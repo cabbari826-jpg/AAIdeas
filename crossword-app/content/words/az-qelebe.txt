@@ -22,3 +22,19 @@ QALİB | Udmuş tərəf | Zəfər çalan | Məğlubun ziddi
 FAŞİZM | 1945-də məğlub | Hitler rejimi | Qara ideologiya
 MAYOR | Kapitandan böyük | Zabit rütbəsi | Ulduzlu paqon
 ÜMİD | Son ölər | İnam | Gözləmə
+ŞÜCAƏT | Qəhrəmanlıq | Cəsarət işi | Rəşadət
+RƏŞADƏT | Mərdlik | Şücaət işi | Qəhrəmanca iş
+PARTİZAN | Meşədə döyüşən | Gizli döyüşçü | Xalq döyüşçüsü
+CƏBHƏÇİ | Front iştirakçı | Ön xətt adamı | Cəbhə oğlu
+TANK | Zirehli maşın | Tırtıllı | Polad qala
+TƏYYARƏÇİ | Pilot | Göy döyüşçüsü | Uçan döyüşçü
+GƏMİÇİ | Matros, kapitan | Gəmi adamı | Dənizdə işləyən
+ƏSİRLİK | Əsir olmaq | Azadlığın itməsi | Dustaqlıq
+DUSTAQ | Məhbus | Zindanda olan | Qandallı
+MÜHARİBƏ | Savaş dövrü | Uzun cəng | Sülhün ziddi
+MƏĞLUB | Uduzan | Qalibin ziddi | Basılmış
+TƏSLİM | Silah yerə | Əl qaldırma | Boyun əymək
+DÖYÜŞKƏN | Vuruşqan | Cəngavər ruhlu | Döyüşə hazır
+FƏDAKAR | Canından keçən | Fədai | Can qoyan
+TƏŞƏKKÜR | Sağ ol | Minnət | Razılıq
+ANIM | Xatırlanma | Yad etmə | Anma günü

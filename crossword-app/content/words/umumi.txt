@@ -39,12 +39,8 @@ SÜPÜRGƏ | Cadugər minir | Döşəmə təmizlər | Zibil yığır
 NƏRDİVAN | Pillələr sırası | Dama çıxmaq üçün | Pilləkən
 SANDIQ | Cehiz qutusu | Qıfıllı yeşik | Taxta qutu
 ÇARPAYI | Döşək altlığı | Yataq mebeli | Yatmaq üçün
-BARMAQ | Üzük yeri | Əlin beşdə biri | Əldə beş
 DİRSƏK | Qolun oynağı | Qolun bükümü | Qol oynağı
 ÜRƏK | Qan pompası | Sevgi rəmzi | Döyünən orqan
-QULAQ | Sırğa yeri | Eşitmə orqanı | Başda iki
-BURUN | Eynək dayağı | İy bilir | Üzün ortası
-DODAQ | Pomada yeri | Ağzın kənarı | Öpüş üçün
 YANAQ | Al-qırmızı olur | Üzün yanı | Qızaran yer
 BOYUN | Şərf yeri | Başı tutur | Baş ilə bədən
 SÜMÜK | Skelet hissəsi | İt gəmirir | Bərk hissə
@@ -59,22 +55,14 @@ BUZ | Donmuş su | Xokkey səthi | Soyuq, bərk
 OTLAQ | Mal-qara yeri | Sürü otlayır | Otluq
 CANAVAR | Bozqurd | Ay işığında ulur | Meşə yırtıcısı
 ÇAQQAL | Leşyeyən | Gecə ulayır | Kiçik yırtıcı
-SİÇAN | Pendir sevər | Pişiyin ovu | Kiçik gəmirici
-QURBAĞA | Quru-quru deyər | Gölməçədə yaşar | Yaşıl tullanan
 KƏPƏNƏK | Tırtıldan olur | Rəngli qanad | Güllər üstündə
 HÖRÜMÇƏK | Səkkiz ayaqlı | Tor toxuyur | Tor ustası
 QARIŞQA | Zəhmətkeş böcək | Yuvada min | Kiçik böcək
 MİLÇƏK | Vızıldayır | Yay zəhləsi | Kiçik həşərat
-BUZOV | Danadan kiçik | İnəyin balası | Körpə dana
 QUZU | Ana arxasınca | Qoyunun balası | Mələyər
-XORUZ | Səhər ban verir | Banlayan quş | Toyuq ailəsi
-CÜCƏ | Payızda sayılar | Yumurtadan çıxır | Toyuq balası
 KƏKLİK | Dağ quşu | Qaqqıldayır | Ov quşu
 TƏRLAN | Ovçu quşu | Qızıl ... | Yırtıcı quş
-GİLAS | Cüt-cüt bitər | Yay meyvəsi | Albalıya bənzər
 ALBALI | Turş gilas | Mürəbbəsi olur | Qırmızı turş
-ÇİYƏLƏK | Toxumu üstündə | Bağ meyvəsi | Qırmızı gilə
-MORUQ | Tikanlı kolda | İstiotlu çay | Giləmeyvə
 QARPIZ | Bostanın şahı | İçi qırmızı | Yaşıl, iri
 YEMİŞ | Ətirli bostan | Sarı bostan | Qovuna bənzər
 BADAM | Acı ləpəli | Paxlava içi | Qoz növü
@@ -130,8 +118,6 @@ CÜMƏ | Həftənin beşi | Şənbədən əvvəl | Həftə günü
 DƏQİQƏ | Saatın hissəsi | Altmış saniyə | Vaxt vahidi
 ƏSR | Yüz il | Yüzillik | Uzun dövr
 PAYIZ | Xəzan fəsli | Yarpaq tökülür | Sentyabr fəsli
-BOZ | Kül rəngi | Siçan rəngi | Ağ-qara arası
-MƏKTƏB | On bir illik | Şagird yeri | Təhsil ocağı
 MUZEY | Eksponat yeri | Sərgi binası | Tarix sərgisi
 TEATR | Səhnə sənəti | Tamaşa yeri | Aktyor evi
 BAZAR | Alış-veriş yeri | Həftə sonu günü | Tərəvəz yeri
@@ -299,7 +285,6 @@ SƏDA | Dağların cavabı | Əks ... | Səs
 SU | Buz əriyəndə | Həyat mənbəyi | İçməli maye
 ADA | Pirallahı | Suda quru | Su ilə əhatəli
 BAR | Kokteyl yeri | Ağacın bəhrəsi | Meyvə, məhsul
-YAĞIŞ | Leysan, çiskin | Çətir lazım olar | Buluddan yağır
 ARABA | Fayton, kəcavə | Atlı ... | Atlı nəqliyyat
 AND | Əhd, peyman | ... içmək | Söz vermək
 DAĞ | Şahdağ, Tufan | Bazardüzü | Uca zirvə

@@ -20,3 +20,26 @@ DALĞALI | Dalğa-dalğa | Ləpəli | Hamar deyil
 YÜKSƏK | Uca | Hündür | Aşağının ziddi
 MÜQƏDDƏS | Ülvi | Pak, ilahi | Toxunulmaz
 NAXIŞ | Bəzək şəkli | Ornament | Xalça bəzəyi
+BAYRAQDAR | Bayraq daşıyan | Önündə gedən | Sancaqdar
+SANCAQ | Kiçik bayraq | Bayraqcıq | Dirəkdə parça
+MÖHÜR | Dövlət damğası | Sənədə vurulur | Ştamp
+NİŞAN | Döş emblemi | Fəxri işarə | Ordenvari
+TÜRK | Mavi rəng xalqı | Oğuz övladı | Anadolu xalqı
+ÇAĞDAŞ | Müasir | İndiki | Yeni dövr
+İSLAM | Yaşıl rəng | Din adı | Müsəlmanlıq
+MÜASİR | Çağdaş | Yeni dövrə aid | Qırmızı rəng
+GÖYRƏNG | Mavi | Göy | Səma rəngli
+DÖVRƏ | Dairə | Dairəvi hərəkət | Dövran
+GƏRDƏN | Boyun | Ənsə | Boyun-boğaz
+DÖVLƏTÇİ | Dövlət adamı | Siyasətçi kişi | Dövlət xadimi
+ULDUZLU | Ulduzlarla dolu | Səkkiz guşəli | Ulduz naxışlı
+ŞANLI | Şöhrətli | Ad-sanlı | Şərəfli bayraq
+RƏNGLİ | Boyalı | Rəng-rəng | Çoxçalarlı
+ƏLVAN | Rəngarəng | Çoxrəngli | Al-yaşıl
+SƏMAVİ | Göy rəngli | Göylərə aid | Mavi-göy
+MƏRASİM | Təntənəli tədbir | Rəsmi ayin | Bayram tədbiri
+AYİN | Dini adət | Adət-ənənə | Ritual
+ŞÜAR | Çağırış sözü | Bayraq sözü | Plakat sözü
+DEVİZ | Moto | Həyat şüarı | Gerb üstündə
+FƏXR | Öyünmə | Fəxarət | Başucalıq
+UCALIQ | Yüksəklik | Yuxarıda olmaq | Zirvədə olmaq

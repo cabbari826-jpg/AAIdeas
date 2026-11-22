@@ -28,6 +28,7 @@ PACKS = os.path.join(ROOT, 'app', 'src', 'main', 'assets', 'packs')
 DOWNLOADABLE = os.path.join(ROOT, 'content', 'downloadable')   # packs offered for download from the game
 MINI = os.path.join(ROOT, 'app', 'src', 'main', 'assets', 'mini')
 MAX_CLUE = 16
+ONLY_OWN_WORDS = {'az-usaq'}   # packs that never borrow words from umumi*.txt
 
 
 def up(s):
@@ -89,7 +90,9 @@ def keyword_for(grid, pool, rng, lo=5, hi=8):
     return None
 
 
-def build_theme(theme, other, rng, tries, min_entries, max_words):
+def build_theme(theme, other, rng, tries, min_entries, max_words, min_theme=0.0):
+    if not theme: theme, other = other, []
+    if not theme: return None
     best = None
     for _ in range(tries):
         got = construct.build(theme, other, rng, max_words=max_words)
@@ -97,8 +100,9 @@ def build_theme(theme, other, rng, tries, min_entries, max_words):
         grid, ent = got
         letters = sum(1 for v in grid.values() if v not in (None, '#'))
         nt = sum(1 for e in ent if e[3] in theme)
-        sc = letters + 3 * nt
-        if len(ent) >= min_entries and (best is None or sc > best[0]): best = (sc, grid, ent)
+        if sum(1 for e in ent if len(e[3]) == 2) > 1: continue   # at most one 2-letter word
+        sc = letters + 6 * nt
+        if len(ent) >= min_entries and nt >= min_theme * len(ent) and (best is None or sc > best[0]): best = (sc, grid, ent)
     if not best: return None
     _, grid, ent = best
     grid = {p: v for p, v in grid.items() if v not in (None, '#')}
@@ -143,6 +147,8 @@ def main():
         if not title: sys.exit(f'new pack {pack_id}: put "# title: Name" in content/words/{pack_id}.txt')
         pack = dict(formatVersion=1, packId=pack_id, language='az', normalization='az-v1', contentVersion=1,
                     title=title, levels=[])
+    if pack_id in ONLY_OWN_WORDS:
+        general = {}   # kids: no grown-up filler words
     if mini:
         # The daily mini game is separate: words and clues only have to be new inside az-mini.
         taken, clues_taken = set(), set()
@@ -179,18 +185,18 @@ def main():
                 th = [w for w in theme if usable(w) and len(w) <= g.MAXLEN]
 
                 oth = [w for w in general if usable(w) and w not in theme and len(w) <= g.MAXLEN]
-                got = build_theme(th, oth, rng, tries, 6, 16)
+                got = build_theme(th, oth, rng, tries, 6, 16, float(os.environ.get('MIN_THEME', '0.5')))
             rows, cols = construct.R, construct.C
         if not got:
-            print(f'Stopped after {n} new levels: not enough unused words in content/words/{pack_id}.txt. '
-                  f'Add words there and run again.')
+            print(f'Stopped after {n} new levels: not enough unused words in content/words/{pack_id}.txt '
+                  f'(at least half of every level must come from it). Add words there and run again.')
             break
         grid, ent = got
         answers = [e[3] for e in ent]
         taken.update(answers)
         for w in answers: clues_taken.update(pool[w])
-        kw_pool = [w for w in theme if usable(w)] or [w for w in general if usable(w)]
-        kw = None if mini else keyword_for(grid, kw_pool, rng)
+        kw = None if mini else (keyword_for(grid, [w for w in theme if usable(w)], rng)
+                                 or keyword_for(grid, [w for w in general if usable(w)], rng))
         if kw: taken.add(kw[0])
         k = start + n
         level = dict(id=f'{pack_id}-{k + 1:03d}', rows=rows, cols=cols, difficulty=min(3, 1 + k * 3 // max(start + count, 30)),

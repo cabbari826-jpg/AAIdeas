@@ -71,8 +71,6 @@ XƏSTƏXANA | Həkimlər binası | Müalicə yeri | Klinika
 STADİON | Futbol meydanı | Tribunalı | İdman arenası
 KİTABXANA | Kitab evi | Oxu zalı | Kitab saxlanan
 QATARYOLU | Dəmir yol | Relslər | Vaqonlar yolu
-TƏYYARƏ | Göydə uçan | Laynər | Pilot sürər
-AVTOBUS | Sərnişin maşını | Dayanacaqlı | Böyük maşın
 TRAMVAY | Relsli maşın | Elektrik vaqonu | Şəhər qatarı
 METRO | Yeraltı qatar | Stansiyalı yol | Yeraltı stansiya
 KÜÇƏBAŞI | Küçənin ucu | Tin başı | Küçə ağzı

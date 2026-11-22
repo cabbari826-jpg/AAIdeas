@@ -21,3 +21,35 @@ MAY | Baharın sonu | Beşinci ay | Bahar ayı
 QURUCU | Bina edən | Əsasını qoyan | Yaradan
 ƏLİFBA | Hərflər sırası | Latın ... | A-dan Z-yə
 ŞURA | Məşvərət orqanı | Milli ... | Sovet
+ELAN | Bəyan etmə | Bildiriş | Afişa xəbəri
+BƏYAN | Bildirmə | Açıqlama | Rəsmi söz
+MƏTBUAT | Qəzet-jurnal | Söz azadlığı | Media
+MƏKTƏBLİ | Şagird | Məktəbə gedən | Portfelli uşaq
+QURULUŞ | Sistem | Təşkilat forması | Dövlət forması
+NÜMAYƏNDƏ | Təmsilçi | Deputat | Elçi kimi
+DEPUTAT | Məclis üzvü | Seçilmiş | Xalq nümayəndəsi
+SƏS | Seçkidə verilən | Səda | Eşidilən
+QƏRAR | Rəsmi hökm | Qət etmə | Qət olunmuş
+XİLASKAR | Qurtaran | Nicat verən | Xilas edən
+QURUM | Təşkilat | İdarə | Müəssisə
+SİYASƏT | Dövlət işi | Diplomatiya | Siyasi iş
+TƏŞKİLAT | Birlik, qurum | Cəmiyyət | Təşkil olunmuş
+CƏMİYYƏT | İcma | Xalq-camaat | Toplum
+BAŞÇI | Rəhbər | Lider | Başda duran
+RƏHBƏR | Başçı | Lider kimi | Yol göstərən
+ARXİV | Sənəd anbarı | Tarixi sənədlər | Köhnə qovluqlar
+SƏNƏD | Rəsmi kağız | Pasport, diplom | Arayış
+ARAYIŞ | Spravka | Təsdiq kağızı | İdarə kağızı
+PASPORT | Vətəndaş sənədi | Şəxsiyyət sənədi | Xarici gediş
+İRS | Mədəni miras | Babalardan qalan | Miras
+MİRAS | İrs | Nəsildən nəslə | Varislik payı
+ALOVLU | Odlu | Atəşli | Coşqun
+ŞƏHƏRLİ | Şəhər sakini | Kəndli deyil | Şəhərdə yaşayan
+KÖKLÜ | Dərin kökü olan | Əsaslı | Qədim
+ƏSAS | Bünövrə daşı | Ən vacib | Baş hissə
+ULUS | Xalq, millət | Tayfalar birliyi | Oğuz elləri
+SƏRVƏT | Var-dövlət | Xəzinə | Neft, qızıl
+XƏZİNƏ | Dəfinə | Sərvət anbarı | Qızıl sandığı
+DƏFİNƏ | Torpaqda xəzinə | Gizli qızıl | Tapılan sərvət
+ZƏNGİN | Varlı | Kasıbın ziddi | Dövlətli
+MİLLİ | Xalqa aid | Ulusal | Xalqın öz malı

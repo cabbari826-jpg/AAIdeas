@@ -1,0 +1,808 @@
+{
+ "formatVersion": 1,
+ "packId": "az-qadinlar",
+ "language": "az",
+ "normalization": "az-v1",
+ "contentVersion": 1,
+ "title": "8 Mart",
+ "levels": [
+  {
+   "id": "az-qadinlar-001",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "BAHAR",
+     "clue": "Yaşıl fəsil",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Martda başlayır",
+      "Yaz fəsli adı",
+      "Yaşıl fəsil"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 2,
+     "clueCol": 0,
+     "answer": "ANACAN",
+     "clue": "Mehriban ana",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Əziz ana",
+      "Ana sözü əzizlə",
+      "Mehriban ana"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 5,
+     "answer": "BACICAN",
+     "clue": "Sevimli bacı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Əziz bacı",
+      "Bacı nazı",
+      "Sevimli bacı"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 4,
+     "clueCol": 0,
+     "answer": "ANALIQ",
+     "clue": "Ana borcu",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ana olmaq",
+      "Ana qayğısı",
+      "Ana borcu"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "CAMAL",
+     "clue": "Gözəl üz",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Üz gözəlliyi",
+      "Gözəl sima",
+      "Gözəl üz"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "QƏŞƏNG",
+     "clue": "Bəzəkli-düzəkli",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Gözəl",
+      "Göyçək",
+      "Bəzəkli-düzəkli"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "MANQAL",
+    "cells": [
+     [
+      3,
+      3
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      7,
+      5
+     ],
+     [
+      4,
+      6
+     ],
+     [
+      2,
+      5
+     ],
+     [
+      4,
+      4
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-qadinlar-002",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "ŞAİRƏ",
+     "clue": "Qadın şair",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Şeir yazan qadın",
+      "Natəvan kimi",
+      "Qadın şair"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "ŞƏFQƏT",
+     "clue": "Yumşaq ürəklik",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Mərhəmət",
+      "Ana ürəyində",
+      "Yumşaq ürəklik"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "ƏTİRLİ",
+     "clue": "Ətir saçan",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qoxulu",
+      "Xoş iyli",
+      "Ətir saçan"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "TOMRİS",
+     "clue": "Qadın hökmdar",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Massaget xanımı",
+      "Kiri məğlub edən",
+      "Qadın hökmdar"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 4,
+     "answer": "ZƏRİF",
+     "clue": "Kobudun ziddi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "İncə, nazik",
+      "Nəfis",
+      "Kobudun ziddi"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 4,
+     "clueCol": 2,
+     "answer": "TÜL",
+     "clue": "Şəffaf parça",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Pəncərə pərdəsi",
+      "Nazik toxuma",
+      "Şəffaf parça"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 1,
+     "answer": "LİFT",
+     "clue": "Mərtəbə qaldıran",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qalxan kabin",
+      "Elevator",
+      "Mərtəbə qaldıran"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "SƏLİQƏ",
+    "cells": [
+     [
+      6,
+      6
+     ],
+     [
+      5,
+      1
+     ],
+     [
+      5,
+      5
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      4,
+      4
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-qadinlar-003",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 5,
+     "answer": "SIRĞA",
+     "clue": "Sallanan bəzək",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qulaq bəzəyi",
+      "Qulağa taxılır",
+      "Sallanan bəzək"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "GÜLDAN",
+     "clue": "Gül qoyulan qab",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Çiçək qabı",
+      "Vaza",
+      "Gül qoyulan qab"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 2,
+     "clueCol": 1,
+     "answer": "QADIN",
+     "clue": "Ana, bacı, qız",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ərin yoldaşı",
+      "Xanım",
+      "Ana, bacı, qız"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "DOWN",
+     "clueRow": 3,
+     "clueCol": 2,
+     "answer": "HÜSN",
+     "clue": "Gözəl görkəm",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Gözəllik",
+      "Camalı",
+      "Gözəl görkəm"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "İNCƏ",
+     "clue": "Arıq",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Nazik, zərif",
+      "Kökün ziddi",
+      "Arıq"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "NAZ",
+     "clue": "Ərkyana hal",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qəmzə",
+      "Ərköyünlük",
+      "Ərkyana hal"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "GƏLİN",
+    "cells": [
+     [
+      5,
+      1
+     ],
+     [
+      7,
+      4
+     ],
+     [
+      5,
+      3
+     ],
+     [
+      7,
+      1
+     ],
+     [
+      2,
+      6
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-qadinlar-004",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "MUNCUQ",
+     "clue": "Bəzək dənəsi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Boyunbağı dənəsi",
+      "Sapa düzülür",
+      "Bəzək dənəsi"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "MİMOZA",
+     "clue": "Mart gülü sarı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Sarı tüklü çiçək",
+      "Mart çiçəyi",
+      "Mart gülü sarı"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "MƏHSƏTİ",
+     "clue": "... Gəncəvi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Gəncəli rübaiçi",
+      "XII əsr şairəsi",
+      "... Gəncəvi"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 1,
+     "answer": "TİKMƏ",
+     "clue": "İynə işi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Əl işi naxış",
+      "Gülbətin işi",
+      "İynə işi"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 5,
+     "answer": "XANIM",
+     "clue": "Ağayın yoldaşı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Hörmətli qadın",
+      "Ledi",
+      "Ağayın yoldaşı"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 4,
+     "clueCol": 2,
+     "answer": "SUAL",
+     "clue": "Nə? Niyə?",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Cavab gözləyən",
+      "Sorğu",
+      "Nə? Niyə?"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "HƏKİM",
+    "cells": [
+     [
+      3,
+      3
+     ],
+     [
+      5,
+      3
+     ],
+     [
+      7,
+      4
+     ],
+     [
+      7,
+      3
+     ],
+     [
+      1,
+      1
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-qadinlar-005",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "BUKET",
+     "clue": "Güldəstə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Dəstə gül",
+      "Gül dəstəsi",
+      "Güldəstə"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 5,
+     "answer": "DƏYANƏT",
+     "clue": "Əyilməzlik",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Səbatlılıq",
+      "Dözümlülük",
+      "Əyilməzlik"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 2,
+     "clueCol": 0,
+     "answer": "BƏNZƏR",
+     "clue": "Tən",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Oxşar",
+      "Eyni kimi",
+      "Tən"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "DOWN",
+     "clueRow": 3,
+     "clueCol": 3,
+     "answer": "ÜZÜK",
+     "clue": "Barmağa taxılır",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Barmaq bəzəyi",
+      "Nişan bəzəyi",
+      "Barmağa taxılır"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 4,
+     "clueCol": 1,
+     "answer": "DÜKAN",
+     "clue": "Bazarçı yeri",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Kiçik mağaza",
+      "Satış yeri",
+      "Bazarçı yeri"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 2,
+     "answer": "QƏND",
+     "clue": "Ağ şəkər tikəsi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Çayla yeyilir",
+      "Kəllə ...",
+      "Ağ şəkər tikəsi"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "DOWN",
+     "clueRow": 4,
+     "clueCol": 1,
+     "answer": "CİB",
+     "clue": "Paltar kisəsi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Pul qoyulan yer",
+      "Şalvarda olur",
+      "Paltar kisəsi"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "NƏZAKƏT",
+    "cells": [
+     [
+      3,
+      2
+     ],
+     [
+      2,
+      5
+     ],
+     [
+      5,
+      3
+     ],
+     [
+      4,
+      5
+     ],
+     [
+      7,
+      3
+     ],
+     [
+      2,
+      2
+     ],
+     [
+      7,
+      5
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-qadinlar-006",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 6,
+     "clueCol": 0,
+     "answer": "ÇİÇƏK",
+     "clue": "Gül",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Bahar hədiyyəsi",
+      "Vazaya qoyulur",
+      "Gül"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 2,
+     "answer": "NƏVAZİŞ",
+     "clue": "Sığal",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Oxşama",
+      "Mehribanlıq",
+      "Sığal"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "MƏTANƏT",
+     "clue": "Dəyanət",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Sarsılmaz ruh",
+      "Möhkəm iradə",
+      "Dəyanət"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 4,
+     "clueCol": 0,
+     "answer": "MAĞAZA",
+     "clue": "Alış yeri",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Satış zalı",
+      "Univermaq",
+      "Alış yeri"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 2,
+     "clueCol": 0,
+     "answer": "ŞƏBƏKƏ",
+     "clue": "Şəki ...",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Taxta naxış",
+      "Mıxsız pəncərə",
+      "Şəki ..."
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "HƏYAT",
+     "clue": "Ömür",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Doğumdan ölümə",
+      "Yaşayış",
+      "Ömür"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "İMTAHAN",
+    "cells": [
+     [
+      6,
+      2
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      4,
+      6
+     ],
+     [
+      1,
+      6
+     ],
+     [
+      4,
+      2
+     ],
+     [
+      1,
+      2
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  }
+ ]
+}

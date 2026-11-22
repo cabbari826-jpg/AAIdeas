@@ -31,3 +31,13 @@ QARANQUŞ | Baharı gətirir | Çəngəlquyruq | Yuvası damda
 ÇİLİNGAĞAC | Çubuq oyunu | Ağacla vurulan | Kənd oyunu
 MÜJDƏ | Xoş xəbər | Muştuluq | Sevindirən xəbər
 TƏNDİR | Lavaş bişirilir | Yer sobası | Çörək ocağı
+HALVA | Un-şəkər şirnisi | Səməni ... | Yağlı şirni
+YAZBAŞI | Baharın gəlişi | Yazın əvvəli | Mart sonu
+OCAQBAŞI | Ailə yığıncağı | Od ətrafı | Ev isti yeri
+NƏĞMƏ | Oxunan söz | Şən oxuma | Mahnı sözü
+YAŞILLIQ | Göy-göyərti | Çəmənlik | Yaşıl yer
+ŞƏNLİK | Toy-bayram | Şən məclis | Bayram şənliyi
+GÜLAB | Gül suyu | Qızılgül suyu | Ətirli su
+QOVURMA | Ət qızartması | Qızarmış tikə | Plov üstü ət
+ŞİRNİYYAT | Şirin şeylər | Konditer malı | Konfet-halva
+BAYRAMLIQ | Bayram paltarı | Təzə geyim | Bayram hədiyyəsi

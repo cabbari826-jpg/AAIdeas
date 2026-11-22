@@ -22,12 +22,8 @@ GÖYƏRÇİN | Sülh quşu | Poçt quşu | Meydan quşu
 TUTUQUŞU | Danışan quş | Yaşıl lələkli | Papağan
 QIZILQUŞ | Ovçuların quşu | Şahin kimi | Yırtıcı quşcuq
 CIRCIRAMA | Yay səsi | Cır-cır | Çəmən böcəyi
-İLBİZ | Evini daşıyar | Yavaş gəzən | Qabıqlı
 BÖCƏK | Cücü | Qanadlı canlı | Altıayaqlı
 QURD | Canavar | Torpaqda yaşayan | Boz yırtıcı
-TISBAĞA | Zirehli | Ən yavaş | Çanaqlı heyvan
-MEYMUN | Banan sevər | Ağacda yaşar | Şimpanze
-ŞİR | Heyvanlar şahı | Yallı pişik | Yalmanlı
 EŞŞƏK | Ulaq | Yükdaşıyan | İnadkar heyvan
 DANA | Buzovdan böyük | Gənc öküz | Mal balası
 ÖKÜZ | Kotan çəkən | Erkək mal | Boyunduruqlu

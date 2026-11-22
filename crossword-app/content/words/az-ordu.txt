@@ -28,3 +28,14 @@ DÖYÜŞÇÜ | Cəngavər | Vuruşan | Əsgər, igid
 HƏRBÇİ | Ordu adamı | Formalı adam | Hərbi şəxs
 ƏMR | Komanda | Komandir sözü | Buyruq
 SIRA | Düz xətt | Düzülüş | Növbə
+ÇAVUŞ | Serjant | Kiçik rütbə | Dəstə başçısı
+KƏŞFİYYAT | Düşmənə baxış | Gizli xidmət | Xəbər toplama
+SNAYPER | Dəqiq atıcı | Uzaqdan vuran | Nişançı
+NİŞANÇI | Atıcı | Hədəf vuran | Snayper kimi
+HƏDƏF | Nişangah | Vurulacaq yer | Nişan nöqtəsi
+TÜFƏNG | Odlu silah | Avtomat kimi | Lüləli silah
+AVTOMAT | Kalaşnikov | Tüfəng növü | Atıcı silah
+KURSANT | Hərbi tələbə | Məktəbli əsgər | Akademiya oxuyan
+AKADEMİYA | Ali məktəb | Elmlər ... | Akademik ocaq
+NİZAMNAMƏ | Qaydalar kitabı | Hərbi qanun | Ustav
+FORMA | Hərbi geyim | Uniforma | Biçim

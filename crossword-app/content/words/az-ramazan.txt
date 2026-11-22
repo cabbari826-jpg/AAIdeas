@@ -17,6 +17,25 @@ YETİM | Atasız uşaq | Kimsəsiz | Valideynsiz
 RƏHM | Mərhəmət hissi | Şəfqət hissi | Acıma
 ŞÜKÜR | Minnətdarlıq | Allaha həmd | Təşəkkür
 İBADƏT | Allaha qulluq | Dua, namaz | Dini əməl
-ƏHSAN | Yaxşılıq etmə | Lütf | Bağış
+ƏHSAN | Yaxşılıq etmə | Bağış | Lütfkarlıq
 XURMA | Səhra meyvəsi | İftar meyvəsi | Qəhvəyi şirin
 SƏHUR | Dan yeri yeməyi | Dan öncəsi süfrə | Gecə yeməyi
+MÜBARƏK | Xeyirli olsun | Bayram sözü | Təbrik sözü
+ORUCLU | Oruc tutan | Ac qalan mömin | Oruc saxlayan
+ALİCƏNAB | Nəcib | Yüksək ruhlu | Mərdanə
+NƏCİB | Alicənab | Əsilzadə | Nəcabətli
+VİCDANLI | İnsaflı | Namuslu | Vicdan sahibi
+İNSAF | Ədalət hissi | Vicdan | Haqq gözləmə
+ƏDALƏT | İnsaflılıq | Haqq-hesab | Düz hökm
+SÜRƏ | Quran fəsli | Ayə toplusu | Fatihə kimi
+AYƏ | Quran cümləsi | Surənin hissəsi | Müqəddəs misra
+MÜƏZZİN | Azan verən | Minarədə oxuyan | Azan oxuyan
+İMAM | Namaz qıldıran | Din başçısı | Məscid önü
+TƏRAVİH | Gecə namazı | Ramazan namazı | Axşam ibadəti
+XEYRAT | Ehsan süfrəsi | Savab işi | Yardım payı
+BAĞIŞ | Hədiyyə | Yardım | Pay vermək
+İANƏ | Yardım pulu | Bağış payı | Xeyriyyə pulu
+DİNDAR | Dinə bağlı | İbadətkar | Namaz qılan
+TƏMİZLİK | Səliqə-sahman | Təmiz olmaq | Çirkliyin ziddi
+SAFLIQ | Paklıq | Təmiz ürək | Duruluq
+PAKLIQ | İsmət | Təmizlik hissi | Ləkəsizlik

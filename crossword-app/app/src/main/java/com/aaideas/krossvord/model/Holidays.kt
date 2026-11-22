@@ -42,6 +42,7 @@ object Holidays {
         Holiday(
             "hemrey", "🤝", "Həmrəylik günü", "Dünya azərbaycanlılarının həmrəylik günü mübarək!",
             "Bu bayram 1991-ci ildən qeyd olunur.", md(12, 31),
+            packId = "az-hemreylik", packFrom = 7, packTo = 7,
         ),
         Holiday(
             "yeni_il", "🎄", "Yeni il", "Yeni iliniz mübarək! Arzularınız çin olsun.",
@@ -51,35 +52,43 @@ object Holidays {
         Holiday(
             "qadinlar", "💐", "8 Mart", "Qadınlar günü mübarək!",
             "8 Mart Beynəlxalq Qadınlar Günüdür.", md(3, 8), showFrom = 1,
+            packId = "az-qadinlar", packFrom = 7, packTo = 7,
         ),
         Holiday(
             "novruz", "🌱", "Novruz bayramı", "Novruz bayramınız mübarək! Bahar evinizə xeyir-bərəkət gətirsin.",
             "Novruz 2009-cu ildə UNESCO-nun qeyri-maddi mədəni irs siyahısına daxil edilib. Bayramdan əvvəl dörd çərşənbə qeyd olunur: Su, Od, Yel və Torpaq.",
             md(3, 20), showFrom = 1, showTo = 5,
+            packId = "az-novruz", packFrom = 20, packTo = 10,
         ),
         Holiday(
             "qelebe", "🕊", "9 May", "Faşizm üzərində Qələbə günü mübarək!",
             "1945-ci ilin mayında İkinci Dünya müharibəsi Avropada başa çatdı.", md(5, 9),
+            packId = "az-qelebe", packFrom = 7, packTo = 7,
         ),
         Holiday(
             "musteqillik", "🇦🇿", "Müstəqillik günü", "Müstəqillik günü mübarək!",
             "28 may 1918-ci ildə Azərbaycan Xalq Cümhuriyyəti elan olundu: müsəlman Şərqində ilk demokratik respublika.", md(5, 28),
+            packId = "az-musteqillik", packFrom = 7, packTo = 7,
         ),
         Holiday(
             "qurtulus", "🇦🇿", "Milli Qurtuluş günü", "Milli Qurtuluş günü mübarək!",
             "15 iyun Azərbaycanda rəsmi bayram günüdür.", md(6, 15),
+            packId = "az-qurtulus", packFrom = 7, packTo = 7,
         ),
         Holiday(
             "ordu", "🎖", "Silahlı Qüvvələr günü", "Silahlı Qüvvələr günü mübarək!",
             "Azərbaycan Milli Ordusu 26 iyun 1918-ci ildə yaradılıb.", md(6, 26),
+            packId = "az-ordu", packFrom = 7, packTo = 7,
         ),
         Holiday(
             "zefer", "🏅", "Zəfər günü", "Zəfər günü mübarək!",
             "8 noyabr 2021-ci ildən Zəfər günü kimi qeyd olunur.", md(11, 8),
+            packId = "az-zefer", packFrom = 7, packTo = 7,
         ),
         Holiday(
             "bayraq", "🇦🇿", "Dövlət Bayrağı günü", "Dövlət Bayrağı günü mübarək!",
             "Üçrəngli bayraq 9 noyabr 1918-ci ildə qəbul edilib. Mavi türkçülüyü, qırmızı müasirliyi, yaşıl islamı bildirir.", md(11, 9),
+            packId = "az-bayraq", packFrom = 7, packTo = 7,
         ),
         Holiday(
             "konstitusiya", "📜", "Konstitusiya günü", "Konstitusiya günü mübarək!",
@@ -94,11 +103,13 @@ object Holidays {
             "ramazan", "🌙", "Ramazan bayramı", "Ramazan bayramınız mübarək! Orucunuz qəbul olsun.",
             "Ramazan bayramı oruc ayının sonunu bildirir; Azərbaycanda iki gün qeyri-iş günüdür.",
             null, listOf(LocalDate.of(2026, 3, 20), LocalDate.of(2027, 3, 10), LocalDate.of(2028, 2, 27)), showTo = 1,
+            packId = "az-ramazan", packFrom = 7, packTo = 7,
         ),
         Holiday(
             "qurban", "🌙", "Qurban bayramı", "Qurban bayramınız mübarək!",
             "Qurban bayramı həcc mövsümünə təsadüf edir; Azərbaycanda iki gün qeyri-iş günüdür.",
             null, listOf(LocalDate.of(2026, 5, 27), LocalDate.of(2027, 5, 17), LocalDate.of(2028, 5, 6)), showTo = 1,
+            packId = "az-qurban", packFrom = 7, packTo = 7,
         ),
     )
 

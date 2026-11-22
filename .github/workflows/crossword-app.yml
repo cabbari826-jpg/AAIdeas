@@ -4,6 +4,8 @@ on:
     paths: ["crossword-app/**", ".github/workflows/crossword-app.yml"]
   pull_request:
     paths: ["crossword-app/**"]
+  # Started by the crossword-levels workflow after it commits new levels.
+  workflow_dispatch:
 # One build per branch: a newer push cancels the build still running for an
 # older one, so a burst of commits publishes one release, not one per commit.
 concurrency:
@@ -79,7 +81,7 @@ jobs:
       # to update itself. Only builds of the prototype branch (and main) are
       # published; feature branches and PRs are not.
       - name: Publish prototype release
-        if: github.event_name == 'push' && (github.ref == 'refs/heads/claude/project-thread-50gxx8' || github.ref == 'refs/heads/main')
+        if: github.event_name != 'pull_request' && (github.ref == 'refs/heads/claude/project-thread-50gxx8' || github.ref == 'refs/heads/main')
         env:
           GH_TOKEN: ${{ github.token }}
           N: ${{ github.run_number }}

@@ -2,7 +2,7 @@
 # 31 dekabr, Dünya azərbaycanlılarının həmrəylik günü: birlik, soydaşlar, ana dili. Format: SÖZ | çətin | orta | asan
 HƏMRƏY | Bir fikirdə olan | Birlikdə olan | Yekdil
 BİRLİK | Vəhdət | Bir olmaq | Ayrılığın ziddi
-DİASPOR | Xaricdəki icma | Qürbətdəki xalq | İcma
+DİASPOR | Xaricdəki icma | Qürbətdəki xalq | Soydaşlar icması
 SOYDAŞ | Eyni soydan | Qandaş | Həmyerli
 QÜRBƏT | Yad diyar | Vətəndən uzaq | Uzaq ölkə
 DOĞMA | Öz, yaxın | Qohum kimi | Yad deyil
@@ -20,3 +20,27 @@ ELOĞLU | Həmvətən | Bir eldən | Elin oğlu
 KÖRPÜ | Çay üstü keçid | İki sahil arası | Keçid
 TƏBRİKNAMƏ | Yazılı təbrik | Təbrik məktubu | Təbrik kağızı
 SƏMİMİ | Ürəkdən | Mehriban | Riyasız
+QARDAŞLIQ | Qardaş olmaq | Dostluq bağı | Doğmalıq hissi
+ƏLBİR | Əl-ələ verib | Həmrəy halda | Birləşmiş
+ÜMUMİ | Hamının | Şəxsi deyil | İctimai
+ORTAQ | Şərik | Ümumi | Birgə
+ŞƏRİK | Ortaq | Yoldaş | Pay sahibi
+YURDDAŞ | Eyni yurdlu | Soydaş adam | Bir yurd övladı
+MƏMLƏKƏT | Diyar-ölkə | Dövlət torpağı | Ölkə ərazisi
+DİYAR | Yurd yeri | Uzaq ... | Torpaq-məmləkət
+UZAQLIQ | Aradakı yol | Ayrılıq | Uzaq olmaq
+YAXINLIQ | Doğmalıq | Qonşuluq | Yaxın olmaq
+ƏLAQƏ | Bağ, rabitə | Rabitə saxlamaq | Bağlılıq
+ÜNSİYYƏT | Danışıb anlaşma | Söz-söhbət | Əlaqə saxlama
+SÖHBƏT | Danışıq | Müsahibə | Gap
+QƏLB | Can evi | Sinədə döyünən | Ürək
+KÖNÜL | Ürəyin istəyi | Gönül | Can
+ELLƏR | Bütün xalqlar | Xalqlar | Obalar
+OBA | Kənd yeri | Köçəri yurdu | Elat yeri
+ATAYURDU | Ata-baba yurdu | Doğma yurd | Ana vətən
+DOĞMACA | Əmi-dayı övladı | Yaxın qohum | Qan qohumu
+QOHUM | Qan bağlı | Əqrəba | Doğma adam
+ƏQRƏBA | Qohum-qardaş | Nəsil adamları | Qohumlar
+SALAM | İlk söz | Görüş sözü | Əssalamüleykum
+ƏLVİDA | Ayrılıq sözü | Sağollaşma | Xudahafiz
+YADİGAR | Xatirə əşyası | Hədiyyə-xatirə | Yaddaşda qalan

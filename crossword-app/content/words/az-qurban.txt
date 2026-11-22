@@ -19,3 +19,21 @@ HACI | Həcc edən | Kəbəyə gedən | ... ana
 COMƏRD | Əliaçıq | Səxavətli | Mərd
 BÖLÜŞMƏK | Paylaşmaq | Yarı vermək | Bölmək
 KASIB | Yoxsul | Varlının ziddi | Ehtiyaclı
+QURBANLIQ | Kəsiləcək qoç | Qurban üçün | Bayram qoçu
+QONŞULUQ | Qonşu olmaq | Yaxın ev | Yaxınlıq
+KÖMƏK | Yardım əli | Əl uzatma | Yardım etmə
+YAXŞILIQ | Xeyir iş | Lütf | Pisliyin ziddi
+SƏADƏT | Xoşbəxtlik | Bəxtiyarlıq | Ən böyük sevinc
+BƏXTİYAR | Bəxtli | Səadətli adam | Xoşbəxt insan
+SƏFA | Zövq | Xoşluq | Gül-çiçək ...
+XEYİRXAH | Yaxşılıqsevər | Mərhəmətli | Xeyir verən
+QİBLƏ | Kəbə istiqaməti | Namaz yönü | Üz tutulan tərəf
+MƏRVƏ | Təpə adı | Səfa ilə ... | Məkkə təpəsi
+MİNA | Həcc vadisi | Şeytan daşlanır | Vadi adı
+ŞEYTAN | İblis | Daşlanan | Pis ruh
+QOYUNÇU | Qoyun saxlayan | Çoban kimi | Sürü sahibi
+KƏSİM | Qurban kəsmə | Bıçaq işi | Mal kəsmək
+ƏLİAÇIQ | Səxavətli adam | Comərd adam | Xəsis deyil
+PAYLAMA | Bölüşdürmə | Pay etmə | Hissələrə bölmə
+ÜMMƏT | Müsəlmanlar | İslam əhli | Bütün möminlər
+DİNDAŞ | Eyni dinli | Ümmət üzvü | Dini qardaş

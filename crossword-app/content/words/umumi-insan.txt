@@ -33,7 +33,6 @@ BALDIZ | Arvadın bacısı | Qayınbacı | Qohum qız
 ƏMİOĞLU | Əminin oğlu | Qohum oğlan | Doğmaca qohum
 NƏVƏCAN | Əziz nəvə | Nəvə balası | Sevimli nəvə
 ATA | Ailə başçısı | Oğulun valideyni | Ana-...
-BALA | Uşaq, övlad | Körpə | Əziz uşaq
 ÖVLAD | Oğul-qız | Ananın balası | Nəsil davamı
 QOCA | Yaşlı | Cavanın ziddi | Ağsaçlı
 CAVAN | Gənc | Qocanın ziddi | Yeniyetmə

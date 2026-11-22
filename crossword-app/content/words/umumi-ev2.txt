@@ -20,7 +20,6 @@ CECİM | Toxunma örtük | Zolaqlı kilim | Xovsuz toxuma
 TİRMƏ | Naxışlı parça | Şal növü | Buta naxışlı
 DÜYÜN | Bağ | Ip ilməyi | Bağlanmış ip
 İLMƏ | Toxuma halqası | Düymə yeri | Halqa
-SANCAQ | İti ucu olan | Sancılır | Taxma
 ÜTÜ | Paltar hamarlar | İsti dəmir | Qırışıq açan
 LƏĞƏN | Mis tas | Yuyunma qabı | Geniş tas
 AFTAFA | Lüləli qab | Əl yuyan qab | Su qabı lüləli

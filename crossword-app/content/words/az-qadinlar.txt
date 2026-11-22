@@ -22,8 +22,26 @@ SIRĞA | Qulaq bəzəyi | Qulağa taxılır | Sallanan bəzək
 ÜZÜK | Barmaq bəzəyi | Nişan bəzəyi | Barmağa taxılır
 BİLƏRZİK | Qol bəzəyi | Biləyə taxılır | Qolbaq
 ANALIQ | Ana olmaq | Ana qayğısı | Ana borcu
-LAYLA | Beşik nəğməsi | Ana oxuyar | Yatırdan mahnı
-BEŞİK | Laylanın yeri | Körpə yatağı | Yellənən yataq
 HƏKİM | Ağ xalatlı | Müalicə edən | Doktor
 NAZ | Qəmzə | Ərköyünlük | Ərkyana hal
 QAYINANA | Ərin anası | Gəlinin anası | Ailə ağsaqqalı
+ANACAN | Əziz ana | Ana sözü əzizlə | Mehriban ana
+QIZCIĞAZ | Balaca qız | Qız balası | Kiçik qız
+XALAQIZI | Xalanın qızı | Xala balası | Ana tərəfdən qız
+BACICAN | Əziz bacı | Bacı nazı | Sevimli bacı
+NƏVAZİŞ | Oxşama | Mehribanlıq | Sığal
+MEHRİBAN | Səmimi | Xoşrəftar | Mülayim insan
+ÇİÇƏKÇİ | Gül satan | Buket bağlayan | Gül ustası
+ƏTİRLİ | Qoxulu | Xoş iyli | Ətir saçan
+BƏNZƏR | Oxşar | Eyni kimi | Tən
+GÖZƏLLİK | Hüsn | Camal | Yaraşıq
+CAMAL | Üz gözəlliyi | Gözəl sima | Gözəl üz
+HÜSN | Gözəllik | Camalı | Gözəl görkəm
+TÜL | Pəncərə pərdəsi | Nazik toxuma | Şəffaf parça
+TİKMƏ | Əl işi naxış | Gülbətin işi | İynə işi
+TOXUCU | Xalça toxuyan | Toxuma ustası | Xalçaçı
+XALÇAÇI | Xalça ustası | Xovlu iş ustası | Toxucu qadın
+QƏŞƏNG | Gözəl | Göyçək | Bəzəkli-düzəkli
+SƏLİQƏ | Təmizlik, nizam | Sahman | Hər şey yerində
+MƏTANƏT | Sarsılmaz ruh | Möhkəm iradə | Dəyanət
+DƏYANƏT | Səbatlılıq | Dözümlülük | Əyilməzlik

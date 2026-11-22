@@ -1,6 +1,6 @@
 """Dev helper: replace whole entries. stdin lines: FILE WORD | a | b | c  (or FILE -WORD to delete)."""
 import sys, os, re
-W = os.path.join(os.path.dirname(__file__), '..', 'content', 'words')
+W = os.environ.get('W') or os.path.join(os.path.dirname(__file__), '..', 'content', 'words')
 for line in sys.stdin:
     line = line.strip()
     if not line: continue

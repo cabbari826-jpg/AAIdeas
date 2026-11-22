@@ -1,0 +1,66 @@
+# Ümumi sözlər (4): təbiət, məişət, sənət, insan. Format: SÖZ | çətin | orta | asan
+UÇURUM | Dərin yarğan | Sıldırım kənar | Dibsiz dərə
+YARĞAN | Dərin yarıq | Sel yolu | Uçurum dərəsi
+TAPANÇA | Kiçik odlu silah | Lüləli silahcıq | Revolver
+OVÇULUQ | Ov sənəti | Tüfənglə gəzmək | Ova çıxmaq
+TƏLƏ | Heyvan tutan | Kələk, tor | Pusqu
+QARMAQ | Tilov ucu | Əyri iynə | Balığı ilişdirən
+TİLOV | Balıqçı çubuğu | Qarmaqlı çubuq | Ov çubuğu
+YEM | Heyvan qidası | Toyuq dəni | Qarmağa taxılan
+QƏFƏS | Barmaqlıqlı qutu | Tutuquşu evi | Kanareyka evi
+AXUR | At yemliyi | Tövlədə qab | Ot qabı
+TÖVLƏ | Mal damı | At evi | Heyvan evi
+KÜMƏS | Toyuq damı | Cücə evi | Hin
+ARXAC | Qoyun yatağı | Çoban düşərgəsi | Sürü yeri
+ƏKİNÇİLİK | Torpaq işi | Kənd təsərrüfatı | Əkin-biçin
+BİÇİN | Taxıl yığımı | Oraqla iş | Məhsul vaxtı
+XIRMAN | Taxıl döyülən | Dən yeri | Biçin meydanı
+TAXIL | Buğda, arpa | Dənli bitki | Zəmi bitkisi
+ÇƏLTİK | Düyü bitkisi | Su tarlası | Lənkəran əkini
+PAMBIQÇI | Pambıq yığan | Ağ tarla işçisi | Pambıq becərən
+ÜZÜMÇÜ | Üzüm becərən | Bağ ustası | Tənək ustası
+MEYVƏ | Ağacda yetişən | Alma, armud | Bağ nemətı
+TƏRƏVƏZ | Bostan nemətı | Pomidor, xiyar | Salat üçün
+NEMƏT | Süfrə bərəkəti | Allah vergisi | Yemək-içmək
+RUZİ | Gündəlik çörək | Qismətə düşən | Halal qazanc
+QİSMƏT | Tale payı | Bəxt | Alın yazısı
+TALE | Qədər | Bəxt yazısı | Fələyin işi
+BƏXT | Uğur | Şans | Tale
+UĞUR | Müvəffəqiyyət | Bəxt gətirmə | Yolun açıq olsun
+MÜKAFAT | Pul, medal | Ən yaxşıya pay | Fəxri hədiyyə
+TƏRİF | Öymə | Afərin sözü | Yaxşı söz demək
+TƏNQİD | Səhvi göstərmə | İrad tutma | Nöqsan deyilməsi
+İRAD | Tənqidi söz | Etiraz sözü | Nöqsan göstərmə
+ETİRAZ | Razı olmama | Qarşı çıxma | Protest
+RAZILIQ | Razı olmaq | Bəli demək | Ittifaq
+QAYĞIKEŞ | Qayğı göstərən | Diqqətcil | Həmişə yanında
+DİQQƏT | Nəzər | Fikir cəmləmə | Ehtiyatla bax!
+EHTİYAT | Sığorta | Qənaət payı | Saxlanılan pay
+TƏHLÜKƏ | Qorxulu hal | Risk | Xətər
+XƏTƏR | Bəla | Təhlükəli hal | Qəza riski
+ZİYAN | Zərər | Zərər vurmaq | Xeyrin ziddi
+ZƏRƏR | İtki, ziyan | Xəsarət | Pis nəticə
+İTKİ | İtirilmiş şey | Əldən çıxan | Ölüm acısı
+TAPINTI | Tapılan şey | Arxeoloji ... | Kəşf
+KƏŞF | Yenilik tapma | İxtira | Açılış
+İXTİRA | Yeni cihaz | Patentli yenilik | Yeni kəşf
+ELM | Bilik sahəsi | Akademiya işi | Bilik
+BİLİK | Elm | Öyrənilən | Bilgi
+SƏNƏT | Peşə, hünər | İncəsənət | Usta işi
+HÜNƏR | Qoçaqlıq | Bacarıqlı iş | Ər işi
+MƏHARƏT | Ustalıq | Sənət incəliyi | Mahir iş
+BACARIQ | Qabiliyyət | Əlindən gələn | Bilmək
+İSTEDAD | Fitri qabiliyyət | Vergi | Talant
+VƏRDİŞ | Adət | Alışqanlıq | Təcrübə
+TƏCRÜBƏ | Həyat dərsi | Peşəkarlıq | Yaşanmış bilik
+SINAQ | Yoxlama | İmtahan | Test
+TƏBƏSSÜM | Gülümsəmə | Xoş üz | Dodaqda gülüş
+QƏHQƏHƏ | Bərkdən gülüş | Ha-ha-ha | Uca gülüş
+GÖZYAŞI | Ağlayanda axar | Kirpikdə damla | Duzlu damla
+HIÇQIRIQ | Ağlama səsi | Hıçqırmaq | İç çəkmə
+SƏSSİZ | Dinməz | Səsi yoxdur | Sakit
+GURULTU | Böyük səs | İldırım səsi | Tappıltı
+PIÇILTI | Yavaş danışıq | Qulağa söz | Xışıltı
+XIŞILTI | Yarpaq səsi | Pıçıltı kimi | Xışıldamaq
+CIRILTI | Qapı səsi | Cırıldamaq | Xırıltı
+ŞIRILTI | Su səsi | Şırıldamaq | Bulaq səsi

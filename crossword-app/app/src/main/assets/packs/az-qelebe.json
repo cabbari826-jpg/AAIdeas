@@ -1,0 +1,823 @@
+{
+ "formatVersion": 1,
+ "packId": "az-qelebe",
+ "language": "az",
+ "normalization": "az-v1",
+ "contentVersion": 1,
+ "title": "9 May",
+ "levels": [
+  {
+   "id": "az-qelebe-001",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "DÖYÜŞ",
+     "clue": "Cəng",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Vuruşma",
+      "Vuruş",
+      "Cəng"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "FAŞİZM",
+     "clue": "Qara ideologiya",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "1945-də məğlub",
+      "Hitler rejimi",
+      "Qara ideologiya"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "YADDAŞ",
+     "clue": "Unutmamaq",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Xatırlama gücü",
+      "Hafizə",
+      "Unutmamaq"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "MAYOR",
+     "clue": "Ulduzlu paqon",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Kapitandan böyük",
+      "Zabit rütbəsi",
+      "Ulduzlu paqon"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 3,
+     "clueCol": 6,
+     "answer": "ÜMİD",
+     "clue": "Gözləmə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Son ölər",
+      "İnam",
+      "Gözləmə"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 1,
+     "answer": "PARAD",
+     "clue": "Hərbi yürüş",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Təntənəli keçid",
+      "Meydanda sıra",
+      "Hərbi yürüş"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "DAYAZ",
+    "cells": [
+     [
+      1,
+      4
+     ],
+     [
+      7,
+      5
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      5,
+      5
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-qelebe-002",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "ƏBƏDİ",
+     "clue": "Əzəli, daimi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Sonsuz",
+      "Heç sönməyən",
+      "Əzəli, daimi"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 4,
+     "clueCol": 0,
+     "answer": "DUSTAQ",
+     "clue": "Qandallı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Məhbus",
+      "Zindanda olan",
+      "Qandallı"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 5,
+     "answer": "FƏDAKAR",
+     "clue": "Can qoyan",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Canından keçən",
+      "Fədai",
+      "Can qoyan"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "XATİRƏ",
+     "clue": "Anılan şey",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Keçmişin izi",
+      "Yada salınan",
+      "Anılan şey"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 1,
+     "clueCol": 3,
+     "answer": "HƏSRƏT",
+     "clue": "Darıxmaq",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ayrılıq dərdi",
+      "İntizar",
+      "Darıxmaq"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 2,
+     "clueCol": 0,
+     "answer": "BƏHMƏZ",
+     "clue": "Şirin qatı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Tut şirəsi",
+      "Qatı şirə",
+      "Şirin qatı"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "ABİDƏ",
+    "cells": [
+     [
+      7,
+      2
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      5,
+      1
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      7,
+      6
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-qelebe-003",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "NƏSİL",
+     "clue": "Soy",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Yaşıdlar",
+      "Övladlar zənciri",
+      "Soy"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "SƏNGƏR",
+     "clue": "Əsgər çuxuru",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Torpaq sipər",
+      "Qazılmış xətt",
+      "Əsgər çuxuru"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 5,
+     "answer": "ƏSİRLİK",
+     "clue": "Dustaqlıq",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Əsir olmaq",
+      "Azadlığın itməsi",
+      "Dustaqlıq"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "TƏSLİM",
+     "clue": "Boyun əymək",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Silah yerə",
+      "Əl qaldırma",
+      "Boyun əymək"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 1,
+     "answer": "TANK",
+     "clue": "Polad qala",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Zirehli maşın",
+      "Tırtıllı",
+      "Polad qala"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 2,
+     "answer": "LÜLƏ",
+     "clue": "Uzun kabab",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Kabab növü",
+      "Qiymədən şiş",
+      "Uzun kabab"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 1,
+     "answer": "ŞAPKA",
+     "clue": "Yay papağı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Günlük papaq",
+      "Kepka",
+      "Yay papağı"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "TƏŞƏKKÜR",
+    "cells": [
+     [
+      3,
+      1
+     ],
+     [
+      5,
+      6
+     ],
+     [
+      7,
+      2
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      6,
+      1
+     ],
+     [
+      7,
+      5
+     ],
+     [
+      5,
+      4
+     ],
+     [
+      4,
+      5
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-qelebe-004",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "SÜKUT",
+     "clue": "Danışmamaq",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Bir dəqiqəlik",
+      "Səssizlik",
+      "Danışmamaq"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "SALYUT",
+     "clue": "Rəngli gecə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Göydə işıqlar",
+      "Bayram atəşi",
+      "Rəngli gecə"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 1,
+     "clueCol": 3,
+     "answer": "MƏĞLUB",
+     "clue": "Basılmış",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Uduzan",
+      "Qalibin ziddi",
+      "Basılmış"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "XİLAS",
+     "clue": "Qurtarma",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qurtuluş",
+      "Nicat",
+      "Qurtarma"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "CƏBHƏ",
+     "clue": "Front",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Döyüş xətti",
+      "Ön xətt",
+      "Front"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 2,
+     "answer": "ƏLƏK",
+     "clue": "Un ələnən",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Un üçün",
+      "Torlu dairə",
+      "Un ələnən"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 3,
+     "answer": "TAS",
+     "clue": "Kasa kimi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Hamam qabı",
+      "Mis kasa",
+      "Kasa kimi"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "BALTA",
+    "cells": [
+     [
+      7,
+      3
+     ],
+     [
+      1,
+      5
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      4,
+      1
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-qelebe-005",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "QALİB",
+     "clue": "Məğlubun ziddi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Udmuş tərəf",
+      "Zəfər çalan",
+      "Məğlubun ziddi"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "ÜÇBUCAQ",
+     "clue": "Üçkünc",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Cəbhə məktubu",
+      "Üç bucaqlı",
+      "Üçkünc"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "CƏBHƏÇİ",
+     "clue": "Cəbhə oğlu",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Front iştirakçı",
+      "Ön xətt adamı",
+      "Cəbhə oğlu"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 2,
+     "clueCol": 0,
+     "answer": "ÇƏLƏNG",
+     "clue": "Hörülmüş gül",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Gül halqası",
+      "Abidəyə qoyulur",
+      "Hörülmüş gül"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "CƏFƏRİ",
+     "clue": "Yaşıl göy",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Petruşka",
+      "Salat göyü",
+      "Yaşıl göy"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 3,
+     "clueCol": 6,
+     "answer": "MİN",
+     "clue": "1000",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "On yüz",
+      "... bir gecə",
+      "1000"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "MÜHARİBƏ",
+    "cells": [
+     [
+      4,
+      6
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      4,
+      4
+     ],
+     [
+      7,
+      2
+     ],
+     [
+      5,
+      5
+     ],
+     [
+      5,
+      6
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      2,
+      2
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-qelebe-006",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "ŞÜCAƏT",
+     "clue": "Rəşadət",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qəhrəmanlıq",
+      "Cəsarət işi",
+      "Rəşadət"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "VETERAN",
+     "clue": "Cəbhə görmüş",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Cəbhəçi qoca",
+      "Ordenli qoca",
+      "Cəbhə görmüş"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "RƏŞADƏT",
+     "clue": "Qəhrəmanca iş",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Mərdlik",
+      "Şücaət işi",
+      "Qəhrəmanca iş"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 4,
+     "answer": "ANIM",
+     "clue": "Anma günü",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Xatırlanma",
+      "Yad etmə",
+      "Anma günü"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "RƏSM",
+     "clue": "Rəssamın işi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Fırça ilə",
+      "Şəkil çəkmə",
+      "Rəssamın işi"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "SAC",
+     "clue": "Yuxa bişən dəmir",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qabarıq dəmir",
+      "Yuxa bişirilir",
+      "Yuxa bişən dəmir"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "TEZ",
+     "clue": "Erkən",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Cəld",
+      "Gecin ziddi",
+      "Erkən"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "DAMAR",
+    "cells": [
+     [
+      5,
+      1
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      6,
+      4
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      5,
+      6
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  }
+ ]
+}

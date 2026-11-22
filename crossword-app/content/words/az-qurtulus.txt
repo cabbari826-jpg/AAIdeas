@@ -22,3 +22,27 @@ YURD | Doğma diyar | Ev-eşik | Vətən
 ƏMİN | Arxayın | Şübhəsiz | Rahat
 TƏRƏQQİ | İrəliyə gediş | Geriləmə ziddi | İnkişaf yolu
 SAĞLAM | Xəstə deyil | Gümrah | Möhkəm bədənli
+ƏMƏK | Zəhmət | İş | Əl işi
+QURUCULUQ | Tikinti işi | Yaratma | Abadlıq
+ABADLIQ | Gözəlləşmə | Abad olmaq | Bərəkət
+SÜLHSEVƏR | Barışsevən | Dinclik istəyən | Sülhpərvər
+SƏBAT | Dözümlü olmaq | Möhkəmlik | Sarsılmazlıq
+ÜMİDVAR | Ümidli | Nikbin | Gələcəyə inanan
+NİKBİN | Optimist | Ümidli adam | Bədbinin ziddi
+SAĞLIQ | Can sağlığı | Salamatlıq | Sağlam olmaq
+GÜVƏN | Arxayınlıq | Bel bağlama | Etimad hissi
+ETİBAR | İnam, güvən | Sözə inam | Bel bağlamaq
+BİRGƏ | Birlikdə | Bir yerdə | Əl-ələ
+YENİLİK | Təzəlik | Yeni şey | Novatorluq
+YÜKSƏLİŞ | Qalxma | İrəliləmə | Ucalma
+ADDIM | Qədəm | Bir ... irəli | Ayaq atma
+YOLAYRICI | Yol kəsişməsi | Ayrıc | Yolların ayrıcı
+SÜKUNƏT | Sakitlik | Dinclik halı | Dinc sükut
+BARIŞ | Sülh | Küsülülüyün sonu | Əl sıxışma
+DÜZLÜK | Doğruluq | Dürüstlük | Yalanın ziddi
+HALAL | Düz qazanc | Haram deyil | Təmiz pul
+DÜRÜST | Haqq adamı | Doğru adam | Yalançı deyil
+TƏRTİB | Qaydaya salma | Ardıcıllıq | Sıra-nizam
+YARADICI | Xəlqedici | Yeni şey quran | İlham adamı
+ZİYA | İşıq, nur | Şəfəq nuru | Parıltı
+PARILTI | İşıltı | Göz qamaşdıran | Parlama
