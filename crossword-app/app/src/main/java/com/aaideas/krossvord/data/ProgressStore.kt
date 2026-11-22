@@ -37,7 +37,7 @@ class ProgressStore(context: Context) {
         }.toSet()
 
     fun resetLevel(levelId: String) {
-        prefs.edit().remove("typed_$levelId").remove("revealed_$levelId").remove("clues_$levelId")
+        prefs.edit().remove("typed_$levelId").remove("revealed_$levelId").remove("clues_$levelId").remove("keyword_$levelId")
             .putStringSet(KEY_DONE, completedLevels() - levelId).apply()
     }
 
@@ -60,6 +60,14 @@ class ProgressStore(context: Context) {
         get() = prefs.getBoolean(KEY_EXTRA, false)
         set(v) = prefs.edit().putBoolean(KEY_EXTRA, v).apply()
 
+    /** Hints earned in game (e.g. key word bonus); spent before asking for an ad. */
+    var freeHints: Int
+        get() = prefs.getInt(KEY_FREE_HINTS, 0)
+        set(v) = prefs.edit().putInt(KEY_FREE_HINTS, v).apply()
+
+    fun saveKeywordGuessed(levelId: String) = prefs.edit().putBoolean("keyword_$levelId", true).apply()
+    fun loadKeywordGuessed(levelId: String) = prefs.getBoolean("keyword_$levelId", false)
+
     fun saveOpenedClues(levelId: String, ids: Set<Int>) {
         prefs.edit().putString("clues_$levelId", ids.joinToString(",")).apply()
     }
@@ -71,6 +79,7 @@ class ProgressStore(context: Context) {
         const val KEY_INPUT = "input_mode"
         const val KEY_HIDE_CLUES = "hide_clues_v2"
         const val KEY_EXTRA = "extra_letters"
+        const val KEY_FREE_HINTS = "free_hints"
         const val KEY_DONE = "completed"
         const val KEY_SINCE_AD = "levels_since_interstitial"
     }

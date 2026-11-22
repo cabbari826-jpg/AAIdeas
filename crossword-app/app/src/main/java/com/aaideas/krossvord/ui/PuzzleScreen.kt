@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.foundation.text.TextAutoSize
@@ -27,12 +28,15 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
 import androidx.compose.ui.graphics.graphicsLayer
@@ -78,6 +82,7 @@ fun PuzzleScreen(vm: GameViewModel, isPremium: Boolean) {
                 style = MaterialTheme.typography.titleSmall,
             )
         }
+        if (game.keyword != null) KeywordStrip(game.keywordLetters, game.isKeywordKnown, vm::openKeywordDialog)
         BoxWithConstraints(Modifier.fillMaxWidth().weight(1f), contentAlignment = Alignment.Center) {
             val cell = min(maxWidth / game.board.cols, maxHeight / game.board.rows)
             Grid(game, cell, preview, vm.feedback, vm::isClueShown, vm::tapCell)
@@ -87,7 +92,13 @@ fun PuzzleScreen(vm: GameViewModel, isPremium: Boolean) {
             if (columns) OutlinedButton(onClick = vm::shuffleTiles, modifier = Modifier.weight(1f)) { Text("⟳ Qarışdır") }
             else OutlinedButton(onClick = vm::clearWord, modifier = Modifier.weight(1f)) { Text("Sözü sil") }
             Button(onClick = vm::hint, modifier = Modifier.weight(1f)) {
-                Text(if (isPremium) "Hərf aç" else "Hərf aç ▶ reklam")
+                Text(
+                    when {
+                        isPremium -> "Hərf aç"
+                        vm.freeHints > 0 -> "Hərf aç (${vm.freeHints} pulsuz)"
+                        else -> "Hərf aç ▶ reklam"
+                    }
+                )
             }
         }
         val entry = game.activeEntry
@@ -106,11 +117,17 @@ fun PuzzleScreen(vm: GameViewModel, isPremium: Boolean) {
             )
         }
     }
+    if (vm.showKeywordDialog) KeywordDialog(vm)
     if (vm.showCompletion) {
         AlertDialog(
             onDismissRequest = vm::dismissCompletion,
             title = { Text("Təbriklər!") },
-            text = { Text("Səviyyə ${vm.currentLevelNumber} həll olundu.") },
+            text = {
+                Text(
+                    "Səviyyə ${vm.currentLevelNumber} həll olundu." +
+                        (game.keyword?.let { "\nAçar söz: ${it.word}" } ?: "")
+                )
+            },
             confirmButton = { Button(onClick = vm::nextLevel) { Text("Növbəti") } },
             dismissButton = { TextButton(onClick = vm::dismissCompletion) { Text("Bağla") } },
         )
@@ -174,10 +191,21 @@ private fun LetterCell(
         else -> colors.letterCell
     }
     val ch = preview ?: game.typed[cell]
+    val keywordIndex = game.keyword?.cellList?.indexOf(cell) ?: -1
     Box(
         modifier.background(bg).semantics { contentDescription = "Xana ${cell.row + 1}, ${cell.col + 1}: ${ch ?: "boş"}" },
         contentAlignment = Alignment.Center,
     ) {
+        if (keywordIndex >= 0) {
+            Box(Modifier.fillMaxSize().padding(2.dp).border(2.dp, colors.keyword, RoundedCornerShape(50)))
+            Text(
+                "${keywordIndex + 1}",
+                fontSize = (size.value * 0.18f).sp,
+                color = colors.keyword,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.align(Alignment.TopStart).padding(start = 3.dp),
+            )
+        }
         if (ch != null) {
             Text(
                 ch.toString(),
@@ -447,4 +475,58 @@ private fun SmallAction(label: String, description: String, enabled: Boolean, on
     ) {
         Box(contentAlignment = Alignment.Center) { Text(label, fontSize = 20.sp) }
     }
+}
+
+/** The level's key word: slots fill in as its highlighted cells are solved; tap to guess early. */
+@Composable
+private fun KeywordStrip(letters: List<Char?>, known: Boolean, onGuess: () -> Unit) {
+    val colors = LocalGridColors.current
+    Row(
+        Modifier.fillMaxWidth().clickable(enabled = !known, onClick = onGuess).padding(vertical = 4.dp, horizontal = 8.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(4.dp),
+    ) {
+        Text("Açar söz", style = MaterialTheme.typography.labelLarge, color = colors.keyword)
+        Spacer(Modifier.width(6.dp))
+        letters.forEachIndexed { i, ch ->
+            Box(
+                Modifier.size(28.dp).border(2.dp, colors.keyword, RoundedCornerShape(50)),
+                contentAlignment = Alignment.Center,
+            ) {
+                Text(ch?.toString() ?: "${i + 1}", fontSize = if (ch != null) 15.sp else 10.sp,
+                    fontWeight = if (ch != null) FontWeight.Bold else FontWeight.Normal,
+                    color = if (ch != null) MaterialTheme.colorScheme.onSurface else colors.keyword)
+            }
+        }
+        Spacer(Modifier.weight(1f))
+        Text(
+            if (known) "✓" else "Təxmin et ›",
+            style = MaterialTheme.typography.labelMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
+    }
+}
+
+@Composable
+private fun KeywordDialog(vm: GameViewModel) {
+    var text by remember { mutableStateOf("") }
+    AlertDialog(
+        onDismissRequest = vm::closeKeywordDialog,
+        title = { Text("Açar sözü təxmin et") },
+        text = {
+            Column {
+                Text("Düz cavab: +$KEYWORD_BONUS_HINTS pulsuz ipucu.")
+                Spacer(Modifier.height(8.dp))
+                OutlinedTextField(
+                    value = text,
+                    onValueChange = { text = it },
+                    singleLine = true,
+                    isError = vm.keywordWrong,
+                    supportingText = { if (vm.keywordWrong) Text("Yox, başqa söz") },
+                )
+            }
+        },
+        confirmButton = { Button(onClick = { vm.guessKeyword(text) }, enabled = text.isNotBlank()) { Text("Yoxla") } },
+        dismissButton = { TextButton(onClick = vm::closeKeywordDialog) { Text("Bağla") } },
+    )
 }

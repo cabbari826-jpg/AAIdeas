@@ -29,6 +29,9 @@ enum class InputMode { COLUMNS, TILES, KEYBOARD }
 
 enum class WordFeedback { RIGHT, WRONG }
 
+/** Free hints for guessing the key word before its letters are all in the grid. */
+const val KEYWORD_BONUS_HINTS = 2
+
 class GameViewModel(app: Application) : AndroidViewModel(app) {
     val packs: List<Pack> = PackRepository(app).bundledPacks()
     val levels: List<Level> = packs.flatMap { it.levels }
@@ -66,6 +69,31 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         private set
     var mistakes by mutableStateOf(0)
         private set
+    var freeHints by mutableStateOf(progress.freeHints)
+        private set
+    var showKeywordDialog by mutableStateOf(false)
+        private set
+    var keywordWrong by mutableStateOf(false)
+        private set
+
+    fun openKeywordDialog() {
+        val s = game ?: return
+        if (s.keyword != null && !s.isKeywordKnown) { keywordWrong = false; showKeywordDialog = true }
+    }
+
+    fun closeKeywordDialog() { showKeywordDialog = false }
+
+    fun guessKeyword(text: String) {
+        val s = game ?: return
+        val (next, ok) = s.guessKeyword(text)
+        if (ok) {
+            freeHints = freeHints + KEYWORD_BONUS_HINTS
+            progress.freeHints = freeHints
+            progress.saveKeywordGuessed(s.board.level.id)
+            game = next
+            showKeywordDialog = false
+        } else keywordWrong = true
+    }
     /** Bumped by the shuffle button to reorder the tiles. */
     var tileShuffle by mutableStateOf(0)
         private set
@@ -166,7 +194,8 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         game = GameState.start(board).copy(
             typed = progress.loadTyped(level.id),
             revealed = progress.loadRevealed(level.id),
-        ).let { s -> progress.loadOpenedClues(level.id)?.let { s.copy(openedClues = it) } ?: s }.let { s -> s.selectEntry(level.entries.firstOrNull { !s.isEntrySolved(it) } ?: level.entries.first()) }
+        ).let { s -> progress.loadOpenedClues(level.id)?.let { s.copy(openedClues = it) } ?: s }
+            .copy(keywordGuessed = progress.loadKeywordGuessed(level.id)).let { s -> s.selectEntry(level.entries.firstOrNull { !s.isEntrySolved(it) } ?: level.entries.first()) }
         showCompletion = false
         feedback = null
         draftPicks = emptyList()
@@ -194,6 +223,11 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     /** Hint: free for premium, otherwise after a rewarded (placeholder) ad. */
     fun hint() {
         if (premium.isPremium.value) update { it.revealLetter() }
+        else if (freeHints > 0) {
+            freeHints--
+            progress.freeHints = freeHints
+            update { it.revealLetter() }
+        }
         else ads.showRewarded("Hərf aç") { update { it.revealLetter() } }
     }
 

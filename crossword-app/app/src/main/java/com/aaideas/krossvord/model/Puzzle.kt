@@ -27,6 +27,19 @@ data class Entry(
     }
 }
 
+/**
+ * Scandinavian "key word": highlighted letter cells whose letters, in order, spell a bonus word.
+ * [cells] are [row, col] pairs.
+ */
+@Serializable
+data class Keyword(
+    val word: String,
+    val cells: List<List<Int>>,
+    val source: String = "",
+) {
+    val cellList: List<Cell> by lazy { cells.map { Cell(it[0], it[1]) } }
+}
+
 @Serializable
 data class Level(
     val id: String,
@@ -34,6 +47,7 @@ data class Level(
     val cols: Int,
     val difficulty: Int = 1,
     val entries: List<Entry>,
+    val keyword: Keyword? = null,
 )
 
 @Serializable
@@ -98,6 +112,14 @@ class Board(val level: Level) {
             }
         }
         for (cell in clues.keys) require(cell !in sol) { "${level.id}: $cell is both a clue and a letter" }
+        level.keyword?.let { k ->
+            val cells = k.cellList
+            require(k.cells.all { it.size == 2 }) { "${level.id}: keyword cells must be [row, col]" }
+            require(cells.toSet().size == cells.size) { "${level.id}: keyword uses a cell twice" }
+            require(cells.all { it in sol }) { "${level.id}: keyword cell is not a letter cell" }
+            val spelled = cells.map { sol.getValue(it) }
+            require(spelled == AzText.letters(k.word)) { "${level.id}: keyword cells spell ${spelled.joinToString("")}, not ${k.word}" }
+        }
         solution = sol
         entriesAt = at
         cluesAt = clues

@@ -10,6 +10,8 @@ data class GameState(
     val revealed: Set<Cell> = emptySet(),
     /** Ids of entries whose clue the player has opened (used when clues start hidden). */
     val openedClues: Set<Int> = emptySet(),
+    /** The player guessed the key word before all its letters were in the grid. */
+    val keywordGuessed: Boolean = false,
     val selectedCell: Cell? = null,
     val direction: Direction = Direction.ACROSS,
 ) {
@@ -30,6 +32,27 @@ data class GameState(
     val isComplete: Boolean get() = board.solution.all { (c, ch) -> typed[c] == ch }
 
     val solvedCount: Int get() = board.level.entries.count { isEntrySolved(it) }
+
+    val keyword: Keyword? get() = board.level.keyword
+
+    /** Key word letters known so far: a letter appears once its cell is settled (solved or revealed). */
+    val keywordLetters: List<Char?>
+        get() {
+            val k = keyword ?: return emptyList()
+            val word = AzText.letters(k.word)
+            if (keywordGuessed) return word
+            return k.cellList.map { c -> if (isLocked(c)) board.solution[c] else null }
+        }
+
+    val isKeywordKnown: Boolean get() = keywordLetters.isNotEmpty() && keywordLetters.all { it != null }
+
+    /** Guess the key word early. Returns the new state and whether this guess earned the bonus. */
+    fun guessKeyword(text: String): Pair<GameState, Boolean> {
+        val k = keyword ?: return this to false
+        if (isKeywordKnown) return this to false
+        val ok = AzText.normalize(text.trim()) == AzText.normalize(k.word)
+        return if (ok) copy(keywordGuessed = true) to true else this to false
+    }
 
     fun isClueOpen(e: Entry) = e.id in openedClues || isEntrySolved(e)
 
