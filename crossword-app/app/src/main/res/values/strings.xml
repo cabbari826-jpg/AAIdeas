@@ -1,4 +1,5 @@
 <resources>
-    <!-- Name under the launcher icon. Default (English and every other language); az and ru have their own. -->
-    <string name="app_name">Keyword</string>
+    <!-- Name under the launcher icon, the same in every language for now.
+         To give a country its own name later, add values-<lang>/strings.xml with app_name. -->
+    <string name="app_name">Açar Söz</string>
 </resources>
