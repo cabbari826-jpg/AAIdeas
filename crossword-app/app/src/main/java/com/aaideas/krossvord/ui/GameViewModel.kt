@@ -254,6 +254,27 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         screen = Screen.PUZZLE
     }
 
+    /** Label for the home screen: which level "continue" opens and whether it was started. */
+    fun continueLabel(): String {
+        val i = continueIndex()
+        val all = completed.size == levels.size
+        return when {
+            all -> "Hamısı həll olunub · Səviyyə ${i + 1}"
+            progress.hasProgress(levels[i].id) -> "Davam et · Səviyyə ${i + 1}"
+            completed.isEmpty() -> "Oyuna başla"
+            else -> "Davam et · Səviyyə ${i + 1}"
+        }
+    }
+
+    /** Wipe all progress (levels, lives, hints) and start again from level 1. */
+    fun resetAllProgress() {
+        progress.resetAll()
+        completed = progress.completedLevels()
+        freeHints = progress.freeHints
+        game = null
+        screen = Screen.HOME
+    }
+
     fun restartLevel() {
         progress.resetLevel(levels[levelIndex].id)
         completed = progress.completedLevels()

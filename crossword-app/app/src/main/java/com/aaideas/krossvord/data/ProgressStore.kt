@@ -41,6 +41,18 @@ class ProgressStore(context: Context) {
             .putStringSet(KEY_DONE, completedLevels() - levelId).apply()
     }
 
+    /** True when the level has letters on the board or a used clue/life (not yet finished). */
+    fun hasProgress(levelId: String): Boolean =
+        prefs.getString("typed_$levelId", null).orEmpty().isNotBlank() || prefs.contains("lives_$levelId")
+
+    /** Forget every level's progress and counters; keep the player's settings. */
+    fun resetAll() {
+        val keep = setOf(KEY_INPUT, KEY_HIDE_CLUES, KEY_EXTRA)
+        val e = prefs.edit()
+        prefs.all.keys.filter { it !in keep }.forEach { e.remove(it) }
+        e.apply()
+    }
+
     var levelsSinceInterstitial: Int
         get() = prefs.getInt(KEY_SINCE_AD, 0)
         set(v) = prefs.edit().putInt(KEY_SINCE_AD, v).apply()

@@ -77,6 +77,15 @@ fun PuzzleScreen(vm: GameViewModel, isPremium: Boolean) {
     Column(Modifier.fillMaxSize().padding(horizontal = 8.dp, vertical = 8.dp)) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             TextButton(onClick = vm::back) { Text("← Səviyyələr") }
+            var confirmRestart by remember { mutableStateOf(false) }
+            TextButton(onClick = { confirmRestart = true }, Modifier.semantics { contentDescription = "Səviyyəni yenidən başla" }) { Text("↺") }
+            if (confirmRestart) AlertDialog(
+                onDismissRequest = { confirmRestart = false },
+                title = { Text("Səviyyəni yenidən başla?") },
+                text = { Text("Bu səviyyədəki hərflər, canlar və açılmış ipucları silinəcək.") },
+                confirmButton = { Button(onClick = { confirmRestart = false; vm.restartLevel() }) { Text("Yenidən başla") } },
+                dismissButton = { TextButton(onClick = { confirmRestart = false }) { Text("İmtina") } },
+            )
             Spacer(Modifier.weight(1f))
             Text(
                 "♥".repeat(vm.lives) + "♡".repeat(MAX_LIVES - vm.lives),

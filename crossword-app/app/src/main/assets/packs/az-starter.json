@@ -897,11 +897,11 @@
      "clueRow": 0,
      "clueCol": 4,
      "answer": "NAR",
-     "clue": "Qırmızı meyvə",
+     "clue": "Dənli meyvə",
      "clues": [
       "Göyçay meyvəsi",
       "Qırmızı dənli",
-      "Qırmızı meyvə"
+      "Dənli meyvə"
      ],
      "source": "claude-draft",
      "status": "candidate"

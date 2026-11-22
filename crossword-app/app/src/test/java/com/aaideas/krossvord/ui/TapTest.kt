@@ -49,4 +49,25 @@ class TapTest {
         rule.waitForIdle()
         rule.onNodeWithText("→ Ocaqda yanır", substring = true, useUnmergedTree = true).assertExists()
     }
+
+    @Test fun homeResetWipesProgressButKeepsSettings() {
+        val vm = GameViewModel(ApplicationProvider.getApplicationContext<Application>())
+        vm.resetAllProgress()
+        vm.setInput(InputMode.TILES)
+        vm.startLevel(0)
+        for (e in vm.game!!.board.level.entries) {
+            vm.selectEntry(e)
+            val g = vm.game!!
+            e.cells.filter { g.typed[it] != g.board.solution[it] }.forEach { vm.type(g.board.solution[it]!!) }
+        }
+        assertEquals(1, vm.completed.size)
+        rule.setContent { KrossvordTheme { HomeScreen(vm) } }
+        rule.onNodeWithText("Yenidən başla").performClick()
+        rule.onNodeWithText("Sıfırla").performClick()
+        rule.waitForIdle()
+        assertEquals(0, vm.completed.size)
+        assertEquals(InputMode.TILES, vm.inputMode)
+        assertEquals(1, vm.currentLevelNumber)
+        vm.setInput(InputMode.COLUMNS)
+    }
 }

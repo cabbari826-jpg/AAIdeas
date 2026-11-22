@@ -34,6 +34,17 @@ class ClueTierTest {
         assertTrue("repeated answers: $dupes", dupes.isEmpty())
     }
 
+    @Test fun cluesAndKeywordsDoNotRepeatAcrossTheBundledPack() {
+        val pack = Pack.parse(javaClass.classLoader!!.getResource("packs/az-starter.json")!!.readText())
+        val clues = pack.levels.flatMap { l -> l.entries.flatMap { it.clueLevels.distinct() } }
+        val dupes = clues.groupingBy { it }.eachCount().filter { it.value > 1 }.keys
+        assertTrue("repeated clues: $dupes", dupes.isEmpty())
+        val answers = pack.levels.flatMap { l -> l.entries.map { it.answer } }.toSet()
+        val keywords = pack.levels.mapNotNull { it.keyword?.word }
+        assertEquals("repeated key words", keywords.size, keywords.toSet().size)
+        assertTrue("key word is also an answer", keywords.none { it in answers })
+    }
+
     @Test fun everyBundledEntryHasThreeShortClueLevels() {
         val pack = Pack.parse(javaClass.classLoader!!.getResource("packs/az-starter.json")!!.readText())
         for (e in pack.levels.flatMap { it.entries }) {

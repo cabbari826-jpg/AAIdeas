@@ -63,7 +63,7 @@ TIERS = {
 "ÇAY": ["Kür, Araz", "Armudu stəkanda", "İsti içki"],
 "ƏR": ["Kişi, igid", "Həyat yoldaşı", "Arvadın yoldaşı"],
 "BAYATI": ["... Şiraz", "Xalq şeiri", "Dördlük"],
-"NAR": ["Göyçay meyvəsi", "Qırmızı dənli", "Qırmızı meyvə"],
+"NAR": ["Göyçay meyvəsi", "Qırmızı dənli", "Dənli meyvə"],
 "BAKI": ["Küləklər şəhəri", "Xəzər incisi", "Paytaxt"],
 "KAL": ["Xam", "Dəyməmiş", "Yetişməmiş"],
 "QAR": ["Ağ örtük", "Qışın yağıntısı", "Ağ yağıntı"],

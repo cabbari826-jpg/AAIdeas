@@ -23,6 +23,10 @@ import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -33,6 +37,7 @@ import com.aaideas.krossvord.monetization.PlaceholderAdService
 
 @Composable
 fun HomeScreen(vm: GameViewModel) {
+    var confirmReset by remember { mutableStateOf(false) }
     Column(
         Modifier.fillMaxSize().padding(24.dp),
         verticalArrangement = Arrangement.Center,
@@ -43,12 +48,29 @@ fun HomeScreen(vm: GameViewModel) {
         Spacer(Modifier.height(8.dp))
         Text("Həll olunub: ${vm.completed.size} / ${vm.levels.size}", style = MaterialTheme.typography.bodyMedium)
         Spacer(Modifier.height(32.dp))
-        Button(onClick = { vm.startLevel(vm.continueIndex()) }, Modifier.fillMaxWidth().height(56.dp)) { Text("Davam et") }
+        Button(onClick = { vm.startLevel(vm.continueIndex()) }, Modifier.fillMaxWidth().height(56.dp)) { Text(vm.continueLabel()) }
         Spacer(Modifier.height(12.dp))
-        OutlinedButton(onClick = { vm.open(Screen.LEVELS) }, Modifier.fillMaxWidth().height(56.dp)) { Text("Səviyyələr") }
+        OutlinedButton(onClick = { vm.open(Screen.LEVELS) }, Modifier.fillMaxWidth().height(56.dp)) { Text("Səviyyə seç") }
         Spacer(Modifier.height(12.dp))
+        if (vm.completed.isNotEmpty()) {
+            OutlinedButton(onClick = { confirmReset = true }, Modifier.fillMaxWidth().height(56.dp)) { Text("Yenidən başla") }
+            Spacer(Modifier.height(12.dp))
+        }
         TextButton(onClick = { vm.open(Screen.SETTINGS) }) { Text("Ayarlar") }
     }
+    if (confirmReset) ResetAllDialog(onConfirm = { confirmReset = false; vm.resetAllProgress(); vm.startLevel(0) }, onDismiss = { confirmReset = false })
+}
+
+/** Asks before wiping all progress. */
+@Composable
+fun ResetAllDialog(onConfirm: () -> Unit, onDismiss: () -> Unit) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text("Hər şeyi sıfırla?") },
+        text = { Text("Bütün həll olunmuş səviyyələr, canlar və pulsuz ipucları silinəcək. Ayarlar və premium qalır.") },
+        confirmButton = { Button(onClick = onConfirm) { Text("Sıfırla") } },
+        dismissButton = { TextButton(onClick = onDismiss) { Text("İmtina") } },
+    )
 }
 
 @Composable
@@ -64,7 +86,7 @@ fun LevelsScreen(vm: GameViewModel) {
                     Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
                         Text("Səviyyə ${i + 1}", style = MaterialTheme.typography.titleMedium)
                         Spacer(Modifier.weight(1f))
-                        Text(if (done) "✓ həll olunub" else "${level.entries.size} söz")
+                        Text(if (done) "✓ həll olunub · yenidən oyna" else "${level.entries.size} söz")
                     }
                 }
             }
@@ -107,6 +129,12 @@ fun SettingsScreen(vm: GameViewModel, isPremium: Boolean) {
             }
             Switch(checked = vm.hideClues, onCheckedChange = vm::changeHideClues)
         }
+        Spacer(Modifier.height(8.dp))
+        Text("İrəliləyiş", style = MaterialTheme.typography.headlineSmall)
+        Text("Həll olunub: ${vm.completed.size} / ${vm.levels.size}. Həll olunmuş səviyyəni siyahıdan yenidən oynamaq olar.")
+        var confirmReset by remember { mutableStateOf(false) }
+        OutlinedButton(onClick = { confirmReset = true }) { Text("Bütün irəliləyişi sıfırla") }
+        if (confirmReset) ResetAllDialog(onConfirm = { confirmReset = false; vm.resetAllProgress() }, onDismiss = { confirmReset = false })
         Spacer(Modifier.height(8.dp))
         Text("Premium", style = MaterialTheme.typography.headlineSmall)
         Text(
