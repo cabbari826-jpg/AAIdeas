@@ -40,13 +40,12 @@ class PlaceholderAdService : AdService {
     }
 }
 
-/** When interstitials may appear. Never during solving, never for premium users. */
+/**
+ * Owner's rule (2026-11-22): no ads between words or levels. Ads appear only when the player
+ * asks for something (out of lives, a letter, an easier clue). Interstitials are kept in the
+ * code path but never shown.
+ */
 object AdPolicy {
-    /** No interstitial until the player has finished this many levels in total. */
-    const val FREE_LEVELS_BEFORE_FIRST_AD = 1
-    /** Then at most one interstitial per this many finished levels. */
-    const val LEVELS_BETWEEN_INTERSTITIALS = 2
-
-    fun shouldShowInterstitial(isPremium: Boolean, totalCompleted: Int, levelsSinceLast: Int): Boolean =
-        !isPremium && totalCompleted > FREE_LEVELS_BEFORE_FIRST_AD && levelsSinceLast >= LEVELS_BETWEEN_INTERSTITIALS
+    @Suppress("UNUSED_PARAMETER")
+    fun shouldShowInterstitial(isPremium: Boolean, totalCompleted: Int, levelsSinceLast: Int): Boolean = false
 }

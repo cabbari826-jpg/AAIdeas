@@ -203,20 +203,19 @@ private fun PuzzleContent(vm: GameViewModel, isPremium: Boolean, compact: Boolea
             },
         )
     }
-    if (vm.showCompletion) {
+    val result = vm.result
+    if (vm.showCompletion && result != null) {
+        LevelResultDialog(vm.currentLevelTitle, result, vm::nextLevel, vm::dismissCompletion)
+    } else if (vm.showCompletion) {
         AlertDialog(
             onDismissRequest = vm::dismissCompletion,
             title = { Text("Təbriklər!") },
-            text = {
-                Text(
-                    "${vm.currentLevelTitle} həll olundu." +
-                        (game.keyword?.let { "\nAçar söz: ${it.word}" } ?: "")
-                )
-            },
+            text = { Text("${vm.currentLevelTitle} həll olundu.") },
             confirmButton = { Button(onClick = vm::nextLevel) { Text("Növbəti") } },
             dismissButton = { TextButton(onClick = vm::dismissCompletion) { Text("Bağla") } },
         )
     }
+
 }
 
 @Composable

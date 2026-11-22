@@ -11,6 +11,9 @@ import kotlinx.coroutines.launch
 import com.aaideas.krossvord.data.PackRepository
 import com.aaideas.krossvord.data.ProgressStore
 import com.aaideas.krossvord.model.Lives
+import com.aaideas.krossvord.model.Medal
+import com.aaideas.krossvord.model.MedalStats
+import com.aaideas.krossvord.model.Medals
 import com.aaideas.krossvord.model.Board
 import com.aaideas.krossvord.model.Cell
 import com.aaideas.krossvord.model.Entry
@@ -23,7 +26,7 @@ import com.aaideas.krossvord.monetization.LocalPremiumManager
 import com.aaideas.krossvord.monetization.PlaceholderAdService
 import com.aaideas.krossvord.monetization.PremiumManager
 
-enum class Screen { HOME, LEVELS, PUZZLE, SETTINGS, WORD_OF_DAY, STATS }
+enum class Screen { HOME, LEVELS, PUZZLE, SETTINGS, WORD_OF_DAY, STATS, COLLECTION }
 
 /** How letters are entered. COLUMNS is the default; the others stay as options in settings. */
 enum class InputMode { COLUMNS, TILES, KEYBOARD }
@@ -51,6 +54,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         d.onSolved = {
             if (soundOn) sounds.wordFound()
             d.reward = dailyReward()
+            collect(listOf(d.guess.word.word))
         }
     }
     private val sounds = GameSounds(app)
@@ -67,13 +71,67 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     private var playStart = 0L
     fun puzzleShown() { playStart = android.os.SystemClock.elapsedRealtime() }
     fun puzzleHidden() {
-        if (playStart == 0L) return
-        val sec = (android.os.SystemClock.elapsedRealtime() - playStart) / 1000
+        flushTime()
         playStart = 0L
-        if (sec in 1..6 * 3600) progress.playSeconds = progress.playSeconds + sec
     }
+
+    /** Adds the time since [playStart] to the totals and to the current level; keeps counting. */
+    private fun flushTime() {
+        if (playStart == 0L) return
+        val now = android.os.SystemClock.elapsedRealtime()
+        val sec = (now - playStart) / 1000
+        if (sec in 1..6 * 3600) {
+            progress.playSeconds = progress.playSeconds + sec
+            game?.let { progress.addLevelSeconds(it.board.level.id, sec) }
+            playStart += sec * 1000
+        }
+    }
+
+    /** Wrong words and letter hints in this level, for the stars. */
+    private var hintsUsed = 0
+
+    /** What the result card shows after a solved level. */
+    var result by mutableStateOf<LevelResult?>(null)
+        private set
     val playSeconds: Long get() = progress.playSeconds + if (playStart == 0L) 0 else (android.os.SystemClock.elapsedRealtime() - playStart) / 1000
     val wordsFound: Int get() = progress.wordsFound
+
+    // ---- Word collection and medals ----
+    var collection by mutableStateOf(progress.collection)
+        private set
+
+    init {
+        // Players from before the collection existed: their solved levels count.
+        val done = progress.completedLevels()
+        if (collection.isEmpty() && done.isNotEmpty()) {
+            collect(levels.filter { it.id in done }.flatMap { l -> l.entries.map { it.answer } })
+        }
+    }
+
+    private fun collect(words: List<String>) {
+        if (words.all { it in collection }) return
+        collection = collection + words
+        progress.collection = collection
+    }
+
+    /** Every answer in the bundled packs, with its pack, for the collection screen. */
+    val allEntries: List<Pair<Pack, Entry>> by lazy { packs.flatMap { p -> p.levels.flatMap { l -> l.entries.map { p to it } } } }
+
+    val medals: List<Medal> = Medals.all(packs)
+    fun medalStats(done: Set<String> = completed) = MedalStats(
+        packsDone = packs.filter { p -> p.levels.isNotEmpty() && p.levels.all { it.id in done } }.map { it.packId }.toSet(),
+        levelsDone = done.size,
+        perfectLevels = progress.perfectLevels,
+        bestPerfectRun = progress.bestPerfectRun,
+        dailyBestStreak = daily.bestStreak,
+        wordsFound = progress.wordsFound,
+    )
+    fun earnedMedals(): Set<String> = Medals.earnedIds(packs, medalStats())
+    private fun earnedMedalsAfterMark(levelId: String) = Medals.earnedIds(packs, medalStats(completed + levelId))
+
+    /** Medals won by the level just solved; shown in the completion dialog. */
+    var newMedals by mutableStateOf<List<Medal>>(emptyList())
+        private set
 
     override fun onCleared() { puzzleHidden(); sounds.release() }
 
@@ -372,6 +430,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         feedback = null
         draftPicks = emptyList()
         mistakes = 0
+        hintsUsed = 0
         tickLives()
         screen = Screen.PUZZLE
     }
@@ -418,6 +477,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
 
     /** Hint: free for premium, otherwise after a rewarded (placeholder) ad. */
     fun hint() {
+        hintsUsed++
         if (premium.isPremium.value) update { it.revealLetter() }
         else if (freeHints > 0) {
             freeHints--
@@ -458,11 +518,30 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         // Tiles/keyboard modes: a word that just became complete but wrong costs a life.
         val newlyWrong = s.board.level.entries.count { s.isEntryWrong(it) && !old.isEntryWrong(it) }
         repeat(newlyWrong) { loseLife() }
+        mistakes += newlyWrong
         val found = s.solvedCount - old.solvedCount
-        if (found > 0 && s.board.level.id == old.board.level.id) progress.wordsFound = progress.wordsFound + found
+        if (found > 0 && s.board.level.id == old.board.level.id) {
+            progress.wordsFound = progress.wordsFound + found
+            collect(s.board.level.entries.filter { s.isEntrySolved(it) && !old.isEntrySolved(it) }.map { it.answer })
+        }
         if (soundOn && found > 0) { if (s.isComplete && !old.isComplete) sounds.levelSolved() else sounds.wordFound() }
         if (s.isComplete && !old.isComplete) {
+            val medalsBefore = earnedMedals()
+            if (mistakes == 0) {
+                progress.perfectLevels = progress.perfectLevels + 1
+                progress.perfectRun = progress.perfectRun + 1
+                progress.bestPerfectRun = maxOf(progress.bestPerfectRun, progress.perfectRun)
+            } else progress.perfectRun = 0
             progress.markCompleted(id)
+            newMedals = medals.filter { it.id in earnedMedalsAfterMark(id) - medalsBefore }
+            flushTime()
+            result = LevelResult(
+                stars = LevelResult.stars(mistakes, hintsUsed),
+                seconds = progress.levelSeconds(id),
+                praise = LevelResult.PRAISE.random(),
+                keyword = s.keyword?.word,
+                medals = newMedals,
+            )
             progress.levelsSinceInterstitial = progress.levelsSinceInterstitial + 1
             completed = progress.completedLevels()
             showCompletion = true
@@ -471,5 +550,18 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         }
         if (s.openedClues != old.openedClues) progress.saveOpenedClues(id, s.openedClues)
         if (s.clueTiers != old.clueTiers) progress.saveClueTiers(id, s.clueTiers)
+    }
+}
+
+/** The result card of a solved level: 1 to 3 stars, time taken (shown only here), praise, new medals. */
+data class LevelResult(val stars: Int, val seconds: Long, val praise: String, val keyword: String?, val medals: List<Medal>) {
+    companion object {
+        val PRAISE = listOf("Əla!", "Bravo!", "Afərin!", "Belə davam et!", "Mükəmməl!", "Super!", "Çox gözəl!")
+        /** Never zero: 3 without mistakes and letter hints, 2 with a few, 1 otherwise. */
+        fun stars(mistakes: Int, hints: Int): Int = when {
+            mistakes == 0 && hints == 0 -> 3
+            mistakes + hints <= 2 -> 2
+            else -> 1
+        }
     }
 }

@@ -98,6 +98,25 @@ class ProgressStore(context: Context) {
             else com.aaideas.krossvord.model.Lives(prefs.getInt(KEY_LIVES, 3), prefs.getLong(KEY_LIVES_SINCE, 0L))
         set(v) = prefs.edit().putInt(KEY_LIVES, v.count).putLong(KEY_LIVES_SINCE, v.since).apply()
 
+    /** Levels solved without a wrong word: count, current run, best run (for medals). */
+    var perfectLevels: Int
+        get() = prefs.getInt("perfect_levels", 0)
+        set(v) = prefs.edit().putInt("perfect_levels", v).apply()
+    var perfectRun: Int
+        get() = prefs.getInt("perfect_run", 0)
+        set(v) = prefs.edit().putInt("perfect_run", v).apply()
+    var bestPerfectRun: Int
+        get() = prefs.getInt("perfect_best", 0)
+        set(v) = prefs.edit().putInt("perfect_best", v).apply()
+
+    fun levelSeconds(levelId: String): Long = prefs.getLong("time_$levelId", 0L)
+    fun addLevelSeconds(levelId: String, sec: Long) = prefs.edit().putLong("time_$levelId", levelSeconds(levelId) + sec).apply()
+
+    /** Words the player has found (answers, and solved words of the day), for the collection. */
+    var collection: Set<String>
+        get() = prefs.getStringSet("collection", emptySet()).orEmpty().toSet()
+        set(v) = prefs.edit().putStringSet("collection", HashSet(v)).apply()
+
     /** Seconds spent on the puzzle screen, for the statistics. */
     var playSeconds: Long
         get() = prefs.getLong(KEY_PLAY_SECONDS, 0L)

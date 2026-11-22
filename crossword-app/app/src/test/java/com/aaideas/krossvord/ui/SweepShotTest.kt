@@ -69,4 +69,31 @@ class SweepShotTest {
         rule.waitForIdle()
         rule.onRoot().captureRoboImage("build/outputs/roborazzi/home-small.png")
     }
+
+    @Test fun levelResult() {
+        val medal = com.aaideas.krossvord.model.Medals.all(emptyList()).first()
+        rule.mainClock.autoAdvance = false
+        rule.setContent {
+            KrossvordTheme {
+                Surface(Modifier.fillMaxSize()) {
+                    LevelResultDialog("Səviyyə 3", LevelResult(3, 154, "Afərin!", "QALA", listOf(medal)), {}, {})
+                }
+            }
+        }
+        rule.mainClock.advanceTimeBy(500)
+        com.github.takahirom.roborazzi.captureScreenRoboImage("build/outputs/roborazzi/result-anim.png")
+        rule.mainClock.advanceTimeBy(2000)
+        com.github.takahirom.roborazzi.captureScreenRoboImage("build/outputs/roborazzi/result.png")
+    }
+
+    @Test fun collectionScreen() {
+        val vm = GameViewModel(ApplicationProvider.getApplicationContext<Application>())
+        vm.restartLevel()
+        vm.setInput(InputMode.KEYBOARD)
+        repeat(3) { val e = vm.game!!.activeEntry!!; e.answer.forEach { vm.type(it) } }
+        rule.setContent { KrossvordTheme { Surface(Modifier.fillMaxSize()) { CollectionScreen(vm) } } }
+        rule.waitForIdle()
+        rule.onRoot().captureRoboImage("build/outputs/roborazzi/collection.png")
+        org.junit.Assert.assertTrue(vm.collection.size >= 3)
+    }
 }

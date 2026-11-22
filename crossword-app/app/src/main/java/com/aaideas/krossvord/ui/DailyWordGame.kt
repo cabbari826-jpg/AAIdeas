@@ -21,7 +21,7 @@ class DailyWordGame(
     private val today: () -> Long = { DailyWords.dayNumber() },
 ) {
     private val prefs = context.getSharedPreferences("daily_word", Context.MODE_PRIVATE)
-    private val words: List<DailyWord> =
+    val words: List<DailyWord> =
         context.assets.open("word_of_day.json").bufferedReader(Charsets.UTF_8).use { DailyWords.parse(it.readText()) }
 
     var guess by mutableStateOf(load())

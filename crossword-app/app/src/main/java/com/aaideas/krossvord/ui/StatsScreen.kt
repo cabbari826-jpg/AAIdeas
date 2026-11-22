@@ -15,6 +15,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
@@ -32,6 +33,9 @@ fun StatsScreen(vm: GameViewModel) {
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         Text("Statistika", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
+        androidx.compose.material3.Button(onClick = { vm.open(Screen.COLLECTION) }, modifier = Modifier.fillMaxWidth()) {
+            Text("📖 Söz kolleksiyası (${vm.collection.size})")
+        }
         Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
             StatTile("Həll olunub", "${vm.completed.size} / ${vm.levels.size}", Modifier.weight(1f))
             StatTile("Tapılmış söz", "${vm.wordsFound}", Modifier.weight(1f))
@@ -44,6 +48,7 @@ fun StatsScreen(vm: GameViewModel) {
             StatTile("Oyun vaxtı", playTimeText(vm.playSeconds), Modifier.weight(1f))
             StatTile("Günün sözü tapılıb", "${vm.daily.totalSolved}", Modifier.weight(1f))
         }
+        MedalsSection(vm)
         Text("Paketlər", style = MaterialTheme.typography.titleLarge)
         vm.packs.forEachIndexed { p, pack ->
             val levels = vm.packLevels(p)
@@ -68,6 +73,34 @@ private fun StatTile(label: String, value: String, modifier: Modifier = Modifier
         Column(Modifier.padding(14.dp)) {
             Text(value, style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
             Text(label, style = MaterialTheme.typography.bodyMedium)
+        }
+    }
+}
+
+/** Medals: earned ones in colour, the rest greyed out with what it takes to win them. */
+@Composable
+private fun MedalsSection(vm: GameViewModel) {
+    val earned = vm.earnedMedals()
+    Text("Medallar (${earned.size} / ${vm.medals.size})", style = MaterialTheme.typography.titleLarge)
+    vm.medals.chunked(2).forEach { pair ->
+        Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+            pair.forEach { m ->
+                val has = m.id in earned
+                Surface(
+                    Modifier.weight(1f),
+                    shape = RoundedCornerShape(16.dp),
+                    color = if (has) MaterialTheme.colorScheme.tertiaryContainer else MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
+                ) {
+                    Row(Modifier.padding(10.dp), verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+                        Text(m.icon, style = MaterialTheme.typography.headlineSmall, modifier = Modifier.graphicsLayer { alpha = if (has) 1f else 0.3f })
+                        Column(Modifier.padding(start = 8.dp)) {
+                            Text(m.title, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
+                            Text(m.description, style = MaterialTheme.typography.bodySmall)
+                        }
+                    }
+                }
+            }
+            if (pair.size == 1) androidx.compose.foundation.layout.Spacer(Modifier.weight(1f))
         }
     }
 }
