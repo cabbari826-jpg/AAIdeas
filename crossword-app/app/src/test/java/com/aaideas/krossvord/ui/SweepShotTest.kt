@@ -185,6 +185,23 @@ class SweepShotTest {
         rule.onRoot().captureRoboImage("build/outputs/roborazzi/puzzle-top.png")
     }
 
+    @Test fun dailyMiniPlaysAndCountsTheTask() {
+        val vm = GameViewModel(ApplicationProvider.getApplicationContext<Application>())
+        vm.finishTutorial()
+        val mini = vm.miniToday!!
+        vm.startMini()
+        assert(vm.playingMini && vm.screen == Screen.PUZZLE)
+        vm.setInput(InputMode.KEYBOARD)
+        mini.entries.forEach { e ->
+            vm.selectEntry(e)
+            e.cells.forEachIndexed { k, c -> if (vm.game!!.typed[c] == null) { vm.tapCell(c); vm.type(e.letters[k]) } }
+        }
+        assert(vm.miniSolvedToday)
+        vm.nextLevel()
+        assert(vm.screen == Screen.DAILY && !vm.playingMini)
+        assert(mini.id !in vm.completed)
+    }
+
     @Test fun collectionScreen() {
         val vm = GameViewModel(ApplicationProvider.getApplicationContext<Application>())
         vm.restartLevel()
