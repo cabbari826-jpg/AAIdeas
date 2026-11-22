@@ -104,6 +104,43 @@ class SweepShotTest {
         rule.onRoot().captureRoboImage("build/outputs/roborazzi/holiday-card.png")
     }
 
+    @Test fun welcomeAndBirthday() {
+        val vm = GameViewModel(ApplicationProvider.getApplicationContext<Application>())
+        vm.today = { java.time.LocalDate.of(2027, 3, 21) }
+        vm.onAppOpen()
+        assert(vm.welcome == GameViewModel.Welcome.PROFILE)
+        // A text field inside a dialog never idles under Robolectric, so the form is shot on its own.
+        rule.mainClock.autoAdvance = false
+        rule.setContent {
+            KrossvordTheme {
+                if (vm.welcome == GameViewModel.Welcome.PROFILE) {
+                    Surface(Modifier.fillMaxSize()) {
+                        androidx.compose.foundation.layout.Column(Modifier.padding(24.dp)) {
+                            androidx.compose.material3.Text("Xoş gəlmisiniz!", style = androidx.compose.material3.MaterialTheme.typography.headlineSmall)
+                            ProfileFields(rememberProfileForm("Ana", java.time.MonthDay.of(3, 21)))
+                        }
+                    }
+                } else WelcomeHost(vm)
+            }
+        }
+        rule.mainClock.advanceTimeBy(1000)
+        rule.onRoot().captureRoboImage("build/outputs/roborazzi/welcome-profile.png")
+        val before = vm.lives
+        rule.runOnUiThread { vm.saveProfile("Ana", java.time.MonthDay.of(3, 21)) }   // entered on the birthday itself
+        assert(vm.welcome == GameViewModel.Welcome.BIRTHDAY)
+        assert(vm.lives == before + 1)
+        rule.mainClock.advanceTimeBy(1000)
+        rule.mainClock.autoAdvance = true
+        rule.waitForIdle()
+        com.github.takahirom.roborazzi.captureScreenRoboImage("build/outputs/roborazzi/welcome-birthday.png")
+        rule.runOnUiThread { vm.dismissWelcome(); vm.onAppOpen() }   // same day again: no second gift, no second greeting
+        assert(vm.welcome == null && vm.lives == before + 1)
+        rule.runOnUiThread { vm.today = { java.time.LocalDate.of(2027, 3, 22) }; vm.onAppOpen() }
+        assert(vm.welcome == GameViewModel.Welcome.DAILY)
+        rule.mainClock.advanceTimeBy(1000)
+        com.github.takahirom.roborazzi.captureScreenRoboImage("build/outputs/roborazzi/welcome-daily.png")
+    }
+
     @Test fun collectionScreen() {
         val vm = GameViewModel(ApplicationProvider.getApplicationContext<Application>())
         vm.restartLevel()

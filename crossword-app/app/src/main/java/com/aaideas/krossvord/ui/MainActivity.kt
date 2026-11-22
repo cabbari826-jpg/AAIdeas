@@ -61,7 +61,7 @@ class MainActivity : ComponentActivity() {
         if (com.aaideas.krossvord.remind.DailyReminder.isOn(this)) com.aaideas.krossvord.remind.DailyReminder.schedule(this)
         setContent {
             if (!ready) { Splash(); return@setContent }
-            LaunchedEffect(Unit) { pendingIntent?.let { openFrom(it) }; pendingIntent = null }
+            LaunchedEffect(Unit) { pendingIntent?.let { openFrom(it) }; pendingIntent = null; vm.onAppOpen() }
             val mode = vm.themeMode
             val dark = vm.skin.alwaysDark || mode == ThemeMode.DARK || (mode == ThemeMode.SYSTEM && isSystemInDarkTheme())
             // Status/nav bar icons must flip with the in-app choice, not only with the phone setting.
@@ -95,6 +95,7 @@ class MainActivity : ComponentActivity() {
                         }
                         if (menu) GlassBottomMenu(vm.screen, vm::open, Modifier.align(Alignment.BottomCenter))
                     }
+                    WelcomeHost(vm)
                     AdPlaceholderHost(vm.ads)
                     UpdateBanner() // prototype only; empty in the release build
                 }

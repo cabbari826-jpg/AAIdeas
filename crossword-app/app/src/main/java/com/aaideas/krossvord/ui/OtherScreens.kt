@@ -138,6 +138,18 @@ fun SettingsScreen(vm: GameViewModel, isPremium: Boolean) {
                 Switch(checked = vm.largeMode, onCheckedChange = vm::changeLargeMode)
             }
         }
+        Surface(onClick = vm::editProfile, shape = androidx.compose.foundation.shape.RoundedCornerShape(16.dp), color = MaterialTheme.colorScheme.surfaceVariant) {
+            Column(Modifier.fillMaxWidth().padding(12.dp)) {
+                Text("👤 Profil", style = MaterialTheme.typography.titleMedium)
+                Text(
+                    listOfNotNull(
+                        vm.playerName.ifBlank { "Ad yazılmayıb" },
+                        vm.birthday?.let { "Ad günü: " + com.aaideas.krossvord.model.Greeting.label(it) },
+                    ).joinToString(" · "),
+                    style = MaterialTheme.typography.bodySmall,
+                )
+            }
+        }
         ThemePicker(vm.themeMode, vm::changeTheme, vm.dynamicColor, vm::changeDynamicColor)
         SkinPicker(vm.skin, vm.ownedSkins, vm::changeSkin, vm::unlockAllSkinsForTesting)
         Text("Hərflərin daxil edilməsi", style = MaterialTheme.typography.headlineSmall)

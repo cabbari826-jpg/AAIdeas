@@ -10,6 +10,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import com.aaideas.krossvord.data.PackRepository
 import com.aaideas.krossvord.data.ProgressStore
+import com.aaideas.krossvord.model.Greeting
 import com.aaideas.krossvord.model.Lives
 import com.aaideas.krossvord.model.Medal
 import com.aaideas.krossvord.model.MedalStats
@@ -343,6 +344,53 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         private set
 
     /** One switch for weak eyes: bigger text everywhere and the selected clue in large print. */
+    // --- Welcome, name and birthday (all optional, kept on the phone) ---
+    var playerName by mutableStateOf(progress.playerName)
+        private set
+    var birthday by mutableStateOf(Greeting.parse(progress.birthday))
+        private set
+
+    /** What to show when the app opens: first the profile question, then once a day a greeting. */
+    enum class Welcome { PROFILE, BIRTHDAY, DAILY }
+    var welcome by mutableStateOf<Welcome?>(null)
+        private set
+
+    /** Called once when the app opens. Gives the birthday life (once a year). */
+    fun onAppOpen() {
+        val day = today()
+        if (Greeting.isBirthday(day, birthday) && progress.birthdayGiftYear != day.year) {
+            progress.birthdayGiftYear = day.year
+            setLives(livesState.gift(now()))
+            progress.welcomeDay = day.toEpochDay()
+            welcome = Welcome.BIRTHDAY
+            return
+        }
+        if (!progress.profileAsked) { welcome = Welcome.PROFILE; return }
+        if (progress.welcomeDay != day.toEpochDay()) {
+            progress.welcomeDay = day.toEpochDay()
+            welcome = Welcome.DAILY
+        }
+    }
+
+    fun editProfile() { welcome = Welcome.PROFILE }
+
+    fun saveProfile(name: String, md: java.time.MonthDay?) {
+        playerName = name.trim().take(24); progress.playerName = playerName
+        birthday = md; progress.birthday = md?.let(Greeting::format)
+        progress.profileAsked = true
+        progress.welcomeDay = today().toEpochDay()
+        welcome = null
+        // Entered on the birthday itself: the gift still comes today.
+        if (Greeting.isBirthday(today(), md) && progress.birthdayGiftYear != today().year) onAppOpen()
+    }
+
+    fun dismissWelcome() {
+        if (welcome == Welcome.PROFILE) progress.profileAsked = true
+        welcome = null
+    }
+
+    fun hello(): String = Greeting.hello(java.time.LocalTime.now().hour, playerName)
+
     var largeMode by mutableStateOf(progress.largeMode)
         private set
 

@@ -47,7 +47,7 @@ class ProgressStore(context: Context) {
 
     /** Forget every level's progress and counters; keep the player's settings. */
     fun resetAll() {
-        val keep = setOf(KEY_INPUT, KEY_HIDE_CLUES, KEY_EXTRA, KEY_THEME, KEY_DYNAMIC, KEY_TUTORIAL, KEY_BIG_CLUES, KEY_SOUND, KEY_SKIN, KEY_SKINS_OWNED, "large_mode")
+        val keep = setOf(KEY_INPUT, KEY_HIDE_CLUES, KEY_EXTRA, KEY_THEME, KEY_DYNAMIC, KEY_TUTORIAL, KEY_BIG_CLUES, KEY_SOUND, KEY_SKIN, KEY_SKINS_OWNED, "large_mode", "player_name", "birthday", "profile_asked", "birthday_gift_year")
         val e = prefs.edit()
         prefs.all.keys.filter { it !in keep }.forEach { e.remove(it) }
         e.apply()
@@ -143,6 +143,31 @@ class ProgressStore(context: Context) {
         set(v) = prefs.edit().putInt("xp", v).apply()
 
     /** Large mode: bigger text everywhere (see LARGE_FONT_SCALE). */
+    /** The player's name for greetings; empty when not given. Kept on reset. */
+    var playerName: String
+        get() = prefs.getString("player_name", null).orEmpty()
+        set(v) = prefs.edit().putString("player_name", v).apply()
+
+    /** Birthday as "MM-dd", or null. Kept on reset. */
+    var birthday: String?
+        get() = prefs.getString("birthday", null)
+        set(v) = prefs.edit().putString("birthday", v).apply()
+
+    /** The welcome (name, birthday) was shown once already. */
+    var profileAsked: Boolean
+        get() = prefs.getBoolean("profile_asked", false)
+        set(v) = prefs.edit().putBoolean("profile_asked", v).apply()
+
+    /** Year the birthday life was last given, so it comes once a year. */
+    var birthdayGiftYear: Int
+        get() = prefs.getInt("birthday_gift_year", 0)
+        set(v) = prefs.edit().putInt("birthday_gift_year", v).apply()
+
+    /** Day (epoch day) the daily welcome was last shown. */
+    var welcomeDay: Long
+        get() = prefs.getLong("welcome_day", -1)
+        set(v) = prefs.edit().putLong("welcome_day", v).apply()
+
     var largeMode: Boolean
         get() = prefs.getBoolean("large_mode", false)
         set(v) = prefs.edit().putBoolean("large_mode", v).apply()

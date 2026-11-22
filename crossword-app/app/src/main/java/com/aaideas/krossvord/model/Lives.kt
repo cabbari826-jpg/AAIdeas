@@ -32,6 +32,12 @@ data class Lives(val count: Int, val since: Long) {
         if (it.count < CAP) Lives(CAP, now) else Lives((it.count + 1).coerceAtMost(MAX), now)
     }
 
+    /** A gift of [n] lives (birthday); above the cap they stay in reserve. */
+    fun gift(now: Long, n: Int = 1): Lives = at(now).let {
+        val c = (it.count + n).coerceAtMost(MAX)
+        if (c >= CAP) Lives(c, now) else Lives(c, it.since)
+    }
+
     /** Milliseconds until the next life comes back, or null when full. */
     fun msToNext(now: Long): Long? = at(now).let { if (it.count >= CAP) null else REGEN_MS - (now - it.since) }
 
