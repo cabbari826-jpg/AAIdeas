@@ -28,6 +28,20 @@ class ThemeScreenshotTest {
             KrossvordTheme(mode) { Surface(Modifier.fillMaxSize()) { screen() } }
         }
 
+    /** The launcher icon (adaptive icon layers drawn together) and its themed variant. */
+    @Test fun launcherIcon() {
+        val ctx = ApplicationProvider.getApplicationContext<Application>()
+        fun draw(res: Int, name: String) {
+            val d = androidx.core.content.ContextCompat.getDrawable(ctx, res)!!
+            val bmp = android.graphics.Bitmap.createBitmap(432, 432, android.graphics.Bitmap.Config.ARGB_8888)
+            d.setBounds(0, 0, 432, 432)
+            d.draw(android.graphics.Canvas(bmp))
+            bmp.captureRoboImage("build/outputs/roborazzi/$name.png")
+        }
+        draw(com.aaideas.krossvord.R.mipmap.ic_launcher, "icon")
+        draw(com.aaideas.krossvord.R.drawable.ic_launcher_monochrome, "icon-themed")
+    }
+
     @Test fun themeChoiceIsRemembered() {
         vm().changeTheme(ThemeMode.DARK)
         assertEquals(ThemeMode.DARK, vm().themeMode)
