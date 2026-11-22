@@ -10,11 +10,12 @@ class WordBuilderTest {
     private val ad = Entry(2, Direction.DOWN, 0, 1, "AD", "İsim")
     private val board = Board(Level("t", 3, 5, 1, listOf(alma, ad)))
 
-    @Test fun boardIsAnAnagramOfTheWord() {
+    @Test fun boardHoldsTheWordPlusNeighbourLetters() {
         val s = GameState.start(board)
         val spots = WordBuilder.letters(s, alma)
         assertEquals(12, spots.size)
-        assertEquals("AALM", spots.filterNotNull().sorted().joinToString(""))
+        // ALMA plus the only other open letter of the level: D of AD (its A is shared with ALMA).
+        assertEquals("AADLM", spots.filterNotNull().sorted().joinToString(""))
         val cols = (0 until 4).map { WordBuilder.column(spots, it).size }
         assertEquals(listOf(3, 3, 3, 3), cols)
     }
@@ -22,7 +23,7 @@ class WordBuilderTest {
     @Test fun extraLettersAreOptional() {
         val s = GameState.start(board)
         val spots = WordBuilder.letters(s, alma, extra = true)
-        assertEquals(4 + WordBuilder.EXTRA_LETTERS, spots.filterNotNull().size)
+        assertEquals(5 + WordBuilder.EXTRA_LETTERS, spots.filterNotNull().size)
     }
 
     @Test fun spotCountGrowsWithLongWords() {
@@ -34,6 +35,17 @@ class WordBuilderTest {
     @Test fun lockedLettersAreNotOnTheBoard() {
         val s = GameState.start(board).submitWord(ad, "AD".toList()).first
         assertEquals("ALM", WordBuilder.letters(s, alma).filterNotNull().sorted().joinToString(""))
+    }
+
+    @Test fun twoLetterWordIsNeverAFiftyFiftyGuess() {
+        val pack = Pack.parse(javaClass.classLoader!!.getResource("packs/az-starter.json")!!.readText())
+        for (level in pack.levels) {
+            val s = GameState.start(Board(level))
+            for (e in level.entries) {
+                val shown = WordBuilder.letters(s, e).filterNotNull().size
+                assertTrue("${e.answer}: only $shown letters", shown >= minOf(9, s.board.solution.size))
+            }
+        }
     }
 
     @Test fun rightWordFillsGridWrongWordChangesNothing() {
