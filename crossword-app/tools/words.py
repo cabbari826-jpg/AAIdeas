@@ -90,7 +90,7 @@ WORDS = {
 "TORT":"Ad günü üçün",
 "ARX":"Su kanalı",
 "DƏRƏ":"Dağ arası",
-"TEPƏ":"Təpə",
+
 "TƏPƏ":"Kiçik dağ",
 "QAYA":"Daş",
 "ZİRVƏ":"Dağın başı",

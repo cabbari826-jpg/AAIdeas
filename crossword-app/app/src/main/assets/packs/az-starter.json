@@ -377,6 +377,336 @@
     ],
     "source": "claude-draft"
    }
+  },
+  {
+   "id": "az-starter-003",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 2,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "ŞƏRBƏT",
+     "clue": "Novruz içkisi",
+     "source": "claude-draft",
+     "status": "candidate"
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "YAYLAQ",
+     "clue": "Yay otlağı",
+     "source": "claude-draft",
+     "status": "candidate"
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "ADAÇAY",
+     "clue": "Dərman çayı",
+     "source": "claude-draft",
+     "status": "candidate"
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 6,
+     "clueCol": 1,
+     "answer": "ƏLA",
+     "clue": "Beşlik qiymət",
+     "source": "claude-draft",
+     "status": "candidate"
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 1,
+     "answer": "NANƏ",
+     "clue": "Dolmaya qatılır",
+     "source": "claude-draft",
+     "status": "candidate"
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 2,
+     "answer": "ƏSA",
+     "clue": "Qoca dayağı",
+     "source": "claude-draft",
+     "status": "candidate"
+    },
+    {
+     "id": 7,
+     "direction": "DOWN",
+     "clueRow": 4,
+     "clueCol": 2,
+     "answer": "DƏN",
+     "clue": "Quş yemi",
+     "source": "claude-draft",
+     "status": "candidate"
+    },
+    {
+     "id": 8,
+     "direction": "DOWN",
+     "clueRow": 4,
+     "clueCol": 3,
+     "answer": "ALA",
+     "clue": "... qarğa",
+     "source": "claude-draft",
+     "status": "candidate"
+    },
+    {
+     "id": 9,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "BAL",
+     "clue": "Pətəkdə olur",
+     "source": "claude-draft",
+     "status": "candidate"
+    },
+    {
+     "id": 10,
+     "direction": "DOWN",
+     "clueRow": 4,
+     "clueCol": 4,
+     "answer": "ÇAN",
+     "clue": "Kilsə zəngi",
+     "source": "claude-draft",
+     "status": "candidate"
+    },
+    {
+     "id": 11,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 6,
+     "answer": "QAYA",
+     "clue": "Uca daş",
+     "source": "claude-draft",
+     "status": "candidate"
+    }
+   ],
+   "keyword": {
+    "word": "ŞƏLALƏ",
+    "cells": [
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      5
+     ],
+     [
+      6,
+      3
+     ],
+     [
+      4,
+      6
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      7,
+      5
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-starter-004",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 2,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 1,
+     "answer": "ÇƏMƏN",
+     "clue": "Otlu sahə",
+     "source": "claude-draft",
+     "status": "candidate"
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 2,
+     "clueCol": 0,
+     "answer": "SU",
+     "clue": "Həyat mənbəyi",
+     "source": "claude-draft",
+     "status": "candidate"
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 2,
+     "clueCol": 3,
+     "answer": "İL",
+     "clue": "365 gün",
+     "source": "claude-draft",
+     "status": "candidate"
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "OX",
+     "clue": "Kamanın yoldaşı",
+     "source": "claude-draft",
+     "status": "candidate"
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 3,
+     "answer": "SAP",
+     "clue": "İynəyə keçir",
+     "source": "claude-draft",
+     "status": "candidate"
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 4,
+     "clueCol": 0,
+     "answer": "YAŞ",
+     "clue": "Ömür ili",
+     "source": "claude-draft",
+     "status": "candidate"
+    },
+    {
+     "id": 7,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 2,
+     "answer": "ARAL",
+     "clue": "Quruyan dəniz",
+     "source": "claude-draft",
+     "status": "candidate"
+    },
+    {
+     "id": 8,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 1,
+     "answer": "ARMUD",
+     "clue": "Göyçə meyvəsi",
+     "source": "claude-draft",
+     "status": "candidate"
+    },
+    {
+     "id": 9,
+     "direction": "DOWN",
+     "clueRow": 1,
+     "clueCol": 1,
+     "answer": "SOYUQ",
+     "clue": "İstinin əksi",
+     "source": "claude-draft",
+     "status": "candidate"
+    },
+    {
+     "id": 10,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 2,
+     "answer": "ÇUXA",
+     "clue": "Kişi geyimi",
+     "source": "claude-draft",
+     "status": "candidate"
+    },
+    {
+     "id": 11,
+     "direction": "DOWN",
+     "clueRow": 3,
+     "clueCol": 3,
+     "answer": "ŞAİR",
+     "clue": "Vaqif, Vurğun",
+     "source": "claude-draft",
+     "status": "candidate"
+    },
+    {
+     "id": 12,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "MİS",
+     "clue": "Samovar metalı",
+     "source": "claude-draft",
+     "status": "candidate"
+    },
+    {
+     "id": 13,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 5,
+     "answer": "ƏLA",
+     "clue": "Beşlik qiymət",
+     "source": "claude-draft",
+     "status": "candidate"
+    },
+    {
+     "id": 14,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 6,
+     "answer": "PALID",
+     "clue": "Möhkəm ağac",
+     "source": "claude-draft",
+     "status": "candidate"
+    }
+   ],
+   "keyword": {
+    "word": "ARXALIQ",
+    "cells": [
+     [
+      5,
+      3
+     ],
+     [
+      7,
+      3
+     ],
+     [
+      3,
+      2
+     ],
+     [
+      5,
+      5
+     ],
+     [
+      2,
+      5
+     ],
+     [
+      6,
+      6
+     ],
+     [
+      6,
+      1
+     ]
+    ],
+    "source": "claude-draft"
+   }
   }
  ]
 }
