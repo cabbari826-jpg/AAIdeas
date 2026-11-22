@@ -45,7 +45,13 @@ class ProgressStore(context: Context) {
         get() = prefs.getInt(KEY_SINCE_AD, 0)
         set(v) = prefs.edit().putInt(KEY_SINCE_AD, v).apply()
 
+    /** Input mode: letter tiles (default) or the full keyboard ("hard mode"). */
+    var useKeyboard: Boolean
+        get() = prefs.getBoolean(KEY_KEYBOARD, false)
+        set(v) = prefs.edit().putBoolean(KEY_KEYBOARD, v).apply()
+
     private companion object {
+        const val KEY_KEYBOARD = "use_keyboard"
         const val KEY_DONE = "completed"
         const val KEY_SINCE_AD = "levels_since_interstitial"
     }

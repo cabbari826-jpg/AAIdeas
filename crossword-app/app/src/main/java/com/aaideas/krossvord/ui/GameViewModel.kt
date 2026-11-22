@@ -36,7 +36,20 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     var showCompletion by mutableStateOf(false)
         private set
 
+    var useKeyboard by mutableStateOf(progress.useKeyboard)
+        private set
+    /** Bumped by the shuffle button to reorder the tiles. */
+    var tileShuffle by mutableStateOf(0)
+        private set
+
     private var levelIndex = 0
+
+    fun setKeyboardMode(on: Boolean) {
+        progress.useKeyboard = on
+        useKeyboard = on
+    }
+
+    fun shuffleTiles() { tileShuffle++ }
 
     val currentLevelNumber: Int get() = levelIndex + 1
 

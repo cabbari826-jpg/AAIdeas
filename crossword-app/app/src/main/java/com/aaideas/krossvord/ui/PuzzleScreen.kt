@@ -1,6 +1,10 @@
 package com.aaideas.krossvord.ui
 
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -25,6 +29,9 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
@@ -44,6 +51,8 @@ import com.aaideas.krossvord.model.Cell
 import com.aaideas.krossvord.model.Direction
 import com.aaideas.krossvord.model.Entry
 import com.aaideas.krossvord.model.GameState
+import com.aaideas.krossvord.model.LetterTiles
+import com.aaideas.krossvord.model.Tile
 
 @Composable
 fun PuzzleScreen(vm: GameViewModel, isPremium: Boolean) {
@@ -68,7 +77,9 @@ fun PuzzleScreen(vm: GameViewModel, isPremium: Boolean) {
                 Text(if (isPremium) "Hərf aç" else "Hərf aç ▶ reklam")
             }
         }
-        AzKeyboard(onLetter = vm::type, onBackspace = vm::backspace)
+        val entry = game.activeEntry
+        if (vm.useKeyboard || entry == null) AzKeyboard(onLetter = vm::type, onBackspace = vm::backspace)
+        else TileInput(LetterTiles.tilesFor(game, entry, vm.tileShuffle), vm::type, vm::backspace, vm::shuffleTiles)
     }
     if (vm.showCompletion) {
         AlertDialog(
@@ -200,5 +211,65 @@ private fun Key(label: String, modifier: Modifier, onClick: () -> Unit) {
         color = MaterialTheme.colorScheme.surfaceVariant,
     ) {
         Box(contentAlignment = Alignment.Center) { Text(label, fontSize = 18.sp, fontWeight = FontWeight.Medium) }
+    }
+}
+
+/**
+ * Tile input: the word's letters, shuffled, plus a few decoys. Tapping a tile puts its letter
+ * into the selected cell; used tiles fade out. Same height as the keyboard so the grid doesn't jump.
+ */
+@OptIn(ExperimentalLayoutApi::class)
+@Composable
+private fun TileInput(tiles: List<Tile>, onLetter: (Char) -> Unit, onBackspace: () -> Unit, onShuffle: () -> Unit) {
+    val haptic = LocalHapticFeedback.current
+    Column(
+        Modifier.fillMaxWidth().height(156.dp),
+        verticalArrangement = Arrangement.SpaceBetween,
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        FlowRow(
+            Modifier.fillMaxWidth().weight(1f).padding(top = 4.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
+            if (tiles.isEmpty()) {
+                Text("Söz tapıldı ✓", style = MaterialTheme.typography.titleMedium, modifier = Modifier.padding(top = 16.dp))
+            }
+            tiles.forEachIndexed { i, tile ->
+                key(i, tile.letter) {
+                    LetterTile(tile) {
+                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                        onLetter(tile.letter)
+                    }
+                }
+            }
+        }
+        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            OutlinedButton(onClick = onShuffle, modifier = Modifier.weight(1f)) { Text("⟳ Qarışdır") }
+            OutlinedButton(onClick = onBackspace, modifier = Modifier.weight(1f)) { Text("⌫ Sil") }
+        }
+    }
+}
+
+@Composable
+private fun LetterTile(tile: Tile, onClick: () -> Unit) {
+    val scale by animateFloatAsState(if (tile.used) 0.8f else 1f, tween(180), label = "tileScale")
+    val alpha by animateFloatAsState(if (tile.used) 0.25f else 1f, tween(180), label = "tileAlpha")
+    Surface(
+        modifier = Modifier.size(52.dp).graphicsLayer { scaleX = scale; scaleY = scale; this.alpha = alpha }
+            .clickable(enabled = !tile.used, onClick = onClick)
+            .semantics { contentDescription = "Hərf ${tile.letter}" },
+        shape = RoundedCornerShape(12.dp),
+        color = MaterialTheme.colorScheme.primaryContainer,
+        shadowElevation = if (tile.used) 0.dp else 3.dp,
+    ) {
+        Box(contentAlignment = Alignment.Center) {
+            Text(
+                tile.letter.toString(),
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onPrimaryContainer,
+            )
+        }
     }
 }

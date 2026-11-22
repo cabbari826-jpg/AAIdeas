@@ -16,6 +16,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -71,6 +72,18 @@ fun LevelsScreen(vm: GameViewModel) {
 fun SettingsScreen(vm: GameViewModel, isPremium: Boolean) {
     Column(Modifier.fillMaxSize().padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
         TextButton(onClick = vm::back) { Text("← Əsas səhifə") }
+        Text("Hərflərin daxil edilməsi", style = MaterialTheme.typography.headlineSmall)
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Column(Modifier.weight(1f)) {
+                Text("Çətin rejim: tam klaviatura")
+                Text(
+                    if (vm.useKeyboard) "İndi: klaviatura" else "İndi: söz hərfləri olan kartlar",
+                    style = MaterialTheme.typography.bodySmall,
+                )
+            }
+            Switch(checked = vm.useKeyboard, onCheckedChange = vm::setKeyboardMode)
+        }
+        Spacer(Modifier.height(8.dp))
         Text("Premium", style = MaterialTheme.typography.headlineSmall)
         Text(
             if (isPremium) "Premium aktivdir: reklam yoxdur, ipucları pulsuzdur."

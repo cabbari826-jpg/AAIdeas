@@ -25,8 +25,19 @@ class ScreenshotTest {
         vm.startLevel(0)
         vm.restartLevel()
         "ODAŞ".forEach(vm::type) // two words solved
-        vm.tapCell(Cell(0, 4))   // clue cell for ALMA ↓
+        vm.tapCell(Cell(0, 1))   // clue cell for OTAQ ↓ (O is already in place)
+        vm.type('T')
         captureRoboImage("build/outputs/roborazzi/puzzle.png") {
+            KrossvordTheme { Surface(Modifier.fillMaxSize()) { PuzzleScreen(vm, isPremium = false) } }
+        }
+    }
+
+    @Test fun puzzleKeyboardMode() {
+        val vm = vm()
+        vm.setKeyboardMode(true)
+        vm.startLevel(0)
+        vm.restartLevel()
+        captureRoboImage("build/outputs/roborazzi/puzzle-keyboard.png") {
             KrossvordTheme { Surface(Modifier.fillMaxSize()) { PuzzleScreen(vm, isPremium = false) } }
         }
     }
