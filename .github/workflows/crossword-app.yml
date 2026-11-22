@@ -54,6 +54,11 @@ jobs:
           if [ -s prototype.keystore ] && [ -z "$KEYSTORE_PASSWORD" ]; then
             echo "::error::PROTOTYPE_KEYSTORE_PASSWORD secret is missing"; exit 1
           fi
+          if [ -s prototype.keystore ]; then
+            pw=$(printf '%s' "$KEYSTORE_PASSWORD" | tr -d '[:space:]')
+            keytool -list -keystore prototype.keystore -storepass "$pw" >/dev/null ||
+              { echo "::error::PROTOTYPE_KEYSTORE_PASSWORD does not open PROTOTYPE_KEYSTORE_BASE64 (re-paste both secrets)"; exit 1; }
+          fi
       - run: ./gradlew testDebugUnitTest assembleDebug
         env:
           PROTOTYPE_KEYSTORE_PASSWORD: ${{ secrets.PROTOTYPE_KEYSTORE_PASSWORD }}
