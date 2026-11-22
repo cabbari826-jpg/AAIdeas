@@ -34,10 +34,18 @@ class SkinPalette(val scheme: ColorScheme, val grid: GridColors)
  * App and grid themes. [id] is stored in settings, so never rename one.
  * Every palette keeps letters dark on light cells (or light on dark) with strong contrast for low vision.
  */
-enum class Skin(val id: String, val label: String, val unlock: Unlock, val alwaysDark: Boolean = false) {
+enum class Skin(
+    val id: String,
+    val label: String,
+    val unlock: Unlock,
+    val alwaysDark: Boolean = false,
+    /** Liquid glass: a colourful backdrop behind see-through panels (blurred on Android 12+). */
+    val glass: Boolean = false,
+) {
     KLASSIK("klassik", "Klassik", Unlock.FREE),
     KAGIZ("kagiz", "Kağız", Unlock.FREE),
     GECE("gece", "Gecə", Unlock.FREE, alwaysDark = true),
+    SUSE("suse", "Şüşə", Unlock.FREE, glass = true),
     QEZET("qezet", "Qəzet", Unlock.RANK_1),
     DENIZ("deniz", "Xəzər", Unlock.RANK_2),
     XALCA("xalca", "Xalça", Unlock.STREAK_OR_RANK_3),
@@ -52,6 +60,7 @@ enum class Skin(val id: String, val label: String, val unlock: Unlock, val alway
         KLASSIK -> if (dark) SkinPalette(DarkColors, DarkGrid) else SkinPalette(LightColors, LightGrid)
         KAGIZ -> if (dark) KagizDark else KagizLight
         GECE -> GeceDark
+        SUSE -> if (dark) GlassDark else GlassLight
         QEZET -> if (dark) QezetDark else QezetLight
         XALCA -> if (dark) XalcaDark else XalcaLight
         DENIZ -> if (dark) DenizDark else DenizLight
@@ -115,6 +124,19 @@ private fun grid(
     clueCell = Color(clue), clueText = Color(clueText), emptyCell = Color(block), letterCell = Color(cell), letter = Color(letter),
     activeWord = Color(word), activeCell = Color(cur), solved = Color(ok), wrong = Color(bad), revealed = Color(revealed),
     line = Color(line), keyword = Color(key), pattern = pattern, patternInk = Color(ink), patternInk2 = Color(ink2),
+)
+
+// Şüşə (liquid glass): lavender, gold and mint light behind frosted white panels; at night deep violet and teal.
+// Surfaces are see-through so the backdrop (GlassBackdrop) shows; the grid stays readable with near-white letter cells.
+private val GlassLight = SkinPalette(
+    light(0xFF6750A4, 0xFFFFFFFF, 0x99E8DEF8, 0xFF21005D, 0xFFE9E0F7, 0xFF1D1A22, 0x66FFFFFF, 0xFF3E3A4A, 0x59FFFFFF, 0x80FFFFFF, 0xFF79747E, 0x66FFFFFF, 0x99FFE8A8, 0xFF3B2A00)
+        .copy(surface = Color(0x40FFFFFF), surfaceContainerLowest = Color(0x33FFFFFF), surfaceContainerLow = Color(0x4DFFFFFF), surfaceContainerHighest = Color(0x99FFFFFF)),
+    grid(0x8CE8DEF8, 0xFF2E2640, 0x596750A4, 0xD9FFFFFF, 0xFF1D1A22, 0xE6FFF1C2, 0xFFFFC94D, 0xE6DDF3E3, 0xE6FFD9D6, 0xFF6750A4, 0x80FFFFFF, 0xFFD9480F),
+)
+private val GlassDark = SkinPalette(
+    dark(0xFFCDB8FF, 0xFF2B1F4A, 0x40CDB8FF, 0xFFF1EAFF, 0xFF15112A, 0xFFF1ECF8, 0x26FFFFFF, 0xFFD6CFE2, 0x1FFFFFFF, 0x2EFFFFFF, 0xFF9A90AA, 0x33FFFFFF, 0x40FFC94D, 0xFFFFF1C2)
+        .copy(surface = Color(0x14FFFFFF), surfaceContainerLowest = Color(0x0FFFFFFF), surfaceContainerLow = Color(0x1AFFFFFF), surfaceContainerHighest = Color(0x3DFFFFFF)),
+    grid(0x1FFFFFFF, 0xFFD6CFE2, 0x33000000, 0x29FFFFFF, 0xFFFFFFFF, 0x40FFC94D, 0xBFFFC94D, 0x662E9E5B, 0x66E5484D, 0xFFCDB8FF, 0x33FFFFFF, 0xFFF0A05A),
 )
 
 // Kağız: warm paper and brown ink; the blocked cells are pencil-hatched.
