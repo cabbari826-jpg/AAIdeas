@@ -95,7 +95,7 @@ private fun WelcomeCard(emoji: String, title: String, lines: List<String>, butto
 }
 
 @Composable
-private fun CardShell(content: @Composable () -> Unit) {
+internal fun CardShell(content: @Composable () -> Unit) {
     Surface(
         shape = RoundedCornerShape(28.dp),
         color = MaterialTheme.colorScheme.surface,
@@ -111,7 +111,7 @@ private fun CardShell(content: @Composable () -> Unit) {
 }
 
 @Composable
-private fun Badge(emoji: String) {
+internal fun Badge(emoji: String) {
     Box(
         Modifier.size(72.dp).background(MaterialTheme.colorScheme.primaryContainer, CircleShape),
         contentAlignment = Alignment.Center,

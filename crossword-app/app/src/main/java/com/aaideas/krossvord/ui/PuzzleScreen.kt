@@ -47,12 +47,15 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.layout.boundsInRoot
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -75,7 +78,10 @@ fun PuzzleScreen(vm: GameViewModel, isPremium: Boolean) {
     val context = androidx.compose.ui.platform.LocalContext.current
     val lowEnd = remember { isLowEndPhone(context) }
     androidx.compose.runtime.CompositionLocalProvider(LocalTile provides if (compact) 40.dp else 46.dp, LocalLowEnd provides lowEnd) {
-        PuzzleContent(vm, isPremium, compact)
+        Box(Modifier.fillMaxSize()) {
+            PuzzleContent(vm, isPremium, compact)
+            TutorialLayer(vm)
+        }
     }
 }
 
@@ -101,9 +107,10 @@ private fun PuzzleContent(vm: GameViewModel, isPremium: Boolean, compact: Boolea
     }.orEmpty()
     Column(Modifier.fillMaxSize().padding(horizontal = if (compact) 4.dp else 8.dp, vertical = if (compact) 2.dp else 8.dp)) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            TextButton(onClick = vm::back) { Text("← Səviyyələr") }
+            SquareButton("❮", "Geri", vm::back, Modifier.tutorialAnchor(vm, TutorialSpot.BACK))
+            Spacer(Modifier.width(8.dp))
             var confirmRestart by remember { mutableStateOf(false) }
-            TextButton(onClick = { confirmRestart = true }, Modifier.semantics { contentDescription = "Səviyyəni yenidən başla" }) { Text("↺") }
+            SquareButton("↻", "Səviyyəni yenidən başla", { confirmRestart = true }, Modifier.tutorialAnchor(vm, TutorialSpot.RESTART))
             if (confirmRestart) AlertDialog(
                 onDismissRequest = { confirmRestart = false },
                 title = { Text("Səviyyəni yenidən başla?") },
@@ -112,20 +119,15 @@ private fun PuzzleContent(vm: GameViewModel, isPremium: Boolean, compact: Boolea
                 dismissButton = { TextButton(onClick = { confirmRestart = false }) { Text("İmtina") } },
             )
             Spacer(Modifier.weight(1f))
-            LivesBadge(vm, isPremium, Modifier.padding(end = 10.dp))
-            Text(
-                "${vm.currentLevelTitle} · ${game.solvedCount}/${game.board.level.entries.size}",
-                style = MaterialTheme.typography.titleSmall,
-                maxLines = 1,
-                overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis,
-            )
+            LivesBadge(vm, isPremium, Modifier.padding(end = 6.dp).tutorialAnchor(vm, TutorialSpot.LIVES))
         }
-        if (game.keyword != null) KeywordStrip(game.keywordLetters, game.isKeywordKnown, vm::openKeywordDialog)
+        if (game.keyword != null) KeywordStrip(game.keywordLetters, game.isKeywordKnown, vm::openKeywordDialog, Modifier.tutorialAnchor(vm, TutorialSpot.KEYWORD))
         BoxWithConstraints(Modifier.fillMaxWidth().weight(1f), contentAlignment = Alignment.Center) {
             val cell = min(maxWidth / game.board.cols, maxHeight / game.board.rows)
             Grid(
                 game, cell, preview, vm.feedback, vm::isClueShown, vm::tapCell, vm::tapClueOf,
-                tutorialEntry = if (vm.tutorialStep == TUTORIAL_TAP) game.activeEntry else null,
+                tutorialEntry = if (vm.tutorialStep == TUTORIAL_COACH && COACH_STEPS[vm.coachIndex].first == TutorialSpot.CLUE) game.activeEntry else null,
+                onSpot = if (vm.tutorialStep == TUTORIAL_COACH) { spot, r -> vm.tutorialRects[spot] = r } else null,
             )
         }
         val hintText = when {
@@ -138,7 +140,7 @@ private fun PuzzleContent(vm: GameViewModel, isPremium: Boolean, compact: Boolea
         if (!actionsInColumns) Row(Modifier.fillMaxWidth().padding(vertical = if (compact) 2.dp else 6.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             if (columns) OutlinedButton(onClick = vm::shuffleTiles, modifier = Modifier.weight(1f)) { Text("⟳ Qarışdır") }
             else OutlinedButton(onClick = vm::clearWord, modifier = Modifier.weight(1f)) { Text("Sözü sil") }
-            Button(onClick = vm::hint, modifier = Modifier.weight(1f)) {
+            Button(onClick = vm::hint, modifier = Modifier.weight(1f).tutorialAnchor(vm, TutorialSpot.HINT)) {
                 Text(
                     when {
                         isPremium -> "Hərf aç"
@@ -153,11 +155,11 @@ private fun PuzzleContent(vm: GameViewModel, isPremium: Boolean, compact: Boolea
         val active = game.activeEntry
         val bigText = vm.bigClues || LocalDensity.current.fontScale >= BIG_FONT_SCALE
         when {
-            vm.tutorialStep != TUTORIAL_DONE -> TutorialCallout(vm.tutorialStep, vm::finishTutorial)
             active != null && vm.isClueShown(active) && (bigText || game.clueText(active).length > CELL_CLUE_MAX) ->
                 LongClueLine(active, game.clueText(active), big = bigText)
         }
         val entry = game.activeEntry
+        Box(Modifier.tutorialAnchor(vm, TutorialSpot.LETTERS)) {
         when {
             entry == null || vm.inputMode == InputMode.KEYBOARD -> AzKeyboard(onLetter = vm::type, onBackspace = vm::backspace)
             vm.inputMode == InputMode.TILES ->
@@ -172,6 +174,7 @@ private fun PuzzleContent(vm: GameViewModel, isPremium: Boolean, compact: Boolea
                 onClear = vm::clearDraft,
                 extra = if (actionsInColumns) ColumnExtras(vm::shuffleTiles, vm::hint, if (isPremium || vm.freeHints > 0) "Hərf aç" else "Hərf ▶") else null,
             )
+        }
         }
     }
     if (vm.showKeywordDialog) KeywordDialog(vm)
@@ -232,9 +235,11 @@ private fun Grid(
     onTap: (Cell) -> Unit,
     onClueTap: (Entry) -> Unit,
     tutorialEntry: Entry?,
+    onSpot: ((TutorialSpot, androidx.compose.ui.geometry.Rect) -> Unit)? = null,
 ) {
     val colors = LocalGridColors.current
     val active = game.activeEntry
+    val density = LocalDensity.current
     val activeCells = active?.cells?.toSet().orEmpty()
     // Where each word starts, and which way it runs: drawn as a clear arrow in that cell.
     val starts = remember(game.board) {
@@ -248,7 +253,18 @@ private fun Grid(
         sweep.animateTo(n + 1f, tween(durationMillis = 130 * (n + 1), easing = androidx.compose.animation.core.LinearEasing))
     }
     val arrowColor = MaterialTheme.colorScheme.primary
-    Column(Modifier.border(1.dp, colors.line)) {
+    // While coaching: tell where the active word and its clue cell are on screen.
+    val spots = if (onSpot == null || active == null) Modifier else Modifier.onGloballyPositioned { co ->
+        val o = co.boundsInRoot().topLeft
+        val px = with(density) { cellSize.toPx() }
+        fun rectOf(cells: List<Cell>) = androidx.compose.ui.geometry.Rect(
+            o.x + cells.minOf { it.col } * px, o.y + cells.minOf { it.row } * px,
+            o.x + (cells.maxOf { it.col } + 1) * px, o.y + (cells.maxOf { it.row } + 1) * px,
+        )
+        onSpot(TutorialSpot.WORD, rectOf(active.cells))
+        game.board.cluesAt.entries.firstOrNull { active in it.value }?.let { onSpot(TutorialSpot.CLUE, rectOf(listOf(it.key))) }
+    }
+    Column(Modifier.border(1.dp, colors.line).then(spots)) {
         for (r in 0 until game.board.rows) {
             Row {
                 for (c in 0 until game.board.cols) {
@@ -427,24 +443,6 @@ private fun ClueCell(
 }
 
 /** First-run hint under the grid: tap the highlighted clue cell, then what happened. */
-@Composable
-private fun TutorialCallout(step: Int, onDone: () -> Unit) {
-    Surface(
-        color = MaterialTheme.colorScheme.primaryContainer,
-        shape = RoundedCornerShape(10.dp),
-        modifier = Modifier.fillMaxWidth().padding(top = 2.dp),
-    ) {
-        Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(start = 12.dp, end = 4.dp, top = 6.dp, bottom = 6.dp)) {
-            Text(
-                if (step == TUTORIAL_TAP) "☝ Haşiyəli ipucu xanasına toxun: ipucu böyük açılacaq."
-                else "Əla! Kartda «Daha asan ipucu» var: ikincisi pulsuzdur, üçüncüsü reklamdan sonra. Açılmış ipucuları sürüşdürüb vərəqlə.",
-                style = MaterialTheme.typography.bodyMedium,
-                modifier = Modifier.weight(1f),
-            )
-            TextButton(onClick = onDone) { Text(if (step == TUTORIAL_TAP) "Keç" else "Aydındır") }
-        }
-    }
-}
 
 /** Phone font scale from which the clue also shows in large text under the grid. */
 const val BIG_FONT_SCALE = 1.3f
@@ -473,32 +471,33 @@ private fun LongClueLine(entry: Entry, text: String, big: Boolean) {
 private val KEY_ROWS = listOf("QÜERTYUİOPÖ", "ASDFGHJKLIƏ", "ZXCVBNMÇŞĞ")
 
 @Composable
-internal fun AzKeyboard(onLetter: (Char) -> Unit, onBackspace: () -> Unit) {
+internal fun AzKeyboard(onLetter: (Char) -> Unit, onBackspace: () -> Unit, keyHeight: Dp = LocalTile.current + 8.dp) {
     check(KEY_ROWS.joinToString("").toSet() == AzText.ALPHABET.toSet())
     val haptic = LocalHapticFeedback.current
-    Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+    // Tall keys with big letters: easier to hit for older players.
+    Column(verticalArrangement = Arrangement.spacedBy(6.dp), modifier = Modifier.padding(bottom = 6.dp)) {
         KEY_ROWS.forEachIndexed { i, row ->
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(3.dp)) {
                 row.forEach { ch ->
-                    Key(ch.toString(), Modifier.weight(1f)) {
+                    Key(ch.toString(), Modifier.weight(1f), keyHeight) {
                         haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                         onLetter(ch)
                     }
                 }
-                if (i == KEY_ROWS.lastIndex) Key("⌫", Modifier.weight(1f), onBackspace)
+                if (i == KEY_ROWS.lastIndex) Key("⌫", Modifier.weight(1.4f), keyHeight, onBackspace)
             }
         }
     }
 }
 
 @Composable
-private fun Key(label: String, modifier: Modifier, onClick: () -> Unit) {
+private fun Key(label: String, modifier: Modifier, height: Dp, onClick: () -> Unit) {
     Surface(
-        modifier = modifier.height(LocalTile.current + 2.dp).clickable(onClick = onClick),
-        shape = RoundedCornerShape(6.dp),
+        modifier = modifier.height(height).clickable(onClick = onClick),
+        shape = RoundedCornerShape(8.dp),
         color = MaterialTheme.colorScheme.surfaceVariant,
     ) {
-        Box(contentAlignment = Alignment.Center) { Text(label, fontSize = 18.sp, fontWeight = FontWeight.Medium) }
+        Box(contentAlignment = Alignment.Center) { Text(label, fontSize = 22.sp, fontWeight = FontWeight.SemiBold) }
     }
 }
 
@@ -733,10 +732,12 @@ private fun SmallAction(label: String, description: String, enabled: Boolean, on
 
 /** The level's key word: slots fill in as its highlighted cells are solved; tap to guess early. */
 @Composable
-private fun KeywordStrip(letters: List<Char?>, known: Boolean, onGuess: () -> Unit) {
+private fun KeywordStrip(letters: List<Char?>, known: Boolean, onGuess: () -> Unit, modifier: Modifier = Modifier) {
     val colors = LocalGridColors.current
+    // Centred as one group: label, circles, guess mark.
+    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
     Row(
-        Modifier.fillMaxWidth().clickable(enabled = !known, onClick = onGuess).padding(vertical = 2.dp, horizontal = 8.dp),
+        modifier.clickable(enabled = !known, onClick = onGuess).padding(vertical = 2.dp, horizontal = 8.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(4.dp),
     ) {
@@ -752,12 +753,27 @@ private fun KeywordStrip(letters: List<Char?>, known: Boolean, onGuess: () -> Un
                     color = if (ch != null) MaterialTheme.colorScheme.onSurface else colors.keyword)
             }
         }
-        Spacer(Modifier.weight(1f))
+        Spacer(Modifier.width(6.dp))
         Text(
-            if (known) "✓" else "Təxmin et ›",
-            style = MaterialTheme.typography.labelMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            if (known) "✓" else "›",
+            style = MaterialTheme.typography.titleLarge,
+            color = colors.keyword,
         )
+    }
+    }
+}
+
+/** A big, easy-to-hit square button for the top bar. */
+@Composable
+private fun SquareButton(glyph: String, description: String, onClick: () -> Unit, modifier: Modifier = Modifier) {
+    androidx.compose.material3.Surface(
+        onClick = onClick,
+        shape = RoundedCornerShape(14.dp),
+        color = MaterialTheme.colorScheme.secondaryContainer,
+        contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+        modifier = modifier.size(48.dp).semantics { contentDescription = description },
+    ) {
+        Box(contentAlignment = Alignment.Center) { Text(glyph, fontSize = 30.sp, fontWeight = FontWeight.Bold, lineHeight = 30.sp) }
     }
 }
 
@@ -788,17 +804,29 @@ private fun KeywordDialog(vm: GameViewModel) {
 /** 125 -> "2:05". */
 fun clock(seconds: Long): String = "${seconds / 60}:${"%02d".format(seconds % 60)}"
 
-/** Hearts for the shared lives, extra ones as "+N", and the countdown to the next life. */
+/** One heart with the number of lives inside; empty red outline at zero; countdown to the next life below. */
 @Composable
 private fun LivesBadge(vm: GameViewModel, isPremium: Boolean, modifier: Modifier = Modifier) {
     val n = vm.lives
-    val hearts = when {
-        isPremium -> "♥ ∞"
-        n > com.aaideas.krossvord.model.Lives.CAP -> "♥".repeat(com.aaideas.krossvord.model.Lives.CAP) + "+${n - com.aaideas.krossvord.model.Lives.CAP}"
-        else -> "♥".repeat(n) + "♡".repeat(com.aaideas.krossvord.model.Lives.CAP - n)
-    }
+    val red = Color(0xFFE53935)
     Column(modifier.semantics { contentDescription = "Can: ${if (isPremium) "limitsiz" else n}" }, horizontalAlignment = Alignment.CenterHorizontally) {
-        Text(hearts, color = MaterialTheme.colorScheme.error, fontSize = 18.sp, lineHeight = 18.sp)
+        Box(Modifier.size(44.dp, 40.dp), contentAlignment = Alignment.Center) {
+            val empty = !isPremium && n <= 0
+            androidx.compose.foundation.Canvas(Modifier.matchParentSize()) {
+                val w = size.width; val h = size.height
+                val path = androidx.compose.ui.graphics.Path().apply {
+                    moveTo(w / 2, h * 0.95f)
+                    cubicTo(w * 0.05f, h * 0.62f, -w * 0.02f, h * 0.22f, w * 0.27f, h * 0.08f)
+                    cubicTo(w * 0.40f, h * 0.02f, w * 0.48f, h * 0.12f, w / 2, h * 0.22f)
+                    cubicTo(w * 0.52f, h * 0.12f, w * 0.60f, h * 0.02f, w * 0.73f, h * 0.08f)
+                    cubicTo(w * 1.02f, h * 0.22f, w * 0.95f, h * 0.62f, w / 2, h * 0.95f)
+                    close()
+                }
+                if (empty) drawPath(path, red, style = androidx.compose.ui.graphics.drawscope.Stroke(width = 3.dp.toPx()))
+                else drawPath(path, red)
+            }
+            if (!empty) Text(if (isPremium) "∞" else "$n", color = Color.White, fontSize = 16.sp, fontWeight = FontWeight.Bold, modifier = Modifier.padding(bottom = 3.dp))
+        }
         val next = vm.secondsToNextLife
         if (!isPremium && next != null) {
             Text("+1 ${clock(next)}", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)

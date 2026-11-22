@@ -51,9 +51,24 @@ const val KEYWORD_BONUS_HINTS = 2
 
 /** Clue steps that are free; later steps need a rewarded ad. */
 const val FREE_CLUE_STEPS = 1
-const val TUTORIAL_TAP = 0
-const val TUTORIAL_EXPLAIN = 1
+/** First-run tutorial: ask whether to explain, then coach marks one by one, then done. */
+const val TUTORIAL_ASK = 0
+const val TUTORIAL_COACH = 1
 const val TUTORIAL_DONE = 2
+
+/** Parts of the puzzle screen the coach marks point at. */
+enum class TutorialSpot { CLUE, WORD, LETTERS, KEYWORD, HINT, LIVES, RESTART, BACK }
+
+val COACH_STEPS: List<Pair<TutorialSpot, String>> = listOf(
+    TutorialSpot.CLUE to "Bu xanada ipucu yazılıb. Ox sözün hansı tərəfə yazıldığını göstərir: → sağa, ↓ aşağı. Toxunsanız, ipucu böyük açılar.",
+    TutorialSpot.WORD to "Sözün hərfləri bu xanalara yazılır. Seçilmiş söz rənglə işıqlanır, işıq sözün istiqamətində qaçır.",
+    TutorialSpot.LETTERS to "Hərfləri buradan seçin. Söz düzdürsə, yaşıl olur. Səhvdirsə, bir can gedir.",
+    TutorialSpot.KEYWORD to "Dairəli xanalardakı hərflər açar sözü yaradır. Tez tapsanız, bonus alırsınız.",
+    TutorialSpot.HINT to "Çətin olsa, bir hərf açın.",
+    TutorialSpot.LIVES to "Canlarınız. Bitəndə vaxt keçdikcə özü bərpa olunur.",
+    TutorialSpot.RESTART to "Səviyyəni yenidən başlamaq üçün.",
+    TutorialSpot.BACK to "Əsas səhifəyə qayıtmaq üçün.",
+)
 
 class GameViewModel(app: Application) : AndroidViewModel(app) {
     val packs: List<Pack> = com.aaideas.krossvord.data.PackCache.get(app)
@@ -424,7 +439,6 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         if (s.activeEntry != e) update { it.selectEntry(e) }
         update { it.openClue(e) }
         clueCard = e
-        if (tutorialStep == TUTORIAL_TAP) tutorialStep = TUTORIAL_EXPLAIN
     }
 
     /** The word whose clue card is open, or null. */
@@ -433,9 +447,18 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
 
     fun closeClueCard() { clueCard = null }
 
-    /** First-run tutorial: 0 = "tap this clue", 1 = explain what happened, 2 = done. */
-    var tutorialStep by mutableStateOf(if (progress.tutorialDone) TUTORIAL_DONE else TUTORIAL_TAP)
+    var tutorialStep by mutableStateOf(if (progress.tutorialDone) TUTORIAL_DONE else TUTORIAL_ASK)
         private set
+    /** Which coach mark is showing; spots that are not on screen are skipped. */
+    var coachIndex by mutableStateOf(0)
+        private set
+    /** Where the coach-marked parts are on screen, reported by the puzzle screen while coaching. */
+    val tutorialRects = androidx.compose.runtime.mutableStateMapOf<TutorialSpot, androidx.compose.ui.geometry.Rect>()
+
+    fun startCoach() { coachIndex = 0; tutorialStep = TUTORIAL_COACH }
+    fun nextCoach() { if (coachIndex + 1 < COACH_STEPS.size) coachIndex++ else finishTutorial() }
+    /** From settings: show the explanation again next time a level opens. */
+    fun replayTutorial() { progress.tutorialDone = false; tutorialStep = TUTORIAL_ASK }
 
     /** One switch for weak eyes: bigger text everywhere and the selected clue in large print. */
     // --- Welcome, name and birthday (all optional, kept on the phone) ---

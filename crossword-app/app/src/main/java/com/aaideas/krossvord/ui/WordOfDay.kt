@@ -137,12 +137,14 @@ fun WordOfDayScreen(daily: DailyWordGame, isPremium: Boolean, onBack: () -> Unit
                 modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
             )
         }
+        // The keyboard sits a little above the bottom edge, with big keys.
         Spacer(Modifier.weight(1f))
         if (!g.finished) {
-            Button(onClick = daily::hint, modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp)) {
+            Button(onClick = daily::hint, modifier = Modifier.fillMaxWidth().padding(bottom = 10.dp)) {
                 Text(if (isPremium) "Hərf aç" else "Hərf aç ▶ reklam")
             }
-            AzKeyboard(onLetter = daily::type, onBackspace = daily::backspace)
+            AzKeyboard(onLetter = daily::type, onBackspace = daily::backspace, keyHeight = 58.dp)
+            Spacer(Modifier.height(16.dp))
         }
     }
 }

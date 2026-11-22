@@ -150,6 +150,7 @@ fun SettingsScreen(vm: GameViewModel, isPremium: Boolean) {
                 Switch(checked = vm.kidsMode, onCheckedChange = vm::changeKidsMode)
             }
         }
+        OutlinedButton(onClick = vm::replayTutorial, modifier = Modifier.fillMaxWidth()) { Text("❓ Oyunun qaydalarını yenidən göstər") }
         Surface(onClick = vm::editProfile, shape = androidx.compose.foundation.shape.RoundedCornerShape(16.dp), color = MaterialTheme.colorScheme.surfaceVariant) {
             Column(Modifier.fillMaxWidth().padding(12.dp)) {
                 Text("👤 Profil", style = MaterialTheme.typography.titleMedium)
