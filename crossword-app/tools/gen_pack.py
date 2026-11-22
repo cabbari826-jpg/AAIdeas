@@ -14,11 +14,14 @@ from words_more import TIERS_MORE
 PACK = os.path.join(os.path.dirname(__file__), '..', 'app', 'src', 'main', 'assets', 'packs', 'az-starter.json')
 R, C = 8, 7
 MAXLEN = 7
-MAX_TWO = 1      # at most one 2-letter word per level
-MAX_THREE = 3    # at most three 3-letter words per level
+MAX_TWO = int(os.environ.get('MAX_TWO', '1'))      # 2-letter words per level
+MAX_THREE = int(os.environ.get('MAX_THREE', '3'))  # 3-letter words per level
 
 BANK = dict(WORDS); BANK.update(WORDS_HARD); BANK.update({w: t[2] for w, t in TIERS_MORE.items()})
-SKIP = set(filter(None, os.environ.get('SKIP', '').split(',')))   # words judged too weak
+# Weak words, near-duplicates of used ones, and names kept for the themed packs.
+DEFAULT_SKIP = ('İNCİR,ÇƏN,SƏN,OXU,ORAN,ANT,QAB,SAN,NUR,YENİ,ZAMAN,İY,ARX,TAN,ŞER,ARAZ,KÜR,XƏZƏR,ŞAMAXI,'
+                'LƏNKƏRAN,GÖYGÖL,NİL,VOLQA,İRAN,QOBUSTAN,MUĞAM,DASTAN,ROMAN,ANAR,ŞƏHƏR,DƏNİZ,ZƏNG,DOST')
+SKIP = set(filter(None, os.environ.get('SKIP', DEFAULT_SKIP).split(',')))
 
 
 def slots(pat):

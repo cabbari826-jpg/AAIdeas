@@ -94,7 +94,7 @@ fun PuzzleScreen(vm: GameViewModel, isPremium: Boolean) {
                 modifier = Modifier.padding(end = 10.dp).semantics { contentDescription = "Can: ${vm.lives}" },
             )
             Text(
-                "Səviyyə ${vm.currentLevelNumber} · ${game.solvedCount}/${game.board.level.entries.size}",
+                "${vm.currentLevelTitle} · ${game.solvedCount}/${game.board.level.entries.size}",
                 style = MaterialTheme.typography.titleSmall,
             )
         }
@@ -154,7 +154,7 @@ fun PuzzleScreen(vm: GameViewModel, isPremium: Boolean) {
             title = { Text("Təbriklər!") },
             text = {
                 Text(
-                    "Səviyyə ${vm.currentLevelNumber} həll olundu." +
+                    "${vm.currentLevelTitle} həll olundu." +
                         (game.keyword?.let { "\nAçar söz: ${it.word}" } ?: "")
                 )
             },
@@ -253,6 +253,11 @@ private fun LetterCell(
     }
 }
 
+/** Longest clue that still fits in a grid cell; longer ones (song lines) show ♪ there and in full below. */
+const val CELL_CLUE_MAX = 16
+
+fun cellClue(text: String): String = if (text.length > CELL_CLUE_MAX) "♪ …" else text
+
 @Composable
 private fun ClueCell(
     clues: List<Entry>,
@@ -272,7 +277,7 @@ private fun ClueCell(
                 contentAlignment = Alignment.Center,
             ) {
                 BasicText(
-                    text = (if (shown(e)) text(e) else "?") + if (e.direction == Direction.ACROSS) " →" else " ↓",
+                    text = cellClue(if (shown(e)) text(e) else "?") + if (e.direction == Direction.ACROSS) " →" else " ↓",
                     style = TextStyle(color = colors.clueText, textAlign = TextAlign.Center, lineHeight = 1.05.em),
                     autoSize = TextAutoSize.StepBased(minFontSize = 5.sp, maxFontSize = 11.sp, stepSize = 0.5.sp),
                     modifier = Modifier.padding(horizontal = 1.dp),

@@ -27,29 +27,41 @@ class ClueTierTest {
         assertFalse(s.canEaseClue(e))
     }
 
-    @Test fun answersDoNotRepeatAcrossTheBundledPack() {
-        val pack = Pack.parse(javaClass.classLoader!!.getResource("packs/az-starter.json")!!.readText())
-        val all = pack.levels.flatMap { l -> l.entries.map { it.answer } }
+    /** Every bundled pack: the main one and the themes. */
+    private val packs: List<Pack> = java.io.File("src/main/assets/packs").listFiles()!!
+        .filter { it.name.endsWith(".json") }.sortedBy { it.name }
+        .map { Pack.parse(it.readText()) }
+
+    @Test fun answersDoNotRepeatAcrossAllPacks() {
+        assertTrue(packs.size >= 5)
+        val all = packs.flatMap { p -> p.levels.flatMap { l -> l.entries.map { it.answer } } }
         val dupes = all.groupingBy { it }.eachCount().filter { it.value > 1 }.keys
         assertTrue("repeated answers: $dupes", dupes.isEmpty())
     }
 
-    @Test fun cluesAndKeywordsDoNotRepeatAcrossTheBundledPack() {
-        val pack = Pack.parse(javaClass.classLoader!!.getResource("packs/az-starter.json")!!.readText())
-        val clues = pack.levels.flatMap { l -> l.entries.flatMap { it.clueLevels.distinct() } }
+    @Test fun cluesAndKeywordsDoNotRepeatAcrossAllPacks() {
+        val levels = packs.flatMap { it.levels }
+        val clues = levels.flatMap { l -> l.entries.flatMap { it.clueLevels.distinct() } }
         val dupes = clues.groupingBy { it }.eachCount().filter { it.value > 1 }.keys
         assertTrue("repeated clues: $dupes", dupes.isEmpty())
-        val answers = pack.levels.flatMap { l -> l.entries.map { it.answer } }.toSet()
-        val keywords = pack.levels.mapNotNull { it.keyword?.word }
+        val answers = levels.flatMap { l -> l.entries.map { it.answer } }.toSet()
+        val keywords = levels.mapNotNull { it.keyword?.word }
         assertEquals("repeated key words", keywords.size, keywords.toSet().size)
         assertTrue("key word is also an answer", keywords.none { it in answers })
     }
 
-    @Test fun everyBundledEntryHasThreeShortClueLevels() {
-        val pack = Pack.parse(javaClass.classLoader!!.getResource("packs/az-starter.json")!!.readText())
-        for (e in pack.levels.flatMap { it.entries }) {
+    @Test fun everyEntryHasThreeShortClueLevels() {
+        for (p in packs) for (e in p.levels.flatMap { it.entries }) {
             assertEquals("${e.answer} clue levels", 3, e.clueLevels.size)
-            e.clueLevels.forEach { assertTrue("too long: $it", it.length <= 16) }
+            e.clueLevels.forEachIndexed { i, c ->
+                // Song lines (music pack, hardest level) may be longer: the grid shows ♪ for them.
+                val max = if (i == 0 && p.packId == "az-musiqi") 40 else 16
+                assertTrue("too long: $c", c.length <= max)
+            }
         }
+    }
+
+    @Test fun everyThemedPackHasAtLeastTenLevels() {
+        packs.filter { it.packId != "az-starter" }.forEach { assertTrue(it.packId, it.levels.size >= 10) }
     }
 }
