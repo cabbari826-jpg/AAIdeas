@@ -8,7 +8,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.staticCompositionLocalOf
+import android.os.Build
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Shapes
+import androidx.compose.material3.Typography
+import androidx.compose.material3.dynamicDarkColorScheme
+import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 
 /** What the player picked in Settings → Görünüş. */
 enum class ThemeMode(val label: String) {
@@ -82,15 +91,48 @@ private val DarkGrid = GridColors(
 val LocalGridColors = staticCompositionLocalOf { LightGrid }
 
 @Composable
-fun KrossvordTheme(mode: ThemeMode = ThemeMode.SYSTEM, content: @Composable () -> Unit) {
+fun KrossvordTheme(
+    mode: ThemeMode = ThemeMode.SYSTEM,
+    dynamicColor: Boolean = false,
+    content: @Composable () -> Unit,
+) {
     val dark = when (mode) {
         ThemeMode.SYSTEM -> isSystemInDarkTheme()
         ThemeMode.LIGHT -> false
         ThemeMode.DARK -> true
     }
-    MaterialTheme(colorScheme = if (dark) DarkColors else LightColors) {
+    val context = LocalContext.current
+    val scheme = when {
+        dynamicColor && supportsDynamicColor -> if (dark) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+        dark -> DarkColors
+        else -> LightColors
+    }
+    MaterialTheme(colorScheme = scheme, shapes = ExpressiveShapes, typography = ExpressiveType) {
         CompositionLocalProvider(LocalGridColors provides if (dark) DarkGrid else LightGrid) {
             content()
         }
     }
+}
+
+/** Wallpaper colours exist from Android 12. */
+val supportsDynamicColor: Boolean get() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
+
+/** Material 3 Expressive look: rounder corners and heavier headings than the baseline. */
+private val ExpressiveShapes = Shapes(
+    extraSmall = RoundedCornerShape(8.dp),
+    small = RoundedCornerShape(12.dp),
+    medium = RoundedCornerShape(20.dp),
+    large = RoundedCornerShape(28.dp),
+    extraLarge = RoundedCornerShape(36.dp),
+)
+
+private val ExpressiveType = Typography().run {
+    copy(
+        displaySmall = displaySmall.copy(fontWeight = FontWeight.Black),
+        headlineMedium = headlineMedium.copy(fontWeight = FontWeight.ExtraBold),
+        headlineSmall = headlineSmall.copy(fontWeight = FontWeight.Bold),
+        titleLarge = titleLarge.copy(fontWeight = FontWeight.Bold),
+        titleMedium = titleMedium.copy(fontWeight = FontWeight.SemiBold),
+        labelLarge = labelLarge.copy(fontWeight = FontWeight.SemiBold),
+    )
 }

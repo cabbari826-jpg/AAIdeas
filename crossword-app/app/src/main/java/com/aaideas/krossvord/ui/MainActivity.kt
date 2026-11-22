@@ -11,6 +11,8 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.ui.Alignment
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -35,17 +37,22 @@ class MainActivity : ComponentActivity() {
                 else SystemBarStyle.light(Color.TRANSPARENT, Color.TRANSPARENT)
                 enableEdgeToEdge(statusBarStyle = bar, navigationBarStyle = bar)
             }
-            KrossvordTheme(mode) {
+            KrossvordTheme(mode, vm.dynamicColor) {
                 Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
                     val isPremium by vm.premium.isPremium.collectAsState()
                     BackHandler(enabled = vm.screen != Screen.HOME) { vm.back() }
+                    val menu = vm.screen != Screen.PUZZLE
                     Box(Modifier.safeDrawingPadding()) {
-                        when (vm.screen) {
-                            Screen.HOME -> HomeScreen(vm)
-                            Screen.LEVELS -> LevelsScreen(vm)
-                            Screen.PUZZLE -> PuzzleScreen(vm, isPremium)
-                            Screen.SETTINGS -> SettingsScreen(vm, isPremium)
+                        // Leave room under the floating menu so it never hides the last item (home scrolls under it).
+                        Box(if (menu && vm.screen != Screen.HOME) Modifier.padding(bottom = BottomMenuHeight) else Modifier) {
+                            when (vm.screen) {
+                                Screen.HOME -> ExpressiveHome(vm)
+                                Screen.LEVELS -> LevelsScreen(vm)
+                                Screen.PUZZLE -> PuzzleScreen(vm, isPremium)
+                                Screen.SETTINGS -> SettingsScreen(vm, isPremium)
+                            }
                         }
+                        if (menu) GlassBottomMenu(vm.screen, vm::open, Modifier.align(Alignment.BottomCenter))
                     }
                     AdPlaceholderHost(vm.ads)
                     UpdateBanner() // prototype only; empty in the release build

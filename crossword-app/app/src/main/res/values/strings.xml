@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">Krossvord</string>
+    <!-- Name under the launcher icon. Default (English and every other language); az and ru have their own. -->
+    <string name="app_name">Keyword</string>
 </resources>

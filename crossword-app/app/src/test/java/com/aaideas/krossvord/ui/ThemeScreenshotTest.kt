@@ -2,6 +2,7 @@ package com.aaideas.krossvord.ui
 
 import android.app.Application
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -42,9 +43,20 @@ class ThemeScreenshotTest {
         shoot("puzzle-dark", ThemeMode.DARK) { PuzzleScreen(vm, isPremium = false) }
     }
 
-    @Test fun homeDark() {
+    @Test fun homeLightAndDark() {
         val vm = vm()
-        shoot("home-dark", ThemeMode.DARK) { HomeScreen(vm) }
+        vm.startLevel(0); vm.restartLevel()
+        val letters = vm.columnLetters()
+        "OD".forEach { ch -> vm.pickLetter(letters.indexOf(ch)) }
+        vm.open(Screen.HOME)
+        val home = @Composable {
+            androidx.compose.foundation.layout.Box {
+                ExpressiveHome(vm)
+                GlassBottomMenu(Screen.HOME, {}, Modifier.align(androidx.compose.ui.Alignment.BottomCenter))
+            }
+        }
+        shoot("home-light", ThemeMode.LIGHT, home)
+        shoot("home-dark", ThemeMode.DARK, home)
     }
 
     @Test fun settingsLightAndDark() {

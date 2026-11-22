@@ -47,7 +47,7 @@ class ProgressStore(context: Context) {
 
     /** Forget every level's progress and counters; keep the player's settings. */
     fun resetAll() {
-        val keep = setOf(KEY_INPUT, KEY_HIDE_CLUES, KEY_EXTRA, KEY_THEME)
+        val keep = setOf(KEY_INPUT, KEY_HIDE_CLUES, KEY_EXTRA, KEY_THEME, KEY_DYNAMIC)
         val e = prefs.edit()
         prefs.all.keys.filter { it !in keep }.forEach { e.remove(it) }
         e.apply()
@@ -76,6 +76,11 @@ class ProgressStore(context: Context) {
     var themeMode: String
         get() = prefs.getString(KEY_THEME, null) ?: "SYSTEM"
         set(v) = prefs.edit().putString(KEY_THEME, v).apply()
+
+    /** Take colours from the phone wallpaper (Android 12+) instead of the app's lavender. */
+    var dynamicColor: Boolean
+        get() = prefs.getBoolean(KEY_DYNAMIC, false)
+        set(v) = prefs.edit().putBoolean(KEY_DYNAMIC, v).apply()
 
     /** Hints earned in game (e.g. key word bonus); spent before asking for an ad. */
     var freeHints: Int
@@ -109,6 +114,7 @@ class ProgressStore(context: Context) {
         const val KEY_HIDE_CLUES = "hide_clues_v2"
         const val KEY_EXTRA = "extra_letters"
         const val KEY_THEME = "theme_mode"
+        const val KEY_DYNAMIC = "dynamic_color"
         const val KEY_FREE_HINTS = "free_hints"
         const val KEY_DONE = "completed"
         const val KEY_SINCE_AD = "levels_since_interstitial"

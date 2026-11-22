@@ -1,0 +1,7 @@
+<resources>
+    <!-- Only the window behind Compose: matches the app background so launch does not flash. -->
+    <style name="Theme.AcarSoz" parent="@android:style/Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/window_bg</item>
+    </style>
+    <color name="window_bg">#FDF7FF</color>
+</resources>

@@ -72,6 +72,17 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         progress.themeMode = mode.name
     }
 
+    var dynamicColor by mutableStateOf(progress.dynamicColor)
+        private set
+
+    fun changeDynamicColor(on: Boolean) {
+        dynamicColor = on
+        progress.dynamicColor = on
+    }
+
+    /** Has the player any progress (typed letters or lives used) in this level? */
+    fun levelStarted(index: Int): Boolean = progress.hasProgress(levels[index].id)
+
     fun changeExtraLetters(on: Boolean) {
         progress.extraLetters = on
         extraLetters = on

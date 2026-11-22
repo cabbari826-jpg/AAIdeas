@@ -123,7 +123,7 @@ fun SettingsScreen(vm: GameViewModel, isPremium: Boolean) {
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         TextButton(onClick = vm::back) { Text("← Əsas səhifə") }
-        ThemePicker(vm.themeMode, vm::changeTheme)
+        ThemePicker(vm.themeMode, vm::changeTheme, vm.dynamicColor, vm::changeDynamicColor)
         Text("Hərflərin daxil edilməsi", style = MaterialTheme.typography.headlineSmall)
         listOf(
             InputMode.COLUMNS to "Anaqram: sözü sütunlardakı hərflərdən yığ",
