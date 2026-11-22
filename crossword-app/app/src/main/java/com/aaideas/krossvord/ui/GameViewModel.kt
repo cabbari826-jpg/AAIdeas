@@ -184,8 +184,14 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     /** A gift theme just earned; the home screen shows it once. */
     var newSkin by mutableStateOf<Skin?>(null)
 
+    /** Themes the player may use now: earned ones, plus the premium set while premium is active. */
+    fun usableSkins(isPremium: Boolean): Set<Skin> = if (isPremium) ownedSkins + Skin.premium else ownedSkins
+
+    /** The theme to draw; a premium theme falls back to Klassik if premium ends. */
+    fun activeSkin(isPremium: Boolean): Skin = if (skin in usableSkins(isPremium)) skin else Skin.KLASSIK
+
     fun changeSkin(s: Skin) {
-        if (s !in ownedSkins) return
+        if (s !in usableSkins(premium.isPremium.value)) return
         skin = s
         progress.skin = s.id
         if (newSkin == s) newSkin = null
@@ -203,8 +209,8 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
 
     /** Prototype only: try every theme without earning it. */
     fun unlockAllSkinsForTesting() {
-        ownedSkins = Skin.entries.toSet()
-        progress.skinsOwned = Skin.entries.map { it.id }.toSet()
+        ownedSkins = Skin.entries.toSet() - Skin.premium
+        progress.skinsOwned = ownedSkins.map { it.id }.toSet()
     }
 
     var dynamicColor by mutableStateOf(progress.dynamicColor)

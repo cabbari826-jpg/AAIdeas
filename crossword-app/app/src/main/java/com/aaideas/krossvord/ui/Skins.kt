@@ -14,7 +14,7 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import java.util.Calendar
 
 /** Ornament on the blocked cells of the grid. Drawn with a handful of shapes per cell, cheap on old phones. */
-enum class BlockPattern { NONE, HATCH, STARS, CARPET, SEMENI, WAVES, POMEGRANATE }
+enum class BlockPattern { NONE, HATCH, STARS, CARPET, SEMENI, WAVES, POMEGRANATE, SEBEKE, BUTA, FLOWER }
 
 /** How a gift theme is unlocked; shown under a locked theme in Settings. */
 enum class Unlock(val hint: String, val rankId: String? = null) {
@@ -25,6 +25,7 @@ enum class Unlock(val hint: String, val rankId: String? = null) {
     RANK_4("«Müdrik» rütbəsi (1500 XP)", "rank_4"),
     RANK_5("«Ustad» rütbəsi (3000 XP)", "rank_5"),
     NOVRUZ("Novruz bayramında hədiyyə (15 mart – 5 aprel)"),
+    PREMIUM("Premium ilə"),
 }
 
 class SkinPalette(val scheme: ColorScheme, val grid: GridColors)
@@ -42,7 +43,10 @@ enum class Skin(val id: String, val label: String, val unlock: Unlock, val alway
     XALCA("xalca", "Xalça", Unlock.STREAK_OR_RANK_3),
     NAR("nar", "Nar", Unlock.RANK_4),
     QIZIL("qizil", "Qızıl", Unlock.RANK_5),
-    NOVRUZ("novruz", "Novruz", Unlock.NOVRUZ);
+    NOVRUZ("novruz", "Novruz", Unlock.NOVRUZ),
+    SEBEKE("sebeke", "Şəbəkə", Unlock.PREMIUM),
+    BUTA("buta", "Buta", Unlock.PREMIUM),
+    XARIBULBUL("xaribulbul", "Xarıbülbül", Unlock.PREMIUM, alwaysDark = true);
 
     fun palette(dark: Boolean): SkinPalette = when (this) {
         KLASSIK -> if (dark) SkinPalette(DarkColors, DarkGrid) else SkinPalette(LightColors, LightGrid)
@@ -54,11 +58,15 @@ enum class Skin(val id: String, val label: String, val unlock: Unlock, val alway
         NAR -> if (dark) NarDark else NarLight
         QIZIL -> if (dark) QizilDark else QizilLight
         NOVRUZ -> if (dark) NovruzDark else NovruzLight
+        SEBEKE -> if (dark) SebekeDark else SebekeLight
+        BUTA -> if (dark) ButaDark else ButaLight
+        XARIBULBUL -> XaribulbulDark
     }
 
     companion object {
         fun fromId(id: String?): Skin = entries.firstOrNull { it.id == id } ?: KLASSIK
         val free: Set<Skin> = entries.filter { it.unlock == Unlock.FREE }.toSet()
+        val premium: Set<Skin> = entries.filter { it.unlock == Unlock.PREMIUM }.toSet()
 
         /** Gift themes the player has earned right now (once earned, the caller keeps them for good). */
         fun earned(rankThemes: Set<String>, bestDailyStreak: Int, today: Calendar = Calendar.getInstance()): Set<Skin> = buildSet {
@@ -198,6 +206,37 @@ private val QizilDark = SkinPalette(
         BlockPattern.STARS, 0xFFF2C14E, 0xFFBFA76A),
 )
 
+// Premium. Şəbəkə: Şəki stained-glass lattice, coloured panes in a wooden frame.
+private val SebekeLight = SkinPalette(
+    light(0xFF6B3E1E, 0xFFFFFFFF, 0xFFF6DCC6, 0xFF2C1406, 0xFFFBF5EE, 0xFF22170F, 0xFFF0E2D3, 0xFF54433A, 0xFFF6EBDF, 0xFFEFE1D2, 0xFF86736A, 0xFFD8C3B5, 0xFFD3E4FF, 0xFF0B2A5C),
+    grid(0xFFF0DFCB, 0xFF3A2414, 0xFF5A3418, 0xFFFFFFFF, 0xFF1C120A, 0xFFFFF0C4, 0xFFF2BE3C, 0xFFDCEFD3, 0xFFF9D0CB, 0xFF1E5AA8, 0xFFA48A76, 0xFFC0362C,
+        BlockPattern.SEBEKE, 0xFF2F7DD1, 0xFFE24A3B),
+)
+private val SebekeDark = SkinPalette(
+    dark(0xFFF2BC93, 0xFF4A2408, 0xFF5A3A22, 0xFFF6DCC6, 0xFF17110D, 0xFFEFE2D8, 0xFF2A201A, 0xFFD8C3B5, 0xFF201813, 0xFF2B211B, 0xFF9F8C82, 0xFF3F332C, 0xFF1C3560, 0xFFD3E4FF),
+    grid(0xFF33271F, 0xFFEFDFD0, 0xFF2E1A0C, 0xFF241B15, 0xFFFAF1E9, 0xFF453A20, 0xFF8E6C1C, 0xFF20341F, 0xFF4F2420, 0xFF8FB8F2, 0xFF4A3B31, 0xFFFF8A75,
+        BlockPattern.SEBEKE, 0xFF2563A8, 0xFFB83A2E),
+)
+
+// Premium. Buta: the paisley of Azerbaijani textiles, gold on deep blue.
+private val ButaLight = SkinPalette(
+    light(0xFF1F3E8C, 0xFFFFFFFF, 0xFFDAE2FF, 0xFF001849, 0xFFF8F8FF, 0xFF191B23, 0xFFE1E2EC, 0xFF44464F, 0xFFEFF0FA, 0xFFE7E8F2, 0xFF757780, 0xFFC5C6D0, 0xFFFFE08B, 0xFF261A00),
+    grid(0xFFE3E7F6, 0xFF14234A, 0xFF1F3E8C, 0xFFFFFFFF, 0xFF0E1530, 0xFFFFF0C4, 0xFFF2C14E, 0xFFDCEFD3, 0xFFF9D0CB, 0xFF1F3E8C, 0xFF9FA6BE, 0xFFB8860B,
+        BlockPattern.BUTA, 0xFFE8B83A, 0xFFC0392B),
+)
+private val ButaDark = SkinPalette(
+    dark(0xFFB3C5FF, 0xFF002B75, 0xFF243A75, 0xFFDAE2FF, 0xFF10131C, 0xFFE2E2EE, 0xFF1E2230, 0xFFC5C6D0, 0xFF171A24, 0xFF20242F, 0xFF8F909A, 0xFF33374A, 0xFF4A3A00, 0xFFFFE08B),
+    grid(0xFF222A42, 0xFFDCE3F7, 0xFF0F1F4A, 0xFF181D2B, 0xFFF1F3FC, 0xFF3F3A22, 0xFF86701E, 0xFF1F3424, 0xFF4E2424, 0xFFB3C5FF, 0xFF343C55, 0xFFF2C14E,
+        BlockPattern.BUTA, 0xFFD9A82E, 0xFFA8342A),
+)
+
+// Premium. Xarıbülbül: the Shusha flower on deep emerald with gold, always dark.
+private val XaribulbulDark = SkinPalette(
+    dark(0xFFE9C46A, 0xFF3B2A00, 0xFF2E4B3C, 0xFFDCEFE2, 0xFF0C1512, 0xFFE4EEE8, 0xFF19261F, 0xFFC0CFC6, 0xFF111C17, 0xFF1A2721, 0xFF8A9A91, 0xFF2A3A32, 0xFF3D2140, 0xFFF6D9FA),
+    grid(0xFF1B2A23, 0xFFDDEBE3, 0xFF07110D, 0xFF14201A, 0xFFF2F8F4, 0xFF3C3A20, 0xFF8A701C, 0xFF1D3A2A, 0xFF4E2226, 0xFFE9C46A, 0xFF2A3B33, 0xFFE9C46A,
+        BlockPattern.FLOWER, 0xFF8E3A8C, 0xFFE9C46A),
+)
+
 /** Background of a blocked cell, with its theme's ornament. */
 fun Modifier.blockCell(c: GridColors): Modifier = when (c.pattern) {
     BlockPattern.NONE -> background(c.emptyCell)
@@ -265,6 +304,39 @@ fun Modifier.blockCell(c: GridColors): Modifier = when (c.pattern) {
                 }
                 drawPath(crown, ink)
                 drawCircle(ink2, m * 0.07f, Offset(w * 0.74f, h * 0.26f))
+            }
+            BlockPattern.SEBEKE -> {
+                // A star-shaped glass pane between wooden bars: two crossing squares and a centre.
+                fun square(r: Float, rot: Boolean) = Path().apply {
+                    if (rot) { moveTo(w / 2, h / 2 - r); lineTo(w / 2 + r, h / 2); lineTo(w / 2, h / 2 + r); lineTo(w / 2 - r, h / 2) }
+                    else { val q = r * 0.72f; moveTo(w / 2 - q, h / 2 - q); lineTo(w / 2 + q, h / 2 - q); lineTo(w / 2 + q, h / 2 + q); lineTo(w / 2 - q, h / 2 + q) }
+                    close()
+                }
+                val a = square(m * 0.42f, true); val b = square(m * 0.42f, false)
+                val c = Offset(w / 2, h / 2)
+                onDrawBehind {
+                    drawPath(b, ink); drawPath(a, ink2)
+                    drawCircle(Color(0xFFF2C14E), m * 0.1f, c)
+                }
+            }
+            BlockPattern.BUTA -> {
+                // Paisley: a teardrop whose tip curls, with a small dot inside.
+                val p = Path().apply {
+                    moveTo(w * 0.50f, h * 0.84f)
+                    cubicTo(w * 0.18f, h * 0.80f, w * 0.20f, h * 0.38f, w * 0.48f, h * 0.36f)
+                    cubicTo(w * 0.62f, h * 0.35f, w * 0.66f, h * 0.22f, w * 0.58f, h * 0.14f)
+                    cubicTo(w * 0.86f, h * 0.22f, w * 0.86f, h * 0.70f, w * 0.50f, h * 0.84f)
+                    close()
+                }
+                onDrawBehind { drawPath(p, ink); drawCircle(ink2, m * 0.08f, Offset(w * 0.48f, h * 0.6f)) }
+            }
+            BlockPattern.FLOWER -> onDrawBehind {
+                // Xarıbülbül: three petals (purple) over a gold stem.
+                drawLine(ink2, Offset(w / 2, h * 0.86f), Offset(w / 2, h * 0.5f), m * 0.05f)
+                drawCircle(ink, m * 0.14f, Offset(w * 0.36f, h * 0.42f))
+                drawCircle(ink, m * 0.14f, Offset(w * 0.64f, h * 0.42f))
+                drawCircle(ink, m * 0.15f, Offset(w * 0.5f, h * 0.30f))
+                drawCircle(ink2, m * 0.06f, Offset(w * 0.5f, h * 0.42f))
             }
             BlockPattern.NONE -> onDrawBehind {}
         }

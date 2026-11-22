@@ -62,6 +62,8 @@ class ThemeScreenshotTest {
         }
         draw(com.aaideas.krossvord.R.mipmap.ic_launcher, "icon")
         draw(com.aaideas.krossvord.R.drawable.ic_launcher_monochrome, "icon-themed")
+        draw(com.aaideas.krossvord.R.mipmap.ic_launcher_tile, "icon-premium-tile")
+        draw(com.aaideas.krossvord.R.mipmap.ic_launcher_key, "icon-premium-key")
     }
 
     @Test fun themeChoiceIsRemembered() {
