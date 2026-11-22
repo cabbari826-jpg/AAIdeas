@@ -144,7 +144,7 @@ fun SettingsScreen(vm: GameViewModel, isPremium: Boolean) {
                 Text(
                     listOfNotNull(
                         vm.playerName.ifBlank { "Ad yazılmayıb" },
-                        vm.birthday?.let { "Ad günü: " + com.aaideas.krossvord.model.Greeting.label(it) },
+                        vm.birthday?.let { "Ad günü: " + com.aaideas.krossvord.model.Greeting.label(it) + (vm.birthYear?.let { y -> " $y" } ?: "") },
                     ).joinToString(" · "),
                     style = MaterialTheme.typography.bodySmall,
                 )

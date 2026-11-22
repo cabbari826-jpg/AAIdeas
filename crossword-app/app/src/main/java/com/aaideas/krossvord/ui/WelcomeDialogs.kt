@@ -1,16 +1,25 @@
 package com.aaideas.krossvord.ui
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
-import androidx.compose.material3.AlertDialog
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
-import androidx.compose.material3.Checkbox
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -22,92 +31,152 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardCapitalization
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.window.DialogProperties
 import com.aaideas.krossvord.model.Greeting
 import java.time.MonthDay
 
 /** The dialog the app opens with, if any: profile on first run, birthday, or the daily greeting. */
 @Composable
 fun WelcomeHost(vm: GameViewModel) {
-    when (vm.welcome) {
-        GameViewModel.Welcome.PROFILE -> ProfileDialog(vm.playerName, vm.birthday, vm::saveProfile, vm::dismissWelcome)
-        GameViewModel.Welcome.BIRTHDAY -> SimpleWelcome(
-            "🎂 Ad gününüz mübarək" + vm.playerName.takeIf { it.isNotBlank() }?.let { ", $it" }.orEmpty() + "!",
-            "Sizə hədiyyə: +1 can ❤️\nCan sayı: ${vm.lives}",
-            vm::dismissWelcome,
+    val welcome = vm.welcome ?: return
+    Dialog(onDismissRequest = vm::dismissWelcome, properties = DialogProperties(usePlatformDefaultWidth = false)) {
+        WelcomeContent(vm, welcome)
+    }
+}
+
+/** The card itself, also shown without a dialog in screenshot tests. */
+@Composable
+fun WelcomeContent(vm: GameViewModel, welcome: GameViewModel.Welcome) {
+    when (welcome) {
+        GameViewModel.Welcome.PROFILE -> ProfileCard(rememberProfileForm(vm.playerName, vm.birthday, vm.birthYear), vm::saveProfile, vm::dismissWelcome)
+        GameViewModel.Welcome.BIRTHDAY -> WelcomeCard(
+            emoji = "🎂",
+            title = "Ad gününüz mübarək" + vm.playerName.takeIf { it.isNotBlank() }?.let { ",\n$it" }.orEmpty() + "!",
+            lines = listOf("Sağlam, şad və uzun ömür arzulayırıq!", "Sizə kiçik hədiyyə: +1 can ❤️"),
+            button = "Təşəkkürlər!",
+            onClose = vm::dismissWelcome,
         )
-        GameViewModel.Welcome.DAILY -> {
-            val lines = buildList {
-                vm.holiday?.let { add("${it.icon} ${it.greeting}") }
-                if (!vm.daily.guess.finished) add("Günün sözü sizi gözləyir.")
+        GameViewModel.Welcome.DAILY -> WelcomeCard(
+            emoji = vm.holiday?.icon ?: "👋",
+            title = vm.hello(),
+            lines = buildList {
+                vm.holiday?.let { add(it.greeting) }
+                if (!vm.daily.guess.finished) add("Günün sözü sizi gözləyir")
                 add("Canlar: ${vm.lives} ❤️")
-            }
-            SimpleWelcome(vm.hello(), lines.joinToString("\n"), vm::dismissWelcome)
+            },
+            button = "Oynayaq!",
+            onClose = vm::dismissWelcome,
+        )
+    }
+}
+
+/** Shared look: a round emoji badge, a centred title, short lines and one wide button. */
+@Composable
+private fun WelcomeCard(emoji: String, title: String, lines: List<String>, button: String, onClose: () -> Unit) {
+    CardShell {
+        Badge(emoji)
+        Text(title, style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
+        Spacer(Modifier.height(4.dp))
+        lines.forEach {
+            Text(it, style = MaterialTheme.typography.bodyLarge, textAlign = TextAlign.Center, color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
-        null -> Unit
+        Spacer(Modifier.height(8.dp))
+        Button(onClick = onClose, modifier = Modifier.fillMaxWidth().height(52.dp)) { Text(button, fontSize = 18.sp) }
     }
 }
 
 @Composable
-private fun SimpleWelcome(title: String, text: String, onClose: () -> Unit) {
-    AlertDialog(
-        onDismissRequest = onClose,
-        title = { Text(title, fontWeight = FontWeight.Bold) },
-        text = { Text(text, style = MaterialTheme.typography.bodyLarge) },
-        confirmButton = { Button(onClick = onClose) { Text("Oynayaq!") } },
-    )
+private fun CardShell(content: @Composable () -> Unit) {
+    Surface(
+        shape = RoundedCornerShape(28.dp),
+        color = MaterialTheme.colorScheme.surface,
+        tonalElevation = 2.dp,
+        modifier = Modifier.padding(20.dp).widthIn(max = 420.dp).fillMaxWidth(),
+    ) {
+        Column(
+            Modifier.verticalScroll(rememberScrollState()).padding(horizontal = 24.dp, vertical = 24.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(10.dp),
+        ) { content() }
+    }
 }
 
-/** Name and birthday, both optional; nothing leaves the phone. */
 @Composable
-fun ProfileDialog(name0: String, birthday0: MonthDay?, onSave: (String, MonthDay?) -> Unit, onSkip: () -> Unit) {
-    val form = rememberProfileForm(name0, birthday0)
-    AlertDialog(
-        onDismissRequest = onSkip,
-        title = { Text("Xoş gəlmisiniz!", fontWeight = FontWeight.Bold) },
-        text = { ProfileFields(form) },
-        confirmButton = { Button(onClick = { onSave(form.name, form.birthday()) }) { Text("Yadda saxla") } },
-        dismissButton = { TextButton(onClick = onSkip) { Text("Keç") } },
-    )
+private fun Badge(emoji: String) {
+    Box(
+        Modifier.size(72.dp).background(MaterialTheme.colorScheme.primaryContainer, CircleShape),
+        contentAlignment = Alignment.Center,
+    ) { Text(emoji, fontSize = 36.sp) }
 }
 
-class ProfileForm(name0: String, birthday0: MonthDay?) {
+class ProfileForm(name0: String, birthday0: MonthDay?, year0: Int?) {
     var name by mutableStateOf(name0)
-    var withBirthday by mutableStateOf(birthday0 != null)
-    var day by mutableIntStateOf(birthday0?.dayOfMonth ?: 1)
-    var month by mutableIntStateOf(birthday0?.monthValue ?: 1)
-    val maxDay get() = java.time.Month.of(month).maxLength()
-    fun birthday(): MonthDay? = if (withBirthday) MonthDay.of(month, day.coerceAtMost(maxDay)) else null
+    /** 0 = not chosen. */
+    var day by mutableIntStateOf(birthday0?.dayOfMonth ?: 0)
+    var month by mutableIntStateOf(birthday0?.monthValue ?: 0)
+    var year by mutableStateOf(year0?.toString().orEmpty())
+    fun birthday(): MonthDay? =
+        if (day == 0 || month == 0) null else MonthDay.of(month, day.coerceAtMost(java.time.Month.of(month).maxLength()))
+    fun birthYear(): Int? = year.toIntOrNull()?.takeIf { it in 1900..java.time.LocalDate.now().year }
 }
 
 @Composable
-fun rememberProfileForm(name0: String, birthday0: MonthDay?) = remember { ProfileForm(name0, birthday0) }
+fun rememberProfileForm(name0: String, birthday0: MonthDay?, year0: Int?) = remember { ProfileForm(name0, birthday0, year0) }
 
+/** Name and birthday; nothing leaves the phone. Later the name can come from the Google account. */
 @Composable
-fun ProfileFields(f: ProfileForm) {
-    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        Text("Sizi necə çağıraq? (istəyə görə)", style = MaterialTheme.typography.bodyLarge)
-        OutlinedTextField(f.name, { f.name = it.take(24) }, singleLine = true, placeholder = { Text("Adınız") }, modifier = Modifier.fillMaxWidth())
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Checkbox(f.withBirthday, { f.withBirthday = it })
-            Text("Ad günüm (o gün hədiyyə: +1 can)", style = MaterialTheme.typography.bodyMedium)
+fun ProfileCard(f: ProfileForm, onSave: (String, MonthDay?, Int?) -> Unit, onSkip: () -> Unit) {
+    CardShell {
+        Badge("👋")
+        Text("Xoş gəlmisiniz!", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
+        Text("Gəlin tanış olaq", style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        OutlinedTextField(
+            f.name, { f.name = it.take(24) },
+            label = { Text("Adınız") }, singleLine = true,
+            keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Words),
+            modifier = Modifier.fillMaxWidth(),
+        )
+        Text("Doğum tarixi", style = MaterialTheme.typography.titleSmall, modifier = Modifier.fillMaxWidth().padding(top = 4.dp))
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.fillMaxWidth()) {
+            val maxDay = if (f.month == 0) 31 else java.time.Month.of(f.month).maxLength()
+            Picker("Gün", if (f.day == 0) "—" else f.day.coerceAtMost(maxDay).toString(), Modifier.weight(1f),
+                { f.day = if (f.day <= 1) maxDay else f.day.coerceAtMost(maxDay) - 1 },
+                { f.day = if (f.day >= maxDay) 1 else f.day + 1 })
+            Picker("Ay", if (f.month == 0) "—" else Greeting.MONTHS[f.month - 1], Modifier.weight(1.4f),
+                { f.month = if (f.month <= 1) 12 else f.month - 1 },
+                { f.month = if (f.month >= 12) 1 else f.month + 1 })
         }
-        if (f.withBirthday) {
-            val max = f.maxDay
-            val d = f.day.coerceAtMost(max)
-            Stepper(d.toString(), { f.day = if (d <= 1) max else d - 1 }, { f.day = if (d >= max) 1 else d + 1 })
-            Stepper(Greeting.MONTHS[f.month - 1], { f.month = if (f.month <= 1) 12 else f.month - 1 }, { f.month = if (f.month >= 12) 1 else f.month + 1 })
+        OutlinedTextField(
+            f.year, { s -> f.year = s.filter(Char::isDigit).take(4) },
+            label = { Text("İl") }, singleLine = true,
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            modifier = Modifier.fillMaxWidth(),
+        )
+        Text("Məlumat yalnız telefonunuzda saxlanılır", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        Button(onClick = { onSave(f.name, f.birthday(), f.birthYear()) }, modifier = Modifier.fillMaxWidth().height(52.dp)) {
+            Text("Davam et", fontSize = 18.sp)
         }
-        Text("Bu məlumat yalnız telefonunuzda qalır.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        TextButton(onClick = onSkip) { Text("Sonra") }
     }
 }
 
+/** A value with ‹ › on both sides, in a soft box: easier for older players than a scrolling wheel. */
 @Composable
-private fun Stepper(value: String, onMinus: () -> Unit, onPlus: () -> Unit) {
-    Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center) {
-        TextButton(onClick = onMinus) { Text("‹", style = MaterialTheme.typography.headlineSmall) }
-        Text(value, style = MaterialTheme.typography.titleLarge, textAlign = TextAlign.Center, modifier = Modifier.widthIn(min = 120.dp))
-        TextButton(onClick = onPlus) { Text("›", style = MaterialTheme.typography.headlineSmall) }
+private fun Picker(label: String, value: String, modifier: Modifier, onMinus: () -> Unit, onPlus: () -> Unit) {
+    Surface(shape = RoundedCornerShape(16.dp), color = MaterialTheme.colorScheme.surfaceVariant, modifier = modifier) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.padding(vertical = 4.dp)) {
+            Text(label, style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                TextButton(onClick = onMinus, modifier = Modifier.size(44.dp)) { Text("‹", fontSize = 22.sp) }
+                Text(value, style = MaterialTheme.typography.titleMedium, textAlign = TextAlign.Center, maxLines = 1, modifier = Modifier.weight(1f))
+                TextButton(onClick = onPlus, modifier = Modifier.size(44.dp)) { Text("›", fontSize = 22.sp) }
+            }
+        }
     }
 }

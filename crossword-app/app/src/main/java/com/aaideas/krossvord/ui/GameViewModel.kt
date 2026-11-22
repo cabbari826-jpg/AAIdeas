@@ -355,6 +355,8 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         private set
     var birthday by mutableStateOf(Greeting.parse(progress.birthday))
         private set
+    var birthYear by mutableStateOf(progress.birthYear.takeIf { it > 0 })
+        private set
 
     /** What to show when the app opens: first the profile question, then once a day a greeting. */
     enum class Welcome { PROFILE, BIRTHDAY, DAILY }
@@ -380,7 +382,8 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
 
     fun editProfile() { welcome = Welcome.PROFILE }
 
-    fun saveProfile(name: String, md: java.time.MonthDay?) {
+    fun saveProfile(name: String, md: java.time.MonthDay?, year: Int? = null) {
+        birthYear = year; progress.birthYear = year ?: 0
         playerName = name.trim().take(24); progress.playerName = playerName
         birthday = md; progress.birthday = md?.let(Greeting::format)
         progress.profileAsked = true

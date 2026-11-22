@@ -47,7 +47,7 @@ class ProgressStore(context: Context) {
 
     /** Forget every level's progress and counters; keep the player's settings. */
     fun resetAll() {
-        val keep = setOf(KEY_INPUT, KEY_HIDE_CLUES, KEY_EXTRA, KEY_THEME, KEY_DYNAMIC, KEY_TUTORIAL, KEY_BIG_CLUES, KEY_SOUND, KEY_SKIN, KEY_SKINS_OWNED, "large_mode", "player_name", "birthday", "profile_asked", "birthday_gift_year")
+        val keep = setOf(KEY_INPUT, KEY_HIDE_CLUES, KEY_EXTRA, KEY_THEME, KEY_DYNAMIC, KEY_TUTORIAL, KEY_BIG_CLUES, KEY_SOUND, KEY_SKIN, KEY_SKINS_OWNED, "large_mode", "player_name", "birthday", "birth_year", "profile_asked", "birthday_gift_year")
         val e = prefs.edit()
         prefs.all.keys.filter { it !in keep }.forEach { e.remove(it) }
         e.apply()
@@ -152,6 +152,11 @@ class ProgressStore(context: Context) {
     var birthday: String?
         get() = prefs.getString("birthday", null)
         set(v) = prefs.edit().putString("birthday", v).apply()
+
+    /** Birth year, 0 when not given. Kept on reset. */
+    var birthYear: Int
+        get() = prefs.getInt("birth_year", 0)
+        set(v) = prefs.edit().putInt("birth_year", v).apply()
 
     /** The welcome (name, birthday) was shown once already. */
     var profileAsked: Boolean
