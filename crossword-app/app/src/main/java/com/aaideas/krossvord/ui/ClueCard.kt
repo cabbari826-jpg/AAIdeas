@@ -1,6 +1,9 @@
 package com.aaideas.krossvord.ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.runtime.remember
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -53,12 +56,30 @@ fun ClueCard(
     val scope = rememberCoroutineScope()
     // A newly opened clue slides in.
     LaunchedEffect(tier) { if (pager.currentPage != tier) pager.animateScrollToPage(tier) }
-    Dialog(onDismissRequest = onClose) {
-        Surface(shape = RoundedCornerShape(20.dp), color = MaterialTheme.colorScheme.surface, tonalElevation = 6.dp) {
-            Column(Modifier.padding(16.dp)) {
+    // Sits low on the screen, over the keyboard, so the grid stays in view; a tap above it closes it.
+    Dialog(onDismissRequest = onClose, properties = androidx.compose.ui.window.DialogProperties(usePlatformDefaultWidth = false)) {
+      Box(
+          Modifier.fillMaxSize().clickable(
+              interactionSource = remember { androidx.compose.foundation.interaction.MutableInteractionSource() },
+              indication = null,
+              onClick = onClose,
+          ).padding(horizontal = 12.dp, vertical = 16.dp),
+          contentAlignment = Alignment.BottomCenter,
+      ) {
+        Surface(
+            shape = RoundedCornerShape(20.dp), color = MaterialTheme.colorScheme.surface, tonalElevation = 6.dp, shadowElevation = 8.dp,
+            // Taps on the card itself must not close it.
+            modifier = Modifier.fillMaxWidth().clickable(
+                interactionSource = remember { androidx.compose.foundation.interaction.MutableInteractionSource() },
+                indication = null,
+                onClick = {},
+            ),
+        ) {
+            Column(Modifier.padding(horizontal = 12.dp, vertical = 6.dp)) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
-                        (if (entry.direction == Direction.ACROSS) "→ Üfüqi" else "↓ Şaquli") + " · ${entry.letters.size} hərf",
+                        (if (entry.direction == Direction.ACROSS) "→ " else "↓ ") + "${entry.letters.size} hərf · " +
+                            TIER_NAMES.getOrElse(pager.currentPage) { "İpucu ${pager.currentPage + 1}" },
                         style = MaterialTheme.typography.titleSmall,
                         color = MaterialTheme.colorScheme.primary,
                         modifier = Modifier.weight(1f),
@@ -67,22 +88,17 @@ fun ClueCard(
                         Text("✕", style = MaterialTheme.typography.titleLarge)
                     }
                 }
-                HorizontalPager(pager, Modifier.fillMaxWidth().heightIn(min = 150.dp)) { page ->
+                HorizontalPager(pager, Modifier.fillMaxWidth().heightIn(min = 56.dp)) { page ->
                     Column(
-                        Modifier.fillMaxWidth().padding(horizontal = 8.dp, vertical = 12.dp),
+                        Modifier.fillMaxWidth().padding(horizontal = 4.dp, vertical = 2.dp),
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.Center,
                     ) {
                         Text(
-                            TIER_NAMES.getOrElse(page) { "İpucu ${page + 1}" },
-                            style = MaterialTheme.typography.labelLarge,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        )
-                        Text(
                             entry.clueLevels[page],
-                            style = MaterialTheme.typography.headlineMedium,
+                            style = MaterialTheme.typography.headlineSmall,
                             textAlign = TextAlign.Center,
-                            modifier = Modifier.padding(top = 12.dp).semantics { contentDescription = "Böyük ipucu: ${entry.clueLevels[page]}" },
+                            modifier = Modifier.semantics { contentDescription = "Böyük ipucu: ${entry.clueLevels[page]}" },
                         )
                     }
                 }
@@ -91,7 +107,7 @@ fun ClueCard(
                     TextButton(
                         onClick = { scope.launch { pager.animateScrollToPage(pager.currentPage - 1) } },
                         enabled = pager.currentPage > 0,
-                    ) { Text("‹ Əvvəlki") }
+                    ) { Text("‹", style = MaterialTheme.typography.titleLarge) }
                     entry.clueLevels.indices.forEach { i ->
                         val color = when {
                             i == pager.currentPage -> MaterialTheme.colorScheme.primary
@@ -103,10 +119,10 @@ fun ClueCard(
                     TextButton(
                         onClick = { scope.launch { pager.animateScrollToPage(pager.currentPage + 1) } },
                         enabled = pager.currentPage < tier,
-                    ) { Text("Növbəti ›") }
+                    ) { Text("›", style = MaterialTheme.typography.titleLarge) }
                 }
                 if (game.canEaseClue(entry)) {
-                    Button(onClick = onEase, modifier = Modifier.fillMaxWidth().padding(top = 4.dp)) {
+                    Button(onClick = onEase, modifier = Modifier.fillMaxWidth()) {
                         Text(if (needsAd) "Daha asan ipucu ▶ reklam" else "Daha asan ipucu (pulsuz)")
                     }
                 } else {
@@ -115,10 +131,11 @@ fun ClueCard(
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         textAlign = TextAlign.Center,
-                        modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
+                        modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
                     )
                 }
             }
         }
     }
-}
+      }
+    }

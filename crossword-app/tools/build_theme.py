@@ -15,7 +15,7 @@ except ImportError:
 mod, pack_id, title = sys.argv[1], sys.argv[2], sys.argv[3]
 theme = importlib.import_module(mod).TIERS
 others = {}
-for m in ('theme_geo', 'theme_tarix', 'theme_edebiyyat', 'theme_musiqi'):
+for m in ('theme_geo', 'theme_tarix', 'theme_edebiyyat', 'theme_musiqi', 'theme_kimya'):
     others.update(importlib.import_module(m).TIERS)
 tiers = {**T4, **T3, **T2, **T1, **others, **theme}
 levels = json.load(open(f'out_{pack_id}.json'))
