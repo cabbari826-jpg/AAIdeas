@@ -1,5 +1,6 @@
 package com.aaideas.krossvord.ui
 
+import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
@@ -13,6 +14,7 @@ import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -29,6 +31,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
 import androidx.compose.ui.graphics.graphicsLayer
@@ -53,10 +57,18 @@ import com.aaideas.krossvord.model.Entry
 import com.aaideas.krossvord.model.GameState
 import com.aaideas.krossvord.model.LetterTiles
 import com.aaideas.krossvord.model.Tile
+import com.aaideas.krossvord.model.WordBuilder
 
 @Composable
 fun PuzzleScreen(vm: GameViewModel, isPremium: Boolean) {
     val game = vm.game ?: return
+    val columns = vm.inputMode == InputMode.COLUMNS
+    val letters = if (columns) vm.columnLetters() else emptyList()
+    val draft = if (columns) vm.draft() else emptyList()
+    // Letters being built in the columns mode are previewed in the grid before the check.
+    val preview: Map<Cell, Char> = game.activeEntry?.let { e ->
+        game.openCells(e).zip(draft.map { letters[it] }).toMap()
+    }.orEmpty()
     Column(Modifier.fillMaxSize().padding(horizontal = 8.dp, vertical = 8.dp)) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             TextButton(onClick = vm::back) { Text("← Səviyyələr") }
@@ -68,18 +80,31 @@ fun PuzzleScreen(vm: GameViewModel, isPremium: Boolean) {
         }
         BoxWithConstraints(Modifier.fillMaxWidth().weight(1f), contentAlignment = Alignment.Center) {
             val cell = min(maxWidth / game.board.cols, maxHeight / game.board.rows)
-            Grid(game, cell, vm::tapCell)
+            Grid(game, cell, preview, vm.feedback, vm::isClueShown, vm::tapCell)
         }
-        ClueBar(game.activeEntry, game)
+        ClueBar(game.activeEntry, game, game.activeEntry?.let(vm::isClueShown) ?: true, vm::openActiveClue)
         Row(Modifier.fillMaxWidth().padding(vertical = 6.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            OutlinedButton(onClick = vm::clearWord, modifier = Modifier.weight(1f)) { Text("Sözü sil") }
+            if (columns) OutlinedButton(onClick = vm::shuffleTiles, modifier = Modifier.weight(1f)) { Text("⟳ Qarışdır") }
+            else OutlinedButton(onClick = vm::clearWord, modifier = Modifier.weight(1f)) { Text("Sözü sil") }
             Button(onClick = vm::hint, modifier = Modifier.weight(1f)) {
                 Text(if (isPremium) "Hərf aç" else "Hərf aç ▶ reklam")
             }
         }
         val entry = game.activeEntry
-        if (vm.useKeyboard || entry == null) AzKeyboard(onLetter = vm::type, onBackspace = vm::backspace)
-        else TileInput(LetterTiles.tilesFor(game, entry, vm.tileShuffle), vm::type, vm::backspace, vm::shuffleTiles)
+        when {
+            entry == null || vm.inputMode == InputMode.KEYBOARD -> AzKeyboard(onLetter = vm::type, onBackspace = vm::backspace)
+            vm.inputMode == InputMode.TILES ->
+                TileInput(LetterTiles.tilesFor(game, entry, vm.tileShuffle), vm::type, vm::backspace, vm::shuffleTiles)
+            else -> ColumnsInput(
+                letters = letters,
+                draft = draft,
+                slots = game.openCells(entry).size,
+                feedback = vm.feedback,
+                onPick = vm::pickLetter,
+                onUndo = vm::unpickLast,
+                onClear = vm::clearDraft,
+            )
+        }
     }
     if (vm.showCompletion) {
         AlertDialog(
@@ -93,7 +118,14 @@ fun PuzzleScreen(vm: GameViewModel, isPremium: Boolean) {
 }
 
 @Composable
-private fun Grid(game: GameState, cellSize: Dp, onTap: (Cell) -> Unit) {
+private fun Grid(
+    game: GameState,
+    cellSize: Dp,
+    preview: Map<Cell, Char>,
+    feedback: WordFeedback?,
+    clueShown: (Entry) -> Boolean,
+    onTap: (Cell) -> Unit,
+) {
     val colors = LocalGridColors.current
     val active = game.activeEntry
     val activeCells = active?.cells?.toSet().orEmpty()
@@ -104,11 +136,15 @@ private fun Grid(game: GameState, cellSize: Dp, onTap: (Cell) -> Unit) {
                     val cell = Cell(r, c)
                     val mod = Modifier.size(cellSize).border(0.5.dp, colors.line)
                     if (game.board.isLetter(cell)) {
-                        LetterCell(game, cell, cell == game.selectedCell, cell in activeCells, cellSize, mod.clickable { onTap(cell) })
+                        LetterCell(
+                            game, cell, cell == game.selectedCell, cell in activeCells, cellSize,
+                            preview[cell], feedback == WordFeedback.WRONG && cell in activeCells,
+                            mod.clickable { onTap(cell) },
+                        )
                     } else {
                         val clues = game.board.cluesAt[cell]
                         if (clues == null) Box(mod.background(colors.emptyCell))
-                        else ClueCell(clues, active, mod.background(colors.clueCell).clickable { onTap(cell) })
+                        else ClueCell(clues, active, clueShown, mod.background(colors.clueCell).clickable { onTap(cell) })
                     }
                 }
             }
@@ -117,17 +153,27 @@ private fun Grid(game: GameState, cellSize: Dp, onTap: (Cell) -> Unit) {
 }
 
 @Composable
-private fun LetterCell(game: GameState, cell: Cell, selected: Boolean, inActive: Boolean, size: Dp, modifier: Modifier) {
+private fun LetterCell(
+    game: GameState,
+    cell: Cell,
+    selected: Boolean,
+    inActive: Boolean,
+    size: Dp,
+    preview: Char?,
+    wrongFlash: Boolean,
+    modifier: Modifier,
+) {
     val colors = LocalGridColors.current
     val entries = game.board.entriesAt[cell].orEmpty()
     val bg = when {
-        selected -> colors.activeCell
+        wrongFlash -> colors.wrong
+        selected && preview == null -> colors.activeCell
         inActive -> colors.activeWord
         entries.any { game.isEntryWrong(it) } -> colors.wrong
         entries.any { game.isEntrySolved(it) } -> colors.solved
         else -> colors.letterCell
     }
-    val ch = game.typed[cell]
+    val ch = preview ?: game.typed[cell]
     Box(
         modifier.background(bg).semantics { contentDescription = "Xana ${cell.row + 1}, ${cell.col + 1}: ${ch ?: "boş"}" },
         contentAlignment = Alignment.Center,
@@ -137,14 +183,18 @@ private fun LetterCell(game: GameState, cell: Cell, selected: Boolean, inActive:
                 ch.toString(),
                 fontSize = (size.value * 0.55f).sp,
                 fontWeight = FontWeight.SemiBold,
-                color = if (cell in game.revealed) colors.revealed else colors.letter,
+                color = when {
+                    preview != null -> colors.letter.copy(alpha = 0.6f)
+                    cell in game.revealed -> colors.revealed
+                    else -> colors.letter
+                },
             )
         }
     }
 }
 
 @Composable
-private fun ClueCell(clues: List<Entry>, active: Entry?, modifier: Modifier) {
+private fun ClueCell(clues: List<Entry>, active: Entry?, shown: (Entry) -> Boolean, modifier: Modifier) {
     val colors = LocalGridColors.current
     Column(modifier.padding(1.dp)) {
         // Across clue on top, down clue below: the usual Scandinavian order.
@@ -156,7 +206,7 @@ private fun ClueCell(clues: List<Entry>, active: Entry?, modifier: Modifier) {
                 contentAlignment = Alignment.Center,
             ) {
                 BasicText(
-                    text = e.clue + if (e.direction == Direction.ACROSS) " →" else " ↓",
+                    text = (if (shown(e)) e.clue else "?") + if (e.direction == Direction.ACROSS) " →" else " ↓",
                     style = TextStyle(color = colors.clueText, textAlign = TextAlign.Center, lineHeight = 1.05.em),
                     autoSize = TextAutoSize.StepBased(minFontSize = 5.sp, maxFontSize = 11.sp, stepSize = 0.5.sp),
                     modifier = Modifier.padding(horizontal = 1.dp),
@@ -167,17 +217,27 @@ private fun ClueCell(clues: List<Entry>, active: Entry?, modifier: Modifier) {
 }
 
 @Composable
-private fun ClueBar(entry: Entry?, game: GameState) {
+private fun ClueBar(entry: Entry?, game: GameState, shown: Boolean, onOpen: () -> Unit) {
     Surface(
         color = MaterialTheme.colorScheme.secondaryContainer,
         shape = RoundedCornerShape(10.dp),
         modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
     ) {
-        val text = if (entry == null) "Sözü seçin" else {
-            val arrow = if (entry.direction == Direction.ACROSS) "→" else "↓"
-            "$arrow ${entry.clue}  (${entry.letters.size} hərf)" + if (game.isEntryWrong(entry)) "  · səhvdir" else ""
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            val text = if (entry == null) "Sözü seçin" else {
+                val arrow = if (entry.direction == Direction.ACROSS) "→" else "↓"
+                val clue = if (shown) entry.clue else "İpucu gizlidir"
+                "$arrow $clue  (${entry.letters.size} hərf)" + if (game.isEntryWrong(entry)) "  · səhvdir" else ""
+            }
+            Text(
+                text,
+                Modifier.weight(1f).padding(horizontal = 12.dp, vertical = 10.dp),
+                style = MaterialTheme.typography.titleMedium,
+            )
+            if (entry != null && !shown) {
+                TextButton(onClick = onOpen) { Text("İpucunu aç") }
+            }
         }
-        Text(text, Modifier.padding(horizontal = 12.dp, vertical = 10.dp), style = MaterialTheme.typography.titleMedium)
     }
 }
 
@@ -271,5 +331,119 @@ private fun LetterTile(tile: Tile, onClick: () -> Unit) {
                 color = MaterialTheme.colorScheme.onPrimaryContainer,
             )
         }
+    }
+}
+
+/**
+ * Letter columns: two columns of scattered letters on the left, two on the right,
+ * the word being built in the middle. When every slot is filled the word is checked.
+ */
+@Composable
+private fun ColumnsInput(
+    letters: List<Char>,
+    draft: List<Int>,
+    slots: Int,
+    feedback: WordFeedback?,
+    onPick: (Int) -> Unit,
+    onUndo: () -> Unit,
+    onClear: () -> Unit,
+) {
+    val haptic = LocalHapticFeedback.current
+    LaunchedEffect(feedback) {
+        if (feedback == WordFeedback.WRONG) haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+    }
+    val shake = remember { Animatable(0f) }
+    LaunchedEffect(feedback) {
+        if (feedback == WordFeedback.WRONG) {
+            for (x in listOf(14f, -12f, 9f, -6f, 3f, 0f)) shake.animateTo(x, tween(45))
+        }
+    }
+    Row(
+        Modifier.fillMaxWidth().height(196.dp).padding(top = 4.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        for (c in 0..1) LetterColumn(WordBuilder.column(letters, c), draft, onPick)
+        Column(
+            Modifier.weight(1f).fillMaxHeight().padding(horizontal = 6.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            val status = when {
+                slots == 0 -> "Söz tapıldı ✓"
+                feedback == WordFeedback.WRONG -> "Yox, yenidən cəhd et"
+                feedback == WordFeedback.RIGHT -> "Düzdür! ✓"
+                else -> "Hərfləri növbə ilə seç"
+            }
+            Text(
+                status,
+                style = MaterialTheme.typography.labelMedium,
+                maxLines = 2,
+                color = when (feedback) {
+                    WordFeedback.WRONG -> MaterialTheme.colorScheme.error
+                    WordFeedback.RIGHT -> MaterialTheme.colorScheme.primary
+                    else -> MaterialTheme.colorScheme.onSurfaceVariant
+                },
+                textAlign = TextAlign.Center,
+            )
+            Spacer(Modifier.height(10.dp))
+            BoxWithConstraints(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+                val slot = if (slots == 0) 0.dp else min(34.dp, (maxWidth - 3.dp * (slots - 1)) / slots)
+                Row(
+                    Modifier.graphicsLayer { translationX = shake.value },
+                    horizontalArrangement = Arrangement.spacedBy(3.dp),
+                ) {
+                    repeat(slots) { i ->
+                        val ch = draft.getOrNull(i)?.let { letters[it] }
+                        Box(
+                            Modifier.size(slot, slot * 1.25f)
+                                .background(
+                                    if (feedback == WordFeedback.WRONG) MaterialTheme.colorScheme.errorContainer
+                                    else MaterialTheme.colorScheme.surfaceVariant,
+                                    RoundedCornerShape(6.dp),
+                                ),
+                            contentAlignment = Alignment.Center,
+                        ) {
+                            Text(ch?.toString() ?: "", fontSize = (slot.value * 0.6f).sp, fontWeight = FontWeight.Bold)
+                        }
+                    }
+                }
+            }
+            Spacer(Modifier.height(12.dp))
+            Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                SmallAction("⌫", "Son hərfi sil", draft.isNotEmpty(), onUndo)
+                SmallAction("✕", "Təmizlə", draft.isNotEmpty(), onClear)
+            }
+        }
+        for (c in 2..3) LetterColumn(WordBuilder.column(letters, c), draft, onPick)
+    }
+}
+
+@Composable
+private fun LetterColumn(items: List<IndexedValue<Char>>, draft: List<Int>, onPick: (Int) -> Unit) {
+    val haptic = LocalHapticFeedback.current
+    Column(
+        Modifier.padding(horizontal = 3.dp).fillMaxHeight(),
+        verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterVertically),
+    ) {
+        items.forEach { (index, ch) ->
+            key(index, ch) {
+                LetterTile(Tile(ch, used = index in draft)) {
+                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                    onPick(index)
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun SmallAction(label: String, description: String, enabled: Boolean, onClick: () -> Unit) {
+    Surface(
+        modifier = Modifier.size(48.dp).clickable(enabled = enabled, onClick = onClick)
+            .semantics { contentDescription = description },
+        shape = RoundedCornerShape(24.dp),
+        color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = if (enabled) 1f else 0.4f),
+    ) {
+        Box(contentAlignment = Alignment.Center) { Text(label, fontSize = 20.sp) }
     }
 }

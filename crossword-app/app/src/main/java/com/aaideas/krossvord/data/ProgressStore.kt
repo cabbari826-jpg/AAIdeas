@@ -37,7 +37,7 @@ class ProgressStore(context: Context) {
         }.toSet()
 
     fun resetLevel(levelId: String) {
-        prefs.edit().remove("typed_$levelId").remove("revealed_$levelId")
+        prefs.edit().remove("typed_$levelId").remove("revealed_$levelId").remove("clues_$levelId")
             .putStringSet(KEY_DONE, completedLevels() - levelId).apply()
     }
 
@@ -45,13 +45,26 @@ class ProgressStore(context: Context) {
         get() = prefs.getInt(KEY_SINCE_AD, 0)
         set(v) = prefs.edit().putInt(KEY_SINCE_AD, v).apply()
 
-    /** Input mode: letter tiles (default) or the full keyboard ("hard mode"). */
-    var useKeyboard: Boolean
-        get() = prefs.getBoolean(KEY_KEYBOARD, false)
-        set(v) = prefs.edit().putBoolean(KEY_KEYBOARD, v).apply()
+    /** Input mode name: COLUMNS (default), TILES or KEYBOARD. */
+    var inputMode: String
+        get() = prefs.getString(KEY_INPUT, null) ?: "COLUMNS"
+        set(v) = prefs.edit().putString(KEY_INPUT, v).apply()
+
+    /** Start each level with only one clue visible; the rest open on request. */
+    var hideClues: Boolean
+        get() = prefs.getBoolean(KEY_HIDE_CLUES, true)
+        set(v) = prefs.edit().putBoolean(KEY_HIDE_CLUES, v).apply()
+
+    fun saveOpenedClues(levelId: String, ids: Set<Int>) {
+        prefs.edit().putString("clues_$levelId", ids.joinToString(",")).apply()
+    }
+
+    fun loadOpenedClues(levelId: String): Set<Int>? =
+        prefs.getString("clues_$levelId", null)?.split(',')?.mapNotNull { it.toIntOrNull() }?.toSet()
 
     private companion object {
-        const val KEY_KEYBOARD = "use_keyboard"
+        const val KEY_INPUT = "input_mode"
+        const val KEY_HIDE_CLUES = "hide_clues"
         const val KEY_DONE = "completed"
         const val KEY_SINCE_AD = "levels_since_interstitial"
     }

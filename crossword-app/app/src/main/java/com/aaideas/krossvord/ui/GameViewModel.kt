@@ -5,6 +5,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import com.aaideas.krossvord.data.PackRepository
 import com.aaideas.krossvord.data.ProgressStore
 import com.aaideas.krossvord.model.Board
@@ -13,12 +16,18 @@ import com.aaideas.krossvord.model.Entry
 import com.aaideas.krossvord.model.GameState
 import com.aaideas.krossvord.model.Level
 import com.aaideas.krossvord.model.Pack
+import com.aaideas.krossvord.model.WordBuilder
 import com.aaideas.krossvord.monetization.AdPolicy
 import com.aaideas.krossvord.monetization.LocalPremiumManager
 import com.aaideas.krossvord.monetization.PlaceholderAdService
 import com.aaideas.krossvord.monetization.PremiumManager
 
 enum class Screen { HOME, LEVELS, PUZZLE, SETTINGS }
+
+/** How letters are entered. COLUMNS is the default; the others stay as options in settings. */
+enum class InputMode { COLUMNS, TILES, KEYBOARD }
+
+enum class WordFeedback { RIGHT, WRONG }
 
 class GameViewModel(app: Application) : AndroidViewModel(app) {
     val packs: List<Pack> = PackRepository(app).bundledPacks()
@@ -36,7 +45,19 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     var showCompletion by mutableStateOf(false)
         private set
 
-    var useKeyboard by mutableStateOf(progress.useKeyboard)
+    var inputMode by mutableStateOf(
+        runCatching { InputMode.valueOf(progress.inputMode) }.getOrDefault(InputMode.COLUMNS)
+    )
+        private set
+    var hideClues by mutableStateOf(progress.hideClues)
+        private set
+
+    /** Letter-columns input: indexes of the picked letters, for the word in [draftKey]. */
+    private var draftPicks by mutableStateOf(emptyList<Int>())
+    private var draftKey: Pair<Int, Int>? = null
+    var feedback by mutableStateOf<WordFeedback?>(null)
+        private set
+    var mistakes by mutableStateOf(0)
         private set
     /** Bumped by the shuffle button to reorder the tiles. */
     var tileShuffle by mutableStateOf(0)
@@ -44,9 +65,75 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
 
     private var levelIndex = 0
 
-    fun setKeyboardMode(on: Boolean) {
-        progress.useKeyboard = on
-        useKeyboard = on
+    fun setInput(mode: InputMode) {
+        progress.inputMode = mode.name
+        inputMode = mode
+    }
+
+    fun changeHideClues(on: Boolean) {
+        progress.hideClues = on
+        hideClues = on
+    }
+
+    fun isClueShown(e: Entry): Boolean = !hideClues || (game?.isClueOpen(e) ?: true)
+
+    fun openActiveClue() = update { s -> s.activeEntry?.let { s.openClue(it) } ?: s }
+
+    // ---- Letter columns ----
+
+    private fun keyOf(s: GameState, e: Entry) = e.id to s.openCells(e).size
+
+    fun columnLetters(): List<Char> {
+        val s = game ?: return emptyList()
+        val e = s.activeEntry ?: return emptyList()
+        return WordBuilder.letters(s, e, tileShuffle)
+    }
+
+    /** Picked letter indexes for the active word (empty when the word or its open cells changed). */
+    fun draft(): List<Int> {
+        val s = game ?: return emptyList()
+        val e = s.activeEntry ?: return emptyList()
+        return if (draftKey == keyOf(s, e)) draftPicks else emptyList()
+    }
+
+    fun pickLetter(index: Int) {
+        val s = game ?: return
+        val e = s.activeEntry ?: return
+        if (feedback == WordFeedback.WRONG) feedback = null
+        val picks = draft()
+        val open = s.openCells(e)
+        if (index in picks || picks.size >= open.size) return
+        draftKey = keyOf(s, e)
+        draftPicks = picks + index
+        if (draftPicks.size == open.size) checkDraft(s, e)
+    }
+
+    fun unpickLast() {
+        feedback = null
+        draftPicks = draft().dropLast(1)
+    }
+
+    fun clearDraft() {
+        feedback = null
+        draftPicks = emptyList()
+    }
+
+    private fun checkDraft(s: GameState, e: Entry) {
+        val letters = columnLetters()
+        val word = draftPicks.map { letters[it] }
+        val (_, ok) = s.submitWord(e, word)
+        if (ok) {
+            draftPicks = emptyList()
+            feedback = WordFeedback.RIGHT
+            update { it.openClue(e).submitWord(e, word).first }
+        } else {
+            mistakes++
+            feedback = WordFeedback.WRONG
+            viewModelScope.launch {
+                delay(700)
+                if (feedback == WordFeedback.WRONG) { draftPicks = emptyList(); feedback = null }
+            }
+        }
     }
 
     fun shuffleTiles() { tileShuffle++ }
@@ -72,8 +159,11 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         game = GameState.start(board).copy(
             typed = progress.loadTyped(level.id),
             revealed = progress.loadRevealed(level.id),
-        ).let { s -> s.selectEntry(level.entries.firstOrNull { !s.isEntrySolved(it) } ?: level.entries.first()) }
+        ).let { s -> progress.loadOpenedClues(level.id)?.let { s.copy(openedClues = it) } ?: s }.let { s -> s.selectEntry(level.entries.firstOrNull { !s.isEntrySolved(it) } ?: level.entries.first()) }
         showCompletion = false
+        feedback = null
+        draftPicks = emptyList()
+        mistakes = 0
         screen = Screen.PUZZLE
     }
 
@@ -83,8 +173,13 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         startLevel(levelIndex)
     }
 
-    fun tapCell(c: Cell) = update { if (it.board.isLetter(c)) it.tapCell(c) else it.tapClue(c) }
-    fun selectEntry(e: Entry) = update { it.selectEntry(e) }
+    fun tapCell(c: Cell) = updateSelection { if (it.board.isLetter(c)) it.tapCell(c) else it.tapClue(c) }
+    fun selectEntry(e: Entry) = updateSelection { it.selectEntry(e) }
+
+    private fun updateSelection(f: (GameState) -> GameState) {
+        if (feedback == WordFeedback.RIGHT) feedback = null
+        update(f)
+    }
     fun type(ch: Char) = update { it.type(ch) }
     fun backspace() = update { it.backspace() }
     fun clearWord() = update { it.clearActiveEntry() }
@@ -131,5 +226,6 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         } else if (!s.isComplete) {
             progress.saveTyped(id, s.typed, s.revealed)
         }
+        if (s.openedClues != old.openedClues) progress.saveOpenedClues(id, s.openedClues)
     }
 }

@@ -20,26 +20,39 @@ import org.robolectric.annotation.GraphicsMode
 class ScreenshotTest {
     private fun vm() = GameViewModel(ApplicationProvider.getApplicationContext<Application>())
 
-    @Test fun puzzleInProgress() {
+    private fun shoot(vm: GameViewModel, name: String) =
+        captureRoboImage("build/outputs/roborazzi/$name.png") {
+            KrossvordTheme { Surface(Modifier.fillMaxSize()) { PuzzleScreen(vm, isPremium = false) } }
+        }
+
+    /** Default mode: letter columns, one clue open; OD solved, two letters of the next word picked. */
+    @Test fun puzzleColumns() {
         val vm = vm()
         vm.startLevel(0)
         vm.restartLevel()
-        "ODAŞ".forEach(vm::type) // two words solved
-        vm.tapCell(Cell(0, 1))   // clue cell for OTAQ ↓ (O is already in place)
-        vm.type('T')
-        captureRoboImage("build/outputs/roborazzi/puzzle.png") {
-            KrossvordTheme { Surface(Modifier.fillMaxSize()) { PuzzleScreen(vm, isPremium = false) } }
-        }
+        val letters = vm.columnLetters()
+        "OD".forEach { ch -> vm.pickLetter(letters.indexOf(ch)) }
+        vm.tapCell(Cell(0, 1)) // OTAQ ↓, clue still hidden
+        val next = vm.columnLetters()
+        vm.pickLetter(next.indexOf('T'))
+        vm.pickLetter(next.indexOf('A'))
+        shoot(vm, "puzzle")
+    }
+
+    @Test fun puzzleTiles() {
+        val vm = vm()
+        vm.setInput(InputMode.TILES)
+        vm.startLevel(0)
+        vm.restartLevel()
+        shoot(vm, "puzzle-tiles")
     }
 
     @Test fun puzzleKeyboardMode() {
         val vm = vm()
-        vm.setKeyboardMode(true)
+        vm.setInput(InputMode.KEYBOARD)
         vm.startLevel(0)
         vm.restartLevel()
-        captureRoboImage("build/outputs/roborazzi/puzzle-keyboard.png") {
-            KrossvordTheme { Surface(Modifier.fillMaxSize()) { PuzzleScreen(vm, isPremium = false) } }
-        }
+        shoot(vm, "puzzle-keyboard")
     }
 
     @Test fun home() {

@@ -8,6 +8,8 @@ data class GameState(
     val board: Board,
     val typed: Map<Cell, Char> = emptyMap(),
     val revealed: Set<Cell> = emptySet(),
+    /** Ids of entries whose clue the player has opened (used when clues start hidden). */
+    val openedClues: Set<Int> = emptySet(),
     val selectedCell: Cell? = null,
     val direction: Direction = Direction.ACROSS,
 ) {
@@ -28,6 +30,25 @@ data class GameState(
     val isComplete: Boolean get() = board.solution.all { (c, ch) -> typed[c] == ch }
 
     val solvedCount: Int get() = board.level.entries.count { isEntrySolved(it) }
+
+    fun isClueOpen(e: Entry) = e.id in openedClues || isEntrySolved(e)
+
+    fun openClue(e: Entry): GameState = copy(openedClues = openedClues + e.id)
+
+    /** Cells of [e] the player still has to fill (not revealed, not part of a solved word). */
+    fun openCells(e: Entry): List<Cell> = e.cells.filter { !isLocked(it) }
+
+    /**
+     * Whole-word input: [letters] go into the open cells of [e], in order.
+     * Returns the new state and whether the word was right. A wrong word changes nothing.
+     */
+    fun submitWord(e: Entry, letters: List<Char>): Pair<GameState, Boolean> {
+        val open = openCells(e)
+        if (letters.size != open.size) return this to false
+        val ok = open.indices.all { board.solution[open[it]] == letters[it] }
+        if (!ok) return this to false
+        return copy(typed = typed + open.zip(letters), selectedCell = e.cells.last(), direction = e.direction) to true
+    }
 
     /** Tap on a letter cell: select it; a second tap on the same cell switches direction. */
     fun tapCell(c: Cell): GameState {
@@ -100,7 +121,7 @@ data class GameState(
     companion object {
         fun start(board: Board): GameState {
             val first = board.level.entries.first()
-            return GameState(board).selectEntry(first)
+            return GameState(board, openedClues = setOf(first.id)).selectEntry(first)
         }
     }
 }

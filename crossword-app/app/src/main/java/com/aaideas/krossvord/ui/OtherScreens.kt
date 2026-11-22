@@ -1,6 +1,8 @@
 package com.aaideas.krossvord.ui
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,6 +18,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -70,18 +73,31 @@ fun LevelsScreen(vm: GameViewModel) {
 
 @Composable
 fun SettingsScreen(vm: GameViewModel, isPremium: Boolean) {
-    Column(Modifier.fillMaxSize().padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+    Column(
+        Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp),
+    ) {
         TextButton(onClick = vm::back) { Text("← Əsas səhifə") }
         Text("Hərflərin daxil edilməsi", style = MaterialTheme.typography.headlineSmall)
+        listOf(
+            InputMode.COLUMNS to "Hərf sütunları: sözü sağ və sol sütunlardan yığ",
+            InputMode.TILES to "Kartlar: hərfləri bir-bir xanaya qoy",
+            InputMode.KEYBOARD to "Çətin rejim: tam klaviatura",
+        ).forEach { (mode, label) ->
+            Row(
+                Modifier.fillMaxWidth().clickable { vm.setInput(mode) },
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                RadioButton(selected = vm.inputMode == mode, onClick = { vm.setInput(mode) })
+                Text(label)
+            }
+        }
         Row(verticalAlignment = Alignment.CenterVertically) {
             Column(Modifier.weight(1f)) {
-                Text("Çətin rejim: tam klaviatura")
-                Text(
-                    if (vm.useKeyboard) "İndi: klaviatura" else "İndi: söz hərfləri olan kartlar",
-                    style = MaterialTheme.typography.bodySmall,
-                )
+                Text("Bir ipucu ilə başla")
+                Text("Qalan ipucları istəyəndə açılır", style = MaterialTheme.typography.bodySmall)
             }
-            Switch(checked = vm.useKeyboard, onCheckedChange = vm::setKeyboardMode)
+            Switch(checked = vm.hideClues, onCheckedChange = vm::changeHideClues)
         }
         Spacer(Modifier.height(8.dp))
         Text("Premium", style = MaterialTheme.typography.headlineSmall)

@@ -1,0 +1,54 @@
+package com.aaideas.krossvord.model
+
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
+import org.junit.Test
+
+class WordBuilderTest {
+    private val alma = Entry(1, Direction.ACROSS, 1, 0, "ALMA", "Quba meyvəsi")
+    private val ad = Entry(2, Direction.DOWN, 0, 1, "AD", "İsim")
+    private val board = Board(Level("t", 3, 5, 1, listOf(alma, ad)))
+
+    @Test fun lettersContainTheWordAndFillEvenColumns() {
+        val s = GameState.start(board)
+        val letters = WordBuilder.letters(s, alma)
+        assertEquals(12, letters.size)
+        val counts = letters.groupingBy { it }.eachCount()
+        "ALMA".groupingBy { it }.eachCount().forEach { (ch, n) -> assertTrue((counts[ch] ?: 0) >= n) }
+        val cols = (0 until 4).map { WordBuilder.column(letters, it).size }
+        assertEquals(listOf(3, 3, 3, 3), cols)
+    }
+
+    @Test fun letterCountGrowsWithLongWords() {
+        assertEquals(12, WordBuilder.letterCount(2))
+        assertEquals(12, WordBuilder.letterCount(7))
+        assertEquals(16, WordBuilder.letterCount(10))
+    }
+
+    @Test fun rightWordFillsGridWrongWordChangesNothing() {
+        val s = GameState.start(board)
+        val (same, wrong) = s.submitWord(alma, "ALMO".toList())
+        assertFalse(wrong)
+        assertEquals(s, same)
+        val (done, ok) = s.submitWord(alma, "ALMA".toList())
+        assertTrue(ok)
+        assertTrue(done.isEntrySolved(alma))
+    }
+
+    @Test fun lockedCrossingLetterIsSkipped() {
+        val s = GameState.start(board).submitWord(ad, "AD".toList()).first
+        assertEquals(3, s.openCells(alma).size)
+        val (done, ok) = s.submitWord(alma, "LMA".toList())
+        assertTrue(ok)
+        assertTrue(done.isComplete)
+    }
+
+    @Test fun onlyFirstClueStartsOpen() {
+        val s = GameState.start(board)
+        assertTrue(s.isClueOpen(alma))
+        assertFalse(s.isClueOpen(ad))
+        assertTrue(s.openClue(ad).isClueOpen(ad))
+        assertTrue("solved words show their clue", s.submitWord(ad, "AD".toList()).first.isClueOpen(ad))
+    }
+}
