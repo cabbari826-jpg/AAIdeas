@@ -37,6 +37,9 @@ const val MAX_LIVES = 3
 
 /** Clue steps that are free; later steps need a rewarded ad. */
 const val FREE_CLUE_STEPS = 1
+const val TUTORIAL_TAP = 0
+const val TUTORIAL_EXPLAIN = 1
+const val TUTORIAL_DONE = 2
 
 class GameViewModel(app: Application) : AndroidViewModel(app) {
     val packs: List<Pack> = PackRepository(app).bundledPacks()
@@ -146,6 +149,32 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         if (!s.canEaseClue(e)) return
         val needsAd = s.clueTier(e) >= FREE_CLUE_STEPS && !premium.isPremium.value
         if (needsAd) ads.showRewarded("Asan ipucu") { update { it.easeClue(e) } } else update { it.easeClue(e) }
+    }
+
+    /**
+     * Tap on a clue inside a clue cell. Another word's clue selects that word; the active word's
+     * clue opens if hidden, otherwise turns into the next, easier clue.
+     */
+    fun tapClueOf(e: Entry) {
+        val s = game ?: return
+        if (feedback == WordFeedback.RIGHT) feedback = null
+        when {
+            s.activeEntry != e -> update { it.selectEntry(e) }
+            !isClueShown(e) -> openActiveClue()
+            s.canEaseClue(e) -> {
+                easeActiveClue()
+                if (tutorialStep == TUTORIAL_TAP) tutorialStep = TUTORIAL_EXPLAIN
+            }
+        }
+    }
+
+    /** First-run tutorial: 0 = "tap this clue", 1 = explain what happened, 2 = done. */
+    var tutorialStep by mutableStateOf(if (progress.tutorialDone) TUTORIAL_DONE else TUTORIAL_TAP)
+        private set
+
+    fun finishTutorial() {
+        tutorialStep = TUTORIAL_DONE
+        progress.tutorialDone = true
     }
 
     fun easeNeedsAd(): Boolean {
