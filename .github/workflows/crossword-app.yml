@@ -4,9 +4,11 @@ on:
     paths: ["crossword-app/**", ".github/workflows/crossword-app.yml"]
   pull_request:
     paths: ["crossword-app/**"]
-# One build at a time per branch, so releases come out in order.
+# One build per branch: a newer push cancels the build still running for an
+# older one, so a burst of commits publishes one release, not one per commit.
 concurrency:
   group: crossword-app-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   build:
     runs-on: ubuntu-latest

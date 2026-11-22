@@ -20,7 +20,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -31,6 +30,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.core.content.FileProvider
+import androidx.lifecycle.compose.LifecycleResumeEffect
 import com.aaideas.krossvord.BuildConfig
 import kotlinx.coroutines.launch
 
@@ -54,18 +54,31 @@ fun UpdateBanner() {
     val scope = rememberCoroutineScope()
     var ui by remember { mutableStateOf<UpdateUi>(UpdateUi.Hidden) }
 
-    LaunchedEffect(Unit) {
-        val latest = PrototypeUpdates.fetchLatest(BuildConfig.UPDATE_REPO) ?: return@LaunchedEffect
-        if (latest.build > BuildConfig.VERSION_CODE) ui = UpdateUi.Offer(latest)
+    // Check on every return to the app, not only on cold start, so the card
+    // always names the newest build (several can be published in a row).
+    LifecycleResumeEffect(Unit) {
+        val job = scope.launch {
+            val latest = PrototypeUpdates.fetchLatest(BuildConfig.UPDATE_REPO) ?: return@launch
+            val current = ui
+            if (latest.build > BuildConfig.VERSION_CODE && current !is UpdateUi.Downloading) {
+                ui = if (current is UpdateUi.NeedsPermission) UpdateUi.NeedsPermission(latest) else UpdateUi.Offer(latest)
+            }
+        }
+        onPauseOrDispose { job.cancel() }
     }
 
-    fun start(release: PrototypeRelease) {
+    fun start(offered: PrototypeRelease) {
         if (!canInstall(context)) {
-            ui = UpdateUi.NeedsPermission(release)
+            ui = UpdateUi.NeedsPermission(offered)
             openInstallPermissionSettings(context)
             return
         }
         scope.launch {
+            ui = UpdateUi.Downloading(offered, 0)
+            // Ask once more right before downloading: if a newer build came out
+            // since the card was shown, install that one and skip a second update.
+            val newest = PrototypeUpdates.fetchLatest(BuildConfig.UPDATE_REPO)
+            val release = if (newest != null && newest.build > offered.build) newest else offered
             ui = UpdateUi.Downloading(release, 0)
             val apk = PrototypeUpdates.download(context, release) { ui = UpdateUi.Downloading(release, it) }
             if (apk == null) {
