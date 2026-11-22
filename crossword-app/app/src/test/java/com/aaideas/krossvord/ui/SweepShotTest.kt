@@ -165,6 +165,26 @@ class SweepShotTest {
         assert(vm.game!!.clueTier(e) == 0)
     }
 
+    @Test fun tutorialShots() {
+        val vm = GameViewModel(ApplicationProvider.getApplicationContext<Application>())
+        vm.startLevel(0)
+        vm.restartLevel()
+        vm.replayTutorial()
+        rule.setContent { KrossvordTheme { PuzzleScreen(vm, isPremium = false) } }
+        rule.waitForIdle()
+        com.github.takahirom.roborazzi.captureScreenRoboImage("build/outputs/roborazzi/tutorial-ask.png")
+        rule.runOnUiThread { vm.startCoach() }
+        rule.waitForIdle()
+        rule.mainClock.advanceTimeBy(500)
+        rule.onRoot().captureRoboImage("build/outputs/roborazzi/tutorial-1.png")
+        rule.runOnUiThread { vm.nextCoach(); vm.nextCoach() }
+        rule.waitForIdle()
+        rule.onRoot().captureRoboImage("build/outputs/roborazzi/tutorial-3.png")
+        rule.runOnUiThread { vm.finishTutorial() }
+        rule.waitForIdle()
+        rule.onRoot().captureRoboImage("build/outputs/roborazzi/puzzle-top.png")
+    }
+
     @Test fun collectionScreen() {
         val vm = GameViewModel(ApplicationProvider.getApplicationContext<Application>())
         vm.restartLevel()

@@ -10,6 +10,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Arrangement
+import dev.chrisbanes.haze.hazeEffect
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -96,11 +97,16 @@ private fun Modifier.springPress(source: MutableInteractionSource): Modifier {
 fun ExpressiveHome(vm: GameViewModel) {
     var confirmReset by remember { mutableStateOf(false) }
     val cs = MaterialTheme.colorScheme
+    val season = DecorSeason.on(vm.today())
+    Box(Modifier.fillMaxSize()) {
     Column(
         Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(horizontal = 20.dp, vertical = 16.dp),
         verticalArrangement = Arrangement.spacedBy(18.dp),
     ) {
-        Text(BRAND, style = MaterialTheme.typography.headlineMedium)
+        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+            Text(BRAND, style = MaterialTheme.typography.headlineMedium, modifier = Modifier.weight(1f))
+            season?.let { HolidayDecor(it, vm.today()) }
+        }
 
         vm.holiday?.let { HolidayCard(it, vm) }
         vm.newSkin?.let { gift ->
@@ -123,17 +129,25 @@ fun ExpressiveHome(vm: GameViewModel) {
             }
         }
 
+        ContinueCard(vm)
         WordOfDayCard(vm.daily) { vm.open(Screen.WORD_OF_DAY) }
         TodayCard(vm)
 
-        ContinueCard(vm)
-
-        // Level grid of the pack the player is on.
-        val p = vm.packIndexOf(vm.continueIndex())
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Text(vm.packs[p].title, style = MaterialTheme.typography.titleLarge, modifier = Modifier.weight(1f))
-            TextButton(onClick = { vm.selectedPack = p; vm.open(Screen.LEVELS) }) { Text("Hamısı ›") }
+        // Packs first, then the levels of the chosen pack, all on this screen.
+        val p = vm.homePack
+        val open = vm.packs.indices.filter { vm.packOpen(it) }
+        if (open.size > 1) {
+            Text("Paketlər", style = MaterialTheme.typography.titleLarge)
+            Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                open.forEach { i ->
+                    val pack = vm.packs[i]
+                    val done = pack.levels.count { it.id in vm.completed }
+                    val icon = com.aaideas.krossvord.model.Holidays.holidayFor(pack.packId)?.icon?.let { "$it " }.orEmpty()
+                    PackCard(icon + pack.title, done, pack.levels.size, selected = i == p) { vm.selectedPack = i }
+                }
+            }
         }
+        Text(vm.packs[p].title, style = MaterialTheme.typography.titleLarge)
         val levels = vm.packLevels(p)
         val current = vm.continueIndex()
         levels.chunked(4).forEach { row ->
@@ -152,24 +166,15 @@ fun ExpressiveHome(vm: GameViewModel) {
             }
         }
 
-        if (vm.packs.size > 1) {
-            Text("Paketlər", style = MaterialTheme.typography.titleLarge)
-            Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                vm.packs.forEachIndexed { i, pack ->
-                    val done = pack.levels.count { it.id in vm.completed }
-                    PackCard(pack.title, done, pack.levels.size, selected = i == p) {
-                        vm.selectedPack = i; vm.open(Screen.LEVELS)
-                    }
-                }
-            }
-        }
-
         if (vm.completed.isNotEmpty()) {
             TextButton(onClick = { confirmReset = true }, Modifier.align(Alignment.CenterHorizontally)) {
                 Text("Hər şeyi yenidən başla", color = cs.onSurfaceVariant)
             }
         }
         Spacer(Modifier.height(BottomMenuHeight))
+    }
+    if (season == DecorSeason.YENI_IL) SnowFall(Modifier.matchParentSize())
+    if (season == DecorSeason.BAYRAM) FireworksOnce(Modifier.matchParentSize())
     }
     if (confirmReset) ResetAllDialog(onConfirm = { confirmReset = false; vm.resetAllProgress(); vm.startLevel(0) }, onDismiss = { confirmReset = false })
 }
@@ -278,17 +283,21 @@ val BottomMenuHeight: Dp = 88.dp
 @Composable
 fun GlassBottomMenu(screen: Screen, open: (Screen) -> Unit, modifier: Modifier = Modifier) {
     val cs = MaterialTheme.colorScheme
+    val haze = LocalHaze.current
+    val dark = cs.background.luminance() < 0.5f
     Surface(
-        modifier = modifier.padding(horizontal = 24.dp, vertical = 12.dp).fillMaxWidth(),
+        modifier = modifier.padding(horizontal = 24.dp, vertical = 12.dp).fillMaxWidth()
+            // Şüşə: frosted glass over whatever scrolls beneath (real blur on Android 12+, a tint before that).
+            .then(if (haze != null) Modifier.clip(CircleShape).hazeEffect(haze, glassStyle(dark)) else Modifier),
         shape = CircleShape,
         // No shadow: it would show through the see-through fill as a smudge.
-        color = cs.surfaceContainerHigh,
+        color = if (haze != null) Color.Transparent else cs.surfaceContainerHigh,
         border = BorderStroke(1.dp, cs.outlineVariant.copy(alpha = 0.7f)),
     ) {
         Row(Modifier.padding(6.dp), horizontalArrangement = Arrangement.spacedBy(4.dp)) {
             listOf(
                 Triple(Screen.HOME, "▦", "Oyun"),
-                Triple(Screen.LEVELS, "☰", "Səviyyələr"),
+                Triple(Screen.DAILY, "📅", "Bu gün"),
                 Triple(Screen.STATS, "★", "Statistika"),
                 Triple(Screen.SETTINGS, "⚙", "Ayarlar"),
             ).forEach { (target, icon, label) ->

@@ -18,7 +18,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -75,8 +74,6 @@ enum class AppIcon(val alias: String, val label: String, val preview: Int, val k
         fun chosen(ctx: Context): AppIcon =
             entries.firstOrNull { it.name == prefs(ctx).getString("chosen", null) } ?: STANDARD
 
-        fun holidaysOn(ctx: Context): Boolean = prefs(ctx).getBoolean("holidays", false)
-
         /** Novruz from 15 March to 5 April, New Year from 20 December to 7 January. */
         fun holidayFor(month: Int, day: Int): AppIcon? = when {
             Skin.isNovruz(month, day) -> NOVRUZ
@@ -84,7 +81,7 @@ enum class AppIcon(val alias: String, val label: String, val preview: Int, val k
             else -> null
         }
 
-        /** The icon that should be on: a holiday one in season if allowed, else the choice, else standard. */
+        /** The icon that should be on: a holiday one in season, else the choice, else standard. */
         fun target(chosen: AppIcon, holidays: Boolean, isPremium: Boolean, month: Int, day: Int): AppIcon {
             if (holidays) holidayFor(month, day)?.let { return it }
             return if (chosen.kind == IconKind.PREMIUM && !isPremium) STANDARD else chosen
@@ -96,7 +93,7 @@ enum class AppIcon(val alias: String, val label: String, val preview: Int, val k
          * Note for Play Billing: call this only once the purchase state is known, or a premium icon resets.
          */
         fun sync(ctx: Context, isPremium: Boolean, today: Calendar = Calendar.getInstance()): AppIcon {
-            val want = target(chosen(ctx), holidaysOn(ctx), isPremium,
+            val want = target(chosen(ctx), holidays = true, isPremium = isPremium,
                 today.get(Calendar.MONTH) + 1, today.get(Calendar.DAY_OF_MONTH))
             if (current(ctx) != want) set(ctx, want)
             return want
@@ -104,11 +101,6 @@ enum class AppIcon(val alias: String, val label: String, val preview: Int, val k
 
         fun choose(ctx: Context, icon: AppIcon, isPremium: Boolean): AppIcon {
             prefs(ctx).edit().putString("chosen", icon.name).apply()
-            return sync(ctx, isPremium)
-        }
-
-        fun setHolidays(ctx: Context, on: Boolean, isPremium: Boolean): AppIcon {
-            prefs(ctx).edit().putBoolean("holidays", on).apply()
             return sync(ctx, isPremium)
         }
 
@@ -123,13 +115,12 @@ enum class AppIcon(val alias: String, val label: String, val preview: Int, val k
     }
 }
 
-/** Settings block: pick the app icon (extra ones with premium) and turn holiday icons on or off. */
+/** Settings block: pick the app icon (extra ones with premium). Holiday icons come on by themselves in season. */
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun AppIconPicker(isPremium: Boolean) {
     val ctx = LocalContext.current
     var chosen by remember(isPremium) { mutableStateOf(AppIcon.chosen(ctx).let { if (it.kind == IconKind.PREMIUM && !isPremium) AppIcon.STANDARD else it }) }
-    var holidays by remember { mutableStateOf(AppIcon.holidaysOn(ctx)) }
     Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
         Text("Tətbiqin ikonu", style = MaterialTheme.typography.headlineSmall)
         FlowRow(horizontalArrangement = Arrangement.spacedBy(6.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
@@ -144,13 +135,7 @@ fun AppIconPicker(isPremium: Boolean) {
             if (isPremium) "Ana ekranda ikon bir neçə saniyəyə dəyişir." else "Əlavə ikonlar Premium ilə açılır.",
             style = MaterialTheme.typography.bodySmall,
         )
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Column(Modifier.weight(1f)) {
-                Text("Bayram ikonları", style = MaterialTheme.typography.titleMedium)
-                Text("Novruzda və Yeni ildə ikon özü dəyişir, sonra geri qayıdır.", style = MaterialTheme.typography.bodySmall)
-            }
-            Switch(holidays, { holidays = it; AppIcon.setHolidays(ctx, it, isPremium) })
-        }
+        Text("Novruzda və Yeni ildə ikon özü bayram ikonuna dəyişir, sonra geri qayıdır.", style = MaterialTheme.typography.bodySmall)
         Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
             AppIcon.entries.filter { it.kind == IconKind.HOLIDAY }.forEach { IconTile(it, selected = false, locked = false, onPick = null) }
         }

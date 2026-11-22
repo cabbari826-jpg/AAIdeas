@@ -23,7 +23,7 @@ fun HolidayCard(h: Holiday, vm: GameViewModel) {
             Text("Bilirsinizmi? ${h.fact}", style = MaterialTheme.typography.bodyMedium, modifier = Modifier.padding(top = 4.dp))
             val p = vm.packs.indexOfFirst { it.packId == h.packId }
             if (p >= 0 && vm.packOpen(p)) {
-                TextButton(onClick = { vm.selectedPack = p; vm.open(Screen.LEVELS) }) { Text("Bayram paketi: ${vm.packs[p].title} ›") }
+                TextButton(onClick = { vm.selectedPack = p }) { Text("Bayram paketi: ${vm.packs[p].title} ›") }
             }
         }
     }

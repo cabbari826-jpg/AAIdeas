@@ -80,6 +80,47 @@ class ThemeScreenshotTest {
         shoot("puzzle-dark", ThemeMode.DARK) { PuzzleScreen(vm, isPremium = false) }
     }
 
+    @Test fun glassTheme() {
+        val vm = vm()
+        vm.unlockAllSkinsForTesting(); vm.changeSkin(Skin.SUSE)
+        vm.open(Screen.HOME)
+        for (mode in listOf(ThemeMode.LIGHT, ThemeMode.DARK)) {
+            val suffix = mode.name.lowercase()
+            shoot("glass-home-$suffix", mode, Skin.SUSE) {
+                androidx.compose.foundation.layout.Box {
+                    GlassBackdrop(mode == ThemeMode.DARK, androidx.compose.ui.Modifier.matchParentSize())
+                    ExpressiveHome(vm)
+                    GlassBottomMenu(Screen.HOME, {}, androidx.compose.ui.Modifier.align(androidx.compose.ui.Alignment.BottomCenter))
+                }
+            }
+        }
+        vm.startLevel(0); vm.restartLevel()
+        shoot("glass-puzzle-light", ThemeMode.LIGHT, Skin.SUSE) {
+            androidx.compose.foundation.layout.Box {
+                GlassBackdrop(false, androidx.compose.ui.Modifier.matchParentSize())
+                PuzzleScreen(vm, isPremium = false)
+            }
+        }
+    }
+
+    @Test fun holidayHomes() {
+        val vm = vm()
+        vm.open(Screen.HOME)
+        for ((name, day) in listOf(
+            "yeniil" to java.time.LocalDate.of(2026, 12, 28),
+            "novruz" to java.time.LocalDate.of(2027, 3, 18),
+            "ramazan" to java.time.LocalDate.of(2027, 2, 20),
+            "qurban" to java.time.LocalDate.of(2027, 5, 17),
+            "bayram" to java.time.LocalDate.of(2027, 5, 28),
+            "zefer" to java.time.LocalDate.of(2026, 11, 8),
+        )) {
+            vm.today = { day }
+            shoot("home-holiday-$name", ThemeMode.LIGHT) { androidx.compose.foundation.layout.Box { ExpressiveHome(vm) } }
+        }
+        vm.today = { java.time.LocalDate.of(2027, 2, 20) }
+        shoot("home-holiday-ramazan-dark", ThemeMode.DARK) { androidx.compose.foundation.layout.Box { ExpressiveHome(vm) } }
+    }
+
     @Test fun homeLightAndDark() {
         val vm = vm()
         vm.startLevel(0); vm.restartLevel()

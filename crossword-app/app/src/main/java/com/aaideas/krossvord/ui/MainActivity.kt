@@ -2,6 +2,7 @@ package com.aaideas.krossvord.ui
 
 import android.os.Bundle
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import dev.chrisbanes.haze.hazeSource
 import android.graphics.Color
 import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
@@ -83,10 +84,16 @@ class MainActivity : ComponentActivity() {
             androidx.compose.runtime.CompositionLocalProvider(androidx.compose.ui.platform.LocalDensity provides density) {
             LaunchedEffect(vm.screen) { if (vm.screen == Screen.HOME || vm.screen == Screen.SETTINGS) vm.refreshSkins(com.aaideas.krossvord.model.Ranks.unlockedThemes(vm.xp).toSet()) }
             KrossvordTheme(mode, vm.dynamicColor, skin) {
-                Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
+                // Şüşə: the colourful backdrop shows through, so the window surface is clear.
+                Surface(Modifier.fillMaxSize(), color = if (skin.glass) androidx.compose.ui.graphics.Color.Transparent else MaterialTheme.colorScheme.background) {
+                    val haze = if (skin.glass) androidx.compose.runtime.remember { dev.chrisbanes.haze.HazeState() } else null
                     val isPremium by vm.premium.isPremium.collectAsState()
                     BackHandler(enabled = vm.screen != Screen.HOME) { vm.back() }
                     val menu = vm.screen != Screen.PUZZLE && vm.screen != Screen.WORD_OF_DAY
+                    androidx.compose.runtime.CompositionLocalProvider(LocalHaze provides haze) {
+                    // The backdrop and screens are the blur source; the floating menu (outside it) frosts them.
+                    Box(Modifier.fillMaxSize().then(if (haze != null) Modifier.hazeSource(haze) else Modifier)) {
+                        if (skin.glass) GlassBackdrop(dark, Modifier.fillMaxSize())
                     Box(Modifier.safeDrawingPadding()) {
                         // Leave room under the floating menu so it never hides the last item (home scrolls under it).
                         Box(if (menu && vm.screen != Screen.HOME) Modifier.padding(bottom = BottomMenuHeight) else Modifier) {
@@ -101,7 +108,11 @@ class MainActivity : ComponentActivity() {
                                 Screen.DAILY -> DailyScreen(vm)
                             }
                         }
+                    }
+                    }
+                    Box(Modifier.fillMaxSize().safeDrawingPadding()) {
                         if (menu) GlassBottomMenu(vm.screen, vm::open, Modifier.align(Alignment.BottomCenter))
+                    }
                     }
                     WelcomeHost(vm)
                     AdPlaceholderHost(vm.ads)

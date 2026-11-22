@@ -20,6 +20,7 @@ class DailyWordGame(
     private val premium: PremiumManager,
     private val today: () -> Long = { DailyWords.dayNumber() },
 ) {
+    private val appContext = context.applicationContext
     private val prefs = context.getSharedPreferences("daily_word", Context.MODE_PRIVATE)
     val words: List<DailyWord> =
         context.assets.open("word_of_day.json").bufferedReader(Charsets.UTF_8).use { DailyWords.parse(it.readText()) }
@@ -74,7 +75,9 @@ class DailyWordGame(
             onSolved()
         }
         e.apply()
+        val changed = g.solved != guess.solved || g.failed != guess.failed
         guess = g
+        if (changed) runCatching { com.aaideas.krossvord.widget.WordWidget.refresh(appContext) }
     }
 
     fun type(ch: Char) {
@@ -101,7 +104,7 @@ class DailyWordGame(
 
     fun reset() { prefs.edit().clear().apply(); guess = load() }
 
-    private companion object {
+    companion object {
         const val KEY_DAY = "day"
         const val KEY_REVEALED = "revealed"
         const val KEY_ATTEMPTS = "attempts"

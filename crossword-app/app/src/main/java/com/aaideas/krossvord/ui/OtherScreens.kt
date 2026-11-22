@@ -92,7 +92,7 @@ fun LevelsScreen(vm: GameViewModel) {
                 val done = pack.levels.count { it.id in vm.completed }
                 val icon = com.aaideas.krossvord.model.Holidays.holidayFor(pack.packId)?.icon?.let { "$it " }.orEmpty()
                 FilterChip(
-                    selected = vm.selectedPack == p,
+                    selected = vm.homePack == p,
                     onClick = { vm.selectedPack = p },
                     label = { Text("$icon${pack.title} $done/${pack.levels.size}") },
                 )
@@ -100,7 +100,7 @@ fun LevelsScreen(vm: GameViewModel) {
         }
         Spacer(Modifier.height(8.dp))
         LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            items(vm.packLevels(vm.selectedPack)) { (i, level) ->
+            items(vm.packLevels(vm.homePack)) { (i, level) ->
                 val done = level.id in vm.completed
                 Card(Modifier.fillMaxWidth().clickable { vm.startLevel(i) }) {
                     Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
@@ -150,6 +150,7 @@ fun SettingsScreen(vm: GameViewModel, isPremium: Boolean) {
                 Switch(checked = vm.kidsMode, onCheckedChange = vm::changeKidsMode)
             }
         }
+        OutlinedButton(onClick = vm::replayTutorial, modifier = Modifier.fillMaxWidth()) { Text("❓ Oyunun qaydalarını yenidən göstər") }
         Surface(onClick = vm::editProfile, shape = androidx.compose.foundation.shape.RoundedCornerShape(16.dp), color = MaterialTheme.colorScheme.surfaceVariant) {
             Column(Modifier.fillMaxWidth().padding(12.dp)) {
                 Text("👤 Profil", style = MaterialTheme.typography.titleMedium)

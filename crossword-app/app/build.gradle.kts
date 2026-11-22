@@ -78,6 +78,8 @@ dependencies {
     implementation(composeBom)
     implementation("androidx.core:core-ktx:1.16.0")
     implementation("androidx.core:core-splashscreen:1.0.1")
+    // Frosted-glass blur for the Şüşə theme (Apache-2.0); blurs on Android 12+, tints before that.
+    implementation("dev.chrisbanes.haze:haze:1.6.10")
     implementation("androidx.activity:activity-compose:1.10.1")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.9.1")
     implementation("androidx.compose.material3:material3")
