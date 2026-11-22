@@ -27,7 +27,8 @@ android {
     // them the usual per-machine debug key is used. Prototype only; the Google
     // Play build will use its own upload key.
     val protoKeystore = rootProject.file("prototype.keystore")
-    val protoPassword = System.getenv("PROTOTYPE_KEYSTORE_PASSWORD")
+    // trim(): a pasted secret often carries a trailing newline or space.
+    val protoPassword = System.getenv("PROTOTYPE_KEYSTORE_PASSWORD")?.trim()
     if (protoKeystore.exists() && !protoPassword.isNullOrEmpty()) {
         signingConfigs {
             getByName("debug") {
