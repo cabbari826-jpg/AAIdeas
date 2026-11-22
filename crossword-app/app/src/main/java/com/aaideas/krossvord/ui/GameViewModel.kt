@@ -70,7 +70,8 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
 
     /** Letter-columns input: indexes of the picked letters, for the word in [draftKey]. */
     private var draftPicks by mutableStateOf(emptyList<Int>())
-    private var draftKey: Pair<Int, Int>? = null
+    // Both are Compose state: draft() must subscribe to them, or picks never redraw (old bug).
+    private var draftKey by mutableStateOf<Pair<Int, Int>?>(null)
     var feedback by mutableStateOf<WordFeedback?>(null)
         private set
     var mistakes by mutableStateOf(0)
@@ -183,6 +184,12 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         draftKey = keyOf(s, e)
         draftPicks = picks + index
         if (draftPicks.size == open.size) checkDraft(s, e)
+    }
+
+    /** Take back one picked letter (tapping a lit tile); later picks keep their order. */
+    fun unpickLetter(index: Int) {
+        feedback = null
+        draftPicks = draft() - index
     }
 
     fun unpickLast() {
