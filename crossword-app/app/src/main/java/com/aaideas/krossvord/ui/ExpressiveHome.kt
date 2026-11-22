@@ -10,6 +10,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Arrangement
+import dev.chrisbanes.haze.hazeEffect
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -282,11 +283,15 @@ val BottomMenuHeight: Dp = 88.dp
 @Composable
 fun GlassBottomMenu(screen: Screen, open: (Screen) -> Unit, modifier: Modifier = Modifier) {
     val cs = MaterialTheme.colorScheme
+    val haze = LocalHaze.current
+    val dark = cs.background.luminance() < 0.5f
     Surface(
-        modifier = modifier.padding(horizontal = 24.dp, vertical = 12.dp).fillMaxWidth(),
+        modifier = modifier.padding(horizontal = 24.dp, vertical = 12.dp).fillMaxWidth()
+            // Şüşə: frosted glass over whatever scrolls beneath (real blur on Android 12+, a tint before that).
+            .then(if (haze != null) Modifier.clip(CircleShape).hazeEffect(haze, glassStyle(dark)) else Modifier),
         shape = CircleShape,
         // No shadow: it would show through the see-through fill as a smudge.
-        color = cs.surfaceContainerHigh,
+        color = if (haze != null) Color.Transparent else cs.surfaceContainerHigh,
         border = BorderStroke(1.dp, cs.outlineVariant.copy(alpha = 0.7f)),
     ) {
         Row(Modifier.padding(6.dp), horizontalArrangement = Arrangement.spacedBy(4.dp)) {

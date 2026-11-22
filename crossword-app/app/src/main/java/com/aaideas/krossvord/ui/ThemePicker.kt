@@ -14,6 +14,10 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.ui.Alignment
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -74,13 +78,18 @@ fun ThemePicker(current: ThemeMode, onPick: (ThemeMode) -> Unit, dynamic: Boolea
 @Composable
 fun SkinPicker(current: Skin, owned: Set<Skin>, onPick: (Skin) -> Unit, onUnlockAll: () -> Unit) {
     val dark = MaterialTheme.colorScheme.background.luminance() < 0.5f
+    val ctx = LocalContext.current
+    var askGlass by androidx.compose.runtime.saveable.rememberSaveable { androidx.compose.runtime.mutableStateOf(false) }
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
         Text("Mövzu", style = MaterialTheme.typography.headlineSmall)
         Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
             Skin.entries.forEach { skin ->
-                SkinCard(skin, skin.palette(dark || skin.alwaysDark), selected = skin == current, locked = skin !in owned) { onPick(skin) }
+                SkinCard(skin, skin.palette(dark || skin.alwaysDark), selected = skin == current, locked = skin !in owned) {
+                    if (skin.glass && isWeakForGlass(ctx)) askGlass = true else onPick(skin)
+                }
             }
         }
+        if (askGlass) GlassWarning(onYes = { askGlass = false; onPick(Skin.SUSE) }, onNo = { askGlass = false })
         val lockedOnes = Skin.entries.filter { it !in owned }
         if (lockedOnes.isNotEmpty()) {
             Text("🔒 Hədiyyə mövzular oyunda qazanılır.", style = MaterialTheme.typography.bodySmall)
@@ -96,7 +105,7 @@ private fun SkinCard(skin: Skin, p: SkinPalette, selected: Boolean, locked: Bool
     Column(
         Modifier.width(112.dp).clip(RoundedCornerShape(20.dp))
             .border(if (selected) 3.dp else 1.dp, if (selected) cs.primary else cs.outlineVariant, RoundedCornerShape(20.dp))
-            .background(p.scheme.background)
+            .then(if (skin.glass) Modifier.drawBehind { drawRect(Brush.linearGradient(listOf(Color(0xFFB69DF8), Color(0xFFFFE08A), Color(0xFF9FDDC2)))) } else Modifier.background(p.scheme.background))
             .clickable(enabled = !locked, onClick = onClick)
             .padding(10.dp)
             .semantics { contentDescription = skin.label + if (locked) ", bağlıdır: ${skin.unlock.hint}" else if (selected) ", seçilib" else "" },
