@@ -8,3 +8,4 @@ captures/
 tools/*.txt
 tools/out_*.json
 __pycache__/
+prototype.keystore
