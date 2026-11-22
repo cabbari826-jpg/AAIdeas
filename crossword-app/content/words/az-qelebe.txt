@@ -1,0 +1,24 @@
+# title: 9 May
+# 9 May, Faşizm üzərində Qələbə günü: xatirə, veteranlar, sülh. Format: SÖZ | çətin | orta | asan
+VETERAN | Cəbhəçi qoca | Ordenli qoca | Cəbhə görmüş
+ORDEN | Ən yüksək nişan | Döşə taxılır | Şərəf nişanı
+MEDAL | Dairəvi nişan | Qızıl, gümüş | Mükafat
+ABİDƏ | Daş xatirə | Meydanda heykəl | Monument
+XATİRƏ | Keçmişin izi | Yada salınan | Anılan şey
+YADDAŞ | Xatırlama gücü | Hafizə | Unutmamaq
+ƏBƏDİ | Sonsuz | Heç sönməyən | Əzəli, daimi
+CƏBHƏ | Döyüş xətti | Ön xətt | Front
+SƏNGƏR | Torpaq sipər | Qazılmış xətt | Əsgər çuxuru
+PARAD | Təntənəli keçid | Meydanda sıra | Hərbi yürüş
+SALYUT | Göydə işıqlar | Bayram atəşi | Rəngli gecə
+XİLAS | Qurtuluş | Nicat | Qurtarma
+DÖYÜŞ | Vuruşma | Vuruş | Cəng
+HƏSRƏT | Ayrılıq dərdi | İntizar | Darıxmaq
+ÜÇBUCAQ | Cəbhə məktubu | Üç bucaqlı | Üçkünc
+NƏSİL | Yaşıdlar | Övladlar zənciri | Soy
+ÇƏLƏNG | Gül halqası | Abidəyə qoyulur | Hörülmüş gül
+SÜKUT | Bir dəqiqəlik | Səssizlik | Danışmamaq
+QALİB | Udmuş tərəf | Zəfər çalan | Məğlubun ziddi
+FAŞİZM | 1945-də məğlub | Hitler rejimi | Qara ideologiya
+MAYOR | Kapitandan böyük | Zabit rütbəsi | Ulduzlu paqon
+ÜMİD | Son ölər | İnam | Gözləmə

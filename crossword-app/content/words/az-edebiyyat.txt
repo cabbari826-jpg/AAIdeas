@@ -1,0 +1,105 @@
+# title: Ədəbiyyat
+# Format: SÖZ | çətin | orta | asan
+NİZAMİ | Xəmsə müəllifi | Gəncəli şair | Sirlər xəzinəsi
+FÜZULİ | Bağdadlı şair | Şikayətnamə | Su qəsidəsi
+NƏSİMİ | Hürufi şair | Dərisi soyulan | Məndə sığar...
+VAQİF | Qarabağ vəziri | Qoşma ustası | Molla Pənah
+VİDADİ | Vaqifin dostu | Durnalar şairi | Molla Vəli
+SABİR | Hophopnamə | Molla jurnalçısı | Şamaxılı şair
+CAVİD | İblis dramı | Romantik dram | Hüseyn ...
+MÜŞFİQ | Oxu tar | 1938 qurbanı | Mikayıl ...
+VURĞUN | Vaqif dramı | Azərbaycan şeiri | Səməd ...
+ŞƏHRİYAR | Heydərbaba | Təbrizli şair | Ustad şair
+NATƏVAN | Xan qızı | Şuşalı şairə | Xurşidbanu
+AXUNDOV | Aldanmış kəvakib | İlk dramaturq | Mirzə Fətəli
+HADİ | Məhəmməd ... | Füyuzat şairi | Romantik şair
+ZAKİR | Qasım bəy | Təmsil ustası | Şuşalı satirik
+NƏBATİ | Seyid Əbülqasım | Qaradağlı şair | Gül şairi
+ANAR | Otel otağı | Ağ liman | Yazıçı Rzayev
+ELÇİN | Mahmud və Məryəm | Ölüm hökmü | Yazıçı Əfəndiyev
+RZA | Rəsul ... | Rənglər şeirləri | Xalq şairi
+İLYAS | Söyüdlü arx | ... Əfəndiyev | Dramaturq adı
+ƏMANİ | Saray qəzəlxanı | Lətifə ustası | Qəzəl ustası
+QOVSİ | Təbrizli Qövsi | Qəzəlxan | XVII əsr şairi
+ŞİRVANİ | Seyid Əzim | Məktəb müəllimi | Şamaxı şairi
+CABBARLI | Almaz pyesi | Sevil müəllifi | Cəfər ...
+LEYLİ | Qeysin sevgisi | Məcnunun yarı | Leyla
+MƏCNUN | Qeys | Çölə düşən aşiq | Leylinin aşiqi
+XƏMSƏ | Beş poema | Pənc gənc | Nizami beşliyi
+XOSROV | Sasani şahı | Şirinin yarı | Pərviz
+ŞİRİN | Fərhadın yarı | Bərdə şahzadəsi | Xosrovla ...
+FƏRHAD | Dağ çapan | Bisütun aşiqi | Şirinin aşiqi
+KOROĞLU | Qıratın sahibi | Çənlibel | Rövşən
+QORQUD | Dədə ... | Oğuz müdriki | Qopuzlu ozan
+BEYRƏK | Bamsı ... | Banuçiçəyin yarı | Oğuz igidi
+ƏSLİ | Kərəmin yarı | Keşiş qızı | Kərəmin sevgisi
+KƏRƏM | Yanıb kül oldu | Əslinin aşiqi | Aşıq oğlu
+QƏRİB | Aşıq ... | Şahsənəmin aşiqi | Yad
+NƏBİ | Qaçaq ... | Həcərin əri | Bozatlı qaçaq
+HƏCƏR | Nəbinin xanımı | Qaçaq qadın | Qəhrəman qadın
+NİGAR | Koroğlunun yarı | Çənlibel xanımı | Qadın adı
+QIRAT | Koroğlunun atı | Dürat qardaşı | Məşhur at
+SEVİL | Çadrasını atdı | Cabbarlı pyesi | Qadın obrazı
+ALMAZ | Kənd müəllimi | Cabbarlı əsəri | Cəvahir
+İBLİS | Cavid faciəsi | Şeytan | Mələk düşməni
+OQTAY | ... Eloğlu | Teatr pyesi | Kişi adı
+MOLLA | ... Nəsrəddin | Lətifə qəhrəmanı | Ruhani
+BƏHLUL | Danəndə | Ağıllı dəli | Müdrik dəli
+HOMER | Kor ozan | İliada müəllifi | Yunan şairi
+DANTE | İlahi komediya | Beatriçe aşiqi | Florensiyalı
+ŞEKSPİR | Stratford | Hamlet müəllifi | İngilis şairi
+HAMLET | Danimarka prinsi | Olum, ya ölüm | Faciə qəhrəmanı
+OTELLO | Venesiya mavri | Dezdemona | Qısqanc
+ROMEO | Monteqi | Cülyettanın yarı | Verona aşiqi
+TOLSTOY | Hərb və sülh | Anna Karenina | Rus klassiki
+PUŞKİN | Yevgeni Onegin | Rus poeziyası | Rus şairi
+QOQOL | Ölü canlar | Müfəttiş | Ukraynalı yazıçı
+ÇEXOV | Albalı bağı | Qısa hekayə | Rus dramaturqu
+BAYRON | Çayld Harold | Lord ... | Romantik ingilis
+HÜQO | Səfillər | Notr-Dam | Fransız yazıçı
+DÜMA | Atos müəllifi | Kristo qrafı | Fransız romançı
+VERN | Nautilus | 80 gündə | Fantast Jül
+DEFO | Robinzon Kruzo | Ada romanı | İngilis yazıçı
+FAUST | Mefistofel | Hötenin əsəri | Alim-qəhrəman
+HÖTE | Veymar dahisi | Faust müəllifi | Alman şairi
+ODİSSEY | İtaka kralı | On illik yol | Uliss
+İLİADA | Axillesin qəzəbi | Troya poeması | Homer əsəri
+ROBİNZON | Cümə dostu | Adada tək | Kruzo
+QƏZƏL | Füzuli janrı | Aşiqanə şeir | Şeir növü
+RÜBAİ | Xəyyam janrı | Dörd misra | Dörd misralı
+QOŞMA | Aşıq şeiri | Vaqif janrı | Heca şeiri
+GƏRAYLI | Səkkiz heca | Aşıq janrı | Aşıq şeir növü
+MƏSNƏVİ | Mövlana əsəri | Cüt qafiyəli | Poema növü
+DASTAN | Xalq eposu | Aşıq danışır | Epik əsər
+ROMAN | Böyük əsər | Epopeya | Nəsr janrı
+POEMA | Nəzm hekayə | Mənzum əsər | Uzun şeir
+HEKAYƏ | Kiçik nəsr | Qısa əsər | Danışılan
+NOVELLA | Kiçik roman | Nəsr növü | Novel
+PYES | Səhnə əsəri | Dram əsəri | Teatr üçün
+DRAM | Səhnə janrı | Ciddi pyes | Pyes növü
+FACİƏ | Kədərli son | Tragediya | Ölümlə bitən
+SATİRA | Gülüş silahı | Sabir janrı | Həcv
+OBRAZ | Personaj | Bədii surət | Surət
+QAFİYƏ | Səs ahəngi | Misra sonu | Həmahəng söz
+VƏZN | Əruz | Şeir ölçüsü | Ritm
+HECA | ... vəzni | Söz parçası | Sait ilə
+MİSRA | Şeir sətri | Beytin yarısı | Sətir
+BEYT | İki misra | Qəzəl hissəsi | Cüt misra
+BƏND | Şeir hissəsi | Strofa | Kuplet
+LƏTİFƏ | Molla danışır | Gülməli hekayə | Zarafat
+TAPMACA | Bil görüm nədir | Müəmma | Tapılası
+YAZIÇI | Nasir | Kitab müəllifi | Qələm sahibi
+OXUCU | Kitabsevər | Kitab oxuyan | Qiraətçi
+SƏHİFƏ | Vərəq üzü | Kitabda nömrəli | Vərəq
+CİLD | Kitabın üzü | Tom | Birinci ...
+FƏSİL | Kitab bölməsi | Hissə | Bölüm
+SƏTİR | Yazı xətti | Cərgə | Xətt
+EPİLOQ | Son söz | Proloqun əksi | Sonluq
+PROLOQ | Ön söz | Giriş | Başlanğıc
+MÜƏLLİF | Yaradıcı | Əsər sahibi | Yazan
+NƏSR | Nəzmin əksi | Roman dili | Düzyazı
+NƏZM | Nəsrin əksi | Şeir | Poeziya
+İLHAM | Şairin pərisi | Yaradıcı coşqu | Vəhy
+PƏRİ | Nağıl gözəli | Div düşməni | Sehrli qız
+DİV | Nağıl nəhəngi | Pərinin düşməni | Nağıl əjdəri
+ƏJDAHA | Yeddibaşlı | Od püskürən | Nağıl canavarı

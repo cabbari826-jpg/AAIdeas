@@ -1,0 +1,70 @@
+# Ümumi sözlər: ev, mətbəx, yemək, geyim. Format: SÖZ | çətin | orta | asan
+STUL | Söykənəcəkli | Masa yanında | Oturmaq üçün
+DOLAB | Paltar saxlanan | Qapılı mebel | Şkaf
+DÖŞƏK | Yataq altlığı | Pambıqlı yataq | Üstündə yatılır
+MƏTBƏX | Aşpazın otağı | Yemək bişən yer | Plitəli otaq
+VEDRƏ | Su daşınan qab | Qulplu qab | Kova
+KÜP | Gil qab | Saxsı qab | Dar boğazlı qab
+SÜRAHİ | Su qabı, şüşə | Masada su qabı | Grafin
+FİNCAN | Qəhvə qabı | Qulplu kiçik qab | Kiçik çay qabı
+NƏLBƏKİ | Fincan altlığı | Stəkan altı | Kiçik boşqab
+MANQAL | Kabab bişirən | Kömürlü qurğu | Şiş qoyulan yer
+ODUN | Sobaya atılan | Doğranmış ağac | Yanacaq ağacı
+KİBRİT | Çöpü yandırılır | Qutuda çöplər | Od yandıran
+KƏLBƏTİN | Mismar çıxaran | Dişli alət | Sıxan alət
+KÜRƏK | Qar təmizləyən | Torpaq atan | Bel kimi alət
+DIRMIQ | Dişli bağ aləti | Ot yığan | Yarpaq toplayan
+ƏLƏK | Un üçün | Torlu dairə | Un ələnən
+SAC | Qabarıq dəmir | Yuxa bişirilir | Yuxa bişən dəmir
+KƏFGİR | Deşikli qaşıq | Plov çəkilir | Böyük qaşıq
+SÜZGƏC | Makaron üçün | Deşikli qab | Su süzən
+QAPAQ | Qazanın papağı | Örtük | Qab üstü
+ZƏNCİR | Halqalar düzümü | Itin bağı | Dəmir halqalar
+YUN | Qoyundan alınır | Corab xammalı | Toxuma sapı
+PAMBIQ | Ağ qızıl | Tarlada ağ topa | Yorğan dolusu
+DƏRİ | Çanta materialı | Heyvan örtüyü | Bədən örtüyü
+XALAT | Həkim geyimi | Evdə geyilir | Uzun ev paltarı
+CİB | Pul qoyulan yer | Şalvarda olur | Paltar kisəsi
+YAXA | Köynəyin boynu | Boyun hissəsi | Pencəyin üstü
+QOL | Biləkdən çiyinə | Köynəyin hissəsi | Əl hissəsi
+TOQQA | Kəmər bağı | Metal bağlayıcı | Kəmər ucu
+ATLAS | Parlaq parça | İpək növü | Hamar parça
+MAHUD | Qalın yun parça | Şinel parçası | Yun parça
+ŞAL | Çiyinə atılır | Yun örtük | Böyük yaylıq
+YAYLIQ | Qadın örtüyü | Çəhrayı baş şalı | Başa örtülür
+DON | Qadın paltarı | Ətəkli paltar | Libas
+ƏTƏK | Donun aşağısı | Yubka | Paltarın ucu
+ŞAPKA | Günlük papaq | Kepka | Yay papağı
+ŞİRƏ | Meyvə suyu | Albalı ... | Sıxılmış maye
+KOMPOT | Meyvə şərbəti | Qaynamış meyvə | Meyvəli içki
+DƏMLİK | Çaydan üstündə | Çay dəmləyən | Kiçik çaydan
+QƏND | Çayla yeyilir | Kəllə ... | Ağ şəkər tikəsi
+KƏRƏ | Yağ növü | İnək yağı | Sarı yağ
+XAMA | Südün üzü | Smetana | Ağ qatı
+ŞOR | Qaymaqsız pendir | Kəsmik | Ağ ovxalanan
+KƏSMİK | Ovxalı pendir | Şor kimi | Südlü məhsul
+BULAMA | Ağız südü | İlk süd | Təzə doğmuş süd
+ERİŞTƏ | Əl əriştəsi | Xəmir zolağı | Əriştə aşı
+KÜKÜ | Göyərti yeməyi | Yumurtalı xörək | Sobada bişən
+LÜLƏ | Kabab növü | Qiymədən şiş | Uzun kabab
+BASTURMA | Marinadlı kabab | Soğanlı kabab | Tikə kabab
+ÇIĞIRTMA | Toyuq yeməyi | Pomidorlu xörək | Qızardılmış
+LƏVƏNGİ | Dolma toyuq | Lənkəran yeməyi | Qozlu toyuq
+BOZARTMA | Qızardılmış ət | Soğanlı ət | Ət yeməyi
+ŞAFTALI | Tüklü meyvə | İsti ay meyvəsi | Çəhrayı meyvə
+GAVALI | Qaralı meyvə | Alçaya oxşar | Bənövşəyi meyvə
+ƏZGİL | Payız meyvəsi | Qəhvəyi meyvə | Çəyirdəkli
+ZOĞAL | Al turş meyvə | Qırmızı mürəbbə | Lavaşa salınır
+ÇƏYİRDƏK | Meyvənin içi | Gilasın içi | Bərk içlik
+LOBYA | Paxlalı bitki | Qırmızı dən | Yaşıl paxla
+KƏRƏVİZ | Ətirli kök | Selderey | Sup göyərtisi
+ISPANAQ | Yaşıl yarpaq | Dəmirli göyərti | Göy yarpaq
+GÖBƏLƏK | Meşədə tapılır | Papaqlı bitki | Yağış sonrası
+BALQABAQ | Narıncı tərəvəz | Sıyığı olur | Payız tərəvəzi
+YERKÖKÜ | Narıncı kök | Dovşan sevər | Sarıkök
+YEMƏK | Qida | Xörək | Aş-qara
+DADLI | Ləzzətli | Şirin-şəkər | Dadı xoş
+SƏBZİ | Göyərti | Yaşıllıq | Tərəvəz
+TABAQ | Böyük düz qab | Mis məcməyi | Dairəvi qab
+NƏMLİK | Rütubət | Yaşlıq | Quru deyil
+SƏRİN | Az soyuq | Xoş soyuq | Bürkünün ziddi

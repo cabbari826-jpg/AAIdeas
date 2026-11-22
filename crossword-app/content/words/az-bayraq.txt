@@ -1,0 +1,22 @@
+# title: Bayraq günü
+# 9 noyabr, Dövlət Bayrağı günü: üç rəng, aypara, səkkizguşəli ulduz. Format: SÖZ | çətin | orta | asan
+ÜÇRƏNG | Mavi, al, yaşıl | Üç rəngli | Bayraq rəngləri
+AYPARA | Hilal | Ayın yarısı | Ağ ay
+MAVİ | Türkçülük rəngi | Göy rəngi | Səma rəngi
+QIRMIZI | Müasirlik rəngi | Al rəng | Qan rəngi
+SƏKKİZ | Ulduzun guşəsi | Yeddidən sonra | 4+4
+DİRƏK | Bayraq ağacı | Sütun | Dik çubuq
+PARÇA | Bayraq materialı | Mahud, ipək | Kəsik toxuma
+RƏMZ | Simvol | İşarə | Nişanə
+TƏNTƏNƏ | Möhtəşəm mərasim | Bayram şəni | Şan-şöhrətli an
+UCA | Hündür, ali | Yüksək | Alçağın ziddi
+ZİRVƏ | Dağın başı | Ən yüksək nöqtə | Təpə ucu
+KÜLƏK | Bayrağı oynadar | Əsən hava axını | Yel axını
+ŞAHİN | Göy ovçusu | İti gözlü quş | Qızılquş
+MEYDAN | Bayraq ... | Böyük sahə | Şəhər sahəsi
+AND | Əsgər içər | Söz vermə | Söz vermək
+ŞƏRƏFLİ | Hörmətli | Adlı-sanlı | Ləyaqətli
+DALĞALI | Dalğa-dalğa | Ləpəli | Hamar deyil
+YÜKSƏK | Uca | Hündür | Aşağının ziddi
+MÜQƏDDƏS | Ülvi | Pak, ilahi | Toxunulmaz
+NAXIŞ | Bəzək şəkli | Ornament | Xalça bəzəyi

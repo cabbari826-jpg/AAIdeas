@@ -1,0 +1,135 @@
+# title: Kimya
+# Format: SÖZ | çətin | orta | asan
+OKSİGEN | O | Yanmanı saxlayır | Nəfəs qazı
+HİDROGEN | Ən yüngül qaz | H | Su qazı
+KARBON | C | Almazın elementi | Kömür elementi
+AZOT | N | Havanın çoxu | Havada ən çox
+DƏMİR | Fe | Pas bağlayan | Polad metalı
+QIZIL | Au | Sarı nəcib metal | Zinət metalı
+GÜMÜŞ | Ag | Ağ nəcib metal | Qızıldan ucuz
+QALAY | Sn | Lehim metalı | Qab ağardan
+QURĞUŞUN | Pb | Ağır boz metal | Güllə metalı
+CİVƏ | Hg | Maye metal | Termometr metalı
+SİNK | Zn | Qalvanik örtük | Boz metal
+NATRİUM | Na | Xörək duzunda | Qələvi metal
+KALİUM | K | Bananda bol | Gübrə metalı
+KALSİUM | Ca | Sümük elementi | Süddə bol
+XLOR | Cl | Hovuz qoxusu | Yaşıl zəhər qaz
+FLÜOR | F | Diş pastasında | Halogen qaz
+YOD | I | Yara dərmanı | Qəhvəyi məhlul
+BROM | Br | Maye halogen | Qırmızı maye
+KÜKÜRD | S | Sarı ametal | Kibrit başında
+FOSFOR | P | Qaranlıqda işıq | Kibrit elementi
+NİKEL | Ni | Sikkə metalı | Parlaq örtük
+XROM | Cr | Güzgü kimi örtük | Krom
+KOBALT | Co | Göy boya metalı | Mavi rəngli
+URAN | U | AES yanacağı | Radioaktiv
+RADİUM | Ra | Küri tapdı | Şüalanan metal
+HELİUM | He | Şar qazı | İnert qaz
+NEON | Ne | Reklam lampası | Qırmızı işıq
+ARQON | Ar | Qaynaq qazı | Nəcib qaz
+KSENON | Xe | Fara lampası | Ağır nəcib qaz
+RADON | Rn | Radioaktiv qaz | Zirzəmi qazı
+LİTİUM | Li | Batareya metalı | Ən yüngül metal
+TİTAN | Ti | Möhkəm yüngül | Raket metalı
+PLATİN | Pt | Ağ qızıl | Qiymətli metal
+VOLFRAM | W | Lampa teli | Ən çətin əriyən
+MANQAN | Mn | Polada qatılır | Bənövşəyi duz
+ARSEN | As | Zəhər elementi | Mərgümüş
+SELEN | Se | Fotoelement | Ay elementi
+BOR | B | Beşinci element | Bura elementi
+ATOM | Bölünməz sanılan | Nüvə + elektron | Kiçik zərrə
+İON | Yüklü atom | Kat..., an... | Yüklü zərrə
+MOLEKUL | H2O | Atomlar birliyi | Maddə zərrəsi
+ELEKTRON | Mənfi yük | e⁻ | Atomun yükü
+PROTON | Müsbət yük | p⁺ | Nüvədəki müsbət
+NEYTRON | Yüksüz zərrə | n⁰ | Nüvədəki neytral
+NÜVƏ | Atomun mərkəzi | Proton evi | Mərkəz
+İZOTOP | Eyni yer | Neytronu fərqli | Element növü
+ELEMENT | Cədvəl xanası | Bəsit maddə | Kimyəvi növ
+MADDƏ | Kütləsi olan | Cisimin tərkibi | Materiya
+FORMUL | NaCl yazılışı | Tərkib yazısı | H2SO4 kimi
+SİMVOL | Fe, Cu, Na | Element işarəsi | Qısa işarə
+VALENT | Bağ sayı | Bağ qabiliyyəti | ... elektron
+MOL | Avoqadro sayı | Miqdar vahidi | 6·10²³
+KÜTLƏ | Qramla ölçülür | Atom ...si | Ağırlıq
+SIXLIQ | Kütlə/həcm | ρ | Nə qədər sıx
+TURŞU | pH < 7 | Lakmus qızarır | Turş maddə
+QƏLƏVİ | pH > 7 | Sabunlu hiss | Əsas maddə
+OKSİD | O ilə birləşmə | CO2, CaO | Oksigen birliyi
+DUZ | NaCl | Turşu + əsas | Xörək ...
+SPİRT | C2H5OH | Etanol | Dezinfeksiya
+EFİR | Uçucu iyli | Mürəkkəb ... | Narkoz maddəsi
+METAN | CH4 | Bataqlıq qazı | Təbii qaz
+ETAN | C2H6 | İki karbonlu | Alkan
+PROPAN | C3H8 | Balon qazı | Mətbəx balonu
+BUTAN | C4H10 | Alışqan qazı | Fənər qazı
+BENZOL | C6H6 | Kekule halqası | Aromatik
+ETİLEN | C2H4 | Meyvə yetişdirən | Qoşa bağlı
+ASETON | Lak silən | Dırnaq yuyucusu | Həlledici
+AMMONYAK | NH3 | Nişatır | Kəskin qoxulu
+ŞƏKƏR | C12H22O11 | Çuğundur özü | Şirin maddə
+QLÜKOZA | Üzüm şəkəri | C6H12O6 | Qan şəkəri
+NİŞASTA | Kartof unu | Yodla göyərir | Kraxmal
+ZÜLAL | Amin turşuları | Protein | Yumurta ağı
+FERMENT | Bio katalizator | Enzim | Mayalanma
+VİTAMİN | Askorbin | C, D, B | Meyvədə olan
+SABUN | Yağ + qələvi | Köpüklənir | Əl yuyan
+SİRKƏ | Asetat turşusu | Turş ədviyyat | Marinad
+SODA | Na2CO3 | Çörək tozu | Yeməli ...
+ƏHƏNG | CaO | Ağardılır | Badana
+GİPS | Sınıq sarğısı | Kalsium sulfat | Ağ toz
+TƏBAŞİR | Lövhə yazısı | CaCO3 | Ağ çubuq
+KVARS | SiO2 | Qum mineralı | Saat kristalı
+ALMAZ | Ən bərk | Karbon kristalı | Brilyant
+QRAFİT | Karandaş içi | Yumşaq karbon | Qara karbon
+KÖMÜR | Daş ... | Ağac ... | Qara yanacaq
+BENZİN | Neftdən | Maşın yanacağı | Yanacaq növü
+POLİMER | Uzun zəncir | Plastik əsası | Zəncirvari
+PLASTİK | Polietilen | Sintetik kütlə | Butulka
+KAUÇUK | Hevea şirəsi | Rezinin əsası | Elastik
+NEYLON | Corab lifi | Sintetik lif | Kapron kimi
+ŞÜŞƏ | Qum + soda | Şəffaf | Pəncərə
+SEMENT | Klinker | Tikinti tozu | Beton əsası
+POLAD | Dəmir + karbon | Zəngləməz ... | Möhkəm ərinti
+TUNC | Mis + qalay | Bürünc | ... dövrü
+LATUN | Mis + sink | Sarı ərinti | Mis ərintisi
+OZON | O3 | Göy qalxanı | Şimşək qoxusu
+KRİSTAL | Qəfəsli quruluş | Qar dənəsi | Billur
+ƏRİNTİ | Metal qarışığı | Tunc, polad | Qatışıq metal
+METAL | Elektrik keçirir | Parlaq maddə | Dəmir, mis
+HALOGEN | Duz yaradan | VII qrup | F, Cl, Br, I
+SULFAT | SO4 | Mis kuporosu | Kükürdlü duz
+NİTRAT | NO3 | Selitra | Azot gübrəsi
+FOSFAT | PO4 | Fosfor duzu | Gübrə duzu
+REAKSİYA | Kimyəvi çevrilmə | Reaktivlər | Qarşılıqlı təsir
+MƏHLUL | Həll olunmuş | Duzlu su | Su + duz
+ÇÖKÜNTÜ | Dibə enən | Çöküb yığılan | Qalıq
+KOROZİYA | Metal yeyilməsi | Paslanma | Pas
+PAS | Fe2O3 | Dəmir xəstəliyi | Qırmızı ərp
+ELEKTROLİZ | Cərəyanla ayırma | Faraday | Elektrik ilə
+ANOD | Müsbət elektrod | + qütb | Katodun cütü
+KATOD | Mənfi elektrod | - qütb | Anodun cütü
+KATALİZ | Sürət artımı | Reaksiya sürəti | Tezləşdirmə
+BUXAR | Qaynayanda çıxar | Su ... | Qaz halı
+KÖPÜK | Qabarcıqlar | Sabun ... | Pivə ...
+EMULSİYA | Süd kimi | Yağ + su | Majonez
+AEROZOL | Sprey | Qazda damcı | Balon sprey
+KOLBA | Konik qab | Laborator qabı | Kimya qabı
+PROBİRKA | Sınaq şüşəsi | Nazik boru | Test şüşəsi
+PİPET | Damcı ölçən | Damcıladan | Damlatma borusu
+BÜRET | Titrləmə borusu | Kranlı boru | Ölçü borusu
+HUNİ | Tökmə qabı | Konus qab | Süzgəc qabı
+FİLTR | Süzgəc | Süzmə kağızı | Təmizləyici
+LAKMUS | Qızarır, göyərir | Rəng kağızı | Göstərici
+İNDİKATOR | Fenolftalein | pH göstəricisi | Rəng dəyişən
+LABORANT | Laboratoriyaçı | Kolba yuyan | Köməkçi
+KİMYAÇI | Reaksiya ustası | Alim | Kimya alimi
+ALXİMİK | Fəlsəfə daşı | Qızıl axtaran | Qədim kimyaçı
+MENDELEYEV | Dövri cədvəl | Rus kimyaçı | Cədvəl müəllifi
+LAVUAZYE | Kütlə qanunu | Fransız kimyaçı | Oksigeni adlandı
+AVOQADRO | Molekul qanunu | İtalyan alim | ... sayı
+DALTON | Rəng korluğu | Atom nəzəriyyəsi | İngilis alimi
+NOBEL | Dinamit | İsveç ixtiraçısı | Mükafat adı
+BOYL | Qaz qanunu | İrland alimi | ... qanunu
+LOMONOSOV | MDU banisi | Rus alimi | Mixail ...

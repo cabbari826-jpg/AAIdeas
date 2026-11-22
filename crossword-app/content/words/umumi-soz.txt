@@ -1,0 +1,79 @@
+# Ümumi sözlər: vaxt, rəqəmlər, sifətlər, hisslər, şəhər. Format: SÖZ | çətin | orta | asan
+SANİYƏ | Ən kiçik vaxt | Altmışda biri | Ən qısa an
+GÜNORTA | Gündüzün ortası | Nahar çağı | Nahar vaxtı
+SABAH | Bu gündən sonra | Gələn gün | Dünənin ziddi
+DÜNƏN | Ötən gün | Bu gündən əvvəl | Keçən gün
+FEVRAL | Ən qısa ay | İkinci ay | Qışın sonu
+MART | Novruz ayı | Üçüncü ay | Baharın başı
+APREL | Dördüncü ay | Zarafat ayı | Yaz ayı
+İYUL | Ən isti ay | Yeddinci ay | Yayın ortası
+AVQUST | Səkkizinci ay | Yayın sonu | Meyvə ayı
+OKTYABR | Onuncu ay | Payızın ortası | Xəzan ayı
+ŞƏNBƏ | İstirahət günü | Həftə sonu | Bazardan əvvəl
+DÖRD | Üçdən sonra | 2+2 | Kvadratın tərəfi
+ON | Barmaqların sayı | Doqquzdan sonra | 5+5
+İYİRMİ | İki onluq | 10+10 | Barmaqlar cəmi
+OTUZ | Ayın günləri | 3×10 | 15+15
+QIRX | 4×10 | ... il dost | Otuz doqquz+1
+ƏLLİ | Yüzün yarısı | 5×10 | 25+25
+YÜZ | On onluq | Əsr ili | 10×10
+MİN | On yüz | ... bir gecə | 1000
+QISA | Uzunun ziddi | Gödək | Bir az
+ENLİ | Geniş | Darın ziddi | Yayvan
+DAR | Ensiz | Enlinin ziddi | Sıx
+DƏRİN | Dibi uzaq | Dayazın ziddi | Uçurum kimi
+DAYAZ | Dibi yaxın | Dərinin ziddi | Az sulu
+AĞIR | Yüngülün ziddi | Çəkili | Çətin qaldırılan
+YÜNGÜL | Ağırın ziddi | Lələk kimi | Asan
+İLIQ | Az isti | Ilıq su | Xoş isti
+TƏMİZ | Pak | Çirklinin ziddi | Səliqəli
+KÖHNƏ | Təzənin ziddi | Əski | İşlənmiş
+GÖZƏL | Qəşəng | Yaraşıqlı | Çirkinin ziddi
+TURŞ | Limon dadı | Şirinin ziddi | Alça dadı
+ACI | Bibər dadı | Yandıran dad | Şirin deyil
+DUZLU | Duz dadan | Şor | Duzu çox
+BOŞ | Dolunun ziddi | İçi yox | Hava ilə dolu
+SƏRT | Bərk | Kəskin | Yumşağın ziddi
+YUMŞAQ | Pambıq kimi | Sərtin ziddi | Mülayim
+BƏRK | Möhkəm | Yumşaq deyil | Daş kimi
+YAVAŞ | Asta | Sürətsiz | Ləng
+TEZ | Cəld | Gecin ziddi | Erkən
+GEC | Vaxtından sonra | Tezin ziddi | Axşamüstü sonra
+ŞƏN | Şad | Kefli | Qəmginin ziddi
+QƏMGİN | Kədərli | Məyus | Şənin ziddi
+SAKİTLİK | Səs-küysüzlük | Asudəlik | Hüzur
+TƏLƏSİK | Cəld, aşıqan | Səbirsiz | Tələsən
+AĞILLI | Dərrakəli | Zəkalı | Bilikli
+SƏDAQƏT | Vəfa | Sadiqlik | Etibar
+VƏFA | Sədaqət | Etibarlılıq | Sadiq olmaq
+CƏSARƏT | Qorxmazlıq | Ürəklilik | İgidlik
+HƏYA | Utancaqlıq | Abır | Abır-ismət
+HƏVƏS | Maraq, istək | Şövq | Can atma
+MARAQ | Diqqət çəkən | Bilik həvəsi | Bilmək istəyi
+SÜRƏT | Tezlik | Km/saat | Cəldlik
+QÜVVƏ | Güc | Taqət | Enerji
+YARDIM | Kömək əli | Əl tutma | Dəstək
+SUAL | Cavab gözləyən | Sorğu | Nə? Niyə?
+CAVAB | Suala qarşı | Bəli və ya xeyr | Qarşılıq
+FİKİR | Düşüncə | Rəy | Ağıldan keçən
+XƏBƏR | Yenilik | Məlumat | Eşidilən yenilik
+SİRR | Gizli şey | Məxfi | Açılmamış
+ŞƏKİLÇİ | Sözün sonu | Qrammatik hissə | Əlavə
+DƏYİRMAN | Un üyüdən | Su ... | Daşlı qurğu
+QUYU | Su çıxarılan | Dərin dəlik | Vedrəli dərinlik
+KÜLƏKLİ | Yelli | Əsən havalı | Sakit deyil
+PARK | Ağaclı gəzinti | Şəhər bağı | Bulvar kimi
+BULVAR | Dənizkənarı park | Gəzinti yeri | Sahil parkı
+DÜKAN | Kiçik mağaza | Satış yeri | Bazarçı yeri
+MAĞAZA | Satış zalı | Univermaq | Alış yeri
+APTEK | Dərman satılan | Əczaxana | Həb alınan yer
+XƏSTƏXANA | Həkimlər binası | Müalicə yeri | Klinika
+STADİON | Futbol meydanı | Tribunalı | İdman arenası
+KİTABXANA | Kitab evi | Oxu zalı | Kitab saxlanan
+QATARYOLU | Dəmir yol | Relslər | Vaqonlar yolu
+TƏYYARƏ | Göydə uçan | Laynər | Pilot sürər
+AVTOBUS | Sərnişin maşını | Dayanacaqlı | Böyük maşın
+TRAMVAY | Relsli maşın | Elektrik vaqonu | Şəhər qatarı
+METRO | Yeraltı qatar | Stansiyalı yol | Yeraltı stansiya
+KÜÇƏBAŞI | Küçənin ucu | Tin başı | Küçə ağzı
+DÖNGƏ | Yolun burulması | Dolama yer | Əyri yer

@@ -1,0 +1,24 @@
+# title: Qurtuluş günü
+# 15 iyun, Milli Qurtuluş günü: birlik, sabitlik, quruculuq. Format: SÖZ | çətin | orta | asan
+NİCAT | Qurtuluş yolu | Xilas olma | Çıxış yolu
+SABİT | Dəyişməz | Möhkəm duran | Tərpənməz
+İNKİŞAF | Tərəqqi | İrəliləyiş | Böyümə
+ZƏHMƏT | Əmək, iş | Tər tökmə | Çətin iş
+GƏLƏCƏK | Hələ gəlməyən | Sabahkı günlər | Keçmişin ziddi
+NİZAM | Qayda-qanun | İntizam | Səliqə
+QAYDA | Qanun, tərtib | Yol ... | Nizam
+ŞƏFƏQ | Dan qızartısı | Gün doğanda | Səhər işığı
+SÜBH | Gecənin sonu | Alaçıq vaxt | Dan yeri
+ÜFÜQ | Göy-yer xətti | Uzaq sərhəd | Uzaq xətt
+İNAM | Etimad | Güvən | İnanmaq
+İRADƏ | Möhkəm istək | Dəmir ... | Əzm
+MÖHKƏM | Bərk, davamlı | Sınmaz | Güclü
+DAYAQ | Arxa, söykənəcək | Dirək | Kömək
+SÜTUN | Bina dirəyi | Mərmər dirək | Dik dayaq
+TƏMƏL | Bünövrə | Binanın altı | Əsas
+BÜNÖVRƏ | Təməl daşı | Ev əsası | Binanın kökü
+İYUN | Yayın başı | Altıncı ay | Yay ayı
+YURD | Doğma diyar | Ev-eşik | Vətən
+ƏMİN | Arxayın | Şübhəsiz | Rahat
+TƏRƏQQİ | İrəliyə gediş | Geriləmə ziddi | İnkişaf yolu
+SAĞLAM | Xəstə deyil | Gümrah | Möhkəm bədənli

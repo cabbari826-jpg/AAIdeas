@@ -1,0 +1,51 @@
+# Ümumi sözlər: insan, bədən, peşələr, ailə. Format: SÖZ | çətin | orta | asan
+TOPUQ | Ayaq biləyi | Ayaqqabı sürtər | Ayağın sümüyü
+DABAN | Ayağın arxası | Ayaqqabı ... | Ayağın dibi
+OVUC | Əlin içi | Bir ... su | Açıq əl
+ALIN | Qaşların üstü | Üzün yuxarısı | Baş önü
+KİRPİK | Göz qapağı tükü | Gözə kölgə | Göz tükləri
+BIĞ | Dodaq üstü tük | Kişi bəzəyi | Burma ...
+SAQQAL | Çənə tükü | Ağ ... baba | Kosada yoxdur
+ÇƏNƏ | Üzün aşağısı | Saqqal yeri | Ağız altı
+SİNƏ | Döş | Ürək yeri | Göğüs
+QARIN | Mədə yeri | Göbək yeri | Bədənin ortası
+CİYƏR | Qaraciyər | Ağciyər | Daxili orqan
+BÖYRƏK | Cüt orqan | Paxla kimi orqan | Bel orqanı
+QAN | Al maye | Damarlarda axar | Həyat mayesi
+DAMAR | Qan yolu | Nəbz vuran | Qan borusu
+ƏZƏLƏ | Pəzi | Güc verən | İdmançıda iri
+NƏFƏS | Hava alma | Dərin ... | Tənəffüs
+BƏRBƏR | Saç kəsən | Dəllək | Ülgüclü usta
+ÇƏKMƏÇİ | Ayaqqabı ustası | Başmaq tikən | Pinəçi
+SATICI | Piştaxtada durar | Mal satan | Dükançı
+DÜLGƏR | Ağac ustası | Taxta işçisi | Mebel ustası
+TƏBİB | Xalq həkimi | Loğman | Dərmançı
+MATROS | Gəmi işçisi | Dənizçi oğlan | Göyərtə işçisi
+POÇTALYON | Məktub gətirən | Çanta daşıyan | Poçtçu
+AKTYOR | Səhnə adamı | Rol oynayan | Artist
+MÜĞƏNNİYƏ | Qadın müğənni | Nəğməkar xanım | Oxuyan xanım
+ŞOFER | Avtomobilçi | Taksi sürən | Maşın sürücüsü
+MƏMUR | Dövlət işçisi | Kargüzar | Rəsmi işçi
+ALİMƏ | Qadın alim | Elm xanımı | Kəşf edən xanım
+QONAQPƏRVƏR | Qonaq sevən | Süfrəsi açıq | Mehriban ev
+QAYIN | Ərin qardaşı | Arvadın qardaşı | Qohum
+BALDIZ | Arvadın bacısı | Qayınbacı | Qohum qız
+ƏMİOĞLU | Əminin oğlu | Qohum oğlan | Doğmaca qohum
+NƏVƏCAN | Əziz nəvə | Nəvə balası | Sevimli nəvə
+ATA | Ailə başçısı | Oğulun valideyni | Ana-...
+BALA | Uşaq, övlad | Körpə | Əziz uşaq
+ÖVLAD | Oğul-qız | Ananın balası | Nəsil davamı
+QOCA | Yaşlı | Cavanın ziddi | Ağsaçlı
+CAVAN | Gənc | Qocanın ziddi | Yeniyetmə
+AĞSAQQAL | El böyüyü | Hörmətli qoca | Ağ saqqallı
+AĞBİRÇƏK | Hörmətli qarı | Ağsaçlı qadın | Nənə yaşda
+YOLDAŞ | Həmsöhbət | Dost | Səfər dostu
+KÖMƏKÇİ | Yardımçı | Əl tutan | Köməkdar
+USTA | Sənətkar | Bacarıqlı | Mahir
+ŞAGİRDLİK | Öyrənmə dövrü | Usta yanında | Tələbəlik
+TƏLƏBƏ | Ali məktəbli | Universitetli | Kursant
+DƏRSLİK | Məktəb kitabı | Dərs kitabı | Tədris kitabı
+İMTAHAN | Sınaq | Bilik yoxlaması | Biletli sınaq
+QİYMƏT | Beşlik | Dəyər | Dərs balı
+TƏNƏFFÜS | Dərs arası | Zəngdən sonra | Dərs fasiləsi
+LÖVHƏ | Təbaşirli | Sinifdə yazılan | Yazı taxtası

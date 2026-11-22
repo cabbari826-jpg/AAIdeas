@@ -1,0 +1,23 @@
+# title: Müstəqillik günü
+# 28 May: 1918, Azərbaycan Xalq Cümhuriyyəti, dövlət, xalq. Format: SÖZ | çətin | orta | asan
+AZADLIQ | Əsarətin ziddi | Hürriyyət | Sərbəstlik
+MƏCLİS | Parlament adı | Xalq ... | Toplantı
+XALQ | Millət | Əhali | El
+DÖVLƏT | Gerbi, himni var | Ölkə idarəsi | Hökumət
+SEÇKİ | 1918-də qadına | Səs vermə | Seçim günü
+MİLLƏT | Xalq, ümmət | Bir dilli birlik | El-oba
+HÜQUQ | Qanuni ixtiyar | Haqq | Səlahiyyət
+AZAD | Bağlı deyil | Əsir deyil | Müstəqil
+TARİX | Keçmiş haqqında | Elm, fənn | Olmuşlar
+PAYTAXT | Baş şəhər | Bakı, Paris kimi | Mərkəz şəhər
+NAZİR | Hökumət üzvü | Kabinet üzvü | Vəzir
+DEMOKRAT | Xalq hakimiyyəti | Seçkili quruluş | Seçki tərəfdarı
+ŞƏRQ | Gün çıxan tərəf | Qərbin ziddi | Gündoğan
+DİL | Ana ... | Danışıq vasitəsi | Ağızdakı orqan
+VƏTƏNDAŞ | Pasportlu | Ölkə sakini | Təbəə
+DÖVR | Zaman kəsiyi | Epoxa | Əsr, il
+ZİYALI | Oxumuş adam | Alim, yazıçı | Bilikli insan
+MAY | Baharın sonu | Beşinci ay | Bahar ayı
+QURUCU | Bina edən | Əsasını qoyan | Yaradan
+ƏLİFBA | Hərflər sırası | Latın ... | A-dan Z-yə
+ŞURA | Məşvərət orqanı | Milli ... | Sovet

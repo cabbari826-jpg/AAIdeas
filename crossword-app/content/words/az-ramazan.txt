@@ -1,0 +1,22 @@
+# title: Ramazan bayramı
+# Ramazan bayramı: oruc ayı, iftar, fitrə, xeyirxahlıq. Format: SÖZ | çətin | orta | asan
+ORUC | Ramazan ibadəti | Gündüz yeməmək | Ac qalıb ibadət
+İFTAR | Axşam süfrəsi | Orucun açılışı | Günbatanda yemək
+İMSAK | Orucun başı | Dan yeri vaxtı | Səhər sərhədi
+NAMAZ | Gündə beş dəfə | İbadət | Səcdəli dua
+DUA | Yalvarış | Allaha müraciət | Xeyir dilək
+SƏDƏQƏ | Kasıba verilən | Ehsan | Xeyriyyə
+FİTRƏ | Bayram sədəqəsi | Kasıb payı | Orucdan sonra
+HİLAL | Təzə ay | Aypara | Ayın doğuşu
+QURAN | Müqəddəs kitab | 114 surə | Kitab
+AZAN | Namaza çağırış | Minarədən səs | Müəzzin oxuyar
+SAVAB | Xeyirli əməl | Günahın ziddi | Əcr
+NİYYƏT | Ürəkdəki qərar | Məqsəd | Arzu-kam
+XEYİR | Yaxşılıq | Şərin ziddi | Fayda
+YETİM | Atasız uşaq | Kimsəsiz | Valideynsiz
+RƏHM | Mərhəmət hissi | Şəfqət hissi | Acıma
+ŞÜKÜR | Minnətdarlıq | Allaha həmd | Təşəkkür
+İBADƏT | Allaha qulluq | Dua, namaz | Dini əməl
+ƏHSAN | Yaxşılıq etmə | Lütf | Bağış
+XURMA | Səhra meyvəsi | İftar meyvəsi | Qəhvəyi şirin
+SƏHUR | Dan yeri yeməyi | Dan öncəsi süfrə | Gecə yeməyi

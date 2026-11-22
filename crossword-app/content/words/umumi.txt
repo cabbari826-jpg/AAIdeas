@@ -1,0 +1,344 @@
+# Ümumi sözlər: əsas pak (Başlanğıc) və tematik şəbəkələri bağlamaq üçün.
+# Format: SÖZ | çətin | orta | asan   (hər ipucu 16 hərfə qədər)
+QOZ | Beyinə bənzər | Qabıqlı meyvə | Qərzəkli meyvə
+DAN | ... yeri sökülür | Səhər tezdən | Şəfəq
+FİL | Xortumlu | Hind nəhəngi | İri heyvan
+ƏTİR | Xoş iy | Flakonda satılır | Duxi
+YAŞIL | Ot rəngi | Svetoforda keç | Yarpaq rəngi
+MAŞIN | Avtomobil | Dörd təkərli | Minik
+TAC | Şahın başında | Kral papağı | Qızıl çələng
+QIZ | Oğlanın bacısı | Gəlin olacaq | Ana-bala: ...
+DİŞ | Ağızda otuz iki | Fırçalanır | Çeynəyir
+ALTI | Beşdən sonra | Zərin ən çoxu | 6
+İSTİ | Soyuğun əksi | Yay havası | Qızmar
+TORPAQ | Yer | Əkin örtüyü | Vətən ...
+QALXAN | Döyüşçü sipəri | Zirehli lövhə | Sipər
+QAPI | Giriş yeri | Açılır, bağlanır | Darvaza
+CÖKƏ | Ağac | Çayı dərmandır | Ağ çiçəkli ağac
+VAXT | Zaman | Saat göstərir | Fürsət
+SARVAN | Karvan başçısı | Dəvə sürən | Karvançı
+QAZ | Ev quşu | Qaqqıldayan | Uzunboyun quş
+GÖL | Qapalı su | Durğun su | Kiçik su hövzəsi
+MƏŞƏL | Olimpiya odu | Yanar çubuq | Od mənbəyi
+KÖYNƏK | Yaxalı, düyməli | Pencəyin altına | Üst paltarı
+ŞALVAR | İki balaqlı | Kəmərlə taxılır | Ayağa geyilir
+CORAB | Yundan toxunur | Ayaqqabıya qədər | Ayağa geyim
+ƏLCƏK | Beş barmaqlı | Qışda ələ | Əl geyimi
+KƏMƏR | Toqqalı qayış | Belə bağlanır | Bel qayışı
+ÇƏKMƏ | Uzunboğaz | Qış ayaqqabısı | Boğazlı ayaqqabı
+PƏNCƏRƏ | Şüşəli açırım | Otağa işıq verir | Evin gözü
+YASTIQ | Lələkli döşək | Baş altına | Yataqda baş üçün
+YORĞAN | Pambıqlı örtük | Gecə örtülür | Yataq örtüyü
+PƏRDƏ | Teatrda açılır | Pəncərə örtüyü | Tül, ...
+ÇAYDAN | Qaynar su qabı | Qaz üstündə fit | Su qaynadır
+NİMÇƏ | Dərin boşqab | Xörək qabı | Kiçik qab
+BOŞQAB | Süfrə çini | Yemək qoyulur | Yastı qab
+STƏKAN | Armudu ... | Çay qabı | Şüşə qab
+QAZAN | Plov üçün qab | Mis ... | Böyük qab
+SÜPÜRGƏ | Cadugər minir | Döşəmə təmizlər | Zibil yığır
+NƏRDİVAN | Pillələr sırası | Dama çıxmaq üçün | Pilləkən
+SANDIQ | Cehiz qutusu | Qıfıllı yeşik | Taxta qutu
+ÇARPAYI | Döşək altlığı | Yataq mebeli | Yatmaq üçün
+BARMAQ | Üzük yeri | Əlin beşdə biri | Əldə beş
+DİRSƏK | Qolun oynağı | Qolun bükümü | Qol oynağı
+ÜRƏK | Qan pompası | Sevgi rəmzi | Döyünən orqan
+QULAQ | Sırğa yeri | Eşitmə orqanı | Başda iki
+BURUN | Eynək dayağı | İy bilir | Üzün ortası
+DODAQ | Pomada yeri | Ağzın kənarı | Öpüş üçün
+YANAQ | Al-qırmızı olur | Üzün yanı | Qızaran yer
+BOYUN | Şərf yeri | Başı tutur | Baş ilə bədən
+SÜMÜK | Skelet hissəsi | İt gəmirir | Bərk hissə
+YAMAC | Dağın döşü | Maili sahə | Dağ ətəyi
+MAĞARA | İbtidai ev | Qayada oyuq | Dağda dəlik
+DALĞA | Sörfçünün dostu | Dənizdə qalxır | Ləpə
+ŞAXTA | ... baba | Qış soyuğu | Sərt soyuq
+BORAN | Qarlı külək | Çovğun | Qar fırtınası
+İLDIRIM | Göy guruldayır | Göydən düşən od | Şimşək çaxır
+BUZ | Donmuş su | Xokkey səthi | Soyuq, bərk
+ÇAYIR | Biçənək | Otluq yer | Yaşıl düz
+OTLAQ | Mal-qara yeri | Sürü otlayır | Otluq
+CANAVAR | Bozqurd | Ay işığında ulur | Meşə yırtıcısı
+ÇAQQAL | Leşyeyən | Gecə ulayır | Kiçik yırtıcı
+SİÇAN | Pendir sevər | Pişiyin ovu | Kiçik gəmirici
+QURBAĞA | Quru-quru deyər | Gölməçədə yaşar | Yaşıl tullanan
+KƏPƏNƏK | Tırtıldan olur | Rəngli qanad | Güllər üstündə
+HÖRÜMÇƏK | Səkkiz ayaqlı | Tor toxuyur | Tor ustası
+QARIŞQA | Zəhmətkeş böcək | Yuvada min | Kiçik böcək
+MİLÇƏK | Vızıldayır | Yay zəhləsi | Kiçik həşərat
+BUZOV | Danadan kiçik | İnəyin balası | Körpə dana
+QUZU | Ana arxasınca | Qoyunun balası | Mələyər
+XORUZ | Səhər ban verir | Banlayan quş | Toyuq ailəsi
+CÜCƏ | Payızda sayılar | Yumurtadan çıxır | Toyuq balası
+KƏKLİK | Dağ quşu | Qaqqıldayır | Ov quşu
+TƏRLAN | Ovçu quşu | Qızıl ... | Yırtıcı quş
+GİLAS | Cüt-cüt bitər | Yay meyvəsi | Albalıya bənzər
+ALBALI | Turş gilas | Mürəbbəsi olur | Qırmızı turş
+ÇİYƏLƏK | Toxumu üstündə | Bağ meyvəsi | Qırmızı gilə
+MORUQ | Tikanlı kolda | İstiotlu çay | Giləmeyvə
+QARPIZ | Bostanın şahı | İçi qırmızı | Yaşıl, iri
+YEMİŞ | Ətirli bostan | Sarı bostan | Qovuna bənzər
+BADAM | Acı ləpəli | Paxlava içi | Qoz növü
+PÜSTƏ | Ağzı açıq qoz | Yaşıl ləpə | Duzlu çərəz
+TURP | Acı kök | Ağ kökümeyvə | Kökü yeyilir
+ÇUĞUNDUR | Borşa rəng verir | Qırmızı kök | Şəkər bitkisi
+BİBƏR | Bolqar ... | Acı tərəvəz | Göy tərəvəz növü
+ŞÜYÜD | Ətirli otu | Turşuya qatılır | Göyərti
+KEŞNİŞ | Kinza | Qutaba qatılır | Ətirli göy
+CƏFƏRİ | Petruşka | Salat göyü | Yaşıl göy
+BUĞDA | Sünbüllü taxıl | Un verir | Taxıl
+ARPA | Pivə taxılı | Atın yemi | Taxıl növü
+BƏHMƏZ | Tut şirəsi | Qatı şirə | Şirin qatı
+HALVA | Ehsan şirnisi | Unlu şirni | Şirin yemək
+KÜLÇƏ | Qızıl parçası | Şirin çörək | Kökə növü
+DOVĞA | Qatıqlı şorba | Ayranlı yemək | Yay şorbası
+KÜFTƏ | Qiymə topu | Bozbaş içi | Ət kürəsi
+AŞPAZ | Mətbəx ustası | Yemək bişirir | Kulinar
+SÜRÜCÜ | Sükan arxasında | Maşın sürən | Şofer
+PİLOT | Göy sürücüsü | Təyyarəçi | Uçan adam
+DƏNİZÇİ | Matros | Gəmi heyəti | Dəniz adamı
+BƏNNA | Hörgü ustası | Kərpic qoyur | Tikinti ustası
+NALBƏND | Nal vuran | Atın ustası | Nal ustası
+ZƏRGƏR | Qızıl ustası | Üzük düzəldir | Bəzək ustası
+ƏKİNÇİ | Toxum səpən | Torpaq becərən | Kəndli
+BALIQÇI | Tilov sahibi | Tor atan | Balıq tutan
+MÜĞƏNNİ | Səhnə ulduzu | Nəğmə oxuyan | Xanəndə
+KATİB | Protokol yazan | Yazı işçisi | Mirzə
+HƏYAT | Doğumdan ölümə | Yaşayış | Ömür
+KƏDƏR | Qəm-qüssə | Sevincin əksi | Dərd
+QORXU | Cəsarətin əksi | Vahimə | Qorxmaq hissi
+SƏBR | Gözləmə gücü | Dözüm | Təmkin
+HÖRMƏT | İzzət-ikram | Ehtiram | Qiymət vermək
+VİCDAN | Daxili hakim | Namus səsi | İnsaf
+DÜNYA | Yer kürəsi | Aləm | Kainat
+AĞIL | Zəka | Huş | Düşüncə gücü
+XƏYAL | Fantaziya | Arzu, röya | Təsəvvür
+YUXU | Gecə görünən | Röya | Yatanda görülür
+MƏKTUB | Zərfdə gələr | Poçtla gələn | Namə
+ÇƏTİR | Açılan dam | Yağışdan qoruyur | Zontik
+ÇANTA | Məktəbli daşıyır | Əl ... | Kisə
+ZƏNBİL | Bazar səbəti | Hörmə səbət | Səbət növü
+QIFIL | Açarla açılır | Qapını bağlayır | Kilid
+ÇƏKİC | Mismar vurur | Döymə aləti | Toxmaq
+MİŞAR | Dişli bıçaq | Taxta kəsir | Bıçqı
+BALTA | Odun yarır | Kəsici alət | Tişə
+ORAQ | Əyri bıçaq | Biçin aləti | Taxıl biçir
+KOTAN | Öküz qoşulur | Torpaq şumlayır | Xış
+ŞAMDAN | Mum qoyulur | Şam dayağı | Mumluq
+LAMPA | Elektrik işığı | Çıraq | İşıq verir
+HƏFTƏ | Yeddi gün | Bazar ertəsindən | Gün yeddi
+CÜMƏ | Həftənin beşi | Şənbədən əvvəl | Həftə günü
+DƏQİQƏ | Saatın hissəsi | Altmış saniyə | Vaxt vahidi
+ƏSR | Yüz il | Yüzillik | Uzun dövr
+PAYIZ | Xəzan fəsli | Yarpaq tökülür | Sentyabr fəsli
+BOZ | Kül rəngi | Siçan rəngi | Ağ-qara arası
+MƏKTƏB | On bir illik | Şagird yeri | Təhsil ocağı
+MUZEY | Eksponat yeri | Sərgi binası | Tarix sərgisi
+TEATR | Səhnə sənəti | Tamaşa yeri | Aktyor evi
+BAZAR | Alış-veriş yeri | Həftə sonu günü | Tərəvəz yeri
+POÇT | Məktub idarəsi | Bağlama yeri | Marka satılır
+KÜÇƏ | Ev ünvanında | Səki yanında | Şəhər yolu
+MƏSCİD | Minarəli bina | Namaz yeri | İbadət yeri
+KÖRPƏ | Beşikdəki | Yeni doğulmuş | Uşaq
+NƏVƏ | Babanın sevinci | Övladın övladı | Nənənin balası
+QARDAŞ | Bacının ... | Kişi doğma | Oğlan doğma
+BACI | Qardaşın ... | Qız doğma | Qız qardaş
+QONŞU | Divar yoldaşı | Yanımızda yaşar | Qapı ...si
+QƏLƏBƏ | Məğlubiyyət əksi | Zəfər çalmaq | Uduş
+SƏFƏR | Səyahət | Yola çıxmaq | Gəzinti
+DAVA | Sülhün əksi | Döyüş | Savaş
+MƏHƏLLƏ | Şəhər hissəsi | Bölgə | Küçələr toplusu
+GƏMİ | Kapitanın evi | Lövbər salır | Dəniz nəqliyyatı
+İKİ | Cüt | Birdən sonra | 1+1
+TÜLKÜ | Nağılda hiyləgər | Kürkü qırmızı | Hiyləgər heyvan
+ARA | Məsafə | Boşluq | Fasilə
+ƏL | Ovuc sahibi | Qolun ucu | Barmaqlar yeri
+KƏLƏM | Dolması olur | Yarpaqlı baş | Ağ tərəvəz
+ASTA | Tələsmədən | Yavaş-yavaş | Yavaş
+LALƏ | Qırmızı çöl gülü | Hollandiya gülü | Yaz çiçəyi
+ƏRİK | Qurusu qaysı | Ordubad meyvəsi | Sarı meyvə
+İRİ | Yekə | Kiçiyin əksi | Böyük
+ALP | Dastan qəhrəmanı | Ər, igid | Qəhrəman
+OT | Biçənəkdə bitər | Heyvan yemi | Yaşıl bitki
+ZÜRAFƏ | Ləkəli hündür | Afrika heyvanı | Uzun boyunlu
+ATLAS | Xəritələr kitabı | Coğrafiya kitabı | İpək parça
+POMİDOR | Kətçupun əsası | Salat tərəvəzi | Qırmızı tərəvəz
+MASA | Yazı ...sı | Dörd ayaqlı | Stol
+İL | On iki ay | 365 gün | Təqvim vahidi
+AXŞAM | Şam yeməyi vaxtı | Gün batanda | Gecədən əvvəl
+İNSAN | Homo sapiens | Bəni-adəm | Adam
+XAN | Şəki hakimi | Bəy, hökmran | Hökmdar
+BEŞ | Ən yüksək qiymət | Dörddən sonra | 5
+LİMON | Çaya dilim | Turş sitrus | Sarı meyvə növü
+QIŞLAQ | Aran otlağı | Qış düşərgəsi | Qış otlağı
+İSTİOT | Qara ədviyyə | Acı toz | Acı ədviyyə
+ZƏFƏR | Qalibiyyət | Qələbə çalmaq | Qələbə
+MƏRCİ | Sarı paxla | Qırmızı paxla | Paxlalı dən
+SÖZ | Lüğət vahidi | Kəlmə | Söylənən
+ƏMİ | Atanın qardaşı | Ata tərəfi kişi | Ata qardaşı
+QATAR | Vaqonlar sırası | Relsdə gedir | Dəmiryol
+QUNDUZ | Çayda bənd qurar | Dişli gəmirici | Bənd tikən
+ŞAN | Şöhrət | Ad-san | Nam
+MEŞƏ | Ağaclar diyarı | Ayı yaşayır | Ağaclıq
+ARAN | Düzən bölgə | Dağlığın əksi | Düzənlik
+UN | Dəyirmanda olur | Çörək xammalı | Üyüdülmüş buğda
+ŞAM | Mum işığı | Həmişəyaşıl ağac | Mum
+DÜŞBƏRƏ | Qulaqcıqlı xəmir | Bulyonda xörək | Kiçik xəngəl
+ZİNDAN | Dəmir döyülən | Dəmirçi aləti | Ağır dəmir
+DİVAR | Otaq sərhədi | Kərpic hörgü | Hasar
+OBA | Köçəri məskən | Kiçik kənd | Elat
+KƏND | Şəhərin əksi | Əkinçilər yeri | Kiçik yaşayış
+İYNƏ | Sapı keçirilər | Tikiş aləti | İti uclu
+SƏRV | Qamətli ağac | Həmişəyaşıl | Hündür ağac
+AĞAC | Gövdəli bitki | Meşədə bitir | Budaqlı
+ŞAHMAT | 64 xanalı oyun | Ağ-qara oyun | Şah-mat oyunu
+DƏRS | Zəngdən zəngə | Məktəbdə keçilir | Məşğələ
+DAŞ | Qaya parçası | Bərk cisim | Çaqıl
+AZ | Çoxun əksi | Bir qədər | Cüzi
+DAYI | Ananın qardaşı | Ana tərəfi kişi | Ana qardaşı
+ŞAH | Matı alır | İran hökmdarı | Hökmdar, kral
+TOY | Gəlin-bəy günü | Nikah məclisi | Düyün
+ÇUXA | Qafqaz paltarı | Kişi paltarı | Uzun geyim
+AÇAR | Qıfılın dostu | Qapını açır | Açmaq aləti
+KOL | Kiçik bitki | Gövdəsiz ağac | Çalı
+XALÇA | Qubanın sənəti | Divara vurulur | Döşənəcək
+OX | Kamanın yoldaşı | Yay atır | Nişana atılır
+XALA | Ananın bacısı | Ana tərəfi qadın | Ana bacısı
+SAÇ | Hörük | Başda bitir | Daranır
+TƏR | İsti gündə axar | Alında damla | Yaş
+KARVAN | Dəvə qatarı | Sarvanın dəstəsi | Yolçular dəstəsi
+FINDIQ | Zaqatala qozu | Sincab sevər | Kiçik qoz
+AYI | Qışda yatar | Bal sevər | Meşə heyvanı
+TƏKƏR | Velosipeddə iki | Fırlanan dairə | Maşında
+QOVUN | Ətirli tağ | Bostan | Bostan meyvəsi
+ŞAGİRD | Məktəbli | Dərs oxuyur | Ustanın şəyirdi
+NOVRUZ | Bahar bayramı | Səməni bayramı | Yaz bayramı
+ŞİŞ | Kabab dəmiri | Manqal aləti | Tikə keçirilər
+GÜL | Bülbülün sevgisi | Tikanlı çiçək | Çiçək
+VƏZİR | Şahmatda güclü | Şahın köməkçisi | Nazir
+DƏRƏ | Dağ arası | Dərin çuxur | Vadi
+ÜZ | Sifət | Çöhrə | Sima
+İP | Kəndir | Bağlamağa | Sap
+OĞUL | Ataya ümid | Övlad (kişi) | Oğlan övlad
+İLAN | Qabıq dəyişər | Sürünən | Zəhərli
+VULKAN | Od püskürən dağ | Lava çıxarır | Püskürən dağ
+ƏNCİR | Abşeron meyvəsi | Quru meyvə | Yumşaq meyvə
+ALAN | Meydança | Açıq yer | Geniş yer
+EL | Xalq | Camaat | Oba, tayfa
+TƏK | Yalqız | Cütün əksi | Bir dənə
+BÜLBÜL | Gülün aşiqi | Gözəl oxuyan | Nəğməkar quş
+REYHAN | Ətirli göyərti | Bənövşəyi göy | Süfrə göyü
+DƏVƏ | Səhra gəmisi | Hörgüclü | Karvan heyvanı
+PƏLƏNG | Zolaqlı pişik | Zolaqlı yırtıcı | Böyük pişik
+OV | Şikar | Tüfənglə gəzinti | Şikar etmək
+LAVAŞ | Nazik çörək | Təndir çörəyi | Yayma
+ƏSGƏR | Hərbçi | Sıravi | Döyüşçü
+EV | Yaşayış yeri | Mənzil | Ocaq, yuva
+ALÇA | Turşu olur | Gavalı növü | Turş meyvə
+YAZ | Bahar | Qışdan sonra | İlin fəsli
+ÇİNAR | Yüzillik ağac | Böyük ağac | Enliyarpaq ağac
+QARĞA | Qara quş | Qarıldayır | Quzğun qohumu
+PALÇIQ | Yaş torpaq | Yağışdan sonra | Lil
+MAYA | Xəmirdə | Qıcqırdır | Ferment
+QOYUN | Yun verir | Sürüdə | Mələyən
+SÜLH | Müharibənin əksi | Barış | Asayiş
+QASIRĞA | Burulğan külək | Tayfun | Güclü külək
+YOL | Cığır | Səfər xətti | Şose
+SAZ | Aşıq aləti | Simli | Telli alət
+ÜÇ | İkidən sonra | Dörddən əvvəl | 3
+DOQQUZ | Səkkizdən sonra | Üç dəfə üç | 9
+YAŞ | Ömür ili | Neçə il | Göz damlası
+DÜYMƏ | Paltarda | Köynəkdə | İlgəyə keçər
+QIŞ | Soyuq fəsil | Qar fəsli | Dekabr fəsli
+BİBİ | Atanın bacısı | Ata tərəfi qadın | Ata bacısı
+KEÇİ | Dağ heyvanı | Buynuzlu | Mələr
+NEFT | Qara qızıl | Buruq çıxarır | Yanacaq
+SAAT | Vaxt ölçən | Əqrəbli | Qol ...
+ULDUZ | Səma cismi | Gecə parlayır | Göydə
+KASA | Qab | Dərin qab | Piyalə
+SEL | Daşqın | Dağdan axar | Güclü axın
+TOZ | Xırda zərrə | Silinən | Torpaq zərrəsi
+PİTİ | Şəki yeməyi | Saxsıda bişir | Noxudlu yemək
+ÜZÜM | Salxım | Şərab meyvəsi | Giləli meyvə
+LEYLƏK | Uzun ayaqlı quş | Damda yuva qurar | Ağ quş
+ÖRDƏK | Su quşu | Vak-vak | Üzən quş
+DOLU | Buz yağıntı | Boşun əksi | Buz dənəsi
+TOR | Balıqçının aləti | Hörümçək toxuyur | Şəbəkə
+ZAL | Böyük otaq | Konsert ...ı | Salon
+SƏRÇƏ | Kiçik quş | Cik-cik | Boz quş
+SÜRÜ | Qoyun dəstəsi | Çobanın varı | Dəstə
+SƏS | Səda | Eşidilən | Avaz
+ƏSƏR | Yaradıcılıq işi | Kitab, pyes | Yaradıcılıq
+ÇƏMƏN | Otlu sahə | Yaşıl ot sahəsi | Gül-çiçəkli yer
+QAŞ | Göz üstündə | Çatılır | Kirpiyin üstü
+VADİ | Çay dərəsi | Düzən dərə | Dərə
+OCAQ | Od yeri | Ailə ...ğı | Kamin
+TOP | Futbol | Yumru oyuncaq | Yumru
+BAYQUŞ | Gecə quşu | Hikmət rəmzi | Böyük gözlü quş
+QATIQ | Süddən | Maya ilə olur | Yoqurt
+DİZ | Ayaq oynağı | Ayağın ortası | Ayaq bükümü
+ÇIRAQ | Neft lampası | Köhnə işıq | Fitilli
+DAM | Evin üstü | Kirəmitli örtük | Çardaq
+QUŞ | Qanadlı | Uçar | Yuva qurar
+OD | Yanğın səbəbi | Ocaqda yanır | Alov
+AŞ | Süfrənin şahı | Düyü yeməyi | Plov
+TARLA | Kombayn yeri | Kəndlinin sahəsi | Əkin yeri
+AD | Şöhrət, nam | ... günü | İsim
+MİS | Bürünc tərkibi | Samovar metalı | Qırmızı metal
+QARA | Matəm rəngi | ... dəniz | Ağın əksi
+ALİM | Elmlər doktoru | Akademik | Elm adamı
+TUT | Bəhməz meyvəsi | İpəkqurdu yeyir | Şirin giləmeyvə
+OTAQ | Mənzilin bölməsi | Yataq ... | Evin hissəsi
+AT | Şahmat fiquru | Qarabağ cinsi | Minik heyvanı
+DAD | ...-bidad | Şirin, acı, turş | Ləzzət
+ULU | Böyük, müqəddəs | Çox qədim | Böyük, qədim
+İT | Sədaqət rəmzi | Çoban köməkçisi | Sadiq heyvan
+ALMA | Nyuton meyvəsi | Quba meyvəsi | Qırmızı meyvə
+ŞAİR | Qəzəl müəllifi | Nizami, Füzuli | Şeir yazan
+SAHİL | Bulvarın yeri | Dənizin qırağı | Dəniz kənarı
+SƏDA | Dağların cavabı | Əks ... | Səs
+SU | Buz əriyəndə | Həyat mənbəyi | İçməli maye
+ADA | Pirallahı | Suda quru | Su ilə əhatəli
+BAR | Kokteyl yeri | Ağacın bəhrəsi | Meyvə, məhsul
+YAĞIŞ | Leysan, çiskin | Çətir lazım olar | Buluddan yağır
+ARABA | Fayton, kəcavə | Atlı ... | Atlı nəqliyyat
+AND | Əhd, peyman | ... içmək | Söz vermək
+DAĞ | Şahdağ, Tufan | Bazardüzü | Uca zirvə
+SARI | ... gəlin | Zəfəran rəngi | Limon rəngi
+ARZU | Kam, murad | Ürəyin istəyi | İstək
+ŞƏRBƏT | Bal-şəkər içkisi | Novruz içkisi | Şirin içki
+YAYLAQ | Köçərilərin yayı | Yay otlağı | Dağ otlağı
+ADAÇAY | Salviya | Dərman çayı | Dərman bitkisi
+ƏLA | Beşlik qiymət | Əntiqə, gözəl | Çox yaxşı
+NANƏ | Mentol mənbəyi | Dolmaya qatılır | Ətirli ot
+ƏSA | Musanın çubuğu | Qoca dayağı | Çəlik
+DƏN | Dəyirmanın yemi | Quş yemi | Toxum
+ALA | ...-bula | ... qarğa | Rəngbərəng
+BAL | Şagird qiyməti | Pətəkdə olur | Arı məhsulu
+ÇAN | Zınqırov | Kilsə zəngi | Zəng
+QAYA | Qobustan daşı | Uca daş | Böyük daş
+KƏTAN | Lif bitkisi | Təbii parça | Parça növü
+ADƏT | Ənənə, qayda | Həmişəki vərdiş | Vərdiş
+KAMAN | Ox atan alət | Simli alət | Skripka
+MƏN | Birinci şəxs | Sən deyiləm | Özüm
+AĞ | Gəlinlik rəngi | Qaranın əksi | Qar rəngi
+SÜD | İnəyin bəxşişi | Qatıq xammalı | Ağ içki
+KÖK | Dolu, yoğun | Mənşə, əsl | Ağacın dayağı
+ANA | ... dili | Valideyn | Mama
+TAM | Bütöv, kamil | Natamam deyil | Bütün
+AY | Təqvim bölməsi | Yerin peyki | Gecə işığı
+ADAM | Bəşər övladı | Şəxs | İnsan
+NƏNƏ | Nağıl danışan | Ananın anası | Böyük ana
+NƏRD | Zər atılan oyun | Taxta oyunu | Zərli oyun
+BABA | Əcdad | Atanın atası | Dədə
+ARAL | Quruyan dəniz | Duzlu göl | Dəniz
+YAY | Spiral, prujin | İsti fəsil | İyul fəsli
+AŞIQ | Ələsgər | Saz çalan | El sənətkarı
+ƏT | Qəssab malı | Kabab üçün | Mal ...
+ARI | Çalışqan həşərat | Pətək sakini | Bal verən
+ÇAY | Kür, Araz | Armudu stəkanda | İsti içki
+ƏR | Kişi, igid | Həyat yoldaşı | Arvadın yoldaşı
+BAYATI | ... Şiraz | Xalq şeiri | Dördlük
+NAR | Göyçay meyvəsi | Qırmızı dənli | Dənli meyvə
+BAKI | Küləklər şəhəri | Xəzər incisi | Paytaxt
+KAL | Xam | Dəyməmiş | Yetişməmiş
+QAR | Ağ örtük | Qışın yağıntısı | Ağ yağıntı

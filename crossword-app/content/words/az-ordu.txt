@@ -1,0 +1,30 @@
+# title: Silahlı Qüvvələr
+# 26 iyun, Silahlı Qüvvələr günü: ordu, rütbələr, xidmət. Format: SÖZ | çətin | orta | asan
+ZABİT | Paqonlu komandir | Leytenant və s. | Ordu rəisi
+GENERAL | Ən böyük rütbə | Lampaslı | Ordu başçısı
+SERJANT | Kiçik komandir | Çavuş | Sıra başçısı
+KAPİTAN | Gəmi rəisi | Dörd ulduzlu | Mayordan kiçik
+ADMİRAL | Donanma başçısı | Dəniz generalı | Böyük dənizçi
+DONANMA | Gəmilər ordusu | Hərbi dəniz | Flot
+PİYADA | Atsız əsgər | Yeriyən qoşun | Ayaqla gedən
+TOPÇU | Artilleriyaçı | Top atan | Top əsgəri
+PARAŞÜT | Göydən enmə | Çətirli tullanma | Hava çətiri
+BÖLÜK | Rota | Tabordan kiçik | Əsgər dəstəsi
+TABOR | Batalyon | Bölüklər birliyi | Alaydan kiçik
+ALAY | Polk | Tabordan böyük | Hərbi hissə
+KAZARMA | Əsgər evi | Hərbi yataqxana | Qışla
+PAQON | Çiyin nişanı | Ulduzlu lövhə | Rütbə yeri
+ŞİNEL | Əsgər paltosu | Hərbi palto | Uzun boz palto
+SƏRHƏD | Ölkə hüdudu | Keşikçi qoruyar | Ölkənin kənarı
+KEŞİK | Gözətçilik | Nöbətçi yeri | Mühafizə
+NÖBƏT | Gecə keşiyi | Gecə ... | Keşik vaxtı
+HƏRBİ | Ordu ilə bağlı | Mülki deyil | Əsgəri
+SİLAH | Döyüş aləti | Qılınc, ox | Tapança, tüfəng
+DƏBİLQƏ | Dəmir papaq | Baş qoruyucu | Kaska
+RADAR | Uzaqdan görən | Lokator | Göy göz
+TƏLİM | Məşq | Öyrətmə | Hazırlıq
+MANEVR | Qoşun gedişi | Taktik gediş | Yerdəyişmə
+DÖYÜŞÇÜ | Cəngavər | Vuruşan | Əsgər, igid
+HƏRBÇİ | Ordu adamı | Formalı adam | Hərbi şəxs
+ƏMR | Komanda | Komandir sözü | Buyruq
+SIRA | Düz xətt | Düzülüş | Növbə

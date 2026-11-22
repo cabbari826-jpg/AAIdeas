@@ -1,0 +1,149 @@
+# title: Coğrafiya
+# Format: SÖZ | çətin | orta | asan
+ŞƏKİ | Xan sarayı yeri | Piti vətəni | Halvası məşhur
+QUBA | Qırmızı qəsəbə | Alma diyarı | Xalçası məşhur
+GƏNCƏ | Nizaminin şəhəri | Xan bağı şəhəri | Qərbin mərkəzi
+ŞUŞA | Qarabağın tacı | Xarıbülbül yeri | Musiqi beşiyi
+QƏBƏLƏ | Tufandağ kurortu | Qədim paytaxt | Şimal kurortu
+ASTARA | İranla sərhəd | Cənub ucu | Çay rayonu
+XAÇMAZ | Nabran yanında | Şimal sahili | Meyvə rayonu
+AĞDAM | Qarabağ qapısı | Çörək muzeyi | Azad olunmuş
+FÜZULİ | Şair adlı şəhər | Hava limanı | Qarabağ rayonu
+LAÇIN | Dəhlizi var | Quş adlı rayon | Qarabağ dağları
+ORDUBAD | Ərik şəhəri | Naxçıvan şəhəri | Araz sahili
+ŞƏMKİR | Su anbarı | Qərb rayonu | Gəncə yaxını
+TOVUZ | Aşıq diyarı | Gürcüstan yaxını | Qərb şəhəri
+QAZAX | Vurğunun yurdu | Seminariya yeri | Qərb ucu
+BƏRDƏ | Arranın paytaxtı | Qədim şəhər | Tərtər yanında
+ŞİRVAN | Əli Bayramlı | Kür sahili | Aran şəhəri
+SALYAN | Kür deltası | Şirvan qonşusu | Kür aşağısı
+MASALLI | İstisu kurortu | Lənkəran qonşusu | Cənub rayonu
+LERİK | Çox yaşayanlar | Talış dağları | Dağ rayonu
+GÖYÇAY | Nar festivalı | Nar diyarı | Şirvan rayonu
+AĞDAŞ | Ağ daşlı | Şirvan düzü | Pambıq diyarı
+ZƏRDAB | Ziyalının yurdu | Kür sahili şəhər | Mərkəz rayonu
+İMİŞLİ | Araz yaxını | Pambıq rayonu | Mil düzü
+BALAKƏN | Gürcü sərhədi | Şimal-qərb ucu | Fındıq rayonu
+OĞUZ | Vartaşen | Şəki qonşusu | Meşəli rayon
+QUSAR | Şahdağ kurortu | Xızır Zində | Xizək yeri
+ŞABRAN | Dəvəçi | Qədim qala adı | Şimal şəhəri
+SİYƏZƏN | Beşbarmaq yanı | Neftli rayon | Xəzər sahili
+XIZI | Qırmızı qumlar | Abşeron qonşusu | Dağ kəndi
+GƏDƏBƏY | Qızıl mədəni | Kartofu məşhur | Qərb dağları
+XOCALI | 1992 faciəsi | Qarabağ şəhəri | Faciə yeri
+TƏRTƏR | Su anbarı adı | Çay və rayon | Qarabağ çayı
+YEVLAX | Kür körpüsü | Mərkəzi qovşaq | Dəmiryol qovşağı
+ŞAHBUZ | Batabat gölü | Naxçıvan dağları | Dağ kurortu
+CULFA | Xaçlı qəbiristan | Araz körpüsü | Naxçıvan rayonu
+ŞƏRUR | Türkiyəyə yaxın | Naxçıvan düzü | Sədərək qonşusu
+ABŞERON | Neft yarımadası | Bakı yanı | Yarımada
+ZƏNGİLAN | Bəsitçay | Çinarlı rayon | Azad rayon
+ARAZ | Xudafərin çayı | Sərhəd çayı | Kürün qolu
+KÜR | Ölkənin ən uzunu | Mingəçevir çayı | Xəzərə tökülür
+XƏZƏR | Ən böyük göl | Bakının dənizi | Kaspi
+ŞAMAXI | Sabirin yurdu | Şirvan paytaxtı | Rəqqasə şəhəri
+LƏNKƏRAN | Talış şəhəri | Çay bölgəsi | Cənub şəhəri
+GÖYGÖL | 1139 zəlzələsi | Kəpəzin gölü | Mavi göl
+QOBUSTAN | Qayaüstü rəsmlər | Palçıq vulkanı | Qaya muzeyi
+SAMUR | Rusiya sərhədi | Şimal çayı | Dağ çayı
+KƏPƏZ | Göygölü yaradan | Gəncə dağı | Uçqun dağı
+ŞAHDAĞ | Qış kurortu | Şimal zirvəsi | Qarlı dağ
+SAVALAN | İranda vulkan | Ərdəbil dağı | Cənub zirvəsi
+MARALGÖL | Göygöl qonşusu | Maral adlı göl | Dağ gölü
+BATABAT | Üzən ada | Naxçıvan gölü | Yay yeri
+NABRAN | Meşəli çimərlik | Yay istirahəti | Xəzər çimərliyi
+VİLƏŞ | Talış çayı | Masallı çayı | Cənub çayı
+QANIX | Alazan | Zaqatala çayı | Kürə tökülür
+İSTİSU | Kəlbəcər suyu | Mineral su | Bulaq adı
+BADAMLI | Naxçıvan suyu | Şəfalı bulaq | Qazlı su
+YANARDAĞ | Abşeronda alov | Sönməyən od | Yanan təpə
+TÜRKİYƏ | Anadolu | Ankara ölkəsi | Qardaş ölkə
+RUSİYA | Ən böyük ölkə | Şimal qonşu | Moskva ölkəsi
+MİSİR | Ehramlar ölkəsi | Nil ölkəsi | Qahirə ölkəsi
+ÇİN | Böyük səddi var | Pekin ölkəsi | Ən çox əhali
+YAPONİYA | Gündoğan ölkə | Sakura ölkəsi | Tokio ölkəsi
+İTALİYA | Çəkmə forması | Roma ölkəsi | Pizza vətəni
+FRANSA | Qalliya | Eyfel ölkəsi | Paris ölkəsi
+KANADA | Ağcaqayın ölkəsi | Ottava ölkəsi | ABŞ qonşusu
+MEKSİKA | Asteklər ölkəsi | Sombrero ölkəsi | ABŞ-ın cənubu
+KUBA | Ada-respublika | Havana ölkəsi | Karib adası
+NORVEÇ | Fiordlar ölkəsi | Oslo ölkəsi | Şimal krallığı
+İSVEÇ | Nobel vətəni | Stokholm ölkəsi | Şimal ölkəsi
+POLŞA | Şopenin vətəni | Varşava ölkəsi | Avropa ölkəsi
+İRAQ | Bağdad ölkəsi | Mesopotamiya | Ərəb ölkəsi
+LİVAN | Sidr ağacı | Beyrut ölkəsi | Aralıq sahili
+OMAN | Muskat ölkəsi | Ərəb sultanlığı | Ərəbistan ucu
+QƏTƏR | Doha ölkəsi | Körfəz əmirliyi | Qazlı ölkə
+YƏMƏN | Səba ölkəsi | Səna ölkəsi | Ərəbistan cənubu
+KENİYA | Safari ölkəsi | Nayrobi ölkəsi | Afrika ölkəsi
+PERU | İnklər ölkəsi | Lima ölkəsi | And ölkəsi
+ÇİLİ | Ən uzun ölkə | Santyaqo ölkəsi | Cənubi Amerika
+MALİ | Timbuktu ölkəsi | Sahara ölkəsi | Afrika dövləti
+TUNİS | Karfagen yeri | Şimali Afrika | Məğrib ölkəsi
+ALMANİYA | Germaniya | Berlin ölkəsi | Alman yurdu
+MACAR | Budapeştli | Avropa xalqı | Dunay xalqı
+ROMA | Əbədi şəhər | İtaliya paytaxtı | Kolizey şəhəri
+PARİS | Luvr şəhəri | Fransa paytaxtı | Eyfel şəhəri
+LONDON | Big Ben şəhəri | İngilis paytaxtı | Temza şəhəri
+MADRİD | Prado şəhəri | İspan paytaxtı | Real komandası
+BERLİN | Divarı yıxılan | Alman paytaxtı | Brandenburg
+MOSKVA | Kreml şəhəri | Rusiya paytaxtı | Qırmızı meydan
+ANKARA | Anıtqəbir yeri | Türk paytaxtı | Türkiyə mərkəzi
+TEHRAN | Milad qülləsi | İran paytaxtı | İran şəhəri
+QAHİRƏ | Ehramlar yanı | Misir paytaxtı | Nil şəhəri
+AFİNA | Akropol şəhəri | Yunan paytaxtı | Olimpiya yurdu
+VYANA | Valslar şəhəri | Avstriya mərkəzi | Dunay şəhəri
+PRAQA | Yüz qüllə şəhəri | Çex paytaxtı | Vltava şəhəri
+TOKİO | Ən iri meqapolis | Yapon paytaxtı | Asiya paytaxtı
+PEKİN | Qadağan şəhər | Çin paytaxtı | Çinin mərkəzi
+SEUL | Han çayı şəhəri | Koreya paytaxtı | Cənubi Koreya
+DEHLİ | Qırmızı qala | Hind paytaxtı | Hindistan şəhəri
+OSLO | Nobel sülh yeri | Norveç paytaxtı | Fiord şəhəri
+BERN | Ayı şəhəri | İsveçrə paytaxtı | Alp şəhəri
+LİMA | Peru paytaxtı | Okean sahili | And şəhəri
+HAVANA | Siqar şəhəri | Kuba paytaxtı | Karib şəhəri
+OTTAVA | Kanada paytaxtı | Parlament təpəsi | Şimal paytaxtı
+MİNSK | Belarus paytaxtı | Svisloç şəhəri | Slavyan şəhəri
+TBİLİSİ | Kür üstündə | Gürcü paytaxtı | Qonşu paytaxt
+BİŞKEK | Frunze | Qırğız paytaxtı | Qırğızıstan
+DAŞKƏND | Özbək paytaxtı | Pambıq şəhəri | Türküstan şəhəri
+ASTANA | Nur-Sultan | Qazax paytaxtı | Bozqır paytaxtı
+KİYEV | Dnepr şəhəri | Ukrayna paytaxtı | Slavyan paytaxtı
+RİQA | Latviya paytaxtı | Baltik şəhəri | Daugava şəhəri
+DUBAY | Bürc Xəlifə yeri | Əmirlik şəhəri | Körfəz şəhəri
+MƏKKƏ | Kəbə şəhəri | Həcc yeri | Müqəddəs şəhər
+İSTANBUL | Bosfor şəhəri | Konstantinopol | Türk metropolu
+NİL | Ən uzun çay | Misir çayı | Afrika çayı
+VOLQA | İtil | Rus çayı | Xəzərə axır
+İRAN | Persiya | Cənub qonşu | Tehran ölkəsi
+DUNAY | Mavi ... valsı | Vyana çayı | Avropa çayı
+AMAZON | Ən sulu çay | Braziliya çayı | Cəngəllik çayı
+REYN | Lorelei qayası | Alman çayı | Avropa çayı adı
+TEMZA | London çayı | İngilis çayı | Britaniya çayı
+SENA | Paris çayı | Fransız çayı | Luvr çayı
+DƏCLƏ | Tigr | Bağdad çayı | İraq çayı
+FƏRAT | Yefrat | İkiçayarası | Suriya çayı
+QANQ | Müqəddəs çay | Benares çayı | Hind çayı
+ELBRUS | Avropa zirvəsi | Qafqaz zirvəsi | Qarlı zirvə
+EVEREST | Comolunqma | Dünyanın damı | Ən uca zirvə
+ALTAY | Türklərin beşiyi | Sibir dağları | Dağ sistemi
+URAL | Qitələr sərhədi | Daş qurşaq | Rusiya dağları
+HİMALAY | Qar məskəni | Ən uca dağlar | Tibet dağları
+SAHARA | Ən böyük səhra | Afrika səhrası | Qum dənizi adı
+QOBİ | Monqol səhrası | Asiya səhrası | Daşlı səhra
+QARAQUM | Türkmən səhrası | Qara qumlar | Orta Asiya qumu
+AFRİKA | İsti qitə | Nil qitəsi | Qara qitə
+ASİYA | Ən böyük qitə | Şərq qitəsi | Çinin qitəsi
+AVROPA | Köhnə qitə | Qərb qitəsi | Fransa qitəsi
+ATLANTİK | Titanik batan | Okean adı | Böyük okean
+SAKİT | ... okean | Ən böyük okean | Fiyi okeanı
+KARİB | ... dənizi | Pirat dənizi | Kuba dənizi
+BALTİK | Kəhrəba dənizi | Riqa dənizi | Şimal dənizi
+EGEY | Yunan dənizi | Adalar dənizi | Aralıq qolu
+BOSFOR | İstanbul boğazı | Dəniz qapısı | Boğaz
+SİBİR | Tayqa diyarı | Şaxta diyarı | Rusiya şərqi
+ALYASKA | Satılan torpaq | ABŞ ştatı | Soyuq ştat
+HAVAY | Ada ştatı | Aloha | Okean adaları
+SİCİLİYA | Etna adası | İtaliya adası | Mafiya adası
+KİPR | Afrodita adası | Aralıq adası | Ada ölkə
+MALTA | Cəngavər adası | Kiçik ada ölkə | Valletta
