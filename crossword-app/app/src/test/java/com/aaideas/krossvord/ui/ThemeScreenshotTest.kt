@@ -80,6 +80,24 @@ class ThemeScreenshotTest {
         shoot("puzzle-dark", ThemeMode.DARK) { PuzzleScreen(vm, isPremium = false) }
     }
 
+    @Test fun holidayHomes() {
+        val vm = vm()
+        vm.open(Screen.HOME)
+        for ((name, day) in listOf(
+            "yeniil" to java.time.LocalDate.of(2026, 12, 28),
+            "novruz" to java.time.LocalDate.of(2027, 3, 18),
+            "ramazan" to java.time.LocalDate.of(2027, 2, 20),
+            "qurban" to java.time.LocalDate.of(2027, 5, 17),
+            "bayram" to java.time.LocalDate.of(2027, 5, 28),
+            "zefer" to java.time.LocalDate.of(2026, 11, 8),
+        )) {
+            vm.today = { day }
+            shoot("home-holiday-$name", ThemeMode.LIGHT) { androidx.compose.foundation.layout.Box { ExpressiveHome(vm) } }
+        }
+        vm.today = { java.time.LocalDate.of(2027, 2, 20) }
+        shoot("home-holiday-ramazan-dark", ThemeMode.DARK) { androidx.compose.foundation.layout.Box { ExpressiveHome(vm) } }
+    }
+
     @Test fun homeLightAndDark() {
         val vm = vm()
         vm.startLevel(0); vm.restartLevel()

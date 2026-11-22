@@ -96,11 +96,16 @@ private fun Modifier.springPress(source: MutableInteractionSource): Modifier {
 fun ExpressiveHome(vm: GameViewModel) {
     var confirmReset by remember { mutableStateOf(false) }
     val cs = MaterialTheme.colorScheme
+    val season = DecorSeason.on(vm.today())
+    Box(Modifier.fillMaxSize()) {
     Column(
         Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(horizontal = 20.dp, vertical = 16.dp),
         verticalArrangement = Arrangement.spacedBy(18.dp),
     ) {
-        Text(BRAND, style = MaterialTheme.typography.headlineMedium)
+        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+            Text(BRAND, style = MaterialTheme.typography.headlineMedium, modifier = Modifier.weight(1f))
+            season?.let { HolidayDecor(it, vm.today()) }
+        }
 
         vm.holiday?.let { HolidayCard(it, vm) }
         vm.newSkin?.let { gift ->
@@ -166,6 +171,9 @@ fun ExpressiveHome(vm: GameViewModel) {
             }
         }
         Spacer(Modifier.height(BottomMenuHeight))
+    }
+    if (season == DecorSeason.YENI_IL) SnowFall(Modifier.matchParentSize())
+    if (season == DecorSeason.BAYRAM) FireworksOnce(Modifier.matchParentSize())
     }
     if (confirmReset) ResetAllDialog(onConfirm = { confirmReset = false; vm.resetAllProgress(); vm.startLevel(0) }, onDismiss = { confirmReset = false })
 }
