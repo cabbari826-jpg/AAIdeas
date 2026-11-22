@@ -176,6 +176,37 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         progress.themeMode = mode.name
     }
 
+    // ---- Themes (skins) ----
+    var skin by mutableStateOf(Skin.fromId(progress.skin))
+        private set
+    var ownedSkins by mutableStateOf(Skin.free + progress.skinsOwned.map { Skin.fromId(it) })
+        private set
+    /** A gift theme just earned; the home screen shows it once. */
+    var newSkin by mutableStateOf<Skin?>(null)
+
+    fun changeSkin(s: Skin) {
+        if (s !in ownedSkins) return
+        skin = s
+        progress.skin = s.id
+        if (newSkin == s) newSkin = null
+    }
+
+    /** Check gift conditions (rank, word-of-the-day streak, Novruz) and keep what was earned. */
+    fun refreshSkins(rankThemes: Set<String> = emptySet()) {
+        val now = Skin.earned(rankThemes, daily.bestStreak)
+        val gained = now - ownedSkins
+        if (gained.isEmpty()) return
+        ownedSkins = ownedSkins + gained
+        progress.skinsOwned = (ownedSkins - Skin.free).map { it.id }.toSet()
+        newSkin = gained.first()
+    }
+
+    /** Prototype only: try every theme without earning it. */
+    fun unlockAllSkinsForTesting() {
+        ownedSkins = Skin.entries.toSet()
+        progress.skinsOwned = Skin.entries.map { it.id }.toSet()
+    }
+
     var dynamicColor by mutableStateOf(progress.dynamicColor)
         private set
 

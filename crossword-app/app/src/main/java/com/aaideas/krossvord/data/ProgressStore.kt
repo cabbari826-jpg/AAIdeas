@@ -47,7 +47,7 @@ class ProgressStore(context: Context) {
 
     /** Forget every level's progress and counters; keep the player's settings. */
     fun resetAll() {
-        val keep = setOf(KEY_INPUT, KEY_HIDE_CLUES, KEY_EXTRA, KEY_THEME, KEY_DYNAMIC, KEY_TUTORIAL, KEY_BIG_CLUES, KEY_SOUND, "large_mode")
+        val keep = setOf(KEY_INPUT, KEY_HIDE_CLUES, KEY_EXTRA, KEY_THEME, KEY_DYNAMIC, KEY_TUTORIAL, KEY_BIG_CLUES, KEY_SOUND, KEY_SKIN, KEY_SKINS_OWNED, "large_mode")
         val e = prefs.edit()
         prefs.all.keys.filter { it !in keep }.forEach { e.remove(it) }
         e.apply()
@@ -76,6 +76,16 @@ class ProgressStore(context: Context) {
     var themeMode: String
         get() = prefs.getString(KEY_THEME, null) ?: "SYSTEM"
         set(v) = prefs.edit().putString(KEY_THEME, v).apply()
+
+    /** Chosen app/grid theme id (see ui.Skin). */
+    var skin: String
+        get() = prefs.getString(KEY_SKIN, null) ?: "klassik"
+        set(v) = prefs.edit().putString(KEY_SKIN, v).apply()
+
+    /** Gift themes already earned; kept even after the streak ends or the holiday passes. */
+    var skinsOwned: Set<String>
+        get() = prefs.getStringSet(KEY_SKINS_OWNED, emptySet()).orEmpty()
+        set(v) = prefs.edit().putStringSet(KEY_SKINS_OWNED, v).apply()
 
     /** Take colours from the phone wallpaper (Android 12+) instead of the app's lavender. */
     var dynamicColor: Boolean
@@ -175,6 +185,8 @@ class ProgressStore(context: Context) {
         const val KEY_EXTRA = "extra_letters"
         const val KEY_THEME = "theme_mode"
         const val KEY_DYNAMIC = "dynamic_color"
+        const val KEY_SKIN = "skin"
+        const val KEY_SKINS_OWNED = "skins_owned"
         const val KEY_FREE_HINTS = "free_hints"
         const val KEY_TUTORIAL = "tutorial_clue_cells_done"
         const val KEY_BIG_CLUES = "big_clues"

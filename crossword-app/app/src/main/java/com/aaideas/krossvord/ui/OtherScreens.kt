@@ -139,6 +139,7 @@ fun SettingsScreen(vm: GameViewModel, isPremium: Boolean) {
             }
         }
         ThemePicker(vm.themeMode, vm::changeTheme, vm.dynamicColor, vm::changeDynamicColor)
+        SkinPicker(vm.skin, vm.ownedSkins, vm::changeSkin, vm::unlockAllSkinsForTesting)
         Text("Hərflərin daxil edilməsi", style = MaterialTheme.typography.headlineSmall)
         listOf(
             InputMode.COLUMNS to "Anaqram: sözü sütunlardakı hərflərdən yığ",

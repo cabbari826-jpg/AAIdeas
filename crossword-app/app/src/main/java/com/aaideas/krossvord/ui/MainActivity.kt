@@ -63,7 +63,7 @@ class MainActivity : ComponentActivity() {
             if (!ready) { Splash(); return@setContent }
             LaunchedEffect(Unit) { pendingIntent?.let { openFrom(it) }; pendingIntent = null }
             val mode = vm.themeMode
-            val dark = mode == ThemeMode.DARK || (mode == ThemeMode.SYSTEM && isSystemInDarkTheme())
+            val dark = vm.skin.alwaysDark || mode == ThemeMode.DARK || (mode == ThemeMode.SYSTEM && isSystemInDarkTheme())
             // Status/nav bar icons must flip with the in-app choice, not only with the phone setting.
             LaunchedEffect(dark) {
                 val bar = if (dark) SystemBarStyle.dark(Color.TRANSPARENT)
@@ -74,7 +74,8 @@ class MainActivity : ComponentActivity() {
             val base = androidx.compose.ui.platform.LocalDensity.current
             val density = if (vm.largeMode) androidx.compose.ui.unit.Density(base.density, maxOf(base.fontScale, LARGE_FONT_SCALE)) else base
             androidx.compose.runtime.CompositionLocalProvider(androidx.compose.ui.platform.LocalDensity provides density) {
-            KrossvordTheme(mode, vm.dynamicColor) {
+            LaunchedEffect(vm.screen) { if (vm.screen == Screen.HOME || vm.screen == Screen.SETTINGS) vm.refreshSkins(com.aaideas.krossvord.model.Ranks.unlockedThemes(vm.xp).toSet()) }
+            KrossvordTheme(mode, vm.dynamicColor, vm.skin) {
                 Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
                     val isPremium by vm.premium.isPremium.collectAsState()
                     BackHandler(enabled = vm.screen != Screen.HOME) { vm.back() }
