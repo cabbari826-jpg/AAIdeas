@@ -451,8 +451,31 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     var welcome by mutableStateOf<Welcome?>(null)
         private set
 
+    // ---- Asking for the daily reminder: never on the first launch; on the second launch or
+    // after the first solved level, once, and only if it is off. ----
+    var askReminder by mutableStateOf(false)
+        private set
+    private var reminderDue = false
+    private fun reminderOn() = com.aaideas.krossvord.remind.DailyReminder.isOn(getApplication())
+
+    private fun maybeAskReminder() {
+        if (!reminderDue || progress.reminderAsked || reminderOn() || welcome != null) return
+        reminderDue = false
+        progress.reminderAsked = true
+        askReminder = true
+    }
+
+    fun closeReminderAsk() { askReminder = false }
+
     /** Called once when the app opens. Gives the birthday life (once a year). */
     fun onAppOpen() {
+        progress.launches = progress.launches + 1
+        if (progress.launches >= 2) reminderDue = true
+        openWelcome()
+        maybeAskReminder()
+    }
+
+    private fun openWelcome() {
         val day = today()
         if (Greeting.isBirthday(day, birthday) && progress.birthdayGiftYear != day.year) {
             progress.birthdayGiftYear = day.year
@@ -478,12 +501,14 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         progress.welcomeDay = today().toEpochDay()
         welcome = null
         // Entered on the birthday itself: the gift still comes today.
-        if (Greeting.isBirthday(today(), md) && progress.birthdayGiftYear != today().year) onAppOpen()
+        if (Greeting.isBirthday(today(), md) && progress.birthdayGiftYear != today().year) openWelcome()
+        maybeAskReminder()
     }
 
     fun dismissWelcome() {
         if (welcome == Welcome.PROFILE) progress.profileAsked = true
         welcome = null
+        maybeAskReminder()
     }
 
     fun hello(): String = Greeting.hello(java.time.LocalTime.now().hour, playerName)
@@ -595,7 +620,10 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     fun packLevels(p: Int): List<Pair<Int, Level>> = packs[p].levels.mapIndexed { i, l -> packStart[p] + i to l }
 
     /** Pack shown on the level list; follows the level being played. */
-    var selectedPack by mutableStateOf(0)
+    var selectedPack by mutableStateOf(-1)
+
+    /** Pack whose levels the home screen shows: the one picked, else the one being played. */
+    val homePack: Int get() = selectedPack.takeIf { it in packs.indices && packOpen(it) } ?: packIndexOf(continueIndex())
 
     val currentLevelNumber: Int get() = numberInPack(levelIndex)
     val currentLevelTitle: String get() = if (playingMini) "Mini krossvord" else levelTitle(levelIndex)
@@ -632,13 +660,14 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     fun open(s: Screen) {
+        if (s == Screen.HOME && completed.isNotEmpty()) { reminderDue = true; maybeAskReminder() }
         if (s == Screen.WORD_OF_DAY) daily.refresh()
         screen = s
     }
 
     fun back() {
         screen = when (screen) {
-            Screen.PUZZLE -> if (playingMini) Screen.DAILY.also { flushTime(); playingMini = false } else Screen.LEVELS
+            Screen.PUZZLE -> if (playingMini) Screen.DAILY.also { flushTime(); playingMini = false } else Screen.HOME.also { if (completed.isNotEmpty()) { reminderDue = true; maybeAskReminder() } }
             else -> Screen.HOME
         }
     }
@@ -757,7 +786,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         if (playingMini) { playingMini = false; game = null; screen = Screen.DAILY; return }
         val go = {
             val next = (levelIndex + 1 until levels.size).firstOrNull { levelOpen(it) }
-            if (next != null) startLevel(next) else screen = Screen.LEVELS
+            if (next != null) startLevel(next) else screen = Screen.HOME
         }
         val since = progress.levelsSinceInterstitial
         if (AdPolicy.shouldShowInterstitial(premium.isPremium.value, completed.size, since)) {

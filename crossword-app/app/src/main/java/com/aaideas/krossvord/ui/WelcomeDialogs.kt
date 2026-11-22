@@ -44,6 +44,9 @@ import java.time.MonthDay
 /** The dialog the app opens with, if any: profile on first run, birthday, or the daily greeting. */
 @Composable
 fun WelcomeHost(vm: GameViewModel) {
+    if (vm.askReminder && vm.screen == Screen.HOME) {
+        Dialog(onDismissRequest = vm::closeReminderAsk, properties = DialogProperties(usePlatformDefaultWidth = false)) { ReminderAsk(vm) }
+    }
     val welcome = vm.welcome ?: return
     Dialog(onDismissRequest = vm::dismissWelcome, properties = DialogProperties(usePlatformDefaultWidth = false)) {
         WelcomeContent(vm, welcome)
@@ -178,5 +181,29 @@ private fun Picker(label: String, value: String, modifier: Modifier, onMinus: ()
                 TextButton(onClick = onPlus, modifier = Modifier.size(44.dp)) { Text("›", fontSize = 22.sp) }
             }
         }
+    }
+}
+
+/** Offer of the 10:00 word-of-the-day reminder; asks Android for permission when needed. */
+@Composable
+fun ReminderAsk(vm: GameViewModel) {
+    val context = androidx.compose.ui.platform.LocalContext.current
+    val remind = com.aaideas.krossvord.remind.DailyReminder
+    val ask = androidx.activity.compose.rememberLauncherForActivityResult(
+        androidx.activity.result.contract.ActivityResultContracts.RequestPermission()
+    ) { granted -> remind.set(context, granted); vm.closeReminderAsk() }
+    CardShell {
+        Badge("⏰")
+        Text("Xatırladaq?", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
+        Text(
+            "Hər gün saat ${remind.HOUR}:00-da günün sözünü xatırladaq. Söz artıq tapılıbsa, narahat etmərik.",
+            style = MaterialTheme.typography.bodyLarge, textAlign = TextAlign.Center, color = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
+        Button(onClick = {
+            if (!remind.canNotify(context) && android.os.Build.VERSION.SDK_INT >= 33) ask.launch(android.Manifest.permission.POST_NOTIFICATIONS)
+            else { remind.set(context, true); vm.closeReminderAsk() }
+        }, modifier = Modifier.fillMaxWidth().height(52.dp)) { Text("Bəli, xatırlat", fontSize = 18.sp) }
+        TextButton(onClick = vm::closeReminderAsk) { Text("Xeyr, sağ olun") }
+        Text("Ayarlardan istənilən vaxt dəyişmək olar", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
     }
 }

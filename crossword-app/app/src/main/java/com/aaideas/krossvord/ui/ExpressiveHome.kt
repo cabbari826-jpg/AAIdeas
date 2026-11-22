@@ -123,17 +123,25 @@ fun ExpressiveHome(vm: GameViewModel) {
             }
         }
 
+        ContinueCard(vm)
         WordOfDayCard(vm.daily) { vm.open(Screen.WORD_OF_DAY) }
         TodayCard(vm)
 
-        ContinueCard(vm)
-
-        // Level grid of the pack the player is on.
-        val p = vm.packIndexOf(vm.continueIndex())
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Text(vm.packs[p].title, style = MaterialTheme.typography.titleLarge, modifier = Modifier.weight(1f))
-            TextButton(onClick = { vm.selectedPack = p; vm.open(Screen.LEVELS) }) { Text("Hamısı ›") }
+        // Packs first, then the levels of the chosen pack, all on this screen.
+        val p = vm.homePack
+        val open = vm.packs.indices.filter { vm.packOpen(it) }
+        if (open.size > 1) {
+            Text("Paketlər", style = MaterialTheme.typography.titleLarge)
+            Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                open.forEach { i ->
+                    val pack = vm.packs[i]
+                    val done = pack.levels.count { it.id in vm.completed }
+                    val icon = com.aaideas.krossvord.model.Holidays.holidayFor(pack.packId)?.icon?.let { "$it " }.orEmpty()
+                    PackCard(icon + pack.title, done, pack.levels.size, selected = i == p) { vm.selectedPack = i }
+                }
+            }
         }
+        Text(vm.packs[p].title, style = MaterialTheme.typography.titleLarge)
         val levels = vm.packLevels(p)
         val current = vm.continueIndex()
         levels.chunked(4).forEach { row ->
@@ -149,18 +157,6 @@ fun ExpressiveHome(vm: GameViewModel) {
                     )
                 }
                 repeat(4 - row.size) { Spacer(Modifier.weight(1f)) }
-            }
-        }
-
-        if (vm.packs.size > 1) {
-            Text("Paketlər", style = MaterialTheme.typography.titleLarge)
-            Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                vm.packs.forEachIndexed { i, pack ->
-                    val done = pack.levels.count { it.id in vm.completed }
-                    PackCard(pack.title, done, pack.levels.size, selected = i == p) {
-                        vm.selectedPack = i; vm.open(Screen.LEVELS)
-                    }
-                }
             }
         }
 
@@ -288,7 +284,7 @@ fun GlassBottomMenu(screen: Screen, open: (Screen) -> Unit, modifier: Modifier =
         Row(Modifier.padding(6.dp), horizontalArrangement = Arrangement.spacedBy(4.dp)) {
             listOf(
                 Triple(Screen.HOME, "▦", "Oyun"),
-                Triple(Screen.LEVELS, "☰", "Səviyyələr"),
+                Triple(Screen.DAILY, "📅", "Bu gün"),
                 Triple(Screen.STATS, "★", "Statistika"),
                 Triple(Screen.SETTINGS, "⚙", "Ayarlar"),
             ).forEach { (target, icon, label) ->
