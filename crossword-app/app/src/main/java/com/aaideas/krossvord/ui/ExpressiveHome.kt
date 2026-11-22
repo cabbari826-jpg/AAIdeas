@@ -102,6 +102,8 @@ fun ExpressiveHome(vm: GameViewModel) {
     ) {
         Text(BRAND, style = MaterialTheme.typography.headlineMedium)
 
+        WordOfDayCard(vm.daily) { vm.open(Screen.WORD_OF_DAY) }
+
         ContinueCard(vm)
 
         // Level grid of the pack the player is on.

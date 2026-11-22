@@ -41,7 +41,7 @@ class MainActivity : ComponentActivity() {
                 Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
                     val isPremium by vm.premium.isPremium.collectAsState()
                     BackHandler(enabled = vm.screen != Screen.HOME) { vm.back() }
-                    val menu = vm.screen != Screen.PUZZLE
+                    val menu = vm.screen != Screen.PUZZLE && vm.screen != Screen.WORD_OF_DAY
                     Box(Modifier.safeDrawingPadding()) {
                         // Leave room under the floating menu so it never hides the last item (home scrolls under it).
                         Box(if (menu && vm.screen != Screen.HOME) Modifier.padding(bottom = BottomMenuHeight) else Modifier) {
@@ -50,6 +50,7 @@ class MainActivity : ComponentActivity() {
                                 Screen.LEVELS -> LevelsScreen(vm)
                                 Screen.PUZZLE -> PuzzleScreen(vm, isPremium)
                                 Screen.SETTINGS -> SettingsScreen(vm, isPremium)
+                                Screen.WORD_OF_DAY -> WordOfDayScreen(vm.daily, isPremium, vm::back)
                             }
                         }
                         if (menu) GlassBottomMenu(vm.screen, vm::open, Modifier.align(Alignment.BottomCenter))

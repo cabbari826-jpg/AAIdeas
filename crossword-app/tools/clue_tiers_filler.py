@@ -14,7 +14,7 @@ TIERS_FILLER = {
 "İSTİ": ["Soyuğun əksi", "Yay havası", "Qızmar"],
 "TORPAQ": ["Yer", "Əkin örtüyü", "Vətən ..."],
 "QALXAN": ["Döyüşçü sipəri", "Zirehli lövhə", "Sipər"],
-"QAPI": ["Giriş yeri", "Açılıb-bağlanır", "Darvaza"],
+"QAPI": ["Giriş yeri", "Açılır, bağlanır", "Darvaza"],
 "CÖKƏ": ["Ağac", "Çayı dərmandır", "Ağ çiçəkli ağac"],
 "VAXT": ["Zaman", "Saat göstərir", "Fürsət"],
 "SARVAN": ["Karvan başçısı", "Dəvə sürən", "Karvançı"],

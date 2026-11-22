@@ -22,7 +22,7 @@ import com.aaideas.krossvord.monetization.LocalPremiumManager
 import com.aaideas.krossvord.monetization.PlaceholderAdService
 import com.aaideas.krossvord.monetization.PremiumManager
 
-enum class Screen { HOME, LEVELS, PUZZLE, SETTINGS }
+enum class Screen { HOME, LEVELS, PUZZLE, SETTINGS, WORD_OF_DAY }
 
 /** How letters are entered. COLUMNS is the default; the others stay as options in settings. */
 enum class InputMode { COLUMNS, TILES, KEYBOARD }
@@ -47,6 +47,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     private val progress = ProgressStore(app)
     val premium: PremiumManager = LocalPremiumManager(app)
     val ads = PlaceholderAdService()
+    val daily = DailyWordGame(app, ads, premium)
 
     var screen by mutableStateOf(Screen.HOME)
         private set
@@ -192,6 +193,14 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     var tutorialStep by mutableStateOf(if (progress.tutorialDone) TUTORIAL_DONE else TUTORIAL_TAP)
         private set
 
+    var bigClues by mutableStateOf(progress.bigClues)
+        private set
+
+    fun changeBigClues(on: Boolean) {
+        bigClues = on
+        progress.bigClues = on
+    }
+
     fun finishTutorial() {
         tutorialStep = TUTORIAL_DONE
         progress.tutorialDone = true
@@ -288,7 +297,10 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     val currentLevelNumber: Int get() = numberInPack(levelIndex)
     val currentLevelTitle: String get() = levelTitle(levelIndex)
 
-    fun open(s: Screen) { screen = s }
+    fun open(s: Screen) {
+        if (s == Screen.WORD_OF_DAY) daily.refresh()
+        screen = s
+    }
 
     fun back() {
         screen = when (screen) {
@@ -333,6 +345,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     /** Wipe all progress (levels, lives, hints) and start again from level 1. */
     fun resetAllProgress() {
         progress.resetAll()
+        daily.reset()
         completed = progress.completedLevels()
         freeHints = progress.freeHints
         game = null

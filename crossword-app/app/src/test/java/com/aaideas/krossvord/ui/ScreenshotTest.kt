@@ -107,4 +107,13 @@ class ScreenshotTest {
             KrossvordTheme { Surface(Modifier.fillMaxSize()) { HomeScreen(vm) } }
         }
     }
+
+    @Test fun wordOfDay() {
+        val vm = vm()
+        vm.daily.refresh()
+        "KƏ".forEach { vm.daily.type(it) }
+        captureRoboImage("build/outputs/roborazzi/word-of-day.png") {
+            KrossvordTheme { Surface(Modifier.fillMaxSize()) { WordOfDayScreen(vm.daily, isPremium = false, onBack = {}) } }
+        }
+    }
 }

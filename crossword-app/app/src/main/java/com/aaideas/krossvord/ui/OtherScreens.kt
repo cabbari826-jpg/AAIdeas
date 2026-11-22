@@ -49,7 +49,9 @@ fun HomeScreen(vm: GameViewModel) {
         Text("Azərbaycanca skandinav krossvordu", style = MaterialTheme.typography.bodyLarge)
         Spacer(Modifier.height(8.dp))
         Text("Həll olunub: ${vm.completed.size} / ${vm.levels.size}", style = MaterialTheme.typography.bodyMedium)
-        Spacer(Modifier.height(32.dp))
+        Spacer(Modifier.height(24.dp))
+        WordOfDayCard(vm.daily) { vm.open(Screen.WORD_OF_DAY) }
+        Spacer(Modifier.height(16.dp))
         Button(onClick = { vm.startLevel(vm.continueIndex()) }, Modifier.fillMaxWidth().height(56.dp)) { Text(vm.continueLabel()) }
         Spacer(Modifier.height(12.dp))
         OutlinedButton(onClick = { vm.open(Screen.LEVELS) }, Modifier.fillMaxWidth().height(56.dp)) { Text("Səviyyə seç") }
@@ -151,6 +153,13 @@ fun SettingsScreen(vm: GameViewModel, isPremium: Boolean) {
                 Text("Qalan ipucları istəyəndə açılır", style = MaterialTheme.typography.bodySmall)
             }
             Switch(checked = vm.hideClues, onCheckedChange = vm::changeHideClues)
+        }
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Column(Modifier.weight(1f)) {
+                Text("Böyük ipucu")
+                Text("Seçilmiş sözün ipucu şəbəkənin altında iri şriftlə də görünür. Telefonda iri şrift varsa, özü açılır.", style = MaterialTheme.typography.bodySmall)
+            }
+            Switch(checked = vm.bigClues, onCheckedChange = vm::changeBigClues)
         }
         Spacer(Modifier.height(8.dp))
         Text("İrəliləyiş", style = MaterialTheme.typography.headlineSmall)

@@ -451,7 +451,7 @@
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Uzunömürlülər",
+      "Çox yaşayanlar",
       "Talış dağları",
       "Dağ rayonu"
      ]
@@ -808,7 +808,7 @@
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Mesopotamiya",
+      "Bağdad ölkəsi",
       "Bağdad ölkəsi",
       "Ərəb ölkəsi"
      ]
@@ -1474,13 +1474,13 @@
      "clueRow": 7,
      "clueCol": 0,
      "answer": "NORVEÇ",
-     "clue": "Skandinaviya",
+     "clue": "Şimal krallığı",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
       "Fiordlar ölkəsi",
       "Oslo ölkəsi",
-      "Skandinaviya"
+      "Şimal krallığı"
      ]
     },
     {

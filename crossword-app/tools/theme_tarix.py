@@ -8,7 +8,7 @@ TIERS = {
 "OPEK": ["Neft kartel", "Neft ixracçıları", "Vyana təşkilatı"],
 "FİFA": ["Sürixdə iqamət", "Dünya kuboku", "Futbol qurumu"],
 "UEFA": ["Nyonda iqamət", "Avrokubok", "Avropa futbolu"],
-"YUNESKO": ["İrs siyahısı", "Elm-mədəniyyət", "BMT təşkilatı"],
+"YUNESKO": ["İrs siyahısı", "Elm təşkilatı", "BMT təşkilatı"],
 "İNTERPOL": ["Lionda iqamət", "Beynəlxalq polis", "Polis təşkilatı"],
 "MDB": ["1991-də yarandı", "Minsk sazişi", "Birlik"],
 # Treaties and conferences
@@ -17,7 +17,7 @@ TIERS = {
 "YALTA": ["1945 konfransı", "Livadiya sarayı", "Üç böyük"],
 "POTSDAM": ["Sansusi sarayı", "1945 görüşü", "Alman şəhəri"],
 "VESTFAL": ["1648 sülhü", "Otuzillik sonu", "Sülh adı"],
-"BREST": ["1918 sülhü", "Qala-qəhrəman", "Belarus şəhəri"],
+"BREST": ["1918 sülhü", "Qəhrəman qala", "Belarus şəhəri"],
 # Battles and wars
 "TROYA": ["Taxta at", "Heleni üçün", "İliada şəhəri"],
 "VATERLO": ["Napoleonun sonu", "1815 döyüşü", "Belçika kəndi"],
@@ -26,7 +26,7 @@ TIERS = {
 "ÇALDIRAN": ["1514 döyüşü", "İsmayıl-Səlim", "Döyüş yeri"],
 "MALAZGİRD": ["1071 qələbəsi", "Alparslan", "Anadolu qapısı"],
 "SƏLİB": ["... yürüşləri", "Xaçlılar", "Orta əsr yürüşü"],
-"PUNİK": ["... müharibələri", "Roma-Karfagen", "Karfagen savaşı"],
+"PUNİK": ["... müharibələri", "Roma Karfagenə", "Karfagen savaşı"],
 "İSTİLA": ["Zəbt", "İşğal", "Fəth"],
 # Rulers and leaders of the past
 "BABƏK": ["Bəzz qalası", "Xürrəmilər başı", "Xürrəmi sərkərdə"],
