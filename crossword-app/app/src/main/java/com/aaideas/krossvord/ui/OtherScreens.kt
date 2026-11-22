@@ -72,6 +72,13 @@ fun LevelsScreen(vm: GameViewModel) {
     }
 }
 
+/** Authors of the open word lists we use. Add a line for every new source (see content/SOURCES.md). */
+val CREDITS = listOf(
+    "Söz siyahısı: Azərbaycan dili üçün Hunspell lüğəti (Mozilla Azerbaijani L10n; " +
+        "Metin Amiroff, Kevin Scannell, Orkhan Jafarov). Lisenziya: MPL-2.0, " +
+        "github.com/mozillaz/spellchecker",
+)
+
 @Composable
 fun SettingsScreen(vm: GameViewModel, isPremium: Boolean) {
     Column(
@@ -117,8 +124,10 @@ fun SettingsScreen(vm: GameViewModel, isPremium: Boolean) {
         else Button(onClick = vm.premium::purchase) { Text("Premium al (test, ödənişsiz)") }
         Text("Prototip: alış hələ Google Play Billing ilə bağlı deyil.", style = MaterialTheme.typography.bodySmall)
         Spacer(Modifier.height(8.dp))
-        Text("Mənbələr", style = MaterialTheme.typography.headlineSmall)
+        Text("Proqram haqqında", style = MaterialTheme.typography.headlineSmall)
+        Text("Mənbələr", style = MaterialTheme.typography.titleMedium)
         Text("Bu paketdəki sözlər və ipucları qaralamadır, redaktə gözləyir.", style = MaterialTheme.typography.bodyMedium)
+        CREDITS.forEach { Text(it, style = MaterialTheme.typography.bodySmall) }
     }
 }
 

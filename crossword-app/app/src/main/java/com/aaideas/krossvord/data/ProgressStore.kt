@@ -37,7 +37,7 @@ class ProgressStore(context: Context) {
         }.toSet()
 
     fun resetLevel(levelId: String) {
-        prefs.edit().remove("typed_$levelId").remove("revealed_$levelId").remove("clues_$levelId").remove("keyword_$levelId").remove("lives_$levelId")
+        prefs.edit().remove("typed_$levelId").remove("revealed_$levelId").remove("clues_$levelId").remove("keyword_$levelId").remove("lives_$levelId").remove("tiers_$levelId")
             .putStringSet(KEY_DONE, completedLevels() - levelId).apply()
     }
 
@@ -71,6 +71,14 @@ class ProgressStore(context: Context) {
     fun saveLives(levelId: String, lives: Int) = prefs.edit().putInt("lives_$levelId", lives).apply()
     fun loadLives(levelId: String): Int? =
         if (prefs.contains("lives_$levelId")) prefs.getInt("lives_$levelId", 3) else null
+
+    fun saveClueTiers(levelId: String, tiers: Map<Int, Int>) =
+        prefs.edit().putString("tiers_$levelId", tiers.entries.joinToString(",") { "${it.key}:${it.value}" }).apply()
+
+    fun loadClueTiers(levelId: String): Map<Int, Int> =
+        prefs.getString("tiers_$levelId", null).orEmpty().split(',').mapNotNull {
+            val p = it.split(':'); if (p.size == 2) p[0].toIntOrNull()?.let { k -> p[1].toIntOrNull()?.let { v -> k to v } } else null
+        }.toMap()
 
     fun saveOpenedClues(levelId: String, ids: Set<Int>) {
         prefs.edit().putString("clues_$levelId", ids.joinToString(",")).apply()

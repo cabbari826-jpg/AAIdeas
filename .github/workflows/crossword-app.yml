@@ -17,6 +17,27 @@ jobs:
           distribution: temurin
           java-version: 17
       - uses: gradle/actions/setup-gradle@v4
+      # Robolectric downloads android-all at test time and Maven Central often
+      # answers 429. Pre-fetch it (with retries, from Google's mirror) into ~/.m2,
+      # where Robolectric looks first, and cache it between runs.
+      - uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository/org/robolectric/android-all-instrumented
+          key: robolectric-android-all-15-12650502-i7
+      - name: Pre-fetch Robolectric android-all
+        run: |
+          v=15-robolectric-12650502-i7
+          d=~/.m2/repository/org/robolectric/android-all-instrumented/$v
+          mkdir -p "$d"
+          for ext in jar pom; do
+            f="$d/android-all-instrumented-$v.$ext"
+            [ -s "$f" ] && continue
+            for base in https://maven-central.storage-download.googleapis.com/maven2 https://repo1.maven.org/maven2; do
+              curl -fsSL --retry 5 --retry-all-errors --retry-delay 5 -o "$f" \
+                "$base/org/robolectric/android-all-instrumented/$v/android-all-instrumented-$v.$ext" && break
+            done
+            [ -s "$f" ]
+          done
       - run: ./gradlew testDebugUnitTest assembleDebug
       - uses: actions/upload-artifact@v4
         with:
