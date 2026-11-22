@@ -13,9 +13,9 @@ object WordBuilder {
     const val EXTRA_LETTERS = 3
     private const val DECOY_POOL = "AAƏƏIİLRNMEDKSYTUBQOŞÇZGÜXHVÖPCĞ"
 
-    /** Board spots: at least 12 (3 per column), a multiple of 4. */
+    /** Board spots: at least 16 (4 per column), a multiple of 4. */
     fun spotCount(letters: Int): Int {
-        val n = maxOf(12, letters)
+        val n = maxOf(16, letters)
         return (n + COLUMNS - 1) / COLUMNS * COLUMNS
     }
 
@@ -25,7 +25,7 @@ object WordBuilder {
         if (open.isEmpty()) return emptyList()
         val rnd = Random(state.board.level.id.hashCode() * 17 + entry.id * 7919 + open.size * 131 + shuffle)
         val needed = open.map { state.board.solution.getValue(it) }
-        val neighbours = neighbourLetters(state, entry, targetLetters(needed.size) - needed.size)
+        val neighbours = neighbourLetters(state, entry, targetLetters(needed.size) - needed.size, rnd)
         val decoys = if (extra) List(EXTRA_LETTERS) { DECOY_POOL[rnd.nextInt(DECOY_POOL.length)] } else emptyList()
         val all = needed + neighbours + decoys
         val spots = arrayOfNulls<Char>(spotCount(all.size))
@@ -34,20 +34,19 @@ object WordBuilder {
     }
 
     /** How many letters to show for a word with [needed] open cells: never a near-certain guess. */
-    fun targetLetters(needed: Int): Int = minOf(12, maxOf(needed + 5, 9)).coerceAtLeast(needed)
+    fun targetLetters(needed: Int): Int = minOf(16, maxOf(needed + 10, 14)).coerceAtLeast(needed)
 
     /**
      * Instead of random decoys: letters of other unsolved words of the level, so every letter
-     * on the board belongs to some real answer. Crossing words first, then the next words in order.
+     * on the board belongs to some real answer. Words are taken from the whole level in random order,
+     * so the extra letters don't point at the crossing words.
      */
-    fun neighbourLetters(state: GameState, entry: Entry, count: Int): List<Char> {
+    fun neighbourLetters(state: GameState, entry: Entry, count: Int, rnd: Random = Random(0)): List<Char> {
         if (count <= 0) return emptyList()
         val own = entry.cells.toSet()
-        val all = state.board.level.entries
-        val i = all.indexOf(entry)
-        val crossing = entry.cells.flatMap { state.board.entriesAt[it].orEmpty() }.filter { it != entry }
-        val order = (crossing + all.drop(i + 1) + all.take(i)).distinct()
+        val order = state.board.level.entries
             .filter { it != entry && !state.isEntrySolved(it) }
+            .shuffled(rnd)
         val out = mutableListOf<Char>()
         for (e in order) {
             for (c in state.openCells(e)) {

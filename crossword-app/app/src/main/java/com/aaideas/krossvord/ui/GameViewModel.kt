@@ -32,6 +32,9 @@ enum class WordFeedback { RIGHT, WRONG }
 /** Free hints for guessing the key word before its letters are all in the grid. */
 const val KEYWORD_BONUS_HINTS = 2
 
+/** Wrong words allowed per level before the player must watch an ad or restart. */
+const val MAX_LIVES = 3
+
 class GameViewModel(app: Application) : AndroidViewModel(app) {
     val packs: List<Pack> = PackRepository(app).bundledPacks()
     val levels: List<Level> = packs.flatMap { it.levels }
@@ -71,6 +74,23 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         private set
     var freeHints by mutableStateOf(progress.freeHints)
         private set
+    var lives by mutableStateOf(MAX_LIVES)
+        private set
+    val outOfLives: Boolean get() = lives <= 0
+
+    private fun loseLife() {
+        lives = (lives - 1).coerceAtLeast(0)
+        game?.let { progress.saveLives(it.board.level.id, lives) }
+    }
+
+    /** Out of lives: one more life after a rewarded ad (free for premium). */
+    fun extraLife() {
+        val give: () -> Unit = {
+            lives = 1
+            game?.let { progress.saveLives(it.board.level.id, lives) }
+        }
+        if (premium.isPremium.value) give() else ads.showRewarded("+1 can", give)
+    }
     var showKeywordDialog by mutableStateOf(false)
         private set
     var keywordWrong by mutableStateOf(false)
@@ -134,6 +154,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     fun pickLetter(index: Int) {
         val s = game ?: return
         val e = s.activeEntry ?: return
+        if (outOfLives) return
         if (feedback == WordFeedback.WRONG) feedback = null
         val picks = draft()
         val open = s.openCells(e)
@@ -163,6 +184,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
             update { it.openClue(e).submitWord(e, word).first }
         } else {
             mistakes++
+            loseLife()
             feedback = WordFeedback.WRONG
             viewModelScope.launch {
                 delay(700)
@@ -200,6 +222,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         feedback = null
         draftPicks = emptyList()
         mistakes = 0
+        lives = progress.loadLives(level.id) ?: MAX_LIVES
         screen = Screen.PUZZLE
     }
 
@@ -216,7 +239,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         if (feedback == WordFeedback.RIGHT) feedback = null
         update(f)
     }
-    fun type(ch: Char) = update { it.type(ch) }
+    fun type(ch: Char) { if (!outOfLives) update { it.type(ch) } }
     fun backspace() = update { it.backspace() }
     fun clearWord() = update { it.clearActiveEntry() }
 
@@ -259,6 +282,9 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         }
         game = s
         val id = s.board.level.id
+        // Tiles/keyboard modes: a word that just became complete but wrong costs a life.
+        val newlyWrong = s.board.level.entries.count { s.isEntryWrong(it) && !old.isEntryWrong(it) }
+        repeat(newlyWrong) { loseLife() }
         if (s.isComplete && !old.isComplete) {
             progress.markCompleted(id)
             progress.levelsSinceInterstitial = progress.levelsSinceInterstitial + 1

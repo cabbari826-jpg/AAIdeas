@@ -18,7 +18,7 @@
      "clueRow": 1,
      "clueCol": 0,
      "answer": "OD",
-     "clue": "Alov",
+     "clue": "Ocaqda yanır",
      "source": "claude-draft",
      "status": "candidate"
     },
@@ -28,7 +28,7 @@
      "clueRow": 1,
      "clueCol": 3,
      "answer": "AŞ",
-     "clue": "Plov",
+     "clue": "Düyü yeməyi",
      "source": "claude-draft",
      "status": "candidate"
     },
@@ -38,7 +38,7 @@
      "clueRow": 2,
      "clueCol": 0,
      "answer": "TARLA",
-     "clue": "Əkin yeri",
+     "clue": "Kəndlinin sahəsi",
      "source": "claude-draft",
      "status": "candidate"
     },
@@ -48,7 +48,7 @@
      "clueRow": 3,
      "clueCol": 0,
      "answer": "AD",
-     "clue": "İsim",
+     "clue": "... günü",
      "source": "claude-draft",
      "status": "candidate"
     },
@@ -58,7 +58,7 @@
      "clueRow": 3,
      "clueCol": 3,
      "answer": "MİS",
-     "clue": "Qırmızı metal",
+     "clue": "Samovar metalı",
      "source": "claude-draft",
      "status": "candidate"
     },
@@ -68,7 +68,7 @@
      "clueRow": 4,
      "clueCol": 2,
      "answer": "QARA",
-     "clue": "Ağın əksi",
+     "clue": "... dəniz",
      "source": "claude-draft",
      "status": "candidate"
     },
@@ -78,7 +78,7 @@
      "clueRow": 6,
      "clueCol": 0,
      "answer": "ALİM",
-     "clue": "Elm adamı",
+     "clue": "Akademik",
      "source": "claude-draft",
      "status": "candidate"
     },
@@ -88,7 +88,7 @@
      "clueRow": 7,
      "clueCol": 0,
      "answer": "TUT",
-     "clue": "Şirin giləmeyvə",
+     "clue": "İpəkqurdu yeyir",
      "source": "claude-draft",
      "status": "candidate"
     },
@@ -98,7 +98,7 @@
      "clueRow": 0,
      "clueCol": 1,
      "answer": "OTAQ",
-     "clue": "Evin hissəsi",
+     "clue": "Yataq ...",
      "source": "claude-draft",
      "status": "candidate"
     },
@@ -108,7 +108,7 @@
      "clueRow": 5,
      "clueCol": 1,
      "answer": "AT",
-     "clue": "Minik heyvanı",
+     "clue": "Qarabağ cinsi",
      "source": "claude-draft",
      "status": "candidate"
     },
@@ -118,7 +118,7 @@
      "clueRow": 0,
      "clueCol": 2,
      "answer": "DAD",
-     "clue": "Ləzzət",
+     "clue": "Şirin, acı, turş",
      "source": "claude-draft",
      "status": "candidate"
     },
@@ -128,7 +128,7 @@
      "clueRow": 4,
      "clueCol": 2,
      "answer": "ULU",
-     "clue": "Böyük, qədim",
+     "clue": "Çox qədim",
      "source": "claude-draft",
      "status": "candidate"
     },
@@ -138,7 +138,7 @@
      "clueRow": 5,
      "clueCol": 3,
      "answer": "İT",
-     "clue": "Sadiq heyvan",
+     "clue": "Çoban köməkçisi",
      "source": "claude-draft",
      "status": "candidate"
     },
@@ -148,7 +148,7 @@
      "clueRow": 0,
      "clueCol": 4,
      "answer": "ALMA",
-     "clue": "Quba meyvəsi",
+     "clue": "Nyuton meyvəsi",
      "source": "claude-draft",
      "status": "candidate"
     },
@@ -158,7 +158,7 @@
      "clueRow": 0,
      "clueCol": 5,
      "answer": "ŞAİR",
-     "clue": "Şeir yazan",
+     "clue": "Nizami, Füzuli",
      "source": "claude-draft",
      "status": "candidate"
     },
@@ -168,7 +168,7 @@
      "clueRow": 2,
      "clueCol": 6,
      "answer": "SAHİL",
-     "clue": "Dəniz kənarı",
+     "clue": "Dənizin qırağı",
      "source": "claude-draft",
      "status": "candidate"
     }
@@ -216,7 +216,7 @@
      "clueRow": 1,
      "clueCol": 0,
      "answer": "SƏDA",
-     "clue": "Səs",
+     "clue": "Əks ...",
      "source": "claude-draft",
      "status": "candidate"
     },
@@ -226,7 +226,7 @@
      "clueRow": 2,
      "clueCol": 3,
      "answer": "NUR",
-     "clue": "İşıq",
+     "clue": "İşıq, parıltı",
      "source": "claude-draft",
      "status": "candidate"
     },
@@ -236,7 +236,7 @@
      "clueRow": 3,
      "clueCol": 2,
      "answer": "AD",
-     "clue": "İsim",
+     "clue": "... günü",
      "source": "claude-draft",
      "status": "candidate"
     },
@@ -246,7 +246,7 @@
      "clueRow": 4,
      "clueCol": 0,
      "answer": "KÜR",
-     "clue": "Böyük çay",
+     "clue": "Ən uzun çayımız",
      "source": "claude-draft",
      "status": "candidate"
     },
@@ -256,7 +256,7 @@
      "clueRow": 4,
      "clueCol": 4,
      "answer": "SU",
-     "clue": "İçməli maye",
+     "clue": "Həyat mənbəyi",
      "source": "claude-draft",
      "status": "candidate"
     },
@@ -266,7 +266,7 @@
      "clueRow": 5,
      "clueCol": 2,
      "answer": "ADA",
-     "clue": "Suda quru",
+     "clue": "Pirallahı",
      "source": "claude-draft",
      "status": "candidate"
     },
@@ -276,7 +276,7 @@
      "clueRow": 6,
      "clueCol": 2,
      "answer": "BAR",
-     "clue": "Ağacın məhsulu",
+     "clue": "Ağacın bəhrəsi",
      "source": "claude-draft",
      "status": "candidate"
     },
@@ -286,7 +286,7 @@
      "clueRow": 7,
      "clueCol": 1,
      "answer": "YAĞIŞ",
-     "clue": "Buluddan yağır",
+     "clue": "Çətir lazım olar",
      "source": "claude-draft",
      "status": "candidate"
     },
@@ -296,7 +296,7 @@
      "clueRow": 0,
      "clueCol": 1,
      "answer": "SƏKKİZ",
-     "clue": "Yeddidən sonra",
+     "clue": "2 × 4",
      "source": "claude-draft",
      "status": "candidate"
     },
@@ -306,7 +306,7 @@
      "clueRow": 2,
      "clueCol": 3,
      "answer": "ARABA",
-     "clue": "Fayton",
+     "clue": "Atlı ...",
      "source": "claude-draft",
      "status": "candidate"
     },
@@ -326,7 +326,7 @@
      "clueRow": 4,
      "clueCol": 4,
      "answer": "DAĞ",
-     "clue": "Uca zirvə",
+     "clue": "Bazardüzü",
      "source": "claude-draft",
      "status": "candidate"
     },
@@ -336,7 +336,7 @@
      "clueRow": 3,
      "clueCol": 5,
      "answer": "SARI",
-     "clue": "Limon rəngi",
+     "clue": "Zəfəran rəngi",
      "source": "claude-draft",
      "status": "candidate"
     },
@@ -346,7 +346,7 @@
      "clueRow": 0,
      "clueCol": 6,
      "answer": "ARZU",
-     "clue": "İstək",
+     "clue": "Ürəyin istəyi",
      "source": "claude-draft",
      "status": "candidate"
     }

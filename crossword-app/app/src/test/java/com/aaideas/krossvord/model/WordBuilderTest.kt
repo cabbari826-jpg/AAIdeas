@@ -13,11 +13,11 @@ class WordBuilderTest {
     @Test fun boardHoldsTheWordPlusNeighbourLetters() {
         val s = GameState.start(board)
         val spots = WordBuilder.letters(s, alma)
-        assertEquals(12, spots.size)
+        assertEquals(16, spots.size)
         // ALMA plus the only other open letter of the level: D of AD (its A is shared with ALMA).
         assertEquals("AADLM", spots.filterNotNull().sorted().joinToString(""))
         val cols = (0 until 4).map { WordBuilder.column(spots, it).size }
-        assertEquals(listOf(3, 3, 3, 3), cols)
+        assertEquals(listOf(4, 4, 4, 4), cols)
     }
 
     @Test fun extraLettersAreOptional() {
@@ -27,9 +27,9 @@ class WordBuilderTest {
     }
 
     @Test fun spotCountGrowsWithLongWords() {
-        assertEquals(12, WordBuilder.spotCount(2))
-        assertEquals(12, WordBuilder.spotCount(12))
-        assertEquals(16, WordBuilder.spotCount(13))
+        assertEquals(16, WordBuilder.spotCount(2))
+        assertEquals(16, WordBuilder.spotCount(16))
+        assertEquals(20, WordBuilder.spotCount(17))
     }
 
     @Test fun lockedLettersAreNotOnTheBoard() {
@@ -43,7 +43,7 @@ class WordBuilderTest {
             val s = GameState.start(Board(level))
             for (e in level.entries) {
                 val shown = WordBuilder.letters(s, e).filterNotNull().size
-                assertTrue("${e.answer}: only $shown letters", shown >= minOf(9, s.board.solution.size))
+                assertTrue("${e.answer}: only $shown letters", shown >= minOf(14, s.board.solution.size))
             }
         }
     }

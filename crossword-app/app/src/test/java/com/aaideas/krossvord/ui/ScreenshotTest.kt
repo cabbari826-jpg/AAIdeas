@@ -39,6 +39,22 @@ class ScreenshotTest {
         shoot(vm, "puzzle")
     }
 
+    /** Three wrong words: lives run out and the player is offered an ad or a restart. */
+    @Test fun outOfLives() {
+        val vm = vm()
+        vm.startLevel(0)
+        vm.restartLevel()
+        repeat(3) {
+            val letters = vm.columnLetters()
+            // "DO" instead of "OD": always wrong.
+            vm.pickLetter(letters.indexOf('D'))
+            vm.pickLetter(letters.indexOf('O'))
+            vm.clearDraft()
+        }
+        org.junit.Assert.assertTrue(vm.outOfLives)
+        shoot(vm, "puzzle-no-lives")
+    }
+
     @Test fun puzzleTiles() {
         val vm = vm()
         vm.setInput(InputMode.TILES)

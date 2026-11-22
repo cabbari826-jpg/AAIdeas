@@ -14,7 +14,7 @@ class ProgressStore(context: Context) {
 
     fun markCompleted(levelId: String) {
         prefs.edit().putStringSet(KEY_DONE, completedLevels() + levelId).remove("typed_$levelId")
-            .remove("revealed_$levelId").apply()
+            .remove("revealed_$levelId").remove("lives_$levelId").apply()
     }
 
     fun saveTyped(levelId: String, typed: Map<Cell, Char>, revealed: Set<Cell>) {
@@ -37,7 +37,7 @@ class ProgressStore(context: Context) {
         }.toSet()
 
     fun resetLevel(levelId: String) {
-        prefs.edit().remove("typed_$levelId").remove("revealed_$levelId").remove("clues_$levelId").remove("keyword_$levelId")
+        prefs.edit().remove("typed_$levelId").remove("revealed_$levelId").remove("clues_$levelId").remove("keyword_$levelId").remove("lives_$levelId")
             .putStringSet(KEY_DONE, completedLevels() - levelId).apply()
     }
 
@@ -67,6 +67,10 @@ class ProgressStore(context: Context) {
 
     fun saveKeywordGuessed(levelId: String) = prefs.edit().putBoolean("keyword_$levelId", true).apply()
     fun loadKeywordGuessed(levelId: String) = prefs.getBoolean("keyword_$levelId", false)
+
+    fun saveLives(levelId: String, lives: Int) = prefs.edit().putInt("lives_$levelId", lives).apply()
+    fun loadLives(levelId: String): Int? =
+        if (prefs.contains("lives_$levelId")) prefs.getInt("lives_$levelId", 3) else null
 
     fun saveOpenedClues(levelId: String, ids: Set<Int>) {
         prefs.edit().putString("clues_$levelId", ids.joinToString(",")).apply()

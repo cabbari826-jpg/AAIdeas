@@ -78,6 +78,12 @@ fun PuzzleScreen(vm: GameViewModel, isPremium: Boolean) {
             TextButton(onClick = vm::back) { Text("← Səviyyələr") }
             Spacer(Modifier.weight(1f))
             Text(
+                "♥".repeat(vm.lives) + "♡".repeat(MAX_LIVES - vm.lives),
+                color = MaterialTheme.colorScheme.error,
+                fontSize = 18.sp,
+                modifier = Modifier.padding(end = 10.dp).semantics { contentDescription = "Can: ${vm.lives}" },
+            )
+            Text(
                 "Səviyyə ${vm.currentLevelNumber} · ${game.solvedCount}/${game.board.level.entries.size}",
                 style = MaterialTheme.typography.titleSmall,
             )
@@ -118,6 +124,17 @@ fun PuzzleScreen(vm: GameViewModel, isPremium: Boolean) {
         }
     }
     if (vm.showKeywordDialog) KeywordDialog(vm)
+    if (vm.outOfLives && !vm.showCompletion && vm.ads.pending == null) {
+        AlertDialog(
+            onDismissRequest = {},
+            title = { Text("Canlar bitdi") },
+            text = { Text("Üç səhv söz. Reklama bax və bir can al, ya da səviyyəni yenidən başla.") },
+            confirmButton = {
+                Button(onClick = vm::extraLife) { Text(if (isPremium) "+1 can" else "+1 can ▶ reklam") }
+            },
+            dismissButton = { TextButton(onClick = vm::restartLevel) { Text("Yenidən başla") } },
+        )
+    }
     if (vm.showCompletion) {
         AlertDialog(
             onDismissRequest = vm::dismissCompletion,
@@ -339,12 +356,14 @@ private fun TileInput(tiles: List<Tile>, onLetter: (Char) -> Unit, onBackspace: 
     }
 }
 
+private val TILE = 46.dp
+
 @Composable
 private fun LetterTile(tile: Tile, onClick: () -> Unit) {
     val scale by animateFloatAsState(if (tile.used) 0.8f else 1f, tween(180), label = "tileScale")
     val alpha by animateFloatAsState(if (tile.used) 0.25f else 1f, tween(180), label = "tileAlpha")
     Surface(
-        modifier = Modifier.size(52.dp).graphicsLayer { scaleX = scale; scaleY = scale; this.alpha = alpha }
+        modifier = Modifier.size(TILE).graphicsLayer { scaleX = scale; scaleY = scale; this.alpha = alpha }
             .clickable(enabled = !tile.used, onClick = onClick)
             .semantics { contentDescription = "Hərf ${tile.letter}" },
         shape = RoundedCornerShape(12.dp),
@@ -354,7 +373,7 @@ private fun LetterTile(tile: Tile, onClick: () -> Unit) {
         Box(contentAlignment = Alignment.Center) {
             Text(
                 tile.letter.toString(),
-                fontSize = 24.sp,
+                fontSize = 22.sp,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.onPrimaryContainer,
             )
@@ -387,7 +406,7 @@ private fun ColumnsInput(
         }
     }
     Row(
-        Modifier.fillMaxWidth().height(196.dp).padding(top = 4.dp),
+        Modifier.fillMaxWidth().height(212.dp).padding(top = 4.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         for (c in 0..1) LetterColumn(WordBuilder.column(letters, c), draft, onPick)
@@ -451,10 +470,10 @@ private fun LetterColumn(items: List<IndexedValue<Char?>>, draft: List<Int>, onP
     val haptic = LocalHapticFeedback.current
     Column(
         Modifier.padding(horizontal = 3.dp).fillMaxHeight(),
-        verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterVertically),
+        verticalArrangement = Arrangement.spacedBy(6.dp, Alignment.CenterVertically),
     ) {
         items.forEach { (index, ch) ->
-            if (ch == null) { Spacer(Modifier.size(52.dp)); return@forEach }
+            if (ch == null) { Spacer(Modifier.size(TILE)); return@forEach }
             key(index, ch) {
                 LetterTile(Tile(ch, used = index in draft)) {
                     haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
