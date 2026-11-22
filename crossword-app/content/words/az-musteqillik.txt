@@ -27,7 +27,7 @@ MƏTBUAT | Qəzet-jurnal | Söz azadlığı | Media
 MƏKTƏBLİ | Şagird | Məktəbə gedən | Portfelli uşaq
 QURULUŞ | Sistem | Təşkilat forması | Dövlət forması
 NÜMAYƏNDƏ | Təmsilçi | Deputat | Elçi kimi
-DEPUTAT | Məclis üzvü | Seçilmiş | Xalq nümayəndəsi
+DEPUTAT | Məclis üzvü | Seçilmiş | Xalqın elçisi
 SƏS | Seçkidə verilən | Səda | Eşidilən
 QƏRAR | Rəsmi hökm | Qət etmə | Qət olunmuş
 XİLASKAR | Qurtaran | Nicat verən | Xilas edən

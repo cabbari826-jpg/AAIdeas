@@ -139,7 +139,7 @@ TÜLKÜ | Nağılda hiyləgər | Kürkü qırmızı | Hiyləgər heyvan
 ARA | Məsafə | Boşluq | Fasilə
 ƏL | Ovuc sahibi | Qolun ucu | Barmaqlar yeri
 KƏLƏM | Dolması olur | Yarpaqlı baş | Ağ tərəvəz
-ASTA | Tələsmədən | Yavaş-yavaş | Yavaş
+ASTA | Tələsmədən | Yavaş, yavaş | Yavaş
 LALƏ | Qırmızı çöl gülü | Hollandiya gülü | Yaz çiçəyi
 ƏRİK | Qurusu qaysı | Ordubad meyvəsi | Sarı meyvə
 İRİ | Yekə | Kiçiyin əksi | Böyük

@@ -12,7 +12,7 @@ DÖŞƏMƏ | Ayaq altı | Otağın altı | Parket
 KÜNC | Bucaq | İki divar arası | Otaq bucağı
 SƏTƏL | Mis vedrə | Sərnic | Su qabı
 SƏRNİC | Böyük vedrə | Süd qabı | Mis qab
-KƏTİL | Söykənəcəksiz | Kiçik stul | Taburet
+KƏTİL | Arxasız stul | Kiçik stul | Taburet
 MÜTƏKKƏ | Uzun yastıq | Söykənmə yastığı | Döşəkcə
 PALAZ | Xovsuz xalça | Yer örtüyü | Kilim növü
 CECİM | Toxunma örtük | Zolaqlı kilim | Xovsuz toxuma
@@ -37,7 +37,7 @@ BİLET | Gediş kağızı | Kassada alınır | Giriş kağızı
 KASSA | Pul qəbulu | Bilet satan | Kassir yeri
 TAKSİ | Sarı maşın | Ödənişli maşın | Kirayə maşın
 MİKRORAYON | Yaşayış massivi | Məhəllə qrupu | Rayon hissəsi
-BİNA | Tikili | Ev, qurğu | Çoxmərtəbəli
+BİNA | Tikili | Ev, qurğu | Çox qatlı ev
 MƏRTƏBƏ | Bina qatı | Etaj | Qat
 LİFT | Qalxan kabin | Elevator | Mərtəbə qaldıran
 DAM | Evin üstü | Örtük | Çardaq üstü

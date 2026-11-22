@@ -233,7 +233,7 @@
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Külək çərşənbəsi",
+      "Hava çərşənbəsi",
       "Əsən hava",
       "Yüngül külək"
      ]
@@ -346,7 +346,7 @@
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Su çərşənbəsində",
+      "Su günü yeri",
       "Dağ çeşməsi",
       "Yerdən çıxan su"
      ]
@@ -730,7 +730,7 @@
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Döyüşdürülür",
+      "Döyüşdə vurulur",
       "Boyanır",
       "Toyuq verir"
      ]

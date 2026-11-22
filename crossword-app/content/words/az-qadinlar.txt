@@ -41,7 +41,7 @@ TÜL | Pəncərə pərdəsi | Nazik toxuma | Şəffaf parça
 TİKMƏ | Əl işi naxış | Gülbətin işi | İynə işi
 TOXUCU | Xalça toxuyan | Toxuma ustası | Xalçaçı
 XALÇAÇI | Xalça ustası | Xovlu iş ustası | Toxucu qadın
-QƏŞƏNG | Gözəl | Göyçək | Bəzəkli-düzəkli
+QƏŞƏNG | Gözəl | Göyçək | Bəzəkli
 SƏLİQƏ | Təmizlik, nizam | Sahman | Hər şey yerində
 MƏTANƏT | Sarsılmaz ruh | Möhkəm iradə | Dəyanət
 DƏYANƏT | Səbatlılıq | Dözümlülük | Əyilməzlik

@@ -26,7 +26,7 @@ BÖCƏK | Cücü | Qanadlı canlı | Altıayaqlı
 QURD | Canavar | Torpaqda yaşayan | Boz yırtıcı
 EŞŞƏK | Ulaq | Yükdaşıyan | İnadkar heyvan
 DANA | Buzovdan böyük | Gənc öküz | Mal balası
-ÖKÜZ | Kotan çəkən | Erkək mal | Boyunduruqlu
+ÖKÜZ | Kotan çəkən | Erkək mal | Arabaya qoşulan
 CAMIŞ | Su sevən mal | Qara iri mal | Südlü mal
 KƏL | Erkək camış | Güclü mal | Camış atası
 QATIR | At-eşşək balası | Dağ yolu heyvanı | Yükçü heyvan

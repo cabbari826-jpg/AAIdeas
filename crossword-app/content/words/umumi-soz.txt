@@ -41,7 +41,7 @@ TEZ | Cəld | Gecin ziddi | Erkən
 GEC | Vaxtından sonra | Tezin ziddi | Axşamüstü sonra
 ŞƏN | Şad | Kefli | Qəmginin ziddi
 QƏMGİN | Kədərli | Məyus | Şənin ziddi
-SAKİTLİK | Səs-küysüzlük | Asudəlik | Hüzur
+SAKİTLİK | Səssiz an | Asudəlik | Hüzur
 TƏLƏSİK | Cəld, aşıqan | Səbirsiz | Tələsən
 AĞILLI | Dərrakəli | Zəkalı | Bilikli
 SƏDAQƏT | Vəfa | Sadiqlik | Etibar

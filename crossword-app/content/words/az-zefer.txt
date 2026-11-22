@@ -15,7 +15,7 @@ NOYABR | Payızın sonu | On birinci ay | Payız ayı
 ŞƏRƏF | Namus, ləyaqət | Ləyaqət | Şan-şöhrət
 QÜRUR | İftixar | Fəxr hissi | Məğrurluq
 ŞÖHRƏT | Məşhurluq | Ad çıxarma | Şan
-ƏZƏMƏT | Böyüklük | Möhtəşəmlik | Ululuq
+ƏZƏMƏT | Böyüklük | Böyük şan | Ululuq
 DİRÇƏLİŞ | Yenidən canlanma | Bərpa | Oyanış
 BƏRPA | Yenidən tikmə | Təmir | Dirçəltmə
 ALQIŞ | Əl çalma | Təbrik səsi | Afərin
@@ -39,7 +39,7 @@ YENİDƏN | Təkrar | Bir də | Təzədən
 ŞUŞALI | Şuşa sakini | Şuşadan olan | Qarabağlı
 MUĞAMÇI | Muğam xanəndəsi | Dəstgah ifaçısı | Ustad oxuyan
 XARIBÜLBÜL | Şuşa çiçəyi | Ofris | Qarabağ gülü
-KÖÇKÜN | Yurd-yuvasız | Qaçqın | Evdən didərgin
+KÖÇKÜN | Yurdsuz | Qaçqın | Evdən didərgin
 QAÇQIN | Didərgin | Yurdsuz qalan | Evsiz qalan
 ÇİÇƏKLİ | Güllü | Çəmənli | Bahar kimi
 TƏRANƏ | Şən mahnı | Nəğmə sözü | Xoş avaz

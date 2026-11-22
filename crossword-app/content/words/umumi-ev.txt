@@ -1,5 +1,5 @@
 # Ümumi sözlər: ev, mətbəx, yemək, geyim. Format: SÖZ | çətin | orta | asan
-STUL | Söykənəcəkli | Masa yanında | Oturmaq üçün
+STUL | Arxalı oturacaq | Masa yanında | Oturmaq üçün
 DOLAB | Paltar saxlanan | Qapılı mebel | Şkaf
 DÖŞƏK | Yataq altlığı | Pambıqlı yataq | Üstündə yatılır
 MƏTBƏX | Aşpazın otağı | Yemək bişən yer | Plitəli otaq

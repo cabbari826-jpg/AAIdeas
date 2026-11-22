@@ -5,7 +5,7 @@ SABİT | Dəyişməz | Möhkəm duran | Tərpənməz
 İNKİŞAF | Tərəqqi | İrəliləyiş | Böyümə
 ZƏHMƏT | Əmək, iş | Tər tökmə | Çətin iş
 GƏLƏCƏK | Hələ gəlməyən | Sabahkı günlər | Keçmişin ziddi
-NİZAM | Qayda-qanun | İntizam | Səliqə
+NİZAM | Qayda, qanun | İntizam | Səliqə
 QAYDA | Qanun, tərtib | Yol ... | Nizam
 ŞƏFƏQ | Dan qızartısı | Gün doğanda | Səhər işığı
 SÜBH | Gecənin sonu | Alaçıq vaxt | Dan yeri

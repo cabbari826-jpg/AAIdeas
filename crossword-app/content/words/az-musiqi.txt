@@ -67,7 +67,7 @@ XOR | Kollektiv oxuma | Çoxsəsli | Oxuyan dəstə
 KONSERT | Filarmoniya axşamı | Səhnə çıxışı | Musiqi axşamı
 ORKESTR | Dirijorun dəstəsi | Simfonik ... | Ansambl
 DİRİJOR | Çubuqlu | Orkestr rəhbəri | Maestro
-BƏSTƏ | Mahnı mətni | Melodiya | Kompozisiya
+BƏSTƏ | Mahnı mətni | Melodiya | Quruluş, düzüm
 ZİL | Yüksək səs | Bəmin əksi | İncə səs
 BƏM | Alçaq səs | Zilin əksi | Qalın səs
 ÜZEYİR | Leyli və Məcnun | Hacıbəyli | Himnin bəstəkarı

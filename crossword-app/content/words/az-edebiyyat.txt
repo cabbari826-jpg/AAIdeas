@@ -1,11 +1,11 @@
 # title: Ədəbiyyat
 # Format: SÖZ | çətin | orta | asan
 NİZAMİ | Xəmsə müəllifi | Gəncəli şair | Sirlər xəzinəsi
-FÜZULİ | Bağdadlı şair | Şikayətnamə | Su qəsidəsi
+FÜZULİ | Bağdadlı şair | Şikayət yazısı | Su qəsidəsi
 NƏSİMİ | Hürufi şair | Dərisi soyulan | Məndə sığar...
 VAQİF | Qarabağ vəziri | Qoşma ustası | Molla Pənah
 VİDADİ | Vaqifin dostu | Durnalar şairi | Molla Vəli
-SABİR | Hophopnamə | Molla jurnalçısı | Şamaxılı şair
+SABİR | Satira kitabı | Molla jurnalçısı | Şamaxılı şair
 CAVİD | İblis dramı | Romantik dram | Hüseyn ...
 MÜŞFİQ | Oxu tar | 1938 qurbanı | Mikayıl ...
 VURĞUN | Vaqif dramı | Azərbaycan şeiri | Səməd ...
@@ -60,7 +60,7 @@ HÜQO | Səfillər | Notr-Dam | Fransız yazıçı
 DÜMA | Atos müəllifi | Kristo qrafı | Fransız romançı
 VERN | Nautilus | 80 gündə | Fantast Jül
 DEFO | Robinzon Kruzo | Ada romanı | İngilis yazıçı
-FAUST | Mefistofel | Hötenin əsəri | Alim-qəhrəman
+FAUST | Mefistofel | Hötenin əsəri | Alim, qəhrəman
 HÖTE | Veymar dahisi | Faust müəllifi | Alman şairi
 ODİSSEY | İtaka kralı | On illik yol | Uliss
 İLİADA | Axillesin qəzəbi | Troya poeması | Homer əsəri

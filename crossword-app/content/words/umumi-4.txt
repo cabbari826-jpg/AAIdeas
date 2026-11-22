@@ -21,12 +21,12 @@ PAMBIQÇI | Pambıq yığan | Ağ tarla işçisi | Pambıq becərən
 ÜZÜMÇÜ | Üzüm becərən | Bağ ustası | Tənək ustası
 MEYVƏ | Ağacda yetişən | Alma, armud | Bağ nemətı
 TƏRƏVƏZ | Bostan nemətı | Pomidor, xiyar | Salat üçün
-NEMƏT | Süfrə bərəkəti | Allah vergisi | Yemək-içmək
+NEMƏT | Süfrə bərəkəti | Allah vergisi | Yemək, içmək
 RUZİ | Gündəlik çörək | Qismətə düşən | Halal qazanc
 QİSMƏT | Tale payı | Bəxt | Alın yazısı
 TALE | Qədər | Bəxt yazısı | Fələyin işi
 BƏXT | Uğur | Şans | Tale
-UĞUR | Müvəffəqiyyət | Bəxt gətirmə | Yolun açıq olsun
+UĞUR | Yaxşı nəticə | Bəxt gətirmə | Yolun açıq olsun
 MÜKAFAT | Pul, medal | Ən yaxşıya pay | Fəxri hədiyyə
 TƏRİF | Öymə | Afərin sözü | Yaxşı söz demək
 TƏNQİD | Səhvi göstərmə | İrad tutma | Nöqsan deyilməsi

@@ -13,7 +13,7 @@ QIŞ | Ən soyuq fəsil | Dekabr fəsli | Qarlı fəsil
 DEKABR | İlin sonu | 12-ci ay | Qışın əvvəli
 YANVAR | İlin əvvəli | 1-ci ay | Qış ayı
 BAYRAM | Şənlik günü | Təntənə | Novruz, Yeni il
-TƏBRİK | Xoş arzu | Açıqcada yazılan | Gözaydınlığı
+TƏBRİK | Xoş arzu | Açıqcada yazılan | Xoş xəbər payı
 ARZU | İstək | Diləy | Ürək istəyi
 HƏDİYYƏ | Bağlama sürprizi | Pay | Ərməğan
 SÜRPRİZ | Gözlənilməz | Qəfil sevinc | Xəbərsiz pay
@@ -47,7 +47,7 @@ MAHNI | Oxunan şey | Nəğmə | Bayram nəğməsi
 RƏQS | Oyun havası | Yallı | Musiqiyə hərəkət
 MASKA | Üz örtüyü | Karnaval üzü | Gizlədici
 KARNAVAL | Maskalı şənlik | Kostyum bayramı | Bal
-KOSTYUM | Geyim dəsti | Pencək-şalvar | Bal paltarı
+KOSTYUM | Geyim dəsti | Pencək, şalvar | Bal paltarı
 TƏTİL | Dərs fasiləsi | Qış ... | Dərssiz günlər
 İSTİRAHƏT | Dincəlmə | İşsiz gün | Rahatlıq
 XOŞBƏXTLİK | Böyük sevinc | Səadət | Ən gözəl arzu

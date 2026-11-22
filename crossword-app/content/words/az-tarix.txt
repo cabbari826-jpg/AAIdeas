@@ -18,7 +18,7 @@ TROYA | Taxta at | Heleni üçün | İliada şəhəri
 VATERLO | Napoleonun sonu | 1815 döyüşü | Belçika kəndi
 BORODİNO | 1812 döyüşü | Kutuzov döyüşü | Rusiya kəndi
 KURSK | Tank döyüşü | 1943 qövsü | Rusiya şəhəri
-ÇALDIRAN | 1514 döyüşü | İsmayıl-Səlim | Döyüş yeri
+ÇALDIRAN | 1514 döyüşü | İsmayıl, Səlim | Döyüş yeri
 MALAZGİRD | 1071 qələbəsi | Alparslan | Anadolu qapısı
 SƏLİB | ... yürüşləri | Xaçlılar | Orta əsr yürüşü
 PUNİK | ... müharibələri | Roma Karfagenə | Karfagen savaşı

@@ -28,6 +28,12 @@ PACKS = os.path.join(ROOT, 'app', 'src', 'main', 'assets', 'packs')
 DOWNLOADABLE = os.path.join(ROOT, 'content', 'downloadable')   # packs offered for download from the game
 MINI = os.path.join(ROOT, 'app', 'src', 'main', 'assets', 'mini')
 MAX_CLUE = 16
+MAX_WORD = 10.25   # widest single word (in letter widths) that still fits a grid cell; ClueFitTest has the last word
+
+
+def word_width(t):
+    """Rough printed width of a word: narrow letters count half, m/w and capitals a bit more."""
+    return sum(0.55 if c in 'iljtfrıİI.,-' else 1.35 if c in 'mwMW' else 1.15 if c.isupper() else 1.0 for c in t)
 ONLY_OWN_WORDS = {'az-usaq'}   # packs that never borrow words from umumi*.txt
 
 
@@ -51,7 +57,9 @@ def read_words(name):
             errs.append(f'{name}.txt line {n}: need "SÖZ | çətin | orta | asan", got: {line}'); continue
         w = up(parts[0]).replace(' ', '')
         bad = [c for c in parts[1:] if len(c) > MAX_CLUE and not (name == 'az-musiqi' and c is parts[1])]
-        if bad: errs.append(f'{name}.txt line {n}: clue longer than {MAX_CLUE} letters: {bad[0]}')
+        bad += [c for c in parts[1:] if any(word_width(t) > MAX_WORD for t in c.split()) and c not in bad
+                and not (name == 'az-musiqi' and c is parts[1])]
+        if bad: errs.append(f'{name}.txt line {n}: clue too long ({MAX_CLUE} letters at most, one word too wide for a cell): {bad[0]}')
         if any(t.startswith(w) for c in parts[1:] for t in re.split(r'[^\w]+', up(c))): errs.append(f'{name}.txt line {n}: the clue gives the answer away: {line}')
         if w in out: errs.append(f'{name}.txt line {n}: {w} is listed twice')
         out[w] = parts[1:]
@@ -72,6 +80,9 @@ def used_everywhere(skip_path):
             for e in L['entries']:
                 words.add(e['answer']); clues.update(e.get('clues') or [e['clue']])
             if L.get('keyword'): words.add(L['keyword']['word'])
+    wod = os.path.join(ROOT, 'app', 'src', 'main', 'assets', 'word_of_day.json')
+    if os.path.exists(wod):   # the word of the day must not show up in a level
+        words.update(w['word'] for w in load(wod))
     return words, clues
 
 
@@ -172,8 +183,10 @@ def main():
     made = 0
     for n in range(count):
         if pack_id == 'az-starter':
+            # Main pack: every word comes from umumi*.txt; the grid grows from crossings.
+            construct.R, construct.C = g.R, g.C
             words = [w for w in general if usable(w) and len(w) <= g.MAXLEN]
-            got = build_main(words, rng, tries)
+            got = build_theme(words, [], rng, tries, 7, 16) or build_theme(words, [], rng, tries, 6, 16)
             rows, cols = g.R, g.C
         else:
             if mini:
@@ -188,7 +201,8 @@ def main():
                 got = build_theme(th, oth, rng, tries, 6, 16, float(os.environ.get('MIN_THEME', '0.5')))
             rows, cols = construct.R, construct.C
         if not got:
-            print(f'Stopped after {n} new levels: not enough unused words in content/words/{pack_id}.txt '
+            src = 'umumi*.txt' if pack_id == 'az-starter' else f'{pack_id}.txt'
+            print(f'Stopped after {n} new levels: not enough unused words in content/words/{src} '
                   f'(at least half of every level must come from it). Add words there and run again.')
             break
         grid, ent = got
@@ -206,8 +220,8 @@ def main():
         if kw: level['keyword'] = dict(word=kw[0], cells=kw[1], source='claude-draft')
         pack['levels'].append(level)
         made += 1
-        nt = sum(1 for w in answers if w in theme)
-        print(level['id'], f'{nt}/{len(answers)} from {pack_id}.txt', 'key word:', kw[0] if kw else '-', ' '.join(answers))
+        nt = sum(1 for w in answers if w in (general if pack_id == 'az-starter' else theme))
+        print(level['id'], f'{nt}/{len(answers)} from the word list', 'key word:', kw[0] if kw else '-', ' '.join(answers))
     dest = out or path
     os.makedirs(os.path.dirname(os.path.abspath(dest)), exist_ok=True)
     with open(dest, 'w', encoding='utf-8') as f:

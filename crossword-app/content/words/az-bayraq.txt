@@ -26,11 +26,11 @@ MÖHÜR | Dövlət damğası | Sənədə vurulur | Ştamp
 NİŞAN | Döş emblemi | Fəxri işarə | Ordenvari
 TÜRK | Mavi rəng xalqı | Oğuz övladı | Anadolu xalqı
 ÇAĞDAŞ | Müasir | İndiki | Yeni dövr
-İSLAM | Yaşıl rəng | Din adı | Müsəlmanlıq
+İSLAM | Yaşıl rəng | Din adı | Müsəlman dini
 MÜASİR | Çağdaş | Yeni dövrə aid | Qırmızı rəng
 GÖYRƏNG | Mavi | Göy | Səma rəngli
 DÖVRƏ | Dairə | Dairəvi hərəkət | Dövran
-GƏRDƏN | Boyun | Ənsə | Boyun-boğaz
+GƏRDƏN | Boyun | Ənsə | Boyun, boğaz
 DÖVLƏTÇİ | Dövlət adamı | Siyasətçi kişi | Dövlət xadimi
 ULDUZLU | Ulduzlarla dolu | Səkkiz guşəli | Ulduz naxışlı
 ŞANLI | Şöhrətli | Ad-sanlı | Şərəfli bayraq

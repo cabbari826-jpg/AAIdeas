@@ -36,6 +36,6 @@ XEYRAT | Ehsan süfrəsi | Savab işi | Yardım payı
 BAĞIŞ | Hədiyyə | Yardım | Pay vermək
 İANƏ | Yardım pulu | Bağış payı | Xeyriyyə pulu
 DİNDAR | Dinə bağlı | İbadətkar | Namaz qılan
-TƏMİZLİK | Səliqə-sahman | Təmiz olmaq | Çirkliyin ziddi
+TƏMİZLİK | Səliqə, sahman | Təmiz olmaq | Çirkliyin ziddi
 SAFLIQ | Paklıq | Təmiz ürək | Duruluq
 PAKLIQ | İsmət | Təmizlik hissi | Ləkəsizlik

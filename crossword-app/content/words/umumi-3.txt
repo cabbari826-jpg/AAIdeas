@@ -1,7 +1,7 @@
 # Ümumi sözlər (3): müxtəlif gündəlik sözlər. Format: SÖZ | çətin | orta | asan
 AĞRI | Həkimə aparan | Baş ..., diş ... | Sızıltı
 ƏSNƏK | Yuxu gələndə | Ağzı açmaq | Yorğunluq izi
-ASQIRIQ | Burun partlayışı | Soyuqdəymədə | Apçı!
+ASQIRIQ | Burun partlayışı | Soyuq dəyəndə | Apçı!
 ÖSKÜRƏK | Boğaz qıcığı | Xəstəlik səsi | Öhö-öhö
 HƏRARƏT | Termometr ölçər | Qızdırma | İstilik dərəcəsi
 DƏRMAN | Aptekdən alınır | Həb, məlhəm | Müalicə vasitəsi
@@ -15,7 +15,7 @@ ACLIQ | Yemək istəyi | Qarın quruldar | Toxluğun ziddi
 SUSUZLUQ | Su istəyi | Dodaq quruyar | Quraqlıq hissi
 DİNCLİK | Sakit həyat | Hüzurlu gün | Səs-küysüz an
 SƏYAHƏT | Uzaq gəzinti | Turizm | Yol macərası
-TURİST | Səyyah | Gəzməyə gələn | Ekskursiyaçı
+TURİST | Səyyah | Gəzməyə gələn | Səfər adamı
 SƏYYAH | Dünya gəzən | Marko Polo kimi | Gəzərgi
 BƏLƏDÇİ | Gid | Turları aparan | Yolu tanıyan
 XATİRAT | Memuar | Yaddaş kitabı | Keçmişdən yazı
@@ -29,7 +29,7 @@ FOTOAPARAT | Şəkil çəkən | Kamera | Obyektivli cihaz
 KAMERA | Video çəkən | Fotoaparat | Obyektiv
 LUPA | Böyüdücü şüşə | Saatsaz tutar | Kiçik böyüdücü
 EYNƏK | Göz üçün şüşə | Burun üstündə | Gözlük
-DÜRBÜN | Uzağı yaxın edən | İki borulu | Teleskopcuq
+DÜRBÜN | Uzağı yaxın edən | İki borulu | Kiçik teleskop
 TELESKOP | Ulduz baxan | Rəsədxana cihazı | Göy borusu
 MİKROSKOP | Hüceyrə görən | Laborant cihazı | Kiçiyi göstərən
 KİLOQRAM | Min qram | Çəki vahidi | Kq
@@ -57,7 +57,7 @@ SAYĞI | Ehtiramlı diqqət | Dəyər vermə | Hörmət etmə
 EHTİRAM | Dərin hörmət | Sayğı | Baş əymə
 VƏD | Söz vermə | Əhd | Boyun olma
 ƏHD | And, vəd | Söz-peyman | Müqavilə
-BORC | Qaytarılacaq pul | Vəzifə | Kredit
+BORC | Alınan pul | Vəzifə | Kredit
 QƏNAƏT | Az xərcləmə | Kifayət | İsrafın ziddi
 İSRAF | Boş xərc | Qənaətin ziddi | Hədər xərc
 QAZANC | Gəlir | Mənfəət | Pul qazanmaq

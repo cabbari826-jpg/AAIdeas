@@ -58,7 +58,7 @@ TURŞU | pH < 7 | Lakmus qızarır | Turş maddə
 QƏLƏVİ | pH > 7 | Sabunlu hiss | Əsas maddə
 OKSİD | O ilə birləşmə | CO2, CaO | Oksigen birliyi
 DUZ | NaCl | Turşu + əsas | Xörək ...
-SPİRT | C2H5OH | Etanol | Dezinfeksiya
+SPİRT | C2H5OH | Etanol | Mikrob təmizliyi
 EFİR | Uçucu iyli | Mürəkkəb ... | Narkoz maddəsi
 METAN | CH4 | Bataqlıq qazı | Təbii qaz
 ETAN | C2H6 | İki karbonlu | Alkan
@@ -123,7 +123,7 @@ HUNİ | Tökmə qabı | Konus qab | Süzgəc qabı
 FİLTR | Süzgəc | Süzmə kağızı | Təmizləyici
 LAKMUS | Qızarır, göyərir | Rəng kağızı | Göstərici
 İNDİKATOR | Fenolftalein | pH göstəricisi | Rəng dəyişən
-LABORANT | Laboratoriyaçı | Kolba yuyan | Köməkçi
+LABORANT | Kolba ustası | Kolba yuyan | Köməkçi
 KİMYAÇI | Reaksiya ustası | Alim | Kimya alimi
 ALXİMİK | Fəlsəfə daşı | Qızıl axtaran | Qədim kimyaçı
 MENDELEYEV | Dövri cədvəl | Rus kimyaçı | Cədvəl müəllifi

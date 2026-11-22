@@ -2090,7 +2090,7 @@
      "status": "candidate",
      "clues": [
       "Bağdad ölkəsi",
-      "Mesopotamiya",
+      "İki çay arası",
       "Ərəb ölkəsi"
      ]
     },
@@ -4103,7 +4103,7 @@
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Qayda-qanun",
+      "Qayda, qanun",
       "İntizam",
       "Səliqə"
      ]
@@ -5276,13 +5276,13 @@
      "clueRow": 0,
      "clueCol": 1,
      "answer": "BİNA",
-     "clue": "Çoxmərtəbəli",
+     "clue": "Çox qatlı ev",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
       "Tikili",
       "Ev, qurğu",
-      "Çoxmərtəbəli"
+      "Çox qatlı ev"
      ]
     },
     {

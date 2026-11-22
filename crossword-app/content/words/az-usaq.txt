@@ -31,7 +31,7 @@ BARMAQ | Beş dənə | Əldə olur | Sayırıq onunla
 AYAQ | Qaçmaq üçün | Çəkmə geyər | Yeriyirik
 BOZ | Siçan rəngi | Bulud rəngi | Kül rəngi
 BULUD | Göydə ağ | Yağış gətirir | Göydə pambıq
-YAĞIŞ | Damcı-damcı | Çətir lazımdır | Göydən su
+YAĞIŞ | Damcı damcı | Çətir lazımdır | Göydən su
 KÖLGƏ | Arxanca gəzir | Günəşdə yaranır | Qara şəkil
 ŞİR | Heyvan padşahı | Yallı | Yalmanlı pişik
 MEYMUN | Banan yeyir | Ağacda oynar | Şıltaq heyvan
@@ -88,14 +88,13 @@ AĞIZ | Dişlər evi | Yemək yeyilir | Danışmaq üçün
 BAŞ | Papaq qoyulur | Saç bitir | Bədənin üstü
 PEÇENYE | Çaya quru şirni | Xırtıldayan | Qutuda kökə
 KAKAO | Şokolad dəni | Südlü isti içki | Qəhvəyi içki
-QUMBARA | Pul yığılır | Dəmir qutucuq | Donuzcuq kasa
+QUMBARA | Pul yığılır | Dəmir qutucuq | Pul qutusu
 BANT | Saç bəzəyi | Qız saçında | Ləntdən bağ
 AYICIQ | Balaca ayı | Bal sevən bala | Oyuncaq ayı
 BALON | Hava şarı | Uçan top | Rəngli şar
 BAĞÇA | Kiçiklər gedər | Tərbiyəçili ev | Məktəbdən əvvəl
 BULKA | Yumşaq çörək | Kişmişli kökə | Yumru çörək
 DIRNAQ | Barmağın ucu | Kəsilir | Pişikdə caynaq
-DONUZ | Çəhrayı heyvan | Xınq-xınq | Palçıq sevər
 DUMAN | Ağ pərdə | Göz görmür | Bulud yerdə
 DİVAN | Yumşaq oturacaq | Otaqda uzanmaq | Kreslo qardaşı
 GÖDƏKCƏ | Qısa palto | Payız geyimi | İsti gödək

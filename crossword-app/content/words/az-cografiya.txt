@@ -66,11 +66,11 @@ YAPONİYA | Gündoğan ölkə | Sakura ölkəsi | Tokio ölkəsi
 FRANSA | Qalliya | Eyfel ölkəsi | Paris ölkəsi
 KANADA | Ağcaqayın ölkəsi | Ottava ölkəsi | ABŞ qonşusu
 MEKSİKA | Asteklər ölkəsi | Sombrero ölkəsi | ABŞ-ın cənubu
-KUBA | Ada-respublika | Havana ölkəsi | Karib adası
+KUBA | Ada-dövlət | Havana ölkəsi | Karib adası
 NORVEÇ | Fiordlar ölkəsi | Oslo ölkəsi | Şimal krallığı
 İSVEÇ | Nobel vətəni | Stokholm ölkəsi | Şimal ölkəsi
 POLŞA | Şopenin vətəni | Varşava ölkəsi | Avropa ölkəsi
-İRAQ | Bağdad ölkəsi | Mesopotamiya | Ərəb ölkəsi
+İRAQ | Bağdad ölkəsi | İki çay arası | Ərəb ölkəsi
 LİVAN | Sidr ağacı | Beyrut ölkəsi | Aralıq sahili
 OMAN | Muskat ölkəsi | Ərəb sultanlığı | Ərəbistan ucu
 QƏTƏR | Doha ölkəsi | Körfəz əmirliyi | Qazlı ölkə
@@ -112,7 +112,7 @@ KİYEV | Dnepr şəhəri | Ukrayna paytaxtı | Slavyan paytaxtı
 RİQA | Latviya paytaxtı | Baltik şəhəri | Daugava şəhəri
 DUBAY | Bürc Xəlifə yeri | Əmirlik şəhəri | Körfəz şəhəri
 MƏKKƏ | Kəbə şəhəri | Həcc yeri | Müqəddəs şəhər
-İSTANBUL | Bosfor şəhəri | Konstantinopol | Türk metropolu
+İSTANBUL | Bosfor şəhəri | Bizans paytaxtı | Türk metropolu
 NİL | Ən uzun çay | Misir çayı | Afrika çayı
 VOLQA | İtil | Rus çayı | Xəzərə axır
 İRAN | Persiya | Cənub qonşu | Tehran ölkəsi
@@ -125,7 +125,7 @@ DƏCLƏ | Tigr | Bağdad çayı | İraq çayı
 FƏRAT | Yefrat | İkiçayarası | Suriya çayı
 QANQ | Müqəddəs çay | Benares çayı | Hind çayı
 ELBRUS | Avropa zirvəsi | Qafqaz zirvəsi | Qarlı zirvə
-EVEREST | Comolunqma | Dünyanın damı | Ən uca zirvə
+EVEREST | Dünya zirvəsi | Dünyanın damı | Ən uca zirvə
 ALTAY | Türklərin beşiyi | Sibir dağları | Dağ sistemi
 URAL | Qitələr sərhədi | Daş qurşaq | Rusiya dağları
 HİMALAY | Qar məskəni | Ən uca dağlar | Tibet dağları
