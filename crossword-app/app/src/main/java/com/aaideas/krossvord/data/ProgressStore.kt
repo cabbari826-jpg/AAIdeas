@@ -52,8 +52,13 @@ class ProgressStore(context: Context) {
 
     /** Start each level with only one clue visible; the rest open on request. */
     var hideClues: Boolean
-        get() = prefs.getBoolean(KEY_HIDE_CLUES, true)
+        get() = prefs.getBoolean(KEY_HIDE_CLUES, false)
         set(v) = prefs.edit().putBoolean(KEY_HIDE_CLUES, v).apply()
+
+    /** Add a few random extra letters to the letter columns (harder). */
+    var extraLetters: Boolean
+        get() = prefs.getBoolean(KEY_EXTRA, false)
+        set(v) = prefs.edit().putBoolean(KEY_EXTRA, v).apply()
 
     fun saveOpenedClues(levelId: String, ids: Set<Int>) {
         prefs.edit().putString("clues_$levelId", ids.joinToString(",")).apply()
@@ -64,7 +69,8 @@ class ProgressStore(context: Context) {
 
     private companion object {
         const val KEY_INPUT = "input_mode"
-        const val KEY_HIDE_CLUES = "hide_clues"
+        const val KEY_HIDE_CLUES = "hide_clues_v2"
+        const val KEY_EXTRA = "extra_letters"
         const val KEY_DONE = "completed"
         const val KEY_SINCE_AD = "levels_since_interstitial"
     }

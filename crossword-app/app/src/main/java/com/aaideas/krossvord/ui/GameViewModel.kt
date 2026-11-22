@@ -51,6 +51,13 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         private set
     var hideClues by mutableStateOf(progress.hideClues)
         private set
+    var extraLetters by mutableStateOf(progress.extraLetters)
+        private set
+
+    fun changeExtraLetters(on: Boolean) {
+        progress.extraLetters = on
+        extraLetters = on
+    }
 
     /** Letter-columns input: indexes of the picked letters, for the word in [draftKey]. */
     private var draftPicks by mutableStateOf(emptyList<Int>())
@@ -83,10 +90,10 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
 
     private fun keyOf(s: GameState, e: Entry) = e.id to s.openCells(e).size
 
-    fun columnLetters(): List<Char> {
+    fun columnLetters(): List<Char?> {
         val s = game ?: return emptyList()
         val e = s.activeEntry ?: return emptyList()
-        return WordBuilder.letters(s, e, tileShuffle)
+        return WordBuilder.letters(s, e, tileShuffle, extraLetters)
     }
 
     /** Picked letter indexes for the active word (empty when the word or its open cells changed). */
@@ -102,7 +109,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         if (feedback == WordFeedback.WRONG) feedback = null
         val picks = draft()
         val open = s.openCells(e)
-        if (index in picks || picks.size >= open.size) return
+        if (index in picks || picks.size >= open.size || columnLetters().getOrNull(index) == null) return
         draftKey = keyOf(s, e)
         draftPicks = picks + index
         if (draftPicks.size == open.size) checkDraft(s, e)
@@ -120,7 +127,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
 
     private fun checkDraft(s: GameState, e: Entry) {
         val letters = columnLetters()
-        val word = draftPicks.map { letters[it] }
+        val word = draftPicks.map { letters[it]!! }
         val (_, ok) = s.submitWord(e, word)
         if (ok) {
             draftPicks = emptyList()

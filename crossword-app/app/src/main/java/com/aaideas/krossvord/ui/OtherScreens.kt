@@ -27,6 +27,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.aaideas.krossvord.model.WordBuilder
 import com.aaideas.krossvord.monetization.AdKind
 import com.aaideas.krossvord.monetization.PlaceholderAdService
 
@@ -80,7 +81,7 @@ fun SettingsScreen(vm: GameViewModel, isPremium: Boolean) {
         TextButton(onClick = vm::back) { Text("← Əsas səhifə") }
         Text("Hərflərin daxil edilməsi", style = MaterialTheme.typography.headlineSmall)
         listOf(
-            InputMode.COLUMNS to "Hərf sütunları: sözü sağ və sol sütunlardan yığ",
+            InputMode.COLUMNS to "Anaqram: sözü sütunlardakı hərflərdən yığ",
             InputMode.TILES to "Kartlar: hərfləri bir-bir xanaya qoy",
             InputMode.KEYBOARD to "Çətin rejim: tam klaviatura",
         ).forEach { (mode, label) ->
@@ -91,6 +92,13 @@ fun SettingsScreen(vm: GameViewModel, isPremium: Boolean) {
                 RadioButton(selected = vm.inputMode == mode, onClick = { vm.setInput(mode) })
                 Text(label)
             }
+        }
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Column(Modifier.weight(1f)) {
+                Text("Artıq hərflər")
+                Text("Sütunlara sözdə olmayan ${WordBuilder.EXTRA_LETTERS} hərf əlavə olunur", style = MaterialTheme.typography.bodySmall)
+            }
+            Switch(checked = vm.extraLetters, onCheckedChange = vm::changeExtraLetters)
         }
         Row(verticalAlignment = Alignment.CenterVertically) {
             Column(Modifier.weight(1f)) {

@@ -25,14 +25,14 @@ class ScreenshotTest {
             KrossvordTheme { Surface(Modifier.fillMaxSize()) { PuzzleScreen(vm, isPremium = false) } }
         }
 
-    /** Default mode: letter columns, one clue open; OD solved, two letters of the next word picked. */
+    /** Default mode: anagram columns, all clues visible; OD solved, two letters of the next word picked. */
     @Test fun puzzleColumns() {
         val vm = vm()
         vm.startLevel(0)
         vm.restartLevel()
         val letters = vm.columnLetters()
         "OD".forEach { ch -> vm.pickLetter(letters.indexOf(ch)) }
-        vm.tapCell(Cell(0, 1)) // OTAQ ↓, clue still hidden
+        vm.tapCell(Cell(0, 1)) // OTAQ ↓
         val next = vm.columnLetters()
         vm.pickLetter(next.indexOf('T'))
         vm.pickLetter(next.indexOf('A'))

@@ -67,7 +67,7 @@ fun PuzzleScreen(vm: GameViewModel, isPremium: Boolean) {
     val draft = if (columns) vm.draft() else emptyList()
     // Letters being built in the columns mode are previewed in the grid before the check.
     val preview: Map<Cell, Char> = game.activeEntry?.let { e ->
-        game.openCells(e).zip(draft.map { letters[it] }).toMap()
+        game.openCells(e).zip(draft.mapNotNull { letters.getOrNull(it) }).toMap()
     }.orEmpty()
     Column(Modifier.fillMaxSize().padding(horizontal = 8.dp, vertical = 8.dp)) {
         Row(verticalAlignment = Alignment.CenterVertically) {
@@ -340,7 +340,7 @@ private fun LetterTile(tile: Tile, onClick: () -> Unit) {
  */
 @Composable
 private fun ColumnsInput(
-    letters: List<Char>,
+    letters: List<Char?>,
     draft: List<Int>,
     slots: Int,
     feedback: WordFeedback?,
@@ -393,7 +393,7 @@ private fun ColumnsInput(
                     horizontalArrangement = Arrangement.spacedBy(3.dp),
                 ) {
                     repeat(slots) { i ->
-                        val ch = draft.getOrNull(i)?.let { letters[it] }
+                        val ch = draft.getOrNull(i)?.let { letters.getOrNull(it) }
                         Box(
                             Modifier.size(slot, slot * 1.25f)
                                 .background(
@@ -419,13 +419,14 @@ private fun ColumnsInput(
 }
 
 @Composable
-private fun LetterColumn(items: List<IndexedValue<Char>>, draft: List<Int>, onPick: (Int) -> Unit) {
+private fun LetterColumn(items: List<IndexedValue<Char?>>, draft: List<Int>, onPick: (Int) -> Unit) {
     val haptic = LocalHapticFeedback.current
     Column(
         Modifier.padding(horizontal = 3.dp).fillMaxHeight(),
         verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterVertically),
     ) {
         items.forEach { (index, ch) ->
+            if (ch == null) { Spacer(Modifier.size(52.dp)); return@forEach }
             key(index, ch) {
                 LetterTile(Tile(ch, used = index in draft)) {
                     haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)

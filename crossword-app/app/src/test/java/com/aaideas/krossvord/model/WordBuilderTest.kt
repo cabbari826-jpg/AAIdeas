@@ -10,20 +10,30 @@ class WordBuilderTest {
     private val ad = Entry(2, Direction.DOWN, 0, 1, "AD", "İsim")
     private val board = Board(Level("t", 3, 5, 1, listOf(alma, ad)))
 
-    @Test fun lettersContainTheWordAndFillEvenColumns() {
+    @Test fun boardIsAnAnagramOfTheWord() {
         val s = GameState.start(board)
-        val letters = WordBuilder.letters(s, alma)
-        assertEquals(12, letters.size)
-        val counts = letters.groupingBy { it }.eachCount()
-        "ALMA".groupingBy { it }.eachCount().forEach { (ch, n) -> assertTrue((counts[ch] ?: 0) >= n) }
-        val cols = (0 until 4).map { WordBuilder.column(letters, it).size }
+        val spots = WordBuilder.letters(s, alma)
+        assertEquals(12, spots.size)
+        assertEquals("AALM", spots.filterNotNull().sorted().joinToString(""))
+        val cols = (0 until 4).map { WordBuilder.column(spots, it).size }
         assertEquals(listOf(3, 3, 3, 3), cols)
     }
 
-    @Test fun letterCountGrowsWithLongWords() {
-        assertEquals(12, WordBuilder.letterCount(2))
-        assertEquals(12, WordBuilder.letterCount(7))
-        assertEquals(16, WordBuilder.letterCount(10))
+    @Test fun extraLettersAreOptional() {
+        val s = GameState.start(board)
+        val spots = WordBuilder.letters(s, alma, extra = true)
+        assertEquals(4 + WordBuilder.EXTRA_LETTERS, spots.filterNotNull().size)
+    }
+
+    @Test fun spotCountGrowsWithLongWords() {
+        assertEquals(12, WordBuilder.spotCount(2))
+        assertEquals(12, WordBuilder.spotCount(12))
+        assertEquals(16, WordBuilder.spotCount(13))
+    }
+
+    @Test fun lockedLettersAreNotOnTheBoard() {
+        val s = GameState.start(board).submitWord(ad, "AD".toList()).first
+        assertEquals("ALM", WordBuilder.letters(s, alma).filterNotNull().sorted().joinToString(""))
     }
 
     @Test fun rightWordFillsGridWrongWordChangesNothing() {
