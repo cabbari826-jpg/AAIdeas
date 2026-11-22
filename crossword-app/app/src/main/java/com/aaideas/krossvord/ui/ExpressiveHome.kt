@@ -102,6 +102,26 @@ fun ExpressiveHome(vm: GameViewModel) {
     ) {
         Text(BRAND, style = MaterialTheme.typography.headlineMedium)
 
+        vm.newSkin?.let { gift ->
+            Surface(
+                onClick = { vm.changeSkin(gift) },
+                shape = MaterialTheme.shapes.large,
+                color = MaterialTheme.colorScheme.tertiaryContainer,
+                contentColor = MaterialTheme.colorScheme.onTertiaryContainer,
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
+                    Text("🎁", fontSize = 28.sp)
+                    Spacer(Modifier.width(12.dp))
+                    Column(Modifier.weight(1f)) {
+                        Text("Yeni tərtibat: ${gift.label}", style = MaterialTheme.typography.titleMedium)
+                        Text(gift.unlock.hint, style = MaterialTheme.typography.bodySmall)
+                    }
+                    Text("Tətbiq et", style = MaterialTheme.typography.labelLarge)
+                }
+            }
+        }
+
         WordOfDayCard(vm.daily) { vm.open(Screen.WORD_OF_DAY) }
 
         ContinueCard(vm)

@@ -63,14 +63,15 @@ class MainActivity : ComponentActivity() {
             if (!ready) { Splash(); return@setContent }
             LaunchedEffect(Unit) { pendingIntent?.let { openFrom(it) }; pendingIntent = null }
             val mode = vm.themeMode
-            val dark = mode == ThemeMode.DARK || (mode == ThemeMode.SYSTEM && isSystemInDarkTheme())
+            val dark = vm.skin.alwaysDark || mode == ThemeMode.DARK || (mode == ThemeMode.SYSTEM && isSystemInDarkTheme())
             // Status/nav bar icons must flip with the in-app choice, not only with the phone setting.
             LaunchedEffect(dark) {
                 val bar = if (dark) SystemBarStyle.dark(Color.TRANSPARENT)
                 else SystemBarStyle.light(Color.TRANSPARENT, Color.TRANSPARENT)
                 enableEdgeToEdge(statusBarStyle = bar, navigationBarStyle = bar)
             }
-            KrossvordTheme(mode, vm.dynamicColor) {
+            LaunchedEffect(vm.screen) { if (vm.screen == Screen.HOME || vm.screen == Screen.SETTINGS) vm.refreshSkins() }
+            KrossvordTheme(mode, vm.dynamicColor, vm.skin) {
                 Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
                     val isPremium by vm.premium.isPremium.collectAsState()
                     BackHandler(enabled = vm.screen != Screen.HOME) { vm.back() }

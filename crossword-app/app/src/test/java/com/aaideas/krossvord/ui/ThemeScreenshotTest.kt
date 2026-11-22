@@ -23,10 +23,32 @@ import org.robolectric.annotation.GraphicsMode
 class ThemeScreenshotTest {
     private fun vm() = GameViewModel(ApplicationProvider.getApplicationContext<Application>())
 
-    private fun shoot(name: String, mode: ThemeMode, screen: @Composable () -> Unit) =
+    private fun shoot(name: String, mode: ThemeMode, skin: Skin = Skin.KLASSIK, screen: @Composable () -> Unit) =
         captureRoboImage("build/outputs/roborazzi/$name.png") {
-            KrossvordTheme(mode) { Surface(Modifier.fillMaxSize()) { screen() } }
+            KrossvordTheme(mode, skin = skin) { Surface(Modifier.fillMaxSize()) { screen() } }
         }
+
+    /** Every theme on the same half-solved puzzle, light and (for some) dark. */
+    @Test fun skins() {
+        val vm = vm()
+        vm.startLevel(0); vm.restartLevel()
+        val letters = vm.columnLetters()
+        "OD".forEach { ch -> vm.pickLetter(letters.indexOf(ch)) }
+        Skin.entries.forEach { skin -> shoot("skin-${skin.id}", ThemeMode.LIGHT, skin) { PuzzleScreen(vm, isPremium = false) } }
+        listOf(Skin.XALCA, Skin.KAGIZ).forEach { skin -> shoot("skin-${skin.id}-dark", ThemeMode.DARK, skin) { PuzzleScreen(vm, isPremium = false) } }
+    }
+
+    @Test fun skinPicker() {
+        val vm = vm()
+        shoot("skin-picker", ThemeMode.LIGHT) { SkinPicker(Skin.KAGIZ, Skin.free + Skin.XALCA, {}, {}) }
+    }
+
+    @Test fun giftThemes() {
+        org.junit.Assert.assertEquals(Skin.free, Skin.earned(emptySet(), 0, java.util.Calendar.getInstance().apply { set(2026, 0, 10) }))
+        org.junit.Assert.assertTrue(Skin.XALCA in Skin.earned(emptySet(), 7))
+        org.junit.Assert.assertTrue(Skin.QEZET in Skin.earned(setOf("rank_1"), 0))
+        org.junit.Assert.assertTrue(Skin.NOVRUZ in Skin.earned(emptySet(), 0, java.util.Calendar.getInstance().apply { set(2027, 2, 20) }))
+    }
 
     /** The launcher icon (adaptive icon layers drawn together) and its themed variant. */
     @Test fun launcherIcon() {
@@ -69,8 +91,8 @@ class ThemeScreenshotTest {
                 GlassBottomMenu(Screen.HOME, {}, Modifier.align(androidx.compose.ui.Alignment.BottomCenter))
             }
         }
-        shoot("home-light", ThemeMode.LIGHT, home)
-        shoot("home-dark", ThemeMode.DARK, home)
+        shoot("home-light", ThemeMode.LIGHT, screen = home)
+        shoot("home-dark", ThemeMode.DARK, screen = home)
     }
 
     @Test fun settingsLightAndDark() {

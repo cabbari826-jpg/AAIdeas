@@ -43,10 +43,14 @@ data class GridColors(
     val revealed: Color,
     val line: Color,
     val keyword: Color,
+    /** Ornament drawn on blocked (empty) cells; NONE keeps them a flat colour. */
+    val pattern: BlockPattern = BlockPattern.NONE,
+    val patternInk: Color = Color.Transparent,
+    val patternInk2: Color = Color.Transparent,
 )
 
 // The lavender the owner likes (Material 3 baseline), pinned so it no longer depends on library defaults.
-private val LightColors = lightColorScheme(
+internal val LightColors = lightColorScheme(
     primary = Color(0xFF6750A4), onPrimary = Color.White,
     primaryContainer = Color(0xFFE8DEF8), onPrimaryContainer = Color(0xFF21005D),
     secondary = Color(0xFF625B71), onSecondary = Color.White,
@@ -61,7 +65,7 @@ private val LightColors = lightColorScheme(
 )
 
 // Evening palette: deep plum instead of black, off-white text, nothing glaring.
-private val DarkColors = darkColorScheme(
+internal val DarkColors = darkColorScheme(
     primary = Color(0xFFCDB8FF), onPrimary = Color(0xFF2B1F4A),
     primaryContainer = Color(0xFF3A3150), onPrimaryContainer = Color(0xFFE8DEF8),
     secondary = Color(0xFFCBC2DB), onSecondary = Color(0xFF332D41),
@@ -75,13 +79,13 @@ private val DarkColors = darkColorScheme(
     error = Color(0xFFF2B8B5), onError = Color(0xFF601410),
 )
 
-private val LightGrid = GridColors(
+internal val LightGrid = GridColors(
     clueCell = Color(0xFFE9E3F2), clueText = Color(0xFF2E2640), emptyCell = Color(0xFFC2B8D2),
     letterCell = Color.White, letter = Color(0xFF1D1A22), activeWord = Color(0xFFFFF1C2),
     activeCell = Color(0xFFFFC94D), solved = Color(0xFFDDF3E3), wrong = Color(0xFFFFD9D6),
     revealed = Color(0xFF6750A4), line = Color(0xFF9A90AA), keyword = Color(0xFFD9480F),
 )
-private val DarkGrid = GridColors(
+internal val DarkGrid = GridColors(
     clueCell = Color(0xFF2A2533), clueText = Color(0xFFD6CFE2), emptyCell = Color(0xFF110F15),
     letterCell = Color(0xFF1F1C25), letter = Color(0xFFEDE7F3), activeWord = Color(0xFF3D3524),
     activeCell = Color(0xFF7A6020), solved = Color(0xFF1E3528), wrong = Color(0xFF4A2522),
@@ -94,21 +98,22 @@ val LocalGridColors = staticCompositionLocalOf { LightGrid }
 fun KrossvordTheme(
     mode: ThemeMode = ThemeMode.SYSTEM,
     dynamicColor: Boolean = false,
+    skin: Skin = Skin.KLASSIK,
     content: @Composable () -> Unit,
 ) {
-    val dark = when (mode) {
+    val dark = skin.alwaysDark || when (mode) {
         ThemeMode.SYSTEM -> isSystemInDarkTheme()
         ThemeMode.LIGHT -> false
         ThemeMode.DARK -> true
     }
     val context = LocalContext.current
     val scheme = when {
-        dynamicColor && supportsDynamicColor -> if (dark) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-        dark -> DarkColors
-        else -> LightColors
+        skin == Skin.KLASSIK && dynamicColor && supportsDynamicColor ->
+            if (dark) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+        else -> skin.palette(dark).scheme
     }
     MaterialTheme(colorScheme = scheme, shapes = ExpressiveShapes, typography = ExpressiveType) {
-        CompositionLocalProvider(LocalGridColors provides if (dark) DarkGrid else LightGrid) {
+        CompositionLocalProvider(LocalGridColors provides skin.palette(dark).grid) {
             content()
         }
     }

@@ -263,7 +263,7 @@ private fun Grid(
                         )
                     } else {
                         val clues = game.board.cluesAt[cell]
-                        if (clues == null) Box(mod.background(colors.emptyCell))
+                        if (clues == null) Box(mod.blockCell(colors))
                         else ClueCell(clues, active, game, clueShown, onClueTap, tutorialEntry, mod.background(colors.clueCell))
                     }
                 }
