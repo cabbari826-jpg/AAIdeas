@@ -48,8 +48,12 @@ jobs:
       - name: Prototype signing key
         env:
           KEYSTORE_B64: ${{ secrets.PROTOTYPE_KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.PROTOTYPE_KEYSTORE_PASSWORD }}
         run: |
           if [ -n "$KEYSTORE_B64" ]; then echo "$KEYSTORE_B64" | base64 -d > prototype.keystore; fi
+          if [ -s prototype.keystore ] && [ -z "$KEYSTORE_PASSWORD" ]; then
+            echo "::error::PROTOTYPE_KEYSTORE_PASSWORD secret is missing"; exit 1
+          fi
       - run: ./gradlew testDebugUnitTest assembleDebug
         env:
           PROTOTYPE_KEYSTORE_PASSWORD: ${{ secrets.PROTOTYPE_KEYSTORE_PASSWORD }}
@@ -71,6 +75,12 @@ jobs:
             exit 0
           fi
           cp app/build/outputs/apk/debug/app-debug.apk krossvord.apk
+          # Never publish an APK that is not signed with the prototype key: the
+          # phone would refuse to install it over the current version.
+          apksigner=$(ls -d "$ANDROID_HOME"/build-tools/*/apksigner | sort -V | tail -1)
+          "$apksigner" verify --print-certs krossvord.apk | tee certs.txt
+          grep -q "CN=Krossvord prototype" certs.txt
+          gh release delete "krossvord-$N" --repo "$GITHUB_REPOSITORY" --cleanup-tag --yes 2>/dev/null || true
           git log -1 --format='%s%n%n%b' > notes.txt
           gh release create "krossvord-$N" krossvord.apk \
             --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" \
