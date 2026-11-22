@@ -4,9 +4,14 @@ on:
     paths: ["crossword-app/**", ".github/workflows/crossword-app.yml"]
   pull_request:
     paths: ["crossword-app/**"]
+# One build at a time per branch, so releases come out in order.
+concurrency:
+  group: crossword-app-${{ github.ref }}
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # to publish the APK as a GitHub Release
     defaults:
       run:
         working-directory: crossword-app
@@ -38,8 +43,41 @@ jobs:
             done
             [ -s "$f" ]
           done
+      # Fixed prototype signing key from repository secrets (absent on forks/PRs
+      # from forks: then the build is signed with a throwaway debug key).
+      - name: Prototype signing key
+        env:
+          KEYSTORE_B64: ${{ secrets.PROTOTYPE_KEYSTORE_BASE64 }}
+        run: |
+          if [ -n "$KEYSTORE_B64" ]; then echo "$KEYSTORE_B64" | base64 -d > prototype.keystore; fi
       - run: ./gradlew testDebugUnitTest assembleDebug
+        env:
+          PROTOTYPE_KEYSTORE_PASSWORD: ${{ secrets.PROTOTYPE_KEYSTORE_PASSWORD }}
       - uses: actions/upload-artifact@v4
         with:
           name: app-debug
           path: crossword-app/app/build/outputs/apk/debug/app-debug.apk
+      # The prototype on the phone checks the latest release on start and offers
+      # to update itself. Only builds of the prototype branch (and main) are
+      # published; feature branches and PRs are not.
+      - name: Publish prototype release
+        if: github.event_name == 'push' && (github.ref == 'refs/heads/claude/project-thread-50gxx8' || github.ref == 'refs/heads/main')
+        env:
+          GH_TOKEN: ${{ github.token }}
+          N: ${{ github.run_number }}
+        run: |
+          if [ ! -s prototype.keystore ]; then
+            echo "::warning::PROTOTYPE_KEYSTORE_* secrets are not set; not publishing (updates would not install)."
+            exit 0
+          fi
+          cp app/build/outputs/apk/debug/app-debug.apk krossvord.apk
+          git log -1 --format='%s%n%n%b' > notes.txt
+          gh release create "krossvord-$N" krossvord.apk \
+            --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" \
+            --title "Krossvord 0.1.$N" --notes-file notes.txt --latest
+          # Keep only the 10 newest prototype releases (and their tags).
+          gh release list --repo "$GITHUB_REPOSITORY" --limit 100 --json tagName,createdAt \
+            --jq '[.[] | select(.tagName | startswith("krossvord-"))] | sort_by(.createdAt) | reverse | .[10:] | .[].tagName' |
+          while read -r tag; do
+            gh release delete "$tag" --repo "$GITHUB_REPOSITORY" --cleanup-tag --yes
+          done

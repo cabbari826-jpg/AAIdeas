@@ -14,6 +14,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import com.aaideas.krossvord.update.UpdateBanner
 
 class MainActivity : ComponentActivity() {
     private val vm: GameViewModel by viewModels()
@@ -35,6 +36,7 @@ class MainActivity : ComponentActivity() {
                         }
                     }
                     AdPlaceholderHost(vm.ads)
+                    UpdateBanner() // prototype only; empty in the release build
                 }
             }
         }
