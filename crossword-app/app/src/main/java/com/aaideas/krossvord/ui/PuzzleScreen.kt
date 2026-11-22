@@ -72,7 +72,9 @@ import com.aaideas.krossvord.model.WordBuilder
 fun PuzzleScreen(vm: GameViewModel, isPremium: Boolean) {
     // Short screens: smaller tiles and tighter spacing, so the grid cells get bigger.
     val compact = androidx.compose.ui.platform.LocalConfiguration.current.screenHeightDp < COMPACT_HEIGHT_DP
-    androidx.compose.runtime.CompositionLocalProvider(LocalTile provides if (compact) 40.dp else 46.dp) {
+    val context = androidx.compose.ui.platform.LocalContext.current
+    val lowEnd = remember { isLowEndPhone(context) }
+    androidx.compose.runtime.CompositionLocalProvider(LocalTile provides if (compact) 40.dp else 46.dp, LocalLowEnd provides lowEnd) {
         PuzzleContent(vm, isPremium, compact)
     }
 }
@@ -505,6 +507,16 @@ private fun TileInput(tiles: List<Tile>, onLetter: (Char) -> Unit, onBackspace: 
 /** Letter tile size; smaller on short screens so the grid keeps more room. */
 private val LocalTile = androidx.compose.runtime.staticCompositionLocalOf { 46.dp }
 
+/** True on weak phones: tiles drop their shadows, which are costly to draw many times per frame. */
+private val LocalLowEnd = androidx.compose.runtime.staticCompositionLocalOf { false }
+
+/** Weak phone: the system says low RAM, or 4 GB or less of memory (e.g. a Redmi 8). */
+fun isLowEndPhone(context: android.content.Context): Boolean {
+    val am = context.getSystemService(android.content.Context.ACTIVITY_SERVICE) as? android.app.ActivityManager ?: return false
+    val info = android.app.ActivityManager.MemoryInfo().also { am.getMemoryInfo(it) }
+    return am.isLowRamDevice || info.totalMem <= 4_500_000_000L
+}
+
 /** Screens shorter than this (small HD+ phones such as a Redmi 8) get the compact layout. */
 const val COMPACT_HEIGHT_DP = 740
 
@@ -518,7 +530,7 @@ private fun LetterTile(tile: Tile, hideWhenUsed: Boolean = false, onClick: () ->
             .semantics { contentDescription = "Hərf ${tile.letter}" },
         shape = RoundedCornerShape(12.dp),
         color = MaterialTheme.colorScheme.primaryContainer,
-        shadowElevation = if (tile.used) 0.dp else 3.dp,
+        shadowElevation = if (tile.used || LocalLowEnd.current) 0.dp else 3.dp,
     ) {
         Box(contentAlignment = Alignment.Center) {
             Text(
@@ -617,7 +629,7 @@ private fun PickTile(letter: Char, order: Int?, onClick: () -> Unit) {
             .semantics { contentDescription = "Hərf $letter" + if (picked) ", seçilib $order" else "" },
         shape = RoundedCornerShape(12.dp),
         color = if (picked) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.primaryContainer,
-        shadowElevation = if (picked) 0.dp else 3.dp,
+        shadowElevation = if (picked || LocalLowEnd.current) 0.dp else 3.dp,
     ) {
         Box(contentAlignment = Alignment.Center) {
             Text(

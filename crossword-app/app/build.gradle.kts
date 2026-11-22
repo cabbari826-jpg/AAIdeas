@@ -48,6 +48,9 @@ android {
             // ART optimisations off and ignores the libraries' startup profiles, which makes it
             // several times slower to start on low-end phones. Turn that off.
             isDebuggable = false
+            // Same R8 shrinking and optimisation as a store build: smaller, faster to start.
+            isMinifyEnabled = true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
         release {
             isMinifyEnabled = true
