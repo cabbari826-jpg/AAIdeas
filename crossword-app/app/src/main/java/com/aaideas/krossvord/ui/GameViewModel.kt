@@ -11,6 +11,13 @@ import kotlinx.coroutines.launch
 import com.aaideas.krossvord.data.PackRepository
 import com.aaideas.krossvord.data.ProgressStore
 import com.aaideas.krossvord.model.Greeting
+import com.aaideas.krossvord.model.DailyTask
+import com.aaideas.krossvord.model.DailyTasks
+import com.aaideas.krossvord.model.Facts
+import com.aaideas.krossvord.model.Proverb
+import com.aaideas.krossvord.model.Proverbs
+import com.aaideas.krossvord.model.Streak
+import com.aaideas.krossvord.model.TaskKind
 import com.aaideas.krossvord.model.Lives
 import com.aaideas.krossvord.model.Medal
 import com.aaideas.krossvord.model.MedalStats
@@ -27,9 +34,12 @@ import com.aaideas.krossvord.monetization.LocalPremiumManager
 import com.aaideas.krossvord.monetization.PlaceholderAdService
 import com.aaideas.krossvord.monetization.PremiumManager
 
-enum class Screen { HOME, LEVELS, PUZZLE, SETTINGS, WORD_OF_DAY, STATS, COLLECTION }
+enum class Screen { HOME, LEVELS, PUZZLE, SETTINGS, WORD_OF_DAY, STATS, COLLECTION, DAILY }
 
 /** How letters are entered. COLUMNS is the default; the others stay as options in settings. */
+/** Pack shown alone in kids mode. */
+const val KIDS_PACK = "az-usaq"
+
 enum class InputMode { COLUMNS, TILES, KEYBOARD }
 
 enum class WordFeedback { RIGHT, WRONG }
@@ -49,6 +59,11 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     val packs: List<Pack> = com.aaideas.krossvord.data.PackCache.get(app)
     val levels: List<Level> = packs.flatMap { it.levels }
     private val progress = ProgressStore(app)
+    private val dailyStore = com.aaideas.krossvord.data.DailyStore(app)
+
+    /** Today, for holidays and daily things; tests can set it. */
+    var today: () -> java.time.LocalDate = { java.time.LocalDate.now() }
+    private fun dayNum() = today().toEpochDay()
     val premium: PremiumManager = LocalPremiumManager(app)
     val ads = PlaceholderAdService()
     val daily = DailyWordGame(app, ads, premium).also { d ->
@@ -57,9 +72,12 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
             d.reward = dailyReward()
             addXp(com.aaideas.krossvord.model.Ranks.DAILY_XP)
             collect(listOf(d.guess.word.word))
+            track(TaskKind.WORD_OF_DAY)
         }
     }
     private val sounds = GameSounds(app)
+    /** Clue read aloud, only when the phone has an Azerbaijani voice. */
+    val voice = ClueVoice(app)
 
     var soundOn by mutableStateOf(progress.soundOn)
         private set
@@ -97,6 +115,76 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         private set
     val playSeconds: Long get() = progress.playSeconds + if (playStart == 0L) 0 else (android.os.SystemClock.elapsedRealtime() - playStart) / 1000
     val wordsFound: Int get() = progress.wordsFound
+
+    // ---- Daily tasks, streak calendar, proverb of the day, facts ----
+    /** Bumped on every change so the daily screen recomposes. */
+    var dailyTick by mutableStateOf(0)
+        private set
+    /** A short line about a reward just given (task, all tasks, 7 days); the screen shows and clears it. */
+    var dailyNote by mutableStateOf<String?>(null)
+
+    val tasks: List<DailyTask> get() = DailyTasks.forDay(dayNum(), hasMini = false)
+    fun taskCount(t: DailyTask): Int { dailyTick; return dailyStore.count(dayNum(), t.kind).coerceAtMost(t.target) }
+    fun taskDone(t: DailyTask) = taskCount(t) >= t.target
+    val tasksDone: Int get() = tasks.count { taskDone(it) }
+
+    val playedDays: Set<Long> get() { dailyTick; return dailyStore.playedDays }
+    val streakRun: Int get() = Streak.run(playedDays, dayNum())
+    fun todayNum() = dayNum()
+
+    private fun track(kind: TaskKind, n: Int = 1) {
+        val day = dayNum()
+        dailyStore.add(day, kind, n)
+        markPlayed()
+        val list = tasks
+        val paid = dailyStore.rewarded(day).toMutableSet()
+        list.forEachIndexed { i, t ->
+            if (i !in paid && dailyStore.count(day, t.kind) >= t.target) {
+                paid += i
+                addXp(DailyTasks.TASK_XP)
+                dailyNote = "✓ ${t.title}: +${DailyTasks.TASK_XP} XP"
+            }
+        }
+        dailyStore.setRewarded(day, paid)
+        if (paid.size >= list.size && !dailyStore.allRewarded(day)) {
+            dailyStore.setAllRewarded(day)
+            setLives(livesState.gift(now()))
+            dailyNote = "🎉 Bütün tapşırıqlar bitdi: +1 can ❤️"
+        }
+        dailyTick++
+    }
+
+    private fun markPlayed() {
+        val day = dayNum()
+        val days = dailyStore.playedDays
+        if (day !in days) dailyStore.playedDays = days + day
+        val now = dailyStore.playedDays
+        if (Streak.giftDue(now, day, dailyStore.lastStreakGift)) {
+            dailyStore.lastStreakGift = day
+            setLives(livesState.gift(now(), 2))
+            addXp(50)
+            dailyNote = "🎁 ${Streak.run(now, day)} gün ardıcıl! Hədiyyə: +2 can və 50 XP"
+        }
+        dailyTick++
+    }
+
+    val proverb: Proverb get() = Proverbs.forDay(dayNum())
+    val proverbOptions: List<String> get() = Proverbs.options(dayNum())
+    val proverbPick: String? get() { dailyTick; return dailyStore.proverbPick(dayNum()) }
+
+    fun pickProverb(w: String) {
+        if (proverbPick != null) return
+        dailyStore.setProverbPick(dayNum(), w)
+        if (soundOn) { if (w == proverb.answer) sounds.wordFound() }
+        if (w == proverb.answer) { addXp(5); track(TaskKind.PROVERB) } else markPlayed()
+        dailyTick++
+    }
+
+    private fun nextFact(): String {
+        val i = dailyStore.factIndex
+        dailyStore.factIndex = i + 1
+        return Facts.at(i)
+    }
 
     // ---- Rank ----
     var xp by mutableStateOf(progress.xp)
@@ -148,7 +236,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     var newMedals by mutableStateOf<List<Medal>>(emptyList())
         private set
 
-    override fun onCleared() { puzzleHidden(); sounds.release() }
+    override fun onCleared() { puzzleHidden(); sounds.release(); voice.shutdown() }
 
     var screen by mutableStateOf(Screen.HOME)
         private set
@@ -248,7 +336,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     val secondsToNextLife: Long? get() = livesState.msToNext(livesClock)?.let { (it + 999) / 1000 }
     private var livesClock by mutableStateOf(now())
     /** Premium players never run out. */
-    val outOfLives: Boolean get() = lives <= 0 && !premium.isPremium.value
+    val outOfLives: Boolean get() = lives <= 0 && !premium.isPremium.value && !kidsMode
 
     private fun setLives(l: Lives) { livesState = l; livesClock = now(); progress.lives = l }
 
@@ -259,7 +347,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         if (l != livesState) setLives(l)
     }
 
-    private fun loseLife() { if (!premium.isPremium.value) setLives(livesState.lose(now())) }
+    private fun loseLife() { if (!premium.isPremium.value && !kidsMode) setLives(livesState.lose(now())) }
 
     /** Out of lives: back to full after a rewarded ad (no ad for premium). */
     fun refillLives() {
@@ -527,12 +615,11 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     /** First unfinished level, or the last one when everything is done. */
     fun continueIndex(): Int = levels.indices.firstOrNull { levels[it].id !in completed && levelOpen(it) } ?: levels.lastIndex
 
-    /** Today, for holidays; tests can set it. */
-    var today: () -> java.time.LocalDate = { java.time.LocalDate.now() }
 
     /** Holiday packs are open only around the holiday (or once the player has started them). */
     fun packOpen(p: Int): Boolean {
         val pack = packs[p]
+        if (kidsMode && kidsPack >= 0) return p == kidsPack
         return com.aaideas.krossvord.model.Holidays.packOpen(pack.packId, today()) ||
             pack.levels.any { it.id in completed || progress.hasProgress(it.id) }
     }
@@ -540,6 +627,24 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
 
     /** The holiday to greet on the home screen today, if any. */
     val holiday: com.aaideas.krossvord.model.Holiday? get() = com.aaideas.krossvord.model.Holidays.greeting(today())
+
+    /** Saved clue levels; in kids mode clues not touched yet start at the easiest one. */
+    private fun startTiers(level: Level): Map<Int, Int> {
+        val saved = progress.loadClueTiers(level.id)
+        if (!kidsMode) return saved
+        return level.entries.associate { it.id to (saved[it.id] ?: it.clueLevels.lastIndex) }
+    }
+
+    // ---- Kids mode: easiest clues first, no lives lost, only the kids pack when there is one ----
+    var kidsMode by mutableStateOf(progress.kidsMode)
+        private set
+    val kidsPack: Int get() = packs.indexOfFirst { it.packId == KIDS_PACK }
+
+    fun changeKidsMode(on: Boolean) {
+        kidsMode = on
+        progress.kidsMode = on
+        if (on && kidsPack >= 0) selectedPack = kidsPack
+    }
 
     fun startLevel(index: Int) {
         levelIndex = index
@@ -550,7 +655,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
             typed = progress.loadTyped(level.id),
             revealed = progress.loadRevealed(level.id),
         ).let { s -> progress.loadOpenedClues(level.id)?.let { s.copy(openedClues = it) } ?: s }
-            .copy(keywordGuessed = progress.loadKeywordGuessed(level.id), clueTiers = progress.loadClueTiers(level.id)).let { s -> s.selectEntry(level.entries.firstOrNull { !s.isEntrySolved(it) } ?: level.entries.first()) }
+            .copy(keywordGuessed = progress.loadKeywordGuessed(level.id), clueTiers = startTiers(level)).let { s -> s.selectEntry(level.entries.firstOrNull { !s.isEntrySolved(it) } ?: level.entries.first()) }
         showCompletion = false
         feedback = null
         draftPicks = emptyList()
@@ -576,6 +681,8 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     fun resetAllProgress() {
         progress.resetAll()
         daily.reset()
+        dailyStore.clear()
+        dailyTick++
         completed = progress.completedLevels()
         freeHints = progress.freeHints
         setLives(progress.lives.at(now()))
@@ -648,6 +755,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         val found = s.solvedCount - old.solvedCount
         if (found > 0 && s.board.level.id == old.board.level.id) {
             progress.wordsFound = progress.wordsFound + found
+            track(TaskKind.WORDS, found)
             collect(s.board.level.entries.filter { s.isEntrySolved(it) && !old.isEntrySolved(it) }.map { it.answer })
         }
         if (soundOn && found > 0) { if (s.isComplete && !old.isComplete) sounds.levelSolved() else sounds.wordFound() }
@@ -671,7 +779,10 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
                 praise = LevelResult.PRAISE.random(),
                 keyword = s.keyword?.word,
                 medals = newMedals,
+                fact = nextFact(),
             )
+            track(TaskKind.LEVELS)
+            if (mistakes == 0) track(TaskKind.PERFECT)
             progress.levelsSinceInterstitial = progress.levelsSinceInterstitial + 1
             completed = progress.completedLevels()
             showCompletion = true
@@ -684,7 +795,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
 }
 
 /** The result card of a solved level: 1 to 3 stars, time taken (shown only here), praise, new medals. */
-data class LevelResult(val rankUp: com.aaideas.krossvord.model.Rank? = null, val xp: Int = 0, val stars: Int, val seconds: Long, val praise: String, val keyword: String?, val medals: List<Medal>) {
+data class LevelResult(val rankUp: com.aaideas.krossvord.model.Rank? = null, val xp: Int = 0, val stars: Int, val seconds: Long, val praise: String, val keyword: String?, val medals: List<Medal>, val fact: String? = null) {
     companion object {
         val PRAISE = listOf("Əla!", "Bravo!", "Afərin!", "Belə davam et!", "Mükəmməl!", "Super!", "Çox gözəl!")
         /** Never zero: 3 without mistakes and letter hints, 2 with a few, 1 otherwise. */

@@ -138,6 +138,33 @@ class SweepShotTest {
         rule.onRoot().captureRoboImage("build/outputs/roborazzi/welcome-daily.png")
     }
 
+    @Test fun dailyScreen() {
+        val vm = GameViewModel(ApplicationProvider.getApplicationContext<Application>())
+        vm.today = { java.time.LocalDate.of(2026, 11, 22) }
+        // Played three days before today too, and the proverb answered right.
+        repeat(3) { i -> vm.today = { java.time.LocalDate.of(2026, 11, 19 + i) }; vm.pickProverb(vm.proverbOptions.first()) }
+        vm.today = { java.time.LocalDate.of(2026, 11, 22) }
+        val xp0 = vm.xp
+        vm.pickProverb(vm.proverb.answer)
+        assert(vm.xp > xp0)
+        assert(vm.streakRun == 4) { "run ${vm.streakRun}" }
+        rule.setContent { KrossvordTheme { Surface(Modifier.fillMaxSize()) { DailyScreen(vm) } } }
+        rule.onRoot().captureRoboImage("build/outputs/roborazzi/daily.png")
+    }
+
+    @Test fun kidsModeStartsWithEasiestClueAndKeepsLives() {
+        val vm = GameViewModel(ApplicationProvider.getApplicationContext<Application>())
+        vm.changeKidsMode(true)
+        vm.startLevel(0)
+        val g = vm.game!!
+        val e = g.board.level.entries.first()
+        assert(g.clueTier(e) == e.clueLevels.lastIndex)
+        assert(!vm.outOfLives)
+        vm.changeKidsMode(false)
+        vm.restartLevel()
+        assert(vm.game!!.clueTier(e) == 0)
+    }
+
     @Test fun collectionScreen() {
         val vm = GameViewModel(ApplicationProvider.getApplicationContext<Application>())
         vm.restartLevel()

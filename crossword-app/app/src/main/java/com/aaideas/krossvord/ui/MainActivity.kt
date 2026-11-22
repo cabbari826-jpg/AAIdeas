@@ -98,6 +98,7 @@ class MainActivity : ComponentActivity() {
                                 Screen.WORD_OF_DAY -> WordOfDayScreen(vm.daily, isPremium, vm::back)
                                 Screen.STATS -> StatsScreen(vm)
                                 Screen.COLLECTION -> CollectionScreen(vm)
+                                Screen.DAILY -> DailyScreen(vm)
                             }
                         }
                         if (menu) GlassBottomMenu(vm.screen, vm::open, Modifier.align(Alignment.BottomCenter))

@@ -77,6 +77,14 @@ fun LevelResultDialog(title: String, result: LevelResult, onNext: () -> Unit, on
                             Text("${m.icon} Yeni medal: ${m.title}", Modifier.padding(horizontal = 12.dp, vertical = 6.dp), style = MaterialTheme.typography.bodyMedium)
                         }
                     }
+                    result.fact?.let { f ->
+                        Surface(shape = RoundedCornerShape(12.dp), color = MaterialTheme.colorScheme.surfaceVariant) {
+                            Column(Modifier.padding(horizontal = 12.dp, vertical = 8.dp)) {
+                                Text("💡 Bilirsinizmi?", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
+                                Text(f, style = MaterialTheme.typography.bodyMedium)
+                            }
+                        }
+                    }
                     Row(Modifier.fillMaxWidth().padding(top = 4.dp), horizontalArrangement = Arrangement.End) {
                         TextButton(onClick = onClose) { Text("Bağla") }
                         Button(onClick = onNext) { Text("Növbəti") }

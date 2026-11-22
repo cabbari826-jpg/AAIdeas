@@ -138,6 +138,18 @@ fun SettingsScreen(vm: GameViewModel, isPremium: Boolean) {
                 Switch(checked = vm.largeMode, onCheckedChange = vm::changeLargeMode)
             }
         }
+        Surface(shape = androidx.compose.foundation.shape.RoundedCornerShape(16.dp), color = MaterialTheme.colorScheme.secondaryContainer) {
+            Row(Modifier.fillMaxWidth().padding(12.dp), verticalAlignment = Alignment.CenterVertically) {
+                Column(Modifier.weight(1f)) {
+                    Text("🧸 Uşaq rejimi", style = MaterialTheme.typography.titleMedium)
+                    Text(
+                        "Ən asan ipucu əvvəl göstərilir, səhvdə can getmir" + if (vm.kidsPack >= 0) ", yalnız uşaq sözləri" else "",
+                        style = MaterialTheme.typography.bodySmall,
+                    )
+                }
+                Switch(checked = vm.kidsMode, onCheckedChange = vm::changeKidsMode)
+            }
+        }
         Surface(onClick = vm::editProfile, shape = androidx.compose.foundation.shape.RoundedCornerShape(16.dp), color = MaterialTheme.colorScheme.surfaceVariant) {
             Column(Modifier.fillMaxWidth().padding(12.dp)) {
                 Text("👤 Profil", style = MaterialTheme.typography.titleMedium)

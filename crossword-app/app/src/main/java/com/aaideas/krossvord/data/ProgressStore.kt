@@ -47,7 +47,7 @@ class ProgressStore(context: Context) {
 
     /** Forget every level's progress and counters; keep the player's settings. */
     fun resetAll() {
-        val keep = setOf(KEY_INPUT, KEY_HIDE_CLUES, KEY_EXTRA, KEY_THEME, KEY_DYNAMIC, KEY_TUTORIAL, KEY_BIG_CLUES, KEY_SOUND, KEY_SKIN, KEY_SKINS_OWNED, "large_mode", "player_name", "birthday", "birth_year", "profile_asked", "birthday_gift_year")
+        val keep = setOf(KEY_INPUT, KEY_HIDE_CLUES, KEY_EXTRA, KEY_THEME, KEY_DYNAMIC, KEY_TUTORIAL, KEY_BIG_CLUES, KEY_SOUND, KEY_SKIN, KEY_SKINS_OWNED, "large_mode", "kids_mode", "player_name", "birthday", "birth_year", "profile_asked", "birthday_gift_year")
         val e = prefs.edit()
         prefs.all.keys.filter { it !in keep }.forEach { e.remove(it) }
         e.apply()
@@ -172,6 +172,10 @@ class ProgressStore(context: Context) {
     var welcomeDay: Long
         get() = prefs.getLong("welcome_day", -1)
         set(v) = prefs.edit().putLong("welcome_day", v).apply()
+
+    var kidsMode: Boolean
+        get() = prefs.getBoolean("kids_mode", false)
+        set(v) = prefs.edit().putBoolean("kids_mode", v).apply()
 
     var largeMode: Boolean
         get() = prefs.getBoolean("large_mode", false)

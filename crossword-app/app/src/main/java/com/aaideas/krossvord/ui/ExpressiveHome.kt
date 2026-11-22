@@ -124,6 +124,7 @@ fun ExpressiveHome(vm: GameViewModel) {
         }
 
         WordOfDayCard(vm.daily) { vm.open(Screen.WORD_OF_DAY) }
+        TodayCard(vm)
 
         ContinueCard(vm)
 

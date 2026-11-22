@@ -18,7 +18,7 @@ android {
         // versionCode than the one before and installs as an update.
         val build = System.getenv("GITHUB_RUN_NUMBER")?.toIntOrNull() ?: 1
         versionCode = build
-        versionName = "0.1.$build"
+        versionName = "2.0.$build"
     }
 
     // Prototype builds are signed with one fixed key, so each new APK installs
