@@ -54,6 +54,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         d.onSolved = {
             if (soundOn) sounds.wordFound()
             d.reward = dailyReward()
+            addXp(com.aaideas.krossvord.model.Ranks.DAILY_XP)
             collect(listOf(d.guess.word.word))
         }
     }
@@ -95,6 +96,19 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         private set
     val playSeconds: Long get() = progress.playSeconds + if (playStart == 0L) 0 else (android.os.SystemClock.elapsedRealtime() - playStart) / 1000
     val wordsFound: Int get() = progress.wordsFound
+
+    // ---- Rank ----
+    var xp by mutableStateOf(progress.xp)
+        private set
+
+    /** Adds XP; returns the new rank if this raised it. */
+    private fun addXp(n: Int): com.aaideas.krossvord.model.Rank? {
+        val before = com.aaideas.krossvord.model.Ranks.of(xp)
+        xp += n
+        progress.xp = xp
+        val after = com.aaideas.krossvord.model.Ranks.of(xp)
+        return if (after.index > before.index) after else null
+    }
 
     // ---- Word collection and medals ----
     var collection by mutableStateOf(progress.collection)
@@ -297,6 +311,15 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     var tutorialStep by mutableStateOf(if (progress.tutorialDone) TUTORIAL_DONE else TUTORIAL_TAP)
         private set
 
+    /** One switch for weak eyes: bigger text everywhere and the selected clue in large print. */
+    var largeMode by mutableStateOf(progress.largeMode)
+        private set
+
+    fun changeLargeMode(on: Boolean) {
+        largeMode = on
+        progress.largeMode = on
+    }
+
     var bigClues by mutableStateOf(progress.bigClues)
         private set
 
@@ -414,7 +437,21 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     /** First unfinished level, or the last one when everything is done. */
-    fun continueIndex(): Int = levels.indexOfFirst { it.id !in completed }.let { if (it < 0) levels.lastIndex else it }
+    fun continueIndex(): Int = levels.indices.firstOrNull { levels[it].id !in completed && levelOpen(it) } ?: levels.lastIndex
+
+    /** Today, for holidays; tests can set it. */
+    var today: () -> java.time.LocalDate = { java.time.LocalDate.now() }
+
+    /** Holiday packs are open only around the holiday (or once the player has started them). */
+    fun packOpen(p: Int): Boolean {
+        val pack = packs[p]
+        return com.aaideas.krossvord.model.Holidays.packOpen(pack.packId, today()) ||
+            pack.levels.any { it.id in completed || progress.hasProgress(it.id) }
+    }
+    fun levelOpen(index: Int) = packOpen(packIndexOf(index))
+
+    /** The holiday to greet on the home screen today, if any. */
+    val holiday: com.aaideas.krossvord.model.Holiday? get() = com.aaideas.krossvord.model.Holidays.greeting(today())
 
     fun startLevel(index: Int) {
         levelIndex = index
@@ -490,7 +527,8 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     fun nextLevel() {
         showCompletion = false
         val go = {
-            if (levelIndex + 1 < levels.size) startLevel(levelIndex + 1) else screen = Screen.LEVELS
+            val next = (levelIndex + 1 until levels.size).firstOrNull { levelOpen(it) }
+            if (next != null) startLevel(next) else screen = Screen.LEVELS
         }
         val since = progress.levelsSinceInterstitial
         if (AdPolicy.shouldShowInterstitial(premium.isPremium.value, completed.size, since)) {
@@ -535,8 +573,12 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
             progress.markCompleted(id)
             newMedals = medals.filter { it.id in earnedMedalsAfterMark(id) - medalsBefore }
             flushTime()
+            val stars = LevelResult.stars(mistakes, hintsUsed)
+            val rankUp = addXp(com.aaideas.krossvord.model.Ranks.levelXp(stars))
             result = LevelResult(
-                stars = LevelResult.stars(mistakes, hintsUsed),
+                rankUp = rankUp,
+                xp = com.aaideas.krossvord.model.Ranks.levelXp(stars),
+                stars = stars,
                 seconds = progress.levelSeconds(id),
                 praise = LevelResult.PRAISE.random(),
                 keyword = s.keyword?.word,
@@ -554,7 +596,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
 }
 
 /** The result card of a solved level: 1 to 3 stars, time taken (shown only here), praise, new medals. */
-data class LevelResult(val stars: Int, val seconds: Long, val praise: String, val keyword: String?, val medals: List<Medal>) {
+data class LevelResult(val rankUp: com.aaideas.krossvord.model.Rank? = null, val xp: Int = 0, val stars: Int, val seconds: Long, val praise: String, val keyword: String?, val medals: List<Medal>) {
     companion object {
         val PRAISE = listOf("Əla!", "Bravo!", "Afərin!", "Belə davam et!", "Mükəmməl!", "Super!", "Çox gözəl!")
         /** Never zero: 3 without mistakes and letter hints, 2 with a few, 1 otherwise. */

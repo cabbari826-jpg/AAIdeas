@@ -47,7 +47,7 @@ class ProgressStore(context: Context) {
 
     /** Forget every level's progress and counters; keep the player's settings. */
     fun resetAll() {
-        val keep = setOf(KEY_INPUT, KEY_HIDE_CLUES, KEY_EXTRA, KEY_THEME, KEY_DYNAMIC, KEY_TUTORIAL, KEY_BIG_CLUES, KEY_SOUND)
+        val keep = setOf(KEY_INPUT, KEY_HIDE_CLUES, KEY_EXTRA, KEY_THEME, KEY_DYNAMIC, KEY_TUTORIAL, KEY_BIG_CLUES, KEY_SOUND, "large_mode")
         val e = prefs.edit()
         prefs.all.keys.filter { it !in keep }.forEach { e.remove(it) }
         e.apply()
@@ -126,6 +126,16 @@ class ProgressStore(context: Context) {
     var wordsFound: Int
         get() = prefs.getInt(KEY_WORDS_FOUND, 0)
         set(v) = prefs.edit().putInt(KEY_WORDS_FOUND, v).apply()
+
+    /** Experience points for the player's rank (model/Rank). */
+    var xp: Int
+        get() = prefs.getInt("xp", 0)
+        set(v) = prefs.edit().putInt("xp", v).apply()
+
+    /** Large mode: bigger text everywhere (see LARGE_FONT_SCALE). */
+    var largeMode: Boolean
+        get() = prefs.getBoolean("large_mode", false)
+        set(v) = prefs.edit().putBoolean("large_mode", v).apply()
 
     /** The first-run tutorial (tap a clue cell to ease the clue) was finished or skipped. */
     var tutorialDone: Boolean

@@ -22,6 +22,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Switch
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -87,11 +88,13 @@ fun LevelsScreen(vm: GameViewModel) {
             horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             vm.packs.forEachIndexed { p, pack ->
+                if (!vm.packOpen(p)) return@forEachIndexed
                 val done = pack.levels.count { it.id in vm.completed }
+                val icon = com.aaideas.krossvord.model.Holidays.holidayFor(pack.packId)?.icon?.let { "$it " }.orEmpty()
                 FilterChip(
                     selected = vm.selectedPack == p,
                     onClick = { vm.selectedPack = p },
-                    label = { Text("${pack.title} $done/${pack.levels.size}") },
+                    label = { Text("$icon${pack.title} $done/${pack.levels.size}") },
                 )
             }
         }
@@ -125,6 +128,16 @@ fun SettingsScreen(vm: GameViewModel, isPremium: Boolean) {
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         TextButton(onClick = vm::back) { Text("← Əsas səhifə") }
+        // First in the list, so it is easy to find for someone who can't read small text.
+        Surface(shape = androidx.compose.foundation.shape.RoundedCornerShape(16.dp), color = MaterialTheme.colorScheme.primaryContainer) {
+            Row(Modifier.fillMaxWidth().padding(12.dp), verticalAlignment = Alignment.CenterVertically) {
+                Column(Modifier.weight(1f)) {
+                    Text("🔍 İri rejim", style = MaterialTheme.typography.titleMedium)
+                    Text("Bütün yazılar böyüyür, seçilmiş ipucu şəbəkənin altında iri görünür", style = MaterialTheme.typography.bodySmall)
+                }
+                Switch(checked = vm.largeMode, onCheckedChange = vm::changeLargeMode)
+            }
+        }
         ThemePicker(vm.themeMode, vm::changeTheme, vm.dynamicColor, vm::changeDynamicColor)
         Text("Hərflərin daxil edilməsi", style = MaterialTheme.typography.headlineSmall)
         listOf(

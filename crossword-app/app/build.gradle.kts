@@ -58,6 +58,8 @@ android {
         }
     }
     compileOptions {
+        // java.time (holiday dates) on Android 7.
+        isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
@@ -72,6 +74,7 @@ android {
 
 dependencies {
     val composeBom = platform("androidx.compose:compose-bom:2025.06.00")
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.5")
     implementation(composeBom)
     implementation("androidx.core:core-ktx:1.16.0")
     implementation("androidx.activity:activity-compose:1.10.1")

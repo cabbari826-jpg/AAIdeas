@@ -62,6 +62,10 @@ class ClueTierTest {
     }
 
     @Test fun everyThemedPackHasAtLeastTenLevels() {
-        packs.filter { it.packId != "az-starter" }.forEach { assertTrue(it.packId, it.levels.size >= 10) }
+        // Holiday packs are short (open for a few weeks only), but not tiny.
+        packs.filter { it.packId != "az-starter" }.forEach {
+            val min = if (Holidays.holidayFor(it.packId) != null) 6 else 10
+            assertTrue(it.packId, it.levels.size >= min)
+        }
     }
 }

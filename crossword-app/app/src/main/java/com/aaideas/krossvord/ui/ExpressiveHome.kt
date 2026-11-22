@@ -102,6 +102,7 @@ fun ExpressiveHome(vm: GameViewModel) {
     ) {
         Text(BRAND, style = MaterialTheme.typography.headlineMedium)
 
+        vm.holiday?.let { HolidayCard(it, vm) }
         WordOfDayCard(vm.daily) { vm.open(Screen.WORD_OF_DAY) }
 
         ContinueCard(vm)

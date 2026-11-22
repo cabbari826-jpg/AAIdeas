@@ -33,6 +33,7 @@ fun StatsScreen(vm: GameViewModel) {
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         Text("Statistika", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
+        RankCard(vm.xp)
         androidx.compose.material3.Button(onClick = { vm.open(Screen.COLLECTION) }, modifier = Modifier.fillMaxWidth()) {
             Text("📖 Söz kolleksiyası (${vm.collection.size})")
         }
@@ -101,6 +102,26 @@ private fun MedalsSection(vm: GameViewModel) {
                 }
             }
             if (pair.size == 1) androidx.compose.foundation.layout.Spacer(Modifier.weight(1f))
+        }
+    }
+}
+
+/** Rank, XP and how far to the next rank. */
+@Composable
+private fun RankCard(xp: Int) {
+    val rank = com.aaideas.krossvord.model.Ranks.of(xp)
+    val next = com.aaideas.krossvord.model.Ranks.next(xp)
+    Surface(shape = RoundedCornerShape(16.dp), color = MaterialTheme.colorScheme.primaryContainer, modifier = Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(14.dp)) {
+            Text("🎖 ${rank.title}", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
+            Text("$xp XP", style = MaterialTheme.typography.bodyMedium)
+            if (next != null) {
+                LinearProgressIndicator(
+                    progress = { (xp - rank.minXp) / (next.minXp - rank.minXp).toFloat() },
+                    modifier = Modifier.fillMaxWidth().padding(vertical = 6.dp),
+                )
+                Text("Növbəti rütbə: ${next.title} (${next.minXp - xp} XP qalıb)", style = MaterialTheme.typography.bodySmall)
+            } else Text("Ən yüksək rütbə!", style = MaterialTheme.typography.bodySmall)
         }
     }
 }

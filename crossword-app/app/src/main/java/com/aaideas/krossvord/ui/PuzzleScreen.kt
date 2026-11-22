@@ -445,6 +445,9 @@ private fun TutorialCallout(step: Int, onDone: () -> Unit) {
 /** Phone font scale from which the clue also shows in large text under the grid. */
 const val BIG_FONT_SCALE = 1.3f
 
+/** Text scale in large mode; at least [BIG_FONT_SCALE], so the big clue line shows too. */
+const val LARGE_FONT_SCALE = 1.3f
+
 /** The selected clue in full under the grid: song lines that don't fit a cell, or big-text mode. */
 @Composable
 private fun LongClueLine(entry: Entry, text: String, big: Boolean) {

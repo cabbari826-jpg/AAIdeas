@@ -70,6 +70,10 @@ class MainActivity : ComponentActivity() {
                 else SystemBarStyle.light(Color.TRANSPARENT, Color.TRANSPARENT)
                 enableEdgeToEdge(statusBarStyle = bar, navigationBarStyle = bar)
             }
+            // Large mode: all text at least 1.3x, whatever the phone's own font setting.
+            val base = androidx.compose.ui.platform.LocalDensity.current
+            val density = if (vm.largeMode) androidx.compose.ui.unit.Density(base.density, maxOf(base.fontScale, LARGE_FONT_SCALE)) else base
+            androidx.compose.runtime.CompositionLocalProvider(androidx.compose.ui.platform.LocalDensity provides density) {
             KrossvordTheme(mode, vm.dynamicColor) {
                 Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
                     val isPremium by vm.premium.isPremium.collectAsState()
@@ -93,6 +97,7 @@ class MainActivity : ComponentActivity() {
                     AdPlaceholderHost(vm.ads)
                     UpdateBanner() // prototype only; empty in the release build
                 }
+            }
             }
         }
     }

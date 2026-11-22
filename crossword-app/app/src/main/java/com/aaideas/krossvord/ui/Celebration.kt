@@ -61,6 +61,16 @@ fun LevelResultDialog(title: String, result: LevelResult, onNext: () -> Unit, on
                     Stars(result.stars)
                     Text("$title həll olundu", style = MaterialTheme.typography.bodyLarge, textAlign = TextAlign.Center)
                     if (result.seconds > 0) Text("Vaxt: ${levelTimeText(result.seconds)}", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    if (result.xp > 0) Text("+${result.xp} XP", style = MaterialTheme.typography.titleSmall, color = MaterialTheme.colorScheme.primary)
+                    result.rankUp?.let { r ->
+                        Surface(shape = RoundedCornerShape(12.dp), color = MaterialTheme.colorScheme.primaryContainer) {
+                            Text(
+                                "🎖 Yeni rütbə: ${r.title}" + if (r.themeId != null) "\nHədiyyə: yeni tərtibat" else "",
+                                Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
+                                style = MaterialTheme.typography.bodyMedium, textAlign = TextAlign.Center,
+                            )
+                        }
+                    }
                     result.keyword?.let { Text("Açar söz: $it", style = MaterialTheme.typography.titleMedium) }
                     result.medals.forEach { m ->
                         Surface(shape = RoundedCornerShape(12.dp), color = MaterialTheme.colorScheme.tertiaryContainer) {

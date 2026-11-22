@@ -4,6 +4,8 @@ import android.app.Application
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import androidx.compose.foundation.layout.padding
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onRoot
 import androidx.test.core.app.ApplicationProvider
@@ -76,7 +78,7 @@ class SweepShotTest {
         rule.setContent {
             KrossvordTheme {
                 Surface(Modifier.fillMaxSize()) {
-                    LevelResultDialog("Səviyyə 3", LevelResult(3, 154, "Afərin!", "QALA", listOf(medal)), {}, {})
+                    LevelResultDialog("Səviyyə 3", LevelResult(rankUp = com.aaideas.krossvord.model.Ranks.ALL[1], xp = 25, stars = 3, seconds = 154, praise = "Afərin!", keyword = "QALA", medals = listOf(medal)), {}, {})
                 }
             }
         }
@@ -84,6 +86,22 @@ class SweepShotTest {
         com.github.takahirom.roborazzi.captureScreenRoboImage("build/outputs/roborazzi/result-anim.png")
         rule.mainClock.advanceTimeBy(2000)
         com.github.takahirom.roborazzi.captureScreenRoboImage("build/outputs/roborazzi/result.png")
+    }
+
+    @Test fun holidayPackOnlyAroundNewYear() {
+        val vm = GameViewModel(ApplicationProvider.getApplicationContext<Application>())
+        val p = vm.packs.indexOfFirst { it.packId == "az-yeniil" }
+        assert(p >= 0)
+        vm.today = { java.time.LocalDate.of(2026, 11, 22) }
+        assert(!vm.packOpen(p)) { "closed in November" }
+        assert(vm.holiday == null)
+        vm.today = { java.time.LocalDate.of(2026, 12, 28) }
+        assert(vm.packOpen(p)) { "open before New Year" }
+        vm.today = { java.time.LocalDate.of(2026, 12, 30) }
+        assert(vm.holiday?.id == "yeni_il")
+        vm.today = { java.time.LocalDate.of(2027, 1, 1) }
+        rule.setContent { KrossvordTheme { Surface(Modifier.fillMaxSize()) { androidx.compose.foundation.layout.Column(Modifier.padding(16.dp)) { HolidayCard(vm.holiday!!, vm) } } } }
+        rule.onRoot().captureRoboImage("build/outputs/roborazzi/holiday-card.png")
     }
 
     @Test fun collectionScreen() {
