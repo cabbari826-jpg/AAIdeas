@@ -153,21 +153,23 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     /**
-     * Tap on a clue inside a clue cell. Another word's clue selects that word; the active word's
-     * clue opens if hidden, otherwise turns into the next, easier clue.
+     * Tap on a clue cell: selects that word and opens its clue in a large card, where the
+     * player can read it comfortably, ask for an easier clue and swipe back to earlier ones.
      */
     fun tapClueOf(e: Entry) {
         val s = game ?: return
         if (feedback == WordFeedback.RIGHT) feedback = null
-        when {
-            s.activeEntry != e -> update { it.selectEntry(e) }
-            !isClueShown(e) -> openActiveClue()
-            s.canEaseClue(e) -> {
-                easeActiveClue()
-                if (tutorialStep == TUTORIAL_TAP) tutorialStep = TUTORIAL_EXPLAIN
-            }
-        }
+        if (s.activeEntry != e) update { it.selectEntry(e) }
+        update { it.openClue(e) }
+        clueCard = e
+        if (tutorialStep == TUTORIAL_TAP) tutorialStep = TUTORIAL_EXPLAIN
     }
+
+    /** The word whose clue card is open, or null. */
+    var clueCard by mutableStateOf<Entry?>(null)
+        private set
+
+    fun closeClueCard() { clueCard = null }
 
     /** First-run tutorial: 0 = "tap this clue", 1 = explain what happened, 2 = done. */
     var tutorialStep by mutableStateOf(if (progress.tutorialDone) TUTORIAL_DONE else TUTORIAL_TAP)
