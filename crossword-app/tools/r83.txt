@@ -1,0 +1,21 @@
+# # # # # # #
+# # # # N # K
+# Ç # B A B A
+# A # A R A L
+# Y A Y # K #
+# # # A Ş I Q
+# # Ə T # # A
+# A R I # # R
+R 2 2 BABA Atanın atası
+R 3 2 ARAL Dəniz
+R 4 0 YAY İsti fəsil
+R 5 2 AŞIQ Saz çalan
+R 6 1 ƏT Kabab üçün
+R 7 0 ARI Bal verən
+D 1 1 ÇAY İçki
+D 5 2 ƏR Həyat yoldaşı
+D 1 3 BAYATI Xalq şeiri
+D 0 4 NAR Qırmızı meyvə
+D 1 5 BAKI Paytaxt
+D 0 6 KAL Yetişməmiş
+D 4 6 QAR Ağ yağıntı

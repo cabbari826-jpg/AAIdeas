@@ -1,0 +1,22 @@
+# # # # # # #
+# # B # K A L
+# K Ə T A N #
+# # B A B A #
+# M İ N A R Ə
+# Ə R # B # T
+# N # Ə # S #
+# # U L D U Z
+R 1 3 KAL Yetişməmiş
+R 2 0 KƏTAN Parça
+R 3 1 BABA Atanın atası
+R 4 0 MİNARƏ Məscid qülləsi
+R 5 0 ƏR Həyat yoldaşı
+R 7 1 ULDUZ Səma cismi
+D 3 1 MƏN Mən
+D 0 2 BƏBİR Xallı yırtıcı
+D 1 3 TAN Dan yeri
+D 5 3 ƏL Beş barmaq
+D 0 4 KABAB Manqalda
+D 0 5 ANAR Yazıçı (ad)
+D 5 5 SU H₂O
+D 3 6 ƏT Kabab üçün

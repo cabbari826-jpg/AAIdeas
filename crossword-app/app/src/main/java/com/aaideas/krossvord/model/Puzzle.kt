@@ -17,7 +17,11 @@ data class Entry(
     val clue: String,
     val source: String = "",
     val status: String = "candidate",
+    /** Optional clue levels, hardest first. The first is shown; easier ones are opened as hints. */
+    val clues: List<String> = emptyList(),
 ) {
+    val clueLevels: List<String> get() = clues.ifEmpty { listOf(clue) }
+
     val letters: List<Char> by lazy { AzText.letters(answer) }
 
     val cells: List<Cell> by lazy {

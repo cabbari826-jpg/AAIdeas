@@ -1,0 +1,22 @@
+# # # # # # #
+# S U # O # A
+# A # # B A Ğ
+# M # Q A Z #
+# O X U # # N
+# V # M A S A
+# A # # # Ə R
+# R O M A N #
+R 1 0 SU H₂O
+R 2 3 BAĞ Meyvəlik
+R 3 2 QAZ Ev quşu
+R 4 0 OXU Oxumaq
+R 5 2 MASA Stol
+R 6 4 ƏR Həyat yoldaşı
+R 7 0 ROMAN Böyük əsər
+D 0 1 SAMOVAR Çay qaynadır
+D 2 3 QUM Çimərlikdə
+D 0 4 OBA Kənd
+D 1 5 AZ Çoxun əksi
+D 4 5 SƏN Sən
+D 0 6 AĞ Qaranın əksi
+D 3 6 NAR Qırmızı meyvə

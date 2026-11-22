@@ -12,6 +12,8 @@ data class GameState(
     val openedClues: Set<Int> = emptySet(),
     /** The player guessed the key word before all its letters were in the grid. */
     val keywordGuessed: Boolean = false,
+    /** Entry id -> index into [Entry.clueLevels] currently shown (0 = hardest). */
+    val clueTiers: Map<Int, Int> = emptyMap(),
     val selectedCell: Cell? = null,
     val direction: Direction = Direction.ACROSS,
 ) {
@@ -53,6 +55,12 @@ data class GameState(
         val ok = AzText.normalize(text.trim()) == AzText.normalize(k.word)
         return if (ok) copy(keywordGuessed = true) to true else this to false
     }
+
+    fun clueTier(e: Entry): Int = (clueTiers[e.id] ?: 0).coerceIn(0, e.clueLevels.lastIndex)
+    fun clueText(e: Entry): String = e.clueLevels[clueTier(e)]
+    fun canEaseClue(e: Entry): Boolean = clueTier(e) < e.clueLevels.lastIndex && !isEntrySolved(e)
+    fun easeClue(e: Entry): GameState =
+        if (canEaseClue(e)) copy(clueTiers = clueTiers + (e.id to clueTier(e) + 1)) else this
 
     fun isClueOpen(e: Entry) = e.id in openedClues || isEntrySolved(e)
 

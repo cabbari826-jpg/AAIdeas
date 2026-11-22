@@ -35,6 +35,9 @@ const val KEYWORD_BONUS_HINTS = 2
 /** Wrong words allowed per level before the player must watch an ad or restart. */
 const val MAX_LIVES = 3
 
+/** Clue steps that are free; later steps need a rewarded ad. */
+const val FREE_CLUE_STEPS = 1
+
 class GameViewModel(app: Application) : AndroidViewModel(app) {
     val packs: List<Pack> = PackRepository(app).bundledPacks()
     val levels: List<Level> = packs.flatMap { it.levels }
@@ -132,6 +135,24 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
 
     fun isClueShown(e: Entry): Boolean = !hideClues || (game?.isClueOpen(e) ?: true)
 
+    /**
+     * Make the active clue easier: hardest -> medium is free, medium -> easiest needs a
+     * rewarded ad (free for premium).
+     */
+    fun easeActiveClue() {
+        val s = game ?: return
+        val e = s.activeEntry ?: return
+        if (!s.canEaseClue(e)) return
+        val needsAd = s.clueTier(e) >= FREE_CLUE_STEPS && !premium.isPremium.value
+        if (needsAd) ads.showRewarded("Asan ipucu") { update { it.easeClue(e) } } else update { it.easeClue(e) }
+    }
+
+    fun easeNeedsAd(): Boolean {
+        val s = game ?: return false
+        val e = s.activeEntry ?: return false
+        return s.clueTier(e) >= FREE_CLUE_STEPS && !premium.isPremium.value
+    }
+
     fun openActiveClue() = update { s -> s.activeEntry?.let { s.openClue(it) } ?: s }
 
     // ---- Letter columns ----
@@ -217,7 +238,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
             typed = progress.loadTyped(level.id),
             revealed = progress.loadRevealed(level.id),
         ).let { s -> progress.loadOpenedClues(level.id)?.let { s.copy(openedClues = it) } ?: s }
-            .copy(keywordGuessed = progress.loadKeywordGuessed(level.id)).let { s -> s.selectEntry(level.entries.firstOrNull { !s.isEntrySolved(it) } ?: level.entries.first()) }
+            .copy(keywordGuessed = progress.loadKeywordGuessed(level.id), clueTiers = progress.loadClueTiers(level.id)).let { s -> s.selectEntry(level.entries.firstOrNull { !s.isEntrySolved(it) } ?: level.entries.first()) }
         showCompletion = false
         feedback = null
         draftPicks = emptyList()
@@ -294,5 +315,6 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
             progress.saveTyped(id, s.typed, s.revealed)
         }
         if (s.openedClues != old.openedClues) progress.saveOpenedClues(id, s.openedClues)
+        if (s.clueTiers != old.clueTiers) progress.saveClueTiers(id, s.clueTiers)
     }
 }

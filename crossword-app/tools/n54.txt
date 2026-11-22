@@ -1,0 +1,22 @@
+# # # # # # #
+# A Ç A R # Ə
+# Z # N # # L
+# # # T A V A
+# M # # L # #
+# A D A Ç A Y
+# S Ə D A # O
+# A N A # E L
+R 1 0 AÇAR Qıfılı açır
+R 3 2 TAVA Qızartma qabı
+R 5 0 ADAÇAY Dərman bitkisi
+R 6 0 SƏDA Səs
+R 7 0 ANA Ata
+R 7 4 EL Xalq
+D 0 1 AZ Çoxun əksi
+D 3 1 MASA Stol
+D 4 2 DƏN Toxum
+D 0 3 ANT And
+D 4 3 ADA Su ilə əhatəli quru
+D 2 4 ALÇA Meyvə
+D 0 6 ƏLA Çox yaxşı
+D 4 6 YOL Cığır

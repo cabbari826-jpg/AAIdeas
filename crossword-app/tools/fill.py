@@ -8,8 +8,10 @@ if os.environ.get('WORDLIST') == 'hard':
 else:
     from words import WORDS
 MAXLEN = int(os.environ.get('MAXLEN', '6'))
+EXCLUDE = set(filter(None, os.environ.get('EXCLUDE', '').split(',')))
 W = {}
-for w in WORDS: W.setdefault(len(w), []).append(w)
+for w in WORDS:
+    if w not in EXCLUDE: W.setdefault(len(w), []).append(w)
 
 def slots(pat):
     R, C = len(pat), len(pat[0]); out = []

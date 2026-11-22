@@ -93,7 +93,10 @@ fun PuzzleScreen(vm: GameViewModel, isPremium: Boolean) {
             val cell = min(maxWidth / game.board.cols, maxHeight / game.board.rows)
             Grid(game, cell, preview, vm.feedback, vm::isClueShown, vm::tapCell)
         }
-        ClueBar(game.activeEntry, game, game.activeEntry?.let(vm::isClueShown) ?: true, vm::openActiveClue)
+        ClueBar(
+            game.activeEntry, game, game.activeEntry?.let(vm::isClueShown) ?: true, vm::openActiveClue,
+            onEase = vm::easeActiveClue, easeNeedsAd = vm.easeNeedsAd(),
+        )
         Row(Modifier.fillMaxWidth().padding(vertical = 6.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             if (columns) OutlinedButton(onClick = vm::shuffleTiles, modifier = Modifier.weight(1f)) { Text("⟳ Qarışdır") }
             else OutlinedButton(onClick = vm::clearWord, modifier = Modifier.weight(1f)) { Text("Sözü sil") }
@@ -116,6 +119,14 @@ fun PuzzleScreen(vm: GameViewModel, isPremium: Boolean) {
                 letters = letters,
                 draft = draft,
                 slots = game.openCells(entry).size,
+                word = run {
+                    // Whole word: letters already settled in the grid are shown fixed, picks fill the gaps.
+                    val picked = draft.mapNotNull { letters.getOrNull(it) }.iterator()
+                    entry.cells.map { c ->
+                        if (game.isLocked(c)) game.board.solution[c] to true
+                        else (if (picked.hasNext()) picked.next() else null) to false
+                    }
+                },
                 feedback = vm.feedback,
                 onPick = vm::pickLetter,
                 onUndo = vm::unpickLast,
@@ -178,7 +189,7 @@ private fun Grid(
                     } else {
                         val clues = game.board.cluesAt[cell]
                         if (clues == null) Box(mod.background(colors.emptyCell))
-                        else ClueCell(clues, active, clueShown, mod.background(colors.clueCell).clickable { onTap(cell) })
+                        else ClueCell(clues, active, clueShown, game::clueText, mod.background(colors.clueCell).clickable { onTap(cell) })
                     }
                 }
             }
@@ -214,13 +225,15 @@ private fun LetterCell(
         contentAlignment = Alignment.Center,
     ) {
         if (keywordIndex >= 0) {
-            Box(Modifier.fillMaxSize().padding(2.dp).border(2.dp, colors.keyword, RoundedCornerShape(50)))
+            // Ring sits inset; the number sits in the corner on the cell colour so it never covers the letter.
+            Box(Modifier.fillMaxSize().padding(size * 0.14f).border(2.dp, colors.keyword, RoundedCornerShape(50)))
             Text(
                 "${keywordIndex + 1}",
-                fontSize = (size.value * 0.18f).sp,
+                fontSize = (size.value * 0.22f).sp,
+                lineHeight = (size.value * 0.22f).sp,
                 color = colors.keyword,
                 fontWeight = FontWeight.Bold,
-                modifier = Modifier.align(Alignment.TopStart).padding(start = 3.dp),
+                modifier = Modifier.align(Alignment.TopStart).background(bg).padding(start = 2.dp, end = 1.dp),
             )
         }
         if (ch != null) {
@@ -239,7 +252,13 @@ private fun LetterCell(
 }
 
 @Composable
-private fun ClueCell(clues: List<Entry>, active: Entry?, shown: (Entry) -> Boolean, modifier: Modifier) {
+private fun ClueCell(
+    clues: List<Entry>,
+    active: Entry?,
+    shown: (Entry) -> Boolean,
+    text: (Entry) -> String,
+    modifier: Modifier,
+) {
     val colors = LocalGridColors.current
     Column(modifier.padding(1.dp)) {
         // Across clue on top, down clue below: the usual Scandinavian order.
@@ -251,7 +270,7 @@ private fun ClueCell(clues: List<Entry>, active: Entry?, shown: (Entry) -> Boole
                 contentAlignment = Alignment.Center,
             ) {
                 BasicText(
-                    text = (if (shown(e)) e.clue else "?") + if (e.direction == Direction.ACROSS) " →" else " ↓",
+                    text = (if (shown(e)) text(e) else "?") + if (e.direction == Direction.ACROSS) " →" else " ↓",
                     style = TextStyle(color = colors.clueText, textAlign = TextAlign.Center, lineHeight = 1.05.em),
                     autoSize = TextAutoSize.StepBased(minFontSize = 5.sp, maxFontSize = 11.sp, stepSize = 0.5.sp),
                     modifier = Modifier.padding(horizontal = 1.dp),
@@ -262,7 +281,14 @@ private fun ClueCell(clues: List<Entry>, active: Entry?, shown: (Entry) -> Boole
 }
 
 @Composable
-private fun ClueBar(entry: Entry?, game: GameState, shown: Boolean, onOpen: () -> Unit) {
+private fun ClueBar(
+    entry: Entry?,
+    game: GameState,
+    shown: Boolean,
+    onOpen: () -> Unit,
+    onEase: () -> Unit,
+    easeNeedsAd: Boolean,
+) {
     Surface(
         color = MaterialTheme.colorScheme.secondaryContainer,
         shape = RoundedCornerShape(10.dp),
@@ -271,7 +297,7 @@ private fun ClueBar(entry: Entry?, game: GameState, shown: Boolean, onOpen: () -
         Row(verticalAlignment = Alignment.CenterVertically) {
             val text = if (entry == null) "Sözü seçin" else {
                 val arrow = if (entry.direction == Direction.ACROSS) "→" else "↓"
-                val clue = if (shown) entry.clue else "İpucu gizlidir"
+                val clue = if (shown) game.clueText(entry) else "İpucu gizlidir"
                 "$arrow $clue  (${entry.letters.size} hərf)" + if (game.isEntryWrong(entry)) "  · səhvdir" else ""
             }
             Text(
@@ -281,6 +307,15 @@ private fun ClueBar(entry: Entry?, game: GameState, shown: Boolean, onOpen: () -
             )
             if (entry != null && !shown) {
                 TextButton(onClick = onOpen) { Text("İpucunu aç") }
+            } else if (entry != null && game.canEaseClue(entry)) {
+                // Clue levels: dots show how easy the clue is now; the button opens the next, easier one.
+                val level = game.clueTier(entry)
+                Text(
+                    "●".repeat(level + 1) + "○".repeat(entry.clueLevels.lastIndex - level),
+                    fontSize = 10.sp,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+                TextButton(onClick = onEase) { Text(if (easeNeedsAd) "Asan ▶" else "Asan") }
             }
         }
     }
@@ -359,9 +394,9 @@ private fun TileInput(tiles: List<Tile>, onLetter: (Char) -> Unit, onBackspace: 
 private val TILE = 46.dp
 
 @Composable
-private fun LetterTile(tile: Tile, onClick: () -> Unit) {
-    val scale by animateFloatAsState(if (tile.used) 0.8f else 1f, tween(180), label = "tileScale")
-    val alpha by animateFloatAsState(if (tile.used) 0.25f else 1f, tween(180), label = "tileAlpha")
+private fun LetterTile(tile: Tile, hideWhenUsed: Boolean = false, onClick: () -> Unit) {
+    val scale by animateFloatAsState(if (tile.used) (if (hideWhenUsed) 0.4f else 0.8f) else 1f, tween(180), label = "tileScale")
+    val alpha by animateFloatAsState(if (tile.used) (if (hideWhenUsed) 0f else 0.25f) else 1f, tween(180), label = "tileAlpha")
     Surface(
         modifier = Modifier.size(TILE).graphicsLayer { scaleX = scale; scaleY = scale; this.alpha = alpha }
             .clickable(enabled = !tile.used, onClick = onClick)
@@ -390,6 +425,7 @@ private fun ColumnsInput(
     letters: List<Char?>,
     draft: List<Int>,
     slots: Int,
+    word: List<Pair<Char?, Boolean>>,
     feedback: WordFeedback?,
     onPick: (Int) -> Unit,
     onUndo: () -> Unit,
@@ -434,23 +470,31 @@ private fun ColumnsInput(
             )
             Spacer(Modifier.height(10.dp))
             BoxWithConstraints(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
-                val slot = if (slots == 0) 0.dp else min(34.dp, (maxWidth - 3.dp * (slots - 1)) / slots)
+                val n = word.size
+                val slot = if (n == 0) 0.dp else min(34.dp, (maxWidth - 3.dp * (n - 1)) / n)
                 Row(
                     Modifier.graphicsLayer { translationX = shake.value },
                     horizontalArrangement = Arrangement.spacedBy(3.dp),
                 ) {
-                    repeat(slots) { i ->
-                        val ch = draft.getOrNull(i)?.let { letters.getOrNull(it) }
+                    word.forEach { (ch, fixed) ->
                         Box(
                             Modifier.size(slot, slot * 1.25f)
                                 .background(
-                                    if (feedback == WordFeedback.WRONG) MaterialTheme.colorScheme.errorContainer
-                                    else MaterialTheme.colorScheme.surfaceVariant,
+                                    when {
+                                        fixed -> LocalGridColors.current.solved
+                                        feedback == WordFeedback.WRONG -> MaterialTheme.colorScheme.errorContainer
+                                        else -> MaterialTheme.colorScheme.surfaceVariant
+                                    },
                                     RoundedCornerShape(6.dp),
                                 ),
                             contentAlignment = Alignment.Center,
                         ) {
-                            Text(ch?.toString() ?: "", fontSize = (slot.value * 0.6f).sp, fontWeight = FontWeight.Bold)
+                            Text(
+                                ch?.toString() ?: "",
+                                fontSize = (slot.value * 0.6f).sp,
+                                fontWeight = FontWeight.Bold,
+                                color = if (fixed) MaterialTheme.colorScheme.onSurfaceVariant else MaterialTheme.colorScheme.onSurface,
+                            )
                         }
                     }
                 }
@@ -475,7 +519,7 @@ private fun LetterColumn(items: List<IndexedValue<Char?>>, draft: List<Int>, onP
         items.forEach { (index, ch) ->
             if (ch == null) { Spacer(Modifier.size(TILE)); return@forEach }
             key(index, ch) {
-                LetterTile(Tile(ch, used = index in draft)) {
+                LetterTile(Tile(ch, used = index in draft), hideWhenUsed = true) {
                     haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                     onPick(index)
                 }

@@ -1,0 +1,19 @@
+# # # # # # #
+# Y # T # S U
+# A D Ə T # N
+# Ş Ə K Ə R #
+# # N # R # #
+# B # Ç Ə N #
+# E # # Z # #
+# Ş A G İ R D
+R 1 4 SU H₂O
+R 2 0 ADƏT Vərdiş
+R 3 0 ŞƏKƏR Şirin
+R 5 2 ÇƏN Duman
+R 7 0 ŞAGİRD Dərs oxuyur
+D 0 1 YAŞ Ömür ili
+D 4 1 BEŞ 5
+D 1 2 DƏN Toxum
+D 0 3 TƏK Yalqız
+D 1 4 TƏRƏZİ Çəki aləti
+D 0 6 UN Çörək xammalı

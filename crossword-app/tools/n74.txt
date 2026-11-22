@@ -1,0 +1,24 @@
+# # # # # # #
+# Ə # E # İ Y
+# T A V A # A
+# # Z # D A Ş
+# O # # A Y #
+# Y A Ğ # R #
+# U N # T A N
+# N A R # N #
+R 1 4 İY Qoxu
+R 2 0 TAVA Qızartma qabı
+R 3 3 DAŞ Qaya parçası
+R 4 3 AY Gecə işığı
+R 5 0 YAĞ Kərə
+R 6 0 UN Çörək xammalı
+R 6 3 TAN Dan yeri
+R 7 0 NAR Qırmızı meyvə
+D 0 1 ƏT Kabab üçün
+D 3 1 OYUN Əyləncə
+D 1 2 AZ Çoxun əksi
+D 4 2 ANA Ata
+D 0 3 EV Yaşayış yeri
+D 1 4 ADA Su ilə əhatəli quru
+D 2 5 AYRAN İçki
+D 0 6 YAŞ Ömür ili

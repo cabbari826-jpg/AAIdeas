@@ -1,0 +1,24 @@
+# # # # # # #
+# D Ə N İ Z #
+# İ L # Y A Ş
+# Ş A N # L #
+# # # U N # Ü
+# # Ə R # A Z
+# # M # # R #
+# # İ N S A N
+R 1 0 DƏNİZ Xəzər
+R 2 0 İL 12 ay
+R 2 3 YAŞ Ömür ili
+R 3 0 ŞAN Şöhrət
+R 4 2 UN Çörək xammalı
+R 5 1 ƏR Həyat yoldaşı
+R 5 4 AZ Çoxun əksi
+R 7 1 İNSAN Adam
+D 0 1 DİŞ Ağızda
+D 0 2 ƏLA Çox yaxşı
+D 4 2 ƏMİ Atanın qardaşı
+D 2 3 NUR İşıq
+D 0 4 İY Qoxu
+D 0 5 ZAL Böyük otaq
+D 4 5 ARA Məsafə
+D 3 6 ÜZ Sifət
