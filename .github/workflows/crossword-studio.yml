@@ -1,0 +1,41 @@
+name: crossword-studio
+# Builds Açar Söz Studio (Windows program for generating, reviewing and publishing levels)
+# and keeps the newest .exe in the GitHub Release "studio":
+# https://github.com/<owner>/<repo>/releases/download/studio/acar-soz-studio.exe
+on:
+  push:
+    paths: ["crossword-studio/**", ".github/workflows/crossword-studio.yml"]
+  workflow_dispatch:
+concurrency:
+  group: crossword-studio-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: windows-latest
+    permissions:
+      contents: write
+    defaults:
+      run:
+        working-directory: crossword-studio
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: crossword-studio
+      - run: cargo build --release
+      - uses: actions/upload-artifact@v4
+        with:
+          name: acar-soz-studio
+          path: crossword-studio/target/release/acar-soz-studio.exe
+      # Only builds of the game's prototype branch replace the published program.
+      - name: Publish to release "studio"
+        if: github.ref == 'refs/heads/claude/project-thread-50gxx8' || github.ref == 'refs/heads/main'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release view studio --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1 || \
+            gh release create studio --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --prerelease --latest=false \
+              --title "Açar Söz Studio" --notes "Программа для генерации, ревью и выпуска уровней. Скачайте acar-soz-studio.exe."
+          gh release upload studio target/release/acar-soz-studio.exe --repo "$GITHUB_REPOSITORY" --clobber

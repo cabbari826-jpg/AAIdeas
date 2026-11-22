@@ -1,0 +1,27 @@
+[package]
+name = "acar-soz-studio"
+version = "0.1.0"
+edition = "2021"
+description = "Açar Söz: генерация, ревью и выпуск уровней"
+
+[dependencies]
+eframe = { version = "0.31", default-features = false, features = ["glow", "default_fonts", "x11", "persistence"] }
+egui = "0.31"
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1", features = ["preserve_order"] }
+ureq = { version = "2", features = ["json", "native-certs"] }
+base64 = "0.22"
+zip = { version = "2", default-features = false, features = ["deflate"] }
+rfd = { version = "0.15", default-features = false, features = ["xdg-portal", "tokio"] }
+dirs = "5"
+open = "5"
+time = { version = "0.3", features = ["formatting", "local-offset", "macros"] }
+
+[profile.release]
+opt-level = 3
+lto = true
+strip = true
+codegen-units = 1
+
+[build-dependencies]
+winresource = "0.1"
