@@ -98,7 +98,7 @@ jobs:
           git log -1 --format='%s%n%n%b' > notes.txt
           gh release create "krossvord-$N" krossvord.apk \
             --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" \
-            --title "Krossvord 0.1.$N" --notes-file notes.txt --latest
+            --title "Açar Söz 2.0.$N" --notes-file notes.txt --latest
           # Keep only the 10 newest prototype releases (and their tags).
           gh release list --repo "$GITHUB_REPOSITORY" --limit 100 --json tagName,createdAt \
             --jq '[.[] | select(.tagName | startswith("krossvord-"))] | sort_by(.createdAt) | reverse | .[10:] | .[].tagName' |

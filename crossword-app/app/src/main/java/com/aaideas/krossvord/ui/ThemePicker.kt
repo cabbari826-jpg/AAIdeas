@@ -75,7 +75,7 @@ fun ThemePicker(current: ThemeMode, onPick: (ThemeMode) -> Unit, dynamic: Boolea
 fun SkinPicker(current: Skin, owned: Set<Skin>, onPick: (Skin) -> Unit, onUnlockAll: () -> Unit) {
     val dark = MaterialTheme.colorScheme.background.luminance() < 0.5f
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        Text("Tərtibat", style = MaterialTheme.typography.headlineSmall)
+        Text("Mövzu", style = MaterialTheme.typography.headlineSmall)
         Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
             Skin.entries.forEach { skin ->
                 SkinCard(skin, skin.palette(dark || skin.alwaysDark), selected = skin == current, locked = skin !in owned) { onPick(skin) }
@@ -83,7 +83,7 @@ fun SkinPicker(current: Skin, owned: Set<Skin>, onPick: (Skin) -> Unit, onUnlock
         }
         val lockedOnes = Skin.entries.filter { it !in owned }
         if (lockedOnes.isNotEmpty()) {
-            Text("🔒 Hədiyyə tərtibatlar oyunda qazanılır.", style = MaterialTheme.typography.bodySmall)
+            Text("🔒 Hədiyyə mövzular oyunda qazanılır.", style = MaterialTheme.typography.bodySmall)
             if (isDebugBuild()) TextButton(onClick = onUnlockAll) { Text("Hamısını aç (test)") }
         }
     }

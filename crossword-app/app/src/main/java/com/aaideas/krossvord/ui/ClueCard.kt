@@ -50,6 +50,7 @@ fun ClueCard(
     needsAd: Boolean,
     onEase: () -> Unit,
     onClose: () -> Unit,
+    onSpeak: ((String) -> Unit)? = null,
 ) {
     val tier = game.clueTier(entry)
     val pager = rememberPagerState(initialPage = tier) { tier + 1 }
@@ -84,6 +85,12 @@ fun ClueCard(
                         color = MaterialTheme.colorScheme.primary,
                         modifier = Modifier.weight(1f),
                     )
+                    if (onSpeak != null) {
+                        TextButton(
+                            onClick = { onSpeak(entry.clueLevels[pager.currentPage]) },
+                            modifier = Modifier.semantics { contentDescription = "Səsli oxu" },
+                        ) { Text("🔊", style = MaterialTheme.typography.titleLarge) }
+                    }
                     TextButton(onClick = onClose, modifier = Modifier.semantics { contentDescription = "Bağla" }) {
                         Text("✕", style = MaterialTheme.typography.titleLarge)
                     }

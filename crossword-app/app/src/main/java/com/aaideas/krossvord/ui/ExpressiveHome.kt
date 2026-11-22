@@ -115,7 +115,7 @@ fun ExpressiveHome(vm: GameViewModel) {
                     Text("🎁", fontSize = 28.sp)
                     Spacer(Modifier.width(12.dp))
                     Column(Modifier.weight(1f)) {
-                        Text("Yeni tərtibat: ${gift.label}", style = MaterialTheme.typography.titleMedium)
+                        Text("Yeni mövzu: ${gift.label}", style = MaterialTheme.typography.titleMedium)
                         Text(gift.unlock.hint, style = MaterialTheme.typography.bodySmall)
                     }
                     Text("Tətbiq et", style = MaterialTheme.typography.labelLarge)
@@ -124,6 +124,7 @@ fun ExpressiveHome(vm: GameViewModel) {
         }
 
         WordOfDayCard(vm.daily) { vm.open(Screen.WORD_OF_DAY) }
+        TodayCard(vm)
 
         ContinueCard(vm)
 

@@ -176,7 +176,11 @@ private fun PuzzleContent(vm: GameViewModel, isPremium: Boolean, compact: Boolea
     }
     if (vm.showKeywordDialog) KeywordDialog(vm)
     vm.clueCard?.takeIf { it in game.board.level.entries }?.let { e ->
-        ClueCard(game, e, needsAd = vm.easeNeedsAd(), onEase = vm::easeActiveClue, onClose = vm::closeClueCard)
+        androidx.compose.runtime.LaunchedEffect(Unit) { vm.voice.warmUp() }
+        ClueCard(
+            game, e, needsAd = vm.easeNeedsAd(), onEase = vm::easeActiveClue, onClose = vm::closeClueCard,
+            onSpeak = if (vm.voice.available) vm.voice::speak else null,
+        )
     }
     // Lives come back with time: keep the countdown moving while some are missing.
     val missing = vm.secondsToNextLife != null
