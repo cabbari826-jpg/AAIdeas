@@ -1,0 +1,326 @@
+{
+ "formatVersion": 1,
+ "packId": "az-starter",
+ "language": "az",
+ "normalization": "az-v1",
+ "contentVersion": 1,
+ "title": "Başlanğıc",
+ "levels": [
+  {
+   "id": "az-starter-001",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "OD",
+     "clue": "Alov",
+     "source": "claude-draft",
+     "status": "candidate"
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 3,
+     "answer": "AŞ",
+     "clue": "Plov",
+     "source": "claude-draft",
+     "status": "candidate"
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 2,
+     "clueCol": 0,
+     "answer": "TARLA",
+     "clue": "Əkin yeri",
+     "source": "claude-draft",
+     "status": "candidate"
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "AD",
+     "clue": "İsim",
+     "source": "claude-draft",
+     "status": "candidate"
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 3,
+     "answer": "MİS",
+     "clue": "Qırmızı metal",
+     "source": "claude-draft",
+     "status": "candidate"
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 4,
+     "clueCol": 2,
+     "answer": "QARA",
+     "clue": "Ağın əksi",
+     "source": "claude-draft",
+     "status": "candidate"
+    },
+    {
+     "id": 7,
+     "direction": "ACROSS",
+     "clueRow": 6,
+     "clueCol": 0,
+     "answer": "ALİM",
+     "clue": "Elm adamı",
+     "source": "claude-draft",
+     "status": "candidate"
+    },
+    {
+     "id": 8,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "TUT",
+     "clue": "Şirin giləmeyvə",
+     "source": "claude-draft",
+     "status": "candidate"
+    },
+    {
+     "id": 9,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "OTAQ",
+     "clue": "Evin hissəsi",
+     "source": "claude-draft",
+     "status": "candidate"
+    },
+    {
+     "id": 10,
+     "direction": "DOWN",
+     "clueRow": 5,
+     "clueCol": 1,
+     "answer": "AT",
+     "clue": "Minik heyvanı",
+     "source": "claude-draft",
+     "status": "candidate"
+    },
+    {
+     "id": 11,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 2,
+     "answer": "DAD",
+     "clue": "Ləzzət",
+     "source": "claude-draft",
+     "status": "candidate"
+    },
+    {
+     "id": 12,
+     "direction": "DOWN",
+     "clueRow": 4,
+     "clueCol": 2,
+     "answer": "ULU",
+     "clue": "Böyük, qədim",
+     "source": "claude-draft",
+     "status": "candidate"
+    },
+    {
+     "id": 13,
+     "direction": "DOWN",
+     "clueRow": 5,
+     "clueCol": 3,
+     "answer": "İT",
+     "clue": "Sadiq heyvan",
+     "source": "claude-draft",
+     "status": "candidate"
+    },
+    {
+     "id": 14,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "ALMA",
+     "clue": "Quba meyvəsi",
+     "source": "claude-draft",
+     "status": "candidate"
+    },
+    {
+     "id": 15,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 5,
+     "answer": "ŞAİR",
+     "clue": "Şeir yazan",
+     "source": "claude-draft",
+     "status": "candidate"
+    },
+    {
+     "id": 16,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 6,
+     "answer": "SAHİL",
+     "clue": "Dəniz kənarı",
+     "source": "claude-draft",
+     "status": "candidate"
+    }
+   ]
+  },
+  {
+   "id": "az-starter-002",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "SƏDA",
+     "clue": "Səs",
+     "source": "claude-draft",
+     "status": "candidate"
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 2,
+     "clueCol": 3,
+     "answer": "NUR",
+     "clue": "İşıq",
+     "source": "claude-draft",
+     "status": "candidate"
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 2,
+     "answer": "AD",
+     "clue": "İsim",
+     "source": "claude-draft",
+     "status": "candidate"
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 4,
+     "clueCol": 0,
+     "answer": "KÜR",
+     "clue": "Böyük çay",
+     "source": "claude-draft",
+     "status": "candidate"
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 4,
+     "clueCol": 4,
+     "answer": "SU",
+     "clue": "İçməli maye",
+     "source": "claude-draft",
+     "status": "candidate"
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 2,
+     "answer": "ADA",
+     "clue": "Suda quru",
+     "source": "claude-draft",
+     "status": "candidate"
+    },
+    {
+     "id": 7,
+     "direction": "ACROSS",
+     "clueRow": 6,
+     "clueCol": 2,
+     "answer": "BAR",
+     "clue": "Ağacın məhsulu",
+     "source": "claude-draft",
+     "status": "candidate"
+    },
+    {
+     "id": 8,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 1,
+     "answer": "YAĞIŞ",
+     "clue": "Buluddan yağır",
+     "source": "claude-draft",
+     "status": "candidate"
+    },
+    {
+     "id": 9,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "SƏKKİZ",
+     "clue": "Yeddidən sonra",
+     "source": "claude-draft",
+     "status": "candidate"
+    },
+    {
+     "id": 10,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 3,
+     "answer": "ARABA",
+     "clue": "Fayton",
+     "source": "claude-draft",
+     "status": "candidate"
+    },
+    {
+     "id": 11,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "AND",
+     "clue": "... içmək",
+     "source": "claude-draft",
+     "status": "candidate"
+    },
+    {
+     "id": 12,
+     "direction": "DOWN",
+     "clueRow": 4,
+     "clueCol": 4,
+     "answer": "DAĞ",
+     "clue": "Uca zirvə",
+     "source": "claude-draft",
+     "status": "candidate"
+    },
+    {
+     "id": 13,
+     "direction": "DOWN",
+     "clueRow": 3,
+     "clueCol": 5,
+     "answer": "SARI",
+     "clue": "Limon rəngi",
+     "source": "claude-draft",
+     "status": "candidate"
+    },
+    {
+     "id": 14,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "ARZU",
+     "clue": "İstək",
+     "source": "claude-draft",
+     "status": "candidate"
+    }
+   ]
+  }
+ ]
+}
