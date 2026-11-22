@@ -148,6 +148,9 @@ fun PuzzleScreen(vm: GameViewModel, isPremium: Boolean) {
         }
     }
     if (vm.showKeywordDialog) KeywordDialog(vm)
+    vm.clueCard?.takeIf { it in game.board.level.entries }?.let { e ->
+        ClueCard(game, e, needsAd = vm.easeNeedsAd(), onEase = vm::easeActiveClue, onClose = vm::closeClueCard)
+    }
     if (vm.outOfLives && !vm.showCompletion && vm.ads.pending == null) {
         AlertDialog(
             onDismissRequest = {},
@@ -334,8 +337,8 @@ private fun TutorialCallout(step: Int, onDone: () -> Unit) {
     ) {
         Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(start = 12.dp, end = 4.dp, top = 6.dp, bottom = 6.dp)) {
             Text(
-                if (step == TUTORIAL_TAP) "☝ Haşiyəli ipucu xanasına toxun: yerində daha asan ipucu açılacaq."
-                else "Əla! Hər toxunuş ipucunu asanlaşdırır. İkinci ipucu pulsuzdur, üçüncüsü reklamdan sonra.",
+                if (step == TUTORIAL_TAP) "☝ Haşiyəli ipucu xanasına toxun: ipucu böyük açılacaq."
+                else "Əla! Kartda «Daha asan ipucu» var: ikincisi pulsuzdur, üçüncüsü reklamdan sonra. Açılmış ipucuları sürüşdürüb vərəqlə.",
                 style = MaterialTheme.typography.bodyMedium,
                 modifier = Modifier.weight(1f),
             )

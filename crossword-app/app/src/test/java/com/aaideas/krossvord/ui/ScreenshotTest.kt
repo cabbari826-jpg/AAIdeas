@@ -116,4 +116,14 @@ class ScreenshotTest {
             KrossvordTheme { Surface(Modifier.fillMaxSize()) { WordOfDayScreen(vm.daily, isPremium = false, onBack = {}) } }
         }
     }
+
+    @Test fun clueCard() {
+        val vm = vm()
+        vm.restartLevel()
+        vm.finishTutorial()
+        val e = vm.game!!.activeEntry!!
+        vm.tapClueOf(e)
+        vm.easeActiveClue()
+        shoot(vm, "clue-card")
+    }
 }

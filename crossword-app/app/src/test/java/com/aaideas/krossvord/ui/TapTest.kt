@@ -46,18 +46,29 @@ class TapTest {
         vm.startLevel(0)
         vm.restartLevel()
         rule.setContent { KrossvordTheme { PuzzleScreen(vm, isPremium = false) } }
-        // The tutorial points at the active clue cell; tapping that cell eases the clue in place.
+        // The tutorial points at the active clue cell; tapping it opens the clue in a big card.
         rule.onNodeWithText("Haşiyəli ipucu", substring = true).assertExists()
         rule.onNodeWithContentDescription("İpucu: Yanğın səbəbi").performClick()
         rule.waitForIdle()
+        rule.onNodeWithContentDescription("Böyük ipucu: Yanğın səbəbi").assertExists()
+        // The card's button opens the next, easier clue (the second one is free).
+        rule.onNodeWithText("Daha asan ipucu (pulsuz)").performClick()
+        rule.waitForIdle()
+        rule.onNodeWithContentDescription("Böyük ipucu: Ocaqda yanır").assertExists()
+        // The third one needs an ad.
+        rule.onNodeWithText("Daha asan ipucu ▶ reklam").assertExists()
+        rule.onNodeWithContentDescription("Bağla").performClick()
+        rule.waitForIdle()
+        assertEquals(null, vm.clueCard)
         rule.onNodeWithContentDescription("İpucu: Ocaqda yanır").assertExists()
         rule.onNodeWithText("Aydındır").performClick()
         rule.waitForIdle()
         assertEquals(TUTORIAL_DONE, vm.tutorialStep)
-        // Tapping another word's clue cell selects that word instead.
+        // Tapping another word's clue cell selects that word and opens its card.
         val other = vm.game!!.board.level.entries[1]
         rule.onNodeWithContentDescription("İpucu: ${vm.game!!.clueText(other)}").performClick()
         rule.waitForIdle()
+        assertEquals(other, vm.clueCard)
         assertEquals(other, vm.game!!.activeEntry)
     }
 
