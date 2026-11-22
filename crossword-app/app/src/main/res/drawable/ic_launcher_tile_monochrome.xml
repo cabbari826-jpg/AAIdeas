@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Themed variant of the gold tile icon. Glyph outlines from Roboto Black (Apache-2.0). -->
-<vector xmlns:android="http://schemas.android.com/apk/res/android" android:width="108dp" android:height="108dp" android:viewportWidth="108" android:viewportHeight="108">
-    <path android:fillColor="#FFFFFF" android:fillType="evenOdd" android:pathData="M43,26 H65 A15,15 0 0 1 80,41 V63 A15,15 0 0 1 65,78 H43 A15,15 0 0 1 28,63 V41 A15,15 0 0 1 43,26 Z M66.76 53.76Q66.76 57.65 65.08 60.64Q63.41 63.64 60.53 65.32Q57.64 67 54.04 67Q47.79 67 44.52 63.24Q41.24 59.49 41.24 53.16V49.62H59.75Q59.59 46.83 57.92 44.9Q56.24 42.97 52.16 42.97Q47.83 42.97 44.09 44.11L43.11 38.46Q43.79 38.16 46.65 37.58Q49.51 37 52.64 37Q59.57 37 63.14 40.7Q66.72 44.41 66.76 50.22ZM54.04 61.05Q56.6 61.05 58.01 59.36Q59.41 57.67 59.69 55.14H48.25V55.77Q48.25 57.97 49.57 59.51Q50.9 61.05 54.04 61.05Z" />
-</vector>
