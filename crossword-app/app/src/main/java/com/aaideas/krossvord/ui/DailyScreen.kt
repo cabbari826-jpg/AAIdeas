@@ -70,6 +70,7 @@ fun DailyScreen(vm: GameViewModel) {
             }
         }
         ProverbCard(vm)
+        if (vm.miniToday != null) MiniCard(vm)
         TasksCard(vm)
         StreakCard(vm)
     }
@@ -108,6 +109,18 @@ private fun ProverbCard(vm: GameViewModel) {
                 color = if (right) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error,
                 textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth(),
             )
+        }
+    }
+}
+
+@Composable
+private fun MiniCard(vm: GameViewModel) {
+    Section("🧩 Mini krossvord") {
+        if (vm.miniSolvedToday) {
+            Text("✓ Bu günün mini krossvordu həll olunub. Sabah yenisi!", style = MaterialTheme.typography.bodyLarge)
+        } else {
+            Text("${vm.miniToday?.entries?.size ?: 0} söz. Tələsmədən həll edin.", style = MaterialTheme.typography.bodyLarge)
+            androidx.compose.material3.Button(onClick = vm::startMini, modifier = Modifier.fillMaxWidth()) { Text("Başla", fontSize = 18.sp) }
         }
     }
 }

@@ -123,7 +123,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     /** A short line about a reward just given (task, all tasks, 7 days); the screen shows and clears it. */
     var dailyNote by mutableStateOf<String?>(null)
 
-    val tasks: List<DailyTask> get() = DailyTasks.forDay(dayNum(), hasMini = false)
+    val tasks: List<DailyTask> get() = DailyTasks.forDay(dayNum(), hasMini = miniLevels.isNotEmpty())
     fun taskCount(t: DailyTask): Int { dailyTick; return dailyStore.count(dayNum(), t.kind).coerceAtMost(t.target) }
     fun taskDone(t: DailyTask) = taskCount(t) >= t.target
     val tasksDone: Int get() = tasks.count { taskDone(it) }
@@ -598,7 +598,38 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     var selectedPack by mutableStateOf(0)
 
     val currentLevelNumber: Int get() = numberInPack(levelIndex)
-    val currentLevelTitle: String get() = levelTitle(levelIndex)
+    val currentLevelTitle: String get() = if (playingMini) "Mini krossvord" else levelTitle(levelIndex)
+
+    // ---- Daily mini-crossword: one small grid a day from assets/mini, no timer ----
+    val miniLevels: List<Level> by lazy {
+        runCatching {
+            getApplication<Application>().assets.open("mini/az-mini.json").bufferedReader(Charsets.UTF_8).use { Pack.parse(it.readText()).levels }
+        }.getOrDefault(emptyList())
+    }
+    val miniToday: Level? get() = miniLevels.takeIf { it.isNotEmpty() }?.let {
+        val order = it.indices.shuffled(java.util.Random(1828L))
+        it[order[Math.floorMod(dayNum(), it.size.toLong()).toInt()]]
+    }
+    val miniSolvedToday: Boolean get() { dailyTick; return dailyStore.miniSolvedDay == dayNum() }
+    var playingMini by mutableStateOf(false)
+        private set
+
+    fun startMini() {
+        val level = miniToday ?: return
+        playingMini = true
+        game = GameState.start(Board(level)).copy(
+            typed = progress.loadTyped(level.id),
+            revealed = progress.loadRevealed(level.id),
+            clueTiers = startTiers(level),
+        ).let { s -> s.selectEntry(level.entries.firstOrNull { !s.isEntrySolved(it) } ?: level.entries.first()) }
+        showCompletion = false
+        feedback = null
+        draftPicks = emptyList()
+        mistakes = 0
+        hintsUsed = 0
+        tickLives()
+        screen = Screen.PUZZLE
+    }
 
     fun open(s: Screen) {
         if (s == Screen.WORD_OF_DAY) daily.refresh()
@@ -607,7 +638,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
 
     fun back() {
         screen = when (screen) {
-            Screen.PUZZLE -> Screen.LEVELS
+            Screen.PUZZLE -> if (playingMini) Screen.DAILY.also { flushTime(); playingMini = false } else Screen.LEVELS
             else -> Screen.HOME
         }
     }
@@ -647,6 +678,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     fun startLevel(index: Int) {
+        playingMini = false
         levelIndex = index
         selectedPack = packIndexOf(index)
         val level = levels[index]
@@ -691,6 +723,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     fun restartLevel() {
+        if (playingMini) { miniToday?.let { progress.resetLevel(it.id) }; startMini(); return }
         progress.resetLevel(levels[levelIndex].id)
         completed = progress.completedLevels()
         startLevel(levelIndex)
@@ -721,6 +754,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
 
     fun nextLevel() {
         showCompletion = false
+        if (playingMini) { playingMini = false; game = null; screen = Screen.DAILY; return }
         val go = {
             val next = (levelIndex + 1 until levels.size).firstOrNull { levelOpen(it) }
             if (next != null) startLevel(next) else screen = Screen.LEVELS
@@ -766,8 +800,13 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
                 progress.perfectRun = progress.perfectRun + 1
                 progress.bestPerfectRun = maxOf(progress.bestPerfectRun, progress.perfectRun)
             } else progress.perfectRun = 0
-            progress.markCompleted(id)
-            newMedals = medals.filter { it.id in earnedMedalsAfterMark(id) - medalsBefore }
+            if (playingMini) {
+                dailyStore.miniSolvedDay = dayNum()
+                newMedals = emptyList()
+            } else {
+                progress.markCompleted(id)
+                newMedals = medals.filter { it.id in earnedMedalsAfterMark(id) - medalsBefore }
+            }
             flushTime()
             val stars = LevelResult.stars(mistakes, hintsUsed)
             val rankUp = addXp(com.aaideas.krossvord.model.Ranks.levelXp(stars))
@@ -781,7 +820,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
                 medals = newMedals,
                 fact = nextFact(),
             )
-            track(TaskKind.LEVELS)
+            if (playingMini) track(TaskKind.MINI) else track(TaskKind.LEVELS)
             if (mistakes == 0) track(TaskKind.PERFECT)
             progress.levelsSinceInterstitial = progress.levelsSinceInterstitial + 1
             completed = progress.completedLevels()
