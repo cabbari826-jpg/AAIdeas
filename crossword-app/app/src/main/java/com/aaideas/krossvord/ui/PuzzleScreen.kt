@@ -3,7 +3,9 @@ package com.aaideas.krossvord.ui
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.core.repeatable
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
@@ -101,7 +103,10 @@ fun PuzzleScreen(vm: GameViewModel, isPremium: Boolean) {
         if (game.keyword != null) KeywordStrip(game.keywordLetters, game.isKeywordKnown, vm::openKeywordDialog)
         BoxWithConstraints(Modifier.fillMaxWidth().weight(1f), contentAlignment = Alignment.Center) {
             val cell = min(maxWidth / game.board.cols, maxHeight / game.board.rows)
-            Grid(game, cell, preview, vm.feedback, vm::isClueShown, vm::tapCell)
+            Grid(
+                game, cell, preview, vm.feedback, vm::isClueShown, vm::tapCell, vm::tapClueOf,
+                tutorialEntry = if (vm.tutorialStep == TUTORIAL_TAP) game.activeEntry else null,
+            )
         }
         Row(Modifier.fillMaxWidth().padding(vertical = 6.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             if (columns) OutlinedButton(onClick = vm::shuffleTiles, modifier = Modifier.weight(1f)) { Text("⟳ Qarışdır") }
@@ -116,10 +121,13 @@ fun PuzzleScreen(vm: GameViewModel, isPremium: Boolean) {
                 )
             }
         }
-        ClueBar(
-            game.activeEntry, game, game.activeEntry?.let(vm::isClueShown) ?: true, vm::openActiveClue,
-            onEase = vm::easeActiveClue, easeNeedsAd = vm.easeNeedsAd(),
-        )
+        // Clues live in the grid cells now; below the grid only the tutorial, or a song line too long for a cell.
+        val active = game.activeEntry
+        when {
+            vm.tutorialStep != TUTORIAL_DONE -> TutorialCallout(vm.tutorialStep, vm::finishTutorial)
+            active != null && vm.isClueShown(active) && game.clueText(active).length > CELL_CLUE_MAX ->
+                LongClueLine(active, game.clueText(active))
+        }
         val entry = game.activeEntry
         when {
             entry == null || vm.inputMode == InputMode.KEYBOARD -> AzKeyboard(onLetter = vm::type, onBackspace = vm::backspace)
@@ -172,6 +180,8 @@ private fun Grid(
     feedback: WordFeedback?,
     clueShown: (Entry) -> Boolean,
     onTap: (Cell) -> Unit,
+    onClueTap: (Entry) -> Unit,
+    tutorialEntry: Entry?,
 ) {
     val colors = LocalGridColors.current
     val active = game.activeEntry
@@ -191,7 +201,7 @@ private fun Grid(
                     } else {
                         val clues = game.board.cluesAt[cell]
                         if (clues == null) Box(mod.background(colors.emptyCell))
-                        else ClueCell(clues, active, clueShown, game::clueText, mod.background(colors.clueCell).clickable { onTap(cell) })
+                        else ClueCell(clues, active, game, clueShown, onClueTap, tutorialEntry, mod.background(colors.clueCell))
                     }
                 }
             }
@@ -262,82 +272,86 @@ fun cellClue(text: String): String = if (text.length > CELL_CLUE_MAX) "♪ …" 
 private fun ClueCell(
     clues: List<Entry>,
     active: Entry?,
+    game: GameState,
     shown: (Entry) -> Boolean,
-    text: (Entry) -> String,
+    onClueTap: (Entry) -> Unit,
+    tutorialEntry: Entry?,
     modifier: Modifier,
 ) {
     val colors = LocalGridColors.current
     Column(modifier.padding(1.dp)) {
-        // Across clue on top, down clue below: the usual Scandinavian order.
+        // Across clue on top, down clue below: the usual Scandinavian order. Each half is its own button.
         clues.sortedBy { it.direction }.forEach { e ->
             val isActive = e == active
+            val text = (if (shown(e)) game.clueText(e) else "?")
+            // A finite pulse (an endless one would also keep UI tests from ever going idle).
+            val pulse = if (e == tutorialEntry) {
+                val a = remember { Animatable(0.35f) }
+                LaunchedEffect(e) { a.animateTo(1f, repeatable(7, tween(600), RepeatMode.Reverse)) }
+                a.value
+            } else 0f
             Box(
                 Modifier.fillMaxWidth().weight(1f)
-                    .background(if (isActive) colors.activeWord else colors.clueCell),
+                    .background(if (isActive) colors.activeWord else colors.clueCell)
+                    .then(if (e == tutorialEntry) Modifier.border(3.dp, MaterialTheme.colorScheme.primary.copy(alpha = pulse)) else Modifier)
+                    .clickable { onClueTap(e) }
+                    .semantics { contentDescription = "İpucu: $text" },
                 contentAlignment = Alignment.Center,
             ) {
-                BasicText(
-                    text = cellClue(if (shown(e)) text(e) else "?") + if (e.direction == Direction.ACROSS) " →" else " ↓",
-                    style = TextStyle(color = colors.clueText, textAlign = TextAlign.Center, lineHeight = 1.05.em),
-                    autoSize = TextAutoSize.StepBased(minFontSize = 5.sp, maxFontSize = 11.sp, stepSize = 0.5.sp),
-                    modifier = Modifier.padding(horizontal = 1.dp),
-                )
-            }
-        }
-    }
-}
-
-@Composable
-private fun ClueBar(
-    entry: Entry?,
-    game: GameState,
-    shown: Boolean,
-    onOpen: () -> Unit,
-    onEase: () -> Unit,
-    easeNeedsAd: Boolean,
-) {
-    // The clue itself is the button: tap it to open a hidden clue or switch to the next, easier one.
-    val canEase = entry != null && shown && game.canEaseClue(entry)
-    val action: (() -> Unit)? = when {
-        entry != null && !shown -> onOpen
-        canEase -> onEase
-        else -> null
-    }
-    Surface(
-        color = MaterialTheme.colorScheme.secondaryContainer,
-        shape = RoundedCornerShape(10.dp),
-        modifier = Modifier.fillMaxWidth().padding(top = 2.dp)
-            .then(if (action != null) Modifier.clickable(onClick = action) else Modifier),
-    ) {
-        Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(end = 10.dp)) {
-            val text = if (entry == null) "Sözü seçin" else {
-                val arrow = if (entry.direction == Direction.ACROSS) "→" else "↓"
-                val clue = if (shown) game.clueText(entry) else "İpucu gizlidir"
-                "$arrow $clue  (${entry.letters.size} hərf)"
-            }
-            AnimatedContent(targetState = text, label = "clue", modifier = Modifier.weight(1f)) { t ->
-                Text(t, Modifier.padding(horizontal = 12.dp, vertical = 10.dp), style = MaterialTheme.typography.titleMedium)
-            }
-            if (entry != null && !shown) {
-                Text("aç ›", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
-            } else if (entry != null && entry.clueLevels.size > 1) {
-                val level = game.clueTier(entry)
-                Column(horizontalAlignment = Alignment.End) {
-                    Text(
-                        "●".repeat(level + 1) + "○".repeat(entry.clueLevels.lastIndex - level),
-                        fontSize = 10.sp,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    BasicText(
+                        text = cellClue(text) + if (e.direction == Direction.ACROSS) " →" else " ↓",
+                        style = TextStyle(color = colors.clueText, textAlign = TextAlign.Center, lineHeight = 1.05.em),
+                        autoSize = TextAutoSize.StepBased(minFontSize = 5.sp, maxFontSize = 11.sp, stepSize = 0.5.sp),
+                        modifier = Modifier.padding(horizontal = 1.dp).weight(1f, fill = false),
                     )
-                    if (canEase) {
-                        Text(
-                            if (easeNeedsAd) "▶ asan" else "asan ›",
-                            style = MaterialTheme.typography.labelMedium,
-                            color = MaterialTheme.colorScheme.primary,
+                    // Which clue level is showing; only on the active word, where a tap eases it.
+                    if (isActive && shown(e) && e.clueLevels.size > 1) {
+                        val level = game.clueTier(e)
+                        BasicText(
+                            "●".repeat(level + 1) + "○".repeat(e.clueLevels.lastIndex - level),
+                            style = TextStyle(color = colors.clueText, fontSize = 6.sp, lineHeight = 7.sp),
                         )
                     }
                 }
             }
         }
+    }
+}
+
+/** First-run hint under the grid: tap the highlighted clue cell, then what happened. */
+@Composable
+private fun TutorialCallout(step: Int, onDone: () -> Unit) {
+    Surface(
+        color = MaterialTheme.colorScheme.primaryContainer,
+        shape = RoundedCornerShape(10.dp),
+        modifier = Modifier.fillMaxWidth().padding(top = 2.dp),
+    ) {
+        Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(start = 12.dp, end = 4.dp, top = 6.dp, bottom = 6.dp)) {
+            Text(
+                if (step == TUTORIAL_TAP) "☝ Haşiyəli ipucu xanasına toxun: yerində daha asan ipucu açılacaq."
+                else "Əla! Hər toxunuş ipucunu asanlaşdırır. İkinci ipucu pulsuzdur, üçüncüsü reklamdan sonra.",
+                style = MaterialTheme.typography.bodyMedium,
+                modifier = Modifier.weight(1f),
+            )
+            TextButton(onClick = onDone) { Text(if (step == TUTORIAL_TAP) "Keç" else "Aydındır") }
+        }
+    }
+}
+
+/** A clue too long for its cell (song lines): shown in full under the grid. */
+@Composable
+private fun LongClueLine(entry: Entry, text: String) {
+    Surface(
+        color = MaterialTheme.colorScheme.secondaryContainer,
+        shape = RoundedCornerShape(10.dp),
+        modifier = Modifier.fillMaxWidth().padding(top = 2.dp),
+    ) {
+        Text(
+            "♪ $text  (${entry.letters.size} hərf)",
+            Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
+            style = MaterialTheme.typography.titleSmall,
+        )
     }
 }
 

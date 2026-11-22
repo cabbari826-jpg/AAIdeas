@@ -47,7 +47,7 @@ class ProgressStore(context: Context) {
 
     /** Forget every level's progress and counters; keep the player's settings. */
     fun resetAll() {
-        val keep = setOf(KEY_INPUT, KEY_HIDE_CLUES, KEY_EXTRA, KEY_THEME, KEY_DYNAMIC)
+        val keep = setOf(KEY_INPUT, KEY_HIDE_CLUES, KEY_EXTRA, KEY_THEME, KEY_DYNAMIC, KEY_TUTORIAL)
         val e = prefs.edit()
         prefs.all.keys.filter { it !in keep }.forEach { e.remove(it) }
         e.apply()
@@ -81,6 +81,11 @@ class ProgressStore(context: Context) {
     var dynamicColor: Boolean
         get() = prefs.getBoolean(KEY_DYNAMIC, false)
         set(v) = prefs.edit().putBoolean(KEY_DYNAMIC, v).apply()
+
+    /** The first-run tutorial (tap a clue cell to ease the clue) was finished or skipped. */
+    var tutorialDone: Boolean
+        get() = prefs.getBoolean(KEY_TUTORIAL, false)
+        set(v) = prefs.edit().putBoolean(KEY_TUTORIAL, v).apply()
 
     /** Hints earned in game (e.g. key word bonus); spent before asking for an ad. */
     var freeHints: Int
@@ -116,6 +121,7 @@ class ProgressStore(context: Context) {
         const val KEY_THEME = "theme_mode"
         const val KEY_DYNAMIC = "dynamic_color"
         const val KEY_FREE_HINTS = "free_hints"
+        const val KEY_TUTORIAL = "tutorial_clue_cells_done"
         const val KEY_DONE = "completed"
         const val KEY_SINCE_AD = "levels_since_interstitial"
     }

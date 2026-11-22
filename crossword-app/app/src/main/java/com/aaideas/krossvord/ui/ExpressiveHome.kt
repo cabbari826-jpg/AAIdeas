@@ -18,14 +18,12 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.GenericShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
@@ -53,34 +51,12 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.aaideas.krossvord.model.AzText
-import kotlin.math.PI
-import kotlin.math.cos
-import kotlin.math.sin
 
 /** In-app brand title (the app's own text is Azerbaijani; the launcher name is localized in res). */
 const val BRAND = "Açar Söz"
 
-/** Scalloped "cookie" outline used for the current level, as in Material 3 Expressive. */
-fun cookieShape(waves: Int = 9, depth: Float = 0.07f): Shape = GenericShape { size, _ ->
-    val cx = size.width / 2; val cy = size.height / 2
-    val r = minOf(cx, cy) * (1 - depth)
-    val steps = 180
-    for (i in 0..steps) {
-        val a = 2 * PI * i / steps
-        val rr = r * (1 + depth * cos(waves * a)).toFloat()
-        val x = cx + rr * cos(a).toFloat(); val y = cy + rr * sin(a).toFloat()
-        if (i == 0) moveTo(x, y) else lineTo(x, y)
-    }
-    close()
-}
-
-/** Shapes that cycle across the level grid so the list does not look like a spreadsheet. */
-private val levelShapes: List<Shape> = listOf(
-    CircleShape,
-    RoundedCornerShape(topStartPercent = 30, topEndPercent = 70, bottomEndPercent = 30, bottomStartPercent = 70),
-    RoundedCornerShape(30),
-    RoundedCornerShape(topStartPercent = 50, topEndPercent = 50, bottomEndPercent = 20, bottomStartPercent = 20),
-)
+/** Every level is a rounded square, like a cell of the grid. State is shown by colour and mark, never by shape. */
+private val levelShape: Shape = RoundedCornerShape(16.dp)
 
 /** Gentle spring squash on press. */
 @Composable
@@ -119,7 +95,7 @@ fun ExpressiveHome(vm: GameViewModel) {
                 row.forEach { (i, level) ->
                     LevelBadge(
                         number = vm.numberInPack(i),
-                        shape = if (i == current) cookieShape() else levelShapes[i % levelShapes.size],
+                        shape = levelShape,
                         done = level.id in vm.completed,
                         current = i == current,
                         modifier = Modifier.weight(1f),
@@ -170,11 +146,6 @@ private fun ContinueCard(vm: GameViewModel) {
         modifier = Modifier.fillMaxWidth().springPress(src),
     ) {
         Box {
-            // Decorative cookie in the corner.
-            Box(
-                Modifier.size(130.dp).align(Alignment.TopEnd).offset(x = 34.dp, y = (-34).dp)
-                    .clip(cookieShape(waves = 12, depth = 0.08f)).background(cs.onPrimary.copy(alpha = 0.14f))
-            )
             Column(Modifier.padding(22.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 Text(
                     "${vm.levelTitle(i)} · ${vm.completed.size}/${vm.levels.size} həll olunub",
@@ -221,7 +192,7 @@ private fun LevelBadge(number: Int, shape: Shape, done: Boolean, current: Boolea
     val fg = if (current) Color(0xFF2A2000) else cs.onSurface
     Box(
         modifier.aspectRatio(1f).springPress(src).clip(shape).background(bg)
-            .then(if (!done && !current) Modifier.border(BorderStroke(1.dp, cs.outlineVariant), shape) else Modifier)
+            .border(BorderStroke(if (current) 3.dp else 1.dp, if (current) cs.primary else if (done) Color.Transparent else cs.outlineVariant), shape)
             .clickable(interactionSource = src, indication = null, onClick = onClick),
         contentAlignment = Alignment.Center,
     ) {
@@ -265,7 +236,7 @@ fun GlassBottomMenu(screen: Screen, open: (Screen) -> Unit, modifier: Modifier =
         modifier = modifier.padding(horizontal = 24.dp, vertical = 12.dp).fillMaxWidth(),
         shape = CircleShape,
         // No shadow: it would show through the see-through fill as a smudge.
-        color = cs.surfaceContainerHigh.copy(alpha = 0.95f),
+        color = cs.surfaceContainerHigh,
         border = BorderStroke(1.dp, cs.outlineVariant.copy(alpha = 0.7f)),
     ) {
         Row(Modifier.padding(6.dp), horizontalArrangement = Arrangement.spacedBy(4.dp)) {
