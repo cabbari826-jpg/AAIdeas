@@ -5,3 +5,6 @@ local.properties
 *.iml
 .kotlin/
 captures/
+tools/*.txt
+tools/out_*.json
+__pycache__/
