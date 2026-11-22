@@ -28,6 +28,13 @@ class DailyWordGame(
         private set
     var wrongFlash by mutableStateOf(false)
         private set
+    /** Called when today's word is solved (chime and buzz). */
+    var onSolved: () -> Unit = {}
+
+    /** Longest run of days in a row, and words of the day solved in all. */
+    val bestStreak: Int get() = maxOf(prefs.getInt(KEY_BEST, 0), streak)
+    val totalSolved: Int get() = prefs.getInt(KEY_TOTAL, 0)
+
     /** Days in a row solved, ending today or yesterday. */
     val streak: Int
         get() {
@@ -59,6 +66,9 @@ class DailyWordGame(
             val last = prefs.getLong(KEY_LAST_SOLVED, Long.MIN_VALUE)
             val run = if (last == today() - 1) prefs.getInt(KEY_STREAK, 0) + 1 else 1
             e.putInt(KEY_STREAK, run).putLong(KEY_LAST_SOLVED, today())
+                .putInt(KEY_BEST, maxOf(run, prefs.getInt(KEY_BEST, 0)))
+                .putInt(KEY_TOTAL, prefs.getInt(KEY_TOTAL, 0) + 1)
+            onSolved()
         }
         e.apply()
         guess = g
@@ -95,5 +105,7 @@ class DailyWordGame(
         const val KEY_SOLVED = "solved"
         const val KEY_STREAK = "streak"
         const val KEY_LAST_SOLVED = "last_solved"
+        const val KEY_BEST = "best_streak"
+        const val KEY_TOTAL = "total_solved"
     }
 }

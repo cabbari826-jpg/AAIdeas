@@ -267,6 +267,7 @@ fun GlassBottomMenu(screen: Screen, open: (Screen) -> Unit, modifier: Modifier =
             listOf(
                 Triple(Screen.HOME, "▦", "Oyun"),
                 Triple(Screen.LEVELS, "☰", "Səviyyələr"),
+                Triple(Screen.STATS, "★", "Statistika"),
                 Triple(Screen.SETTINGS, "⚙", "Ayarlar"),
             ).forEach { (target, icon, label) ->
                 val on = screen == target

@@ -161,6 +161,14 @@ fun SettingsScreen(vm: GameViewModel, isPremium: Boolean) {
             }
             Switch(checked = vm.bigClues, onCheckedChange = vm::changeBigClues)
         }
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Column(Modifier.weight(1f)) {
+                Text("Səs və vibrasiya")
+                Text("Söz tapılanda və səviyyə həll olunanda", style = MaterialTheme.typography.bodySmall)
+            }
+            Switch(checked = vm.soundOn, onCheckedChange = vm::changeSound)
+        }
+        ReminderSwitch()
         Spacer(Modifier.height(8.dp))
         Text("İrəliləyiş", style = MaterialTheme.typography.headlineSmall)
         Text("Həll olunub: ${vm.completed.size} / ${vm.levels.size}. Həll olunmuş səviyyəni siyahıdan yenidən oynamaq olar.")
@@ -206,4 +214,41 @@ fun AdPlaceholderHost(ads: PlaceholderAdService) {
             { TextButton(onClick = { ads.finish(watched = false) }) { Text("İmtina") } }
         } else null,
     )
+}
+
+/**
+ * Opt-in daily reminder for the word of the day. On Android 13+ it first asks for the
+ * notification permission; if the player says no, the switch stays off and says why.
+ */
+@Composable
+private fun ReminderSwitch() {
+    val context = androidx.compose.ui.platform.LocalContext.current
+    val remind = com.aaideas.krossvord.remind.DailyReminder
+    var on by remember { mutableStateOf(remind.isOn(context) && remind.canNotify(context)) }
+    var denied by remember { mutableStateOf(false) }
+    val ask = androidx.activity.compose.rememberLauncherForActivityResult(
+        androidx.activity.result.contract.ActivityResultContracts.RequestPermission()
+    ) { granted ->
+        denied = !granted
+        on = granted
+        remind.set(context, granted)
+    }
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Column(Modifier.weight(1f)) {
+            Text("Günün sözü xatırlatması")
+            Text(
+                if (denied) "Bildiriş icazəsi verilmədi. Telefonun ayarlarından açmaq olar."
+                else "Hər gün saat ${remind.HOUR}:00 civarı, söz hələ tapılmayıbsa",
+                style = MaterialTheme.typography.bodySmall,
+            )
+        }
+        Switch(checked = on, onCheckedChange = { want ->
+            if (want && !remind.canNotify(context) && android.os.Build.VERSION.SDK_INT >= 33) {
+                ask.launch(android.Manifest.permission.POST_NOTIFICATIONS)
+            } else {
+                on = want
+                remind.set(context, want)
+            }
+        })
+    }
 }

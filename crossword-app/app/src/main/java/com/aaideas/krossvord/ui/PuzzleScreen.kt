@@ -81,6 +81,16 @@ fun PuzzleScreen(vm: GameViewModel, isPremium: Boolean) {
 
 @Composable
 private fun PuzzleContent(vm: GameViewModel, isPremium: Boolean, compact: Boolean) {
+    // Count play time only while the puzzle is on screen and the app is in front.
+    val owner = androidx.lifecycle.compose.LocalLifecycleOwner.current
+    androidx.compose.runtime.DisposableEffect(owner) {
+        val obs = androidx.lifecycle.LifecycleEventObserver { _, ev ->
+            if (ev == androidx.lifecycle.Lifecycle.Event.ON_START) vm.puzzleShown()
+            if (ev == androidx.lifecycle.Lifecycle.Event.ON_STOP) vm.puzzleHidden()
+        }
+        owner.lifecycle.addObserver(obs)
+        onDispose { owner.lifecycle.removeObserver(obs); vm.puzzleHidden() }
+    }
     val game = vm.game ?: return
     val columns = vm.inputMode == InputMode.COLUMNS
     val letters = if (columns) vm.columnLetters() else emptyList()

@@ -46,4 +46,27 @@ class SweepShotTest {
         rule.waitForIdle()
         rule.onRoot().captureRoboImage("build/outputs/roborazzi/clue-card-small.png")
     }
+
+    @Test fun statsScreen() {
+        val vm = GameViewModel(ApplicationProvider.getApplicationContext<Application>())
+        rule.setContent { KrossvordTheme { Surface(Modifier.fillMaxSize()) { StatsScreen(vm) } } }
+        rule.waitForIdle()
+        rule.onRoot().captureRoboImage("build/outputs/roborazzi/stats.png")
+    }
+
+    @Test fun homeMenuOnSmallPhone() {
+        val vm = GameViewModel(ApplicationProvider.getApplicationContext<Application>())
+        rule.setContent {
+            KrossvordTheme {
+                Surface(Modifier.fillMaxSize()) {
+                    androidx.compose.foundation.layout.Box {
+                        ExpressiveHome(vm)
+                        GlassBottomMenu(vm.screen, vm::open, Modifier.align(androidx.compose.ui.Alignment.BottomCenter))
+                    }
+                }
+            }
+        }
+        rule.waitForIdle()
+        rule.onRoot().captureRoboImage("build/outputs/roborazzi/home-small.png")
+    }
 }

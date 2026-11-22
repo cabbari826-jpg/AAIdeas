@@ -25,9 +25,25 @@ import com.aaideas.krossvord.update.UpdateBanner
 class MainActivity : ComponentActivity() {
     private val vm: GameViewModel by viewModels()
 
+    override fun onNewIntent(intent: android.content.Intent) {
+        super.onNewIntent(intent)
+        openFrom(intent)
+    }
+
+    /** The word-of-the-day reminder opens that screen directly. */
+    private fun openFrom(intent: android.content.Intent?) {
+        val remind = com.aaideas.krossvord.remind.DailyReminder
+        if (intent?.getStringExtra(remind.EXTRA_OPEN) == remind.OPEN_WORD_OF_DAY) {
+            intent.removeExtra(remind.EXTRA_OPEN)
+            vm.open(Screen.WORD_OF_DAY)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        openFrom(intent)
+        if (com.aaideas.krossvord.remind.DailyReminder.isOn(this)) com.aaideas.krossvord.remind.DailyReminder.schedule(this)
         setContent {
             val mode = vm.themeMode
             val dark = mode == ThemeMode.DARK || (mode == ThemeMode.SYSTEM && isSystemInDarkTheme())
@@ -51,6 +67,7 @@ class MainActivity : ComponentActivity() {
                                 Screen.PUZZLE -> PuzzleScreen(vm, isPremium)
                                 Screen.SETTINGS -> SettingsScreen(vm, isPremium)
                                 Screen.WORD_OF_DAY -> WordOfDayScreen(vm.daily, isPremium, vm::back)
+                                Screen.STATS -> StatsScreen(vm)
                             }
                         }
                         if (menu) GlassBottomMenu(vm.screen, vm::open, Modifier.align(Alignment.BottomCenter))

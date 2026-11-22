@@ -22,7 +22,7 @@ import com.aaideas.krossvord.monetization.LocalPremiumManager
 import com.aaideas.krossvord.monetization.PlaceholderAdService
 import com.aaideas.krossvord.monetization.PremiumManager
 
-enum class Screen { HOME, LEVELS, PUZZLE, SETTINGS, WORD_OF_DAY }
+enum class Screen { HOME, LEVELS, PUZZLE, SETTINGS, WORD_OF_DAY, STATS }
 
 /** How letters are entered. COLUMNS is the default; the others stay as options in settings. */
 enum class InputMode { COLUMNS, TILES, KEYBOARD }
@@ -47,7 +47,30 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     private val progress = ProgressStore(app)
     val premium: PremiumManager = LocalPremiumManager(app)
     val ads = PlaceholderAdService()
-    val daily = DailyWordGame(app, ads, premium)
+    val daily = DailyWordGame(app, ads, premium).also { d -> d.onSolved = { if (soundOn) sounds.wordFound() } }
+    private val sounds = GameSounds(app)
+
+    var soundOn by mutableStateOf(progress.soundOn)
+        private set
+
+    fun changeSound(on: Boolean) {
+        soundOn = on
+        progress.soundOn = on
+    }
+
+    /** Time on the puzzle screen: started when it shows, added up when it hides. */
+    private var playStart = 0L
+    fun puzzleShown() { playStart = android.os.SystemClock.elapsedRealtime() }
+    fun puzzleHidden() {
+        if (playStart == 0L) return
+        val sec = (android.os.SystemClock.elapsedRealtime() - playStart) / 1000
+        playStart = 0L
+        if (sec in 1..6 * 3600) progress.playSeconds = progress.playSeconds + sec
+    }
+    val playSeconds: Long get() = progress.playSeconds + if (playStart == 0L) 0 else (android.os.SystemClock.elapsedRealtime() - playStart) / 1000
+    val wordsFound: Int get() = progress.wordsFound
+
+    override fun onCleared() { puzzleHidden(); sounds.release() }
 
     var screen by mutableStateOf(Screen.HOME)
         private set
@@ -413,6 +436,9 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         // Tiles/keyboard modes: a word that just became complete but wrong costs a life.
         val newlyWrong = s.board.level.entries.count { s.isEntryWrong(it) && !old.isEntryWrong(it) }
         repeat(newlyWrong) { loseLife() }
+        val found = s.solvedCount - old.solvedCount
+        if (found > 0 && s.board.level.id == old.board.level.id) progress.wordsFound = progress.wordsFound + found
+        if (soundOn && found > 0) { if (s.isComplete && !old.isComplete) sounds.levelSolved() else sounds.wordFound() }
         if (s.isComplete && !old.isComplete) {
             progress.markCompleted(id)
             progress.levelsSinceInterstitial = progress.levelsSinceInterstitial + 1
