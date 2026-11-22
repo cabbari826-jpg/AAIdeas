@@ -45,6 +45,7 @@ import androidx.compose.runtime.key
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.semantics.contentDescription
@@ -122,11 +123,13 @@ fun PuzzleScreen(vm: GameViewModel, isPremium: Boolean) {
             }
         }
         // Clues live in the grid cells now; below the grid only the tutorial, or a song line too long for a cell.
+        // Big text: switched on in settings, or on its own when the phone uses a large font.
         val active = game.activeEntry
+        val bigText = vm.bigClues || LocalDensity.current.fontScale >= BIG_FONT_SCALE
         when {
             vm.tutorialStep != TUTORIAL_DONE -> TutorialCallout(vm.tutorialStep, vm::finishTutorial)
-            active != null && vm.isClueShown(active) && game.clueText(active).length > CELL_CLUE_MAX ->
-                LongClueLine(active, game.clueText(active))
+            active != null && vm.isClueShown(active) && (bigText || game.clueText(active).length > CELL_CLUE_MAX) ->
+                LongClueLine(active, game.clueText(active), big = bigText)
         }
         val entry = game.activeEntry
         when {
@@ -298,21 +301,23 @@ private fun ClueCell(
                     .semantics { contentDescription = "İpucu: $text" },
                 contentAlignment = Alignment.Center,
             ) {
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                val showDots = isActive && shown(e) && e.clueLevels.size > 1
+                FitClueText(
+                    cellClue(text) + if (e.direction == Direction.ACROSS) " →" else " ↓",
+                    colors.clueText,
+                    // The tutorial's 3dp frame is drawn over the cell, so keep the text inside it.
+                    Modifier.fillMaxSize()
+                        .padding(if (e == tutorialEntry) 3.dp else 0.dp)
+                        .padding(start = 1.dp, end = 1.dp, bottom = if (showDots) 5.dp else 0.dp),
+                )
+                // Which clue level is showing; only on the active word, where a tap eases it.
+                if (showDots) {
+                    val level = game.clueTier(e)
                     BasicText(
-                        text = cellClue(text) + if (e.direction == Direction.ACROSS) " →" else " ↓",
-                        style = TextStyle(color = colors.clueText, textAlign = TextAlign.Center, lineHeight = 1.05.em),
-                        autoSize = TextAutoSize.StepBased(minFontSize = 5.sp, maxFontSize = 11.sp, stepSize = 0.5.sp),
-                        modifier = Modifier.padding(horizontal = 1.dp).weight(1f, fill = false),
+                        "●".repeat(level + 1) + "○".repeat(e.clueLevels.lastIndex - level),
+                        style = TextStyle(color = colors.clueText, fontSize = 5.sp, lineHeight = 5.sp),
+                        modifier = Modifier.align(Alignment.BottomCenter).padding(bottom = if (e == tutorialEntry) 3.dp else 0.dp),
                     )
-                    // Which clue level is showing; only on the active word, where a tap eases it.
-                    if (isActive && shown(e) && e.clueLevels.size > 1) {
-                        val level = game.clueTier(e)
-                        BasicText(
-                            "●".repeat(level + 1) + "○".repeat(e.clueLevels.lastIndex - level),
-                            style = TextStyle(color = colors.clueText, fontSize = 6.sp, lineHeight = 7.sp),
-                        )
-                    }
                 }
             }
         }
@@ -339,18 +344,22 @@ private fun TutorialCallout(step: Int, onDone: () -> Unit) {
     }
 }
 
-/** A clue too long for its cell (song lines): shown in full under the grid. */
+/** Phone font scale from which the clue also shows in large text under the grid. */
+const val BIG_FONT_SCALE = 1.3f
+
+/** The selected clue in full under the grid: song lines that don't fit a cell, or big-text mode. */
 @Composable
-private fun LongClueLine(entry: Entry, text: String) {
+private fun LongClueLine(entry: Entry, text: String, big: Boolean) {
     Surface(
         color = MaterialTheme.colorScheme.secondaryContainer,
         shape = RoundedCornerShape(10.dp),
         modifier = Modifier.fillMaxWidth().padding(top = 2.dp),
     ) {
         Text(
-            "♪ $text  (${entry.letters.size} hərf)",
+            (if (text.length > CELL_CLUE_MAX) "♪ " else if (entry.direction == Direction.ACROSS) "→ " else "↓ ") +
+                "$text  (${entry.letters.size} hərf)",
             Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
-            style = MaterialTheme.typography.titleSmall,
+            style = if (big) MaterialTheme.typography.headlineSmall else MaterialTheme.typography.titleSmall,
         )
     }
 }
@@ -359,7 +368,7 @@ private fun LongClueLine(entry: Entry, text: String) {
 private val KEY_ROWS = listOf("QÜERTYUİOPÖ", "ASDFGHJKLIƏ", "ZXCVBNMÇŞĞ")
 
 @Composable
-private fun AzKeyboard(onLetter: (Char) -> Unit, onBackspace: () -> Unit) {
+internal fun AzKeyboard(onLetter: (Char) -> Unit, onBackspace: () -> Unit) {
     check(KEY_ROWS.joinToString("").toSet() == AzText.ALPHABET.toSet())
     val haptic = LocalHapticFeedback.current
     Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {

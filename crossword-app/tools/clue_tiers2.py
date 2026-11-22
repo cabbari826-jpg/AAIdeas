@@ -94,7 +94,7 @@ TIERS2 = {
 "PALÇIQ": ["Yaş torpaq", "Yağışdan sonra", "Lil"],
 "MAYA": ["Xəmirdə", "Qıcqırdır", "Ferment"],
 "QOYUN": ["Yun verir", "Sürüdə", "Mələyən"],
-"SÜLH": ["Müharibənin əksi", "Barış", "Əmin-amanlıq"],
+"SÜLH": ["Müharibənin əksi", "Barış", "Asayiş"],
 "QASIRĞA": ["Burulğan külək", "Tayfun", "Güclü külək"],
 "YOL": ["Cığır", "Səfər xətti", "Şose"],
 "SAZ": ["Aşıq aləti", "Simli", "Telli alət"],

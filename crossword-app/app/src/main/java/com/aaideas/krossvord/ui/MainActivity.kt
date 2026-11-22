@@ -33,6 +33,7 @@ class MainActivity : ComponentActivity() {
                             Screen.LEVELS -> LevelsScreen(vm)
                             Screen.PUZZLE -> PuzzleScreen(vm, isPremium)
                             Screen.SETTINGS -> SettingsScreen(vm, isPremium)
+                            Screen.WORD_OF_DAY -> WordOfDayScreen(vm.daily, isPremium, vm::back)
                         }
                     }
                     AdPlaceholderHost(vm.ads)

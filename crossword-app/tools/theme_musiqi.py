@@ -86,7 +86,7 @@ TIERS = {
 "ŞÖVKƏT": ["Ələkbərova", "Xalq artisti", "Qadın xanəndə"],
 "RƏŞİD": ["Behbudov", "Arşın mal alan", "Mahnı ustası"],
 "BÜLBÜL": ["Koroğlu rolu", "Müğənni", "Oxuyan quş"],
-"CABBAR": ["Qaryağdıoğlu", "Plastinka ustadı", "Kişi xanəndə"],
+"CABBAR": ["Qaryağdı oğlu", "Plastinka ustadı", "Kişi xanəndə"],
 "SEYİD": ["Şuşinski", "Şuşalı xanəndə", "Ustad xanəndə"],
 "ƏLƏSGƏR": ["Göyçəli aşıq", "Aşıqlar ustadı", "Aşıq adı"],
 "ARŞIN": ["... mal alan", "Ölçü vahidi", "Operetta"],

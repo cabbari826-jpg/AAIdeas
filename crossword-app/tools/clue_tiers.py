@@ -57,7 +57,7 @@ TIERS = {
 "BABA": ["Əcdad", "Atanın atası", "Dədə"],
 "ARAL": ["Quruyan dəniz", "Duzlu göl", "Dəniz"],
 "YAY": ["Spiral, prujin", "İsti fəsil", "İyul fəsli"],
-"AŞIQ": ["Ələsgər", "Saz çalan", "Xalq müğənnisi"],
+"AŞIQ": ["Ələsgər", "Saz çalan", "El sənətkarı"],
 "ƏT": ["Qəssab malı", "Kabab üçün", "Mal ..."],
 "ARI": ["Çalışqan həşərat", "Pətək sakini", "Bal verən"],
 "ÇAY": ["Kür, Araz", "Armudu stəkanda", "İsti içki"],

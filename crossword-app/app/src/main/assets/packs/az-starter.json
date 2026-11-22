@@ -807,11 +807,11 @@
      "clueRow": 5,
      "clueCol": 2,
      "answer": "AŞIQ",
-     "clue": "Xalq müğənnisi",
+     "clue": "El sənətkarı",
      "clues": [
       "Ələsgər",
       "Saz çalan",
-      "Xalq müğənnisi"
+      "El sənətkarı"
      ],
      "source": "claude-draft",
      "status": "candidate"
@@ -3340,13 +3340,13 @@
      "clueRow": 3,
      "clueCol": 0,
      "answer": "SÜLH",
-     "clue": "Əmin-amanlıq",
+     "clue": "Asayiş",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
       "Müharibənin əksi",
       "Barış",
-      "Əmin-amanlıq"
+      "Asayiş"
      ]
     },
     {

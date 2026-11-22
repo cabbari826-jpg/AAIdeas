@@ -47,7 +47,7 @@ class ProgressStore(context: Context) {
 
     /** Forget every level's progress and counters; keep the player's settings. */
     fun resetAll() {
-        val keep = setOf(KEY_INPUT, KEY_HIDE_CLUES, KEY_EXTRA, KEY_TUTORIAL)
+        val keep = setOf(KEY_INPUT, KEY_HIDE_CLUES, KEY_EXTRA, KEY_TUTORIAL, KEY_BIG_CLUES)
         val e = prefs.edit()
         prefs.all.keys.filter { it !in keep }.forEach { e.remove(it) }
         e.apply()
@@ -71,6 +71,11 @@ class ProgressStore(context: Context) {
     var extraLetters: Boolean
         get() = prefs.getBoolean(KEY_EXTRA, false)
         set(v) = prefs.edit().putBoolean(KEY_EXTRA, v).apply()
+
+    /** Show the selected word's clue in large text under the grid (for low vision). */
+    var bigClues: Boolean
+        get() = prefs.getBoolean(KEY_BIG_CLUES, false)
+        set(v) = prefs.edit().putBoolean(KEY_BIG_CLUES, v).apply()
 
     /** The first-run tutorial (tap a clue cell to ease the clue) was finished or skipped. */
     var tutorialDone: Boolean
@@ -110,6 +115,7 @@ class ProgressStore(context: Context) {
         const val KEY_EXTRA = "extra_letters"
         const val KEY_FREE_HINTS = "free_hints"
         const val KEY_TUTORIAL = "tutorial_clue_cells_done"
+        const val KEY_BIG_CLUES = "big_clues"
         const val KEY_DONE = "completed"
         const val KEY_SINCE_AD = "levels_since_interstitial"
     }
