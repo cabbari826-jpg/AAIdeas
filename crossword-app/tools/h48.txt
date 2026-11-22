@@ -1,0 +1,24 @@
+# # # # # # #
+# Ş İ M Ş Ə K
+# A # # A L A
+# M A V İ # S
+# # # # R # A
+# A D # # A #
+# N A Ğ A R A
+# A Ğ # Y A Ş
+R 1 0 ŞİMŞƏK İldırım
+R 2 3 ALA Rəngbərəng
+R 3 0 MAVİ Göy rəng
+R 5 0 AD İsim
+R 6 0 NAĞARA Zərb aləti
+R 7 0 AĞ Qaranın əksi
+R 7 3 YAŞ Ömür ili
+D 0 1 ŞAM Mum işığı
+D 4 1 ANA Ata
+D 4 2 DAĞ Uca zirvə
+D 0 4 ŞAİR Şer yazar
+D 5 4 AY Gecə işığı
+D 0 5 ƏL Beş barmaq
+D 4 5 ARA Məsafə
+D 0 6 KASA Qab
+D 5 6 AŞ Plov

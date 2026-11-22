@@ -1,5 +1,13 @@
 import random, sys, json
-from words import WORDS
+import os
+if os.environ.get('WORDLIST') == 'hard':
+    from words_hard import WORDS_HARD
+    from words import WORDS as _EASY
+    # Hard list first; easy words fill the gaps (their clues are already reviewed drafts).
+    WORDS = dict(_EASY); WORDS.update(WORDS_HARD)
+else:
+    from words import WORDS
+MAXLEN = int(os.environ.get('MAXLEN', '6'))
 W = {}
 for w in WORDS: W.setdefault(len(w), []).append(w)
 
@@ -28,7 +36,7 @@ def valid_pattern(pat, sl):
     for r, row in enumerate(pat):
         for c, ch in enumerate(row):
             if ch == '.' and (r, c) not in covered: return False
-    if any(len(s[3]) > 6 for s in sl): return False
+    if any(len(s[3]) > MAXLEN for s in sl): return False
     return True
 
 def fill(pat, sl, rng, budget=[0]):
@@ -74,7 +82,9 @@ def score(pat, sl):
     for s in sl:
         for p in s[3]: cov[p] = cov.get(p, 0) + 1
     cross = sum(1 for v in cov.values() if v == 2)
-    return letters + 2 * cross - 2 * sum(1 for s in sl if len(s[3]) == 2)
+    pen2 = int(os.environ.get('PEN2', '2'))
+    longb = int(os.environ.get('LONGB', '0'))
+    return letters + 2 * cross - pen2 * sum(1 for s in sl if len(s[3]) == 2) + longb * sum(1 for s in sl if len(s[3]) >= 5)
 
 R, C = int(sys.argv[1]), int(sys.argv[2]); seed = int(sys.argv[3])
 rng = random.Random(seed); best = None

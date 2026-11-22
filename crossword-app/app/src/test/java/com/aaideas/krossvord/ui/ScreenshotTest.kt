@@ -55,6 +55,13 @@ class ScreenshotTest {
         shoot(vm, "puzzle-no-lives")
     }
 
+    @Test fun hardLevel() {
+        val vm = vm()
+        vm.startLevel(2)
+        vm.restartLevel()
+        shoot(vm, "puzzle-level3")
+    }
+
     @Test fun puzzleTiles() {
         val vm = vm()
         vm.setInput(InputMode.TILES)

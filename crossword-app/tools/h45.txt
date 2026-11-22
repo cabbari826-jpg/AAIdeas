@@ -1,0 +1,21 @@
+# # # # # # #
+# O T A Q # Y
+# # # T A V A
+# A D # T # Ş
+# Ş A M A X I
+# # M A R A L
+# # # Y # L #
+# # K A B A B
+R 1 0 OTAQ Evin hissəsi
+R 2 2 TAVA Qızartma qabı
+R 3 0 AD İsim
+R 4 0 ŞAMAXI Sabirin şəhəri
+R 5 1 MARAL Buynuzlu heyvan
+R 7 1 KABAB Manqalda
+D 2 1 AŞ Plov
+D 2 2 DAM Evin üstü
+D 0 3 AT Minik
+D 3 3 MAYA Xəmirdə
+D 0 4 QATAR Relsdə
+D 3 5 XALA Ananın bacısı
+D 0 6 YAŞIL Ot rəngi
