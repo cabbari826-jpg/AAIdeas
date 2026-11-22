@@ -63,6 +63,15 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     var extraLetters by mutableStateOf(progress.extraLetters)
         private set
 
+    /** Light / dark / follow the phone; kept across launches. */
+    var themeMode by mutableStateOf(ThemeMode.fromName(progress.themeMode))
+        private set
+
+    fun changeTheme(mode: ThemeMode) {
+        themeMode = mode
+        progress.themeMode = mode.name
+    }
+
     fun changeExtraLetters(on: Boolean) {
         progress.extraLetters = on
         extraLetters = on
