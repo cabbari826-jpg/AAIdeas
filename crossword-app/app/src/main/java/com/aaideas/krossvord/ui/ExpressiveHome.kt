@@ -24,7 +24,14 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.GenericShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import kotlin.math.PI
+import kotlin.math.abs
+import kotlin.math.cos
+import kotlin.math.pow
+import kotlin.math.sign
+import kotlin.math.sin
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -56,7 +63,22 @@ import com.aaideas.krossvord.model.AzText
 const val BRAND = "Açar Söz"
 
 /** Every level is a rounded square, like a cell of the grid. State is shown by colour and mark, never by shape. */
-private val levelShape: Shape = RoundedCornerShape(16.dp)
+private val levelShape: Shape = SquircleShape
+
+/** Superellipse |x|^n + |y|^n = 1: smoother than a rounded square (iOS/Pixel-style icon outline). */
+object SquircleShape : Shape by GenericShape({ size, _ ->
+    val n = 4.0
+    val a = size.width / 2; val b = size.height / 2
+    val steps = 120
+    for (i in 0..steps) {
+        val t = 2 * PI * i / steps
+        val c = cos(t); val s = sin(t)
+        val x = a + a * sign(c) * abs(c).pow(2 / n)
+        val y = b + b * sign(s) * abs(s).pow(2 / n)
+        if (i == 0) moveTo(x.toFloat(), y.toFloat()) else lineTo(x.toFloat(), y.toFloat())
+    }
+    close()
+})
 
 /** Gentle spring squash on press. */
 @Composable
