@@ -1286,82 +1286,7 @@
      "id": 1,
      "direction": "DOWN",
      "clueRow": 0,
-     "clueCol": 1,
-     "answer": "BANAN",
-     "clue": "Əyri sarı meyvə",
-     "source": "claude-draft",
-     "status": "candidate",
-     "clues": [
-      "Meymun sevər",
-      "Sarı qabıqlı",
-      "Əyri sarı meyvə"
-     ]
-    },
-    {
-     "id": 2,
-     "direction": "ACROSS",
-     "clueRow": 1,
-     "clueCol": 0,
-     "answer": "BUZOV",
-     "clue": "Balaca dana",
-     "source": "claude-draft",
-     "status": "candidate",
-     "clues": [
-      "İnəyin balası",
-      "Mö deyən bala",
-      "Balaca dana"
-     ]
-    },
-    {
-     "id": 3,
-     "direction": "DOWN",
-     "clueRow": 0,
-     "clueCol": 4,
-     "answer": "OĞLAN",
-     "clue": "Balaca bəy",
-     "source": "claude-draft",
-     "status": "candidate",
-     "clues": [
-      "Qızın qardaşı",
-      "Kiçik kişi",
-      "Balaca bəy"
-     ]
-    },
-    {
-     "id": 4,
-     "direction": "ACROSS",
-     "clueRow": 4,
-     "clueCol": 2,
-     "answer": "BALA",
-     "clue": "Anasının gülü",
-     "source": "claude-draft",
-     "status": "candidate",
-     "clues": [
-      "Kiçik uşaq",
-      "Əzizim",
-      "Anasının gülü"
-     ]
-    },
-    {
-     "id": 5,
-     "direction": "DOWN",
-     "clueRow": 2,
-     "clueCol": 6,
-     "answer": "YATAQ",
-     "clue": "Çarpayı",
-     "source": "claude-draft",
-     "status": "candidate",
-     "clues": [
-      "Gecə yatırıq",
-      "Yorğanlı yer",
-      "Çarpayı"
-     ]
-    },
-    {
-     "id": 6,
-     "direction": "ACROSS",
-     "clueRow": 7,
-     "clueCol": 1,
+     "clueCol": 3,
      "answer": "DODAQ",
      "clue": "Öpüş üçün",
      "source": "claude-draft",
@@ -1371,50 +1296,27 @@
       "Ağızın kənarı",
       "Öpüş üçün"
      ]
-    }
-   ]
-  },
-  {
-   "id": "az-usaq-012",
-   "rows": 8,
-   "cols": 7,
-   "difficulty": 2,
-   "entries": [
-    {
-     "id": 1,
-     "direction": "DOWN",
-     "clueRow": 0,
-     "clueCol": 5,
-     "answer": "KİÇİK",
-     "clue": "Az böyük",
-     "source": "claude-draft",
-     "status": "candidate",
-     "clues": [
-      "Balaca",
-      "Cırtdan boyda",
-      "Az böyük"
-     ]
     },
     {
      "id": 2,
      "direction": "ACROSS",
-     "clueRow": 2,
-     "clueCol": 1,
-     "answer": "SİNİF",
-     "clue": "Lövhəli otaq",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "ÇADIR",
+     "clue": "Brezent ev",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Partalar otağı",
-      "Dərs otağı",
-      "Lövhəli otaq"
+      "Səfər evi",
+      "Kampda ev",
+      "Brezent ev"
      ]
     },
     {
      "id": 3,
      "direction": "DOWN",
      "clueRow": 0,
-     "clueCol": 3,
+     "clueCol": 1,
      "answer": "ÇİYƏLƏK",
      "clue": "Yaz giləsi",
      "source": "claude-draft",
@@ -1428,49 +1330,211 @@
     {
      "id": 4,
      "direction": "ACROSS",
-     "clueRow": 5,
+     "clueRow": 7,
      "clueCol": 0,
-     "answer": "LƏLƏK",
-     "clue": "Quş tükü",
+     "answer": "KÖLGƏ",
+     "clue": "Qara şəkil",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Quşun paltarı",
-      "Yüngül tük",
-      "Quş tükü"
+      "Arxanca gəzir",
+      "Günəşdə yaranır",
+      "Qara şəkil"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 4,
+     "clueCol": 2,
+     "answer": "AĞIZ",
+     "clue": "Danışmaq üçün",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Dişlər evi",
+      "Yemək yeyilir",
+      "Danışmaq üçün"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 1,
+     "clueCol": 6,
+     "answer": "BUZOV",
+     "clue": "Balaca dana",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "İnəyin balası",
+      "Mö deyən bala",
+      "Balaca dana"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "BALIQÇIL",
+    "cells": [
+     [
+      2,
+      6
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      5,
+      1
+     ],
+     [
+      4,
+      5
+     ],
+     [
+      5,
+      3
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      7,
+      3
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-usaq-012",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 2,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "QAŞIQ",
+     "clue": "Şorba üçün",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Sıyıq yeyilir",
+      "Çəngəlin yanında",
+      "Şorba üçün"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "QƏLƏM",
+     "clue": "Karandaş kimi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Şəkil çəkir",
+      "Yazı yazır",
+      "Karandaş kimi"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "MEYMUN",
+     "clue": "Şıltaq heyvan",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Banan yeyir",
+      "Ağacda oynar",
+      "Şıltaq heyvan"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 3,
+     "answer": "BÖYÜK",
+     "clue": "İri",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Nəhəng",
+      "Kiçiyin ziddi",
+      "İri"
      ]
     },
     {
      "id": 5,
      "direction": "DOWN",
      "clueRow": 2,
-     "clueCol": 1,
-     "answer": "BALIQ",
-     "clue": "Pulcuqlu dost",
+     "clueCol": 6,
+     "answer": "BANAN",
+     "clue": "Əyri sarı meyvə",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Suda üzür",
-      "Akvariumda yaşar",
-      "Pulcuqlu dost"
+      "Meymun sevər",
+      "Sarı qabıqlı",
+      "Əyri sarı meyvə"
      ]
     },
     {
      "id": 6,
      "direction": "ACROSS",
      "clueRow": 7,
-     "clueCol": 2,
-     "answer": "KİVİ",
-     "clue": "Qəhvəyi tüklü",
+     "clueCol": 0,
+     "answer": "KÖKƏ",
+     "clue": "Çaya şirni",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Tüklü meyvəcik",
-      "İçi yaşıl",
-      "Qəhvəyi tüklü"
+      "Sobada şirni",
+      "Yumşaq şirni",
+      "Çaya şirni"
      ]
     }
-   ]
+   ],
+   "keyword": {
+    "word": "BALIQ",
+    "cells": [
+     [
+      3,
+      6
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      1,
+      5
+     ]
+    ],
+    "source": "claude-draft"
+   }
   }
  ]
 }

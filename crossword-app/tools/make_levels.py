@@ -181,36 +181,44 @@ def main():
     tries = int(os.environ.get('TRIES', '300'))
     start = len(pack['levels'])
     made = 0
-    for n in range(count):
+    def make_grid():
         if pack_id == 'az-starter':
             # Main pack: every word comes from umumi*.txt; the grid grows from crossings.
             construct.R, construct.C = g.R, g.C
             words = [w for w in general if usable(w) and len(w) <= g.MAXLEN]
-            got = build_theme(words, [], rng, tries, 7, 16) or build_theme(words, [], rng, tries, 6, 16)
-            rows, cols = g.R, g.C
-        else:
-            if mini:
-                construct.R, construct.C = rng.choice([(5, 5), (6, 5), (5, 6), (6, 6)])
-                th = [w for w in pool if usable(w) and len(w) <= max(construct.R, construct.C) - 1]
-                got = build_theme(th, [], rng, tries, 5, 6)
-            else:
-                construct.R, construct.C = g.R, g.C
-                th = [w for w in theme if usable(w) and len(w) <= g.MAXLEN]
+            return build_theme(words, [], rng, tries, 7, 16) or build_theme(words, [], rng, tries, 6, 16)
+        if mini:
+            construct.R, construct.C = rng.choice([(5, 5), (6, 5), (5, 6), (6, 6)])
+            th = [w for w in pool if usable(w) and len(w) <= max(construct.R, construct.C) - 1]
+            return build_theme(th, [], rng, tries, 5, 6)
+        construct.R, construct.C = g.R, g.C
+        th = [w for w in theme if usable(w) and len(w) <= g.MAXLEN]
+        oth = [w for w in general if usable(w) and w not in theme and len(w) <= g.MAXLEN]
+        return build_theme(th, oth, rng, tries, 6, 16, float(os.environ.get('MIN_THEME', '0.5')))
 
-                oth = [w for w in general if usable(w) and w not in theme and len(w) <= g.MAXLEN]
-                got = build_theme(th, oth, rng, tries, 6, 16, float(os.environ.get('MIN_THEME', '0.5')))
-            rows, cols = construct.R, construct.C
+    for n in range(count):
+        kw = None
+        for attempt in range(20):   # every level except the mini grids needs a key word: try other grids
+            got = make_grid()
+            if not got: break
+            grid, ent = got
+            answers = [e[3] for e in ent]
+            if mini: break
+            kw = (keyword_for(grid, [w for w in theme if usable(w) and w not in answers], rng)
+                  or keyword_for(grid, [w for w in general if usable(w) and w not in answers], rng))
+            if kw: break
         if not got:
             src = 'umumi*.txt' if pack_id == 'az-starter' else f'{pack_id}.txt'
             print(f'Stopped after {n} new levels: not enough unused words in content/words/{src} '
                   f'(at least half of every level must come from it). Add words there and run again.')
             break
-        grid, ent = got
-        answers = [e[3] for e in ent]
+        if not mini and not kw:
+            print(f'Stopped after {n} new levels: no unused key word (5-8 letters) fits the grid. '
+                  f'Add longer words to content/words/{pack_id}.txt and run again.')
+            break
+        rows, cols = construct.R, construct.C
         taken.update(answers)
         for w in answers: clues_taken.update(pool[w])
-        kw = None if mini else (keyword_for(grid, [w for w in theme if usable(w)], rng)
-                                 or keyword_for(grid, [w for w in general if usable(w)], rng))
         if kw: taken.add(kw[0])
         k = start + n
         level = dict(id=f'{pack_id}-{k + 1:03d}', rows=rows, cols=cols, difficulty=min(3, 1 + k * 3 // max(start + count, 30)),

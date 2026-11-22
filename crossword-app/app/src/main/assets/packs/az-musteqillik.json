@@ -14,8 +14,38 @@
    "entries": [
     {
      "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "XƏZİNƏ",
+     "clue": "Qızıl sandığı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Dəfinə",
+      "Sərvət anbarı",
+      "Qızıl sandığı"
+     ]
+    },
+    {
+     "id": 2,
      "direction": "ACROSS",
-     "clueRow": 4,
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "ZƏNGİN",
+     "clue": "Dövlətli",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Varlı",
+      "Kasıbın ziddi",
+      "Dövlətli"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 6,
      "clueCol": 0,
      "answer": "ƏLİFBA",
      "clue": "A-dan Z-yə",
@@ -28,70 +58,55 @@
      ]
     },
     {
-     "id": 2,
-     "direction": "DOWN",
-     "clueRow": 0,
-     "clueCol": 6,
-     "answer": "SİYASƏT",
-     "clue": "Siyasi iş",
-     "source": "claude-draft",
-     "status": "candidate",
-     "clues": [
-      "Dövlət işi",
-      "Diplomatiya",
-      "Siyasi iş"
-     ]
-    },
-    {
-     "id": 3,
-     "direction": "ACROSS",
-     "clueRow": 1,
-     "clueCol": 0,
-     "answer": "MƏCLİS",
-     "clue": "Toplantı",
-     "source": "claude-draft",
-     "status": "candidate",
-     "clues": [
-      "Parlament adı",
-      "Xalq ...",
-      "Toplantı"
-     ]
-    },
-    {
      "id": 4,
-     "direction": "ACROSS",
-     "clueRow": 7,
-     "clueCol": 0,
-     "answer": "DÖVLƏT",
-     "clue": "Hökumət",
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 3,
+     "answer": "NAZİR",
+     "clue": "Vəzir",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Gerbi, himni var",
-      "Ölkə idarəsi",
-      "Hökumət"
+      "Hökumət üzvü",
+      "Kabinet üzvü",
+      "Vəzir"
      ]
     },
     {
      "id": 5,
-     "direction": "DOWN",
-     "clueRow": 2,
-     "clueCol": 1,
-     "answer": "SƏNƏD",
-     "clue": "Arayış",
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "XALQ",
+     "clue": "El",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Rəsmi kağız",
-      "Pasport, diplom",
-      "Arayış"
+      "Millət",
+      "Əhali",
+      "El"
      ]
     },
     {
      "id": 6,
      "direction": "DOWN",
-     "clueRow": 2,
-     "clueCol": 3,
+     "clueRow": 4,
+     "clueCol": 6,
+     "answer": "MAY",
+     "clue": "Bahar ayı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Baharın sonu",
+      "Beşinci ay",
+      "Bahar ayı"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "DOWN",
+     "clueRow": 1,
+     "clueCol": 5,
      "answer": "DİL",
      "clue": "Ağızdakı orqan",
      "source": "claude-draft",
@@ -104,31 +119,31 @@
     }
    ],
    "keyword": {
-    "word": "MİLLƏT",
+    "word": "DƏFİNƏ",
     "cells": [
      [
-      1,
-      1
+      2,
+      5
      ],
      [
       2,
-      6
+      1
      ],
      [
-      1,
+      6,
       4
      ],
      [
       4,
-      2
-     ],
-     [
-      6,
       1
      ],
      [
-      7,
+      3,
       6
+     ],
+     [
+      3,
+      2
      ]
     ],
     "source": "claude-draft"
@@ -142,117 +157,132 @@
    "entries": [
     {
      "id": 1,
-     "direction": "ACROSS",
-     "clueRow": 7,
-     "clueCol": 0,
-     "answer": "BAŞÇI",
-     "clue": "Başda duran",
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "ARXİV",
+     "clue": "Köhnə qovluqlar",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Rəhbər",
-      "Lider",
-      "Başda duran"
+      "Sənəd anbarı",
+      "Tarixi sənədlər",
+      "Köhnə qovluqlar"
      ]
     },
     {
      "id": 2,
-     "direction": "DOWN",
-     "clueRow": 0,
-     "clueCol": 3,
-     "answer": "QURULUŞ",
-     "clue": "Dövlət forması",
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "ALOVLU",
+     "clue": "Coşqun",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Sistem",
-      "Təşkilat forması",
-      "Dövlət forması"
+      "Odlu",
+      "Atəşli",
+      "Coşqun"
      ]
     },
     {
      "id": 3,
-     "direction": "ACROSS",
-     "clueRow": 3,
-     "clueCol": 0,
-     "answer": "QURUCU",
-     "clue": "Yaradan",
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "ULUS",
+     "clue": "Oğuz elləri",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Bina edən",
-      "Əsasını qoyan",
-      "Yaradan"
+      "Xalq, millət",
+      "Tayfalar birliyi",
+      "Oğuz elləri"
      ]
     },
     {
      "id": 4,
      "direction": "ACROSS",
-     "clueRow": 1,
-     "clueCol": 0,
-     "answer": "HÜQUQ",
-     "clue": "Səlahiyyət",
+     "clueRow": 4,
+     "clueCol": 2,
+     "answer": "ƏSAS",
+     "clue": "Baş hissə",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Qanuni ixtiyar",
-      "Haqq",
-      "Səlahiyyət"
+      "Bünövrə daşı",
+      "Ən vacib",
+      "Baş hissə"
      ]
     },
     {
      "id": 5,
      "direction": "DOWN",
-     "clueRow": 1,
-     "clueCol": 6,
-     "answer": "QURUM",
-     "clue": "Müəssisə",
+     "clueRow": 2,
+     "clueCol": 3,
+     "answer": "SƏNƏD",
+     "clue": "Arayış",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Təşkilat",
-      "İdarə",
-      "Müəssisə"
+      "Rəsmi kağız",
+      "Pasport, diplom",
+      "Arayış"
      ]
     },
     {
      "id": 6,
      "direction": "ACROSS",
-     "clueRow": 5,
-     "clueCol": 0,
-     "answer": "XALQ",
-     "clue": "El",
+     "clueRow": 6,
+     "clueCol": 1,
+     "answer": "QƏRAR",
+     "clue": "Qət olunmuş",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Millət",
-      "Əhali",
-      "El"
+      "Rəsmi hökm",
+      "Qət etmə",
+      "Qət olunmuş"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "DOWN",
+     "clueRow": 3,
+     "clueCol": 5,
+     "answer": "AZAD",
+     "clue": "Müstəqil",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Bağlı deyil",
+      "Əsir deyil",
+      "Müstəqil"
      ]
     }
    ],
    "keyword": {
-    "word": "CAMIŞ",
+    "word": "ZƏRƏR",
     "cells": [
      [
-      3,
+      5,
       5
      ],
      [
-      5,
-      2
+      6,
+      3
      ],
      [
       6,
       6
      ],
      [
-      7,
-      5
+      4,
+      3
      ],
      [
-      7,
-      3
+      2,
+      1
      ]
     ],
     "source": "claude-draft"
@@ -266,17 +296,318 @@
    "entries": [
     {
      "id": 1,
-     "direction": "ACROSS",
-     "clueRow": 1,
-     "clueCol": 0,
-     "answer": "ARXİV",
-     "clue": "Köhnə qovluqlar",
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "BƏYAN",
+     "clue": "Rəsmi söz",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Sənəd anbarı",
-      "Tarixi sənədlər",
-      "Köhnə qovluqlar"
+      "Bildirmə",
+      "Açıqlama",
+      "Rəsmi söz"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 2,
+     "answer": "ELAN",
+     "clue": "Afişa xəbəri",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Bəyan etmə",
+      "Bildiriş",
+      "Afişa xəbəri"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "QURULUŞ",
+     "clue": "Dövlət forması",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Sistem",
+      "Təşkilat forması",
+      "Dövlət forması"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 1,
+     "answer": "BAŞÇI",
+     "clue": "Başda duran",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Rəhbər",
+      "Lider",
+      "Başda duran"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "DÖVR",
+     "clue": "Əsr, il",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Zaman kəsiyi",
+      "Epoxa",
+      "Əsr, il"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "ŞƏRQ",
+     "clue": "Gündoğan",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Gün çıxan tərəf",
+      "Qərbin ziddi",
+      "Gündoğan"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 1,
+     "answer": "DÖRD",
+     "clue": "Kvadratın tərəfi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Üçdən sonra",
+      "2+2",
+      "Kvadratın tərəfi"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "ARAYIŞ",
+    "cells": [
+     [
+      7,
+      3
+     ],
+     [
+      5,
+      1
+     ],
+     [
+      5,
+      5
+     ],
+     [
+      3,
+      6
+     ],
+     [
+      7,
+      6
+     ],
+     [
+      1,
+      1
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-musteqillik-004",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "MİLLİ",
+     "clue": "Xalqın öz malı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Xalqa aid",
+      "Ulusal",
+      "Xalqın öz malı"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "DÖVLƏT",
+     "clue": "Hökumət",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Gerbi, himni var",
+      "Ölkə idarəsi",
+      "Hökumət"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "MƏTBUAT",
+     "clue": "Media",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qəzet-jurnal",
+      "Söz azadlığı",
+      "Media"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "SƏRVƏT",
+     "clue": "Neft, qızıl",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Var-dövlət",
+      "Xəzinə",
+      "Neft, qızıl"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 4,
+     "clueCol": 1,
+     "answer": "İRS",
+     "clue": "Miras",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Mədəni miras",
+      "Babalardan qalan",
+      "Miras"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "İNDİ",
+     "clue": "Elə bu saat",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Bu an",
+      "Hal-hazırda",
+      "Elə bu saat"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "DOWN",
+     "clueRow": 4,
+     "clueCol": 3,
+     "answer": "DAR",
+     "clue": "Sıx",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ensiz",
+      "Enlinin ziddi",
+      "Sıx"
+     ]
+    },
+    {
+     "id": 8,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "FİLM",
+     "clue": "Ekran əsəri",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Kino əsəri",
+      "Lent",
+      "Ekran əsəri"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "MİLLƏT",
+    "cells": [
+     [
+      1,
+      6
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      4,
+      4
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      7,
+      6
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-musteqillik-005",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "QURUM",
+     "clue": "Müəssisə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Təşkilat",
+      "İdarə",
+      "Müəssisə"
      ]
     },
     {
@@ -296,39 +627,24 @@
     },
     {
      "id": 3,
-     "direction": "ACROSS",
-     "clueRow": 3,
-     "clueCol": 0,
-     "answer": "ARAYIŞ",
-     "clue": "İdarə kağızı",
+     "direction": "DOWN",
+     "clueRow": 1,
+     "clueCol": 4,
+     "answer": "QURUCU",
+     "clue": "Yaradan",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Spravka",
-      "Təsdiq kağızı",
-      "İdarə kağızı"
+      "Bina edən",
+      "Əsasını qoyan",
+      "Yaradan"
      ]
     },
     {
      "id": 4,
      "direction": "ACROSS",
-     "clueRow": 7,
-     "clueCol": 0,
-     "answer": "QƏRAR",
-     "clue": "Qət olunmuş",
-     "source": "claude-draft",
-     "status": "candidate",
-     "clues": [
-      "Rəsmi hökm",
-      "Qət etmə",
-      "Qət olunmuş"
-     ]
-    },
-    {
-     "id": 5,
-     "direction": "DOWN",
-     "clueRow": 2,
-     "clueCol": 6,
+     "clueRow": 3,
+     "clueCol": 2,
      "answer": "ŞURA",
      "clue": "Sovet",
      "source": "claude-draft",
@@ -340,120 +656,7 @@
      ]
     },
     {
-     "id": 6,
-     "direction": "ACROSS",
-     "clueRow": 5,
-     "clueCol": 2,
-     "answer": "DÖVR",
-     "clue": "Əsr, il",
-     "source": "claude-draft",
-     "status": "candidate",
-     "clues": [
-      "Zaman kəsiyi",
-      "Epoxa",
-      "Əsr, il"
-     ]
-    },
-    {
-     "id": 7,
-     "direction": "DOWN",
-     "clueRow": 4,
-     "clueCol": 3,
-     "answer": "DAR",
-     "clue": "Sıx",
-     "source": "claude-draft",
-     "status": "candidate",
-     "clues": [
-      "Ensiz",
-      "Enlinin ziddi",
-      "Sıx"
-     ]
-    }
-   ],
-   "keyword": {
-    "word": "ZİYALI",
-    "cells": [
-     [
-      2,
-      1
-     ],
-     [
-      1,
-      4
-     ],
-     [
-      3,
-      4
-     ],
-     [
-      6,
-      6
-     ],
-     [
-      5,
-      1
-     ],
-     [
-      3,
-      5
-     ]
-    ],
-    "source": "claude-draft"
-   }
-  },
-  {
-   "id": "az-musteqillik-004",
-   "rows": 8,
-   "cols": 7,
-   "difficulty": 1,
-   "entries": [
-    {
-     "id": 1,
-     "direction": "ACROSS",
-     "clueRow": 1,
-     "clueCol": 0,
-     "answer": "SEÇKİ",
-     "clue": "Seçim günü",
-     "source": "claude-draft",
-     "status": "candidate",
-     "clues": [
-      "1918-də qadına",
-      "Səs vermə",
-      "Seçim günü"
-     ]
-    },
-    {
-     "id": 2,
-     "direction": "DOWN",
-     "clueRow": 0,
-     "clueCol": 2,
-     "answer": "ELAN",
-     "clue": "Afişa xəbəri",
-     "source": "claude-draft",
-     "status": "candidate",
-     "clues": [
-      "Bəyan etmə",
-      "Bildiriş",
-      "Afişa xəbəri"
-     ]
-    },
-    {
-     "id": 3,
-     "direction": "ACROSS",
-     "clueRow": 4,
-     "clueCol": 1,
-     "answer": "NAZİR",
-     "clue": "Vəzir",
-     "source": "claude-draft",
-     "status": "candidate",
-     "clues": [
-      "Hökumət üzvü",
-      "Kabinet üzvü",
-      "Vəzir"
-     ]
-    },
-    {
-     "id": 4,
+     "id": 5,
      "direction": "DOWN",
      "clueRow": 1,
      "clueCol": 6,
@@ -468,77 +671,65 @@
      ]
     },
     {
-     "id": 5,
-     "direction": "DOWN",
-     "clueRow": 3,
-     "clueCol": 3,
-     "answer": "AZAD",
-     "clue": "Müstəqil",
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "ATA",
+     "clue": "Ana-...",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Bağlı deyil",
-      "Əsir deyil",
-      "Müstəqil"
+      "Ailə başçısı",
+      "Oğulun valideyni",
+      "Ana-..."
      ]
     },
     {
-     "id": 6,
+     "id": 7,
      "direction": "ACROSS",
-     "clueRow": 6,
-     "clueCol": 1,
-     "answer": "MAY",
-     "clue": "Bahar ayı",
+     "clueRow": 5,
+     "clueCol": 2,
+     "answer": "RUZİ",
+     "clue": "Halal qazanc",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Baharın sonu",
-      "Beşinci ay",
-      "Bahar ayı"
+      "Gündəlik çörək",
+      "Qismətə düşən",
+      "Halal qazanc"
      ]
     }
    ],
    "keyword": {
-    "word": "XİLASKAR",
+    "word": "MİŞAR",
     "cells": [
      [
-      6,
-      6
-     ],
-     [
-      4,
+      7,
       5
      ],
      [
-      2,
-      2
+      5,
+      6
+     ],
+     [
+      3,
+      3
      ],
      [
       3,
       6
      ],
      [
-      1,
-      1
-     ],
-     [
-      1,
-      4
-     ],
-     [
       3,
-      2
-     ],
-     [
-      4,
-      6
+      5
      ]
     ],
     "source": "claude-draft"
    }
   },
   {
-   "id": "az-musteqillik-005",
+   "id": "az-musteqillik-006",
    "rows": 8,
    "cols": 7,
    "difficulty": 1,
@@ -546,7 +737,7 @@
     {
      "id": 1,
      "direction": "ACROSS",
-     "clueRow": 4,
+     "clueRow": 1,
      "clueCol": 0,
      "answer": "RƏHBƏR",
      "clue": "Yol göstərən",
@@ -562,224 +753,112 @@
      "id": 2,
      "direction": "DOWN",
      "clueRow": 0,
-     "clueCol": 4,
-     "answer": "MƏTBUAT",
-     "clue": "Media",
+     "clueCol": 3,
+     "answer": "HÜQUQ",
+     "clue": "Səlahiyyət",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Qəzet-jurnal",
-      "Söz azadlığı",
-      "Media"
+      "Qanuni ixtiyar",
+      "Haqq",
+      "Səlahiyyət"
      ]
     },
     {
      "id": 3,
-     "direction": "DOWN",
-     "clueRow": 2,
-     "clueCol": 2,
-     "answer": "BƏYAN",
-     "clue": "Rəsmi söz",
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "AVQUST",
+     "clue": "Meyvə ayı",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Bildirmə",
-      "Açıqlama",
-      "Rəsmi söz"
+      "Səkkizinci ay",
+      "Yayın sonu",
+      "Meyvə ayı"
      ]
     },
     {
      "id": 4,
      "direction": "DOWN",
-     "clueRow": 1,
-     "clueCol": 6,
-     "answer": "ŞƏRQ",
-     "clue": "Gündoğan",
+     "clueRow": 2,
+     "clueCol": 5,
+     "answer": "SEÇKİ",
+     "clue": "Seçim günü",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Gün çıxan tərəf",
-      "Qərbin ziddi",
-      "Gündoğan"
+      "1918-də qadına",
+      "Səs vermə",
+      "Seçim günü"
      ]
     },
     {
      "id": 5,
-     "direction": "ACROSS",
-     "clueRow": 6,
-     "clueCol": 0,
-     "answer": "QAPAQ",
-     "clue": "Qab üstü",
-     "source": "claude-draft",
-     "status": "candidate",
-     "clues": [
-      "Qazanın papağı",
-      "Örtük",
-      "Qab üstü"
-     ]
-    },
-    {
-     "id": 6,
-     "direction": "ACROSS",
-     "clueRow": 1,
-     "clueCol": 0,
-     "answer": "PALMA",
-     "clue": "Tropik ağac",
-     "source": "claude-draft",
-     "status": "candidate",
-     "clues": [
-      "İsti ölkə ağacı",
-      "Xurma ağacı",
-      "Tropik ağac"
-     ]
-    }
-   ],
-   "keyword": {
-    "word": "MARAQ",
-    "cells": [
-     [
-      1,
-      4
-     ],
-     [
-      1,
-      2
-     ],
-     [
-      4,
-      6
-     ],
-     [
-      6,
-      2
-     ],
-     [
-      5,
-      6
-     ]
-    ],
-    "source": "claude-draft"
-   }
-  },
-  {
-   "id": "az-musteqillik-006",
-   "rows": 8,
-   "cols": 7,
-   "difficulty": 1,
-   "entries": [
-    {
-     "id": 1,
-     "direction": "DOWN",
-     "clueRow": 0,
-     "clueCol": 6,
-     "answer": "ZƏNGİN",
-     "clue": "Dövlətli",
-     "source": "claude-draft",
-     "status": "candidate",
-     "clues": [
-      "Varlı",
-      "Kasıbın ziddi",
-      "Dövlətli"
-     ]
-    },
-    {
-     "id": 2,
-     "direction": "ACROSS",
-     "clueRow": 2,
-     "clueCol": 0,
-     "answer": "XƏZİNƏ",
-     "clue": "Qızıl sandığı",
-     "source": "claude-draft",
-     "status": "candidate",
-     "clues": [
-      "Dəfinə",
-      "Sərvət anbarı",
-      "Qızıl sandığı"
-     ]
-    },
-    {
-     "id": 3,
-     "direction": "DOWN",
-     "clueRow": 0,
-     "clueCol": 2,
-     "answer": "ŞƏHƏRLİ",
-     "clue": "Şəhərdə yaşayan",
-     "source": "claude-draft",
-     "status": "candidate",
-     "clues": [
-      "Şəhər sakini",
-      "Kəndli deyil",
-      "Şəhərdə yaşayan"
-     ]
-    },
-    {
-     "id": 4,
      "direction": "ACROSS",
      "clueRow": 7,
      "clueCol": 0,
-     "answer": "MİLLİ",
-     "clue": "Xalqın öz malı",
+     "answer": "MƏCLİS",
+     "clue": "Toplantı",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Xalqa aid",
-      "Ulusal",
-      "Xalqın öz malı"
-     ]
-    },
-    {
-     "id": 5,
-     "direction": "DOWN",
-     "clueRow": 0,
-     "clueCol": 4,
-     "answer": "MİRAS",
-     "clue": "Varislik payı",
-     "source": "claude-draft",
-     "status": "candidate",
-     "clues": [
-      "İrs",
-      "Nəsildən nəslə",
-      "Varislik payı"
+      "Parlament adı",
+      "Xalq ...",
+      "Toplantı"
      ]
     },
     {
      "id": 6,
-     "direction": "ACROSS",
+     "direction": "DOWN",
      "clueRow": 4,
-     "clueCol": 0,
-     "answer": "HƏYA",
-     "clue": "Abır-ismət",
+     "clueCol": 1,
+     "answer": "ELM",
+     "clue": "Bilik",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Utancaqlıq",
-      "Abır",
-      "Abır-ismət"
+      "Bilik sahəsi",
+      "Akademiya işi",
+      "Bilik"
      ]
     }
    ],
    "keyword": {
-    "word": "GƏLİR",
+    "word": "MƏKTƏBLİ",
     "cells": [
      [
-      4,
-      6
+      7,
+      1
      ],
      [
-      4,
-      2
+      1,
+      5
      ],
      [
       6,
-      2
-     ],
-     [
-      7,
       5
      ],
      [
       3,
+      6
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
       4
+     ],
+     [
+      7,
+      4
+     ],
+     [
+      7,
+      5
      ]
     ],
     "source": "claude-draft"

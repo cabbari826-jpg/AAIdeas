@@ -17,14 +17,14 @@
      "direction": "DOWN",
      "clueRow": 0,
      "clueCol": 3,
-     "answer": "NÖBƏT",
-     "clue": "Keşik vaxtı",
+     "answer": "FORMA",
+     "clue": "Biçim",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Gecə keşiyi",
-      "Gecə ...",
-      "Keşik vaxtı"
+      "Hərbi geyim",
+      "Uniforma",
+      "Biçim"
      ]
     },
     {
@@ -32,21 +32,36 @@
      "direction": "ACROSS",
      "clueRow": 1,
      "clueCol": 0,
-     "answer": "MANEVR",
-     "clue": "Yerdəyişmə",
+     "answer": "TÜFƏNG",
+     "clue": "Lüləli silah",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Qoşun gedişi",
-      "Taktik gediş",
-      "Yerdəyişmə"
+      "Odlu silah",
+      "Avtomat kimi",
+      "Lüləli silah"
      ]
     },
     {
      "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "GENERAL",
+     "clue": "Ordu başçısı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ən böyük rütbə",
+      "Lampaslı",
+      "Ordu başçısı"
+     ]
+    },
+    {
+     "id": 4,
      "direction": "ACROSS",
-     "clueRow": 3,
-     "clueCol": 0,
+     "clueRow": 5,
+     "clueCol": 1,
      "answer": "TABOR",
      "clue": "Alaydan kiçik",
      "source": "claude-draft",
@@ -58,40 +73,25 @@
      ]
     },
     {
-     "id": 4,
-     "direction": "DOWN",
-     "clueRow": 2,
-     "clueCol": 1,
-     "answer": "TOPÇU",
-     "clue": "Top əsgəri",
-     "source": "claude-draft",
-     "status": "candidate",
-     "clues": [
-      "Artilleriyaçı",
-      "Top atan",
-      "Top əsgəri"
-     ]
-    },
-    {
      "id": 5,
-     "direction": "DOWN",
-     "clueRow": 2,
-     "clueCol": 5,
-     "answer": "RADAR",
-     "clue": "Göy göz",
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 1,
+     "answer": "ŞİNEL",
+     "clue": "Uzun boz palto",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Uzaqdan görən",
-      "Lokator",
-      "Göy göz"
+      "Əsgər paltosu",
+      "Hərbi palto",
+      "Uzun boz palto"
      ]
     },
     {
      "id": 6,
      "direction": "ACROSS",
-     "clueRow": 7,
-     "clueCol": 2,
+     "clueRow": 3,
+     "clueCol": 0,
      "answer": "SIRA",
      "clue": "Növbə",
      "source": "claude-draft",
@@ -101,37 +101,44 @@
       "Düzülüş",
       "Növbə"
      ]
+    },
+    {
+     "id": 7,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "TAS",
+     "clue": "Kasa kimi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Hamam qabı",
+      "Mis kasa",
+      "Kasa kimi"
+     ]
     }
    ],
    "keyword": {
-    "word": "AVTOMAT",
+    "word": "TƏLİM",
     "cells": [
+     [
+      5,
+      2
+     ],
+     [
+      1,
+      4
+     ],
      [
       7,
       6
      ],
      [
-      1,
-      5
+      7,
+      3
      ],
      [
-      3,
-      1
-     ],
-     [
-      3,
-      4
-     ],
-     [
-      1,
-      1
-     ],
-     [
-      1,
-      2
-     ],
-     [
-      5,
+      4,
       3
      ]
     ],
@@ -146,53 +153,8 @@
    "entries": [
     {
      "id": 1,
-     "direction": "DOWN",
-     "clueRow": 0,
-     "clueCol": 4,
-     "answer": "HƏRBİ",
-     "clue": "Əsgəri",
-     "source": "claude-draft",
-     "status": "candidate",
-     "clues": [
-      "Ordu ilə bağlı",
-      "Mülki deyil",
-      "Əsgəri"
-     ]
-    },
-    {
-     "id": 2,
      "direction": "ACROSS",
-     "clueRow": 4,
-     "clueCol": 0,
-     "answer": "HƏRBÇİ",
-     "clue": "Hərbi şəxs",
-     "source": "claude-draft",
-     "status": "candidate",
-     "clues": [
-      "Ordu adamı",
-      "Formalı adam",
-      "Hərbi şəxs"
-     ]
-    },
-    {
-     "id": 3,
-     "direction": "DOWN",
-     "clueRow": 0,
-     "clueCol": 6,
-     "answer": "DƏBİLQƏ",
-     "clue": "Kaska",
-     "source": "claude-draft",
-     "status": "candidate",
-     "clues": [
-      "Dəmir papaq",
-      "Baş qoruyucu",
-      "Kaska"
-     ]
-    },
-    {
-     "id": 4,
-     "direction": "ACROSS",
-     "clueRow": 1,
+     "clueRow": 5,
      "clueCol": 0,
      "answer": "SƏRHƏD",
      "clue": "Ölkənin kənarı",
@@ -205,25 +167,70 @@
      ]
     },
     {
-     "id": 5,
+     "id": 2,
      "direction": "DOWN",
-     "clueRow": 2,
-     "clueCol": 2,
-     "answer": "TƏLİM",
-     "clue": "Hazırlıq",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "ADMİRAL",
+     "clue": "Böyük dənizçi",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Məşq",
-      "Öyrətmə",
-      "Hazırlıq"
+      "Donanma başçısı",
+      "Dəniz generalı",
+      "Böyük dənizçi"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "PİYADA",
+     "clue": "Ayaqla gedən",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Atsız əsgər",
+      "Yeriyən qoşun",
+      "Ayaqla gedən"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "BÖLÜK",
+     "clue": "Əsgər dəstəsi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Rota",
+      "Tabordan kiçik",
+      "Əsgər dəstəsi"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "ALAY",
+     "clue": "Hərbi hissə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Polk",
+      "Tabordan böyük",
+      "Hərbi hissə"
      ]
     },
     {
      "id": 6,
      "direction": "ACROSS",
-     "clueRow": 7,
-     "clueCol": 0,
+     "clueRow": 3,
+     "clueCol": 1,
      "answer": "ƏMR",
      "clue": "Buyruq",
      "source": "claude-draft",
@@ -236,31 +243,27 @@
     }
    ],
    "keyword": {
-    "word": "MƏSƏLƏ",
+    "word": "HƏRBİ",
     "cells": [
      [
-      7,
-      2
-     ],
-     [
-      2,
+      5,
       4
      ],
      [
-      1,
+      5,
+      2
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      7,
       1
      ],
      [
-      1,
-      2
-     ],
-     [
-      5,
+      2,
       6
-     ],
-     [
-      4,
-      2
      ]
     ],
     "source": "claude-draft"
@@ -276,184 +279,37 @@
      "id": 1,
      "direction": "DOWN",
      "clueRow": 0,
-     "clueCol": 3,
-     "answer": "ŞİNEL",
-     "clue": "Uzun boz palto",
+     "clueCol": 1,
+     "answer": "HƏRBÇİ",
+     "clue": "Hərbi şəxs",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Əsgər paltosu",
-      "Hərbi palto",
-      "Uzun boz palto"
+      "Ordu adamı",
+      "Formalı adam",
+      "Hərbi şəxs"
      ]
     },
     {
      "id": 2,
      "direction": "ACROSS",
-     "clueRow": 5,
-     "clueCol": 0,
-     "answer": "BÖLÜK",
-     "clue": "Əsgər dəstəsi",
-     "source": "claude-draft",
-     "status": "candidate",
-     "clues": [
-      "Rota",
-      "Tabordan kiçik",
-      "Əsgər dəstəsi"
-     ]
-    },
-    {
-     "id": 3,
-     "direction": "ACROSS",
      "clueRow": 1,
      "clueCol": 0,
-     "answer": "KEŞİK",
-     "clue": "Mühafizə",
+     "answer": "HƏDƏF",
+     "clue": "Nişan nöqtəsi",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Gözətçilik",
-      "Nöbətçi yeri",
-      "Mühafizə"
-     ]
-    },
-    {
-     "id": 4,
-     "direction": "DOWN",
-     "clueRow": 2,
-     "clueCol": 1,
-     "answer": "ZABİT",
-     "clue": "Ordu rəisi",
-     "source": "claude-draft",
-     "status": "candidate",
-     "clues": [
-      "Paqonlu komandir",
-      "Leytenant və s.",
-      "Ordu rəisi"
-     ]
-    },
-    {
-     "id": 5,
-     "direction": "ACROSS",
-     "clueRow": 7,
-     "clueCol": 0,
-     "answer": "TÜFƏNG",
-     "clue": "Lüləli silah",
-     "source": "claude-draft",
-     "status": "candidate",
-     "clues": [
-      "Odlu silah",
-      "Avtomat kimi",
-      "Lüləli silah"
-     ]
-    },
-    {
-     "id": 6,
-     "direction": "ACROSS",
-     "clueRow": 3,
-     "clueCol": 0,
-     "answer": "ZƏNGÇƏ",
-     "clue": "Cingilti verən",
-     "source": "claude-draft",
-     "status": "candidate",
-     "clues": [
-      "Qapı zəngi",
-      "Balaca zəng",
-      "Cingilti verən"
-     ]
-    },
-    {
-     "id": 7,
-     "direction": "DOWN",
-     "clueRow": 1,
-     "clueCol": 6,
-     "answer": "KƏL",
-     "clue": "Camış atası",
-     "source": "claude-draft",
-     "status": "candidate",
-     "clues": [
-      "Erkək camış",
-      "Güclü mal",
-      "Camış atası"
-     ]
-    }
-   ],
-   "keyword": {
-    "word": "KÜLƏKLİ",
-    "cells": [
-     [
-      2,
-      6
-     ],
-     [
-      5,
-      4
-     ],
-     [
-      4,
-      6
-     ],
-     [
-      7,
-      4
-     ],
-     [
-      1,
-      5
-     ],
-     [
-      5,
-      3
-     ],
-     [
-      6,
-      1
-     ]
-    ],
-    "source": "claude-draft"
-   }
-  },
-  {
-   "id": "az-ordu-004",
-   "rows": 8,
-   "cols": 7,
-   "difficulty": 1,
-   "entries": [
-    {
-     "id": 1,
-     "direction": "DOWN",
-     "clueRow": 0,
-     "clueCol": 3,
-     "answer": "PAQON",
-     "clue": "Rütbə yeri",
-     "source": "claude-draft",
-     "status": "candidate",
-     "clues": [
-      "Çiyin nişanı",
-      "Ulduzlu lövhə",
-      "Rütbə yeri"
-     ]
-    },
-    {
-     "id": 2,
-     "direction": "ACROSS",
-     "clueRow": 4,
-     "clueCol": 1,
-     "answer": "FORMA",
-     "clue": "Biçim",
-     "source": "claude-draft",
-     "status": "candidate",
-     "clues": [
-      "Hərbi geyim",
-      "Uniforma",
-      "Biçim"
+      "Nişangah",
+      "Vurulacaq yer",
+      "Nişan nöqtəsi"
      ]
     },
     {
      "id": 3,
      "direction": "DOWN",
      "clueRow": 0,
-     "clueCol": 6,
+     "clueCol": 3,
      "answer": "DONANMA",
      "clue": "Flot",
      "source": "claude-draft",
@@ -468,92 +324,208 @@
      "id": 4,
      "direction": "ACROSS",
      "clueRow": 7,
-     "clueCol": 0,
-     "answer": "PİYADA",
-     "clue": "Ayaqla gedən",
+     "clueCol": 1,
+     "answer": "RADAR",
+     "clue": "Göy göz",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Atsız əsgər",
-      "Yeriyən qoşun",
-      "Ayaqla gedən"
+      "Uzaqdan görən",
+      "Lokator",
+      "Göy göz"
      ]
     },
     {
      "id": 5,
-     "direction": "ACROSS",
-     "clueRow": 2,
-     "clueCol": 0,
-     "answer": "ALAY",
-     "clue": "Hərbi hissə",
+     "direction": "DOWN",
+     "clueRow": 1,
+     "clueCol": 6,
+     "answer": "MANEVR",
+     "clue": "Yerdəyişmə",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Polk",
-      "Tabordan böyük",
-      "Hərbi hissə"
+      "Qoşun gedişi",
+      "Taktik gediş",
+      "Yerdəyişmə"
      ]
     },
     {
      "id": 6,
-     "direction": "DOWN",
-     "clueRow": 0,
-     "clueCol": 1,
-     "answer": "ŞAL",
-     "clue": "Böyük yaylıq",
-     "source": "claude-draft",
-     "status": "candidate",
-     "clues": [
-      "Çiyinə atılır",
-      "Yun örtük",
-      "Böyük yaylıq"
-     ]
-    },
-    {
-     "id": 7,
-     "direction": "DOWN",
+     "direction": "ACROSS",
      "clueRow": 4,
-     "clueCol": 1,
-     "answer": "KÜP",
-     "clue": "Dar boğazlı qab",
+     "clueCol": 2,
+     "answer": "ALIN",
+     "clue": "Baş önü",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Gil qab",
-      "Saxsı qab",
-      "Dar boğazlı qab"
+      "Qaşların üstü",
+      "Üzün yuxarısı",
+      "Baş önü"
      ]
     }
    ],
    "keyword": {
-    "word": "ADMİRAL",
+    "word": "DƏRİN",
     "cells": [
      [
-      7,
-      4
+      1,
+      3
      ],
      [
       1,
-      6
-     ],
-     [
-      4,
-      5
+      4
      ],
      [
       7,
       2
      ],
      [
-      4,
-      4
-     ],
-     [
-      7,
-      6
+      6,
+      1
      ],
      [
       3,
+      3
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-ordu-004",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "KEŞİK",
+     "clue": "Mühafizə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Gözətçilik",
+      "Nöbətçi yeri",
+      "Mühafizə"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 5,
+     "answer": "KURSANT",
+     "clue": "Akademiya oxuyan",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Hərbi tələbə",
+      "Məktəbli əsgər",
+      "Akademiya oxuyan"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "KAPİTAN",
+     "clue": "Mayordan kiçik",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Gəmi rəisi",
+      "Dörd ulduzlu",
+      "Mayordan kiçik"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "NÖBƏT",
+     "clue": "Keşik vaxtı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Gecə keşiyi",
+      "Gecə ...",
+      "Keşik vaxtı"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "TALVAR",
+     "clue": "Örtülü eyvan",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Kölgəlik",
+      "Çardaq kimi",
+      "Örtülü eyvan"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "ŞİMAL",
+     "clue": "Cənubun ziddi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Kompasın N-i",
+      "Qütb tərəfi",
+      "Cənubun ziddi"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 2,
+     "answer": "MART",
+     "clue": "Baharın başı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Novruz ayı",
+      "Üçüncü ay",
+      "Baharın başı"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "PALMA",
+    "cells": [
+     [
+      3,
+      1
+     ],
+     [
+      4,
+      3
+     ],
+     [
+      5,
+      3
+     ],
+     [
+      3,
+      3
+     ],
+     [
+      6,
       1
      ]
     ],
@@ -616,14 +588,14 @@
      "direction": "ACROSS",
      "clueRow": 4,
      "clueCol": 0,
-     "answer": "YARASA",
-     "clue": "Başı aşağı yatar",
+     "answer": "MAĞAZA",
+     "clue": "Alış yeri",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Gecə uçan",
-      "Qanadlı siçan",
-      "Başı aşağı yatar"
+      "Satış zalı",
+      "Univermaq",
+      "Alış yeri"
      ]
     },
     {
@@ -658,27 +630,27 @@
     }
    ],
    "keyword": {
-    "word": "QAÇIŞ",
+    "word": "KANAL",
     "cells": [
      [
-      7,
-      1
+      1,
+      4
      ],
      [
       2,
       4
      ],
      [
-      3,
-      6
-     ],
-     [
-      7,
+      5,
       2
      ],
      [
-      7,
+      4,
       6
+     ],
+     [
+      2,
+      3
      ]
     ],
     "source": "claude-draft"
@@ -692,125 +664,117 @@
    "entries": [
     {
      "id": 1,
-     "direction": "DOWN",
-     "clueRow": 0,
-     "clueCol": 6,
-     "answer": "HƏDƏF",
-     "clue": "Nişan nöqtəsi",
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "ZABİT",
+     "clue": "Ordu rəisi",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Nişangah",
-      "Vurulacaq yer",
-      "Nişan nöqtəsi"
+      "Paqonlu komandir",
+      "Leytenant və s.",
+      "Ordu rəisi"
      ]
     },
     {
      "id": 2,
-     "direction": "ACROSS",
-     "clueRow": 4,
-     "clueCol": 0,
-     "answer": "SANİYƏ",
-     "clue": "Ən qısa an",
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 2,
+     "answer": "AVTOMAT",
+     "clue": "Atıcı silah",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Ən kiçik vaxt",
-      "Altmışda biri",
-      "Ən qısa an"
+      "Kalaşnikov",
+      "Tüfəng növü",
+      "Atıcı silah"
      ]
     },
     {
      "id": 3,
-     "direction": "DOWN",
-     "clueRow": 0,
-     "clueCol": 4,
-     "answer": "KAPİTAN",
-     "clue": "Mayordan kiçik",
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 1,
+     "answer": "TOPÇU",
+     "clue": "Top əsgəri",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Gəmi rəisi",
-      "Dörd ulduzlu",
-      "Mayordan kiçik"
+      "Artilleriyaçı",
+      "Top atan",
+      "Top əsgəri"
      ]
     },
     {
      "id": 4,
      "direction": "DOWN",
-     "clueRow": 0,
-     "clueCol": 1,
-     "answer": "KURSANT",
-     "clue": "Akademiya oxuyan",
+     "clueRow": 2,
+     "clueCol": 4,
+     "answer": "PAQON",
+     "clue": "Rütbə yeri",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Hərbi tələbə",
-      "Məktəbli əsgər",
-      "Akademiya oxuyan"
+      "Çiyin nişanı",
+      "Ulduzlu lövhə",
+      "Rütbə yeri"
      ]
     },
     {
      "id": 5,
      "direction": "ACROSS",
-     "clueRow": 2,
+     "clueRow": 6,
      "clueCol": 0,
-     "answer": "USTA",
-     "clue": "Mahir",
+     "answer": "VAQON",
+     "clue": "Sərnişin qutusu",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Sənətkar",
-      "Bacarıqlı",
-      "Mahir"
+      "Qatar otağı",
+      "Kupe",
+      "Sərnişin qutusu"
      ]
     },
     {
      "id": 6,
-     "direction": "ACROSS",
-     "clueRow": 7,
-     "clueCol": 2,
-     "answer": "ENLİ",
-     "clue": "Yayvan",
+     "direction": "DOWN",
+     "clueRow": 1,
+     "clueCol": 6,
+     "answer": "QUYU",
+     "clue": "Vedrəli dərinlik",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Geniş",
-      "Darın ziddi",
-      "Yayvan"
+      "Su çıxarılan",
+      "Dərin dəlik",
+      "Vedrəli dərinlik"
      ]
     }
    ],
    "keyword": {
-    "word": "SNAYPER",
+    "word": "TOQQA",
     "cells": [
      [
-      2,
-      2
-     ],
-     [
-      6,
-      1
-     ],
-     [
-      2,
-      4
-     ],
-     [
-      4,
+      1,
       5
      ],
      [
       3,
-      4
-     ],
-     [
-      7,
       3
      ],
      [
-      3,
-      1
+      5,
+      4
+     ],
+     [
+      6,
+      3
+     ],
+     [
+      4,
+      4
      ]
     ],
     "source": "claude-draft"

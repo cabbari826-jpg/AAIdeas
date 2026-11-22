@@ -37,3 +37,13 @@ KƏSİM | Qurban kəsmə | Bıçaq işi | Mal kəsmək
 PAYLAMA | Bölüşdürmə | Pay etmə | Hissələrə bölmə
 ÜMMƏT | Möminlər | İslam əhli | Bütün möminlər
 DİNDAŞ | Eyni dinli | Ümmət üzvü | Dini qardaş
+TƏKBİR | Allahu Əkbər | Bayram nidası | Uca söz
+NAMAZGAH | Açıq namaz yeri | Bayram namazı | Çöldə ibadət
+SƏCCADƏ | Namaz xalçası | Kiçik xalça | Dua xalçası
+TƏSBEH | Dənəli sap | Zikr aləti | Muncuqlu sap
+ZİKR | Allahı anma | Təsbeh çəkmə | Dua təkrarı
+MİHRAB | Məscid taxçası | Qiblə tərəfi | İmamın yeri
+MİNBƏR | Xütbə yeri | Pilləli kürsü | Məscid kürsüsü
+XÜTBƏ | Cümə nitqi | İmamın sözü | Minbər nitqi
+QİYAM | Ayaq üstə namaz | Namazda durma | Qalxış
+SƏCDƏ | Alnı yerə | Namazda əyilmə | Baş qoyma

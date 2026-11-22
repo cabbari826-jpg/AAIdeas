@@ -38,3 +38,10 @@ DÖYÜŞKƏN | Vuruşqan | Cəngavər ruhlu | Döyüşə hazır
 FƏDAKAR | Canından keçən | Fədai | Can qoyan
 TƏŞƏKKÜR | Sağ ol | Minnət | Razılıq
 ANIM | Xatırlanma | Yad etmə | Anma günü
+SƏRBAZ | Döyüşçü əsgər | Köhnə əsgər adı | Nizami əsgər
+SÜNGÜ | Tüfəng ucu | İti uclu bıçaq | Lülədə bıçaq
+YARA | Döyüş izi | Sarğı lazım | Qanayan yer
+TİBB | Həkimlik | Səhiyyə | Müalicə elmi
+SANİTAR | Yaralı daşıyan | Tibb köməkçisi | Xərəkçi
+XƏRƏK | Yaralı daşınan | Sanitar aləti | Taxta daşıma
+QARANFİL | Qırmızı mixək | Abidəyə qoyulan | Al çiçək

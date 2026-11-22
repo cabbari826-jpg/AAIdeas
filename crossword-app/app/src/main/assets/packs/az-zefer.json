@@ -16,52 +16,7 @@
      "id": 1,
      "direction": "DOWN",
      "clueRow": 0,
-     "clueCol": 4,
-     "answer": "QÜRUR",
-     "clue": "Məğrurluq",
-     "source": "claude-draft",
-     "status": "candidate",
-     "clues": [
-      "İftixar",
-      "Fəxr hissi",
-      "Məğrurluq"
-     ]
-    },
-    {
-     "id": 2,
-     "direction": "ACROSS",
-     "clueRow": 3,
-     "clueCol": 0,
-     "answer": "ŞÖHRƏT",
-     "clue": "Şan",
-     "source": "claude-draft",
-     "status": "candidate",
-     "clues": [
-      "Məşhurluq",
-      "Ad çıxarma",
-      "Şan"
-     ]
-    },
-    {
-     "id": 3,
-     "direction": "ACROSS",
-     "clueRow": 5,
-     "clueCol": 0,
-     "answer": "HADRUT",
-     "clue": "Xocavənd yeri",
-     "source": "claude-draft",
-     "status": "candidate",
-     "clues": [
-      "Azıx yaxını",
-      "Qəsəbə adı",
-      "Xocavənd yeri"
-     ]
-    },
-    {
-     "id": 4,
-     "direction": "DOWN",
-     "clueRow": 2,
-     "clueCol": 1,
+     "clueCol": 6,
      "answer": "ŞƏHİD",
      "clue": "Ölməz qəhrəman",
      "source": "claude-draft",
@@ -73,9 +28,54 @@
      ]
     },
     {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 2,
+     "clueCol": 0,
+     "answer": "TƏRANƏ",
+     "clue": "Xoş avaz",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Şən mahnı",
+      "Nəğmə sözü",
+      "Xoş avaz"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "YARAŞIQ",
+     "clue": "Göyçəklik",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Gözəl duruş",
+      "Bəzək",
+      "Göyçəklik"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "ATÇILIQ",
+     "clue": "At saxlama",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "At yetişdirmə",
+      "Cıdır işi",
+      "At saxlama"
+     ]
+    },
+    {
      "id": 5,
      "direction": "ACROSS",
-     "clueRow": 1,
+     "clueRow": 7,
      "clueCol": 0,
      "answer": "QAÇQIN",
      "clue": "Evsiz qalan",
@@ -90,64 +90,49 @@
     {
      "id": 6,
      "direction": "ACROSS",
-     "clueRow": 7,
-     "clueCol": 0,
-     "answer": "DAĞLIQ",
-     "clue": "Dağ-dərə",
-     "source": "claude-draft",
-     "status": "candidate",
-     "clues": [
-      "Dağlı yer",
-      "Yüksək yer",
-      "Dağ-dərə"
-     ]
-    },
-    {
-     "id": 7,
-     "direction": "DOWN",
      "clueRow": 4,
-     "clueCol": 3,
-     "answer": "DAĞ",
-     "clue": "Uca zirvə",
+     "clueCol": 2,
+     "answer": "QAZİ",
+     "clue": "Döyüşmüş igid",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Şahdağ, Tufan",
-      "Bazardüzü",
-      "Uca zirvə"
+      "Döyüşdən dönən",
+      "Yaralı qəhrəman",
+      "Döyüşmüş igid"
      ]
     }
    ],
    "keyword": {
-    "word": "ATÇILIQ",
+    "word": "QAYIDIŞ",
     "cells": [
      [
+      4,
+      3
+     ],
+     [
+      2,
+      4
+     ],
+     [
       1,
-      2
+      4
+     ],
+     [
+      4,
+      1
      ],
      [
       5,
       6
      ],
      [
-      1,
-      3
-     ],
-     [
-      1,
-      5
-     ],
-     [
-      7,
-      4
-     ],
-     [
-      7,
-      5
-     ],
-     [
-      1,
+      6,
       1
+     ],
+     [
+      1,
+      6
      ]
     ],
     "source": "claude-draft"
@@ -164,81 +149,81 @@
      "direction": "DOWN",
      "clueRow": 0,
      "clueCol": 1,
-     "answer": "ALQIŞ",
-     "clue": "Afərin",
+     "answer": "ŞƏRƏF",
+     "clue": "Şan-şöhrət",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Əl çalma",
-      "Təbrik səsi",
-      "Afərin"
+      "Namus, ləyaqət",
+      "Ləyaqət",
+      "Şan-şöhrət"
      ]
     },
     {
      "id": 2,
      "direction": "ACROSS",
-     "clueRow": 1,
+     "clueRow": 4,
      "clueCol": 0,
-     "answer": "AFƏRİN",
-     "clue": "Əhsən",
+     "answer": "ƏZƏMƏT",
+     "clue": "Ululuq",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Bəh-bəh",
-      "Tərif sözü",
-      "Əhsən"
+      "Böyüklük",
+      "Böyük şan",
+      "Ululuq"
      ]
     },
     {
      "id": 3,
-     "direction": "ACROSS",
-     "clueRow": 5,
-     "clueCol": 0,
-     "answer": "ŞUŞALI",
-     "clue": "Qarabağlı",
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "DİRƏNİŞ",
+     "clue": "Təslim olmama",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Şuşa sakini",
-      "Şuşadan olan",
-      "Qarabağlı"
+      "Müqavimət",
+      "Əyilməmək",
+      "Təslim olmama"
      ]
     },
     {
      "id": 4,
-     "direction": "ACROSS",
-     "clueRow": 3,
-     "clueCol": 0,
-     "answer": "QAZİ",
-     "clue": "Döyüşmüş igid",
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 5,
+     "answer": "ÇİÇƏKLİ",
+     "clue": "Bahar kimi",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Döyüşdən dönən",
-      "Yaralı qəhrəman",
-      "Döyüşmüş igid"
+      "Güllü",
+      "Çəmənli",
+      "Bahar kimi"
      ]
     },
     {
      "id": 5,
-     "direction": "DOWN",
+     "direction": "ACROSS",
      "clueRow": 2,
-     "clueCol": 6,
-     "answer": "AZIX",
-     "clue": "Mağara adı",
+     "clueCol": 2,
+     "answer": "İGİD",
+     "clue": "Ər oğlu",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Qədim mağara",
-      "İbtidai düşərgə",
-      "Mağara adı"
+      "Qoçaq",
+      "Cəsur oğlan",
+      "Ər oğlu"
      ]
     },
     {
      "id": 6,
-     "direction": "DOWN",
-     "clueRow": 4,
-     "clueCol": 3,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
      "answer": "ŞAD",
      "clue": "Şən",
      "source": "claude-draft",
@@ -254,47 +239,43 @@
      "direction": "ACROSS",
      "clueRow": 7,
      "clueCol": 0,
-     "answer": "CIDIR",
-     "clue": "Atçılıq düzü",
+     "answer": "KEŞNİŞ",
+     "clue": "Ətirli göy",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Şuşada düz",
-      "... düzü",
-      "Atçılıq düzü"
+      "Kinza",
+      "Qutaba qatılır",
+      "Ətirli göy"
      ]
     }
    ],
    "keyword": {
-    "word": "DİRƏNİŞ",
+    "word": "AFƏRİN",
     "cells": [
      [
-      7,
-      3
-     ],
-     [
-      3,
-      4
-     ],
-     [
-      7,
-      5
-     ],
-     [
       1,
-      3
-     ],
-     [
-      1,
-      6
-     ],
-     [
-      1,
-      5
+      2
      ],
      [
       5,
+      1
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      3,
       3
+     ],
+     [
+      7,
+      5
+     ],
+     [
+      7,
+      4
      ]
     ],
     "source": "claude-draft"
@@ -308,140 +289,132 @@
    "entries": [
     {
      "id": 1,
-     "direction": "ACROSS",
-     "clueRow": 1,
-     "clueCol": 0,
-     "answer": "CƏSUR",
-     "clue": "Cəsarətli",
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "CIDIR",
+     "clue": "Atçılıq düzü",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Qorxmaz",
-      "Ürəkli",
-      "Cəsarətli"
+      "Şuşada düz",
+      "... düzü",
+      "Atçılıq düzü"
      ]
     },
     {
      "id": 2,
-     "direction": "DOWN",
-     "clueRow": 0,
-     "clueCol": 2,
-     "answer": "ƏZƏMƏT",
-     "clue": "Ululuq",
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "DAĞLIQ",
+     "clue": "Dağ-dərə",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Böyüklük",
-      "Böyük şan",
-      "Ululuq"
+      "Dağlı yer",
+      "Yüksək yer",
+      "Dağ-dərə"
      ]
     },
     {
      "id": 3,
-     "direction": "ACROSS",
-     "clueRow": 5,
-     "clueCol": 0,
-     "answer": "TƏRANƏ",
-     "clue": "Xoş avaz",
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "MUĞAMÇI",
+     "clue": "Ustad oxuyan",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Şən mahnı",
-      "Nəğmə sözü",
-      "Xoş avaz"
+      "Muğam xanəndəsi",
+      "Dəstgah ifaçısı",
+      "Ustad oxuyan"
      ]
     },
     {
      "id": 4,
-     "direction": "ACROSS",
-     "clueRow": 3,
-     "clueCol": 0,
-     "answer": "SƏMƏRƏ",
-     "clue": "Nəticə",
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 6,
+     "answer": "QÜRUR",
+     "clue": "Məğrurluq",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Bəhrə",
-      "Faydalı nəticə",
-      "Nəticə"
+      "İftixar",
+      "Fəxr hissi",
+      "Məğrurluq"
      ]
     },
     {
      "id": 5,
-     "direction": "DOWN",
-     "clueRow": 1,
-     "clueCol": 6,
-     "answer": "VƏTƏN",
-     "clue": "Ölkə",
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "AZIX",
+     "clue": "Mağara adı",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Ana yurd",
-      "Doğma torpaq",
-      "Ölkə"
+      "Qədim mağara",
+      "İbtidai düşərgə",
+      "Mağara adı"
      ]
     },
     {
      "id": 6,
-     "direction": "DOWN",
-     "clueRow": 4,
-     "clueCol": 4,
-     "answer": "ACI",
-     "clue": "Şirin deyil",
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 2,
+     "answer": "MƏRD",
+     "clue": "Ər oğlu ər",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Bibər dadı",
-      "Yandıran dad",
-      "Şirin deyil"
+      "Kişi kimi",
+      "Namərdin ziddi",
+      "Ər oğlu ər"
      ]
     },
     {
      "id": 7,
      "direction": "ACROSS",
-     "clueRow": 7,
+     "clueRow": 5,
      "clueCol": 2,
-     "answer": "BIĞ",
-     "clue": "Burma ...",
+     "answer": "METR",
+     "clue": "Ruletka ölçüsü",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Dodaq üstü tük",
-      "Kişi bəzəyi",
-      "Burma ..."
+      "Yüz santimetr",
+      "Uzunluq vahidi",
+      "Ruletka ölçüsü"
      ]
     }
    ],
    "keyword": {
-    "word": "MƏNZƏRƏ",
+    "word": "DADLI",
     "cells": [
      [
-      3,
+      1,
+      6
+     ],
+     [
+      4,
       3
      ],
      [
       3,
-      2
+      1
      ],
      [
-      6,
-      6
+      3,
+      4
      ],
      [
       2,
-      2
-     ],
-     [
-      5,
-      6
-     ],
-     [
-      1,
-      5
-     ],
-     [
-      1,
-      2
+      1
      ]
     ],
     "source": "claude-draft"
@@ -458,130 +431,6 @@
      "direction": "ACROSS",
      "clueRow": 1,
      "clueCol": 0,
-     "answer": "NOYABR",
-     "clue": "Payız ayı",
-     "source": "claude-draft",
-     "status": "candidate",
-     "clues": [
-      "Payızın sonu",
-      "On birinci ay",
-      "Payız ayı"
-     ]
-    },
-    {
-     "id": 2,
-     "direction": "DOWN",
-     "clueRow": 0,
-     "clueCol": 3,
-     "answer": "YENİDƏN",
-     "clue": "Təzədən",
-     "source": "claude-draft",
-     "status": "candidate",
-     "clues": [
-      "Təkrar",
-      "Bir də",
-      "Təzədən"
-     ]
-    },
-    {
-     "id": 3,
-     "direction": "ACROSS",
-     "clueRow": 6,
-     "clueCol": 1,
-     "answer": "BƏHRƏ",
-     "clue": "Əməyin nəticəsi",
-     "source": "claude-draft",
-     "status": "candidate",
-     "clues": [
-      "Meyvə, fayda",
-      "Səmərə",
-      "Əməyin nəticəsi"
-     ]
-    },
-    {
-     "id": 4,
-     "direction": "DOWN",
-     "clueRow": 2,
-     "clueCol": 6,
-     "answer": "ŞƏRƏF",
-     "clue": "Şan-şöhrət",
-     "source": "claude-draft",
-     "status": "candidate",
-     "clues": [
-      "Namus, ləyaqət",
-      "Ləyaqət",
-      "Şan-şöhrət"
-     ]
-    },
-    {
-     "id": 5,
-     "direction": "ACROSS",
-     "clueRow": 4,
-     "clueCol": 0,
-     "answer": "İGİD",
-     "clue": "Ər oğlu",
-     "source": "claude-draft",
-     "status": "candidate",
-     "clues": [
-      "Qoçaq",
-      "Cəsur oğlan",
-      "Ər oğlu"
-     ]
-    },
-    {
-     "id": 6,
-     "direction": "DOWN",
-     "clueRow": 2,
-     "clueCol": 1,
-     "answer": "ŞİN",
-     "clue": "Hava dolu rezin",
-     "source": "claude-draft",
-     "status": "candidate",
-     "clues": [
-      "Rezin təkər",
-      "Təkər örtüyü",
-      "Hava dolu rezin"
-     ]
-    }
-   ],
-   "keyword": {
-    "word": "ŞİFRƏ",
-    "cells": [
-     [
-      3,
-      1
-     ],
-     [
-      4,
-      1
-     ],
-     [
-      7,
-      6
-     ],
-     [
-      5,
-      6
-     ],
-     [
-      4,
-      6
-     ]
-    ],
-    "source": "claude-draft"
-   }
-  },
-  {
-   "id": "az-zefer-005",
-   "rows": 8,
-   "cols": 7,
-   "difficulty": 1,
-   "entries": [
-    {
-     "id": 1,
-     "direction": "ACROSS",
-     "clueRow": 3,
-     "clueCol": 0,
      "answer": "BƏRPA",
      "clue": "Dirçəltmə",
      "source": "claude-draft",
@@ -596,22 +445,308 @@
      "id": 2,
      "direction": "DOWN",
      "clueRow": 0,
-     "clueCol": 3,
-     "answer": "YARAŞIQ",
-     "clue": "Göyçəklik",
+     "clueCol": 1,
+     "answer": "BƏHRƏ",
+     "clue": "Əməyin nəticəsi",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Gözəl duruş",
-      "Bəzək",
-      "Göyçəklik"
+      "Meyvə, fayda",
+      "Səmərə",
+      "Əməyin nəticəsi"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "HADRUT",
+     "clue": "Xocavənd yeri",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Azıx yaxını",
+      "Qəsəbə adı",
+      "Xocavənd yeri"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 3,
+     "answer": "DÖNÜŞ",
+     "clue": "Qayıdış yolu",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Geri qayıtma",
+      "Yuvaya dönmə",
+      "Qayıdış yolu"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "ŞUŞALI",
+     "clue": "Qarabağlı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Şuşa sakini",
+      "Şuşadan olan",
+      "Qarabağlı"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "ƏSNƏK",
+     "clue": "Yorğunluq izi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Yuxu gələndə",
+      "Ağzı açmaq",
+      "Yorğunluq izi"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "DOWN",
+     "clueRow": 4,
+     "clueCol": 5,
+     "answer": "KƏL",
+     "clue": "Camış atası",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Erkək camış",
+      "Güclü mal",
+      "Camış atası"
+     ]
+    },
+    {
+     "id": 8,
+     "direction": "DOWN",
+     "clueRow": 1,
+     "clueCol": 6,
+     "answer": "ÜTÜ",
+     "clue": "Qırışıq açan",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Paltar hamarlar",
+      "İsti dəmir",
+      "Qırışıq açan"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "ŞÖHRƏT",
+    "cells": [
+     [
+      7,
+      3
+     ],
+     [
+      4,
+      3
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      6,
+      5
+     ],
+     [
+      3,
+      6
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-zefer-005",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "QOÇAQ",
+     "clue": "İgid adam",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Cəld və cəsur",
+      "Qorxu bilməz",
+      "İgid adam"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "KÖÇKÜN",
+     "clue": "Evdən didərgin",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Yurdsuz",
+      "Qaçqın",
+      "Evdən didərgin"
      ]
     },
     {
      "id": 3,
      "direction": "DOWN",
      "clueRow": 0,
+     "clueCol": 6,
+     "answer": "YENİDƏN",
+     "clue": "Təzədən",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Təkrar",
+      "Bir də",
+      "Təzədən"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "DOWN",
+     "clueRow": 0,
      "clueCol": 1,
+     "answer": "ŞÜKRAN",
+     "clue": "Razılıq bildirmə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Təşəkkür hissi",
+      "Şükür",
+      "Razılıq bildirmə"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 1,
+     "answer": "VƏTƏN",
+     "clue": "Ölkə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ana yurd",
+      "Doğma torpaq",
+      "Ölkə"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 2,
+     "answer": "QEYD",
+     "clue": "Dəftərə yazılan",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qısa yazı",
+      "Yaddaş yazısı",
+      "Dəftərə yazılan"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "QEYRƏT",
+    "cells": [
+     [
+      5,
+      3
+     ],
+     [
+      2,
+      6
+     ],
+     [
+      5,
+      5
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      7,
+      5
+     ],
+     [
+      7,
+      4
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-zefer-006",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "ALQIŞ",
+     "clue": "Afərin",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Əl çalma",
+      "Təbrik səsi",
+      "Afərin"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "TOPXANA",
+     "clue": "Şuşanın meşəsi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Şuşa meşəsi",
+      "Meşə adı",
+      "Şuşanın meşəsi"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
      "answer": "QUBADLI",
      "clue": "Zəngilan qonşusu",
      "source": "claude-draft",
@@ -627,201 +762,69 @@
      "direction": "ACROSS",
      "clueRow": 1,
      "clueCol": 0,
-     "answer": "QİYMƏT",
-     "clue": "Dərs balı",
+     "answer": "TUTQUN",
+     "clue": "Sönük",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Beşlik",
-      "Dəyər",
-      "Dərs balı"
+      "Buludlu",
+      "Qaşqabaqlı hava",
+      "Sönük"
      ]
     },
     {
      "id": 5,
-     "direction": "ACROSS",
-     "clueRow": 5,
-     "clueCol": 0,
-     "answer": "DÖŞƏK",
-     "clue": "Üstündə yatılır",
-     "source": "claude-draft",
-     "status": "candidate",
-     "clues": [
-      "Yataq altlığı",
-      "Pambıqlı yataq",
-      "Üstündə yatılır"
-     ]
-    },
-    {
-     "id": 6,
-     "direction": "ACROSS",
-     "clueRow": 7,
-     "clueCol": 2,
-     "answer": "QEYD",
-     "clue": "Dəftərə yazılan",
-     "source": "claude-draft",
-     "status": "candidate",
-     "clues": [
-      "Qısa yazı",
-      "Yaddaş yazısı",
-      "Dəftərə yazılan"
-     ]
-    }
-   ],
-   "keyword": {
-    "word": "QAYIDIŞ",
-    "cells": [
-     [
-      1,
-      1
-     ],
-     [
-      2,
-      3
-     ],
-     [
-      7,
-      5
-     ],
-     [
-      6,
-      3
-     ],
-     [
-      5,
-      1
-     ],
-     [
-      7,
-      1
-     ],
-     [
-      5,
-      3
-     ]
-    ],
-    "source": "claude-draft"
-   }
-  },
-  {
-   "id": "az-zefer-006",
-   "rows": 8,
-   "cols": 7,
-   "difficulty": 1,
-   "entries": [
-    {
-     "id": 1,
      "direction": "DOWN",
      "clueRow": 0,
-     "clueCol": 5,
-     "answer": "NAMUS",
-     "clue": "Ləyaqət hissi",
+     "clueCol": 6,
+     "answer": "NOYABR",
+     "clue": "Payız ayı",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Şərəf, ar",
-      "Qeyrət",
-      "Ləyaqət hissi"
-     ]
-    },
-    {
-     "id": 2,
-     "direction": "ACROSS",
-     "clueRow": 2,
-     "clueCol": 0,
-     "answer": "ŞÜKRAN",
-     "clue": "Razılıq bildirmə",
-     "source": "claude-draft",
-     "status": "candidate",
-     "clues": [
-      "Təşəkkür hissi",
-      "Şükür",
-      "Razılıq bildirmə"
-     ]
-    },
-    {
-     "id": 3,
-     "direction": "DOWN",
-     "clueRow": 1,
-     "clueCol": 3,
-     "answer": "KÖÇKÜN",
-     "clue": "Evdən didərgin",
-     "source": "claude-draft",
-     "status": "candidate",
-     "clues": [
-      "Yurd-yuvasız",
-      "Qaçqın",
-      "Evdən didərgin"
-     ]
-    },
-    {
-     "id": 4,
-     "direction": "ACROSS",
-     "clueRow": 7,
-     "clueCol": 0,
-     "answer": "DÖNÜŞ",
-     "clue": "Qayıdış yolu",
-     "source": "claude-draft",
-     "status": "candidate",
-     "clues": [
-      "Geri qayıtma",
-      "Yuvaya dönmə",
-      "Qayıdış yolu"
-     ]
-    },
-    {
-     "id": 5,
-     "direction": "DOWN",
-     "clueRow": 3,
-     "clueCol": 1,
-     "answer": "MƏRD",
-     "clue": "Ər oğlu ər",
-     "source": "claude-draft",
-     "status": "candidate",
-     "clues": [
-      "Kişi kimi",
-      "Namərdin ziddi",
-      "Ər oğlu ər"
+      "Payızın sonu",
+      "On birinci ay",
+      "Payız ayı"
      ]
     },
     {
      "id": 6,
      "direction": "ACROSS",
-     "clueRow": 5,
+     "clueRow": 4,
      "clueCol": 2,
-     "answer": "KİSƏ",
-     "clue": "Çanta kimi",
+     "answer": "FARA",
+     "clue": "Avtomobil işığı",
      "source": "claude-draft",
      "status": "candidate",
      "clues": [
-      "Pul torbası",
-      "Kiçik torba",
-      "Çanta kimi"
+      "Maşının gözü",
+      "Ön işıq",
+      "Avtomobil işığı"
      ]
     }
    ],
    "keyword": {
-    "word": "KÜMƏS",
+    "word": "YANAQ",
     "cells": [
      [
-      2,
-      3
-     ],
-     [
-      6,
-      3
-     ],
-     [
       3,
-      5
-     ],
-     [
-      5,
       6
      ],
      [
-      5,
-      5
+      4,
+      6
+     ],
+     [
+      6,
+      1
+     ],
+     [
+      7,
+      1
+     ],
+     [
+      1,
+      4
      ]
     ],
     "source": "claude-draft"
