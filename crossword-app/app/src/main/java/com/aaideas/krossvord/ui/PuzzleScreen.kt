@@ -10,6 +10,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.border
+import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -69,6 +70,15 @@ import com.aaideas.krossvord.model.WordBuilder
 
 @Composable
 fun PuzzleScreen(vm: GameViewModel, isPremium: Boolean) {
+    // Short screens: smaller tiles and tighter spacing, so the grid cells get bigger.
+    val compact = androidx.compose.ui.platform.LocalConfiguration.current.screenHeightDp < COMPACT_HEIGHT_DP
+    androidx.compose.runtime.CompositionLocalProvider(LocalTile provides if (compact) 40.dp else 46.dp) {
+        PuzzleContent(vm, isPremium, compact)
+    }
+}
+
+@Composable
+private fun PuzzleContent(vm: GameViewModel, isPremium: Boolean, compact: Boolean) {
     val game = vm.game ?: return
     val columns = vm.inputMode == InputMode.COLUMNS
     val letters = if (columns) vm.columnLetters() else emptyList()
@@ -77,7 +87,7 @@ fun PuzzleScreen(vm: GameViewModel, isPremium: Boolean) {
     val preview: Map<Cell, Char> = game.activeEntry?.let { e ->
         game.openCells(e).zip(draft.mapNotNull { letters.getOrNull(it) }).toMap()
     }.orEmpty()
-    Column(Modifier.fillMaxSize().padding(horizontal = 8.dp, vertical = 8.dp)) {
+    Column(Modifier.fillMaxSize().padding(horizontal = if (compact) 4.dp else 8.dp, vertical = if (compact) 2.dp else 8.dp)) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             TextButton(onClick = vm::back) { Text("← Səviyyələr") }
             var confirmRestart by remember { mutableStateOf(false) }
@@ -109,7 +119,7 @@ fun PuzzleScreen(vm: GameViewModel, isPremium: Boolean) {
                 tutorialEntry = if (vm.tutorialStep == TUTORIAL_TAP) game.activeEntry else null,
             )
         }
-        Row(Modifier.fillMaxWidth().padding(vertical = 6.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        Row(Modifier.fillMaxWidth().padding(vertical = if (compact) 2.dp else 6.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             if (columns) OutlinedButton(onClick = vm::shuffleTiles, modifier = Modifier.weight(1f)) { Text("⟳ Qarışdır") }
             else OutlinedButton(onClick = vm::clearWord, modifier = Modifier.weight(1f)) { Text("Sözü sil") }
             Button(onClick = vm::hint, modifier = Modifier.weight(1f)) {
@@ -192,6 +202,18 @@ private fun Grid(
     val colors = LocalGridColors.current
     val active = game.activeEntry
     val activeCells = active?.cells?.toSet().orEmpty()
+    // Where each word starts, and which way it runs: drawn as a clear arrow in that cell.
+    val starts = remember(game.board) {
+        game.board.level.entries.groupBy({ it.cells.first() }, { it.direction })
+    }
+    // When a word is picked, a light runs along it from the clue, showing which way to write.
+    val sweep = remember { Animatable(0f) }
+    LaunchedEffect(active?.id) {
+        val n = active?.cells?.size ?: return@LaunchedEffect
+        sweep.snapTo(0f)
+        sweep.animateTo(n + 1f, tween(durationMillis = 130 * (n + 1), easing = androidx.compose.animation.core.LinearEasing))
+    }
+    val arrowColor = MaterialTheme.colorScheme.primary
     Column(Modifier.border(1.dp, colors.line)) {
         for (r in 0 until game.board.rows) {
             Row {
@@ -202,7 +224,12 @@ private fun Grid(
                         LetterCell(
                             game, cell, cell == game.selectedCell, cell in activeCells, cellSize,
                             preview[cell], feedback == WordFeedback.WRONG && cell in activeCells,
-                            mod.clickable { onTap(cell) },
+                            mod.clickable { onTap(cell) }
+                                .wordArrows(starts[cell].orEmpty(), arrowColor)
+                                .then(
+                                    if (active == null || cell !in activeCells) Modifier
+                                    else Modifier.sweepGlow(active.cells.indexOf(cell), active.direction, arrowColor) { sweep.value },
+                                ),
                         )
                     } else {
                         val clues = game.board.cluesAt[cell]
@@ -268,6 +295,44 @@ private fun LetterCell(
         }
     }
 }
+
+/** A filled triangle on the edge a word enters from, pointing the way the word runs. */
+private fun Modifier.wordArrows(dirs: List<Direction>, color: androidx.compose.ui.graphics.Color) =
+    if (dirs.isEmpty()) this else drawWithContent {
+        drawContent()
+        val s = size.minDimension * 0.17f
+        dirs.forEach { d ->
+            val path = androidx.compose.ui.graphics.Path().apply {
+                if (d == Direction.ACROSS) {
+                    moveTo(0f, size.height / 2 - s); lineTo(s * 1.2f, size.height / 2); lineTo(0f, size.height / 2 + s)
+                } else {
+                    moveTo(size.width / 2 - s, 0f); lineTo(size.width / 2, s * 1.2f); lineTo(size.width / 2 + s, 0f)
+                }
+                close()
+            }
+            drawPath(path, color)
+        }
+    }
+
+/**
+ * The light that runs along a picked word: [index] is the cell's place in the word, [progress]
+ * goes from 0 to the word length. Read only while drawing, so the grid doesn't recompose per frame.
+ */
+private fun Modifier.sweepGlow(index: Int, dir: Direction, color: androidx.compose.ui.graphics.Color, progress: () -> Float) =
+    drawWithContent {
+        drawContent()
+        val glow = (1f - kotlin.math.abs(progress() - (index + 0.5f))).coerceIn(0f, 1f)
+        if (glow <= 0f) return@drawWithContent
+        drawRect(color.copy(alpha = 0.35f * glow))
+        // A chevron in the lit cell, pointing the way the word runs.
+        val s = size.minDimension * 0.22f
+        val cx = size.width / 2; val cy = size.height / 2
+        val path = androidx.compose.ui.graphics.Path().apply {
+            if (dir == Direction.ACROSS) { moveTo(cx - s / 2, cy - s); lineTo(cx + s / 2, cy); lineTo(cx - s / 2, cy + s) }
+            else { moveTo(cx - s, cy - s / 2); lineTo(cx, cy + s / 2); lineTo(cx + s, cy - s / 2) }
+        }
+        drawPath(path, color.copy(alpha = glow), style = androidx.compose.ui.graphics.drawscope.Stroke(width = s * 0.35f, cap = androidx.compose.ui.graphics.StrokeCap.Round))
+    }
 
 /** Longest clue that still fits in a grid cell; longer ones (song lines) show ♪ there and in full below. */
 const val CELL_CLUE_MAX = 16
@@ -392,7 +457,7 @@ internal fun AzKeyboard(onLetter: (Char) -> Unit, onBackspace: () -> Unit) {
 @Composable
 private fun Key(label: String, modifier: Modifier, onClick: () -> Unit) {
     Surface(
-        modifier = modifier.height(48.dp).clickable(onClick = onClick),
+        modifier = modifier.height(LocalTile.current + 2.dp).clickable(onClick = onClick),
         shape = RoundedCornerShape(6.dp),
         color = MaterialTheme.colorScheme.surfaceVariant,
     ) {
@@ -437,14 +502,18 @@ private fun TileInput(tiles: List<Tile>, onLetter: (Char) -> Unit, onBackspace: 
     }
 }
 
-private val TILE = 46.dp
+/** Letter tile size; smaller on short screens so the grid keeps more room. */
+private val LocalTile = androidx.compose.runtime.staticCompositionLocalOf { 46.dp }
+
+/** Screens shorter than this (small HD+ phones such as a Redmi 8) get the compact layout. */
+const val COMPACT_HEIGHT_DP = 740
 
 @Composable
 private fun LetterTile(tile: Tile, hideWhenUsed: Boolean = false, onClick: () -> Unit) {
     val scale by animateFloatAsState(if (tile.used) (if (hideWhenUsed) 0.4f else 0.8f) else 1f, tween(180), label = "tileScale")
     val alpha by animateFloatAsState(if (tile.used) (if (hideWhenUsed) 0f else 0.25f) else 1f, tween(180), label = "tileAlpha")
     Surface(
-        modifier = Modifier.size(TILE).graphicsLayer { scaleX = scale; scaleY = scale; this.alpha = alpha }
+        modifier = Modifier.size(LocalTile.current).graphicsLayer { scaleX = scale; scaleY = scale; this.alpha = alpha }
             .clickable(enabled = !tile.used, onClick = onClick)
             .semantics { contentDescription = "Hərf ${tile.letter}" },
         shape = RoundedCornerShape(12.dp),
@@ -488,7 +557,7 @@ private fun ColumnsInput(
         }
     }
     Row(
-        Modifier.fillMaxWidth().height(212.dp).padding(top = 4.dp).graphicsLayer { translationX = shake.value },
+        Modifier.fillMaxWidth().height(LocalTile.current * 4 + 28.dp).padding(top = 4.dp).graphicsLayer { translationX = shake.value },
         verticalAlignment = Alignment.CenterVertically,
     ) {
         for (c in 0..1) LetterColumn(WordBuilder.column(letters, c), draft, onPick, onUnpick)
@@ -522,10 +591,10 @@ private fun LetterColumn(
     val haptic = LocalHapticFeedback.current
     Column(
         Modifier.padding(horizontal = 3.dp).fillMaxHeight(),
-        verticalArrangement = Arrangement.spacedBy(6.dp, Alignment.CenterVertically),
+        verticalArrangement = Arrangement.spacedBy(if (LocalTile.current < 46.dp) 4.dp else 6.dp, Alignment.CenterVertically),
     ) {
         items.forEach { (index, ch) ->
-            if (ch == null) { Spacer(Modifier.size(TILE)); return@forEach }
+            if (ch == null) { Spacer(Modifier.size(LocalTile.current)); return@forEach }
             val order = draft.indexOf(index)
             key(index, ch) {
                 PickTile(ch, if (order >= 0) order + 1 else null) {
@@ -543,7 +612,7 @@ private fun PickTile(letter: Char, order: Int?, onClick: () -> Unit) {
     val picked = order != null
     val scale by animateFloatAsState(if (picked) 0.92f else 1f, tween(150), label = "pickScale")
     Surface(
-        modifier = Modifier.size(TILE).graphicsLayer { scaleX = scale; scaleY = scale }
+        modifier = Modifier.size(LocalTile.current).graphicsLayer { scaleX = scale; scaleY = scale }
             .clickable(onClick = onClick)
             .semantics { contentDescription = "Hərf $letter" + if (picked) ", seçilib $order" else "" },
         shape = RoundedCornerShape(12.dp),
@@ -587,7 +656,7 @@ private fun SmallAction(label: String, description: String, enabled: Boolean, on
 private fun KeywordStrip(letters: List<Char?>, known: Boolean, onGuess: () -> Unit) {
     val colors = LocalGridColors.current
     Row(
-        Modifier.fillMaxWidth().clickable(enabled = !known, onClick = onGuess).padding(vertical = 4.dp, horizontal = 8.dp),
+        Modifier.fillMaxWidth().clickable(enabled = !known, onClick = onGuess).padding(vertical = 2.dp, horizontal = 8.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(4.dp),
     ) {

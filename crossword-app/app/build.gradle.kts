@@ -44,6 +44,10 @@ android {
         debug {
             // Where the in-app updater (src/debug only) looks for new builds.
             buildConfigField("String", "UPDATE_REPO", "\"cabbari826-jpg/AAIdeas\"")
+            // This build goes to real phones for testing. A debuggable app runs Compose with
+            // ART optimisations off and ignores the libraries' startup profiles, which makes it
+            // several times slower to start on low-end phones. Turn that off.
+            isDebuggable = false
         }
         release {
             isMinifyEnabled = true
@@ -71,6 +75,8 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.9.1")
     implementation("androidx.compose.material3:material3")
     implementation("androidx.compose.ui:ui")
+    // Installs the Compose startup (baseline) profiles on sideloaded APKs for faster cold start.
+    implementation("androidx.profileinstaller:profileinstaller:1.4.1")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.1")
     debugImplementation("androidx.compose.ui:ui-tooling")

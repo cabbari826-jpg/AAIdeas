@@ -61,7 +61,14 @@ jobs:
             keytool -list -keystore prototype.keystore -storepass "$pw" >/dev/null ||
               { echo "::error::PROTOTYPE_KEYSTORE_PASSWORD does not open PROTOTYPE_KEYSTORE_BASE64 (re-paste both secrets)"; exit 1; }
           fi
-      - run: ./gradlew testDebugUnitTest assembleDebug
+      # Dependency downloads sometimes fail on rate limits (429); try the build up to 3 times.
+      - run: |
+          for i in 1 2 3; do
+            ./gradlew testDebugUnitTest assembleDebug && exit 0
+            echo "::warning::Gradle attempt $i failed; retrying in $((i * 30))s"
+            sleep $((i * 30))
+          done
+          exit 1
         env:
           PROTOTYPE_KEYSTORE_PASSWORD: ${{ secrets.PROTOTYPE_KEYSTORE_PASSWORD }}
       - uses: actions/upload-artifact@v4
