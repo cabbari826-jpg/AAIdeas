@@ -1,6 +1,7 @@
 package com.aaideas.krossvord.ui
 
 import android.os.Bundle
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import android.graphics.Color
 import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
@@ -48,6 +49,8 @@ class MainActivity : ComponentActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Branded launch screen; it stays up until the level packs are read, so no blank frame in between.
+        installSplashScreen().setKeepOnScreenCondition { !ready }
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         pendingIntent = intent
@@ -63,7 +66,9 @@ class MainActivity : ComponentActivity() {
             if (!ready) { Splash(); return@setContent }
             LaunchedEffect(Unit) { pendingIntent?.let { openFrom(it) }; pendingIntent = null; vm.onAppOpen() }
             val mode = vm.themeMode
-            val dark = vm.skin.alwaysDark || mode == ThemeMode.DARK || (mode == ThemeMode.SYSTEM && isSystemInDarkTheme())
+            val isPremiumNow by vm.premium.isPremium.collectAsState()
+            val skin = vm.activeSkin(isPremiumNow)
+            val dark = skin.alwaysDark || mode == ThemeMode.DARK || (mode == ThemeMode.SYSTEM && isSystemInDarkTheme())
             // Status/nav bar icons must flip with the in-app choice, not only with the phone setting.
             LaunchedEffect(dark) {
                 val bar = if (dark) SystemBarStyle.dark(Color.TRANSPARENT)
@@ -75,7 +80,7 @@ class MainActivity : ComponentActivity() {
             val density = if (vm.largeMode) androidx.compose.ui.unit.Density(base.density, maxOf(base.fontScale, LARGE_FONT_SCALE)) else base
             androidx.compose.runtime.CompositionLocalProvider(androidx.compose.ui.platform.LocalDensity provides density) {
             LaunchedEffect(vm.screen) { if (vm.screen == Screen.HOME || vm.screen == Screen.SETTINGS) vm.refreshSkins(com.aaideas.krossvord.model.Ranks.unlockedThemes(vm.xp).toSet()) }
-            KrossvordTheme(mode, vm.dynamicColor, vm.skin) {
+            KrossvordTheme(mode, vm.dynamicColor, skin) {
                 Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
                     val isPremium by vm.premium.isPremium.collectAsState()
                     BackHandler(enabled = vm.screen != Screen.HOME) { vm.back() }
