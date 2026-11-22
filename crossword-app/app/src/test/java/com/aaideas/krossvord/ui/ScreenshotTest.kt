@@ -62,6 +62,15 @@ class ScreenshotTest {
         shoot(vm, "puzzle-level3")
     }
 
+    @Test fun newLevels() {
+        val vm = vm()
+        for (n in listOf(5, 12, 25)) {
+            vm.startLevel(n - 1)
+            vm.restartLevel()
+            shoot(vm, "level-$n")
+        }
+    }
+
     @Test fun puzzleTiles() {
         val vm = vm()
         vm.setInput(InputMode.TILES)

@@ -9,6 +9,7 @@ clue_tiers.py, then run apply_tiers.py).
 import json, os, random, sys
 from words import WORDS
 from words_hard import WORDS_HARD
+from words_more import TIERS_MORE
 
 PACK = os.path.join(os.path.dirname(__file__), '..', 'app', 'src', 'main', 'assets', 'packs', 'az-starter.json')
 R, C = 8, 7
@@ -16,7 +17,7 @@ MAXLEN = 7
 MAX_TWO = 1      # at most one 2-letter word per level
 MAX_THREE = 3    # at most three 3-letter words per level
 
-BANK = dict(WORDS); BANK.update(WORDS_HARD)
+BANK = dict(WORDS); BANK.update(WORDS_HARD); BANK.update({w: t[2] for w, t in TIERS_MORE.items()})
 SKIP = set(filter(None, os.environ.get('SKIP', '').split(',')))   # words judged too weak
 
 
