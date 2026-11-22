@@ -112,15 +112,12 @@ private fun PuzzleContent(vm: GameViewModel, isPremium: Boolean, compact: Boolea
                 dismissButton = { TextButton(onClick = { confirmRestart = false }) { Text("İmtina") } },
             )
             Spacer(Modifier.weight(1f))
-            Text(
-                "♥".repeat(vm.lives) + "♡".repeat(MAX_LIVES - vm.lives),
-                color = MaterialTheme.colorScheme.error,
-                fontSize = 18.sp,
-                modifier = Modifier.padding(end = 10.dp).semantics { contentDescription = "Can: ${vm.lives}" },
-            )
+            LivesBadge(vm, isPremium, Modifier.padding(end = 10.dp))
             Text(
                 "${vm.currentLevelTitle} · ${game.solvedCount}/${game.board.level.entries.size}",
                 style = MaterialTheme.typography.titleSmall,
+                maxLines = 1,
+                overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis,
             )
         }
         if (game.keyword != null) KeywordStrip(game.keywordLetters, game.isKeywordKnown, vm::openKeywordDialog)
@@ -131,7 +128,14 @@ private fun PuzzleContent(vm: GameViewModel, isPremium: Boolean, compact: Boolea
                 tutorialEntry = if (vm.tutorialStep == TUTORIAL_TAP) game.activeEntry else null,
             )
         }
-        Row(Modifier.fillMaxWidth().padding(vertical = if (compact) 2.dp else 6.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        val hintText = when {
+            isPremium -> "Hərf aç"
+            vm.freeHints > 0 -> "Hərf aç (${vm.freeHints} pulsuz)"
+            else -> "Hərf aç ▶ reklam"
+        }
+        // Small phones, letter columns: shuffle and hint move between the columns, so the grid gets that row.
+        val actionsInColumns = compact && columns
+        if (!actionsInColumns) Row(Modifier.fillMaxWidth().padding(vertical = if (compact) 2.dp else 6.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             if (columns) OutlinedButton(onClick = vm::shuffleTiles, modifier = Modifier.weight(1f)) { Text("⟳ Qarışdır") }
             else OutlinedButton(onClick = vm::clearWord, modifier = Modifier.weight(1f)) { Text("Sözü sil") }
             Button(onClick = vm::hint, modifier = Modifier.weight(1f)) {
@@ -166,6 +170,7 @@ private fun PuzzleContent(vm: GameViewModel, isPremium: Boolean, compact: Boolea
                 onUnpick = vm::unpickLetter,
                 onUndo = vm::unpickLast,
                 onClear = vm::clearDraft,
+                extra = if (actionsInColumns) ColumnExtras(vm::shuffleTiles, vm::hint, if (isPremium || vm.freeHints > 0) "Hərf aç" else "Hərf ▶") else null,
             )
         }
     }
@@ -173,15 +178,29 @@ private fun PuzzleContent(vm: GameViewModel, isPremium: Boolean, compact: Boolea
     vm.clueCard?.takeIf { it in game.board.level.entries }?.let { e ->
         ClueCard(game, e, needsAd = vm.easeNeedsAd(), onEase = vm::easeActiveClue, onClose = vm::closeClueCard)
     }
+    // Lives come back with time: keep the countdown moving while some are missing.
+    val missing = vm.secondsToNextLife != null
+    LaunchedEffect(missing) {
+        while (missing) { kotlinx.coroutines.delay(1000); vm.tickLives() }
+    }
     if (vm.outOfLives && !vm.showCompletion && vm.ads.pending == null) {
+        val dailyOpen = !vm.daily.guess.finished
         AlertDialog(
             onDismissRequest = {},
             title = { Text("Canlar bitdi") },
-            text = { Text("Üç səhv söz. Reklama bax və bir can al, ya da səviyyəni yenidən başla.") },
-            confirmButton = {
-                Button(onClick = vm::extraLife) { Text(if (isPremium) "+1 can" else "+1 can ▶ reklam") }
+            text = {
+                Text(
+                    "Növbəti can ${clock(vm.secondsToNextLife ?: 0)} sonra özü gələcək." +
+                        if (dailyOpen) "\nGünün sözünü tapsan, canlar dərhal dolacaq." else ""
+                )
             },
-            dismissButton = { TextButton(onClick = vm::restartLevel) { Text("Yenidən başla") } },
+            confirmButton = {
+                Button(onClick = vm::refillLives) { Text(if (isPremium) "Canları doldur" else "Canları doldur ▶ reklam") }
+            },
+            dismissButton = {
+                if (dailyOpen) TextButton(onClick = { vm.open(Screen.WORD_OF_DAY) }) { Text("Günün sözü") }
+                else TextButton(onClick = vm::back) { Text("Gözləyəcəm") }
+            },
         )
     }
     if (vm.showCompletion) {
@@ -567,6 +586,7 @@ private fun ColumnsInput(
     onUnpick: (Int) -> Unit,
     onUndo: () -> Unit,
     onClear: () -> Unit,
+    extra: ColumnExtras? = null,
 ) {
     val haptic = LocalHapticFeedback.current
     LaunchedEffect(feedback) {
@@ -591,13 +611,26 @@ private fun ColumnsInput(
             if (feedback != null) {
                 Text(
                     if (feedback == WordFeedback.WRONG) "✗" else "✓",
-                    fontSize = 28.sp,
+                    fontSize = if (extra != null) 20.sp else 28.sp,
+                    lineHeight = if (extra != null) 20.sp else 28.sp,
                     fontWeight = FontWeight.Bold,
                     color = if (feedback == WordFeedback.WRONG) MaterialTheme.colorScheme.error else LocalGridColors.current.keyword,
                 )
             }
-            SmallAction("⌫", "Son hərfi sil", draft.isNotEmpty(), onUndo)
-            SmallAction("✕", "Təmizlə", draft.isNotEmpty(), onClear)
+            if (extra == null) {
+                SmallAction("⌫", "Son hərfi sil", draft.isNotEmpty(), onUndo)
+                SmallAction("✕", "Təmizlə", draft.isNotEmpty(), onClear)
+            } else {
+                // 2 x 2 buttons with captions, so they are clear without the row above.
+                Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                    LabeledAction("⌫", "Sil", draft.isNotEmpty(), onUndo)
+                    LabeledAction("✕", "Təmizlə", draft.isNotEmpty(), onClear)
+                }
+                Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                    LabeledAction("⟳", "Qarışdır", true, extra.onShuffle)
+                    LabeledAction("💡", extra.hintLabel, true, extra.onHint, highlight = true)
+                }
+            }
         }
         for (c in 2..3) LetterColumn(WordBuilder.column(letters, c), draft, onPick, onUnpick)
     }
@@ -658,6 +691,25 @@ private fun PickTile(letter: Char, order: Int?, onClick: () -> Unit) {
                 )
             }
         }
+    }
+}
+
+/** Shuffle and hint, shown between the letter columns on small phones. */
+class ColumnExtras(val onShuffle: () -> Unit, val onHint: () -> Unit, val hintLabel: String)
+
+@Composable
+private fun LabeledAction(icon: String, label: String, enabled: Boolean, onClick: () -> Unit, highlight: Boolean = false) {
+    Column(
+        Modifier.width(64.dp).clickable(enabled = enabled, onClick = onClick).semantics { contentDescription = label },
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Surface(
+            modifier = Modifier.size(40.dp),
+            shape = RoundedCornerShape(20.dp),
+            color = (if (highlight) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surfaceVariant)
+                .copy(alpha = if (enabled) 1f else 0.4f),
+        ) { Box(contentAlignment = Alignment.Center) { Text(icon, fontSize = 18.sp) } }
+        Text(label, style = MaterialTheme.typography.labelSmall, maxLines = 1)
     }
 }
 
@@ -725,4 +777,25 @@ private fun KeywordDialog(vm: GameViewModel) {
         confirmButton = { Button(onClick = { vm.guessKeyword(text) }, enabled = text.isNotBlank()) { Text("Yoxla") } },
         dismissButton = { TextButton(onClick = vm::closeKeywordDialog) { Text("Bağla") } },
     )
+}
+
+/** 125 -> "2:05". */
+fun clock(seconds: Long): String = "${seconds / 60}:${"%02d".format(seconds % 60)}"
+
+/** Hearts for the shared lives, extra ones as "+N", and the countdown to the next life. */
+@Composable
+private fun LivesBadge(vm: GameViewModel, isPremium: Boolean, modifier: Modifier = Modifier) {
+    val n = vm.lives
+    val hearts = when {
+        isPremium -> "♥ ∞"
+        n > com.aaideas.krossvord.model.Lives.CAP -> "♥".repeat(com.aaideas.krossvord.model.Lives.CAP) + "+${n - com.aaideas.krossvord.model.Lives.CAP}"
+        else -> "♥".repeat(n) + "♡".repeat(com.aaideas.krossvord.model.Lives.CAP - n)
+    }
+    Column(modifier.semantics { contentDescription = "Can: ${if (isPremium) "limitsiz" else n}" }, horizontalAlignment = Alignment.CenterHorizontally) {
+        Text(hearts, color = MaterialTheme.colorScheme.error, fontSize = 18.sp, lineHeight = 18.sp)
+        val next = vm.secondsToNextLife
+        if (!isPremium && next != null) {
+            Text("+1 ${clock(next)}", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        }
+    }
 }

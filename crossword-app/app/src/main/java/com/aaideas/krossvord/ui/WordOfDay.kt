@@ -119,6 +119,24 @@ fun WordOfDayScreen(daily: DailyWordGame, isPremium: Boolean, onBack: () -> Unit
             textAlign = TextAlign.Center,
             modifier = Modifier.fillMaxWidth(),
         )
+        val reward = daily.reward
+        if (g.solved && reward != null) {
+            Text(
+                reward,
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.error,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
+            )
+        } else if (!g.finished) {
+            Text(
+                "Tapsan: canlar dolur, ya da +1 ehtiyat can.",
+                style = MaterialTheme.typography.bodyMedium,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
+            )
+        }
         Spacer(Modifier.weight(1f))
         if (!g.finished) {
             Button(onClick = daily::hint, modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp)) {

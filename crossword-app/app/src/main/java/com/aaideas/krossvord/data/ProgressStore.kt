@@ -92,6 +92,12 @@ class ProgressStore(context: Context) {
         get() = prefs.getBoolean(KEY_SOUND, true)
         set(v) = prefs.edit().putBoolean(KEY_SOUND, v).apply()
 
+    /** Shared lives (see model/Lives); a new player gets the starting bonus. */
+    var lives: com.aaideas.krossvord.model.Lives
+        get() = if (!prefs.contains(KEY_LIVES)) com.aaideas.krossvord.model.Lives.newPlayer(System.currentTimeMillis())
+            else com.aaideas.krossvord.model.Lives(prefs.getInt(KEY_LIVES, 3), prefs.getLong(KEY_LIVES_SINCE, 0L))
+        set(v) = prefs.edit().putInt(KEY_LIVES, v.count).putLong(KEY_LIVES_SINCE, v.since).apply()
+
     /** Seconds spent on the puzzle screen, for the statistics. */
     var playSeconds: Long
         get() = prefs.getLong(KEY_PLAY_SECONDS, 0L)
@@ -144,6 +150,8 @@ class ProgressStore(context: Context) {
         const val KEY_TUTORIAL = "tutorial_clue_cells_done"
         const val KEY_BIG_CLUES = "big_clues"
         const val KEY_SOUND = "sound_on"
+        const val KEY_LIVES = "lives_shared"
+        const val KEY_LIVES_SINCE = "lives_since"
         const val KEY_PLAY_SECONDS = "play_seconds"
         const val KEY_WORDS_FOUND = "words_found"
         const val KEY_DONE = "completed"

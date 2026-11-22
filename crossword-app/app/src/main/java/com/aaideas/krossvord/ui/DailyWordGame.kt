@@ -28,7 +28,10 @@ class DailyWordGame(
         private set
     var wrongFlash by mutableStateOf(false)
         private set
-    /** Called when today's word is solved (chime and buzz). */
+    /** What solving today's word gave (lives); shown on the screen. */
+    var reward by mutableStateOf<String?>(null)
+
+    /** Called when today's word is solved (chime, buzz, reward). */
     var onSolved: () -> Unit = {}
 
     /** Longest run of days in a row, and words of the day solved in all. */

@@ -39,12 +39,12 @@ class ScreenshotTest {
         shoot(vm, "puzzle")
     }
 
-    /** Three wrong words: lives run out and the player is offered an ad or a restart. */
+    /** Wrong words use up the shared lives (5 for a new player): the player is offered an ad, the word of the day, or waiting. */
     @Test fun outOfLives() {
         val vm = vm()
         vm.startLevel(0)
         vm.restartLevel()
-        repeat(3) {
+        repeat(com.aaideas.krossvord.model.Lives.START) {
             val letters = vm.columnLetters()
             // "DO" instead of "OD": always wrong.
             vm.pickLetter(letters.indexOf('D'))

@@ -10,6 +10,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import com.aaideas.krossvord.data.PackRepository
 import com.aaideas.krossvord.data.ProgressStore
+import com.aaideas.krossvord.model.Lives
 import com.aaideas.krossvord.model.Board
 import com.aaideas.krossvord.model.Cell
 import com.aaideas.krossvord.model.Entry
@@ -33,7 +34,6 @@ enum class WordFeedback { RIGHT, WRONG }
 const val KEYWORD_BONUS_HINTS = 2
 
 /** Wrong words allowed per level before the player must watch an ad or restart. */
-const val MAX_LIVES = 3
 
 /** Clue steps that are free; later steps need a rewarded ad. */
 const val FREE_CLUE_STEPS = 1
@@ -47,7 +47,12 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     private val progress = ProgressStore(app)
     val premium: PremiumManager = LocalPremiumManager(app)
     val ads = PlaceholderAdService()
-    val daily = DailyWordGame(app, ads, premium).also { d -> d.onSolved = { if (soundOn) sounds.wordFound() } }
+    val daily = DailyWordGame(app, ads, premium).also { d ->
+        d.onSolved = {
+            if (soundOn) sounds.wordFound()
+            d.reward = dailyReward()
+        }
+    }
     private val sounds = GameSounds(app)
 
     var soundOn by mutableStateOf(progress.soundOn)
@@ -125,22 +130,38 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         private set
     var freeHints by mutableStateOf(progress.freeHints)
         private set
-    var lives by mutableStateOf(MAX_LIVES)
-        private set
-    val outOfLives: Boolean get() = lives <= 0
+    /** Shared lives (model/Lives): refreshed by [tickLives] while some are missing. */
+    private var livesState by mutableStateOf(progress.lives.at(now()))
+    private fun now() = System.currentTimeMillis()
+    val lives: Int get() = livesState.count
+    /** Seconds until the next life comes back, or null when full; updates every second. */
+    val secondsToNextLife: Long? get() = livesState.msToNext(livesClock)?.let { (it + 999) / 1000 }
+    private var livesClock by mutableStateOf(now())
+    /** Premium players never run out. */
+    val outOfLives: Boolean get() = lives <= 0 && !premium.isPremium.value
 
-    private fun loseLife() {
-        lives = (lives - 1).coerceAtLeast(0)
-        game?.let { progress.saveLives(it.board.level.id, lives) }
+    private fun setLives(l: Lives) { livesState = l; livesClock = now(); progress.lives = l }
+
+    /** Called every second by the puzzle screen while lives are missing. */
+    fun tickLives() {
+        livesClock = now()
+        val l = livesState.at(livesClock)
+        if (l != livesState) setLives(l)
     }
 
-    /** Out of lives: one more life after a rewarded ad (free for premium). */
-    fun extraLife() {
-        val give: () -> Unit = {
-            lives = 1
-            game?.let { progress.saveLives(it.board.level.id, lives) }
-        }
-        if (premium.isPremium.value) give() else ads.showRewarded("+1 can", give)
+    private fun loseLife() { if (!premium.isPremium.value) setLives(livesState.lose(now())) }
+
+    /** Out of lives: back to full after a rewarded ad (no ad for premium). */
+    fun refillLives() {
+        val give: () -> Unit = { setLives(livesState.refill(now())) }
+        if (premium.isPremium.value) give() else ads.showRewarded("Canları doldur", give)
+    }
+
+    /** Word of the day solved: lives back to full, or one more in reserve. Returns the message. */
+    private fun dailyReward(): String {
+        val before = livesState.at(now())
+        setLives(before.reward(now()))
+        return if (before.count < Lives.CAP) "Mükafat: canlar doldu ♥" else "Mükafat: +1 ehtiyat can ♥ (${lives})"
     }
     var showKeywordDialog by mutableStateOf(false)
         private set
@@ -351,7 +372,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         feedback = null
         draftPicks = emptyList()
         mistakes = 0
-        lives = progress.loadLives(level.id) ?: MAX_LIVES
+        tickLives()
         screen = Screen.PUZZLE
     }
 
@@ -373,6 +394,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         daily.reset()
         completed = progress.completedLevels()
         freeHints = progress.freeHints
+        setLives(progress.lives.at(now()))
         game = null
         screen = Screen.HOME
     }
