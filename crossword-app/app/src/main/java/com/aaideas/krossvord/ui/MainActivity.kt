@@ -9,6 +9,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -19,15 +20,22 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
 import com.aaideas.krossvord.update.UpdateBanner
 
 class MainActivity : ComponentActivity() {
     private val vm: GameViewModel by viewModels()
 
+    /** Set until the packs are read; the screens (and the view model) come after. */
+    private var ready by androidx.compose.runtime.mutableStateOf(com.aaideas.krossvord.data.PackCache.isLoaded)
+    private var pendingIntent: android.content.Intent? = null
+
     override fun onNewIntent(intent: android.content.Intent) {
         super.onNewIntent(intent)
-        openFrom(intent)
+        if (ready) openFrom(intent) else pendingIntent = intent
     }
 
     /** The word-of-the-day reminder opens that screen directly. */
@@ -42,9 +50,18 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        openFrom(intent)
+        pendingIntent = intent
+        if (!ready) {
+            // Read the level packs off the main thread; a plain splash shows meanwhile.
+            lifecycleScope.launch(kotlinx.coroutines.Dispatchers.Default) {
+                com.aaideas.krossvord.data.PackCache.get(applicationContext)
+                kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.Main) { ready = true }
+            }
+        }
         if (com.aaideas.krossvord.remind.DailyReminder.isOn(this)) com.aaideas.krossvord.remind.DailyReminder.schedule(this)
         setContent {
+            if (!ready) { Splash(); return@setContent }
+            LaunchedEffect(Unit) { pendingIntent?.let { openFrom(it) }; pendingIntent = null }
             val mode = vm.themeMode
             val dark = mode == ThemeMode.DARK || (mode == ThemeMode.SYSTEM && isSystemInDarkTheme())
             // Status/nav bar icons must flip with the in-app choice, not only with the phone setting.
@@ -77,5 +94,23 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+    }
+}
+
+/** Shown for the moment the packs are being read: plain, so it draws at once on any phone. */
+@androidx.compose.runtime.Composable
+private fun Splash() {
+    val dark = isSystemInDarkTheme()
+    Box(
+        Modifier.fillMaxSize().background(if (dark) androidx.compose.ui.graphics.Color(0xFF141218) else androidx.compose.ui.graphics.Color(0xFFFEF7FF)),
+        contentAlignment = Alignment.Center,
+    ) {
+        androidx.compose.foundation.text.BasicText(
+            "Açar Söz",
+            style = androidx.compose.ui.text.TextStyle(
+                fontSize = androidx.compose.ui.unit.TextUnit(32f, androidx.compose.ui.unit.TextUnitType.Sp),
+                color = if (dark) androidx.compose.ui.graphics.Color.White else androidx.compose.ui.graphics.Color(0xFF1D1B20),
+            ),
+        )
     }
 }

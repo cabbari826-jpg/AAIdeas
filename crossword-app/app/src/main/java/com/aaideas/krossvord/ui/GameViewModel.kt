@@ -42,7 +42,7 @@ const val TUTORIAL_EXPLAIN = 1
 const val TUTORIAL_DONE = 2
 
 class GameViewModel(app: Application) : AndroidViewModel(app) {
-    val packs: List<Pack> = PackRepository(app).bundledPacks()
+    val packs: List<Pack> = com.aaideas.krossvord.data.PackCache.get(app)
     val levels: List<Level> = packs.flatMap { it.levels }
     private val progress = ProgressStore(app)
     val premium: PremiumManager = LocalPremiumManager(app)
