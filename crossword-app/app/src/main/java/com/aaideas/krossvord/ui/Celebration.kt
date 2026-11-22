@@ -65,7 +65,7 @@ fun LevelResultDialog(title: String, result: LevelResult, onNext: () -> Unit, on
                     result.rankUp?.let { r ->
                         Surface(shape = RoundedCornerShape(12.dp), color = MaterialTheme.colorScheme.primaryContainer) {
                             Text(
-                                "🎖 Yeni rütbə: ${r.title}" + if (r.themeId != null) "\nHədiyyə: yeni tərtibat" else "",
+                                "🎖 Yeni rütbə: ${r.title}" + if (r.themeId != null) "\nHədiyyə: yeni mövzu" else "",
                                 Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
                                 style = MaterialTheme.typography.bodyMedium, textAlign = TextAlign.Center,
                             )
