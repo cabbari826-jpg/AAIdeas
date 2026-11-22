@@ -62,8 +62,7 @@ class ThemeScreenshotTest {
         }
         draw(com.aaideas.krossvord.R.mipmap.ic_launcher, "icon")
         draw(com.aaideas.krossvord.R.drawable.ic_launcher_monochrome, "icon-themed")
-        draw(com.aaideas.krossvord.R.mipmap.ic_launcher_tile, "icon-premium-tile")
-        draw(com.aaideas.krossvord.R.mipmap.ic_launcher_key, "icon-premium-key")
+        AppIcon.entries.forEach { draw(it.preview, "icon-" + it.name.lowercase()) }
     }
 
     @Test fun themeChoiceIsRemembered() {
@@ -100,6 +99,7 @@ class ThemeScreenshotTest {
     @Test fun settingsLightAndDark() {
         val vm = vm()
         shoot("settings-light", ThemeMode.LIGHT) { SettingsScreen(vm, isPremium = false) }
+        shoot("settings-premium", ThemeMode.LIGHT) { SettingsScreen(vm, isPremium = true) }
         shoot("settings-dark", ThemeMode.DARK) { SettingsScreen(vm, isPremium = false) }
     }
 }

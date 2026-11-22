@@ -17,6 +17,7 @@
             android:theme="@style/Theme.AcarSoz.Starting"
             android:windowSoftInputMode="adjustNothing" />
         <!-- Launcher entries: one per app icon. Exactly one is enabled; premium players can switch (ui/AppIcons.kt). -->
+        <!-- ".LauncherTile" now shows the Xalça icon: alias names never change, or a phone that had it on would lose the app icon after an update. -->
         <activity-alias
             android:name=".Launcher"
             android:targetActivity=".ui.MainActivity"
@@ -34,8 +35,8 @@
             android:targetActivity=".ui.MainActivity"
             android:exported="true"
             android:enabled="false"
-            android:icon="@mipmap/ic_launcher_tile"
-            android:roundIcon="@mipmap/ic_launcher_tile_round">
+            android:icon="@mipmap/ic_launcher_xalca"
+            android:roundIcon="@mipmap/ic_launcher_xalca_round">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -48,6 +49,78 @@
             android:enabled="false"
             android:icon="@mipmap/ic_launcher_key"
             android:roundIcon="@mipmap/ic_launcher_key_round">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias
+            android:name=".LauncherNight"
+            android:targetActivity=".ui.MainActivity"
+            android:exported="true"
+            android:enabled="false"
+            android:icon="@mipmap/ic_launcher_night"
+            android:roundIcon="@mipmap/ic_launcher_night_round">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias
+            android:name=".LauncherUlduz"
+            android:targetActivity=".ui.MainActivity"
+            android:exported="true"
+            android:enabled="false"
+            android:icon="@mipmap/ic_launcher_ulduz"
+            android:roundIcon="@mipmap/ic_launcher_ulduz_round">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias
+            android:name=".LauncherXaribulbul"
+            android:targetActivity=".ui.MainActivity"
+            android:exported="true"
+            android:enabled="false"
+            android:icon="@mipmap/ic_launcher_xaribulbul"
+            android:roundIcon="@mipmap/ic_launcher_xaribulbul_round">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias
+            android:name=".LauncherBayraq"
+            android:targetActivity=".ui.MainActivity"
+            android:exported="true"
+            android:enabled="false"
+            android:icon="@mipmap/ic_launcher_bayraq"
+            android:roundIcon="@mipmap/ic_launcher_bayraq_round">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias
+            android:name=".LauncherNovruz"
+            android:targetActivity=".ui.MainActivity"
+            android:exported="true"
+            android:enabled="false"
+            android:icon="@mipmap/ic_launcher_novruz"
+            android:roundIcon="@mipmap/ic_launcher_novruz_round">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias
+            android:name=".LauncherYeniIl"
+            android:targetActivity=".ui.MainActivity"
+            android:exported="true"
+            android:enabled="false"
+            android:icon="@mipmap/ic_launcher_yeniil"
+            android:roundIcon="@mipmap/ic_launcher_yeniil_round">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

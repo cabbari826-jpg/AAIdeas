@@ -68,6 +68,8 @@ class MainActivity : ComponentActivity() {
             val mode = vm.themeMode
             val isPremiumNow by vm.premium.isPremium.collectAsState()
             val skin = vm.activeSkin(isPremiumNow)
+            // App icon: holiday icon in season (if turned on), premium icon only while premium lasts.
+            LaunchedEffect(isPremiumNow) { AppIcon.sync(this@MainActivity, isPremiumNow) }
             val dark = skin.alwaysDark || mode == ThemeMode.DARK || (mode == ThemeMode.SYSTEM && isSystemInDarkTheme())
             // Status/nav bar icons must flip with the in-app choice, not only with the phone setting.
             LaunchedEffect(dark) {

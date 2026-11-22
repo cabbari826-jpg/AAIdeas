@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- App icon layer. Bayraq: flag stripes with the crescent and the eight-pointed star. Background. Glyph outlines from Roboto Black (Apache-2.0). -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android" android:width="108dp" android:height="108dp" android:viewportWidth="108" android:viewportHeight="108">
+    <path android:fillColor="#00B5E2" android:pathData="M0,0h108v42h-108z" />
+    <path android:fillColor="#EF3340" android:pathData="M0,42h108v24h-108z" />
+    <path android:fillColor="#509E2F" android:pathData="M0,66h108v42h-108z" />
+</vector>
