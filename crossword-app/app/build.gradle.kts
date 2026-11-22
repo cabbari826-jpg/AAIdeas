@@ -14,11 +14,36 @@ android {
         applicationId = "com.aaideas.krossvord"
         minSdk = 24
         targetSdk = 36
-        versionCode = 1
-        versionName = "0.1.0"
+        // CI sets GITHUB_RUN_NUMBER, so every published build has a bigger
+        // versionCode than the one before and installs as an update.
+        val build = System.getenv("GITHUB_RUN_NUMBER")?.toIntOrNull() ?: 1
+        versionCode = build
+        versionName = "0.1.$build"
+    }
+
+    // Prototype builds are signed with one fixed key, so each new APK installs
+    // over the previous one. The key is not in the repo: CI writes it from the
+    // PROTOTYPE_KEYSTORE_BASE64 / PROTOTYPE_KEYSTORE_PASSWORD secrets. Without
+    // them the usual per-machine debug key is used. Prototype only; the Google
+    // Play build will use its own upload key.
+    val protoKeystore = rootProject.file("prototype.keystore")
+    val protoPassword = System.getenv("PROTOTYPE_KEYSTORE_PASSWORD")
+    if (protoKeystore.exists() && !protoPassword.isNullOrEmpty()) {
+        signingConfigs {
+            getByName("debug") {
+                storeFile = protoKeystore
+                storePassword = protoPassword
+                keyAlias = "prototype"
+                keyPassword = protoPassword
+            }
+        }
     }
 
     buildTypes {
+        debug {
+            // Where the in-app updater (src/debug only) looks for new builds.
+            buildConfigField("String", "UPDATE_REPO", "\"cabbari826-jpg/AAIdeas\"")
+        }
         release {
             isMinifyEnabled = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
@@ -29,7 +54,10 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions { jvmTarget = "17" }
-    buildFeatures { compose = true }
+    buildFeatures {
+        compose = true
+        buildConfig = true
+    }
     testOptions { unitTests.isIncludeAndroidResources = true }
     sourceSets["test"].resources.srcDir("src/main/assets")
 }
