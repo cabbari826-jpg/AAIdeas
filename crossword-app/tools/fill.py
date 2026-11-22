@@ -8,6 +8,13 @@ if os.environ.get('WORDLIST') == 'hard':
 else:
     from words import WORDS
 MAXLEN = int(os.environ.get('MAXLEN', '6'))
+if os.environ.get("USE_DICT"):
+    # add the big word list (dict/candidates_az.txt); those words have no clue yet
+    WORDS = dict(WORDS)
+    path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "dict", "candidates_az.txt")
+    for line in open(path, encoding="utf8"):
+        w = line.strip()
+        if w and not w.startswith("#") and w not in WORDS: WORDS[w] = "?"
 EXCLUDE = set(filter(None, os.environ.get('EXCLUDE', '').split(',')))
 W = {}
 for w in WORDS:
