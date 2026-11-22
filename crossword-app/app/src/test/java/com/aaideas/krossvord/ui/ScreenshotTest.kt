@@ -62,6 +62,29 @@ class ScreenshotTest {
         shoot(vm, "puzzle-level3")
     }
 
+    @Test fun newLevels() {
+        val vm = vm()
+        for (n in listOf(5, 12, 25)) {
+            vm.startLevel(n - 1)
+            vm.restartLevel()
+            shoot(vm, "level-$n")
+        }
+    }
+
+    @Test fun themedPacks() {
+        val vm = vm()
+        val music = vm.packs.indexOfFirst { it.packId == "az-musiqi" }
+        vm.startLevel(vm.packLevels(music).first().first)
+        vm.restartLevel()
+        shoot(vm, "theme-musiqi-1")
+        val geo = vm.packs.indexOfFirst { it.packId == "az-cografiya" }
+        vm.startLevel(vm.packLevels(geo).first().first)
+        vm.restartLevel()
+        shoot(vm, "theme-cografiya-1")
+        vm.open(Screen.LEVELS)
+        captureRoboImage("build/outputs/roborazzi/levels.png") { KrossvordTheme { LevelsScreen(vm) } }
+    }
+
     @Test fun puzzleTiles() {
         val vm = vm()
         vm.setInput(InputMode.TILES)

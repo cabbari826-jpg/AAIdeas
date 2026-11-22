@@ -12,7 +12,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.material3.FilterChip
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
@@ -77,14 +79,27 @@ fun ResetAllDialog(onConfirm: () -> Unit, onDismiss: () -> Unit) {
 fun LevelsScreen(vm: GameViewModel) {
     Column(Modifier.fillMaxSize().padding(16.dp)) {
         TextButton(onClick = vm::back) { Text("← Əsas səhifə") }
-        vm.packs.forEach { Text(it.title, style = MaterialTheme.typography.headlineSmall) }
+        // One chip per pack: the main pack first, then the themes.
+        Row(
+            Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
+            vm.packs.forEachIndexed { p, pack ->
+                val done = pack.levels.count { it.id in vm.completed }
+                FilterChip(
+                    selected = vm.selectedPack == p,
+                    onClick = { vm.selectedPack = p },
+                    label = { Text("${pack.title} $done/${pack.levels.size}") },
+                )
+            }
+        }
         Spacer(Modifier.height(8.dp))
         LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            itemsIndexed(vm.levels) { i, level ->
+            items(vm.packLevels(vm.selectedPack)) { (i, level) ->
                 val done = level.id in vm.completed
                 Card(Modifier.fillMaxWidth().clickable { vm.startLevel(i) }) {
                     Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
-                        Text("Səviyyə ${i + 1}", style = MaterialTheme.typography.titleMedium)
+                        Text("Səviyyə ${vm.numberInPack(i)}", style = MaterialTheme.typography.titleMedium)
                         Spacer(Modifier.weight(1f))
                         Text(if (done) "✓ həll olunub · yenidən oyna" else "${level.entries.size} söz")
                     }

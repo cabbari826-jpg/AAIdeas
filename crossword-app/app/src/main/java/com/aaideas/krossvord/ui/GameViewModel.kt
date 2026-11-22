@@ -232,7 +232,21 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
 
     fun shuffleTiles() { tileShuffle++ }
 
-    val currentLevelNumber: Int get() = levelIndex + 1
+    /** Pack index and 1-based number inside its pack for a global level index. */
+    private val packStart: List<Int> = packs.runningFold(0) { acc, p -> acc + p.levels.size }
+    fun packIndexOf(index: Int): Int = (packs.indices.lastOrNull { packStart[it] <= index } ?: 0)
+    fun numberInPack(index: Int): Int = index - packStart[packIndexOf(index)] + 1
+    fun levelTitle(index: Int): String {
+        val p = packIndexOf(index)
+        return (if (p == 0) "" else packs[p].title + " · ") + "Səviyyə ${numberInPack(index)}"
+    }
+    fun packLevels(p: Int): List<Pair<Int, Level>> = packs[p].levels.mapIndexed { i, l -> packStart[p] + i to l }
+
+    /** Pack shown on the level list; follows the level being played. */
+    var selectedPack by mutableStateOf(0)
+
+    val currentLevelNumber: Int get() = numberInPack(levelIndex)
+    val currentLevelTitle: String get() = levelTitle(levelIndex)
 
     fun open(s: Screen) { screen = s }
 
@@ -248,6 +262,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
 
     fun startLevel(index: Int) {
         levelIndex = index
+        selectedPack = packIndexOf(index)
         val level = levels[index]
         val board = Board(level)
         game = GameState.start(board).copy(
@@ -268,10 +283,10 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         val i = continueIndex()
         val all = completed.size == levels.size
         return when {
-            all -> "Hamısı həll olunub · Səviyyə ${i + 1}"
-            progress.hasProgress(levels[i].id) -> "Davam et · Səviyyə ${i + 1}"
+            all -> "Hamısı həll olunub · ${levelTitle(i)}"
+            progress.hasProgress(levels[i].id) -> "Davam et · ${levelTitle(i)}"
             completed.isEmpty() -> "Oyuna başla"
-            else -> "Davam et · Səviyyə ${i + 1}"
+            else -> "Davam et · ${levelTitle(i)}"
         }
     }
 

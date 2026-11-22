@@ -6,6 +6,9 @@ or any clue text is used twice in the pack. Optionally writes a review sheet.
 """
 import json, sys
 from clue_tiers import TIERS
+from words_more import TIERS_MORE
+from clue_tiers2 import TIERS2
+TIERS = {**TIERS2, **TIERS_MORE, **TIERS}
 from gen_pack import PACK
 
 pack = json.load(open(PACK))

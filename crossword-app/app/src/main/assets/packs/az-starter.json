@@ -986,6 +986,3309 @@
     ],
     "source": "claude-draft"
    }
+  },
+  {
+   "id": "az-starter-005",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 2,
+     "answer": "GƏMİ",
+     "clue": "Dəniz nəqliyyatı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Kapitanın evi",
+      "Lövbər salır",
+      "Dəniz nəqliyyatı"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 3,
+     "answer": "İKİ",
+     "clue": "1+1",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Cüt",
+      "Birdən sonra",
+      "1+1"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 4,
+     "clueCol": 0,
+     "answer": "TÜLKÜ",
+     "clue": "Hiyləgər heyvan",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Nağılda hiyləgər",
+      "Kürkü qırmızı",
+      "Hiyləgər heyvan"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "ARA",
+     "clue": "Fasilə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Məsafə",
+      "Boşluq",
+      "Fasilə"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 6,
+     "clueCol": 1,
+     "answer": "ƏL",
+     "clue": "Barmaqlar yeri",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ovuc sahibi",
+      "Qolun ucu",
+      "Barmaqlar yeri"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 1,
+     "answer": "KƏLƏM",
+     "clue": "Ağ tərəvəz",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Dolması olur",
+      "Yarpaqlı baş",
+      "Ağ tərəvəz"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "DOWN",
+     "clueRow": 1,
+     "clueCol": 1,
+     "answer": "ASTA",
+     "clue": "Yavaş",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Tələsmədən",
+      "Yavaş-yavaş",
+      "Yavaş"
+     ]
+    },
+    {
+     "id": 8,
+     "direction": "DOWN",
+     "clueRow": 3,
+     "clueCol": 2,
+     "answer": "ÜRƏK",
+     "clue": "Döyünən orqan",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qan pompası",
+      "Sevgi rəmzi",
+      "Döyünən orqan"
+     ]
+    },
+    {
+     "id": 9,
+     "direction": "DOWN",
+     "clueRow": 3,
+     "clueCol": 3,
+     "answer": "LALƏ",
+     "clue": "Yaz çiçəyi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qırmızı çöl gülü",
+      "Hollandiya gülü",
+      "Yaz çiçəyi"
+     ]
+    },
+    {
+     "id": 10,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "ƏRİK",
+     "clue": "Sarı meyvə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qurusu qaysı",
+      "Ordubad meyvəsi",
+      "Sarı meyvə"
+     ]
+    },
+    {
+     "id": 11,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 5,
+     "answer": "KÜFTƏ",
+     "clue": "Ət kürəsi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qiymə topu",
+      "Bozbaş içi",
+      "Ət kürəsi"
+     ]
+    },
+    {
+     "id": 12,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "İRİ",
+     "clue": "Böyük",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Yekə",
+      "Kiçiyin əksi",
+      "Böyük"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "SƏFƏR",
+    "cells": [
+     [
+      3,
+      1
+     ],
+     [
+      7,
+      3
+     ],
+     [
+      5,
+      5
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      5,
+      2
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-starter-006",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "ALP",
+     "clue": "Qəhrəman",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Dastan qəhrəmanı",
+      "Ər, igid",
+      "Qəhrəman"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 4,
+     "answer": "OT",
+     "clue": "Yaşıl bitki",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Biçənəkdə bitər",
+      "Heyvan yemi",
+      "Yaşıl bitki"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "LAMPA",
+     "clue": "İşıq verir",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Elektrik işığı",
+      "Çıraq",
+      "İşıq verir"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "SƏDA",
+     "clue": "Səs",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Dağların cavabı",
+      "Əks ...",
+      "Səs"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "ZÜRAFƏ",
+     "clue": "Uzun boyunlu",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ləkəli hündür",
+      "Afrika heyvanı",
+      "Uzun boyunlu"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "ATLAS",
+     "clue": "İpək parça",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Xəritələr kitabı",
+      "Coğrafiya kitabı",
+      "İpək parça"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "POMİDOR",
+     "clue": "Qırmızı tərəvəz",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Kətçupun əsası",
+      "Salat tərəvəzi",
+      "Qırmızı tərəvəz"
+     ]
+    },
+    {
+     "id": 8,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 5,
+     "answer": "ORAQ",
+     "clue": "Taxıl biçir",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Əyri bıçaq",
+      "Biçin aləti",
+      "Taxıl biçir"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "MARAL",
+    "cells": [
+     [
+      3,
+      3
+     ],
+     [
+      3,
+      2
+     ],
+     [
+      2,
+      5
+     ],
+     [
+      7,
+      4
+     ],
+     [
+      3,
+      1
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-starter-007",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 2,
+     "answer": "MASA",
+     "clue": "Stol",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Yazı ...sı",
+      "Dörd ayaqlı",
+      "Stol"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "ALBALI",
+     "clue": "Qırmızı turş",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Turş gilas",
+      "Mürəbbəsi olur",
+      "Qırmızı turş"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 4,
+     "clueCol": 4,
+     "answer": "İL",
+     "clue": "Təqvim vahidi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "On iki ay",
+      "365 gün",
+      "Təqvim vahidi"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "AXŞAM",
+     "clue": "Gecədən əvvəl",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Şam yeməyi vaxtı",
+      "Gün batanda",
+      "Gecədən əvvəl"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "İNSAN",
+     "clue": "Adam",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Homo sapiens",
+      "Bəni-adəm",
+      "Adam"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "ARABA",
+     "clue": "Atlı nəqliyyat",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Fayton, kəcavə",
+      "Atlı ...",
+      "Atlı nəqliyyat"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "DOWN",
+     "clueRow": 4,
+     "clueCol": 2,
+     "answer": "XAN",
+     "clue": "Hökmdar",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Şəki hakimi",
+      "Bəy, hökmran",
+      "Hökmdar"
+     ]
+    },
+    {
+     "id": 8,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 3,
+     "answer": "BEŞ",
+     "clue": "5",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ən yüksək qiymət",
+      "Dörddən sonra",
+      "5"
+     ]
+    },
+    {
+     "id": 9,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 5,
+     "answer": "LİMON",
+     "clue": "Sarı meyvə növü",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Çaya dilim",
+      "Turş sitrus",
+      "Sarı meyvə növü"
+     ]
+    },
+    {
+     "id": 10,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "AĞIL",
+     "clue": "Düşüncə gücü",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Zəka",
+      "Huş",
+      "Düşüncə gücü"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "NAĞIL",
+    "cells": [
+     [
+      7,
+      5
+     ],
+     [
+      5,
+      1
+     ],
+     [
+      2,
+      6
+     ],
+     [
+      3,
+      6
+     ],
+     [
+      3,
+      2
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-starter-008",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "QIŞLAQ",
+     "clue": "Qış otlağı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Aran otlağı",
+      "Qış düşərgəsi",
+      "Qış otlağı"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "İSTİOT",
+     "clue": "Acı ədviyyə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qara ədviyyə",
+      "Acı toz",
+      "Acı ədviyyə"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 1,
+     "answer": "ZƏFƏR",
+     "clue": "Qələbə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qalibiyyət",
+      "Qələbə çalmaq",
+      "Qələbə"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "MƏRCİ",
+     "clue": "Paxlalı dən",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Sarı paxla",
+      "Qırmızı paxla",
+      "Paxlalı dən"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 2,
+     "answer": "SÖZ",
+     "clue": "Söylənən",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Lüğət vahidi",
+      "Kəlmə",
+      "Söylənən"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 4,
+     "clueCol": 3,
+     "answer": "ƏSR",
+     "clue": "Uzun dövr",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Yüz il",
+      "Yüzillik",
+      "Uzun dövr"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "DOWN",
+     "clueRow": 4,
+     "clueCol": 5,
+     "answer": "ƏMİ",
+     "clue": "Ata qardaşı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Atanın qardaşı",
+      "Ata tərəfi kişi",
+      "Ata qardaşı"
+     ]
+    },
+    {
+     "id": 8,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "QATAR",
+     "clue": "Dəmiryol",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Vaqonlar sırası",
+      "Relsdə gedir",
+      "Dəmiryol"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "QARIŞQA",
+    "cells": [
+     [
+      1,
+      1
+     ],
+     [
+      4,
+      6
+     ],
+     [
+      5,
+      6
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      1,
+      6
+     ],
+     [
+      2,
+      6
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-starter-009",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "QUNDUZ",
+     "clue": "Bənd tikən",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Çayda bənd qurar",
+      "Dişli gəmirici",
+      "Bənd tikən"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 3,
+     "answer": "ŞAN",
+     "clue": "Nam",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Şöhrət",
+      "Ad-san",
+      "Nam"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "MEŞƏ",
+     "clue": "Ağaclıq",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ağaclar diyarı",
+      "Ayı yaşayır",
+      "Ağaclıq"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 6,
+     "clueCol": 2,
+     "answer": "ARAN",
+     "clue": "Düzənlik",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Düzən bölgə",
+      "Dağlığın əksi",
+      "Düzənlik"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "CÜMƏ",
+     "clue": "Həftə günü",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Həftənin beşi",
+      "Şənbədən əvvəl",
+      "Həftə günü"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 1,
+     "answer": "YAMAC",
+     "clue": "Dağ ətəyi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Dağın döşü",
+      "Maili sahə",
+      "Dağ ətəyi"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 2,
+     "answer": "UN",
+     "clue": "Üyüdülmüş buğda",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Dəyirmanda olur",
+      "Çörək xammalı",
+      "Üyüdülmüş buğda"
+     ]
+    },
+    {
+     "id": 8,
+     "direction": "DOWN",
+     "clueRow": 4,
+     "clueCol": 3,
+     "answer": "ŞAM",
+     "clue": "Mum",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Mum işığı",
+      "Həmişəyaşıl ağac",
+      "Mum"
+     ]
+    },
+    {
+     "id": 9,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "DÜŞBƏRƏ",
+     "clue": "Kiçik xəngəl",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qulaqcıqlı xəmir",
+      "Bulyonda xörək",
+      "Kiçik xəngəl"
+     ]
+    },
+    {
+     "id": 10,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "ZİNDAN",
+     "clue": "Ağır dəmir",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Dəmir döyülən",
+      "Dəmirçi aləti",
+      "Ağır dəmir"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "ŞÜYÜD",
+    "cells": [
+     [
+      5,
+      3
+     ],
+     [
+      7,
+      2
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      4,
+      6
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-starter-010",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 2,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 2,
+     "clueCol": 0,
+     "answer": "QƏLƏBƏ",
+     "clue": "Uduş",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Məğlubiyyət əksi",
+      "Zəfər çalmaq",
+      "Uduş"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 4,
+     "clueCol": 1,
+     "answer": "DİVAR",
+     "clue": "Hasar",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Otaq sərhədi",
+      "Kərpic hörgü",
+      "Hasar"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 6,
+     "clueCol": 0,
+     "answer": "BƏNNA",
+     "clue": "Tikinti ustası",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Hörgü ustası",
+      "Kərpic qoyur",
+      "Tikinti ustası"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "DOWN",
+     "clueRow": 4,
+     "clueCol": 1,
+     "answer": "OBA",
+     "clue": "Elat",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Köçəri məskən",
+      "Kiçik kənd",
+      "Elat"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 2,
+     "answer": "KƏND",
+     "clue": "Kiçik yaşayış",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Şəhərin əksi",
+      "Əkinçilər yeri",
+      "Kiçik yaşayış"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 3,
+     "clueCol": 3,
+     "answer": "İYNƏ",
+     "clue": "İti uclu",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Sapı keçirilər",
+      "Tikiş aləti",
+      "İti uclu"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "SƏRV",
+     "clue": "Hündür ağac",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qamətli ağac",
+      "Həmişəyaşıl",
+      "Hündür ağac"
+     ]
+    },
+    {
+     "id": 8,
+     "direction": "DOWN",
+     "clueRow": 3,
+     "clueCol": 5,
+     "answer": "AĞAC",
+     "clue": "Budaqlı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Gövdəli bitki",
+      "Meşədə bitir",
+      "Budaqlı"
+     ]
+    },
+    {
+     "id": 9,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "SƏBR",
+     "clue": "Təmkin",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Gözləmə gücü",
+      "Dözüm",
+      "Təmkin"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "BƏBİR",
+    "cells": [
+     [
+      6,
+      1
+     ],
+     [
+      7,
+      3
+     ],
+     [
+      2,
+      5
+     ],
+     [
+      4,
+      3
+     ],
+     [
+      4,
+      6
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-starter-011",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 2,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "ŞAHMAT",
+     "clue": "Şah-mat oyunu",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "64 xanalı oyun",
+      "Ağ-qara oyun",
+      "Şah-mat oyunu"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "DƏRS",
+     "clue": "Məşğələ",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Zəngdən zəngə",
+      "Məktəbdə keçilir",
+      "Məşğələ"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "YEMİŞ",
+     "clue": "Qovuna bənzər",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ətirli bostan",
+      "Sarı bostan",
+      "Qovuna bənzər"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 6,
+     "clueCol": 3,
+     "answer": "DAŞ",
+     "clue": "Çaqıl",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qaya parçası",
+      "Bərk cisim",
+      "Çaqıl"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 1,
+     "answer": "AZ",
+     "clue": "Cüzi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Çoxun əksi",
+      "Bir qədər",
+      "Cüzi"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 1,
+     "answer": "DAYI",
+     "clue": "Ana qardaşı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ananın qardaşı",
+      "Ana tərəfi kişi",
+      "Ana qardaşı"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "MƏSCİD",
+     "clue": "İbadət yeri",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Minarəli bina",
+      "Namaz yeri",
+      "İbadət yeri"
+     ]
+    },
+    {
+     "id": 8,
+     "direction": "DOWN",
+     "clueRow": 4,
+     "clueCol": 5,
+     "answer": "ŞAH",
+     "clue": "Hökmdar, kral",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Matı alır",
+      "İran hökmdarı",
+      "Hökmdar, kral"
+     ]
+    },
+    {
+     "id": 9,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "TOY",
+     "clue": "Düyün",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Gəlin-bəy günü",
+      "Nikah məclisi",
+      "Düyün"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "HAMAM",
+    "cells": [
+     [
+      7,
+      5
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      5,
+      3
+     ],
+     [
+      7,
+      2
+     ],
+     [
+      1,
+      4
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-starter-012",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 2,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "MAĞARA",
+     "clue": "Dağda dəlik",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "İbtidai ev",
+      "Qayada oyuq",
+      "Dağda dəlik"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 4,
+     "clueCol": 0,
+     "answer": "ÇUXA",
+     "clue": "Uzun geyim",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qafqaz paltarı",
+      "Kişi paltarı",
+      "Uzun geyim"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 2,
+     "answer": "AÇAR",
+     "clue": "Açmaq aləti",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qıfılın dostu",
+      "Qapını açır",
+      "Açmaq aləti"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 6,
+     "clueCol": 0,
+     "answer": "KOL",
+     "clue": "Çalı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Kiçik bitki",
+      "Gövdəsiz ağac",
+      "Çalı"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 1,
+     "answer": "XALÇA",
+     "clue": "Döşənəcək",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qubanın sənəti",
+      "Divara vurulur",
+      "Döşənəcək"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "MİLÇƏK",
+     "clue": "Kiçik həşərat",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Vızıldayır",
+      "Yay zəhləsi",
+      "Kiçik həşərat"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "DOWN",
+     "clueRow": 5,
+     "clueCol": 2,
+     "answer": "OX",
+     "clue": "Nişana atılır",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Kamanın yoldaşı",
+      "Yay atır",
+      "Nişana atılır"
+     ]
+    },
+    {
+     "id": 8,
+     "direction": "DOWN",
+     "clueRow": 3,
+     "clueCol": 3,
+     "answer": "XALA",
+     "clue": "Ana bacısı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ananın bacısı",
+      "Ana tərəfi qadın",
+      "Ana bacısı"
+     ]
+    },
+    {
+     "id": 9,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 4,
+     "answer": "SAÇ",
+     "clue": "Daranır",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Hörük",
+      "Başda bitir",
+      "Daranır"
+     ]
+    },
+    {
+     "id": 10,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 6,
+     "answer": "TƏR",
+     "clue": "Yaş",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "İsti gündə axar",
+      "Alında damla",
+      "Yaş"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "XƏMİR",
+    "cells": [
+     [
+      7,
+      2
+     ],
+     [
+      5,
+      1
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      1,
+      5
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-starter-013",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 2,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 1,
+     "answer": "OTLAQ",
+     "clue": "Otluq",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Mal-qara yeri",
+      "Sürü otlayır",
+      "Otluq"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 4,
+     "clueCol": 4,
+     "answer": "SU",
+     "clue": "İçməli maye",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Buz əriyəndə",
+      "Həyat mənbəyi",
+      "İçməli maye"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "KARVAN",
+     "clue": "Yolçular dəstəsi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Dəvə qatarı",
+      "Sarvanın dəstəsi",
+      "Yolçular dəstəsi"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "FINDIQ",
+     "clue": "Kiçik qoz",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Zaqatala qozu",
+      "Sincab sevər",
+      "Kiçik qoz"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 4,
+     "clueCol": 2,
+     "answer": "AYI",
+     "clue": "Meşə heyvanı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qışda yatar",
+      "Bal sevər",
+      "Meşə heyvanı"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "TƏKƏR",
+     "clue": "Maşında",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Velosipeddə iki",
+      "Fırlanan dairə",
+      "Maşında"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "DOWN",
+     "clueRow": 3,
+     "clueCol": 5,
+     "answer": "SARI",
+     "clue": "Limon rəngi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "... gəlin",
+      "Zəfəran rəngi",
+      "Limon rəngi"
+     ]
+    },
+    {
+     "id": 8,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "QOVUN",
+     "clue": "Bostan meyvəsi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ətirli tağ",
+      "Bostan",
+      "Bostan meyvəsi"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "TOYUQ",
+    "cells": [
+     [
+      1,
+      3
+     ],
+     [
+      2,
+      6
+     ],
+     [
+      6,
+      2
+     ],
+     [
+      4,
+      6
+     ],
+     [
+      1,
+      6
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-starter-014",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 2,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "ŞAGİRD",
+     "clue": "Ustanın şəyirdi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Məktəbli",
+      "Dərs oxuyur",
+      "Ustanın şəyirdi"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "ŞALVAR",
+     "clue": "Ayağa geyilir",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "İki balaqlı",
+      "Kəmərlə taxılır",
+      "Ayağa geyilir"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 1,
+     "answer": "QUZU",
+     "clue": "Mələyər",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ana arxasınca",
+      "Qoyunun balası",
+      "Mələyər"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "NOVRUZ",
+     "clue": "Yaz bayramı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Bahar bayramı",
+      "Səməni bayramı",
+      "Yaz bayramı"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "ŞİŞ",
+     "clue": "Tikə keçirilər",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Kabab dəmiri",
+      "Manqal aləti",
+      "Tikə keçirilər"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "GÜL",
+     "clue": "Çiçək",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Bülbülün sevgisi",
+      "Tikanlı çiçək",
+      "Çiçək"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 4,
+     "answer": "VƏZİR",
+     "clue": "Nazir",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Şahmatda güclü",
+      "Şahın köməkçisi",
+      "Nazir"
+     ]
+    },
+    {
+     "id": 8,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "DƏRƏ",
+     "clue": "Vadi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Dağ arası",
+      "Dərin çuxur",
+      "Vadi"
+     ]
+    },
+    {
+     "id": 9,
+     "direction": "DOWN",
+     "clueRow": 5,
+     "clueCol": 6,
+     "answer": "ÜZ",
+     "clue": "Sima",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Sifət",
+      "Çöhrə",
+      "Sima"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "GÜNƏŞ",
+    "cells": [
+     [
+      1,
+      3
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      7,
+      1
+     ],
+     [
+      4,
+      4
+     ],
+     [
+      3,
+      1
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-starter-015",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 2,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "İP",
+     "clue": "Sap",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Kəndir",
+      "Bağlamağa",
+      "Sap"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 2,
+     "clueCol": 1,
+     "answer": "OĞUL",
+     "clue": "Oğlan övlad",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ataya ümid",
+      "Övlad (kişi)",
+      "Oğlan övlad"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 4,
+     "clueCol": 0,
+     "answer": "STƏKAN",
+     "clue": "Şüşə qab",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Armudu ...",
+      "Çay qabı",
+      "Şüşə qab"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 6,
+     "clueCol": 0,
+     "answer": "İLAN",
+     "clue": "Zəhərli",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qabıq dəyişər",
+      "Sürünən",
+      "Zəhərli"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 2,
+     "answer": "POÇT",
+     "clue": "Marka satılır",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Məktub idarəsi",
+      "Bağlama yeri",
+      "Marka satılır"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "VULKAN",
+     "clue": "Püskürən dağ",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Od püskürən dağ",
+      "Lava çıxarır",
+      "Püskürən dağ"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 6,
+     "answer": "ƏNCİR",
+     "clue": "Yumşaq meyvə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Abşeron meyvəsi",
+      "Quru meyvə",
+      "Yumşaq meyvə"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "CANAVAR",
+    "cells": [
+     [
+      5,
+      6
+     ],
+     [
+      5,
+      4
+     ],
+     [
+      4,
+      6
+     ],
+     [
+      6,
+      3
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      4,
+      5
+     ],
+     [
+      7,
+      6
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-starter-016",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 2,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 1,
+     "answer": "BİBƏR",
+     "clue": "Göy tərəvəz növü",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Bolqar ...",
+      "Acı tərəvəz",
+      "Göy tərəvəz növü"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "ALAN",
+     "clue": "Geniş yer",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Meydança",
+      "Açıq yer",
+      "Geniş yer"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 6,
+     "clueCol": 0,
+     "answer": "EL",
+     "clue": "Oba, tayfa",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Xalq",
+      "Camaat",
+      "Oba, tayfa"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 2,
+     "answer": "TƏK",
+     "clue": "Bir dənə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Yalqız",
+      "Cütün əksi",
+      "Bir dənə"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 2,
+     "answer": "BÜLBÜL",
+     "clue": "Nəğməkar quş",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Gülün aşiqi",
+      "Gözəl oxuyan",
+      "Nəğməkar quş"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 4,
+     "answer": "NİMÇƏ",
+     "clue": "Kiçik qab",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Dərin boşqab",
+      "Xörək qabı",
+      "Kiçik qab"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "REYHAN",
+     "clue": "Süfrə göyü",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ətirli göyərti",
+      "Bənövşəyi göy",
+      "Süfrə göyü"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "TƏBİL",
+    "cells": [
+     [
+      7,
+      3
+     ],
+     [
+      1,
+      5
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      6,
+      2
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-starter-017",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 2,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 2,
+     "answer": "DƏVƏ",
+     "clue": "Karvan heyvanı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Səhra gəmisi",
+      "Hörgüclü",
+      "Karvan heyvanı"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "PƏLƏNG",
+     "clue": "Böyük pişik",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Zolaqlı pişik",
+      "Zolaqlı yırtıcı",
+      "Böyük pişik"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "NƏVƏ",
+     "clue": "Nənənin balası",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Babanın sevinci",
+      "Övladın övladı",
+      "Nənənin balası"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 4,
+     "answer": "OV",
+     "clue": "Şikar etmək",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Şikar",
+      "Tüfənglə gəzinti",
+      "Şikar etmək"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "KƏPƏNƏK",
+     "clue": "Güllər üstündə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Tırtıldan olur",
+      "Rəngli qanad",
+      "Güllər üstündə"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 3,
+     "answer": "LAVAŞ",
+     "clue": "Yayma",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Nazik çörək",
+      "Təndir çörəyi",
+      "Yayma"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "ƏSGƏR",
+     "clue": "Döyüşçü",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Hərbçi",
+      "Sıravi",
+      "Döyüşçü"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "PƏRDƏ",
+    "cells": [
+     [
+      3,
+      1
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      5,
+      6
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      5,
+      2
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-starter-018",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 3,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 4,
+     "answer": "EV",
+     "clue": "Ocaq, yuva",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Yaşayış yeri",
+      "Mənzil",
+      "Ocaq, yuva"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "ALÇA",
+     "clue": "Turş meyvə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Turşu olur",
+      "Gavalı növü",
+      "Turş meyvə"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 4,
+     "clueCol": 3,
+     "answer": "YAZ",
+     "clue": "İlin fəsli",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Bahar",
+      "Qışdan sonra",
+      "İlin fəsli"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "ÇİNAR",
+     "clue": "Enliyarpaq ağac",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Yüzillik ağac",
+      "Böyük ağac",
+      "Enliyarpaq ağac"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "QARĞA",
+     "clue": "Quzğun qohumu",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qara quş",
+      "Qarıldayır",
+      "Quzğun qohumu"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 1,
+     "clueCol": 1,
+     "answer": "PALÇIQ",
+     "clue": "Lil",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Yaş torpaq",
+      "Yağışdan sonra",
+      "Lil"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "DOWN",
+     "clueRow": 1,
+     "clueCol": 4,
+     "answer": "MAYA",
+     "clue": "Ferment",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Xəmirdə",
+      "Qıcqırdır",
+      "Ferment"
+     ]
+    },
+    {
+     "id": 8,
+     "direction": "DOWN",
+     "clueRow": 3,
+     "clueCol": 5,
+     "answer": "ARPA",
+     "clue": "Taxıl növü",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Pivə taxılı",
+      "Atın yemi",
+      "Taxıl növü"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "QARPIZ",
+    "cells": [
+     [
+      7,
+      1
+     ],
+     [
+      4,
+      5
+     ],
+     [
+      7,
+      3
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      6,
+      1
+     ],
+     [
+      4,
+      6
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-starter-019",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 3,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "QOYUN",
+     "clue": "Mələyən",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Yun verir",
+      "Sürüdə",
+      "Mələyən"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "SÜLH",
+     "clue": "Əmin-amanlıq",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Müharibənin əksi",
+      "Barış",
+      "Əmin-amanlıq"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "AŞPAZ",
+     "clue": "Kulinar",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Mətbəx ustası",
+      "Yemək bişirir",
+      "Kulinar"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "QASIRĞA",
+     "clue": "Güclü külək",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Burulğan külək",
+      "Tayfun",
+      "Güclü külək"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "YOL",
+     "clue": "Şose",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Cığır",
+      "Səfər xətti",
+      "Şose"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 4,
+     "clueCol": 5,
+     "answer": "SAZ",
+     "clue": "Telli alət",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Aşıq aləti",
+      "Simli",
+      "Telli alət"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 6,
+     "answer": "ÜÇ",
+     "clue": "3",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "İkidən sonra",
+      "Dörddən əvvəl",
+      "3"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "QONŞU",
+    "cells": [
+     [
+      1,
+      1
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      1,
+      5
+     ],
+     [
+      7,
+      2
+     ],
+     [
+      1,
+      4
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-starter-020",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 3,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "DOQQUZ",
+     "clue": "9",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Səkkizdən sonra",
+      "Üç dəfə üç",
+      "9"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "YAŞ",
+     "clue": "Göz damlası",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ömür ili",
+      "Neçə il",
+      "Göz damlası"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "KATİB",
+     "clue": "Katibə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Protokol yazan",
+      "Yazı işçisi",
+      "Katibə"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "DÜYMƏ",
+     "clue": "İlgəyə keçər",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Paltarda",
+      "Köynəkdə",
+      "İlgəyə keçər"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "QIŞ",
+     "clue": "Dekabr fəsli",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Soyuq fəsil",
+      "Qar fəsli",
+      "Dekabr fəsli"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 3,
+     "clueCol": 4,
+     "answer": "BİBİ",
+     "clue": "Ata bacısı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Atanın bacısı",
+      "Ata tərəfi qadın",
+      "Ata bacısı"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "ZƏNBİL",
+     "clue": "Səbət növü",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Bazar səbəti",
+      "Hörmə səbət",
+      "Səbət növü"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "YAQUT",
+    "cells": [
+     [
+      3,
+      1
+     ],
+     [
+      7,
+      2
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      1,
+      5
+     ],
+     [
+      7,
+      3
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-starter-021",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 3,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "KEÇİ",
+     "clue": "Mələr",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Dağ heyvanı",
+      "Buynuzlu",
+      "Mələr"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 2,
+     "answer": "NEFT",
+     "clue": "Yanacaq",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qara qızıl",
+      "Buruq çıxarır",
+      "Yanacaq"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 1,
+     "answer": "SAAT",
+     "clue": "Qol ...",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Vaxt ölçən",
+      "Əqrəbli",
+      "Qol ..."
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "ULDUZ",
+     "clue": "Göydə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Səma cismi",
+      "Gecə parlayır",
+      "Göydə"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "KASA",
+     "clue": "Piyalə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qab",
+      "Dərin qab",
+      "Piyalə"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 4,
+     "clueCol": 2,
+     "answer": "SEL",
+     "clue": "Güclü axın",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Daşqın",
+      "Dağdan axar",
+      "Güclü axın"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "ÇANTA",
+     "clue": "Kisə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Məktəbli daşıyır",
+      "Əl ...",
+      "Kisə"
+     ]
+    },
+    {
+     "id": 8,
+     "direction": "DOWN",
+     "clueRow": 4,
+     "clueCol": 5,
+     "answer": "TOZ",
+     "clue": "Torpaq zərrəsi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Xırda zərrə",
+      "Silinən",
+      "Torpaq zərrəsi"
+     ]
+    },
+    {
+     "id": 9,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "PİTİ",
+     "clue": "Noxudlu yemək",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Şəki yeməyi",
+      "Saxsıda bişir",
+      "Noxudlu yemək"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "KOTAN",
+    "cells": [
+     [
+      1,
+      1
+     ],
+     [
+      6,
+      5
+     ],
+     [
+      3,
+      6
+     ],
+     [
+      5,
+      4
+     ],
+     [
+      3,
+      3
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-starter-022",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 3,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 2,
+     "answer": "ÜZÜM",
+     "clue": "Giləli meyvə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Salxım",
+      "Şərab meyvəsi",
+      "Giləli meyvə"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "LEYLƏK",
+     "clue": "Ağ quş",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Uzun ayaqlı quş",
+      "Damda yuva qurar",
+      "Ağ quş"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "ÖRDƏK",
+     "clue": "Üzən quş",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Su quşu",
+      "Vak-vak",
+      "Üzən quş"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "DOLU",
+     "clue": "Buz dənəsi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Buz yağıntı",
+      "Boşun əksi",
+      "Buz dənəsi"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 4,
+     "clueCol": 2,
+     "answer": "TOR",
+     "clue": "Şəbəkə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Balıqçının aləti",
+      "Hörümçək toxuyur",
+      "Şəbəkə"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "ZAL",
+     "clue": "Salon",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Böyük otaq",
+      "Konsert ...ı",
+      "Salon"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 5,
+     "answer": "ƏLCƏK",
+     "clue": "Əl geyimi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Beş barmaqlı",
+      "Qışda ələ",
+      "Əl geyimi"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "KƏMƏR",
+    "cells": [
+     [
+      7,
+      5
+     ],
+     [
+      6,
+      5
+     ],
+     [
+      1,
+      6
+     ],
+     [
+      7,
+      4
+     ],
+     [
+      7,
+      2
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-starter-023",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 3,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "SƏRÇƏ",
+     "clue": "Boz quş",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Kiçik quş",
+      "Cik-cik",
+      "Boz quş"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "SÜRÜ",
+     "clue": "Dəstə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qoyun dəstəsi",
+      "Çobanın varı",
+      "Dəstə"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 4,
+     "clueCol": 1,
+     "answer": "SƏS",
+     "clue": "Avaz",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Səda",
+      "Eşidilən",
+      "Avaz"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 2,
+     "answer": "ƏSƏR",
+     "clue": "Yaradıcılıq",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Yaradıcılıq işi",
+      "Kitab, pyes",
+      "Yaradıcılıq"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "ÇƏMƏN",
+     "clue": "Gül-çiçəkli yer",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Otlu sahə",
+      "Yaşıl ot sahəsi",
+      "Gül-çiçəkli yer"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 1,
+     "clueCol": 6,
+     "answer": "QAŞ",
+     "clue": "Kirpiyin üstü",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Göz üstündə",
+      "Çatılır",
+      "Kirpiyin üstü"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "QƏMƏR",
+    "cells": [
+     [
+      2,
+      6
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      4,
+      4
+     ],
+     [
+      4,
+      2
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-starter-024",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 3,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 1,
+     "answer": "VADİ",
+     "clue": "Dərə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Çay dərəsi",
+      "Düzən dərə",
+      "Dərə"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "OCAQ",
+     "clue": "Kamin",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Od yeri",
+      "Ailə ...ğı",
+      "Kamin"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 3,
+     "answer": "TOP",
+     "clue": "Yumru",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Futbol",
+      "Yumru oyuncaq",
+      "Yumru"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "BAYQUŞ",
+     "clue": "Böyük gözlü quş",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Gecə quşu",
+      "Hikmət rəmzi",
+      "Böyük gözlü quş"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 1,
+     "clueCol": 1,
+     "answer": "BOŞQAB",
+     "clue": "Yastı qab",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Süfrə çini",
+      "Yemək qoyulur",
+      "Yastı qab"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 4,
+     "answer": "QATIQ",
+     "clue": "Yoqurt",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Süddən",
+      "Maya ilə olur",
+      "Yoqurt"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "DOWN",
+     "clueRow": 1,
+     "clueCol": 6,
+     "answer": "TURP",
+     "clue": "Kökü yeyilir",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Acı kök",
+      "Ağ kökümeyvə",
+      "Kökü yeyilir"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "QARDAŞ",
+    "cells": [
+     [
+      3,
+      4
+     ],
+     [
+      6,
+      1
+     ],
+     [
+      4,
+      6
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      7,
+      2
+     ],
+     [
+      4,
+      1
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-starter-025",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 3,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 2,
+     "answer": "DİZ",
+     "clue": "Ayaq bükümü",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ayaq oynağı",
+      "Ayağın ortası",
+      "Ayaq bükümü"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 1,
+     "answer": "BADAM",
+     "clue": "Qoz növü",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Acı ləpəli",
+      "Paxlava içi",
+      "Qoz növü"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 1,
+     "answer": "ÇIRAQ",
+     "clue": "Fitilli",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Neft lampası",
+      "Köhnə işıq",
+      "Fitilli"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 1,
+     "answer": "DAM",
+     "clue": "Çardaq",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Evin üstü",
+      "Kirəmitli örtük",
+      "Çardaq"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "İLDIRIM",
+     "clue": "Şimşək çaxır",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Göy guruldayır",
+      "Göydən düşən od",
+      "Şimşək çaxır"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 4,
+     "clueCol": 6,
+     "answer": "QUŞ",
+     "clue": "Yuva qurar",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qanadlı",
+      "Uçar",
+      "Yuva qurar"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "ARIÇI",
+    "cells": [
+     [
+      7,
+      3
+     ],
+     [
+      5,
+      4
+     ],
+     [
+      5,
+      3
+     ],
+     [
+      5,
+      2
+     ],
+     [
+      4,
+      4
+     ]
+    ],
+    "source": "claude-draft"
+   }
   }
  ]
 }
