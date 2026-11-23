@@ -53,6 +53,9 @@ const val STUCK_SECONDS = 75L
 /** How the "stuck?" help looks: A pill under the grid, B owl helper, C golden glow, D key helper (Açar = key), E tall key with big eyes and brows (an office-assistant feel, our own drawing). */
 enum class StuckStyle { PILL, OWL, GLOW, KEY, KEY_TALL }
 
+/** Mascots the player can pick in Settings (in this order). */
+val MASCOTS = listOf(StuckStyle.KEY_TALL, StuckStyle.KEY, StuckStyle.OWL)
+
 /** Short praise for a found word (shown big for a moment, said aloud if there is a voice). */
 val SHORT_PRAISE = listOf("Bravo!", "Əla!", "Afərin!", "Super!", "Düzdür!")
 
@@ -837,8 +840,19 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     /** Seconds before the "stuck?" pill; tests shorten it. */
     var stuckSeconds = STUCK_SECONDS
 
-    /** Which stuck-help style is on (owner is choosing; PILL is the first one). */
-    var stuckStyle by mutableStateOf(StuckStyle.PILL)
+    /**
+     * How the stuck help shows. Default: the quiet golden glow. A mascot (Settings → Köməkçi)
+     * replaces it with a little helper and a speech bubble. PILL is kept as an option in code.
+     */
+    var stuckStyle by mutableStateOf(runCatching { StuckStyle.valueOf(progress.helper) }.getOrDefault(StuckStyle.GLOW))
+
+    /** Settings: the mascot, or null for none (glow). */
+    val helper: StuckStyle? get() = stuckStyle.takeIf { it in MASCOTS }
+
+    fun changeHelper(h: StuckStyle?) {
+        stuckStyle = h ?: StuckStyle.GLOW
+        progress.helper = h?.name.orEmpty()
+    }
     fun packIndexOf(index: Int): Int = (packs.indices.lastOrNull { packStart[it] <= index } ?: 0)
     fun numberInPack(index: Int): Int = index - packStart[packIndexOf(index)] + 1
     fun levelTitle(index: Int): String {

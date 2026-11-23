@@ -47,7 +47,7 @@ class ProgressStore(context: Context) {
 
     /** Forget every level's progress and counters; keep the player's settings. */
     fun resetAll() {
-        val keep = setOf(KEY_INPUT, KEY_HIDE_CLUES, KEY_EXTRA, KEY_THEME, KEY_DYNAMIC, KEY_TUTORIAL, KEY_BIG_CLUES, KEY_SOUND, KEY_SKIN, KEY_SKINS_OWNED, "large_mode", "kids_mode", "vibrate_on", "praise_voice", "reminder_asked", "launches", "whats_new_seen", "player_name", "birthday", "birth_year", "profile_asked", "birthday_gift_year")
+        val keep = setOf(KEY_INPUT, KEY_HIDE_CLUES, KEY_EXTRA, KEY_THEME, KEY_DYNAMIC, KEY_TUTORIAL, KEY_BIG_CLUES, KEY_SOUND, KEY_SKIN, KEY_SKINS_OWNED, "large_mode", "kids_mode", "vibrate_on", "praise_voice", "helper", "reminder_asked", "launches", "whats_new_seen", "player_name", "birthday", "birth_year", "profile_asked", "birthday_gift_year")
         val e = prefs.edit()
         prefs.all.keys.filter { it !in keep }.forEach { e.remove(it) }
         e.apply()
@@ -196,6 +196,11 @@ class ProgressStore(context: Context) {
 
     /** False until the player touches the large-mode switch; till then it follows the phone's font size. */
     val largeModeChosen: Boolean get() = prefs.contains("large_mode")
+
+    /** Mascot that offers help when stuck: "" none (golden glow only), or a StuckStyle name (KEY_TALL, KEY, OWL). */
+    var helper: String
+        get() = prefs.getString("helper", null).orEmpty()
+        set(v) = prefs.edit().putString("helper", v).apply()
 
     /** Short buzz for a found word (separate from the sound). */
     var vibrateOn: Boolean

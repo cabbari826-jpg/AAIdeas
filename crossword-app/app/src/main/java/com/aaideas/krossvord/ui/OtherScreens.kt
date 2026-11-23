@@ -204,6 +204,19 @@ fun SettingsScreen(vm: GameViewModel, isPremium: Boolean) {
             }
             Switch(checked = vm.bigClues, onCheckedChange = vm::changeBigClues)
         }
+        Column {
+            Text("Köməkçi")
+            Text("Çətin sözdə kömək təklif edir. «Yox» seçilsə, ipucu xanası sadəcə qızılı işıqlanır.", style = MaterialTheme.typography.bodySmall)
+            Row(Modifier.horizontalScroll(rememberScrollState()).padding(top = 6.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                (listOf<StuckStyle?>(null) + MASCOTS).forEach { h ->
+                    FilterChip(
+                        selected = vm.helper == h,
+                        onClick = { vm.changeHelper(h) },
+                        label = { Text(when (h) { null -> "Yox"; StuckStyle.KEY_TALL -> "🔑 Açar"; StuckStyle.KEY -> "🗝 Dəyirmi açar"; StuckStyle.OWL -> "🦉 Bayquş"; else -> h.name }) },
+                    )
+                }
+            }
+        }
         Row(verticalAlignment = Alignment.CenterVertically) {
             Column(Modifier.weight(1f)) {
                 Text("Səs")

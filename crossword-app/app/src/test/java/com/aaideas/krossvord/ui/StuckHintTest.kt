@@ -35,6 +35,7 @@ class StuckHintTest {
 
     @Test fun stuckHintShowsAfterAWhile() {
         val vm = vm()
+        vm.stuckStyle = StuckStyle.PILL
         vm.startLevel(0)
         vm.restartLevel()
         vm.finishTutorial()
