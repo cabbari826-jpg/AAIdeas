@@ -26,6 +26,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -60,6 +61,9 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -103,6 +107,19 @@ private fun PuzzleContent(vm: GameViewModel, isPremium: Boolean, compact: Boolea
         onDispose { owner.lifecycle.removeObserver(obs); vm.puzzleHidden() }
     }
     val game = vm.game ?: return
+    // Stuck on one word for a while: shown in the way picked in vm.stuckStyle.
+    val stuckEntry = game.activeEntry?.takeIf { !game.isComplete && vm.tutorialStep == TUTORIAL_DONE }
+    var stuck by remember { mutableStateOf(false) }
+    LaunchedEffect(vm.progressTick, stuckEntry?.id) {
+        stuck = false
+        if (stuckEntry == null) return@LaunchedEffect
+        kotlinx.coroutines.delay(vm.stuckSeconds * 1000)
+        stuck = true
+    }
+    val stuckNow = if (stuck) stuckEntry else null
+    androidx.compose.runtime.CompositionLocalProvider(
+        LocalStuck provides (if (vm.stuckStyle == StuckStyle.GLOW) stuckNow else null),
+    ) {
     val columns = vm.inputMode == InputMode.COLUMNS
     val letters = if (columns) vm.columnLetters() else emptyList()
     val draft = if (columns) vm.draft() else emptyList()
@@ -138,7 +155,11 @@ private fun PuzzleContent(vm: GameViewModel, isPremium: Boolean, compact: Boolea
                 tutorialEntry = if (vm.tutorialStep == TUTORIAL_COACH && COACH_STEPS[vm.coachIndex].first == TutorialSpot.CLUE) game.activeEntry else null,
                 onSpot = if (vm.tutorialStep == TUTORIAL_COACH) { spot, r -> vm.tutorialRects[spot] = r } else null,
             )
-            if (!game.isComplete && vm.tutorialStep == TUTORIAL_DONE) StuckHint(vm, Modifier.align(Alignment.BottomCenter))
+            if (stuckNow != null) when (vm.stuckStyle) {
+                StuckStyle.PILL -> StuckHint(vm, stuckNow, Modifier.align(Alignment.BottomCenter)) { stuck = false }
+                StuckStyle.OWL -> OwlHelper(vm, stuckNow, Modifier.align(Alignment.BottomEnd)) { stuck = false }
+                else -> {}
+            }
         }
         val hintText = when {
             isPremium -> "Hərf aç"
@@ -156,7 +177,7 @@ private fun PuzzleContent(vm: GameViewModel, isPremium: Boolean, compact: Boolea
             val border = if (glass) null else ButtonDefaults.outlinedButtonBorder(true)
             if (columns) OutlinedButton(onClick = vm::shuffleTiles, modifier = Modifier.weight(1f).then(glassBtn), colors = outlined, border = border) { Text("⟳ Qarışdır") }
             else OutlinedButton(onClick = vm::clearWord, modifier = Modifier.weight(1f).then(glassBtn), colors = outlined, border = border) { Text("Sözü sil") }
-            Button(onClick = vm::hint, modifier = Modifier.weight(1f).then(glassBtn).tutorialAnchor(vm, TutorialSpot.HINT)) {
+            Button(onClick = vm::hint, modifier = Modifier.weight(1f).stuckGlow(vm.stuckStyle == StuckStyle.GLOW && stuckNow != null).then(glassBtn).tutorialAnchor(vm, TutorialSpot.HINT)) {
                 Text(
                     when {
                         isPremium -> "Hərf aç"
@@ -210,6 +231,7 @@ private fun PuzzleContent(vm: GameViewModel, isPremium: Boolean, compact: Boolea
             )
         }
         }
+    }
     }
     if (vm.showKeywordDialog) KeywordDialog(vm)
     vm.clueCard?.takeIf { it in game.board.level.entries }?.let { e ->
@@ -453,9 +475,11 @@ private fun ClueCell(
                 LaunchedEffect(e) { a.animateTo(1f, repeatable(7, tween(600), RepeatMode.Reverse)) }
                 a.value
             } else 0f
+            val stuckHere = LocalStuck.current == e
             Box(
                 Modifier.fillMaxWidth().weight(1f)
                     .background(if (isActive) colors.activeWord else colors.clueCell)
+                    .then(if (stuckHere) Modifier.stuckClue() else Modifier)
                     .then(if (e == tutorialEntry) Modifier.border(3.dp, MaterialTheme.colorScheme.primary.copy(alpha = pulse)) else Modifier)
                     .clickable { onClueTap(e) }
                     .semantics { contentDescription = "İpucu: $text" },
@@ -1075,20 +1099,12 @@ private fun GlassLetterRows(
     }
 }
 
-/**
- * Stuck on one word for a while: a soft pill offers an easier clue. No timer is shown; the pill
- * pulses three times and then stays still. Any progress, a hint or picking another word hides it.
- */
+/** The word the player is stuck on, for the golden clue cell (glow style); null otherwise. */
+val LocalStuck = androidx.compose.runtime.staticCompositionLocalOf<Entry?> { null }
+
+/** Style A (first one): a soft pill under the grid offers an easier clue; pulses three times, then stays still. */
 @Composable
-private fun StuckHint(vm: GameViewModel, modifier: Modifier) {
-    val entry = vm.game?.activeEntry ?: return
-    var show by remember { mutableStateOf(false) }
-    LaunchedEffect(vm.progressTick, entry.id) {
-        show = false
-        kotlinx.coroutines.delay(vm.stuckSeconds * 1000)
-        show = true
-    }
-    if (!show) return
+private fun StuckHint(vm: GameViewModel, entry: Entry, modifier: Modifier, onUsed: () -> Unit) {
     val pulse = remember { androidx.compose.animation.core.Animatable(1f) }
     LaunchedEffect(Unit) {
         repeat(3) {
@@ -1098,7 +1114,7 @@ private fun StuckHint(vm: GameViewModel, modifier: Modifier) {
     }
     val cs = MaterialTheme.colorScheme
     androidx.compose.material3.Surface(
-        onClick = { show = false; vm.tapClueOf(entry) },
+        onClick = { onUsed(); vm.tapClueOf(entry) },
         shape = CircleShape,
         color = cs.tertiaryContainer,
         contentColor = cs.onTertiaryContainer,
@@ -1106,6 +1122,129 @@ private fun StuckHint(vm: GameViewModel, modifier: Modifier) {
         modifier = modifier.padding(10.dp).graphicsLayer { scaleX = pulse.value; scaleY = pulse.value },
     ) {
         Text("💡 Çətindir? İpucunu asanlaşdır", Modifier.padding(horizontal = 18.dp, vertical = 12.dp), style = MaterialTheme.typography.titleMedium)
+    }
+}
+
+/**
+ * Style B: a little owl peeks in at the grid's corner with a speech bubble. It slides in once,
+ * blinks twice and stays; a tap opens the clue card. Drawn with shapes, so it costs nothing to load.
+ */
+@Composable
+private fun OwlHelper(vm: GameViewModel, entry: Entry, modifier: Modifier, onUsed: () -> Unit) {
+    val slide = remember { androidx.compose.animation.core.Animatable(1f) }
+    val blink = remember { androidx.compose.animation.core.Animatable(1f) }
+    LaunchedEffect(Unit) {
+        slide.animateTo(0f, androidx.compose.animation.core.spring(dampingRatio = 0.6f, stiffness = 300f))
+        repeat(2) {
+            kotlinx.coroutines.delay(700)
+            blink.animateTo(0.1f, androidx.compose.animation.core.tween(90))
+            blink.animateTo(1f, androidx.compose.animation.core.tween(90))
+        }
+    }
+    val cs = MaterialTheme.colorScheme
+    Row(
+        modifier.padding(6.dp).graphicsLayer { translationX = slide.value * 260f; alpha = 1f - slide.value * 0.6f }
+            .clickable(interactionSource = remember { androidx.compose.foundation.interaction.MutableInteractionSource() }, indication = null) { onUsed(); vm.tapClueOf(entry) },
+        verticalAlignment = Alignment.Bottom,
+    ) {
+        // Speech bubble with a small tail pointing at the owl.
+        Column(horizontalAlignment = Alignment.End) {
+            androidx.compose.material3.Surface(
+                shape = RoundedCornerShape(topStart = 18.dp, topEnd = 18.dp, bottomStart = 18.dp, bottomEnd = 4.dp),
+                color = cs.surface,
+                contentColor = cs.onSurface,
+                border = androidx.compose.foundation.BorderStroke(2.dp, cs.primary),
+                shadowElevation = 3.dp,
+            ) {
+                Column(Modifier.padding(horizontal = 14.dp, vertical = 10.dp)) {
+                    Text("Kömək edim?", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                    Text("Asan ipucu göstərim", style = MaterialTheme.typography.bodyMedium, color = cs.primary)
+                }
+            }
+            Spacer(Modifier.height(18.dp))
+        }
+        Spacer(Modifier.width(4.dp))
+        Owl(blink.value, Modifier.size(64.dp))
+    }
+}
+
+/** A round lavender owl: body, ear tufts, big eyes (that blink), beak, wings. */
+@Composable
+private fun Owl(eyeOpen: Float, modifier: Modifier) {
+    val body = Color(0xFF8E7CC3)
+    val belly = Color(0xFFE9E1FA)
+    val ink = Color(0xFF2A2140)
+    androidx.compose.foundation.Canvas(modifier) {
+        val w = size.width; val h = size.height
+        // ear tufts
+        val ear = androidx.compose.ui.graphics.Path().apply {
+            moveTo(w * 0.18f, h * 0.30f); lineTo(w * 0.22f, h * 0.04f); lineTo(w * 0.42f, h * 0.22f); close()
+            moveTo(w * 0.82f, h * 0.30f); lineTo(w * 0.78f, h * 0.04f); lineTo(w * 0.58f, h * 0.22f); close()
+        }
+        drawPath(ear, body)
+        drawOval(body, topLeft = Offset(w * 0.1f, h * 0.14f), size = Size(w * 0.8f, h * 0.84f))
+        drawOval(belly, topLeft = Offset(w * 0.27f, h * 0.5f), size = Size(w * 0.46f, h * 0.44f))
+        // wings
+        drawOval(Color(0xFF6F5BAE), topLeft = Offset(w * 0.04f, h * 0.48f), size = Size(w * 0.2f, h * 0.36f))
+        drawOval(Color(0xFF6F5BAE), topLeft = Offset(w * 0.76f, h * 0.48f), size = Size(w * 0.2f, h * 0.36f))
+        // eyes
+        for (cx in listOf(w * 0.35f, w * 0.65f)) {
+            drawCircle(Color.White, radius = w * 0.15f, center = Offset(cx, h * 0.38f))
+            drawOval(ink, topLeft = Offset(cx - w * 0.07f, h * 0.38f - w * 0.07f * eyeOpen), size = Size(w * 0.14f, w * 0.14f * eyeOpen))
+            if (eyeOpen > 0.5f) drawCircle(Color.White, radius = w * 0.025f, center = Offset(cx + w * 0.03f, h * 0.36f))
+        }
+        // beak
+        val beak = androidx.compose.ui.graphics.Path().apply {
+            moveTo(w * 0.45f, h * 0.48f); lineTo(w * 0.55f, h * 0.48f); lineTo(w * 0.5f, h * 0.58f); close()
+        }
+        drawPath(beak, Color(0xFFFFB300))
+    }
+}
+
+/** Golden frame and warm light on the stuck clue cell; breathes three times, then stays lit. */
+@Composable
+private fun Modifier.stuckClue(): Modifier {
+    val a = remember { androidx.compose.animation.core.Animatable(0f) }
+    LaunchedEffect(Unit) {
+        repeat(3) {
+            a.animateTo(1f, androidx.compose.animation.core.tween(600))
+            a.animateTo(0.5f, androidx.compose.animation.core.tween(600))
+        }
+        a.animateTo(1f, androidx.compose.animation.core.tween(600))
+    }
+    val v = a.value
+    return this.drawBehind {
+        drawRect(
+            androidx.compose.ui.graphics.Brush.radialGradient(
+                listOf(Color(0xFFFFD54F).copy(alpha = 0.55f * v), Color(0x00FFD54F)),
+                center = Offset(size.width, 0f), radius = size.maxDimension * 1.1f,
+            )
+        )
+    }.border(2.5.dp, Color(0xFFFFB300).copy(alpha = 0.4f + 0.6f * v))
+}
+
+/** Style C (with the golden clue cell): the "Hərf aç" button gets a warm golden halo that breathes three times (no text added). */
+@Composable
+private fun Modifier.stuckGlow(on: Boolean): Modifier {
+    if (!on) return this
+    val a = remember { androidx.compose.animation.core.Animatable(0f) }
+    LaunchedEffect(Unit) {
+        repeat(3) {
+            a.animateTo(1f, androidx.compose.animation.core.tween(700))
+            a.animateTo(0.45f, androidx.compose.animation.core.tween(700))
+        }
+    }
+    val v = a.value
+    return this.drawBehind {
+        val r = size.height / 2
+        for (i in 3 downTo 1) {
+            val g = i * 4.dp.toPx()
+            drawRoundRect(
+                Color(0xFFFFC94D).copy(alpha = 0.22f * v / i),
+                topLeft = Offset(-g, -g), size = Size(size.width + 2 * g, size.height + 2 * g),
+                cornerRadius = androidx.compose.ui.geometry.CornerRadius(r + g),
+            )
+        }
     }
 }
 

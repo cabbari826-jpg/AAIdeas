@@ -17,6 +17,8 @@ import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
@@ -45,6 +47,22 @@ class StuckHintTest {
         rule.onRoot().captureRoboImage("build/outputs/roborazzi/v21-stuck.png")
     }
 
+    /** The other looks for the same moment, for the owner to choose from. */
+    private fun styleShot(style: StuckStyle) {
+        val vm = vm()
+        vm.startLevel(0)
+        vm.restartLevel()
+        vm.finishTutorial()
+        vm.stuckSeconds = 1
+        vm.stuckStyle = style
+        rule.mainClock.autoAdvance = false
+        rule.setContent { KrossvordTheme { Surface(Modifier.fillMaxSize()) { PuzzleScreen(vm, isPremium = false) } } }
+        rule.mainClock.advanceTimeBy(1_000 + 4_500)
+        rule.onRoot().captureRoboImage("build/outputs/roborazzi/v21-stuck-${style.name.lowercase()}.png")
+    }
+
+    @Test fun stuckOwl() = styleShot(StuckStyle.OWL)
+    @Test fun stuckGlow() = styleShot(StuckStyle.GLOW)
 }
 
 /** The whole settings page in one tall picture (new switches and the backup buttons are low down). */

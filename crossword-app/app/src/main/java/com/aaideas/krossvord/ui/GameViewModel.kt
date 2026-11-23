@@ -50,6 +50,9 @@ const val AUTO_LARGE_FONT_SCALE = 1.15f
 /** Seconds without progress on a level before the gentle "stuck?" hint shows. No timer is ever shown. */
 const val STUCK_SECONDS = 75L
 
+/** How the "stuck?" help looks: A pill under the grid, B owl helper, C golden glow on the clue cell and the hint button. */
+enum class StuckStyle { PILL, OWL, GLOW }
+
 /** Short praise for a found word (shown big for a moment, said aloud if there is a voice). */
 val SHORT_PRAISE = listOf("Bravo!", "Əla!", "Afərin!", "Super!", "Düzdür!")
 
@@ -833,6 +836,9 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
 
     /** Seconds before the "stuck?" pill; tests shorten it. */
     var stuckSeconds = STUCK_SECONDS
+
+    /** Which stuck-help style is on (owner is choosing; PILL is the first one). */
+    var stuckStyle by mutableStateOf(StuckStyle.PILL)
     fun packIndexOf(index: Int): Int = (packs.indices.lastOrNull { packStart[it] <= index } ?: 0)
     fun numberInPack(index: Int): Int = index - packStart[packIndexOf(index)] + 1
     fun levelTitle(index: Int): String {
