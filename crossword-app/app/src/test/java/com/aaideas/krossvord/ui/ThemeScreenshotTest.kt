@@ -95,10 +95,14 @@ class ThemeScreenshotTest {
             }
         }
         vm.startLevel(0); vm.restartLevel()
-        shoot("glass-puzzle-light", ThemeMode.LIGHT, Skin.SUSE) {
-            androidx.compose.foundation.layout.Box {
-                GlassBackdrop(false, androidx.compose.ui.Modifier.matchParentSize())
-                PuzzleScreen(vm, isPremium = false)
+        vm.finishTutorial()
+        vm.pickLetter(vm.columnLetters().indexOfFirst { it != null })
+        for (mode in listOf(ThemeMode.LIGHT, ThemeMode.DARK)) {
+            shoot("glass-puzzle-${mode.name.lowercase()}", mode, Skin.SUSE) {
+                androidx.compose.foundation.layout.Box {
+                    GlassBackdrop(mode == ThemeMode.DARK, androidx.compose.ui.Modifier.matchParentSize())
+                    PuzzleScreen(vm, isPremium = false)
+                }
             }
         }
     }

@@ -7,6 +7,8 @@ import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.repeatable
 import androidx.compose.foundation.background
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.border
@@ -107,24 +109,28 @@ private fun PuzzleContent(vm: GameViewModel, isPremium: Boolean, compact: Boolea
         game.openCells(e).zip(draft.mapNotNull { letters.getOrNull(it) }).toMap()
     }.orEmpty()
     Column(Modifier.fillMaxSize().padding(horizontal = if (compact) 4.dp else 8.dp, vertical = if (compact) 2.dp else 8.dp)) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
+        val glass = LocalGlass.current
+        var confirmRestart by remember { mutableStateOf(false) }
+        if (confirmRestart) AlertDialog(
+            onDismissRequest = { confirmRestart = false },
+            title = { Text("Səviyyəni yenidən başla?") },
+            text = { Text("Bu səviyyədəki hərflər, canlar və açılmış ipucları silinəcək.") },
+            confirmButton = { Button(onClick = { confirmRestart = false; vm.restartLevel() }) { Text("Yenidən başla") } },
+            dismissButton = { TextButton(onClick = { confirmRestart = false }) { Text("İmtina") } },
+        )
+        if (glass) GlassTopBar(vm, isPremium) { confirmRestart = true }
+        else Row(verticalAlignment = Alignment.CenterVertically) {
             SquareButton(Glyph.BACK, "Geri", vm::back, Modifier.tutorialAnchor(vm, TutorialSpot.BACK))
             Spacer(Modifier.width(8.dp))
-            var confirmRestart by remember { mutableStateOf(false) }
             SquareButton(Glyph.RESTART, "Səviyyəni yenidən başla", { confirmRestart = true }, Modifier.tutorialAnchor(vm, TutorialSpot.RESTART))
-            if (confirmRestart) AlertDialog(
-                onDismissRequest = { confirmRestart = false },
-                title = { Text("Səviyyəni yenidən başla?") },
-                text = { Text("Bu səviyyədəki hərflər, canlar və açılmış ipucları silinəcək.") },
-                confirmButton = { Button(onClick = { confirmRestart = false; vm.restartLevel() }) { Text("Yenidən başla") } },
-                dismissButton = { TextButton(onClick = { confirmRestart = false }) { Text("İmtina") } },
-            )
             Spacer(Modifier.weight(1f))
             LivesBadge(vm, isPremium, Modifier.padding(end = 6.dp).tutorialAnchor(vm, TutorialSpot.LIVES))
         }
         if (game.keyword != null) KeywordStrip(game.keywordLetters, game.isKeywordKnown, vm::openKeywordDialog, Modifier.tutorialAnchor(vm, TutorialSpot.KEYWORD))
         BoxWithConstraints(Modifier.fillMaxWidth().weight(1f), contentAlignment = Alignment.Center) {
-            val cell = min(maxWidth / game.board.cols, maxHeight / game.board.rows)
+            // Şüşə: the grid sits in a glass card with a small inner margin.
+            val pad = if (glass) GLASS_GRID_PAD * 2 else 0.dp
+            val cell = min((maxWidth - pad) / game.board.cols, (maxHeight - pad) / game.board.rows)
             Grid(
                 game, cell, preview, vm.feedback, vm::isClueShown, vm::tapCell, vm::tapClueOf,
                 tutorialEntry = if (vm.tutorialStep == TUTORIAL_COACH && COACH_STEPS[vm.coachIndex].first == TutorialSpot.CLUE) game.activeEntry else null,
@@ -137,11 +143,15 @@ private fun PuzzleContent(vm: GameViewModel, isPremium: Boolean, compact: Boolea
             else -> "Hərf aç ▶ reklam"
         }
         // Small phones, letter columns: shuffle and hint move between the columns, so the grid gets that row.
-        val actionsInColumns = compact && columns
+        // Şüşə keeps them in the row: its letter tiles are laid out in rows, not columns.
+        val actionsInColumns = compact && columns && !glass
         if (!actionsInColumns) Row(Modifier.fillMaxWidth().padding(vertical = if (compact) 2.dp else 6.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            if (columns) OutlinedButton(onClick = vm::shuffleTiles, modifier = Modifier.weight(1f)) { Text("⟳ Qarışdır") }
-            else OutlinedButton(onClick = vm::clearWord, modifier = Modifier.weight(1f)) { Text("Sözü sil") }
-            Button(onClick = vm::hint, modifier = Modifier.weight(1f).tutorialAnchor(vm, TutorialSpot.HINT)) {
+            val glassBtn = if (glass) Modifier.glassy(CircleShape) else Modifier
+            val outlined = if (glass) ButtonDefaults.outlinedButtonColors(containerColor = MaterialTheme.colorScheme.surfaceContainer) else ButtonDefaults.outlinedButtonColors()
+            val border = if (glass) null else ButtonDefaults.outlinedButtonBorder(true)
+            if (columns) OutlinedButton(onClick = vm::shuffleTiles, modifier = Modifier.weight(1f).then(glassBtn), colors = outlined, border = border) { Text("⟳ Qarışdır") }
+            else OutlinedButton(onClick = vm::clearWord, modifier = Modifier.weight(1f).then(glassBtn), colors = outlined, border = border) { Text("Sözü sil") }
+            Button(onClick = vm::hint, modifier = Modifier.weight(1f).then(glassBtn).tutorialAnchor(vm, TutorialSpot.HINT)) {
                 Text(
                     when {
                         isPremium -> "Hərf aç"
@@ -156,7 +166,7 @@ private fun PuzzleContent(vm: GameViewModel, isPremium: Boolean, compact: Boolea
         val active = game.activeEntry
         val bigText = vm.bigClues || LocalDensity.current.fontScale >= BIG_FONT_SCALE
         when {
-            active != null && vm.isClueShown(active) && (bigText || game.clueText(active).length > CELL_CLUE_MAX) ->
+            active != null && vm.isClueShown(active) && (glass || bigText || game.clueText(active).length > CELL_CLUE_MAX) ->
                 LongClueLine(active, game.clueText(active), big = bigText)
         }
         val entry = game.activeEntry
@@ -270,12 +280,16 @@ private fun Grid(
     }
     val glass = LocalGlass.current
     // Şüşə: the grid is a glass panel of separate rounded cells (as in the mockup) instead of ruled lines.
-    Column((if (glass) Modifier.clip(RoundedCornerShape(12.dp)).glassy(RoundedCornerShape(12.dp)) else Modifier.border(1.dp, colors.line)).then(spots)) {
+    val card = RoundedCornerShape(20.dp)
+    Column(
+        (if (glass) Modifier.clip(card).background(MaterialTheme.colorScheme.surfaceContainer).glassy(card).padding(GLASS_GRID_PAD)
+        else Modifier.border(1.dp, colors.line)).then(spots),
+    ) {
         for (r in 0 until game.board.rows) {
             Row {
                 for (c in 0 until game.board.cols) {
                     val cell = Cell(r, c)
-                    val mod = if (glass) Modifier.size(cellSize).padding(1.5.dp).clip(RoundedCornerShape(7.dp))
+                    val mod = if (glass) Modifier.size(cellSize).padding(1.5.dp).clip(RoundedCornerShape(cellSize * 0.16f))
                         else Modifier.size(cellSize).border(0.5.dp, colors.line)
                     if (game.board.isLetter(cell)) {
                         LetterCell(
@@ -335,7 +349,8 @@ private fun LetterCell(
                 lineHeight = (size.value * 0.22f).sp,
                 color = colors.keyword,
                 fontWeight = FontWeight.Bold,
-                modifier = Modifier.align(Alignment.TopStart).background(bg).padding(start = 2.dp, end = 1.dp),
+                // Şüşə cells are see-through: a second coat of the cell colour would show as a box.
+                modifier = Modifier.align(Alignment.TopStart).background(if (LocalGlass.current) Color.Transparent else bg).padding(start = 2.dp, end = 1.dp),
             )
         }
         if (ch != null) {
@@ -460,16 +475,21 @@ const val LARGE_FONT_SCALE = 1.3f
 /** The selected clue in full under the grid: song lines that don't fit a cell, or big-text mode. */
 @Composable
 private fun LongClueLine(entry: Entry, text: String, big: Boolean) {
+    val glass = LocalGlass.current
+    // Şüşə: a glass pill, "Süfrənin şahı · 5 hərf", as in the mockup.
+    val shape = if (glass) CircleShape else RoundedCornerShape(10.dp)
     Surface(
-        color = MaterialTheme.colorScheme.secondaryContainer,
-        shape = RoundedCornerShape(10.dp),
-        modifier = Modifier.fillMaxWidth().padding(top = 2.dp).glassy(RoundedCornerShape(10.dp)),
+        color = if (glass) MaterialTheme.colorScheme.surfaceContainer else MaterialTheme.colorScheme.secondaryContainer,
+        shape = shape,
+        modifier = Modifier.fillMaxWidth().padding(top = 2.dp, bottom = if (glass) 6.dp else 0.dp).glassy(shape),
     ) {
         Text(
-            (if (text.length > CELL_CLUE_MAX) "♪ " else if (entry.direction == Direction.ACROSS) "→ " else "↓ ") +
+            if (glass) (if (text.length > CELL_CLUE_MAX) "♪ " else "") + "$text · ${entry.letters.size} hərf"
+            else (if (text.length > CELL_CLUE_MAX) "♪ " else if (entry.direction == Direction.ACROSS) "→ " else "↓ ") +
                 "$text  (${entry.letters.size} hərf)",
-            Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
+            Modifier.padding(horizontal = if (glass) 18.dp else 12.dp, vertical = if (glass) 10.dp else 8.dp),
             style = if (big) MaterialTheme.typography.headlineSmall else MaterialTheme.typography.titleSmall,
+            fontWeight = if (glass) FontWeight.Bold else null,
         )
     }
 }
@@ -499,9 +519,10 @@ internal fun AzKeyboard(onLetter: (Char) -> Unit, onBackspace: () -> Unit, keyHe
 
 @Composable
 private fun Key(label: String, modifier: Modifier, height: Dp, onClick: () -> Unit) {
+    val shape = RoundedCornerShape(if (LocalGlass.current) 12.dp else 8.dp)
     Surface(
-        modifier = modifier.height(height).glassy(RoundedCornerShape(8.dp)).clickable(onClick = onClick),
-        shape = RoundedCornerShape(8.dp),
+        modifier = modifier.height(height).glassy(shape).clickable(onClick = onClick),
+        shape = shape,
         color = MaterialTheme.colorScheme.surfaceVariant,
     ) {
         Box(contentAlignment = Alignment.Center) { Text(label, fontSize = 22.sp, fontWeight = FontWeight.SemiBold) }
@@ -572,7 +593,7 @@ private fun LetterTile(tile: Tile, hideWhenUsed: Boolean = false, onClick: () ->
             .semantics { contentDescription = "Hərf ${tile.letter}" },
         shape = RoundedCornerShape(12.dp),
         color = MaterialTheme.colorScheme.primaryContainer,
-        shadowElevation = if (tile.used || LocalLowEnd.current) 0.dp else 3.dp,
+        shadowElevation = if (tile.used || LocalLowEnd.current || LocalGlass.current) 0.dp else 3.dp,
     ) {
         Box(contentAlignment = Alignment.Center) {
             Text(
@@ -610,6 +631,10 @@ private fun ColumnsInput(
         if (feedback == WordFeedback.WRONG) {
             for (x in listOf(14f, -12f, 9f, -6f, 3f, 0f)) shake.animateTo(x, tween(45))
         }
+    }
+    if (LocalGlass.current) {
+        GlassLetterRows(letters, draft, onPick, onUnpick, onUndo, onClear, Modifier.graphicsLayer { translationX = shake.value })
+        return
     }
     Row(
         Modifier.fillMaxWidth().height(LocalTile.current * 4 + 28.dp).padding(top = 4.dp).graphicsLayer { translationX = shake.value },
@@ -686,7 +711,7 @@ private fun PickTile(letter: Char, order: Int?, onClick: () -> Unit) {
             .semantics { contentDescription = "Hərf $letter" + if (picked) ", seçilib $order" else "" },
         shape = RoundedCornerShape(12.dp),
         color = if (picked) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.primaryContainer,
-        shadowElevation = if (picked || LocalLowEnd.current) 0.dp else 3.dp,
+        shadowElevation = if (picked || LocalLowEnd.current || LocalGlass.current) 0.dp else 3.dp,
     ) {
         Box(contentAlignment = Alignment.Center) {
             Text(
@@ -863,6 +888,163 @@ private fun LivesBadge(vm: GameViewModel, isPremium: Boolean, modifier: Modifier
         val next = vm.secondsToNextLife
         if (!isPremium && next != null) {
             Text("+1 ${clock(next)}", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        }
+    }
+}
+
+// ---- Şüşə (glass) layout, as in the Liquid Glass mockup. Klassik and the other themes never reach this. ----
+
+/** Inner margin of the glass card around the grid. */
+private val GLASS_GRID_PAD = 6.dp
+
+/** The heart outline used by the lives badge and the glass top bar. */
+private fun heartPath(w: Float, h: Float) = androidx.compose.ui.graphics.Path().apply {
+    moveTo(w * 0.5f, h * 0.9f)
+    cubicTo(w * 0.5f, h * 0.9f, w * 0.04f, h * 0.62f, w * 0.04f, h * 0.34f)
+    cubicTo(w * 0.04f, h * 0.17f, w * 0.17f, h * 0.06f, w * 0.3f, h * 0.06f)
+    cubicTo(w * 0.4f, h * 0.06f, w * 0.47f, h * 0.12f, w * 0.5f, h * 0.2f)
+    cubicTo(w * 0.53f, h * 0.12f, w * 0.6f, h * 0.06f, w * 0.7f, h * 0.06f)
+    cubicTo(w * 0.83f, h * 0.06f, w * 0.96f, h * 0.17f, w * 0.96f, h * 0.34f)
+    cubicTo(w * 0.96f, h * 0.62f, w * 0.5f, h * 0.9f, w * 0.5f, h * 0.9f)
+    close()
+}
+
+/** A drawn back arrow or restart circle, centred in its box. */
+@Composable
+private fun GlyphIcon(glyph: Glyph, tint: Color, modifier: Modifier) {
+    androidx.compose.foundation.Canvas(modifier) {
+        val w = size.width; val h = size.height
+        val stroke = androidx.compose.ui.graphics.drawscope.Stroke(width = 2.6.dp.toPx(), cap = androidx.compose.ui.graphics.StrokeCap.Round, join = androidx.compose.ui.graphics.StrokeJoin.Round)
+        when (glyph) {
+            Glyph.BACK -> drawPath(androidx.compose.ui.graphics.Path().apply {
+                moveTo(w * 0.62f, h * 0.14f); lineTo(w * 0.3f, h * 0.5f); lineTo(w * 0.62f, h * 0.86f)
+            }, tint, style = stroke)
+            Glyph.RESTART -> {
+                drawArc(tint, startAngle = -30f, sweepAngle = 300f, useCenter = false,
+                    topLeft = androidx.compose.ui.geometry.Offset(w * 0.12f, h * 0.12f),
+                    size = androidx.compose.ui.geometry.Size(w * 0.76f, h * 0.76f), style = stroke)
+                val x = w * 0.5f; val y = h * 0.12f
+                drawPath(androidx.compose.ui.graphics.Path().apply {
+                    moveTo(x - w * 0.1f, y - h * 0.15f); lineTo(x + w * 0.1f, y); lineTo(x - w * 0.1f, y + h * 0.15f)
+                }, tint, style = stroke)
+            }
+        }
+    }
+}
+
+/** One glass pill across the top: "‹ Səviyyələr", restart, hearts, and the level number in its pack. */
+@Composable
+private fun GlassTopBar(vm: GameViewModel, isPremium: Boolean, onRestart: () -> Unit) {
+    val cs = MaterialTheme.colorScheme
+    val ink = cs.onSurface
+    Row(
+        Modifier.fillMaxWidth().padding(bottom = 6.dp).clip(CircleShape).background(cs.surfaceContainer).glassy(CircleShape)
+            .height(52.dp).padding(horizontal = 4.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Row(
+            Modifier.clip(CircleShape).clickable(onClick = vm::back).fillMaxHeight().padding(start = 6.dp, end = 12.dp)
+                .tutorialAnchor(vm, TutorialSpot.BACK).semantics { contentDescription = "Geri" },
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            GlyphIcon(Glyph.BACK, ink, Modifier.size(22.dp))
+            Spacer(Modifier.width(4.dp))
+            Text(if (vm.playingMini) "Geri" else "Səviyyələr", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold, color = ink)
+        }
+        Box(
+            Modifier.size(44.dp).clip(CircleShape).clickable(onClick = onRestart)
+                .tutorialAnchor(vm, TutorialSpot.RESTART).semantics { contentDescription = "Səviyyəni yenidən başla" },
+            contentAlignment = Alignment.Center,
+        ) { GlyphIcon(Glyph.RESTART, ink, Modifier.size(22.dp)) }
+        Spacer(Modifier.weight(1f))
+        val n = vm.lives
+        val red = Color(0xFFE53935)
+        Row(
+            Modifier.tutorialAnchor(vm, TutorialSpot.LIVES).semantics { contentDescription = "Can: ${if (isPremium) "limitsiz" else n}" },
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(1.dp),
+        ) {
+            val hearts = if (isPremium) 1 else maxOf(n, 1)
+            repeat(hearts) {
+                androidx.compose.foundation.Canvas(Modifier.size(17.dp)) {
+                    val path = heartPath(size.width, size.height)
+                    if (!isPremium && n <= 0) drawPath(path, red, style = androidx.compose.ui.graphics.drawscope.Stroke(width = 2.dp.toPx()))
+                    else drawPath(path, red)
+                }
+            }
+            if (isPremium) Text("∞", fontWeight = FontWeight.Bold, color = ink, modifier = Modifier.padding(start = 2.dp))
+            val next = vm.secondsToNextLife
+            if (!isPremium && next != null) {
+                Text(" +1 ${clock(next)}", style = MaterialTheme.typography.labelSmall, color = cs.onSurfaceVariant)
+            }
+        }
+        val count = vm.currentLevelCount
+        if (count != null) Text(count, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold, color = ink,
+            modifier = Modifier.padding(start = 10.dp, end = 14.dp))
+        else Spacer(Modifier.width(12.dp))
+    }
+}
+
+/** Glass letter tiles in even rows of six, ⌫ and ✕ at the end, as in the mockup. Same picking as the columns. */
+@Composable
+private fun GlassLetterRows(
+    letters: List<Char?>,
+    draft: List<Int>,
+    onPick: (Int) -> Unit,
+    onUnpick: (Int) -> Unit,
+    onUndo: () -> Unit,
+    onClear: () -> Unit,
+    modifier: Modifier,
+) {
+    val haptic = LocalHapticFeedback.current
+    val cs = MaterialTheme.colorScheme
+    // Each slot: a letter index, or -1 for ⌫ and -2 for ✕. Used-up spots stay as gaps, so tiles never jump.
+    val slots = letters.indices.toList() + listOf(-1, -2)
+    val h = LocalTile.current + 10.dp
+    Column(modifier.fillMaxWidth().padding(top = 2.dp, bottom = 10.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        slots.chunked(6).forEach { row ->
+            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                row.forEach { i ->
+                    val shape = RoundedCornerShape(16.dp)
+                    val ch = letters.getOrNull(i)
+                    when {
+                        i >= 0 && ch == null -> Spacer(Modifier.weight(1f).height(h))
+                        i >= 0 -> {
+                            val order = draft.indexOf(i).takeIf { it >= 0 }?.plus(1)
+                            val picked = order != null
+                            Box(
+                                Modifier.weight(1f).height(h).clip(shape)
+                                    .background(if (picked) cs.primary else cs.primaryContainer)
+                                    .glassy(shape)
+                                    .clickable {
+                                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                                        if (picked) onUnpick(i) else onPick(i)
+                                    }
+                                    .semantics { contentDescription = "Hərf $ch" + if (picked) ", seçilib $order" else "" },
+                                contentAlignment = Alignment.Center,
+                            ) {
+                                Text(ch.toString(), fontSize = 24.sp, fontWeight = FontWeight.Bold, color = if (picked) cs.onPrimary else cs.onSurface)
+                                if (order != null) Text("$order", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = cs.onPrimary,
+                                    modifier = Modifier.align(Alignment.TopEnd).padding(top = 3.dp, end = 6.dp))
+                            }
+                        }
+                        else -> {
+                            val enabled = draft.isNotEmpty()
+                            Box(
+                                Modifier.weight(1f).height(h).clip(shape)
+                                    .background(cs.secondaryContainer)
+                                    .glassy(shape)
+                                    .clickable(enabled = enabled) { if (i == -1) onUndo() else onClear() }
+                                    .semantics { contentDescription = if (i == -1) "Son hərfi sil" else "Təmizlə" },
+                                contentAlignment = Alignment.Center,
+                            ) {
+                                Text(if (i == -1) "⌫" else "✕", fontSize = 22.sp, color = cs.onSurface.copy(alpha = if (enabled) 1f else 0.4f))
+                            }
+                        }
+                    }
+                }
+                repeat(6 - row.size) { Spacer(Modifier.weight(1f)) }
+            }
         }
     }
 }
