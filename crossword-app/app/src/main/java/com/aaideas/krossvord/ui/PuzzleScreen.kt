@@ -146,7 +146,8 @@ private fun PuzzleContent(vm: GameViewModel, isPremium: Boolean, compact: Boolea
         // Şüşə keeps them in the row: its letter tiles are laid out in rows, not columns.
         val actionsInColumns = compact && columns && !glass
         if (!actionsInColumns) Row(Modifier.fillMaxWidth().padding(vertical = if (compact) 2.dp else 6.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            val glassBtn = if (glass) Modifier.glassy(CircleShape) else Modifier
+            // A fixed height makes the button's fill take the whole touch area, so it lines up with the glass rim.
+            val glassBtn = if (glass) Modifier.height(48.dp).glassy(CircleShape) else Modifier
             val outlined = if (glass) ButtonDefaults.outlinedButtonColors(containerColor = MaterialTheme.colorScheme.surfaceContainer) else ButtonDefaults.outlinedButtonColors()
             val border = if (glass) null else ButtonDefaults.outlinedButtonBorder(true)
             if (columns) OutlinedButton(onClick = vm::shuffleTiles, modifier = Modifier.weight(1f).then(glassBtn), colors = outlined, border = border) { Text("⟳ Qarışdır") }
