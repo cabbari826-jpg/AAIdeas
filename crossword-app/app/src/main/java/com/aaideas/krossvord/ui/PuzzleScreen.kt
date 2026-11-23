@@ -149,9 +149,12 @@ private fun PuzzleContent(vm: GameViewModel, isPremium: Boolean, compact: Boolea
         BoxWithConstraints(Modifier.fillMaxWidth().weight(1f), contentAlignment = Alignment.Center) {
             // Şüşə: the grid sits in a glass card with a small inner margin.
             val pad = if (glass) GLASS_GRID_PAD * 2 else 0.dp
-            val cell = min((maxWidth - pad) / game.board.cols, (maxHeight - pad) / game.board.rows)
+            // The grid spans the full width, in line with the buttons and letters below (symmetry): cells may
+            // be a little wider than tall when height is short, but never more than [MAX_CELL_STRETCH].
+            val cellH = min((maxWidth - pad) / game.board.cols, (maxHeight - pad) / game.board.rows)
+            val cellW = min((maxWidth - pad) / game.board.cols, cellH * MAX_CELL_STRETCH)
             Grid(
-                game, cell, preview, vm.feedback, vm::isClueShown, vm::tapCell, vm::tapClueOf,
+                game, cellW, cellH, preview, vm.feedback, vm::isClueShown, vm::tapCell, vm::tapClueOf,
                 tutorialEntry = if (vm.tutorialStep == TUTORIAL_COACH && COACH_STEPS[vm.coachIndex].first == TutorialSpot.CLUE) game.activeEntry else null,
                 onSpot = if (vm.tutorialStep == TUTORIAL_COACH) { spot, r -> vm.tutorialRects[spot] = r } else null,
             )
@@ -283,9 +286,13 @@ private fun PuzzleContent(vm: GameViewModel, isPremium: Boolean, compact: Boolea
 
 }
 
+/** Cells may get this much wider than tall so the grid lines up with the full-width controls. */
+private const val MAX_CELL_STRETCH = 1.25f
+
 @Composable
 private fun Grid(
     game: GameState,
+    cellWidth: Dp,
     cellSize: Dp,
     preview: Map<Cell, Char>,
     feedback: WordFeedback?,
@@ -315,9 +322,10 @@ private fun Grid(
     val spots = if (onSpot == null || active == null) Modifier else Modifier.onGloballyPositioned { co ->
         val o = co.boundsInRoot().topLeft
         val px = with(density) { cellSize.toPx() }
+        val pw = with(density) { cellWidth.toPx() }
         fun rectOf(cells: List<Cell>) = androidx.compose.ui.geometry.Rect(
-            o.x + cells.minOf { it.col } * px, o.y + cells.minOf { it.row } * px,
-            o.x + (cells.maxOf { it.col } + 1) * px, o.y + (cells.maxOf { it.row } + 1) * px,
+            o.x + cells.minOf { it.col } * pw, o.y + cells.minOf { it.row } * px,
+            o.x + (cells.maxOf { it.col } + 1) * pw, o.y + (cells.maxOf { it.row } + 1) * px,
         )
         onSpot(TutorialSpot.WORD, rectOf(active.cells))
         game.board.cluesAt.entries.firstOrNull { active in it.value }?.let { onSpot(TutorialSpot.CLUE, rectOf(listOf(it.key))) }
@@ -333,8 +341,8 @@ private fun Grid(
             Row {
                 for (c in 0 until game.board.cols) {
                     val cell = Cell(r, c)
-                    val mod = if (glass) Modifier.size(cellSize).padding(1.5.dp).clip(RoundedCornerShape(cellSize * 0.16f))
-                        else Modifier.size(cellSize).border(0.5.dp, colors.line)
+                    val mod = if (glass) Modifier.size(cellWidth, cellSize).padding(1.5.dp).clip(RoundedCornerShape(cellSize * 0.16f))
+                        else Modifier.size(cellWidth, cellSize).border(0.5.dp, colors.line)
                     if (game.board.isLetter(cell)) {
                         LetterCell(
                             game, cell, cell == game.selectedCell, cell in activeCells, cellSize,
@@ -386,7 +394,7 @@ private fun LetterCell(
     ) {
         if (keywordIndex >= 0) {
             // Ring sits inset; the number sits in the corner on the cell colour so it never covers the letter.
-            Box(Modifier.fillMaxSize().padding(size * 0.14f).border(2.dp, colors.keyword, RoundedCornerShape(50)))
+            Box(Modifier.fillMaxHeight().aspectRatio(1f).padding(size * 0.14f).border(2.dp, colors.keyword, RoundedCornerShape(50)))
             Text(
                 "${keywordIndex + 1}",
                 fontSize = (size.value * 0.22f).sp,
@@ -810,36 +818,48 @@ private fun SmallAction(label: String, description: String, enabled: Boolean, on
     }
 }
 
-/** The level's key word: slots fill in as its highlighted cells are solved; tap to guess early. */
+/**
+ * The level's key word: one full-width bar, its edges in line with the grid and the letters.
+ * Label on the left, the slots spread evenly (they fill in as the ringed cells are solved), and a
+ * guess button on the right. In Şüşə it is a glass bar like the others.
+ */
 @Composable
 private fun KeywordStrip(letters: List<Char?>, known: Boolean, onGuess: () -> Unit, modifier: Modifier = Modifier) {
     val colors = LocalGridColors.current
-    // Centred as one group: label, circles, guess mark.
-    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
+    val glass = LocalGlass.current
+    val shape = RoundedCornerShape(18.dp)
     Row(
-        modifier.clickable(enabled = !known, onClick = onGuess).padding(vertical = 2.dp, horizontal = 8.dp),
+        modifier.fillMaxWidth().padding(vertical = 4.dp)
+            .then(if (glass) Modifier.clip(shape).background(MaterialTheme.colorScheme.surfaceContainer).glassy(shape) else Modifier)
+            .clickable(enabled = !known, onClick = onGuess)
+            .padding(horizontal = 12.dp, vertical = 6.dp),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(4.dp),
     ) {
-        Text("Açar söz", style = MaterialTheme.typography.labelLarge, color = colors.keyword)
-        Spacer(Modifier.width(6.dp))
-        letters.forEachIndexed { i, ch ->
-            Box(
-                Modifier.size(28.dp).border(2.dp, colors.keyword, RoundedCornerShape(50)),
-                contentAlignment = Alignment.Center,
-            ) {
-                Text(ch?.toString() ?: "${i + 1}", fontSize = if (ch != null) 15.sp else 10.sp,
-                    fontWeight = if (ch != null) FontWeight.Bold else FontWeight.Normal,
-                    color = if (ch != null) MaterialTheme.colorScheme.onSurface else colors.keyword)
+        Column {
+            Text("Açar", style = MaterialTheme.typography.labelLarge, fontWeight = FontWeight.Bold, color = colors.keyword, lineHeight = 14.sp)
+            Text("söz", style = MaterialTheme.typography.labelLarge, fontWeight = FontWeight.Bold, color = colors.keyword, lineHeight = 14.sp)
+        }
+        Row(Modifier.weight(1f).padding(horizontal = 8.dp), horizontalArrangement = Arrangement.SpaceEvenly) {
+            letters.forEachIndexed { i, ch ->
+                Box(
+                    Modifier.size(32.dp).clip(RoundedCornerShape(10.dp))
+                        .background(if (ch != null) colors.keyword.copy(alpha = 0.18f) else Color.Transparent)
+                        .border(2.dp, colors.keyword, RoundedCornerShape(10.dp)),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    Text(ch?.toString() ?: "${i + 1}", fontSize = if (ch != null) 17.sp else 11.sp,
+                        fontWeight = if (ch != null) FontWeight.Bold else FontWeight.Normal,
+                        color = if (ch != null) MaterialTheme.colorScheme.onSurface else colors.keyword)
+                }
             }
         }
-        Spacer(Modifier.width(6.dp))
-        Text(
-            if (known) "✓" else "›",
-            style = MaterialTheme.typography.titleLarge,
-            color = colors.keyword,
-        )
-    }
+        Box(
+            Modifier.size(36.dp).clip(CircleShape).background(colors.keyword.copy(alpha = if (known) 0.25f else 0.9f)),
+            contentAlignment = Alignment.Center,
+        ) {
+            Text(if (known) "✓" else "?", fontWeight = FontWeight.Bold, fontSize = 18.sp,
+                color = if (known) colors.keyword else Color.White)
+        }
     }
 }
 

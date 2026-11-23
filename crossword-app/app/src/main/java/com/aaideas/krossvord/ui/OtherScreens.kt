@@ -119,6 +119,8 @@ val CREDITS = listOf(
     "Söz siyahısı: Azərbaycan dili üçün Hunspell lüğəti (Mozilla Azerbaijani L10n; " +
         "Metin Amiroff, Kevin Scannell, Orkhan Jafarov). Lisenziya: MPL-2.0, " +
         "github.com/mozillaz/spellchecker",
+    "Menyu şrifti: Nunito (The Nunito Project Authors). Lisenziya: SIL Open Font License 1.1, github.com/googlefonts/nunito",
+    "Azərbaycan xəritəsi: Natural Earth (ictimai mülkiyyət), naturalearthdata.com",
 )
 
 @Composable

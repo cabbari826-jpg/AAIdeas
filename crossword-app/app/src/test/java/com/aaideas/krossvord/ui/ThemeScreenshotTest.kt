@@ -108,6 +108,25 @@ class ThemeScreenshotTest {
         }
     }
 
+    /** The chosen menu: short pill, Nunito labels, drawn icons; each tab selected once. */
+    @Config(qualifiers = "w393dp-h700dp-xxhdpi")
+    @Test fun menuFinal() {
+        for (mode in listOf(ThemeMode.LIGHT, ThemeMode.DARK)) {
+            shoot("menu-final-${mode.name.lowercase()}", mode, Skin.SUSE) {
+                androidx.compose.foundation.layout.Box {
+                    GlassBackdrop(mode == ThemeMode.DARK, androidx.compose.ui.Modifier.matchParentSize())
+                    androidx.compose.foundation.layout.Column(androidx.compose.ui.Modifier.padding(top = 8.dp)) {
+                        listOf(Screen.HOME, Screen.DAILY, Screen.STATS, Screen.SETTINGS).forEach { tab ->
+                            androidx.compose.foundation.layout.Box(androidx.compose.ui.Modifier.fillMaxWidth(), contentAlignment = androidx.compose.ui.Alignment.Center) {
+                                GlassBottomMenu(tab, {})
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     /** Bottom menu variants for the owner: current, shorter, and shorter with bolder fonts. */
     @Config(qualifiers = "w393dp-h1000dp-xxhdpi")
     @Test fun menuVariants() {

@@ -21,6 +21,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.horizontalScroll
@@ -330,9 +331,9 @@ fun GlassBottomMenu(
     screen: Screen,
     open: (Screen) -> Unit,
     modifier: Modifier = Modifier,
-    // Variants shown to the owner: a shorter pill hugging its tabs, and a bolder label font.
-    compact: Boolean = false,
-    font: androidx.compose.ui.text.font.FontFamily? = null,
+    // The owner's pick (2026-11-23): a shorter pill hugging its tabs, labels in Nunito ExtraBold.
+    compact: Boolean = true,
+    font: androidx.compose.ui.text.font.FontFamily? = MenuFont,
 ) {
     val cs = MaterialTheme.colorScheme
     val screenLayer = LocalGlassScreen.current
@@ -355,10 +356,10 @@ fun GlassBottomMenu(
     ) {
         Row(Modifier.padding(if (compact) 5.dp else 6.dp), horizontalArrangement = Arrangement.spacedBy(if (compact) 0.dp else 4.dp)) {
             listOf(
-                Triple(Screen.HOME, "▦", "Oyun"),
-                Triple(Screen.DAILY, "📅", "Bu gün"),
-                Triple(Screen.STATS, "★", "Statistika"),
-                Triple(Screen.SETTINGS, "⚙", "Ayarlar"),
+                Triple(Screen.HOME, MenuIcon.PLAY, "Oyun"),
+                Triple(Screen.DAILY, MenuIcon.TODAY, "Bu gün"),
+                Triple(Screen.STATS, MenuIcon.STATS, "Statistika"),
+                Triple(Screen.SETTINGS, MenuIcon.SETTINGS, "Ayarlar"),
             ).forEach { (target, icon, label) ->
                 val on = screen == target
                 val src = remember { MutableInteractionSource() }
@@ -372,13 +373,65 @@ fun GlassBottomMenu(
                 ) {
                     // With a chosen font the labels are bolder and darker, so they don't look faded on glass.
                     val tabInk = if (on) (if (glass) cs.onSurface else cs.onPrimary) else if (font != null) cs.onSurface.copy(alpha = 0.85f) else cs.onSurfaceVariant
-                    Text(icon, fontSize = 16.sp, color = tabInk)
+                    MenuGlyph(icon, tabInk, filled = on)
                     Text(
                         label,
                         style = if (font != null) MaterialTheme.typography.labelLarge.copy(fontFamily = font, fontWeight = androidx.compose.ui.text.font.FontWeight.Bold, fontSize = 13.sp)
                         else MaterialTheme.typography.labelMedium,
                         color = tabInk,
                     )
+                }
+            }
+        }
+    }
+}
+
+/** Nunito ExtraBold (SIL OFL 1.1), subset to Latin + Azerbaijani letters: the menu labels. */
+val MenuFont = androidx.compose.ui.text.font.FontFamily(
+    androidx.compose.ui.text.font.Font(com.aaideas.krossvord.R.font.nunito_extrabold, androidx.compose.ui.text.font.FontWeight.Bold),
+)
+
+enum class MenuIcon { PLAY, TODAY, STATS, SETTINGS }
+
+/**
+ * Menu icons drawn as one family: rounded 2 dp strokes on a 24 dp box, the chosen tab's icon
+ * gets a soft fill. Drawn, not emoji, so they look the same on every phone.
+ */
+@Composable
+fun MenuGlyph(icon: MenuIcon, ink: Color, filled: Boolean, modifier: Modifier = Modifier) {
+    androidx.compose.foundation.Canvas(modifier.size(24.dp)) {
+        val u = size.width / 24f
+        val stroke = androidx.compose.ui.graphics.drawscope.Stroke(2f * u, cap = androidx.compose.ui.graphics.StrokeCap.Round, join = androidx.compose.ui.graphics.StrokeJoin.Round)
+        val soft = ink.copy(alpha = if (filled) 0.28f else 0f)
+        fun rr(x: Float, y: Float, w: Float, h: Float, r: Float) = androidx.compose.ui.geometry.RoundRect(x * u, y * u, (x + w) * u, (y + h) * u, androidx.compose.ui.geometry.CornerRadius(r * u))
+        fun path(r: androidx.compose.ui.geometry.RoundRect) = androidx.compose.ui.graphics.Path().apply { addRoundRect(r) }
+        when (icon) {
+            // A crossword: 2×2 cells, one filled (the key letter).
+            MenuIcon.PLAY -> {
+                val cells = listOf(rr(3f, 3f, 8f, 8f, 2.5f), rr(13f, 3f, 8f, 8f, 2.5f), rr(3f, 13f, 8f, 8f, 2.5f), rr(13f, 13f, 8f, 8f, 2.5f))
+                drawPath(path(cells[1]), ink)
+                cells.forEachIndexed { i, c -> if (i != 1) { drawPath(path(c), soft); drawPath(path(c), ink, style = stroke) } }
+            }
+            // A calendar page with today's dot.
+            MenuIcon.TODAY -> {
+                val page = rr(3f, 5f, 18f, 16f, 3.5f)
+                drawPath(path(page), soft); drawPath(path(page), ink, style = stroke)
+                drawLine(ink, Offset(3f * u, 10f * u), Offset(21f * u, 10f * u), 2f * u)
+                drawLine(ink, Offset(8f * u, 3f * u), Offset(8f * u, 7f * u), 2f * u, cap = androidx.compose.ui.graphics.StrokeCap.Round)
+                drawLine(ink, Offset(16f * u, 3f * u), Offset(16f * u, 7f * u), 2f * u, cap = androidx.compose.ui.graphics.StrokeCap.Round)
+                drawCircle(ink, 2.2f * u, Offset(12f * u, 15.5f * u))
+            }
+            // Three rising bars.
+            MenuIcon.STATS -> listOf(rr(3.5f, 13f, 4.5f, 8f, 1.8f), rr(9.75f, 8f, 4.5f, 13f, 1.8f), rr(16f, 3f, 4.5f, 18f, 1.8f)).forEach {
+                drawPath(path(it), soft); drawPath(path(it), ink, style = stroke)
+            }
+            // Two sliders with knobs.
+            MenuIcon.SETTINGS -> {
+                drawLine(ink, Offset(3f * u, 8f * u), Offset(21f * u, 8f * u), 2f * u, cap = androidx.compose.ui.graphics.StrokeCap.Round)
+                drawLine(ink, Offset(3f * u, 16f * u), Offset(21f * u, 16f * u), 2f * u, cap = androidx.compose.ui.graphics.StrokeCap.Round)
+                listOf(Offset(15f * u, 8f * u), Offset(9f * u, 16f * u)).forEach {
+                    drawCircle(if (filled) ink else Color.Transparent, 3.2f * u, it)
+                    drawCircle(ink, 3.2f * u, it, style = stroke)
                 }
             }
         }
