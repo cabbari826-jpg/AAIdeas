@@ -23,10 +23,21 @@ class WidgetTest {
     @Test fun reminderIsOnByDefaultSoNobodyIsAsked() {
         val app = ApplicationProvider.getApplicationContext<Application>()
         assertTrue(com.aaideas.krossvord.remind.DailyReminder.isOn(app))
+        org.robolectric.Shadows.shadowOf(app).grantPermissions(android.Manifest.permission.POST_NOTIFICATIONS)
         val vm = GameViewModel(app)
         vm.onAppOpen(); vm.dismissWelcome()
         vm.onAppOpen(); vm.dismissWelcome()
         assertTrue(!vm.askReminder)
+    }
+
+    /** Android 13+: on by default, but without the permission nothing would come, so it is asked once. */
+    @Test fun reminderWithoutPermissionIsAskedOnce() {
+        val app = ApplicationProvider.getApplicationContext<Application>()
+        val vm = GameViewModel(app)
+        vm.onAppOpen(); vm.dismissWelcome()
+        assertTrue(!vm.askReminder)
+        vm.onAppOpen(); vm.dismissWelcome()
+        assertTrue(vm.askReminder)
     }
 
     /** Turned off by the player (or an old install): asked once, from the second launch. */

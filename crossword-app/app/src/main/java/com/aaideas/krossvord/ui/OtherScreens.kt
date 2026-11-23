@@ -416,13 +416,14 @@ private fun WidgetButton() {
     val canPin = remember { android.os.Build.VERSION.SDK_INT >= 26 && runCatching { manager.isRequestPinAppWidgetSupported }.getOrDefault(false) }
     var asked by remember { mutableStateOf(false) }
     Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-        if (canPin) OutlinedButton(onClick = {
+        Text("Vidjet: telefonun əsas ekranında günün sözü və seriyanız görünür, toxunanda oyun açılır.", style = MaterialTheme.typography.bodyMedium)
+        OutlinedButton(onClick = {
             asked = true
-            if (android.os.Build.VERSION.SDK_INT >= 26) runCatching {
+            if (canPin && android.os.Build.VERSION.SDK_INT >= 26) runCatching {
                 manager.requestPinAppWidget(android.content.ComponentName(context, com.aaideas.krossvord.widget.WordWidget::class.java), null, null)
             }
         }, modifier = Modifier.fillMaxWidth()) { Text("📌 «Günün sözü» vidjetini ekrana əlavə et") }
-        if (!canPin || asked) Text(
+        if (asked) Text(
             "Əgər vidjet görünmədisə: ekranın boş yerinə barmağınızı basıb saxlayın → «Vidjetlər» → «Açar Söz».",
             style = MaterialTheme.typography.bodySmall,
         )

@@ -22,6 +22,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -153,7 +155,13 @@ private fun MonthTripCard(vm: GameViewModel) {
         Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Text("🚗 Ayın yolu", style = MaterialTheme.typography.labelLarge, color = cs.primary)
             Text(route.title, style = MaterialTheme.typography.titleLarge)
-            AzMap(route.places, c.position(route, n), Modifier.fillMaxWidth())
+            var whole by androidx.compose.runtime.saveable.rememberSaveable { androidx.compose.runtime.mutableStateOf(false) }
+            Surface(shape = MaterialTheme.shapes.large, color = cs.surfaceContainerLowest, modifier = Modifier.fillMaxWidth()) {
+                AzMap(route.places, c.position(route, n), Modifier.fillMaxWidth(), close = !whole)
+            }
+            androidx.compose.material3.OutlinedButton(onClick = { whole = !whole }, modifier = Modifier.fillMaxWidth().height(48.dp)) {
+                Text(if (whole) "🔍 Yolu yaxından göstər" else "🗺 Bütün xəritəni göstər", style = MaterialTheme.typography.titleSmall)
+            }
             androidx.compose.material3.LinearProgressIndicator(
                 progress = { n.toFloat() / c.GOAL },
                 modifier = Modifier.fillMaxWidth().height(8.dp).clip(CircleShape),

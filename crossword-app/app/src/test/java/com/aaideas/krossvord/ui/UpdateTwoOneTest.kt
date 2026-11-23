@@ -2,6 +2,13 @@ package com.aaideas.krossvord.ui
 
 import android.app.Application
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.background
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.test.core.app.ApplicationProvider
@@ -29,6 +36,10 @@ import org.robolectric.annotation.GraphicsMode
 class UpdateTwoOneTest {
     private val app get() = ApplicationProvider.getApplicationContext<Application>()
     private fun vm() = GameViewModel(app).also { it.today = { java.time.LocalDate.of(2026, 11, 24) } }
+
+    private fun Modifier.androidx_padding() = padding(16.dp)
+    private fun Modifier.androidx_wall() = background(Brush.verticalGradient(listOf(Color(0xFF3A6EA5), Color(0xFF7FB3D5)))).padding(16.dp)
+    private fun Modifier.androidx_widget() = padding(top = 120.dp).size(320.dp, 110.dp)
 
     private fun shoot(name: String, content: @androidx.compose.runtime.Composable () -> Unit) =
         captureRoboImage("build/outputs/roborazzi/$name.png") { KrossvordTheme { Surface(Modifier.fillMaxSize()) { content() } } }
@@ -152,6 +163,39 @@ class UpdateTwoOneTest {
         app.getSharedPreferences("progress", 0).edit().putInt("month_key", 202611).putInt("month_levels", 9).commit()
         val vm = vm()
         shoot("v21-map-month") { JourneyScreen(vm) }
+    }
+
+    @Test fun everyMonthRouteCloseUp() {
+        val c = com.aaideas.krossvord.model.Challenge
+        shoot("v21-routes") {
+            androidx.compose.foundation.layout.Column(
+                Modifier.androidx_padding(),
+                verticalArrangement = androidx.compose.foundation.layout.Arrangement.spacedBy(12.dp),
+            ) {
+                c.ROUTES.forEach { r ->
+                    androidx.compose.material3.Text(r.title)
+                    AzMap(r.places, 3f, Modifier.fillMaxWidth(), close = true)
+                }
+            }
+        }
+    }
+
+    @Test fun widgetOnHomeScreen() {
+        shoot("v21-widget") {
+            androidx.compose.foundation.layout.Box(
+                Modifier.fillMaxSize().androidx_wall(),
+                contentAlignment = androidx.compose.ui.Alignment.TopCenter,
+            ) {
+                androidx.compose.ui.viewinterop.AndroidView(
+                    factory = { ctx ->
+                        val host = android.widget.FrameLayout(ctx)
+                        host.addView(com.aaideas.krossvord.widget.WordWidget.views(ctx).apply(ctx, host))
+                        host
+                    },
+                    modifier = Modifier.androidx_widget(),
+                )
+            }
+        }
     }
 
     @Test fun restWindowAfterAnHourOfPlay() {

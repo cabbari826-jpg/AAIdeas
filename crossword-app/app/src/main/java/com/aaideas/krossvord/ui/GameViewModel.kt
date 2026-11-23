@@ -602,7 +602,8 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     var askReminder by mutableStateOf(false)
         private set
     private var reminderDue = false
-    private fun reminderOn() = com.aaideas.krossvord.remind.DailyReminder.isOn(getApplication())
+    /** On, and Android lets us notify (Android 13+ needs the permission even though the reminder is on by default). */
+    private fun reminderOn() = com.aaideas.krossvord.remind.DailyReminder.let { it.isOn(getApplication()) && it.canNotify(getApplication()) }
 
     private fun maybeAskReminder() {
         if (!reminderDue || progress.reminderAsked || reminderOn() || welcome != null || showWhatsNew || whatsNewDue) return
