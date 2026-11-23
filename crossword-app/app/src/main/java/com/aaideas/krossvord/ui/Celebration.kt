@@ -35,6 +35,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
+import androidx.compose.foundation.layout.width
 import androidx.compose.ui.graphics.drawscope.rotate
 import kotlin.math.cos
 import kotlin.math.sin
@@ -51,7 +52,8 @@ fun levelTimeText(seconds: Long): String =
 fun LevelResultDialog(title: String, result: LevelResult, onNext: () -> Unit, onClose: () -> Unit) {
     Dialog(onDismissRequest = onClose) {
         Box(contentAlignment = Alignment.Center) {
-            Surface(shape = RoundedCornerShape(24.dp), color = MaterialTheme.colorScheme.surface, tonalElevation = 6.dp) {
+            // A fixed width: the window used to grow with its longest line (the button row), so it looked different level to level.
+            Surface(Modifier.width(300.dp), shape = RoundedCornerShape(24.dp), color = MaterialTheme.colorScheme.surface, tonalElevation = 6.dp) {
                 Column(
                     Modifier.padding(horizontal = 20.dp, vertical = 18.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
@@ -85,10 +87,8 @@ fun LevelResultDialog(title: String, result: LevelResult, onNext: () -> Unit, on
                             }
                         }
                     }
-                    Row(Modifier.fillMaxWidth().padding(top = 4.dp), horizontalArrangement = Arrangement.End) {
-                        TextButton(onClick = onClose) { Text("Bağla") }
-                        Button(onClick = onNext) { Text("Növbəti səviyyə ▶") }
-                    }
+                    Button(onClick = onNext, modifier = Modifier.fillMaxWidth().padding(top = 4.dp)) { Text("Növbəti səviyyə ▶") }
+                    TextButton(onClick = onClose) { Text("Bağla") }
                 }
             }
             Confetti(Modifier.matchParentSizeSafe())
