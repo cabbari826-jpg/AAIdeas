@@ -47,9 +47,8 @@ fun JourneyScreen(vm: GameViewModel) {
     val open = Journey.opened(solved)
     val state = rememberLazyListState()
     Column(Modifier.fillMaxSize().padding(horizontal = 16.dp)) {
-        TextButton(onClick = vm::back) { Text("← Əsas səhifə") }
-        Text("Yol xəritəsi", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
-        Spacer(Modifier.height(8.dp))
+        ScreenHeader("Yol xəritəsi", vm::back, Modifier.padding(top = 16.dp))
+        Spacer(Modifier.height(12.dp))
         LazyColumn(state = state, modifier = Modifier.fillMaxSize()) {
             item { MonthTripCard(vm) }
             item {

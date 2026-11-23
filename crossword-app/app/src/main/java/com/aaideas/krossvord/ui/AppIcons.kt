@@ -123,7 +123,6 @@ fun AppIconPicker(isPremium: Boolean) {
     val ctx = LocalContext.current
     var chosen by remember(isPremium) { mutableStateOf(AppIcon.chosen(ctx).let { if (it.kind == IconKind.PREMIUM && !isPremium) AppIcon.STANDARD else it }) }
     Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-        Text("Tətbiqin ikonu", style = MaterialTheme.typography.headlineSmall)
         FlowRow(horizontalArrangement = Arrangement.spacedBy(6.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
             AppIcon.entries.filter { it.kind != IconKind.HOLIDAY }.forEach { icon ->
                 val locked = icon.kind == IconKind.PREMIUM && !isPremium

@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.compositeOver
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.clipPath
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
@@ -111,7 +112,7 @@ private fun DrawScope.glowsDark(t: Float = 0f, moving: Boolean = false) {
 /** Asked before switching a weak phone to Şüşə. */
 @Composable
 fun GlassWarning(onYes: () -> Unit, onNo: () -> Unit) {
-    AlertDialog(
+    SolidAlertDialog(
         onDismissRequest = onNo,
         title = { Text("Şüşə mövzusu") },
         text = {
@@ -253,7 +254,68 @@ fun MaxGlassColors(on: Boolean, dark: Boolean, liquid: Boolean, content: @Compos
         androidx.compose.runtime.CompositionLocalProvider(
             androidx.compose.material3.LocalTextStyle provides style,
             androidx.compose.material3.LocalContentColor provides ink,
+            LocalPanelScheme provides cs,
             content = content,
         )
     }
 }
+
+/** The theme's own colours before [MaxGlassColors] made the panels see-through; dialogs start from these. */
+val LocalPanelScheme = staticCompositionLocalOf<androidx.compose.material3.ColorScheme?> { null }
+
+/**
+ * Dialogs and pop-ups are solid in every glass level: text over a see-through window over the grid
+ * could not be read, and a window that was half glass, half not looked odd. Outside glass, a no-op.
+ */
+@Composable
+fun SolidPanel(content: @Composable () -> Unit) {
+    if (!LocalGlass.current) { content(); return }
+    val base = LocalPanelScheme.current ?: androidx.compose.material3.MaterialTheme.colorScheme
+    val back = base.surface.copy(alpha = 1f)
+    fun Color.solid() = compositeOver(back)
+    val solid = base.copy(
+        surface = back, background = base.background.solid(),
+        surfaceContainerLowest = base.surfaceContainerLowest.solid(), surfaceContainerLow = base.surfaceContainerLow.solid(),
+        surfaceContainer = base.surfaceContainer.solid(), surfaceContainerHigh = base.surfaceContainerHigh.solid(),
+        surfaceContainerHighest = base.surfaceContainerHighest.solid(), surfaceVariant = base.surfaceVariant.solid(),
+        primaryContainer = base.primaryContainer.solid(), secondaryContainer = base.secondaryContainer.solid(),
+        tertiaryContainer = base.tertiaryContainer.solid(),
+    )
+    val style = androidx.compose.material3.LocalTextStyle.current
+    androidx.compose.material3.MaterialTheme(
+        colorScheme = solid,
+        typography = androidx.compose.material3.MaterialTheme.typography,
+        shapes = androidx.compose.material3.MaterialTheme.shapes,
+    ) {
+        androidx.compose.runtime.CompositionLocalProvider(
+            androidx.compose.material3.LocalTextStyle provides style,
+            androidx.compose.material3.LocalContentColor provides solid.onSurface,
+            LocalGlass provides false,
+            LocalCardHaze provides null,
+            LocalGlassBackdrop provides null,
+            content = content,
+        )
+    }
+}
+
+/** [androidx.compose.material3.AlertDialog], solid in the glass theme. */
+@Composable
+fun SolidAlertDialog(
+    onDismissRequest: () -> Unit,
+    confirmButton: @Composable () -> Unit,
+    modifier: Modifier = Modifier,
+    dismissButton: (@Composable () -> Unit)? = null,
+    icon: (@Composable () -> Unit)? = null,
+    title: (@Composable () -> Unit)? = null,
+    text: (@Composable () -> Unit)? = null,
+) = SolidPanel {
+    androidx.compose.material3.AlertDialog(onDismissRequest, confirmButton, modifier, dismissButton, icon, title, text)
+}
+
+/** [androidx.compose.ui.window.Dialog], solid in the glass theme. */
+@Composable
+fun SolidDialog(
+    onDismissRequest: () -> Unit,
+    properties: androidx.compose.ui.window.DialogProperties = androidx.compose.ui.window.DialogProperties(),
+    content: @Composable () -> Unit,
+) = SolidPanel { androidx.compose.ui.window.Dialog(onDismissRequest, properties, content) }

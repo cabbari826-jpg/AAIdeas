@@ -45,13 +45,13 @@ import java.time.MonthDay
 @Composable
 fun WelcomeHost(vm: GameViewModel) {
     if (vm.showWhatsNew) {
-        Dialog(onDismissRequest = vm::closeWhatsNew, properties = DialogProperties(usePlatformDefaultWidth = false)) { WhatsNewCard(vm::closeWhatsNew) }
+        SolidDialog(onDismissRequest = vm::closeWhatsNew, properties = DialogProperties(usePlatformDefaultWidth = false)) { WhatsNewCard(vm::closeWhatsNew) }
     }
     if (vm.askReminder && vm.screen == Screen.HOME) {
-        Dialog(onDismissRequest = vm::closeReminderAsk, properties = DialogProperties(usePlatformDefaultWidth = false)) { ReminderAsk(vm) }
+        SolidDialog(onDismissRequest = vm::closeReminderAsk, properties = DialogProperties(usePlatformDefaultWidth = false)) { ReminderAsk(vm) }
     }
     val welcome = vm.welcome ?: return
-    Dialog(onDismissRequest = vm::dismissWelcome, properties = DialogProperties(usePlatformDefaultWidth = false)) {
+    SolidDialog(onDismissRequest = vm::dismissWelcome, properties = DialogProperties(usePlatformDefaultWidth = false)) {
         WelcomeContent(vm, welcome)
     }
 }
@@ -232,7 +232,7 @@ fun WhatsNewCard(onClose: () -> Unit) {
 @Composable
 fun RestDialog(vm: GameViewModel) {
     if (!vm.restDue) return
-    androidx.compose.material3.AlertDialog(
+    SolidAlertDialog(
         onDismissRequest = { vm.closeRest(goHome = false) },
         icon = { androidx.compose.material3.Text("☕", fontSize = 40.sp) },
         title = { androidx.compose.material3.Text("Bir az dincəlin?") },

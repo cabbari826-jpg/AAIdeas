@@ -1,5 +1,8 @@
 package com.aaideas.krossvord.ui
 
+import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.navigationBars
+
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
@@ -320,7 +323,10 @@ fun WeeklyCard(vm: GameViewModel, p: Int) {
     }
 }
 
-val BottomMenuHeight: Dp = 102.dp
+/** Room left at the end of a screen for the floating menu, plus the gesture bar the screen now runs under. */
+val BottomMenuHeight: Dp
+    @Composable get() = 102.dp + androidx.compose.foundation.layout.WindowInsets.navigationBars
+        .asPaddingValues().calculateBottomPadding()
 
 /**
  * Floating translucent menu ("glass"). Real backdrop blur is not available in Compose on all
@@ -354,7 +360,10 @@ fun GlassBottomMenu(
         color = if (haze != null || screenLayer != null) Color.Transparent else if (glass) Color.White.copy(alpha = if (dark) 0.14f else 0.45f) else cs.surfaceContainerHigh,
         border = if (glass) null else BorderStroke(1.dp, cs.outlineVariant.copy(alpha = 0.7f)),
     ) {
-        Row(Modifier.padding(if (compact) 5.dp else 6.dp), horizontalArrangement = Arrangement.spacedBy(if (compact) 0.dp else 4.dp)) {
+        // Every tab as wide as the widest ("Statistika"), so the chosen tab's highlight is the same size on each
+        // and its icon and label sit exactly in the middle (the owner wants strict symmetry).
+        Row(Modifier.then(if (compact) Modifier.width(androidx.compose.foundation.layout.IntrinsicSize.Max) else Modifier).padding(if (compact) 5.dp else 6.dp),
+            horizontalArrangement = Arrangement.spacedBy(if (compact) 0.dp else 4.dp)) {
             listOf(
                 Triple(Screen.HOME, MenuIcon.PLAY, "Oyun"),
                 Triple(Screen.DAILY, MenuIcon.TODAY, "Bu gün"),
@@ -364,7 +373,7 @@ fun GlassBottomMenu(
                 val on = screen == target
                 val src = remember { MutableInteractionSource() }
                 Column(
-                    (if (compact) Modifier.widthIn(min = 58.dp) else Modifier.weight(1f)).springPress(src).clip(CircleShape)
+                    Modifier.weight(1f).springPress(src).clip(CircleShape)
                         // Şüşə: the chosen tab is a brighter glass pill with dark text (mockup); otherwise the accent.
                         .background(if (on) (if (glass) Color.White.copy(alpha = if (dark) 0.22f else 0.6f) else cs.primary) else Color.Transparent)
                         .clickable(interactionSource = src, indication = null) { open(target) }
@@ -376,9 +385,12 @@ fun GlassBottomMenu(
                     MenuGlyph(icon, tabInk, filled = on)
                     Text(
                         label,
-                        style = if (font != null) MaterialTheme.typography.labelLarge.copy(fontFamily = font, fontWeight = androidx.compose.ui.text.font.FontWeight.Bold, fontSize = 13.sp)
+                        style = if (font != null) MaterialTheme.typography.labelLarge.copy(fontFamily = font, fontWeight = androidx.compose.ui.text.font.FontWeight.ExtraBold, fontSize = 13.sp)
                         else MaterialTheme.typography.labelMedium,
                         color = tabInk,
+                        maxLines = 1,
+                        softWrap = false,
+                        textAlign = androidx.compose.ui.text.style.TextAlign.Center,
                     )
                 }
             }
@@ -387,9 +399,7 @@ fun GlassBottomMenu(
 }
 
 /** Nunito ExtraBold (SIL OFL 1.1), subset to Latin + Azerbaijani letters: the menu labels. */
-val MenuFont = androidx.compose.ui.text.font.FontFamily(
-    androidx.compose.ui.text.font.Font(com.aaideas.krossvord.R.font.nunito_extrabold, androidx.compose.ui.text.font.FontWeight.Bold),
-)
+val MenuFont = AppFont
 
 enum class MenuIcon { PLAY, TODAY, STATS, SETTINGS }
 

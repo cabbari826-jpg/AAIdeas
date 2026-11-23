@@ -66,8 +66,7 @@ fun DailyScreen(vm: GameViewModel) {
         Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(14.dp),
     ) {
-        TextButton(onClick = vm::back) { Text("← Əsas səhifə") }
-        Text("Bu gün", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
+        ScreenHeader("Bu gün", vm::back)
         vm.dailyNote?.let { note ->
             Surface(onClick = { vm.dailyNote = null }, shape = RoundedCornerShape(16.dp), color = MaterialTheme.colorScheme.tertiaryContainer) {
                 Text(note, Modifier.fillMaxWidth().padding(14.dp), style = MaterialTheme.typography.titleSmall)

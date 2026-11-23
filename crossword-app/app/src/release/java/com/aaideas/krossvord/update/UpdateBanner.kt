@@ -9,8 +9,5 @@ fun UpdateBanner() = Unit
 /** Store build: only the version; updates come from Google Play. */
 @Composable
 fun UpdateSettingsRow() {
-    androidx.compose.material3.Text(
-        "Versiya: ${com.aaideas.krossvord.BuildConfig.VERSION_NAME}",
-        style = androidx.compose.material3.MaterialTheme.typography.bodyMedium,
-    )
+    com.aaideas.krossvord.ui.SettingText("Versiya", com.aaideas.krossvord.BuildConfig.VERSION_NAME)
 }

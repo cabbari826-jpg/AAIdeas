@@ -61,18 +61,16 @@ fun WordOfDayCard(daily: DailyWordGame, onOpen: () -> Unit) {
 fun WordOfDayScreen(daily: DailyWordGame, isPremium: Boolean, onBack: () -> Unit) {
     val g = daily.guess
     Column(Modifier.fillMaxSize().padding(horizontal = 12.dp, vertical = 8.dp)) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            TextButton(onClick = onBack) { Text("← Əsas səhifə") }
-            Spacer(Modifier.weight(1f))
+        ScreenHeader("Günün sözü", onBack) {
             Text(
                 "♥".repeat(DailyWords.MAX_ATTEMPTS - g.attempts) + "♡".repeat(g.attempts),
                 color = MaterialTheme.colorScheme.error,
                 fontSize = 18.sp,
-                modifier = Modifier.padding(end = 8.dp).semantics { contentDescription = "Cəhd: ${DailyWords.MAX_ATTEMPTS - g.attempts}" },
+                modifier = Modifier.padding(end = 4.dp).semantics { contentDescription = "Cəhd: ${DailyWords.MAX_ATTEMPTS - g.attempts}" },
             )
-            if (daily.streak > 0) Text("🔥 ${daily.streak}", style = MaterialTheme.typography.titleSmall)
+            if (daily.streak > 0) Text("🔥 ${daily.streak}", style = MaterialTheme.typography.titleSmall, modifier = Modifier.padding(start = 6.dp))
         }
-        Text("Günün sözü", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
+        Spacer(Modifier.height(12.dp))
         Spacer(Modifier.height(8.dp))
         Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer)) {
             Text(

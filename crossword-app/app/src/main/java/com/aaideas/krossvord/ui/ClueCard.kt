@@ -58,7 +58,7 @@ fun ClueCard(
     // A newly opened clue slides in.
     LaunchedEffect(tier) { if (pager.currentPage != tier) pager.animateScrollToPage(tier) }
     // Sits low on the screen, over the keyboard, so the grid stays in view; a tap above it closes it.
-    Dialog(onDismissRequest = onClose, properties = androidx.compose.ui.window.DialogProperties(usePlatformDefaultWidth = false)) {
+    SolidDialog(onDismissRequest = onClose, properties = androidx.compose.ui.window.DialogProperties(usePlatformDefaultWidth = false)) {
       Box(
           Modifier.fillMaxSize().clickable(
               interactionSource = remember { androidx.compose.foundation.interaction.MutableInteractionSource() },

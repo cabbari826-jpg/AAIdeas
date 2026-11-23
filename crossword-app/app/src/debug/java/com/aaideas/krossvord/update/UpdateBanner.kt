@@ -58,26 +58,19 @@ private object UpdateState {
 fun UpdateSettingsRow() {
     val scope = rememberCoroutineScope()
     var status by remember { mutableStateOf<String?>(null) }
-    Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
-        Text("Versiya: ${BuildConfig.VERSION_NAME}", style = MaterialTheme.typography.bodyMedium)
-        androidx.compose.material3.OutlinedButton(
-            onClick = {
-                status = "Yoxlanılır…"
-                scope.launch {
-                    val latest = PrototypeUpdates.fetchLatest(BuildConfig.UPDATE_REPO)
-                    status = when {
-                        latest == null -> "Yoxlamaq alınmadı. İnternet bağlantısını yoxlayın."
-                        latest.build > BuildConfig.VERSION_CODE -> {
-                            if (UpdateState.ui !is UpdateUi.Downloading) UpdateState.ui = UpdateUi.Offer(latest)
-                            "Yeni versiya var: ${latest.versionName}"
-                        }
-                        else -> "Ən son versiya quraşdırılıb ✓"
-                    }
+    com.aaideas.krossvord.ui.SettingLink("🔄 Yeniləmələri yoxla", status ?: "Versiya: ${BuildConfig.VERSION_NAME}") {
+        status = "Yoxlanılır…"
+        scope.launch {
+            val latest = PrototypeUpdates.fetchLatest(BuildConfig.UPDATE_REPO)
+            status = when {
+                latest == null -> "Yoxlamaq alınmadı. İnternet bağlantısını yoxlayın."
+                latest.build > BuildConfig.VERSION_CODE -> {
+                    if (UpdateState.ui !is UpdateUi.Downloading) UpdateState.ui = UpdateUi.Offer(latest)
+                    "Yeni versiya var: ${latest.versionName}"
                 }
-            },
-            modifier = Modifier.fillMaxWidth(),
-        ) { Text("🔄 Yeniləmələri yoxla") }
-        status?.let { Text(it, style = MaterialTheme.typography.bodySmall) }
+                else -> "Ən son versiya quraşdırılıb ✓ (${BuildConfig.VERSION_NAME})"
+            }
+        }
     }
 }
 

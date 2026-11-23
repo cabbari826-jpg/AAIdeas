@@ -32,7 +32,7 @@ fun StatsScreen(vm: GameViewModel) {
         Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp).padding(bottom = BottomMenuHeight),
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
-        Text("Statistika", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
+        ScreenHeader("Statistika", vm::back)
         RankCard(vm.xp)
         androidx.compose.material3.Button(onClick = { vm.openMistakes = false; vm.open(Screen.COLLECTION) }, modifier = Modifier.fillMaxWidth()) {
             Text("📚 Söz kolleksiyası (${vm.collection.size})")

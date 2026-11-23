@@ -131,13 +131,29 @@ private val ExpressiveShapes = Shapes(
     extraLarge = RoundedCornerShape(36.dp),
 )
 
+/**
+ * One typeface for the whole app (the owner's pick for the menu, 2026-11-23): Nunito, SIL OFL 1.1, subset to
+ * Latin + Azerbaijani letters. Symbols it lacks (arrows, ✓) fall back to the system font per character.
+ */
+val AppFont = androidx.compose.ui.text.font.FontFamily(
+    androidx.compose.ui.text.font.Font(com.aaideas.krossvord.R.font.nunito_regular, FontWeight.Normal),
+    androidx.compose.ui.text.font.Font(com.aaideas.krossvord.R.font.nunito_semibold, FontWeight.Medium),
+    androidx.compose.ui.text.font.Font(com.aaideas.krossvord.R.font.nunito_semibold, FontWeight.SemiBold),
+    androidx.compose.ui.text.font.Font(com.aaideas.krossvord.R.font.nunito_bold, FontWeight.Bold),
+    androidx.compose.ui.text.font.Font(com.aaideas.krossvord.R.font.nunito_extrabold, FontWeight.ExtraBold),
+    androidx.compose.ui.text.font.Font(com.aaideas.krossvord.R.font.nunito_extrabold, FontWeight.Black),
+)
+
+/** Material 3 type scale in [AppFont]; headings heavier than the baseline, labels never thin. */
 private val ExpressiveType = Typography().run {
+    fun androidx.compose.ui.text.TextStyle.f(w: FontWeight? = null) = copy(fontFamily = AppFont, fontWeight = w ?: fontWeight)
     copy(
-        displaySmall = displaySmall.copy(fontWeight = FontWeight.Black),
-        headlineMedium = headlineMedium.copy(fontWeight = FontWeight.ExtraBold),
-        headlineSmall = headlineSmall.copy(fontWeight = FontWeight.Bold),
-        titleLarge = titleLarge.copy(fontWeight = FontWeight.Bold),
-        titleMedium = titleMedium.copy(fontWeight = FontWeight.SemiBold),
-        labelLarge = labelLarge.copy(fontWeight = FontWeight.SemiBold),
+        displayLarge = displayLarge.f(FontWeight.ExtraBold), displayMedium = displayMedium.f(FontWeight.ExtraBold),
+        displaySmall = displaySmall.f(FontWeight.ExtraBold),
+        headlineLarge = headlineLarge.f(FontWeight.ExtraBold), headlineMedium = headlineMedium.f(FontWeight.ExtraBold),
+        headlineSmall = headlineSmall.f(FontWeight.Bold),
+        titleLarge = titleLarge.f(FontWeight.Bold), titleMedium = titleMedium.f(FontWeight.Bold), titleSmall = titleSmall.f(FontWeight.Bold),
+        bodyLarge = bodyLarge.f(), bodyMedium = bodyMedium.f(), bodySmall = bodySmall.f(),
+        labelLarge = labelLarge.f(FontWeight.Bold), labelMedium = labelMedium.f(FontWeight.Bold), labelSmall = labelSmall.f(FontWeight.SemiBold),
     )
 }
