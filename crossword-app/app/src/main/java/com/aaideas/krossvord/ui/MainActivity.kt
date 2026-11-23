@@ -17,6 +17,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.ui.Alignment
 import androidx.compose.foundation.layout.safeDrawingPadding
+import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.foundation.layout.only
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.LaunchedEffect
@@ -119,9 +122,12 @@ class MainActivity : ComponentActivity() {
                     // The backdrop and screens are the blur source; the floating menu (outside it) frosts them.
                     Box(Modifier.fillMaxSize().then(if (haze != null && !liquid) Modifier.hazeSource(haze) else Modifier).recordInto(screenLayer)) {
                         if (skin.glass) GlassBackdrop(dark, Modifier.fillMaxSize().then(if (cardHaze != null) Modifier.hazeSource(cardHaze) else Modifier), moving = glassMax, clock = glassClock)
-                    Box(Modifier.safeDrawingPadding()) {
-                        // Leave room under the floating menu so it never hides the last item (home scrolls under it).
-                        Box(if (menu && vm.screen != Screen.HOME && !liquid) Modifier.padding(bottom = BottomMenuHeight) else Modifier) {
+                    // Screens with the menu run on under it and under the gesture bar: a hard edge behind the pill
+                    // looked like a ledge. Their lists end with BottomMenuHeight of space so nothing stays hidden.
+                    Box(if (menu) Modifier.windowInsetsPadding(androidx.compose.foundation.layout.WindowInsets.safeDrawing.only(
+                        androidx.compose.foundation.layout.WindowInsetsSides.Top + androidx.compose.foundation.layout.WindowInsetsSides.Horizontal))
+                        else Modifier.safeDrawingPadding()) {
+                        Box {
                             when (vm.screen) {
                                 Screen.HOME -> ExpressiveHome(vm)
                                 Screen.LEVELS -> LevelsScreen(vm)

@@ -60,7 +60,7 @@ fun Modifier.tutorialAnchor(vm: GameViewModel, spot: TutorialSpot): Modifier =
 @Composable
 fun TutorialLayer(vm: GameViewModel) {
     when (vm.tutorialStep) {
-        TUTORIAL_ASK -> Dialog(onDismissRequest = {}, properties = DialogProperties(usePlatformDefaultWidth = false)) {
+        TUTORIAL_ASK -> SolidDialog(onDismissRequest = {}, properties = DialogProperties(usePlatformDefaultWidth = false)) {
             CardShell {
                 Badge("🧩")
                 Text("Skanvord oynamısınız?", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)

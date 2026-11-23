@@ -32,6 +32,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.aaideas.krossvord.model.WordBuilder
@@ -69,7 +70,7 @@ fun HomeScreen(vm: GameViewModel) {
 /** Asks before wiping all progress. */
 @Composable
 fun ResetAllDialog(onConfirm: () -> Unit, onDismiss: () -> Unit) {
-    AlertDialog(
+    SolidAlertDialog(
         onDismissRequest = onDismiss,
         title = { Text("Hər şeyi sıfırla?") },
         text = { Text("Bütün həll olunmuş səviyyələr, canlar və pulsuz ipucları silinəcək. Ayarlar və premium qalır.") },
@@ -81,7 +82,8 @@ fun ResetAllDialog(onConfirm: () -> Unit, onDismiss: () -> Unit) {
 @Composable
 fun LevelsScreen(vm: GameViewModel) {
     Column(Modifier.fillMaxSize().padding(16.dp)) {
-        TextButton(onClick = vm::back) { Text("← Əsas səhifə") }
+        ScreenHeader("Səviyyələr", vm::back)
+        Spacer(Modifier.height(12.dp))
         // One chip per pack: the main pack first, then the themes.
         Row(
             Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()),
@@ -119,7 +121,7 @@ val CREDITS = listOf(
     "Söz siyahısı: Azərbaycan dili üçün Hunspell lüğəti (Mozilla Azerbaijani L10n; " +
         "Metin Amiroff, Kevin Scannell, Orkhan Jafarov). Lisenziya: MPL-2.0, " +
         "github.com/mozillaz/spellchecker",
-    "Menyu şrifti: Nunito (The Nunito Project Authors). Lisenziya: SIL Open Font License 1.1, github.com/googlefonts/nunito",
+    "Şrift: Nunito (The Nunito Project Authors). Lisenziya: SIL Open Font License 1.1, github.com/googlefonts/nunito",
     "Menyu ikonları: Material Symbols (Google). Lisenziya: Apache 2.0, fonts.google.com/icons",
     "Azərbaycan xəritəsi: Natural Earth (ictimai mülkiyyət), naturalearthdata.com",
 )
@@ -130,81 +132,49 @@ fun SettingsScreen(vm: GameViewModel, isPremium: Boolean) {
         Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp).padding(bottom = BottomMenuHeight),
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
-        TextButton(onClick = vm::back) { Text("← Əsas səhifə") }
-        // First in the list, so it is easy to find for someone who can't read small text.
-        Surface(shape = androidx.compose.foundation.shape.RoundedCornerShape(16.dp), color = MaterialTheme.colorScheme.primaryContainer) {
+        ScreenHeader("Ayarlar", vm::back)
+        // First, so it is easy to find for someone who can't read small text.
+        SettingsGroup(null) {
             TextSizeCard(vm)
+            SettingDivider()
+            SettingSwitch("🧸 Uşaq rejimi", "Ən asan ipucu əvvəl göstərilir, səhvdə can getmir" + if (vm.kidsPack >= 0) ", yalnız uşaq sözləri" else "",
+                vm.kidsMode, vm::changeKidsMode)
+            SettingDivider()
+            SettingLink("👤 Profil", listOfNotNull(
+                vm.playerName.ifBlank { "Ad yazılmayıb" },
+                vm.birthday?.let { "Ad günü: " + com.aaideas.krossvord.model.Greeting.label(it) + (vm.birthYear?.let { y -> " $y" } ?: "") },
+            ).joinToString(" · "), vm::editProfile)
+            SettingDivider()
+            SettingLink("❓ Oyunun qaydaları", "Qısa təlimatı yenidən göstər", vm::replayTutorial)
         }
-        Surface(shape = androidx.compose.foundation.shape.RoundedCornerShape(16.dp), color = MaterialTheme.colorScheme.secondaryContainer) {
-            Row(Modifier.fillMaxWidth().padding(12.dp), verticalAlignment = Alignment.CenterVertically) {
-                Column(Modifier.weight(1f)) {
-                    Text("🧸 Uşaq rejimi", style = MaterialTheme.typography.titleMedium)
-                    Text(
-                        "Ən asan ipucu əvvəl göstərilir, səhvdə can getmir" + if (vm.kidsPack >= 0) ", yalnız uşaq sözləri" else "",
-                        style = MaterialTheme.typography.bodySmall,
-                    )
+        SettingsGroup("Görünüş") {
+            ThemePicker(vm.themeMode, vm::changeTheme, vm.dynamicColor, vm::changeDynamicColor)
+        }
+        SettingsGroup("Mövzu") {
+            SkinPicker(vm.activeSkin(isPremium), vm.usableSkins(isPremium), vm::changeSkin, vm::unlockAllSkinsForTesting)
+        }
+        SettingsGroup("Tətbiqin ikonu") { AppIconPicker(isPremium) }
+        SettingsGroup("Hərflərin daxil edilməsi") {
+            listOf(
+                InputMode.COLUMNS to "Anaqram: sözü hərflərdən yığ",
+                InputMode.TILES to "Kartlar: hərfləri bir-bir xanaya qoy",
+                InputMode.KEYBOARD to "Çətin rejim: tam klaviatura",
+            ).forEach { (mode, label) ->
+                Row(
+                    Modifier.fillMaxWidth().clip(androidx.compose.foundation.shape.RoundedCornerShape(12.dp)).clickable { vm.setInput(mode) },
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    RadioButton(selected = vm.inputMode == mode, onClick = { vm.setInput(mode) })
+                    Text(label, style = MaterialTheme.typography.titleMedium)
                 }
-                Switch(checked = vm.kidsMode, onCheckedChange = vm::changeKidsMode)
             }
-        }
-        OutlinedButton(onClick = vm::replayTutorial, modifier = Modifier.fillMaxWidth()) { Text("❓ Oyunun qaydalarını yenidən göstər") }
-        Surface(onClick = vm::editProfile, shape = androidx.compose.foundation.shape.RoundedCornerShape(16.dp), color = MaterialTheme.colorScheme.surfaceVariant) {
-            Column(Modifier.fillMaxWidth().padding(12.dp)) {
-                Text("👤 Profil", style = MaterialTheme.typography.titleMedium)
-                Text(
-                    listOfNotNull(
-                        vm.playerName.ifBlank { "Ad yazılmayıb" },
-                        vm.birthday?.let { "Ad günü: " + com.aaideas.krossvord.model.Greeting.label(it) + (vm.birthYear?.let { y -> " $y" } ?: "") },
-                    ).joinToString(" · "),
-                    style = MaterialTheme.typography.bodySmall,
-                )
-            }
-        }
-        com.aaideas.krossvord.update.UpdateSettingsRow()
-        OutlinedButton(onClick = vm::openWhatsNew, modifier = Modifier.fillMaxWidth()) { Text("🆕 Yeniliklər") }
-        if (!vm.kidsMode) OutlinedButton(onClick = { vm.open(Screen.PACKS) }, modifier = Modifier.fillMaxWidth()) { Text("📦 Yeni paketlər") }
-        ThemePicker(vm.themeMode, vm::changeTheme, vm.dynamicColor, vm::changeDynamicColor)
-        SkinPicker(vm.activeSkin(isPremium), vm.usableSkins(isPremium), vm::changeSkin, vm::unlockAllSkinsForTesting)
-        AppIconPicker(isPremium)
-        Text("Hərflərin daxil edilməsi", style = MaterialTheme.typography.headlineSmall)
-        listOf(
-            InputMode.COLUMNS to "Anaqram: sözü sütunlardakı hərflərdən yığ",
-            InputMode.TILES to "Kartlar: hərfləri bir-bir xanaya qoy",
-            InputMode.KEYBOARD to "Çətin rejim: tam klaviatura",
-        ).forEach { (mode, label) ->
-            Row(
-                Modifier.fillMaxWidth().clickable { vm.setInput(mode) },
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                RadioButton(selected = vm.inputMode == mode, onClick = { vm.setInput(mode) })
-                Text(label)
-            }
-        }
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Column(Modifier.weight(1f)) {
-                Text("Artıq hərflər")
-                Text("Sütunlara sözdə olmayan ${WordBuilder.EXTRA_LETTERS} hərf əlavə olunur", style = MaterialTheme.typography.bodySmall)
-            }
-            Switch(checked = vm.extraLetters, onCheckedChange = vm::changeExtraLetters)
-        }
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Column(Modifier.weight(1f)) {
-                Text("Bir ipucu ilə başla")
-                Text("Qalan ipucları istəyəndə açılır", style = MaterialTheme.typography.bodySmall)
-            }
-            Switch(checked = vm.hideClues, onCheckedChange = vm::changeHideClues)
-        }
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Column(Modifier.weight(1f)) {
-                Text("Böyük ipucu")
-                Text("Seçilmiş sözün ipucu şəbəkənin altında iri şriftlə də görünür. Telefonda iri şrift varsa, özü açılır.", style = MaterialTheme.typography.bodySmall)
-            }
-            Switch(checked = vm.bigClues, onCheckedChange = vm::changeBigClues)
-        }
-        Column {
-            Text("Köməkçi")
-            Text("Çətin sözdə kömək təklif edir. «Yox» seçilsə, ipucu xanası sadəcə qızılı işıqlanır.", style = MaterialTheme.typography.bodySmall)
-            Row(Modifier.horizontalScroll(rememberScrollState()).padding(top = 6.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            SettingDivider()
+            SettingSwitch("Artıq hərflər", "Sözdə olmayan ${WordBuilder.EXTRA_LETTERS} hərf əlavə olunur", vm.extraLetters, vm::changeExtraLetters)
+            SettingSwitch("Bir ipucu ilə başla", "Qalan ipucları istəyəndə açılır", vm.hideClues, vm::changeHideClues)
+            SettingSwitch("Böyük ipucu", "Seçilmiş sözün ipucu şəbəkənin altında iri şriftlə də görünür", vm.bigClues, vm::changeBigClues)
+            SettingDivider()
+            SettingText("Köməkçi", "Çətin sözdə kömək təklif edir. «Yox» seçilsə, ipucu xanası sadəcə qızılı işıqlanır.")
+            Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 (listOf<StuckStyle?>(null) + MASCOTS).forEach { h ->
                     FilterChip(
                         selected = vm.helper == h,
@@ -214,50 +184,43 @@ fun SettingsScreen(vm: GameViewModel, isPremium: Boolean) {
                 }
             }
         }
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Column(Modifier.weight(1f)) {
-                Text("Səs")
-                Text("Söz tapılanda və səviyyə həll olunanda", style = MaterialTheme.typography.bodySmall)
-            }
-            Switch(checked = vm.soundOn, onCheckedChange = vm::changeSound)
+        SettingsGroup("Səs və bildiriş") {
+            SettingSwitch("Səs", "Söz tapılanda və səviyyə həll olunanda", vm.soundOn, vm::changeSound)
+            SettingSwitch("Vibrasiya", "Düz sözdə telefon yüngülcə titrəyir", vm.vibrateOn, vm::changeVibrate)
+            SettingSwitch("«Bravo!» səsli tərif", "Düz sözdə tərif səslə deyilir (telefonda Azərbaycan səsi varsa)", vm.praiseVoice, vm::changePraiseVoice)
+            SettingDivider()
+            ReminderSwitch()
+            SettingDivider()
+            WidgetButton()
         }
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Column(Modifier.weight(1f)) {
-                Text("Vibrasiya")
-                Text("Düz sözdə telefon yüngülcə titrəyir", style = MaterialTheme.typography.bodySmall)
-            }
-            Switch(checked = vm.vibrateOn, onCheckedChange = vm::changeVibrate)
+        SettingsGroup("İrəliləyiş") {
+            SettingText("Həll olunub: ${vm.completed.size} / ${vm.levels.size}", "Həll olunmuş səviyyəni siyahıdan yenidən oynamaq olar")
+            SettingDivider()
+            var confirmReset by remember { mutableStateOf(false) }
+            BackupButtons()
+            SettingDivider()
+            SettingLink("🗑 Bütün irəliləyişi sıfırla", null) { confirmReset = true }
+            if (confirmReset) ResetAllDialog(onConfirm = { confirmReset = false; vm.resetAllProgress() }, onDismiss = { confirmReset = false })
         }
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Column(Modifier.weight(1f)) {
-                Text("«Bravo!» səsli tərif")
-                Text("Düz sözdə tərif səslə deyilir (telefonda Azərbaycan səsi varsa)", style = MaterialTheme.typography.bodySmall)
-            }
-            Switch(checked = vm.praiseVoice, onCheckedChange = vm::changePraiseVoice)
+        SettingsGroup("Premium") {
+            SettingText(
+                if (isPremium) "Premium aktivdir" else "Premium",
+                if (isPremium) "Reklam yoxdur, ipucları pulsuzdur." else "Səviyyələr arasında reklam olmur, ipucları reklamsız açılır.",
+            )
+            if (isPremium) OutlinedButton(onClick = vm.premium::resetForTesting, modifier = Modifier.fillMaxWidth()) { Text("Premiumu söndür (test)") }
+            else Button(onClick = vm.premium::purchase, modifier = Modifier.fillMaxWidth()) { Text("Premium al (test, ödənişsiz)") }
+            Text("Prototip: alış hələ Google Play Billing ilə bağlı deyil.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
-        ReminderSwitch()
-        WidgetButton()
-        Spacer(Modifier.height(8.dp))
-        Text("İrəliləyiş", style = MaterialTheme.typography.headlineSmall)
-        Text("Həll olunub: ${vm.completed.size} / ${vm.levels.size}. Həll olunmuş səviyyəni siyahıdan yenidən oynamaq olar.")
-        var confirmReset by remember { mutableStateOf(false) }
-        BackupButtons()
-        OutlinedButton(onClick = { confirmReset = true }) { Text("Bütün irəliləyişi sıfırla") }
-        if (confirmReset) ResetAllDialog(onConfirm = { confirmReset = false; vm.resetAllProgress() }, onDismiss = { confirmReset = false })
-        Spacer(Modifier.height(8.dp))
-        Text("Premium", style = MaterialTheme.typography.headlineSmall)
-        Text(
-            if (isPremium) "Premium aktivdir: reklam yoxdur, ipucları pulsuzdur."
-            else "Premium: səviyyələr arasında reklam olmur, ipucları reklamsız açılır."
-        )
-        if (isPremium) OutlinedButton(onClick = vm.premium::resetForTesting) { Text("Premiumu söndür (test)") }
-        else Button(onClick = vm.premium::purchase) { Text("Premium al (test, ödənişsiz)") }
-        Text("Prototip: alış hələ Google Play Billing ilə bağlı deyil.", style = MaterialTheme.typography.bodySmall)
-        Spacer(Modifier.height(8.dp))
-        Text("Proqram haqqında", style = MaterialTheme.typography.headlineSmall)
-        Text("Mənbələr", style = MaterialTheme.typography.titleMedium)
-        Text("Bu paketdəki sözlər və ipucları qaralamadır, redaktə gözləyir.", style = MaterialTheme.typography.bodyMedium)
-        CREDITS.forEach { Text(it, style = MaterialTheme.typography.bodySmall) }
+        SettingsGroup("Tətbiq") {
+            com.aaideas.krossvord.update.UpdateSettingsRow()
+            SettingDivider()
+            SettingLink("🆕 Yeniliklər", null, vm::openWhatsNew)
+            if (!vm.kidsMode) { SettingDivider(); SettingLink("📦 Yeni paketlər", null) { vm.open(Screen.PACKS) } }
+        }
+        SettingsGroup("Proqram haqqında") {
+            SettingText("Mənbələr", "Bu paketdəki sözlər və ipucları qaralamadır, redaktə gözləyir.")
+            CREDITS.forEach { Text(it, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant) }
+        }
     }
 }
 
@@ -265,7 +228,7 @@ fun SettingsScreen(vm: GameViewModel, isPremium: Boolean) {
 @Composable
 fun AdPlaceholderHost(ads: PlaceholderAdService) {
     val req = ads.pending ?: return
-    AlertDialog(
+    SolidAlertDialog(
         onDismissRequest = { ads.finish(watched = false) },
         title = { Text(if (req.kind == AdKind.REWARDED) "Reklam (mükafatlı)" else "Reklam") },
         text = {
@@ -302,28 +265,23 @@ private fun ReminderSwitch() {
         on = granted
         remind.set(context, granted)
     }
-    Row(verticalAlignment = Alignment.CenterVertically) {
-        Column(Modifier.weight(1f)) {
-            Text("Günün sözü xatırlatması")
-            Text(
-                if (denied) "Bildiriş icazəsi verilmədi. Telefonun ayarlarından açmaq olar."
-                else "Hər gün saat ${remind.HOUR}:00 civarı, söz hələ tapılmayıbsa",
-                style = MaterialTheme.typography.bodySmall,
-            )
+    SettingSwitch(
+        "Günün sözü xatırlatması",
+        if (denied) "Bildiriş icazəsi verilmədi. Telefonun ayarlarından açmaq olar."
+        else "Hər gün saat ${remind.HOUR}:00 civarı, söz hələ tapılmayıbsa",
+        on,
+    ) { want ->
+        if (want && !remind.canNotify(context) && android.os.Build.VERSION.SDK_INT >= 33) {
+            ask.launch(android.Manifest.permission.POST_NOTIFICATIONS)
+        } else {
+            on = want
+            remind.set(context, want)
         }
-        Switch(checked = on, onCheckedChange = { want ->
-            if (want && !remind.canNotify(context) && android.os.Build.VERSION.SDK_INT >= 33) {
-                ask.launch(android.Manifest.permission.POST_NOTIFICATIONS)
-            } else {
-                on = want
-                remind.set(context, want)
-            }
-        })
     }
     // Xiaomi/Redmi: without Autostart, MIUI drops the alarm once the app is swiped away.
     if (on && remind.isXiaomi) {
         Text("Xiaomi telefonlarında xatırlatma gəlməsi üçün «Avtomatik başlatma»nı açın.", style = MaterialTheme.typography.bodySmall)
-        OutlinedButton(onClick = { remind.openAutostart(context) }, modifier = Modifier.fillMaxWidth()) { Text("⚙ Avtomatik başlatmanı aç") }
+        SettingLink("⚙ Avtomatik başlatmanı aç", null) { remind.openAutostart(context) }
     }
 }
 
@@ -354,11 +312,11 @@ private fun BackupButtons() {
         if (text == null || !text.contains(com.aaideas.krossvord.data.ProgressBackup.MARK)) note = "Bu fayl Açar Söz faylı deyil."
         else pending = text
     }
-    OutlinedButton(onClick = { save.launch("acar-soz-${java.time.LocalDate.now()}.json") }, modifier = Modifier.fillMaxWidth()) { Text("💾 İrəliləyişi fayla saxla") }
-    OutlinedButton(onClick = { open.launch(arrayOf("application/json", "application/octet-stream", "text/plain", "*/*")) }, modifier = Modifier.fillMaxWidth()) { Text("📂 Fayldan bərpa et") }
+    SettingLink("💾 İrəliləyişi fayla saxla", "Yeni telefona keçəndə") { save.launch("acar-soz-${java.time.LocalDate.now()}.json") }
+    SettingLink("📂 Fayldan bərpa et", null) { open.launch(arrayOf("application/json", "application/octet-stream", "text/plain", "*/*")) }
     note?.let { Text(it, style = MaterialTheme.typography.bodyMedium) }
     pending?.let { text ->
-        AlertDialog(
+        SolidAlertDialog(
             onDismissRequest = { pending = null },
             title = { Text("İrəliləyiş bərpa olunsun?") },
             text = { Text("Bu telefondakı irəliləyiş fayldakı ilə əvəz olunacaq. Oyun yenidən açılacaq.") },
@@ -391,9 +349,8 @@ private fun TextSizeCard(vm: GameViewModel) {
     val sys = androidx.compose.ui.platform.LocalConfiguration.current.fontScale
     val current = vm.shownTextScale(sys)
     val i = TEXT_SCALES.indexOf(current).coerceAtLeast(0)
-    Column(Modifier.fillMaxWidth().padding(12.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-        Text("🔍 Yazı ölçüsü: ${TEXT_SCALE_NAMES[i]}", style = MaterialTheme.typography.titleMedium)
-        Text("Bütün yazılar böyüyür. Telefonda iri şrift varsa, özü iri olur.", style = MaterialTheme.typography.bodySmall)
+    Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+        SettingText("🔍 Yazı ölçüsü: ${TEXT_SCALE_NAMES[i]}", "Bütün yazılar böyüyür. Telefonda iri şrift varsa, özü iri olur.")
         Row(verticalAlignment = Alignment.CenterVertically) {
             OutlinedButton(onClick = { if (i > 0) vm.changeTextScale(TEXT_SCALES[i - 1]) }, enabled = i > 0) { Text("A−") }
             androidx.compose.material3.Slider(
@@ -419,13 +376,12 @@ private fun WidgetButton() {
     val canPin = remember { android.os.Build.VERSION.SDK_INT >= 26 && runCatching { manager.isRequestPinAppWidgetSupported }.getOrDefault(false) }
     var asked by remember { mutableStateOf(false) }
     Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-        Text("Vidjet: telefonun əsas ekranında günün sözü və seriyanız görünür, toxunanda oyun açılır.", style = MaterialTheme.typography.bodyMedium)
-        OutlinedButton(onClick = {
+        SettingLink("📌 «Günün sözü» vidjeti", "Telefonun əsas ekranında günün sözü və seriyanız görünür. Toxunun, ekrana əlavə olunsun.") {
             asked = true
             if (canPin && android.os.Build.VERSION.SDK_INT >= 26) runCatching {
                 manager.requestPinAppWidget(android.content.ComponentName(context, com.aaideas.krossvord.widget.WordWidget::class.java), null, null)
             }
-        }, modifier = Modifier.fillMaxWidth()) { Text("📌 «Günün sözü» vidjetini ekrana əlavə et") }
+        }
         if (asked) Text(
             "Əgər vidjet görünmədisə: ekranın boş yerinə barmağınızı basıb saxlayın → «Vidjetlər» → «Açar Söz».",
             style = MaterialTheme.typography.bodySmall,

@@ -53,8 +53,7 @@ fun CollectionScreen(vm: GameViewModel) {
         if (q.isEmpty()) base else base.filter { it.word.contains(q) }
     }
     Column(Modifier.fillMaxSize().padding(horizontal = 16.dp)) {
-        TextButton(onClick = { vm.open(Screen.STATS) }) { Text("← Statistika") }
-        Text("Söz kolleksiyası", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
+        ScreenHeader("Söz kolleksiyası", { vm.open(Screen.STATS) }, Modifier.padding(top = 16.dp, bottom = 12.dp))
         Text("Tapılmış sözlər: ${all.size}. Səviyyələrdə cəmi $total söz var.", style = MaterialTheme.typography.bodyMedium)
         androidx.compose.foundation.layout.Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             androidx.compose.material3.FilterChip(selected = !mine, onClick = { mine = false }, label = { Text("Hamısı") })

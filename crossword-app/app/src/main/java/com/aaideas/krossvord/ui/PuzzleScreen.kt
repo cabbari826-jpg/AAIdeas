@@ -130,7 +130,7 @@ private fun PuzzleContent(vm: GameViewModel, isPremium: Boolean, compact: Boolea
     Column(Modifier.fillMaxSize().padding(horizontal = if (compact) 4.dp else 8.dp, vertical = if (compact) 2.dp else 8.dp)) {
         val glass = LocalGlass.current
         var confirmRestart by remember { mutableStateOf(false) }
-        if (confirmRestart) AlertDialog(
+        if (confirmRestart) SolidAlertDialog(
             onDismissRequest = { confirmRestart = false },
             title = { Text("Səviyyəni yenidən başla?") },
             text = { Text("Bu səviyyədəki hərflər, canlar və açılmış ipucları silinəcək.") },
@@ -249,7 +249,7 @@ private fun PuzzleContent(vm: GameViewModel, isPremium: Boolean, compact: Boolea
     }
     if (vm.outOfLives && !vm.showCompletion && vm.ads.pending == null) {
         val dailyOpen = !vm.daily.guess.finished
-        AlertDialog(
+        SolidAlertDialog(
             onDismissRequest = {},
             title = { Text("Canlar bitdi") },
             text = {
@@ -271,7 +271,7 @@ private fun PuzzleContent(vm: GameViewModel, isPremium: Boolean, compact: Boolea
     if (vm.showCompletion && result != null) {
         LevelResultDialog(vm.currentLevelTitle, result, vm::nextLevel, vm::dismissCompletion)
     } else if (vm.showCompletion) {
-        AlertDialog(
+        SolidAlertDialog(
             onDismissRequest = vm::dismissCompletion,
             title = { Text("Təbriklər!") },
             text = { Text("${vm.currentLevelTitle} həll olundu.") },
@@ -902,7 +902,7 @@ private fun SquareButton(glyph: Glyph, description: String, onClick: () -> Unit,
 @Composable
 private fun KeywordDialog(vm: GameViewModel) {
     var text by remember { mutableStateOf("") }
-    AlertDialog(
+    SolidAlertDialog(
         onDismissRequest = vm::closeKeywordDialog,
         title = { Text("Açar sözü təxmin et") },
         text = {
@@ -978,7 +978,7 @@ private fun heartPath(w: Float, h: Float) = androidx.compose.ui.graphics.Path().
 
 /** A drawn back arrow or restart circle, centred in its box. */
 @Composable
-private fun GlyphIcon(glyph: Glyph, tint: Color, modifier: Modifier) {
+internal fun GlyphIcon(glyph: Glyph, tint: Color, modifier: Modifier) {
     androidx.compose.foundation.Canvas(modifier) {
         val w = size.width; val h = size.height
         val stroke = androidx.compose.ui.graphics.drawscope.Stroke(width = 2.6.dp.toPx(), cap = androidx.compose.ui.graphics.StrokeCap.Round, join = androidx.compose.ui.graphics.StrokeJoin.Round)

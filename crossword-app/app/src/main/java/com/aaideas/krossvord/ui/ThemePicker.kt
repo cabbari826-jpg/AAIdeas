@@ -45,7 +45,6 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun ThemePicker(current: ThemeMode, onPick: (ThemeMode) -> Unit, dynamic: Boolean, onDynamic: (Boolean) -> Unit) {
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        Text("Görünüş", style = MaterialTheme.typography.headlineSmall)
         SingleChoiceSegmentedButtonRow(Modifier.fillMaxWidth()) {
             ThemeMode.entries.forEachIndexed { i, mode ->
                 SegmentedButton(
@@ -57,17 +56,9 @@ fun ThemePicker(current: ThemeMode, onPick: (ThemeMode) -> Unit, dynamic: Boolea
         }
         Text(
             "«Sistem» telefonun ayarına uyğun dəyişir. «Qaranlıq» axşam gözləri yormur.",
-            style = MaterialTheme.typography.bodySmall,
+            style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
-        if (supportsDynamicColor) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Column(Modifier.weight(1f)) {
-                    Text("Telefonun rəngləri")
-                    Text("Rənglər divar kağızından götürülür", style = MaterialTheme.typography.bodySmall)
-                }
-                Switch(checked = dynamic, onCheckedChange = onDynamic)
-            }
-        }
+        if (supportsDynamicColor) SettingSwitch("Telefonun rəngləri", "Rənglər divar kağızından götürülür", dynamic, onDynamic)
     }
 }
 
@@ -81,7 +72,6 @@ fun SkinPicker(current: Skin, owned: Set<Skin>, onPick: (Skin) -> Unit, onUnlock
     val ctx = LocalContext.current
     var askGlass by androidx.compose.runtime.saveable.rememberSaveable { androidx.compose.runtime.mutableStateOf(false) }
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        Text("Mövzu", style = MaterialTheme.typography.headlineSmall)
         Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
             Skin.entries.forEach { skin ->
                 SkinCard(skin, skin.palette(dark || skin.alwaysDark), selected = skin == current, locked = skin !in owned) {
@@ -93,7 +83,7 @@ fun SkinPicker(current: Skin, owned: Set<Skin>, onPick: (Skin) -> Unit, onUnlock
         if (current.glass) GlassLevelPicker()
         val lockedOnes = Skin.entries.filter { it !in owned }
         if (lockedOnes.isNotEmpty()) {
-            Text("🔒 Hədiyyə mövzular oyunda qazanılır.", style = MaterialTheme.typography.bodySmall)
+            Text("🔒 Hədiyyə mövzular oyunda qazanılır.", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
             if (isDebugBuild()) TextButton(onClick = onUnlockAll) { Text("Hamısını aç (test)") }
         }
     }

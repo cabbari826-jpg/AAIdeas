@@ -50,10 +50,10 @@ fun levelTimeText(seconds: Long): String =
  */
 @Composable
 fun LevelResultDialog(title: String, result: LevelResult, onNext: () -> Unit, onClose: () -> Unit) {
-    Dialog(onDismissRequest = onClose) {
+    SolidDialog(onDismissRequest = onClose) {
         Box(contentAlignment = Alignment.Center) {
             // A fixed width: the window used to grow with its longest line (the button row), so it looked different level to level.
-            Surface(Modifier.width(300.dp), shape = RoundedCornerShape(24.dp), color = MaterialTheme.colorScheme.surface, tonalElevation = 6.dp) {
+            Surface(Modifier.width(300.dp).glassy(RoundedCornerShape(24.dp), lens = false, shadow = false), shape = RoundedCornerShape(24.dp), color = MaterialTheme.colorScheme.surface, tonalElevation = if (LocalGlass.current) 0.dp else 6.dp) {
                 Column(
                     Modifier.padding(horizontal = 20.dp, vertical = 18.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,

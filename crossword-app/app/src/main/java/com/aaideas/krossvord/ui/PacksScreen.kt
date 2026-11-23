@@ -41,8 +41,7 @@ fun PacksScreen(vm: GameViewModel) {
         Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
-        TextButton(onClick = vm::back) { Text("← Əsas səhifə") }
-        Text("Yeni paketlər", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
+        ScreenHeader("Yeni paketlər", vm::back)
         Text(
             "Paketi bir dəfə yükləyin, sonra internetsiz oynayın. Həftənin sürprizləri özü yüklənir.",
             style = MaterialTheme.typography.bodyLarge,
