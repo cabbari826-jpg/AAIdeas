@@ -53,6 +53,7 @@ enum class AppIcon(val alias: String, val label: String, val preview: Int, val k
     XARIBULBUL(".LauncherXaribulbul", "Xarıbülbül", R.mipmap.ic_launcher_xaribulbul_round, IconKind.PREMIUM),
     BAYRAQ(".LauncherBayraq", "Bayraq", R.mipmap.ic_launcher_bayraq_round, IconKind.PREMIUM),
     KEY(".LauncherKey", "Açar", R.mipmap.ic_launcher_key_round, IconKind.PREMIUM),
+    SUSE(".LauncherSuse", "Şüşə", R.mipmap.ic_launcher_suse_round, IconKind.PREMIUM),
     NOVRUZ(".LauncherNovruz", "Novruz", R.mipmap.ic_launcher_novruz_round, IconKind.HOLIDAY),
     YENI_IL(".LauncherYeniIl", "Yeni il", R.mipmap.ic_launcher_yeniil_round, IconKind.HOLIDAY);
 
