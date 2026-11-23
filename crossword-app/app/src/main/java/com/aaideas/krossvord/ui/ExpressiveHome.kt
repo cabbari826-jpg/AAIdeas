@@ -360,7 +360,7 @@ fun GlassBottomMenu(
         color = if (haze != null || screenLayer != null) Color.Transparent else if (glass) Color.White.copy(alpha = if (dark) 0.14f else 0.45f) else cs.surfaceContainerHigh,
         border = if (glass) null else BorderStroke(1.dp, cs.outlineVariant.copy(alpha = 0.7f)),
     ) {
-        // Every tab as wide as the widest ("Statistika"), so the chosen tab's highlight is the same size on each
+        // Every tab as wide as the widest label, so the chosen tab's highlight is the same size on each
         // and its icon and label sit exactly in the middle (the owner wants strict symmetry).
         Row(Modifier.then(if (compact) Modifier.width(androidx.compose.foundation.layout.IntrinsicSize.Max) else Modifier).padding(6.dp),
             // The gap between tabs equals the inset from the pill's edge, so the chosen tab sits evenly in its slot.
@@ -368,7 +368,7 @@ fun GlassBottomMenu(
             listOf(
                 Triple(Screen.HOME, MenuIcon.PLAY, "Oyun"),
                 Triple(Screen.DAILY, MenuIcon.TODAY, "Bu gün"),
-                Triple(Screen.STATS, MenuIcon.STATS, "Statistika"),
+                Triple(Screen.STATS, MenuIcon.STATS, "Uğurlar"),
                 Triple(Screen.SETTINGS, MenuIcon.SETTINGS, "Ayarlar"),
             ).forEach { (target, icon, label) ->
                 val on = screen == target
@@ -409,7 +409,7 @@ fun GlassBottomMenu(
 /** Nunito ExtraBold (SIL OFL 1.1), subset to Latin + Azerbaijani letters: the menu labels. */
 val MenuFont = AppFont
 
-private val MENU_LABELS = listOf("Oyun", "Bu gün", "Statistika", "Ayarlar")
+private val MENU_LABELS = listOf("Oyun", "Bu gün", "Uğurlar", "Ayarlar")
 
 enum class MenuIcon { PLAY, TODAY, STATS, SETTINGS }
 
