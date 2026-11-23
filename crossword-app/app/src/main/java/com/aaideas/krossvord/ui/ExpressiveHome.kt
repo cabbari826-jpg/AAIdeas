@@ -284,7 +284,7 @@ private fun PackCard(title: String, done: Int, total: Int, selected: Boolean, on
     }
 }
 
-val BottomMenuHeight: Dp = 88.dp
+val BottomMenuHeight: Dp = 102.dp
 
 /**
  * Floating translucent menu ("glass"). Real backdrop blur is not available in Compose on all
@@ -297,7 +297,8 @@ fun GlassBottomMenu(screen: Screen, open: (Screen) -> Unit, modifier: Modifier =
     val glass = LocalGlass.current
     val dark = cs.background.luminance() < 0.5f
     Surface(
-        modifier = modifier.padding(horizontal = 24.dp, vertical = 12.dp).fillMaxWidth()
+        // Lifted off the bottom edge so it floats clear of the gesture bar.
+        modifier = modifier.padding(start = 24.dp, end = 24.dp, top = 12.dp, bottom = 26.dp).fillMaxWidth()
             // Şüşə: frosted glass over whatever scrolls beneath (real blur on Android 12+, a tint before that).
             .then(if (haze != null) Modifier.clip(CircleShape).hazeEffect(haze, glassStyle(dark)) else Modifier)
             .glassy(CircleShape),

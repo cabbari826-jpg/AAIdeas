@@ -7,6 +7,7 @@ import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.repeatable
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -1006,7 +1007,8 @@ private fun GlassLetterRows(
     val rows = (letters.size + 2 + perRow - 1) / perRow
     val slots = letters.indices.toList() + List(rows * perRow - letters.size - 2) { -3 } + listOf(-1, -2)
     val gap = if (perRow > 6) 6.dp else 8.dp
-    val h = LocalTile.current + 6.dp
+    // Tiles keep the mockup's shape (a touch taller than wide), whatever the number per row.
+    val tile = Modifier.aspectRatio(1f / 1.05f)
     Column(modifier.fillMaxWidth().padding(top = 2.dp, bottom = 8.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
         slots.chunked(perRow).forEach { row ->
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(gap)) {
@@ -1014,12 +1016,12 @@ private fun GlassLetterRows(
                     val shape = RoundedCornerShape(16.dp)
                     val ch = letters.getOrNull(i)
                     when {
-                        i == -3 || (i >= 0 && ch == null) -> Spacer(Modifier.weight(1f).height(h))
+                        i == -3 || (i >= 0 && ch == null) -> Spacer(Modifier.weight(1f).then(tile))
                         i >= 0 -> {
                             val order = draft.indexOf(i).takeIf { it >= 0 }?.plus(1)
                             val picked = order != null
                             Box(
-                                Modifier.weight(1f).height(h).clip(shape)
+                                Modifier.weight(1f).then(tile).clip(shape)
                                     .background(if (picked) cs.primary else cs.primaryContainer)
                                     .glassy(shape)
                                     .clickable {
@@ -1037,7 +1039,7 @@ private fun GlassLetterRows(
                         else -> {
                             val enabled = draft.isNotEmpty()
                             Box(
-                                Modifier.weight(1f).height(h).clip(shape)
+                                Modifier.weight(1f).then(tile).clip(shape)
                                     .background(cs.secondaryContainer)
                                     .glassy(shape)
                                     .clickable(enabled = enabled) { if (i == -1) onUndo() else onClear() }

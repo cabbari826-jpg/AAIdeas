@@ -104,6 +104,25 @@ fun GlassWarning(onYes: () -> Unit, onNo: () -> Unit) {
     )
 }
 
+/**
+ * "Effektləri azalt": the lighter glass with no shadows and no live blur. On by itself on weak phones
+ * (see [isWeakForGlass]) until the player flips the switch in Settings; their choice is kept.
+ */
+object GlassLite {
+    private var state: androidx.compose.runtime.MutableState<Boolean>? = null
+    private fun prefs(ctx: Context) = ctx.getSharedPreferences("glass", Context.MODE_PRIVATE)
+    fun isOn(ctx: Context): Boolean = (state ?: androidx.compose.runtime.mutableStateOf(
+        prefs(ctx).let { if (it.contains("lite")) it.getBoolean("lite", false) else isWeakForGlass(ctx) },
+    ).also { state = it }).value
+    fun set(ctx: Context, on: Boolean) {
+        prefs(ctx).edit().putBoolean("lite", on).apply()
+        isOn(ctx); state!!.value = on
+    }
+}
+
+/** Set while reduced glass effects are on. */
+val LocalGlassLite = staticCompositionLocalOf { false }
+
 /** True while the Şüşə theme is on; glass-only touches (rims, sheen, gaps) read it. */
 val LocalGlass = staticCompositionLocalOf { false }
 
@@ -115,6 +134,7 @@ val LocalGlass = staticCompositionLocalOf { false }
 fun Modifier.glassy(shape: Shape): Modifier {
     if (!LocalGlass.current) return this
     val dark = androidx.compose.material3.MaterialTheme.colorScheme.background.luminance() < 0.5f
+    val lite = LocalGlassLite.current
     return this.drawWithCache {
         val path = Path().apply { addOutline(shape.createOutline(size, layoutDirection, this@drawWithCache)) }
         val sheen = Brush.linearGradient(
@@ -130,7 +150,7 @@ fun Modifier.glassy(shape: Shape): Modifier {
         val stroke = androidx.compose.ui.graphics.drawscope.Stroke(1.dp.toPx())
         // The soft shadow under each panel (CSS 0 10px 30px), drawn only outside the panel: under a
         // see-through panel it would show through as a grey box. Blurred shadows need Android 9.
-        val shadow = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+        val shadow = if (!lite && Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             val dy = minOf(10.dp.toPx(), size.minDimension * 0.12f)
             Path().apply { addPath(path, Offset(0f, dy)) }.asAndroidPath() to android.graphics.Paint(android.graphics.Paint.ANTI_ALIAS_FLAG).apply {
                 color = if (dark) android.graphics.Color.argb(90, 0, 0, 0) else android.graphics.Color.argb(56, 40, 20, 80)

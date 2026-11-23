@@ -90,6 +90,13 @@ fun SkinPicker(current: Skin, owned: Set<Skin>, onPick: (Skin) -> Unit, onUnlock
             }
         }
         if (askGlass) GlassWarning(onYes = { askGlass = false; onPick(Skin.SUSE) }, onNo = { askGlass = false })
+        if (current.glass) Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+            Column(Modifier.weight(1f)) {
+                Text("Effektləri azalt", style = MaterialTheme.typography.titleMedium)
+                Text("Kölgəsiz və bulanıqsız şüşə: zəif telefonda oyun daha rahat işləyir.", style = MaterialTheme.typography.bodySmall)
+            }
+            androidx.compose.material3.Switch(checked = GlassLite.isOn(ctx), onCheckedChange = { GlassLite.set(ctx, it) })
+        }
         val lockedOnes = Skin.entries.filter { it !in owned }
         if (lockedOnes.isNotEmpty()) {
             Text("🔒 Hədiyyə mövzular oyunda qazanılır.", style = MaterialTheme.typography.bodySmall)

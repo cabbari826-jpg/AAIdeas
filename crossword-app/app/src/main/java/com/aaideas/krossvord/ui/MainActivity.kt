@@ -86,11 +86,12 @@ class MainActivity : ComponentActivity() {
             KrossvordTheme(mode, vm.dynamicColor, skin) {
                 // Şüşə: the colourful backdrop shows through, so the window surface is clear.
                 Surface(Modifier.fillMaxSize(), color = if (skin.glass) androidx.compose.ui.graphics.Color.Transparent else MaterialTheme.colorScheme.background) {
-                    val haze = if (skin.glass) androidx.compose.runtime.remember { dev.chrisbanes.haze.HazeState() } else null
+                    val glassLite = skin.glass && GlassLite.isOn(this@MainActivity)
+                    val haze = if (skin.glass && !glassLite) androidx.compose.runtime.remember { dev.chrisbanes.haze.HazeState() } else null
                     val isPremium by vm.premium.isPremium.collectAsState()
                     BackHandler(enabled = vm.screen != Screen.HOME) { vm.back() }
                     val menu = vm.screen != Screen.PUZZLE && vm.screen != Screen.WORD_OF_DAY
-                    androidx.compose.runtime.CompositionLocalProvider(LocalHaze provides haze) {
+                    androidx.compose.runtime.CompositionLocalProvider(LocalHaze provides haze, LocalGlassLite provides glassLite) {
                     // The backdrop and screens are the blur source; the floating menu (outside it) frosts them.
                     Box(Modifier.fillMaxSize().then(if (haze != null) Modifier.hazeSource(haze) else Modifier)) {
                         if (skin.glass) GlassBackdrop(dark, Modifier.fillMaxSize())
