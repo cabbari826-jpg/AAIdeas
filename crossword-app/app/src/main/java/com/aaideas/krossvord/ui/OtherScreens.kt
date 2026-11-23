@@ -233,6 +233,7 @@ fun SettingsScreen(vm: GameViewModel, isPremium: Boolean) {
             Switch(checked = vm.praiseVoice, onCheckedChange = vm::changePraiseVoice)
         }
         ReminderSwitch()
+        WidgetButton()
         Spacer(Modifier.height(8.dp))
         Text("İrəliləyiş", style = MaterialTheme.typography.headlineSmall)
         Text("Həll olunub: ${vm.completed.size} / ${vm.levels.size}. Həll olunmuş səviyyəni siyahıdan yenidən oynamaq olar.")
@@ -401,5 +402,29 @@ private fun TextSizeCard(vm: GameViewModel) {
             )
             OutlinedButton(onClick = { if (i < TEXT_SCALES.lastIndex) vm.changeTextScale(TEXT_SCALES[i + 1]) }, enabled = i < TEXT_SCALES.lastIndex) { Text("A+") }
         }
+    }
+}
+
+/**
+ * Puts the "Günün sözü" widget on the home screen in one tap (Android 8+ launchers that allow it);
+ * otherwise explains where to find it.
+ */
+@Composable
+private fun WidgetButton() {
+    val context = androidx.compose.ui.platform.LocalContext.current
+    val manager = remember { android.appwidget.AppWidgetManager.getInstance(context) }
+    val canPin = remember { android.os.Build.VERSION.SDK_INT >= 26 && runCatching { manager.isRequestPinAppWidgetSupported }.getOrDefault(false) }
+    var asked by remember { mutableStateOf(false) }
+    Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+        if (canPin) OutlinedButton(onClick = {
+            asked = true
+            if (android.os.Build.VERSION.SDK_INT >= 26) runCatching {
+                manager.requestPinAppWidget(android.content.ComponentName(context, com.aaideas.krossvord.widget.WordWidget::class.java), null, null)
+            }
+        }, modifier = Modifier.fillMaxWidth()) { Text("📌 «Günün sözü» vidjetini ekrana əlavə et") }
+        if (!canPin || asked) Text(
+            "Əgər vidjet görünmədisə: ekranın boş yerinə barmağınızı basıb saxlayın → «Vidjetlər» → «Açar Söz».",
+            style = MaterialTheme.typography.bodySmall,
+        )
     }
 }

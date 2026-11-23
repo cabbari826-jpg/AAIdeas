@@ -126,6 +126,47 @@ class UpdateTwoOneTest {
         shoot("v21-map") { JourneyScreen(vm2) }
     }
 
+    @Test fun monthTripMovesWithLevelsAndRewardsTheEnd() {
+        val c = com.aaideas.krossvord.model.Challenge
+        val west = c.ROUTES[0]
+        assertEquals("Bakı", c.reached(west, 0).name)
+        assertEquals("Qazax", c.reached(west, c.GOAL).name)
+        assertEquals(0, c.toNextStop(west, c.GOAL))
+        assertTrue(c.toNextStop(west, 0) in 1..3)
+        app.getSharedPreferences("progress", 0).edit().putInt("month_key", 202611).putInt("month_levels", 9).commit()
+        val vm = vm()
+        assertEquals(9, vm.monthLevels)
+        val hints = vm.freeHints
+        app.getSharedPreferences("progress", 0).edit().putInt("month_levels", c.GOAL - 1).commit()
+        val vm2 = vm()
+        vm2.startLevel(0); vm2.restartLevel()
+        // Solve level 1 by revealing every letter (premium on, so hints are free).
+        vm2.premium.purchase()
+        repeat(200) { if (vm2.game?.isComplete != true) vm2.hint() }
+        assertEquals(c.GOAL, vm2.monthLevels)
+        assertTrue(vm2.result?.trip.orEmpty().startsWith("🏁"))
+        assertEquals(hints + c.REWARD_HINTS, vm2.freeHints)
+    }
+
+    @Test fun mapScreenWithMonthTrip() {
+        app.getSharedPreferences("progress", 0).edit().putInt("month_key", 202611).putInt("month_levels", 9).commit()
+        val vm = vm()
+        shoot("v21-map-month") { JourneyScreen(vm) }
+    }
+
+    @Test fun restWindowAfterAnHourOfPlay() {
+        val vm = vm()
+        vm.startLevel(0)
+        assertFalse(vm.restDue)
+        vm.addSittingForTest(REST_EVERY_SECONDS + 5)
+        vm.startLevel(1)
+        assertTrue(vm.restDue)
+        shoot("v21-rest") { RestDialog(vm) }
+        vm.closeRest(goHome = false)
+        vm.startLevel(2)
+        assertFalse(vm.restDue)          // next one only after another hour
+    }
+
     @Test fun everyThirdDayInARowGivesAFreeHint() {
         val s = com.aaideas.krossvord.model.Streak
         assertTrue(s.hintDue(setOf(10L, 11L, 12L), 12L, -1))

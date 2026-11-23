@@ -194,6 +194,22 @@ class ProgressStore(context: Context) {
         get() = prefs.getBoolean("large_mode", false)
         set(v) = prefs.edit().putBoolean("large_mode", v).apply()
 
+    // ---- "Ayın yolu": levels solved this month (first time), finish day, best finish ----
+    var monthKey: Int
+        get() = prefs.getInt("month_key", 0)
+        set(v) = prefs.edit().putInt("month_key", v).apply()
+    var monthLevels: Int
+        get() = prefs.getInt("month_levels", 0)
+        set(v) = prefs.edit().putInt("month_levels", v).apply()
+    /** Day of the month the route was finished, 0 = not yet. */
+    var monthFinishDay: Int
+        get() = prefs.getInt("month_finish_day", 0)
+        set(v) = prefs.edit().putInt("month_finish_day", v).apply()
+    /** Fastest finish ever (day of the month), 0 = never finished. */
+    var bestFinishDay: Int
+        get() = prefs.getInt("best_finish_day", 0)
+        set(v) = prefs.edit().putInt("best_finish_day", v).apply()
+
     /** Text size from the settings slider; 0 = never picked. */
     var textScale: Float
         get() = prefs.getFloat("text_scale", 0f)

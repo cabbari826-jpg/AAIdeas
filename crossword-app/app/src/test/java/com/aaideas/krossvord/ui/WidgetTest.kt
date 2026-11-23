@@ -20,8 +20,20 @@ class WidgetTest {
         WordWidget.refresh(app)
     }
 
+    @Test fun reminderIsOnByDefaultSoNobodyIsAsked() {
+        val app = ApplicationProvider.getApplicationContext<Application>()
+        assertTrue(com.aaideas.krossvord.remind.DailyReminder.isOn(app))
+        val vm = GameViewModel(app)
+        vm.onAppOpen(); vm.dismissWelcome()
+        vm.onAppOpen(); vm.dismissWelcome()
+        assertTrue(!vm.askReminder)
+    }
+
+    /** Turned off by the player (or an old install): asked once, from the second launch. */
     @Test fun reminderAskedOnlyFromSecondLaunch() {
-        val vm = GameViewModel(ApplicationProvider.getApplicationContext<Application>())
+        val app = ApplicationProvider.getApplicationContext<Application>()
+        app.getSharedPreferences("reminder", 0).edit().putBoolean("on", false).commit()
+        val vm = GameViewModel(app)
         vm.onAppOpen()
         vm.dismissWelcome()
         assertTrue(!vm.askReminder)

@@ -227,3 +227,22 @@ fun WhatsNewCard(onClose: () -> Unit) {
         Button(onClick = onClose, modifier = Modifier.fillMaxWidth().height(52.dp)) { Text("Əla!", fontSize = 18.sp) }
     }
 }
+
+/** After an hour of play: a kind nudge to rest the eyes. Never blocks: "Davam et" plays on. */
+@Composable
+fun RestDialog(vm: GameViewModel) {
+    if (!vm.restDue) return
+    androidx.compose.material3.AlertDialog(
+        onDismissRequest = { vm.closeRest(goHome = false) },
+        icon = { androidx.compose.material3.Text("☕", fontSize = 40.sp) },
+        title = { androidx.compose.material3.Text("Bir az dincəlin?") },
+        text = {
+            androidx.compose.material3.Text(
+                "Bir saatdan çoxdur oynayırsınız. Telefonu bir az kənara qoyun: gözlərinizi dincəldin, su için, bir az gəzin. Sözlər sizi gözləyəcək 🙂",
+                style = androidx.compose.material3.MaterialTheme.typography.bodyLarge,
+            )
+        },
+        confirmButton = { androidx.compose.material3.Button(onClick = { vm.closeRest(goHome = true) }) { androidx.compose.material3.Text("Yaxşı, dincəlirəm") } },
+        dismissButton = { androidx.compose.material3.TextButton(onClick = { vm.closeRest(goHome = false) }) { androidx.compose.material3.Text("Davam et") } },
+    )
+}

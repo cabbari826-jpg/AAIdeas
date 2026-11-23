@@ -43,17 +43,23 @@ import com.aaideas.krossvord.model.Journey
 fun JourneyScreen(vm: GameViewModel) {
     val solved = vm.completed.size
     val open = Journey.opened(solved)
-    val state = rememberLazyListState(initialFirstVisibleItemIndex = (open - 2).coerceAtLeast(0))
+    val state = rememberLazyListState()
     Column(Modifier.fillMaxSize().padding(horizontal = 16.dp)) {
         TextButton(onClick = vm::back) { Text("← Əsas səhifə") }
         Text("Yol xəritəsi", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
-        Text(
-            Journey.toNext(solved)?.let { "Hər ${Journey.STEP} səviyyədə yeni yer açılır. Növbətiyə $it səviyyə qaldı." }
-                ?: "Bütün yol keçildi! Əla səyahət idi.",
-            style = MaterialTheme.typography.bodyLarge,
-        )
         Spacer(Modifier.height(8.dp))
         LazyColumn(state = state, modifier = Modifier.fillMaxSize()) {
+            item { MonthTripCard(vm) }
+            item {
+                Text("Böyük yol", style = MaterialTheme.typography.titleLarge, modifier = Modifier.padding(top = 16.dp, bottom = 8.dp))
+            }
+            item {
+                Text(
+                    Journey.toNext(solved)?.let { "Hər ${Journey.STEP} səviyyədə yeni yer açılır. Növbətiyə $it səviyyə qaldı." }
+                        ?: "Bütün yol keçildi! Əla səyahət idi.",
+                    style = MaterialTheme.typography.bodyMedium, modifier = Modifier.padding(bottom = 8.dp),
+                )
+            }
             itemsIndexed(Journey.CITIES) { i, city ->
                 Stop(city, i, open, Journey.toNext(solved), last = i == Journey.CITIES.lastIndex)
             }
@@ -132,6 +138,38 @@ fun JourneyCard(vm: GameViewModel) {
                 )
             }
             Text("▶", style = MaterialTheme.typography.titleMedium)
+        }
+    }
+}
+
+/** "Ayın yolu": this month's route on the map, how far the car is, and the reward. */
+@Composable
+private fun MonthTripCard(vm: GameViewModel) {
+    val c = com.aaideas.krossvord.model.Challenge
+    val route = vm.route
+    val n = vm.monthLevels
+    val cs = MaterialTheme.colorScheme
+    Surface(shape = MaterialTheme.shapes.extraLarge, color = cs.surfaceContainerHigh, modifier = Modifier.fillMaxWidth().glassy(MaterialTheme.shapes.extraLarge)) {
+        Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Text("🚗 Ayın yolu", style = MaterialTheme.typography.labelLarge, color = cs.primary)
+            Text(route.title, style = MaterialTheme.typography.titleLarge)
+            AzMap(route.places, c.position(route, n), Modifier.fillMaxWidth())
+            androidx.compose.material3.LinearProgressIndicator(
+                progress = { n.toFloat() / c.GOAL },
+                modifier = Modifier.fillMaxWidth().height(8.dp).clip(CircleShape),
+                drawStopIndicator = {},
+            )
+            Text(
+                if (n >= c.GOAL) "🏁 Çatdınız! Ayın ${vm.monthFinishDay}-də. Hədiyyə alındı: ${c.REWARD_HINTS} pulsuz ipucu."
+                else "$n / ${c.GOAL} səviyyə · indi: ${c.reached(route, n).name} · növbəti dayanacağa ${c.toNextStop(route, n)} səviyyə",
+                style = MaterialTheme.typography.bodyMedium,
+            )
+            Text(
+                "Ay bitənə qədər çatsanız: ${c.REWARD_HINTS} pulsuz ipucu." +
+                    (vm.bestFinishDay.takeIf { it > 0 }?.let { " Rekordunuz: ayın $it-i." } ?: "") +
+                    " Hər ay yeni yol.",
+                style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant,
+            )
         }
     }
 }

@@ -79,6 +79,11 @@ fun LevelResultDialog(title: String, result: LevelResult, onNext: () -> Unit, on
                             Text("${m.icon} Yeni medal: ${m.title}", Modifier.padding(horizontal = 12.dp, vertical = 6.dp), style = MaterialTheme.typography.bodyMedium)
                         }
                     }
+                    result.trip?.let { t ->
+                        Surface(shape = RoundedCornerShape(12.dp), color = MaterialTheme.colorScheme.tertiaryContainer) {
+                            Text(t, Modifier.padding(horizontal = 12.dp, vertical = 6.dp), style = MaterialTheme.typography.bodyMedium, textAlign = TextAlign.Center)
+                        }
+                    }
                     // A new place on the road map: its fact replaces the usual one.
                     result.city?.let { c ->
                         Surface(shape = RoundedCornerShape(12.dp), color = MaterialTheme.colorScheme.secondaryContainer) {

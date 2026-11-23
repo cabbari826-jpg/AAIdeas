@@ -44,6 +44,11 @@ enum class InputMode { COLUMNS, TILES, KEYBOARD }
 
 enum class WordFeedback { RIGHT, WRONG }
 
+/** "Bir az dincəlin" after this much play in one sitting, and again every time after it. */
+const val REST_EVERY_SECONDS = 60L * 60
+/** Away this long and the next play is a new sitting. */
+const val REST_GAP_MS = 15L * 60 * 1000
+
 /** Text sizes on the settings slider: normal, a bit bigger, large, very large. */
 val TEXT_SCALES = listOf(1f, 1.15f, 1.3f, 1.5f)
 val TEXT_SCALE_NAMES = listOf("Adi", "Bir az iri", "İri", "Çox iri")
@@ -185,10 +190,34 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
 
     /** Time on the puzzle screen: started when it shows, added up when it hides. */
     private var playStart = 0L
-    fun puzzleShown() { playStart = android.os.SystemClock.elapsedRealtime() }
+    fun puzzleShown() {
+        val now = android.os.SystemClock.elapsedRealtime()
+        // A real pause (15 minutes away) starts a new sitting for the rest reminder.
+        if (lastHidden != 0L && now - lastHidden > REST_GAP_MS) { sittingSeconds = 0; nextRestAt = REST_EVERY_SECONDS }
+        playStart = now
+    }
     fun puzzleHidden() {
         flushTime()
         playStart = 0L
+        lastHidden = android.os.SystemClock.elapsedRealtime()
+    }
+
+    // ---- "Bir az dincəlin": after an hour of play in one sitting, a gentle window before the next level, then every hour ----
+    private var lastHidden = 0L
+    /** Seconds played on levels in this sitting. */
+    private var sittingSeconds = 0L
+    private var nextRestAt = REST_EVERY_SECONDS
+    var restDue by mutableStateOf(false)
+        private set
+    fun closeRest(goHome: Boolean) { restDue = false; if (goHome) { flushTime(); screen = Screen.HOME } }
+    /** Tests: pretend this much was played. */
+    fun addSittingForTest(sec: Long) { sittingSeconds += sec }
+    private fun checkRest() {
+        flushTime()
+        if (sittingSeconds >= nextRestAt) {
+            restDue = true
+            nextRestAt = sittingSeconds + REST_EVERY_SECONDS
+        }
     }
 
     /** Adds the time since [playStart] to the totals and to the current level; keeps counting. */
@@ -198,6 +227,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         val sec = (now - playStart) / 1000
         if (sec in 1..6 * 3600) {
             progress.playSeconds = progress.playSeconds + sec
+            sittingSeconds += sec
             game?.let { progress.addLevelSeconds(it.board.level.id, sec) }
             playStart += sec * 1000
         }
@@ -607,6 +637,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         progress.launches = progress.launches + 1
         if (progress.launches >= 2) reminderDue = true
         openWelcome()
+        rollMonth()
         autoUpdatePacks()
         maybeShowWhatsNew()
         maybeAskReminder()
@@ -630,6 +661,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
 
     /** The app came back to the front: a new day may have started while it slept. */
     fun onResumeDay() {
+        rollMonth()
         daily.refresh()
         dailyTick++
         tickLives()
@@ -975,6 +1007,45 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     }
     fun levelOpen(index: Int) = packOpen(packIndexOf(index))
 
+    // ---- "Ayın yolu": a monthly road trip, moved by levels solved this month ----
+    private fun monthKeyOf(d: java.time.LocalDate) = d.year * 100 + d.monthValue
+    /** Levels solved for the first time this month (resets when the month changes). */
+    var monthLevels by mutableStateOf(0)
+        private set
+    var monthFinishDay by mutableStateOf(0)
+        private set
+    val bestFinishDay: Int get() { monthLevels; return progress.bestFinishDay }
+    val route: com.aaideas.krossvord.model.Route get() = com.aaideas.krossvord.model.Challenge.routeFor(java.time.YearMonth.from(today()))
+
+    private fun rollMonth() {
+        val key = monthKeyOf(today())
+        if (progress.monthKey != key) {
+            progress.monthKey = key; progress.monthLevels = 0; progress.monthFinishDay = 0
+        }
+        monthLevels = progress.monthLevels
+        monthFinishDay = progress.monthFinishDay
+    }
+
+    /** A level solved for the first time: the car moves; at the end, free hints. Returns a line for the result card. */
+    private fun advanceTrip(): String? {
+        rollMonth()
+        val c = com.aaideas.krossvord.model.Challenge
+        if (monthLevels >= c.GOAL) return null
+        val before = c.position(route, monthLevels).toInt()
+        monthLevels++; progress.monthLevels = monthLevels
+        if (monthLevels >= c.GOAL) {
+            val day = today().dayOfMonth
+            monthFinishDay = day; progress.monthFinishDay = day
+            if (progress.bestFinishDay == 0 || day < progress.bestFinishDay) progress.bestFinishDay = day
+            freeHints += c.REWARD_HINTS; progress.freeHints = freeHints
+            return "🏁 ${route.places.last().name}! Ayın yolu ${day}-də başa çatdı. Hədiyyə: ${c.REWARD_HINTS} pulsuz ipucu"
+        }
+        val after = c.position(route, monthLevels).toInt()
+        return if (after > before) "🚗 Ayın yolu: ${route.places[after].name} çatdınız!" else null
+    }
+
+    init { rollMonth() }
+
     /** The newest open weekly surprise with levels left, for the home card; null when none. */
     val weeklyPack: Int? get() = packs.indices.lastOrNull { com.aaideas.krossvord.model.Weekly.isWeekly(packs[it].packId) && packOpen(it) }
         ?.takeIf { p -> packs[p].levels.any { it.id !in completed } }
@@ -1007,6 +1078,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     fun startLevel(index: Int) {
+        checkRest()
         playingMini = false
         levelIndex = index
         selectedPack = packIndexOf(index)
@@ -1146,9 +1218,11 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
             flushTime()
             val stars = LevelResult.stars(mistakes, hintsUsed)
             val rankUp = addXp(com.aaideas.krossvord.model.Ranks.levelXp(stars))
+            val trip = if (!playingMini && id !in completed) advanceTrip() else null
             val before = com.aaideas.krossvord.model.Journey.opened(completed.size)
             val after = com.aaideas.krossvord.model.Journey.opened(progress.completedLevels().size)
             result = LevelResult(
+                trip = trip,
                 city = if (after > before && !playingMini) com.aaideas.krossvord.model.Journey.CITIES[after - 1] else null,
                 rankUp = rankUp,
                 xp = com.aaideas.krossvord.model.Ranks.levelXp(stars),
@@ -1173,7 +1247,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
 }
 
 /** The result card of a solved level: 1 to 3 stars, time taken (shown only here), praise, new medals. */
-data class LevelResult(val city: com.aaideas.krossvord.model.City? = null, val rankUp: com.aaideas.krossvord.model.Rank? = null, val xp: Int = 0, val stars: Int, val seconds: Long, val praise: String, val keyword: String?, val medals: List<Medal>, val fact: String? = null) {
+data class LevelResult(val trip: String? = null, val city: com.aaideas.krossvord.model.City? = null, val rankUp: com.aaideas.krossvord.model.Rank? = null, val xp: Int = 0, val stars: Int, val seconds: Long, val praise: String, val keyword: String?, val medals: List<Medal>, val fact: String? = null) {
     companion object {
         val PRAISE = listOf("Əla!", "Bravo!", "Afərin!", "Belə davam et!", "Mükəmməl!", "Super!", "Çox gözəl!")
         /** Never zero: 3 without mistakes and letter hints, 2 with a few, 1 otherwise. */

@@ -131,6 +131,7 @@ class MainActivity : ComponentActivity() {
                     }
                     }
                     WelcomeHost(vm)
+                    RestDialog(vm)
                     AdPlaceholderHost(vm.ads)
                     UpdateBanner() // prototype only; empty in the release build
                 }

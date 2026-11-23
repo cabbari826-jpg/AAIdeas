@@ -29,7 +29,8 @@ object DailyReminder {
     private const val PREFS = "reminder"
     private const val KEY_ON = "on"
 
-    fun isOn(context: Context) = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).getBoolean(KEY_ON, false)
+    /** On unless the player turned it off (the owner wants the reminder to come by itself). */
+    fun isOn(context: Context) = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).getBoolean(KEY_ON, true)
 
     fun set(context: Context, on: Boolean) {
         context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).edit().putBoolean(KEY_ON, on).apply()
