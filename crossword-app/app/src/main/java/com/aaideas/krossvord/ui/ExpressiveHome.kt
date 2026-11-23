@@ -349,7 +349,7 @@ fun GlassBottomMenu(
     val dark = cs.background.luminance() < 0.5f
     Surface(
         // Lifted off the bottom edge so it floats clear of the gesture bar.
-        modifier = modifier.padding(start = 24.dp, end = 24.dp, top = 12.dp, bottom = 26.dp)
+        modifier = modifier.padding(start = 16.dp, end = 16.dp, top = 12.dp, bottom = 26.dp)
             .then(if (compact) Modifier else Modifier.fillMaxWidth())
             // Şüşə: frosted glass over whatever scrolls beneath (real blur on Android 12+, a tint before that).
             .then(if (haze != null) Modifier.clip(CircleShape).hazeEffect(haze, glassStyle(dark)) else Modifier)
@@ -360,14 +360,15 @@ fun GlassBottomMenu(
         color = if (haze != null || screenLayer != null) Color.Transparent else if (glass) Color.White.copy(alpha = if (dark) 0.14f else 0.45f) else cs.surfaceContainerHigh,
         border = if (glass) null else BorderStroke(1.dp, cs.outlineVariant.copy(alpha = 0.7f)),
     ) {
-        // Every tab as wide as the widest ("Statistika"), so the chosen tab's highlight is the same size on each
+        // Every tab as wide as the widest label, so the chosen tab's highlight is the same size on each
         // and its icon and label sit exactly in the middle (the owner wants strict symmetry).
-        Row(Modifier.then(if (compact) Modifier.width(androidx.compose.foundation.layout.IntrinsicSize.Max) else Modifier).padding(if (compact) 5.dp else 6.dp),
-            horizontalArrangement = Arrangement.spacedBy(if (compact) 0.dp else 4.dp)) {
+        Row(Modifier.then(if (compact) Modifier.width(androidx.compose.foundation.layout.IntrinsicSize.Max) else Modifier).padding(6.dp),
+            // The gap between tabs equals the inset from the pill's edge, so the chosen tab sits evenly in its slot.
+            horizontalArrangement = Arrangement.spacedBy(6.dp)) {
             listOf(
                 Triple(Screen.HOME, MenuIcon.PLAY, "Oyun"),
                 Triple(Screen.DAILY, MenuIcon.TODAY, "Bu gün"),
-                Triple(Screen.STATS, MenuIcon.STATS, "Statistika"),
+                Triple(Screen.STATS, MenuIcon.STATS, "Uğurlar"),
                 Triple(Screen.SETTINGS, MenuIcon.SETTINGS, "Ayarlar"),
             ).forEach { (target, icon, label) ->
                 val on = screen == target
@@ -377,21 +378,28 @@ fun GlassBottomMenu(
                         // Şüşə: the chosen tab is a brighter glass pill with dark text (mockup); otherwise the accent.
                         .background(if (on) (if (glass) Color.White.copy(alpha = if (dark) 0.22f else 0.6f) else cs.primary) else Color.Transparent)
                         .clickable(interactionSource = src, indication = null) { open(target) }
-                        .padding(vertical = 7.dp, horizontal = if (compact) 9.dp else 0.dp),
+                        .padding(vertical = 7.dp, horizontal = if (compact) 6.dp else 0.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     // With a chosen font the labels are bolder and darker, so they don't look faded on glass.
                     val tabInk = if (on) (if (glass) cs.onSurface else cs.onPrimary) else if (font != null) cs.onSurface.copy(alpha = 0.85f) else cs.onSurfaceVariant
                     MenuGlyph(icon, tabInk, filled = on)
-                    Text(
-                        label,
-                        style = if (font != null) MaterialTheme.typography.labelLarge.copy(fontFamily = font, fontWeight = androidx.compose.ui.text.font.FontWeight.ExtraBold, fontSize = 13.sp)
-                        else MaterialTheme.typography.labelMedium,
-                        color = tabInk,
-                        maxLines = 1,
-                        softWrap = false,
-                        textAlign = androidx.compose.ui.text.style.TextAlign.Center,
-                    )
+                    // On a narrow phone or with big text the label shrinks to fit its tab instead of being cut
+                    // on the right, so it always sits exactly under the icon in the middle of the highlight.
+                    val labelStyle = (if (font != null) MaterialTheme.typography.labelLarge.copy(fontFamily = font, fontWeight = androidx.compose.ui.text.font.FontWeight.ExtraBold, fontSize = 13.sp)
+                        else MaterialTheme.typography.labelMedium).copy(color = tabInk, textAlign = androidx.compose.ui.text.style.TextAlign.Center)
+                    // Every tab is the same width, so sizing all labels to fit the longest one keeps them one size.
+                    val measurer = androidx.compose.ui.text.rememberTextMeasurer()
+                    val density = androidx.compose.ui.platform.LocalDensity.current
+                    val screen = androidx.compose.ui.platform.LocalConfiguration.current.screenWidthDp.dp
+                    val style = remember(labelStyle, measurer, screen, density) {
+                        val longest = MENU_LABELS.maxOf { measurer.measure(it, labelStyle, softWrap = false).size.width }
+                        // Room per tab: the screen less the pill's margins, its inset, the gaps and each tab's padding.
+                        val room = with(density) { ((screen - 32.dp - 12.dp - 18.dp) / 4 - 12.dp).toPx() }
+                        if (longest <= room || longest == 0) labelStyle
+                        else labelStyle.copy(fontSize = labelStyle.fontSize * (room / longest * 0.98f))
+                    }
+                    Text(label, style = style, maxLines = 1, softWrap = false)
                 }
             }
         }
@@ -400,6 +408,8 @@ fun GlassBottomMenu(
 
 /** Nunito ExtraBold (SIL OFL 1.1), subset to Latin + Azerbaijani letters: the menu labels. */
 val MenuFont = AppFont
+
+private val MENU_LABELS = listOf("Oyun", "Bu gün", "Uğurlar", "Ayarlar")
 
 enum class MenuIcon { PLAY, TODAY, STATS, SETTINGS }
 

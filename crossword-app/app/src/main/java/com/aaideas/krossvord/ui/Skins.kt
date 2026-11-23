@@ -149,7 +149,7 @@ private val GlassDark = SkinPalette(
             primaryContainer = Color(0x38FFFFFF), onSecondaryContainer = Color(0xFFF1ECF8), onTertiaryContainer = Color(0xFFF1ECF8),
             onPrimaryContainer = Color(0xFFF1ECF8),
         ),
-    grid(0x1FFFFFFF, 0xFFD6CFE2, 0x33000000, 0x29FFFFFF, 0xFFFFFFFF, 0x40FFC94D, 0xBFFFC94D, 0x662E9E5B, 0x66E5484D, 0xFFCDB8FF, 0x33FFFFFF, 0xFFF0A05A),
+    grid(0x1FFFFFFF, 0xFFF4F0FA, 0x33000000, 0x29FFFFFF, 0xFFFFFFFF, 0x40FFC94D, 0xBFFFC94D, 0x662E9E5B, 0x66E5484D, 0xFFCDB8FF, 0x33FFFFFF, 0xFFF0A05A),
 )
 
 // Kağız: warm paper and brown ink; the blocked cells are pencil-hatched.
