@@ -159,6 +159,7 @@ private fun PuzzleContent(vm: GameViewModel, isPremium: Boolean, compact: Boolea
                 StuckStyle.PILL -> StuckHint(vm, stuckNow, Modifier.align(Alignment.BottomCenter)) { stuck = false }
                 StuckStyle.OWL -> OwlHelper(vm, stuckNow, Modifier.align(Alignment.BottomEnd)) { stuck = false }
                 StuckStyle.KEY -> OwlHelper(vm, stuckNow, Modifier.align(Alignment.BottomEnd), key = true) { stuck = false }
+                StuckStyle.KEY_TALL -> OwlHelper(vm, stuckNow, Modifier.align(Alignment.BottomEnd), tall = true) { stuck = false }
                 else -> {}
             }
         }
@@ -1131,7 +1132,7 @@ private fun StuckHint(vm: GameViewModel, entry: Entry, modifier: Modifier, onUse
  * blinks twice and stays; a tap opens the clue card. Drawn with shapes, so it costs nothing to load.
  */
 @Composable
-private fun OwlHelper(vm: GameViewModel, entry: Entry, modifier: Modifier, key: Boolean = false, onUsed: () -> Unit) {
+private fun OwlHelper(vm: GameViewModel, entry: Entry, modifier: Modifier, key: Boolean = false, tall: Boolean = false, onUsed: () -> Unit) {
     val slide = remember { androidx.compose.animation.core.Animatable(1f) }
     val blink = remember { androidx.compose.animation.core.Animatable(1f) }
     LaunchedEffect(Unit) {
@@ -1165,7 +1166,11 @@ private fun OwlHelper(vm: GameViewModel, entry: Entry, modifier: Modifier, key: 
             Spacer(Modifier.height(18.dp))
         }
         Spacer(Modifier.width(4.dp))
-        if (key) KeyBuddy(blink.value, Modifier.size(width = 58.dp, height = 78.dp).graphicsLayer {
+        if (tall) TallKey(blink.value, Modifier.size(width = 56.dp, height = 104.dp).graphicsLayer {
+            // Leans in with a wobble, then stays a little tilted, curious.
+            rotationZ = 18f * slide.value - 7f
+            transformOrigin = androidx.compose.ui.graphics.TransformOrigin(0.5f, 1f)
+        }) else if (key) KeyBuddy(blink.value, Modifier.size(width = 58.dp, height = 78.dp).graphicsLayer {
             // A small happy wiggle while it slides in.
             rotationZ = -14f * slide.value + 6f
         }) else Owl(blink.value, Modifier.size(64.dp))
@@ -1216,6 +1221,52 @@ private fun KeyBuddy(eyeOpen: Float, modifier: Modifier) {
         drawArc(ink, startAngle = 20f, sweepAngle = 140f, useCenter = false,
             topLeft = Offset(cx - r * 0.28f, cy - r * 0.05f), size = Size(r * 0.56f, r * 0.45f),
             style = androidx.compose.ui.graphics.drawscope.Stroke(width = r * 0.08f, cap = androidx.compose.ui.graphics.StrokeCap.Round))
+    }
+}
+
+/**
+ * Style E: a tall, thin golden key standing on its tip, with big round eyes and raised
+ * eyebrows on its bow, no mouth: the eyes and brows do the talking. Our own drawing.
+ */
+@Composable
+private fun TallKey(eyeOpen: Float, modifier: Modifier) {
+    val gold = Color(0xFFFFC94D)
+    val edge = Color(0xFFC98A0E)
+    val ink = Color(0xFF2A2140)
+    androidx.compose.foundation.Canvas(modifier) {
+        val w = size.width; val h = size.height
+        val cx = w / 2
+        val stroke = w * 0.13f
+        val line = androidx.compose.ui.graphics.drawscope.Stroke(width = stroke, cap = androidx.compose.ui.graphics.StrokeCap.Round, join = androidx.compose.ui.graphics.StrokeJoin.Round)
+        val outline = androidx.compose.ui.graphics.drawscope.Stroke(width = stroke + 4f, cap = androidx.compose.ui.graphics.StrokeCap.Round, join = androidx.compose.ui.graphics.StrokeJoin.Round)
+        // Bow: an open oval ring at the top (like a wire bent round), with a little gap where it meets the shaft.
+        val ringTop = h * 0.08f; val ringH = h * 0.36f
+        val ring = androidx.compose.ui.graphics.Path().apply {
+            arcTo(androidx.compose.ui.geometry.Rect(w * 0.12f, ringTop, w * 0.88f, ringTop + ringH), 100f, 340f, true)
+        }
+        // Shaft with a slight S-bend, and two teeth near the tip.
+        val shaft = androidx.compose.ui.graphics.Path().apply {
+            moveTo(cx, ringTop + ringH)
+            cubicTo(cx + w * 0.12f, h * 0.6f, cx - w * 0.1f, h * 0.78f, cx, h * 0.94f)
+            moveTo(cx + w * 0.01f, h * 0.8f); lineTo(cx + w * 0.26f, h * 0.8f)
+            moveTo(cx + w * 0.01f, h * 0.9f); lineTo(cx + w * 0.2f, h * 0.9f)
+        }
+        for (p in listOf(ring, shaft)) drawPath(p, edge, style = outline)
+        for (p in listOf(ring, shaft)) drawPath(p, gold, style = line)
+        // Big eyes inside the bow, looking toward the bubble (left).
+        val eyeY = ringTop + ringH * 0.52f
+        val er = w * 0.15f
+        for (ex in listOf(cx - w * 0.15f, cx + w * 0.15f)) {
+            drawOval(Color.White, topLeft = Offset(ex - er, eyeY - er * 1.15f), size = Size(er * 2, er * 2.3f))
+            drawOval(ink.copy(alpha = 0.25f), topLeft = Offset(ex - er, eyeY - er * 1.15f), size = Size(er * 2, er * 2.3f), style = androidx.compose.ui.graphics.drawscope.Stroke(width = 2f))
+            val ph = er * 1.1f * eyeOpen
+            drawOval(ink, topLeft = Offset(ex - er * 0.85f, eyeY - ph / 2 + er * 0.1f), size = Size(er * 0.95f, ph.coerceAtLeast(2f)))
+            if (eyeOpen > 0.5f) drawCircle(Color.White, radius = er * 0.18f, center = Offset(ex - er * 0.45f, eyeY - er * 0.2f))
+        }
+        // Raised, slightly tilted eyebrows: "Need a hand?"
+        val brow = androidx.compose.ui.graphics.drawscope.Stroke(width = w * 0.06f, cap = androidx.compose.ui.graphics.StrokeCap.Round)
+        drawLine(ink, Offset(cx - w * 0.3f, eyeY - er * 1.55f), Offset(cx - w * 0.04f, eyeY - er * 1.85f), strokeWidth = brow.width, cap = brow.cap)
+        drawLine(ink, Offset(cx + w * 0.04f, eyeY - er * 1.9f), Offset(cx + w * 0.3f, eyeY - er * 1.7f), strokeWidth = brow.width, cap = brow.cap)
     }
 }
 
