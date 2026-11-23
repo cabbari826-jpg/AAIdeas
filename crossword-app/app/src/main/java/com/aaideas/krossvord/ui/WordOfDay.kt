@@ -37,7 +37,7 @@ fun WordOfDayCard(daily: DailyWordGame, onOpen: () -> Unit) {
     Card(
         onClick = onOpen,
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.tertiaryContainer),
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth().glassy(CardDefaults.shape),
     ) {
         Column(Modifier.padding(16.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {

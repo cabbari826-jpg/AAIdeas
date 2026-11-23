@@ -46,6 +46,7 @@ import androidx.compose.runtime.key
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.layout.boundsInRoot
 import androidx.compose.ui.layout.onGloballyPositioned
@@ -264,12 +265,15 @@ private fun Grid(
         onSpot(TutorialSpot.WORD, rectOf(active.cells))
         game.board.cluesAt.entries.firstOrNull { active in it.value }?.let { onSpot(TutorialSpot.CLUE, rectOf(listOf(it.key))) }
     }
-    Column(Modifier.border(1.dp, colors.line).then(spots)) {
+    val glass = LocalGlass.current
+    // Şüşə: the grid is a glass panel of separate rounded cells (as in the mockup) instead of ruled lines.
+    Column((if (glass) Modifier.clip(RoundedCornerShape(12.dp)).glassy(RoundedCornerShape(12.dp)) else Modifier.border(1.dp, colors.line)).then(spots)) {
         for (r in 0 until game.board.rows) {
             Row {
                 for (c in 0 until game.board.cols) {
                     val cell = Cell(r, c)
-                    val mod = Modifier.size(cellSize).border(0.5.dp, colors.line)
+                    val mod = if (glass) Modifier.size(cellSize).padding(1.5.dp).clip(RoundedCornerShape(7.dp))
+                        else Modifier.size(cellSize).border(0.5.dp, colors.line)
                     if (game.board.isLetter(cell)) {
                         LetterCell(
                             game, cell, cell == game.selectedCell, cell in activeCells, cellSize,
@@ -456,7 +460,7 @@ private fun LongClueLine(entry: Entry, text: String, big: Boolean) {
     Surface(
         color = MaterialTheme.colorScheme.secondaryContainer,
         shape = RoundedCornerShape(10.dp),
-        modifier = Modifier.fillMaxWidth().padding(top = 2.dp),
+        modifier = Modifier.fillMaxWidth().padding(top = 2.dp).glassy(RoundedCornerShape(10.dp)),
     ) {
         Text(
             (if (text.length > CELL_CLUE_MAX) "♪ " else if (entry.direction == Direction.ACROSS) "→ " else "↓ ") +
@@ -493,7 +497,7 @@ internal fun AzKeyboard(onLetter: (Char) -> Unit, onBackspace: () -> Unit, keyHe
 @Composable
 private fun Key(label: String, modifier: Modifier, height: Dp, onClick: () -> Unit) {
     Surface(
-        modifier = modifier.height(height).clickable(onClick = onClick),
+        modifier = modifier.height(height).glassy(RoundedCornerShape(8.dp)).clickable(onClick = onClick),
         shape = RoundedCornerShape(8.dp),
         color = MaterialTheme.colorScheme.surfaceVariant,
     ) {
@@ -560,6 +564,7 @@ private fun LetterTile(tile: Tile, hideWhenUsed: Boolean = false, onClick: () ->
     val alpha by animateFloatAsState(if (tile.used) (if (hideWhenUsed) 0f else 0.25f) else 1f, tween(180), label = "tileAlpha")
     Surface(
         modifier = Modifier.size(LocalTile.current).graphicsLayer { scaleX = scale; scaleY = scale; this.alpha = alpha }
+            .glassy(RoundedCornerShape(12.dp))
             .clickable(enabled = !tile.used, onClick = onClick)
             .semantics { contentDescription = "Hərf ${tile.letter}" },
         shape = RoundedCornerShape(12.dp),
@@ -673,6 +678,7 @@ private fun PickTile(letter: Char, order: Int?, onClick: () -> Unit) {
     val scale by animateFloatAsState(if (picked) 0.92f else 1f, tween(150), label = "pickScale")
     Surface(
         modifier = Modifier.size(LocalTile.current).graphicsLayer { scaleX = scale; scaleY = scale }
+            .glassy(RoundedCornerShape(12.dp))
             .clickable(onClick = onClick)
             .semantics { contentDescription = "Hərf $letter" + if (picked) ", seçilib $order" else "" },
         shape = RoundedCornerShape(12.dp),
@@ -709,7 +715,7 @@ private fun LabeledAction(icon: String, label: String, enabled: Boolean, onClick
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Surface(
-            modifier = Modifier.size(40.dp),
+            modifier = Modifier.size(40.dp).glassy(RoundedCornerShape(20.dp)),
             shape = RoundedCornerShape(20.dp),
             color = (if (highlight) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surfaceVariant)
                 .copy(alpha = if (enabled) 1f else 0.4f),
@@ -721,7 +727,7 @@ private fun LabeledAction(icon: String, label: String, enabled: Boolean, onClick
 @Composable
 private fun SmallAction(label: String, description: String, enabled: Boolean, onClick: () -> Unit) {
     Surface(
-        modifier = Modifier.size(48.dp).clickable(enabled = enabled, onClick = onClick)
+        modifier = Modifier.size(48.dp).glassy(RoundedCornerShape(24.dp)).clickable(enabled = enabled, onClick = onClick)
             .semantics { contentDescription = description },
         shape = RoundedCornerShape(24.dp),
         color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = if (enabled) 1f else 0.4f),
@@ -771,7 +777,7 @@ private fun SquareButton(glyph: String, description: String, onClick: () -> Unit
         shape = RoundedCornerShape(14.dp),
         color = MaterialTheme.colorScheme.secondaryContainer,
         contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
-        modifier = modifier.size(48.dp).semantics { contentDescription = description },
+        modifier = modifier.size(48.dp).glassy(RoundedCornerShape(14.dp)).semantics { contentDescription = description },
     ) {
         Box(contentAlignment = Alignment.Center) { Text(glyph, fontSize = 30.sp, fontWeight = FontWeight.Bold, lineHeight = 30.sp) }
     }

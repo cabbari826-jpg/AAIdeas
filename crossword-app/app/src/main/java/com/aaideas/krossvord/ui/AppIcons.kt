@@ -115,7 +115,7 @@ enum class AppIcon(val alias: String, val label: String, val preview: Int, val k
     }
 }
 
-/** Settings block: pick the app icon (extra ones with premium). Holiday icons come on by themselves in season. */
+/** Settings block: pick the app icon (extra ones with premium). Holiday icons are a surprise: never shown here. */
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun AppIconPicker(isPremium: Boolean) {
@@ -135,10 +135,6 @@ fun AppIconPicker(isPremium: Boolean) {
             if (isPremium) "Ana ekranda ikon bir neçə saniyəyə dəyişir." else "Əlavə ikonlar Premium ilə açılır.",
             style = MaterialTheme.typography.bodySmall,
         )
-        Text("Novruzda və Yeni ildə ikon özü bayram ikonuna dəyişir, sonra geri qayıdır.", style = MaterialTheme.typography.bodySmall)
-        Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-            AppIcon.entries.filter { it.kind == IconKind.HOLIDAY }.forEach { IconTile(it, selected = false, locked = false, onPick = null) }
-        }
     }
 }
 

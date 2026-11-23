@@ -113,7 +113,7 @@ fun KrossvordTheme(
         else -> skin.palette(dark).scheme
     }
     MaterialTheme(colorScheme = scheme, shapes = ExpressiveShapes, typography = ExpressiveType) {
-        CompositionLocalProvider(LocalGridColors provides skin.palette(dark).grid) {
+        CompositionLocalProvider(LocalGridColors provides skin.palette(dark).grid, LocalGlass provides skin.glass) {
             content()
         }
     }
