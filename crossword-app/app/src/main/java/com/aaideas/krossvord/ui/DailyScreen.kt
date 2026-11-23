@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -47,7 +48,10 @@ fun TodayCard(vm: GameViewModel) {
             Column(Modifier.weight(1f)) {
                 Text("Bu gün", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
                 Text(
-                    "Tapşırıqlar ${vm.tasksDone}/${vm.tasks.size}" + if (vm.proverbPick == null) " · Atalar sözü" else "",
+                    "Tapşırıqlar ${vm.tasksDone}/${vm.tasks.size}" +
+                        (if (vm.proverbPick == null) " · Atalar sözü" else "") +
+                        (if (vm.weeklyPack != null) " · 🎁 Sürpriz" else "") +
+                        (if (!vm.kidsMode) " · 🚗 Ayın yolu ${vm.monthLevels.coerceAtMost(com.aaideas.krossvord.model.Challenge.GOAL)}/${com.aaideas.krossvord.model.Challenge.GOAL}" else ""),
                     style = MaterialTheme.typography.bodyMedium,
                 )
             }
@@ -69,10 +73,15 @@ fun DailyScreen(vm: GameViewModel) {
                 Text(note, Modifier.fillMaxWidth().padding(14.dp), style = MaterialTheme.typography.titleSmall)
             }
         }
+        // Everything that changes by day, week or month, so the main screen stays short.
+        vm.weeklyPack?.let { WeeklyCard(vm, it) }
+        if (!vm.kidsMode) MonthTripMini(vm)
+        TasksCard(vm)
         ProverbCard(vm)
         if (vm.miniToday != null) MiniCard(vm)
-        TasksCard(vm)
         StreakCard(vm)
+        if (!vm.kidsMode) JourneyCard(vm)
+        Spacer(Modifier.height(BottomMenuHeight))
     }
 }
 

@@ -131,14 +131,17 @@ fun ExpressiveHome(vm: GameViewModel) {
 
         ContinueCard(vm)
         WordOfDayCard(vm.daily) { vm.open(Screen.WORD_OF_DAY) }
-        vm.weeklyPack?.let { WeeklyCard(vm, it) }
+        // Weekly surprise, month road and the big road live on the "Bu gün" tab; here one card leads there.
         TodayCard(vm)
-        if (!vm.kidsMode) JourneyCard(vm)
 
         // Packs first, then the levels of the chosen pack, all on this screen.
         val p = vm.homePack
         val open = vm.packs.indices.filter { vm.packOpen(it) }
-        Text("Paketlər", style = MaterialTheme.typography.titleLarge)
+        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+            Text("Paketlər", style = MaterialTheme.typography.titleLarge, modifier = Modifier.weight(1f))
+            // Kids mode keeps to the kids pack, so no downloads from there.
+            if (!vm.kidsMode) TextButton(onClick = { vm.open(Screen.PACKS) }) { Text("📦 Yeni paketlər ▶", style = MaterialTheme.typography.titleSmall) }
+        }
         Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
             if (open.size > 1) open.forEach { i ->
                 val pack = vm.packs[i]
@@ -148,8 +151,6 @@ fun ExpressiveHome(vm: GameViewModel) {
                 PackCard(icon + pack.title, done, pack.levels.size, selected = i == p) { vm.selectedPack = i }
             }
         }
-        // Kids mode keeps to the kids pack, so no downloads from there.
-        if (!vm.kidsMode) MorePacksButton { vm.open(Screen.PACKS) }
         Text(vm.packs[p].title, style = MaterialTheme.typography.titleLarge)
         val levels = vm.packLevels(p)
         val current = vm.continueIndex()
@@ -287,34 +288,9 @@ private fun PackCard(title: String, done: Int, total: Int, selected: Boolean, on
     }
 }
 
-/** Under the pack row: opens "Yeni paketlər". Full width, so nobody has to scroll sideways to find it. */
-@Composable
-private fun MorePacksButton(onClick: () -> Unit) {
-    val cs = MaterialTheme.colorScheme
-    val src = remember { MutableInteractionSource() }
-    Surface(
-        onClick = onClick,
-        interactionSource = src,
-        shape = MaterialTheme.shapes.large,
-        color = if (LocalGlass.current) cs.surfaceContainer else cs.secondaryContainer,
-        contentColor = cs.onSecondaryContainer,
-        modifier = Modifier.fillMaxWidth().springPress(src).glassy(MaterialTheme.shapes.large),
-    ) {
-        Row(Modifier.padding(horizontal = 16.dp, vertical = 14.dp), verticalAlignment = Alignment.CenterVertically) {
-            Text("📦", fontSize = 24.sp)
-            Spacer(Modifier.width(12.dp))
-            Column(Modifier.weight(1f)) {
-                Text("Yeni paketlər", style = MaterialTheme.typography.titleMedium)
-                Text("Yüklə və internetsiz oyna", style = MaterialTheme.typography.bodySmall)
-            }
-            Text("▶", style = MaterialTheme.typography.titleMedium)
-        }
-    }
-}
-
 /** "Həftənin sürprizi": the newest weekly pack with levels left. */
 @Composable
-private fun WeeklyCard(vm: GameViewModel, p: Int) {
+fun WeeklyCard(vm: GameViewModel, p: Int) {
     val cs = MaterialTheme.colorScheme
     val pack = vm.packs[p]
     val done = pack.levels.count { it.id in vm.completed }

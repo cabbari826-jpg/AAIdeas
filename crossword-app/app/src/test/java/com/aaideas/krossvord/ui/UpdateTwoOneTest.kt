@@ -165,6 +165,12 @@ class UpdateTwoOneTest {
         shoot("v21-map-month") { JourneyScreen(vm) }
     }
 
+    @Test fun todayTabHoldsWeeklyAndMonthRoad() {
+        app.getSharedPreferences("progress", 0).edit().putInt("month_key", 202611).putInt("month_levels", 9).commit()
+        val vm = vm()
+        shoot("v21-today") { DailyScreen(vm) }
+    }
+
     @Test fun everyMonthRouteCloseUp() {
         val c = com.aaideas.krossvord.model.Challenge
         shoot("v21-routes") {

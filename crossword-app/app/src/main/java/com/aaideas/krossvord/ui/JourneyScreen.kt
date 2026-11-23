@@ -144,6 +144,39 @@ fun JourneyCard(vm: GameViewModel) {
     }
 }
 
+/** Short "Ayın yolu" for the "Bu gün" tab: the route close up and the progress; a tap opens the map screen. */
+@Composable
+fun MonthTripMini(vm: GameViewModel) {
+    val c = com.aaideas.krossvord.model.Challenge
+    val route = vm.route
+    val n = vm.monthLevels
+    val cs = MaterialTheme.colorScheme
+    Surface(onClick = { vm.open(Screen.MAP) }, shape = MaterialTheme.shapes.extraLarge, color = cs.surfaceContainerHigh, modifier = Modifier.fillMaxWidth().glassy(MaterialTheme.shapes.extraLarge)) {
+        Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Column(Modifier.weight(1f)) {
+                    Text("🚗 Ayın yolu", style = MaterialTheme.typography.labelLarge, color = cs.primary)
+                    Text(route.title, style = MaterialTheme.typography.titleMedium)
+                }
+                Text("▶", style = MaterialTheme.typography.titleMedium)
+            }
+            Surface(shape = MaterialTheme.shapes.large, color = cs.surfaceContainerLowest, modifier = Modifier.fillMaxWidth()) {
+                AzMap(route.places, c.position(route, n), Modifier.fillMaxWidth(), close = true)
+            }
+            androidx.compose.material3.LinearProgressIndicator(
+                progress = { n.coerceAtMost(c.GOAL).toFloat() / c.GOAL },
+                modifier = Modifier.fillMaxWidth().height(8.dp).clip(CircleShape),
+                drawStopIndicator = {},
+            )
+            Text(
+                if (n >= c.GOAL) "🏁 Çatdınız! Hədiyyə: ${c.REWARD_HINTS} pulsuz ipucu."
+                else "$n / ${c.GOAL} səviyyə · indi: ${c.reached(route, n).name}",
+                style = MaterialTheme.typography.bodyMedium,
+            )
+        }
+    }
+}
+
 /** "Ayın yolu": this month's route on the map, how far the car is, and the reward. */
 @Composable
 private fun MonthTripCard(vm: GameViewModel) {
