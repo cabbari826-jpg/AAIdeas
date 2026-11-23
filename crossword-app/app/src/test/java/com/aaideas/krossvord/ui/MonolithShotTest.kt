@@ -176,6 +176,31 @@ class MonolithShotTest {
         captureScreenRoboImage("build/outputs/roborazzi/glass-dark-picked.png")
     }
 
+    /** Bigger phone font (the app's own large mode goes up to 1.5x) and a narrow phone: labels must stay centred. */
+    @Config(qualifiers = "w360dp-h740dp-xhdpi")
+    @Test fun menuBigFont() {
+        rule.setContent {
+            val d = androidx.compose.ui.platform.LocalDensity.current
+            Column {
+                for (scale in listOf(1f, 1.15f, 1.3f, 1.5f)) {
+                    androidx.compose.runtime.CompositionLocalProvider(androidx.compose.ui.platform.LocalDensity provides androidx.compose.ui.unit.Density(d.density, scale)) {
+                        KrossvordTheme(ThemeMode.LIGHT, skin = Skin.KLASSIK) {
+                            Surface(Modifier.fillMaxWidth()) {
+                                Column(Modifier.padding(vertical = 4.dp)) {
+                                    listOf(Screen.HOME, Screen.STATS).forEach { tab ->
+                                        Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) { GlassBottomMenu(tab, {}) }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        rule.waitForIdle()
+        captureScreenRoboImage("build/outputs/roborazzi/mono-menus-bigfont.png")
+    }
+
     @Test fun menuEveryTheme() {
         rule.mainClock.autoAdvance = false
         rule.setContent {
