@@ -105,6 +105,14 @@ class ThemeScreenshotTest {
                 }
             }
         }
+        // Big clue text and more letters (a player's settings): the grid must keep its full width.
+        vm.changeBigClues(true); vm.changeExtraLetters(true)
+        shoot("glass-puzzle-big", ThemeMode.LIGHT, Skin.SUSE) {
+            androidx.compose.foundation.layout.Box {
+                GlassBackdrop(false, androidx.compose.ui.Modifier.matchParentSize())
+                PuzzleScreen(vm, isPremium = false)
+            }
+        }
     }
 
     @Test fun holidayHomes() {

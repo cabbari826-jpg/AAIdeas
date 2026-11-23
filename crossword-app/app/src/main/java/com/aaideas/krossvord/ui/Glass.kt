@@ -14,6 +14,12 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.DrawScope
+import androidx.compose.ui.graphics.drawscope.clipPath
+import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
+import androidx.compose.ui.graphics.drawscope.scale
+import androidx.compose.ui.graphics.ClipOp
+import androidx.compose.ui.graphics.asAndroidPath
+import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.Shape
@@ -56,25 +62,29 @@ fun GlassBackdrop(dark: Boolean, modifier: Modifier = Modifier) {
     Canvas(modifier) { if (dark) glowsDark() else glowsLight() }
 }
 
-private fun DrawScope.glow(cx: Float, cy: Float, r: Float, c: Color) {
+/** An oval glow, like CSS radial-gradient(rx ry at cx cy, c 0, transparent 70%): sizes are parts of the screen. */
+private fun DrawScope.glow(cx: Float, cy: Float, rx: Float, ry: Float, c: Color) {
     val center = Offset(size.width * cx, size.height * cy)
-    val radius = maxOf(size.width, size.height) * r
-    drawCircle(Brush.radialGradient(listOf(c, c.copy(alpha = 0f)), center, radius), radius, center)
+    val r = size.width * rx
+    scale(scaleX = 1f, scaleY = size.height * ry / r, pivot = center) {
+        drawCircle(Brush.radialGradient(0f to c, 0.7f to c.copy(alpha = 0f), center = center, radius = r), r, center)
+    }
 }
 
+// Same glows as the mockup.
 private fun DrawScope.glowsLight() {
     drawRect(Color(0xFFE8DEF8))
-    glow(0.12f, 0.08f, 0.45f, Color(0xFFB69DF8))
-    glow(0.92f, 0.22f, 0.38f, Color(0xFFFFC94D))
-    glow(0.25f, 0.62f, 0.42f, Color(0xFF7FD1AE))
-    glow(0.95f, 0.88f, 0.5f, Color(0xFF8E74D0))
+    glow(0.15f, 0.10f, 0.60f, 0.40f, Color(0xFFB69DF8))
+    glow(0.90f, 0.25f, 0.50f, 0.35f, Color(0xFFFFC94D))
+    glow(0.30f, 0.80f, 0.60f, 0.45f, Color(0xFF7FD1AE))
+    glow(0.95f, 0.90f, 0.70f, 0.50f, Color(0xFF6750A4))
 }
 
 private fun DrawScope.glowsDark() {
     drawRect(Color(0xFF120F1E))
-    glow(0.85f, 0.1f, 0.45f, Color(0xFF4B3A8C))
-    glow(0.08f, 0.55f, 0.42f, Color(0xFF1E5A6B))
-    glow(0.75f, 0.85f, 0.4f, Color(0xFF8A3B6E))
+    glow(0.80f, 0.15f, 0.55f, 0.40f, Color(0xFF4B3A8C))
+    glow(0.10f, 0.60f, 0.50f, 0.40f, Color(0xFF1E5A6B))
+    glow(0.70f, 0.85f, 0.40f, 0.30f, Color(0xFF8A3B6E))
 }
 
 /** Asked before switching a weak phone to Şüşə. */
@@ -108,7 +118,7 @@ fun Modifier.glassy(shape: Shape): Modifier {
     return this.drawWithCache {
         val path = Path().apply { addOutline(shape.createOutline(size, layoutDirection, this@drawWithCache)) }
         val sheen = Brush.linearGradient(
-            0f to Color.White.copy(alpha = if (dark) 0.16f else 0.42f),
+            0f to Color.White.copy(alpha = if (dark) 0.16f else 0.5f),
             0.4f to Color.White.copy(alpha = 0f),
             0.7f to Color.White.copy(alpha = 0f),
             1f to Color.White.copy(alpha = if (dark) 0.06f else 0.16f),
@@ -118,7 +128,19 @@ fun Modifier.glassy(shape: Shape): Modifier {
             listOf(Color.White.copy(alpha = if (dark) 0.45f else 0.9f), Color.White.copy(alpha = if (dark) 0.12f else 0.35f)),
         )
         val stroke = androidx.compose.ui.graphics.drawscope.Stroke(1.dp.toPx())
+        // The soft shadow under each panel (CSS 0 10px 30px), drawn only outside the panel: under a
+        // see-through panel it would show through as a grey box. Blurred shadows need Android 9.
+        val shadow = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            val dy = minOf(10.dp.toPx(), size.minDimension * 0.12f)
+            Path().apply { addPath(path, Offset(0f, dy)) }.asAndroidPath() to android.graphics.Paint(android.graphics.Paint.ANTI_ALIAS_FLAG).apply {
+                color = if (dark) android.graphics.Color.argb(90, 0, 0, 0) else android.graphics.Color.argb(56, 40, 20, 80)
+                maskFilter = android.graphics.BlurMaskFilter(minOf(15.dp.toPx(), size.minDimension * 0.25f), android.graphics.BlurMaskFilter.Blur.NORMAL)
+            }
+        } else null
         onDrawWithContent {
+            if (shadow != null) clipPath(path, ClipOp.Difference) {
+                drawIntoCanvas { it.nativeCanvas.drawPath(shadow.first, shadow.second) }
+            }
             drawPath(path, sheen)
             drawContent()
             drawPath(path, rim, style = stroke)

@@ -488,7 +488,7 @@ private fun LongClueLine(entry: Entry, text: String, big: Boolean) {
             if (glass) (if (text.length > CELL_CLUE_MAX) "♪ " else "") + "$text · ${entry.letters.size} hərf"
             else (if (text.length > CELL_CLUE_MAX) "♪ " else if (entry.direction == Direction.ACROSS) "→ " else "↓ ") +
                 "$text  (${entry.letters.size} hərf)",
-            Modifier.padding(horizontal = if (glass) 18.dp else 12.dp, vertical = if (glass) 10.dp else 8.dp),
+            Modifier.padding(horizontal = if (glass) 18.dp else 12.dp, vertical = if (glass) 7.dp else 8.dp),
             style = if (big) MaterialTheme.typography.headlineSmall else MaterialTheme.typography.titleSmall,
             fontWeight = if (glass) FontWeight.Bold else null,
         )
@@ -1000,16 +1000,21 @@ private fun GlassLetterRows(
     val haptic = LocalHapticFeedback.current
     val cs = MaterialTheme.colorScheme
     // Each slot: a letter index, or -1 for ⌫ and -2 for ✕. Used-up spots stay as gaps, so tiles never jump.
-    val slots = letters.indices.toList() + listOf(-1, -2)
-    val h = LocalTile.current + 10.dp
-    Column(modifier.fillMaxWidth().padding(top = 2.dp, bottom = 10.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        slots.chunked(6).forEach { row ->
-            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+    // At most three rows, so the grid above keeps its full width: long words get a 7th or 8th tile per row.
+    val perRow = maxOf(6, (letters.size + 2 + 2) / 3)
+    // ⌫ and ✕ are always the last two tiles of the bottom row, on the right; -3 is an empty gap before them.
+    val rows = (letters.size + 2 + perRow - 1) / perRow
+    val slots = letters.indices.toList() + List(rows * perRow - letters.size - 2) { -3 } + listOf(-1, -2)
+    val gap = if (perRow > 6) 6.dp else 8.dp
+    val h = LocalTile.current + 6.dp
+    Column(modifier.fillMaxWidth().padding(top = 2.dp, bottom = 8.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+        slots.chunked(perRow).forEach { row ->
+            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(gap)) {
                 row.forEach { i ->
                     val shape = RoundedCornerShape(16.dp)
                     val ch = letters.getOrNull(i)
                     when {
-                        i >= 0 && ch == null -> Spacer(Modifier.weight(1f).height(h))
+                        i == -3 || (i >= 0 && ch == null) -> Spacer(Modifier.weight(1f).height(h))
                         i >= 0 -> {
                             val order = draft.indexOf(i).takeIf { it >= 0 }?.plus(1)
                             val picked = order != null
@@ -1044,7 +1049,7 @@ private fun GlassLetterRows(
                         }
                     }
                 }
-                repeat(6 - row.size) { Spacer(Modifier.weight(1f)) }
+                repeat(perRow - row.size) { Spacer(Modifier.weight(1f)) }
             }
         }
     }
