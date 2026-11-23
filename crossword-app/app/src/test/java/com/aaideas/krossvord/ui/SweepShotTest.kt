@@ -183,6 +183,9 @@ class SweepShotTest {
         rule.runOnUiThread { vm.finishTutorial() }
         rule.waitForIdle()
         rule.onRoot().captureRoboImage("build/outputs/roborazzi/puzzle-top.png")
+        rule.runOnUiThread { vm.setInput(InputMode.KEYBOARD) }
+        rule.waitForIdle()
+        rule.onRoot().captureRoboImage("build/outputs/roborazzi/puzzle-keyboard-big.png")
     }
 
     @Test fun dailyMiniPlaysAndCountsTheTask() {
@@ -200,6 +203,13 @@ class SweepShotTest {
         vm.nextLevel()
         assert(vm.screen == Screen.DAILY && !vm.playingMini)
         assert(mini.id !in vm.completed)
+    }
+
+    @Test fun whatsNewShot() {
+        rule.setContent { KrossvordTheme { Surface(Modifier.fillMaxSize(), color = androidx.compose.ui.graphics.Color(0xFF555555)) {
+            androidx.compose.foundation.layout.Box(contentAlignment = androidx.compose.ui.Alignment.Center) { WhatsNewCard {} }
+        } } }
+        rule.onRoot().captureRoboImage("build/outputs/roborazzi/whats-new.png")
     }
 
     @Test fun collectionScreen() {

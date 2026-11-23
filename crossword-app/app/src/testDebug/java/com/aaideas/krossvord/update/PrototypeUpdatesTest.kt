@@ -15,7 +15,7 @@ class PrototypeUpdatesTest {
     @Test fun readsBuildNumberAndApkUrl() {
         val r = PrototypeUpdates.parseLatest(release("krossvord-42"))!!
         assertEquals(42, r.build)
-        assertEquals("0.1.42", r.versionName)
+        assertEquals("2.0.42", r.versionName)
         assertEquals("https://github.com/o/r/releases/download/krossvord-42/krossvord.apk", r.apkUrl)
     }
 

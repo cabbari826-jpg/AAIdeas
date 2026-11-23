@@ -13,7 +13,7 @@ import java.net.URL
 
 /** A prototype build published by CI as a GitHub Release tagged `krossvord-<build>`. */
 data class PrototypeRelease(val build: Int, val apkUrl: String) {
-    val versionName get() = "0.1.$build"
+    val versionName get() = "2.0.$build"
 }
 
 object PrototypeUpdates {

@@ -482,7 +482,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     private fun reminderOn() = com.aaideas.krossvord.remind.DailyReminder.isOn(getApplication())
 
     private fun maybeAskReminder() {
-        if (!reminderDue || progress.reminderAsked || reminderOn() || welcome != null) return
+        if (!reminderDue || progress.reminderAsked || reminderOn() || welcome != null || showWhatsNew || whatsNewDue) return
         reminderDue = false
         progress.reminderAsked = true
         askReminder = true
@@ -490,11 +490,31 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
 
     fun closeReminderAsk() { askReminder = false }
 
+    // ---- "What's new": once after an update (not on a fresh install), and from settings ----
+    var showWhatsNew by mutableStateOf(false)
+        private set
+    private var whatsNewDue = false
+    fun openWhatsNew() { showWhatsNew = true }
+    fun closeWhatsNew() {
+        showWhatsNew = false
+        progress.whatsNewSeen = com.aaideas.krossvord.BuildConfig.VERSION_CODE
+        maybeAskReminder()
+    }
+    private fun maybeShowWhatsNew() {
+        if (whatsNewDue && welcome == null) { whatsNewDue = false; showWhatsNew = true }
+    }
+
     /** Called once when the app opens. Gives the birthday life (once a year). */
     fun onAppOpen() {
+        // Players from before this existed have progress but no record: they get it too.
+        val existing = progress.launches > 0 || completed.isNotEmpty()
+        val seen = progress.whatsNewSeen
+        if (existing && seen < com.aaideas.krossvord.BuildConfig.VERSION_CODE) whatsNewDue = true
+        else if (seen == 0) progress.whatsNewSeen = com.aaideas.krossvord.BuildConfig.VERSION_CODE
         progress.launches = progress.launches + 1
         if (progress.launches >= 2) reminderDue = true
         openWelcome()
+        maybeShowWhatsNew()
         maybeAskReminder()
     }
 
@@ -531,6 +551,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     fun dismissWelcome() {
         if (welcome == Welcome.PROFILE) progress.profileAsked = true
         welcome = null
+        maybeShowWhatsNew()
         maybeAskReminder()
     }
 

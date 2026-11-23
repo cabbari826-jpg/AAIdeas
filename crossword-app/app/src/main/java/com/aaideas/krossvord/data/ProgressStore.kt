@@ -47,7 +47,7 @@ class ProgressStore(context: Context) {
 
     /** Forget every level's progress and counters; keep the player's settings. */
     fun resetAll() {
-        val keep = setOf(KEY_INPUT, KEY_HIDE_CLUES, KEY_EXTRA, KEY_THEME, KEY_DYNAMIC, KEY_TUTORIAL, KEY_BIG_CLUES, KEY_SOUND, KEY_SKIN, KEY_SKINS_OWNED, "large_mode", "kids_mode", "reminder_asked", "launches", "player_name", "birthday", "birth_year", "profile_asked", "birthday_gift_year")
+        val keep = setOf(KEY_INPUT, KEY_HIDE_CLUES, KEY_EXTRA, KEY_THEME, KEY_DYNAMIC, KEY_TUTORIAL, KEY_BIG_CLUES, KEY_SOUND, KEY_SKIN, KEY_SKINS_OWNED, "large_mode", "kids_mode", "reminder_asked", "launches", "whats_new_seen", "player_name", "birthday", "birth_year", "profile_asked", "birthday_gift_year")
         val e = prefs.edit()
         prefs.all.keys.filter { it !in keep }.forEach { e.remove(it) }
         e.apply()
@@ -172,6 +172,11 @@ class ProgressStore(context: Context) {
     var welcomeDay: Long
         get() = prefs.getLong("welcome_day", -1)
         set(v) = prefs.edit().putLong("welcome_day", v).apply()
+
+    /** Version code whose "what's new" the player has seen; 0 = none yet. Kept on reset. */
+    var whatsNewSeen: Int
+        get() = prefs.getInt("whats_new_seen", 0)
+        set(v) = prefs.edit().putInt("whats_new_seen", v).apply()
 
     var launches: Int
         get() = prefs.getInt("launches", 0)

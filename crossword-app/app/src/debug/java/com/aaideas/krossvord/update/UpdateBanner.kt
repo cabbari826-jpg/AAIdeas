@@ -48,11 +48,44 @@ private sealed interface UpdateUi {
  * the system installer. Lives in src/debug, so the Google Play build has none
  * of it (no INTERNET or REQUEST_INSTALL_PACKAGES permission either).
  */
+/** Shared by the banner and the settings button, so a manual check shows the same card. */
+private object UpdateState {
+    var ui by mutableStateOf<UpdateUi>(UpdateUi.Hidden)
+}
+
+/** Settings row: current version and a "check for updates" button. */
+@Composable
+fun UpdateSettingsRow() {
+    val scope = rememberCoroutineScope()
+    var status by remember { mutableStateOf<String?>(null) }
+    Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+        Text("Versiya: ${BuildConfig.VERSION_NAME}", style = MaterialTheme.typography.bodyMedium)
+        androidx.compose.material3.OutlinedButton(
+            onClick = {
+                status = "Yoxlanılır…"
+                scope.launch {
+                    val latest = PrototypeUpdates.fetchLatest(BuildConfig.UPDATE_REPO)
+                    status = when {
+                        latest == null -> "Yoxlamaq alınmadı. İnternet bağlantısını yoxlayın."
+                        latest.build > BuildConfig.VERSION_CODE -> {
+                            if (UpdateState.ui !is UpdateUi.Downloading) UpdateState.ui = UpdateUi.Offer(latest)
+                            "Yeni versiya var: ${latest.versionName}"
+                        }
+                        else -> "Ən son versiya quraşdırılıb ✓"
+                    }
+                }
+            },
+            modifier = Modifier.fillMaxWidth(),
+        ) { Text("🔄 Yeniləmələri yoxla") }
+        status?.let { Text(it, style = MaterialTheme.typography.bodySmall) }
+    }
+}
+
 @Composable
 fun UpdateBanner() {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
-    var ui by remember { mutableStateOf<UpdateUi>(UpdateUi.Hidden) }
+    var ui by UpdateState::ui
 
     // Check on every return to the app, not only on cold start, so the card
     // always names the newest build (several can be published in a row).

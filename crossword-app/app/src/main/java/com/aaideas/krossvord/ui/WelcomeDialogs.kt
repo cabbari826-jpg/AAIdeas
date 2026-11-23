@@ -44,6 +44,9 @@ import java.time.MonthDay
 /** The dialog the app opens with, if any: profile on first run, birthday, or the daily greeting. */
 @Composable
 fun WelcomeHost(vm: GameViewModel) {
+    if (vm.showWhatsNew) {
+        Dialog(onDismissRequest = vm::closeWhatsNew, properties = DialogProperties(usePlatformDefaultWidth = false)) { WhatsNewCard(vm::closeWhatsNew) }
+    }
     if (vm.askReminder && vm.screen == Screen.HOME) {
         Dialog(onDismissRequest = vm::closeReminderAsk, properties = DialogProperties(usePlatformDefaultWidth = false)) { ReminderAsk(vm) }
     }
@@ -205,5 +208,22 @@ fun ReminderAsk(vm: GameViewModel) {
         }, modifier = Modifier.fillMaxWidth().height(52.dp)) { Text("Bəli, xatırlat", fontSize = 18.sp) }
         TextButton(onClick = vm::closeReminderAsk) { Text("Xeyr, sağ olun") }
         Text("Ayarlardan istənilən vaxt dəyişmək olar", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+    }
+}
+
+/** What the latest update brought, as a short list. */
+@Composable
+fun WhatsNewCard(onClose: () -> Unit) {
+    CardShell {
+        Badge("🎉")
+        Text("Yeniliklər", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
+        Text(com.aaideas.krossvord.model.WhatsNew.TITLE, style = MaterialTheme.typography.titleSmall, color = MaterialTheme.colorScheme.primary)
+        com.aaideas.krossvord.model.WhatsNew.ITEMS.forEach { (icon, text) ->
+            Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.Top) {
+                Text(icon, fontSize = 20.sp, modifier = Modifier.widthIn(min = 32.dp))
+                Text(text, style = MaterialTheme.typography.bodyLarge)
+            }
+        }
+        Button(onClick = onClose, modifier = Modifier.fillMaxWidth().height(52.dp)) { Text("Əla!", fontSize = 18.sp) }
     }
 }

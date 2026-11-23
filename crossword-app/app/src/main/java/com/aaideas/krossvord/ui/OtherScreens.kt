@@ -163,6 +163,8 @@ fun SettingsScreen(vm: GameViewModel, isPremium: Boolean) {
                 )
             }
         }
+        com.aaideas.krossvord.update.UpdateSettingsRow()
+        OutlinedButton(onClick = vm::openWhatsNew, modifier = Modifier.fillMaxWidth()) { Text("🆕 Yeniliklər") }
         ThemePicker(vm.themeMode, vm::changeTheme, vm.dynamicColor, vm::changeDynamicColor)
         SkinPicker(vm.activeSkin(isPremium), vm.usableSkins(isPremium), vm::changeSkin, vm::unlockAllSkinsForTesting)
         AppIconPicker(isPremium)

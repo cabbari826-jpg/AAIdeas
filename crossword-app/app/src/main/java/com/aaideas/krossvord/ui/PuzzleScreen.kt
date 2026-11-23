@@ -107,10 +107,10 @@ private fun PuzzleContent(vm: GameViewModel, isPremium: Boolean, compact: Boolea
     }.orEmpty()
     Column(Modifier.fillMaxSize().padding(horizontal = if (compact) 4.dp else 8.dp, vertical = if (compact) 2.dp else 8.dp)) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            SquareButton("❮", "Geri", vm::back, Modifier.tutorialAnchor(vm, TutorialSpot.BACK))
+            SquareButton(Glyph.BACK, "Geri", vm::back, Modifier.tutorialAnchor(vm, TutorialSpot.BACK))
             Spacer(Modifier.width(8.dp))
             var confirmRestart by remember { mutableStateOf(false) }
-            SquareButton("↻", "Səviyyəni yenidən başla", { confirmRestart = true }, Modifier.tutorialAnchor(vm, TutorialSpot.RESTART))
+            SquareButton(Glyph.RESTART, "Səviyyəni yenidən başla", { confirmRestart = true }, Modifier.tutorialAnchor(vm, TutorialSpot.RESTART))
             if (confirmRestart) AlertDialog(
                 onDismissRequest = { confirmRestart = false },
                 title = { Text("Səviyyəni yenidən başla?") },
@@ -161,7 +161,10 @@ private fun PuzzleContent(vm: GameViewModel, isPremium: Boolean, compact: Boolea
         val entry = game.activeEntry
         Box(Modifier.tutorialAnchor(vm, TutorialSpot.LETTERS)) {
         when {
-            entry == null || vm.inputMode == InputMode.KEYBOARD -> AzKeyboard(onLetter = vm::type, onBackspace = vm::backspace)
+            entry == null || vm.inputMode == InputMode.KEYBOARD -> Column {
+                AzKeyboard(onLetter = vm::type, onBackspace = vm::backspace, keyHeight = if (compact) 52.dp else 60.dp)
+                Spacer(Modifier.height(if (compact) 6.dp else 14.dp))
+            }
             vm.inputMode == InputMode.TILES ->
                 TileInput(LetterTiles.tilesFor(game, entry, vm.tileShuffle), vm::type, vm::backspace, vm::shuffleTiles)
             else -> ColumnsInput(
@@ -763,17 +766,38 @@ private fun KeywordStrip(letters: List<Char?>, known: Boolean, onGuess: () -> Un
     }
 }
 
-/** A big, easy-to-hit square button for the top bar. */
+enum class Glyph { BACK, RESTART }
+
+/** A big, easy-to-hit square button for the top bar; the icon is drawn, so it sits exactly in the middle. */
 @Composable
-private fun SquareButton(glyph: String, description: String, onClick: () -> Unit, modifier: Modifier = Modifier) {
+private fun SquareButton(glyph: Glyph, description: String, onClick: () -> Unit, modifier: Modifier = Modifier) {
+    val tint = MaterialTheme.colorScheme.onSecondaryContainer
     androidx.compose.material3.Surface(
         onClick = onClick,
         shape = RoundedCornerShape(14.dp),
         color = MaterialTheme.colorScheme.secondaryContainer,
-        contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
         modifier = modifier.size(48.dp).semantics { contentDescription = description },
     ) {
-        Box(contentAlignment = Alignment.Center) { Text(glyph, fontSize = 30.sp, fontWeight = FontWeight.Bold, lineHeight = 30.sp) }
+        androidx.compose.foundation.Canvas(Modifier.padding(13.dp)) {
+            val w = size.width; val h = size.height
+            val stroke = androidx.compose.ui.graphics.drawscope.Stroke(width = 3.dp.toPx(), cap = androidx.compose.ui.graphics.StrokeCap.Round, join = androidx.compose.ui.graphics.StrokeJoin.Round)
+            when (glyph) {
+                Glyph.BACK -> drawPath(androidx.compose.ui.graphics.Path().apply {
+                    moveTo(w * 0.64f, h * 0.12f); lineTo(w * 0.3f, h * 0.5f); lineTo(w * 0.64f, h * 0.88f)
+                }, tint, style = stroke)
+                Glyph.RESTART -> {
+                    // A circle open at the top right, with an arrowhead at its end.
+                    drawArc(tint, startAngle = -60f, sweepAngle = 300f, useCenter = false,
+                        topLeft = androidx.compose.ui.geometry.Offset(w * 0.1f, h * 0.1f),
+                        size = androidx.compose.ui.geometry.Size(w * 0.8f, h * 0.8f), style = stroke)
+                    val cx = w / 2 + w * 0.4f * kotlin.math.cos(Math.toRadians(-60.0)).toFloat()
+                    val cy = h / 2 + h * 0.4f * kotlin.math.sin(Math.toRadians(-60.0)).toFloat()
+                    drawPath(androidx.compose.ui.graphics.Path().apply {
+                        moveTo(cx - w * 0.26f, cy - h * 0.02f); lineTo(cx, cy); lineTo(cx - w * 0.02f, cy + h * 0.26f)
+                    }, tint, style = stroke)
+                }
+            }
+        }
     }
 }
 
@@ -810,16 +834,19 @@ private fun LivesBadge(vm: GameViewModel, isPremium: Boolean, modifier: Modifier
     val n = vm.lives
     val red = Color(0xFFE53935)
     Column(modifier.semantics { contentDescription = "Can: ${if (isPremium) "limitsiz" else n}" }, horizontalAlignment = Alignment.CenterHorizontally) {
-        Box(Modifier.size(44.dp, 40.dp), contentAlignment = Alignment.Center) {
+        Box(Modifier.size(42.dp), contentAlignment = Alignment.Center) {
             val empty = !isPremium && n <= 0
             androidx.compose.foundation.Canvas(Modifier.matchParentSize()) {
                 val w = size.width; val h = size.height
+                // A classic, round-shouldered heart, symmetric left and right.
                 val path = androidx.compose.ui.graphics.Path().apply {
-                    moveTo(w / 2, h * 0.95f)
-                    cubicTo(w * 0.05f, h * 0.62f, -w * 0.02f, h * 0.22f, w * 0.27f, h * 0.08f)
-                    cubicTo(w * 0.40f, h * 0.02f, w * 0.48f, h * 0.12f, w / 2, h * 0.22f)
-                    cubicTo(w * 0.52f, h * 0.12f, w * 0.60f, h * 0.02f, w * 0.73f, h * 0.08f)
-                    cubicTo(w * 1.02f, h * 0.22f, w * 0.95f, h * 0.62f, w / 2, h * 0.95f)
+                    moveTo(w * 0.5f, h * 0.9f)
+                    cubicTo(w * 0.5f, h * 0.9f, w * 0.04f, h * 0.62f, w * 0.04f, h * 0.34f)
+                    cubicTo(w * 0.04f, h * 0.17f, w * 0.17f, h * 0.06f, w * 0.3f, h * 0.06f)
+                    cubicTo(w * 0.4f, h * 0.06f, w * 0.47f, h * 0.12f, w * 0.5f, h * 0.2f)
+                    cubicTo(w * 0.53f, h * 0.12f, w * 0.6f, h * 0.06f, w * 0.7f, h * 0.06f)
+                    cubicTo(w * 0.83f, h * 0.06f, w * 0.96f, h * 0.17f, w * 0.96f, h * 0.34f)
+                    cubicTo(w * 0.96f, h * 0.62f, w * 0.5f, h * 0.9f, w * 0.5f, h * 0.9f)
                     close()
                 }
                 if (empty) drawPath(path, red, style = androidx.compose.ui.graphics.drawscope.Stroke(width = 3.dp.toPx()))
