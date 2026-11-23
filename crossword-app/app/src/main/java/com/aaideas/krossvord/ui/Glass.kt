@@ -62,16 +62,21 @@ fun glassStyle(dark: Boolean): HazeStyle = HazeDefaults.style(
  * Static (no animation), so it costs one cheap draw.
  */
 @Composable
-fun GlassBackdrop(dark: Boolean, modifier: Modifier = Modifier, moving: Boolean = false) {
+fun GlassBackdrop(dark: Boolean, modifier: Modifier = Modifier, moving: Boolean = false, clock: androidx.compose.runtime.State<Float>? = null) {
     if (!moving) { Canvas(modifier) { if (dark) glowsDark() else glowsLight() }; return }
-    // Maksimum şüşə: the glows drift slowly in circles (one turn in ~24 s), so the blur under the cards lives.
-    val t by androidx.compose.animation.core.rememberInfiniteTransition(label = "glow").animateFloat(
+    // Maksimum şüşə: the glows drift slowly in circles (one turn in ~24 s), so the colour under the cards lives.
+    val time = clock ?: rememberGlassClock()
+    Canvas(modifier) { val t = time.value; if (dark) glowsDark(t, true) else glowsLight(t, true) }
+}
+
+/** 0..2π over 24 s, forever: the phase of the moving light. */
+@Composable
+fun rememberGlassClock(): androidx.compose.runtime.State<Float> =
+    androidx.compose.animation.core.rememberInfiniteTransition(label = "glow").animateFloat(
         0f, (2 * Math.PI).toFloat(),
         androidx.compose.animation.core.infiniteRepeatable(androidx.compose.animation.core.tween(24_000, easing = androidx.compose.animation.core.LinearEasing)),
         label = "t",
     )
-    Canvas(modifier) { if (dark) glowsDark(t) else glowsLight(t) }
-}
 
 private fun dx(t: Float, k: Float) = 0.18f * kotlin.math.sin(t * k)
 private fun dy(t: Float, k: Float) = 0.12f * kotlin.math.cos(t * k)
@@ -86,21 +91,21 @@ private fun DrawScope.glow(cx: Float, cy: Float, rx: Float, ry: Float, c: Color)
 }
 
 // Same glows as the mockup.
-private fun DrawScope.glowsLight(t: Float = 0f) {
+private fun DrawScope.glowsLight(t: Float = 0f, moving: Boolean = false) {
     drawRect(Color(0xFFE8DEF8))
     glow(0.15f + dx(t, 1f), 0.10f + dy(t, 1f), 0.60f, 0.40f, Color(0xFFB69DF8))
     glow(0.90f - dx(t, 1f), 0.25f + dy(t, 2f), 0.50f, 0.35f, Color(0xFFFFC94D))
     glow(0.30f + dx(t, 2f), 0.80f - dy(t, 1f), 0.60f, 0.45f, Color(0xFF7FD1AE))
     glow(0.95f - dx(t, 1f), 0.90f - dy(t, 1f), 0.70f, 0.50f, Color(0xFF6750A4))
-    if (t != 0f) glow(0.5f + 2 * dx(t, 1f), 0.5f + 3 * dy(t, 1f), 0.35f, 0.25f, Color(0xFFFF8FB1))
+    if (moving) glow(0.5f + 2 * dx(t, 1f), 0.5f + 3 * dy(t, 1f), 0.35f, 0.25f, Color(0xFFFF8FB1))
 }
 
-private fun DrawScope.glowsDark(t: Float = 0f) {
+private fun DrawScope.glowsDark(t: Float = 0f, moving: Boolean = false) {
     drawRect(Color(0xFF120F1E))
     glow(0.80f - dx(t, 1f), 0.15f + dy(t, 1f), 0.55f, 0.40f, Color(0xFF4B3A8C))
     glow(0.10f + dx(t, 1f), 0.60f + dy(t, 2f), 0.50f, 0.40f, Color(0xFF1E5A6B))
     glow(0.70f + dx(t, 2f), 0.85f - dy(t, 1f), 0.40f, 0.30f, Color(0xFF8A3B6E))
-    if (t != 0f) glow(0.5f + 2 * dx(t, 1f), 0.45f + 3 * dy(t, 1f), 0.35f, 0.25f, Color(0xFF3A7BD5))
+    if (moving) glow(0.5f + 2 * dx(t, 1f), 0.45f + 3 * dy(t, 1f), 0.35f, 0.25f, Color(0xFF3A7BD5))
 }
 
 /** Asked before switching a weak phone to Şüşə. */
@@ -184,7 +189,7 @@ fun Modifier.glassy(shape: Shape, lens: Boolean = true): Modifier {
     // Maksimum şüşə: the card looks through a glass lens at the moving light behind it (Android 13+),
     // or frosts it (Android 12). The drop shadow would be clipped, so none.
     val base = when {
-        liquid != null -> this.liquidGlass(liquid, shape, dark)
+        liquid != null -> this.glassLens(liquid, shape)
         cardHaze != null -> this.then(Modifier.clip(shape).hazeEffect(cardHaze, cardGlassStyle(dark)))
         else -> this
     }

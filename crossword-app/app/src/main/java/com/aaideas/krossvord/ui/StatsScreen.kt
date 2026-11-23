@@ -29,7 +29,7 @@ fun playTimeText(seconds: Long): String {
 @Composable
 fun StatsScreen(vm: GameViewModel) {
     Column(
-        Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp),
+        Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp).padding(bottom = BottomMenuHeight),
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         Text("Statistika", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)

@@ -98,26 +98,30 @@ class MainActivity : ComponentActivity() {
             LaunchedEffect(vm.screen) { if (vm.screen == Screen.HOME || vm.screen == Screen.SETTINGS) vm.refreshSkins(com.aaideas.krossvord.model.Ranks.unlockedThemes(vm.xp).toSet()) }
             KrossvordTheme(mode, vm.dynamicColor, skin) {
                 // Şüşə: the colourful backdrop shows through, so the window surface is clear.
-                Surface(Modifier.fillMaxSize(), color = if (skin.glass) androidx.compose.ui.graphics.Color.Transparent else MaterialTheme.colorScheme.background) {
+                Surface(Modifier.fillMaxSize(), color = if (skin.glass) androidx.compose.ui.graphics.Color.Transparent else MaterialTheme.colorScheme.background,
+                    // A clear surface would leave text black on the dark glass; say the colour outright.
+                    contentColor = MaterialTheme.colorScheme.onBackground) {
                     val glassLite = skin.glass && GlassLite.isOn(this@MainActivity)
                     val haze = if (skin.glass && !glassLite) androidx.compose.runtime.remember { dev.chrisbanes.haze.HazeState() } else null
                     val glassMax = haze != null && GlassMax.isOn(this@MainActivity)
                     // Android 13+: real glass lens (LiquidGlass.kt); Android 12: frosted cards (Haze).
                     val liquid = glassMax && LiquidGlass.supported
                     val cardHaze = if (glassMax && !liquid) androidx.compose.runtime.remember { dev.chrisbanes.haze.HazeState() } else null
-                    val backdropLayer = if (liquid) androidx.compose.ui.graphics.rememberGraphicsLayer() else null
+                    // The moving light's clock: the backdrop and every glass lens read the same time.
+                    val glassClock = if (liquid) rememberGlassClock() else null
+                    val backdrop = glassClock?.let { LensLight(it, dark) }
                     val screenLayer = if (liquid) androidx.compose.ui.graphics.rememberGraphicsLayer() else null
                     val isPremium by vm.premium.isPremium.collectAsState()
                     BackHandler(enabled = vm.screen != Screen.HOME) { vm.back() }
                     val menu = vm.screen != Screen.PUZZLE && vm.screen != Screen.WORD_OF_DAY
-                    androidx.compose.runtime.CompositionLocalProvider(LocalHaze provides haze, LocalGlassLite provides glassLite, LocalCardHaze provides cardHaze, LocalGlassBackdrop provides backdropLayer, LocalGlassScreen provides screenLayer) {
+                    androidx.compose.runtime.CompositionLocalProvider(LocalHaze provides haze, LocalGlassLite provides glassLite, LocalCardHaze provides cardHaze, LocalGlassBackdrop provides backdrop, LocalGlassScreen provides screenLayer) {
                     MaxGlassColors(glassMax, dark, liquid) {
                     // The backdrop and screens are the blur source; the floating menu (outside it) frosts them.
                     Box(Modifier.fillMaxSize().then(if (haze != null && !liquid) Modifier.hazeSource(haze) else Modifier).recordInto(screenLayer)) {
-                        if (skin.glass) GlassBackdrop(dark, Modifier.fillMaxSize().then(if (cardHaze != null) Modifier.hazeSource(cardHaze) else Modifier).recordInto(backdropLayer), moving = glassMax)
+                        if (skin.glass) GlassBackdrop(dark, Modifier.fillMaxSize().then(if (cardHaze != null) Modifier.hazeSource(cardHaze) else Modifier), moving = glassMax, clock = glassClock)
                     Box(Modifier.safeDrawingPadding()) {
                         // Leave room under the floating menu so it never hides the last item (home scrolls under it).
-                        Box(if (menu && vm.screen != Screen.HOME) Modifier.padding(bottom = BottomMenuHeight) else Modifier) {
+                        Box(if (menu && vm.screen != Screen.HOME && !liquid) Modifier.padding(bottom = BottomMenuHeight) else Modifier) {
                             when (vm.screen) {
                                 Screen.HOME -> ExpressiveHome(vm)
                                 Screen.LEVELS -> LevelsScreen(vm)

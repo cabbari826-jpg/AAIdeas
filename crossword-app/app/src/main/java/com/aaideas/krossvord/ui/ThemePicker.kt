@@ -90,21 +90,7 @@ fun SkinPicker(current: Skin, owned: Set<Skin>, onPick: (Skin) -> Unit, onUnlock
             }
         }
         if (askGlass) GlassWarning(onYes = { askGlass = false; onPick(Skin.SUSE) }, onNo = { askGlass = false })
-        if (current.glass) Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
-            Column(Modifier.weight(1f)) {
-                Text("Effektləri azalt", style = MaterialTheme.typography.titleMedium)
-                Text("Kölgəsiz və bulanıqsız şüşə: zəif telefonda oyun daha rahat işləyir.", style = MaterialTheme.typography.bodySmall)
-            }
-            androidx.compose.material3.Switch(checked = GlassLite.isOn(ctx), onCheckedChange = { GlassLite.set(ctx, it) })
-        }
-        // Experiment: only in the Lab build until the owner decides.
-        if (com.aaideas.krossvord.BuildConfig.LAB && current.glass && glassBlurSupported && !GlassLite.isOn(ctx)) Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
-            Column(Modifier.weight(1f)) {
-                Text("Maksimum şüşə (sınaq)", style = MaterialTheme.typography.titleMedium)
-                Text("Hər kart arxasındakı rəngli işığı bulandırır, işıq yavaş-yavaş hərəkət edir. Batareyanı bir az çox işlədir.", style = MaterialTheme.typography.bodySmall)
-            }
-            androidx.compose.material3.Switch(checked = GlassMax.isOn(ctx), onCheckedChange = { GlassMax.set(ctx, it) })
-        }
+        if (current.glass) GlassLevelPicker()
         val lockedOnes = Skin.entries.filter { it !in owned }
         if (lockedOnes.isNotEmpty()) {
             Text("🔒 Hədiyyə mövzular oyunda qazanılır.", style = MaterialTheme.typography.bodySmall)
@@ -163,3 +149,34 @@ private fun SkinCard(skin: Skin, p: SkinPalette, selected: Boolean, locked: Bool
 @Composable
 private fun isDebugBuild(): Boolean =
     (LocalContext.current.applicationInfo.flags and android.content.pm.ApplicationInfo.FLAG_DEBUGGABLE) != 0
+
+/**
+ * Şüşə effekti, three steps: "Sadə" see-through panels without blur (weak phones), "Bulanıq" the
+ * Android frost behind the menu, "Maksimum" iPhone-like glass: every card bends and lights the
+ * moving colour behind it (Android 13+; on Android 12 the cards are frosted instead).
+ */
+@Composable
+private fun GlassLevelPicker() {
+    val ctx = LocalContext.current
+    val lite = GlassLite.isOn(ctx)
+    val max = !lite && GlassMax.isOn(ctx)
+    Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+        Text("Şüşə effekti", style = MaterialTheme.typography.titleMedium)
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            androidx.compose.material3.FilterChip(selected = lite, onClick = { GlassLite.set(ctx, true); GlassMax.set(ctx, false) }, label = { Text("Sadə") })
+            if (glassBlurSupported) {
+                androidx.compose.material3.FilterChip(selected = !lite && !max, onClick = { GlassLite.set(ctx, false); GlassMax.set(ctx, false) }, label = { Text("Bulanıq") })
+                androidx.compose.material3.FilterChip(selected = max, onClick = { GlassLite.set(ctx, false); GlassMax.set(ctx, true) }, label = { Text("✨ Maksimum") })
+            }
+        }
+        Text(
+            when {
+                lite -> "Bulanıqsız, kölgəsiz şüşə: zəif telefonda oyun daha rahat işləyir."
+                max -> "Əsl şüşə kimi: kartların kənarı arxadakı rəngi əyir və işığı tutur, rəng yavaş-yavaş axır. Batareyanı bir az çox işlədir."
+                else -> "Menyu arxasından keçəni bulandırır."
+            },
+            style = MaterialTheme.typography.bodySmall,
+        )
+        if (!glassBlurSupported) Text("Bulanıq və Maksimum Android 12 və yenisində işləyir.", style = MaterialTheme.typography.bodySmall)
+    }
+}
