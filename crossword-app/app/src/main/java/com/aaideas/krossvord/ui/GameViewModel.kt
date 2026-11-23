@@ -670,6 +670,8 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     val homePack: Int get() = selectedPack.takeIf { it in packs.indices && packOpen(it) } ?: packIndexOf(continueIndex())
 
     val currentLevelNumber: Int get() = numberInPack(levelIndex)
+    /** "7 / 16": the level's place in its pack; null for the daily mini crossword. */
+    val currentLevelCount: String? get() = if (playingMini) null else "$currentLevelNumber / ${packs[packIndexOf(levelIndex)].levels.size}"
     val currentLevelTitle: String get() = if (playingMini) "Mini krossvord" else levelTitle(levelIndex)
 
     // ---- Daily mini-crossword: one small grid a day from assets/mini, no timer ----
