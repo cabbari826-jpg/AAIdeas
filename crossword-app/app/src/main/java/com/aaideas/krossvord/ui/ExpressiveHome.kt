@@ -349,7 +349,7 @@ fun GlassBottomMenu(
     val dark = cs.background.luminance() < 0.5f
     Surface(
         // Lifted off the bottom edge so it floats clear of the gesture bar.
-        modifier = modifier.padding(start = 24.dp, end = 24.dp, top = 12.dp, bottom = 26.dp)
+        modifier = modifier.padding(start = 16.dp, end = 16.dp, top = 12.dp, bottom = 26.dp)
             .then(if (compact) Modifier else Modifier.fillMaxWidth())
             // Şüşə: frosted glass over whatever scrolls beneath (real blur on Android 12+, a tint before that).
             .then(if (haze != null) Modifier.clip(CircleShape).hazeEffect(haze, glassStyle(dark)) else Modifier)
@@ -362,8 +362,9 @@ fun GlassBottomMenu(
     ) {
         // Every tab as wide as the widest ("Statistika"), so the chosen tab's highlight is the same size on each
         // and its icon and label sit exactly in the middle (the owner wants strict symmetry).
-        Row(Modifier.then(if (compact) Modifier.width(androidx.compose.foundation.layout.IntrinsicSize.Max) else Modifier).padding(if (compact) 5.dp else 6.dp),
-            horizontalArrangement = Arrangement.spacedBy(if (compact) 0.dp else 4.dp)) {
+        Row(Modifier.then(if (compact) Modifier.width(androidx.compose.foundation.layout.IntrinsicSize.Max) else Modifier).padding(6.dp),
+            // The gap between tabs equals the inset from the pill's edge, so the chosen tab sits evenly in its slot.
+            horizontalArrangement = Arrangement.spacedBy(6.dp)) {
             listOf(
                 Triple(Screen.HOME, MenuIcon.PLAY, "Oyun"),
                 Triple(Screen.DAILY, MenuIcon.TODAY, "Bu gün"),

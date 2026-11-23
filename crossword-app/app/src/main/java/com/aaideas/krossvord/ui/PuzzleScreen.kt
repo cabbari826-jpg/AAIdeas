@@ -1088,7 +1088,9 @@ private fun GlassLetterRows(
                             Box(
                                 Modifier.weight(1f).then(tile).clip(shape)
                                     .background(if (picked) cs.primary else cs.primaryContainer)
-                                    .glassy(shape)
+                                    // A chosen tile skips the glass lens: the lens would cover its bright fill and
+                                    // leave dark letters on dark glass (dark Şüşə).
+                                    .glassy(shape, lens = !picked)
                                     .clickable {
                                         haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                                         if (picked) onUnpick(i) else onPick(i)

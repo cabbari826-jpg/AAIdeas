@@ -156,6 +156,26 @@ class MonolithShotTest {
         } finally { GlassPreview.forceFrosted = false }
     }
 
+    /** Dark Şüşə with two letters chosen: the chosen tiles must stay bright. */
+    @Test fun glassDarkPicked() {
+        val vm = glassVm()
+        val letters = vm.columnLetters()
+        vm.pickLetter(letters.indexOf('O'))
+        rule.mainClock.autoAdvance = false
+        rule.setContent {
+            KrossvordTheme(ThemeMode.DARK, skin = Skin.SUSE) {
+                MaxGlassColors(on = true, dark = true, liquid = true) {
+                    Box(Modifier.fillMaxSize()) {
+                        GlassBackdrop(true, Modifier.fillMaxSize())
+                        PuzzleScreen(vm, isPremium = false)
+                    }
+                }
+            }
+        }
+        rule.mainClock.advanceTimeBy(1500)
+        captureScreenRoboImage("build/outputs/roborazzi/glass-dark-picked.png")
+    }
+
     @Test fun menuEveryTheme() {
         rule.mainClock.autoAdvance = false
         rule.setContent {
