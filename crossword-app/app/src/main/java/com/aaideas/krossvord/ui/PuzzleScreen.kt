@@ -137,22 +137,19 @@ private fun PuzzleContent(vm: GameViewModel, isPremium: Boolean, compact: Boolea
             confirmButton = { Button(onClick = { confirmRestart = false; vm.restartLevel() }) { Text("Yenidən başla") } },
             dismissButton = { TextButton(onClick = { confirmRestart = false }) { Text("İmtina") } },
         )
-        if (glass) GlassTopBar(vm, isPremium) { confirmRestart = true }
-        else Row(verticalAlignment = Alignment.CenterVertically) {
-            SquareButton(Glyph.BACK, "Geri", vm::back, Modifier.tutorialAnchor(vm, TutorialSpot.BACK))
-            Spacer(Modifier.width(8.dp))
-            SquareButton(Glyph.RESTART, "Səviyyəni yenidən başla", { confirmRestart = true }, Modifier.tutorialAnchor(vm, TutorialSpot.RESTART))
-            Spacer(Modifier.weight(1f))
-            LivesBadge(vm, isPremium, Modifier.padding(end = 6.dp).tutorialAnchor(vm, TutorialSpot.LIVES))
-        }
+        // Every theme: one full-width bar on top, so the screen is symmetric edge to edge.
+        GlassTopBar(vm, isPremium) { confirmRestart = true }
         if (game.keyword != null) KeywordStrip(game.keywordLetters, game.isKeywordKnown, vm::openKeywordDialog, Modifier.tutorialAnchor(vm, TutorialSpot.KEYWORD))
         BoxWithConstraints(Modifier.fillMaxWidth().weight(1f), contentAlignment = Alignment.Center) {
             // Şüşə: the grid sits in a glass card with a small inner margin.
             val pad = if (glass) GLASS_GRID_PAD * 2 else 0.dp
             // The grid spans the full width, in line with the buttons and letters below (symmetry): cells may
             // be a little wider than tall when height is short, but never more than [MAX_CELL_STRETCH].
-            val cellH = min((maxWidth - pad) / game.board.cols, (maxHeight - pad) / game.board.rows)
-            val cellW = min((maxWidth - pad) / game.board.cols, cellH * MAX_CELL_STRETCH)
+            // Spare height goes into the cells too (a little taller than wide), so the gaps above and below
+            // the grid stay the same 8 dp as everywhere else instead of a wide empty band.
+            val fit = min((maxWidth - pad) / game.board.cols, (maxHeight - pad) / game.board.rows)
+            val cellW = min((maxWidth - pad) / game.board.cols, fit * MAX_CELL_STRETCH)
+            val cellH = min((maxHeight - pad) / game.board.rows, cellW * MAX_CELL_STRETCH)
             Grid(
                 game, cellW, cellH, preview, vm.feedback, vm::isClueShown, vm::tapCell, vm::tapClueOf,
                 tutorialEntry = if (vm.tutorialStep == TUTORIAL_COACH && COACH_STEPS[vm.coachIndex].first == TutorialSpot.CLUE) game.activeEntry else null,
@@ -171,13 +168,12 @@ private fun PuzzleContent(vm: GameViewModel, isPremium: Boolean, compact: Boolea
             vm.freeHints > 0 -> "Hərf aç (${vm.freeHints} pulsuz)"
             else -> "Hərf aç ▶ reklam"
         }
-        // Small phones, letter columns: shuffle and hint move between the columns, so the grid gets that row.
-        // Şüşə keeps them in the row: its letter tiles are laid out in rows, not columns.
-        val actionsInColumns = compact && columns && !glass
+        // Letter tiles are laid out in even rows in every theme, so shuffle and hint always keep their own row.
+        val actionsInColumns = false
         val solved = game.isComplete && !vm.showCompletion
-        if (!actionsInColumns && !solved) Row(Modifier.fillMaxWidth().padding(vertical = if (compact) 2.dp else if (glass) PANEL_GAP else 6.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        if (!actionsInColumns && !solved) Row(Modifier.fillMaxWidth().padding(vertical = if (compact) 2.dp else PANEL_GAP), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             // A fixed height makes the button's fill take the whole touch area, so it lines up with the glass rim.
-            val glassBtn = if (glass) Modifier.height(48.dp).glassy(CircleShape) else Modifier
+            val glassBtn = Modifier.height(48.dp).glassy(CircleShape)
             val outlined = if (glass) ButtonDefaults.outlinedButtonColors(containerColor = MaterialTheme.colorScheme.surfaceContainer) else ButtonDefaults.outlinedButtonColors()
             val border = if (glass) null else ButtonDefaults.outlinedButtonBorder(true)
             if (columns) OutlinedButton(onClick = vm::shuffleTiles, modifier = Modifier.weight(1f).then(glassBtn), colors = outlined, border = border) { Text("⟳ Qarışdır") }
@@ -538,7 +534,7 @@ private fun LongClueLine(entry: Entry, text: String, big: Boolean) {
     Surface(
         color = if (glass) MaterialTheme.colorScheme.surfaceContainer else MaterialTheme.colorScheme.secondaryContainer,
         shape = shape,
-        modifier = Modifier.fillMaxWidth().padding(top = if (glass) 0.dp else 2.dp, bottom = if (glass) PANEL_GAP else 0.dp).glassy(shape),
+        modifier = Modifier.fillMaxWidth().padding(bottom = PANEL_GAP).glassy(shape),
     ) {
         Text(
             if (glass) (if (text.length > CELL_CLUE_MAX) "♪ " else "") + "$text · ${entry.letters.size} hərf"
@@ -689,7 +685,8 @@ private fun ColumnsInput(
             for (x in listOf(14f, -12f, 9f, -6f, 3f, 0f)) shake.animateTo(x, tween(45))
         }
     }
-    if (LocalGlass.current) {
+    // Every theme: even rows of tiles, edge to edge (the old two-columns-a-side layout left ragged holes).
+    if (true) {
         GlassLetterRows(letters, draft, onPick, onUnpick, onUndo, onClear, Modifier.graphicsLayer { translationX = shake.value })
         return
     }
@@ -834,7 +831,7 @@ private fun KeywordStrip(letters: List<Char?>, known: Boolean, onGuess: () -> Un
     Row(
         // The same 8 dp gap above and below as between every other panel on this screen.
         modifier.fillMaxWidth().padding(vertical = PANEL_GAP)
-            .then(if (glass) Modifier.clip(shape).background(MaterialTheme.colorScheme.surfaceContainer).glassy(shape) else Modifier)
+            .clip(shape).background(MaterialTheme.colorScheme.surfaceContainer).glassy(shape)
             .clickable(enabled = !known, onClick = onGuess)
             .padding(horizontal = 12.dp, vertical = 6.dp),
         verticalAlignment = Alignment.CenterVertically,

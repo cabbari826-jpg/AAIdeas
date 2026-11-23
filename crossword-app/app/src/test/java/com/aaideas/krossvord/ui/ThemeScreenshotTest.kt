@@ -82,6 +82,16 @@ class ThemeScreenshotTest {
         shoot("puzzle-dark", ThemeMode.DARK) { PuzzleScreen(vm, isPremium = false) }
     }
 
+    /** Klassik level screen with the tutorial closed: the same symmetric layout as Şüşə. */
+    @Test fun classicSymmetric() {
+        val vm = vm()
+        vm.startLevel(0); vm.restartLevel(); vm.finishTutorial()
+        val letters = vm.columnLetters()
+        "OD".forEach { ch -> vm.pickLetter(letters.indexOf(ch)) }
+        for (mode in listOf(ThemeMode.LIGHT, ThemeMode.DARK))
+            shoot("classic-sym-${mode.name.lowercase()}", mode) { PuzzleScreen(vm, isPremium = false) }
+    }
+
     /** Update 2.1 screens in Şüşə: home, "Bu gün", the map, packs, settings. */
     @Config(qualifiers = "w393dp-h1300dp-xxhdpi")
     @Test fun glassUpdate21() {
