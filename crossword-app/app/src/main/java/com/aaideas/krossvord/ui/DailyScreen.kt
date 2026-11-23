@@ -87,7 +87,14 @@ fun DailyScreen(vm: GameViewModel) {
 
 @Composable
 private fun Section(title: String, content: @Composable () -> Unit) {
-    Surface(shape = RoundedCornerShape(20.dp), color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f)) {
+    val shape = RoundedCornerShape(20.dp)
+    // Şüşə: the same frosted card as the rest of the screen (a grey slab looked foreign in dark glass).
+    val glass = LocalGlass.current
+    Surface(
+        shape = shape,
+        color = if (glass) MaterialTheme.colorScheme.surfaceContainerHigh else MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f),
+        modifier = Modifier.fillMaxWidth().glassy(shape),
+    ) {
         Column(Modifier.fillMaxWidth().padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
             Text(title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
             content()

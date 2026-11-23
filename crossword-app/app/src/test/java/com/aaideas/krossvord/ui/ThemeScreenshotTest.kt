@@ -80,6 +80,32 @@ class ThemeScreenshotTest {
         shoot("puzzle-dark", ThemeMode.DARK) { PuzzleScreen(vm, isPremium = false) }
     }
 
+    /** Update 2.1 screens in Şüşə: home, "Bu gün", the map, packs, settings. */
+    @Config(qualifiers = "w393dp-h1300dp-xxhdpi")
+    @Test fun glassUpdate21() {
+        val app = ApplicationProvider.getApplicationContext<Application>()
+        app.getSharedPreferences("progress", 0).edit().putInt("month_key", 202611).putInt("month_levels", 9).commit()
+        val vm = vm()
+        vm.unlockAllSkinsForTesting(); vm.changeSkin(Skin.SUSE)
+        val screens: List<Pair<String, @Composable () -> Unit>> = listOf(
+            "home" to { ExpressiveHome(vm) },
+            "today" to { DailyScreen(vm) },
+            "map" to { JourneyScreen(vm) },
+            "packs" to { PacksScreen(vm) },
+            "settings" to { SettingsScreen(vm, isPremium = false) },
+        )
+        for (mode in listOf(ThemeMode.LIGHT, ThemeMode.DARK)) for ((name, screen) in screens) {
+            val tab = when (name) { "today" -> Screen.DAILY; "settings" -> Screen.SETTINGS; else -> Screen.HOME }
+            shoot("glass21-$name-${mode.name.lowercase()}", mode, Skin.SUSE) {
+                androidx.compose.foundation.layout.Box {
+                    GlassBackdrop(mode == ThemeMode.DARK, androidx.compose.ui.Modifier.matchParentSize())
+                    screen()
+                    GlassBottomMenu(tab, {}, androidx.compose.ui.Modifier.align(androidx.compose.ui.Alignment.BottomCenter))
+                }
+            }
+        }
+    }
+
     @Test fun glassTheme() {
         val vm = vm()
         vm.unlockAllSkinsForTesting(); vm.changeSkin(Skin.SUSE)
