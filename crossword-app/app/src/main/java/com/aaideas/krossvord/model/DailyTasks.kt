@@ -44,6 +44,15 @@ object Streak {
         return n
     }
 
+    /** A free letter hint for every 3rd day in a row. */
+    const val HINT_EVERY = 3
+
+    /** True when today's play completes a run of 3, 6, 9, ... days and the hint wasn't given today. */
+    fun hintDue(days: Set<Long>, today: Long, lastHintDay: Long): Boolean {
+        val r = run(days, today)
+        return today in days && r > 0 && r % HINT_EVERY == 0 && lastHintDay != today
+    }
+
     /** True when today's play completes a run of 7, 14, ... days. */
     fun giftDue(days: Set<Long>, today: Long, lastGiftDay: Long): Boolean {
         val r = run(days, today)

@@ -35,6 +35,16 @@ class MainActivity : ComponentActivity() {
     private var ready by androidx.compose.runtime.mutableStateOf(com.aaideas.krossvord.data.PackCache.isLoaded)
     private var pendingIntent: android.content.Intent? = null
 
+    /**
+     * Back in front (also after a night in the background, when the process was kept): pick up
+     * the new day's word, tasks and lives, and set the reminder again.
+     */
+    override fun onStart() {
+        super.onStart()
+        if (ready) vm.onResumeDay()
+        if (com.aaideas.krossvord.remind.DailyReminder.isOn(this)) com.aaideas.krossvord.remind.DailyReminder.schedule(this)
+    }
+
     override fun onNewIntent(intent: android.content.Intent) {
         super.onNewIntent(intent)
         if (ready) openFrom(intent) else pendingIntent = intent
@@ -82,7 +92,8 @@ class MainActivity : ComponentActivity() {
             val base = androidx.compose.ui.platform.LocalDensity.current
             // Follows the phone's own big font until the player sets the switch.
             val systemScale = androidx.compose.ui.platform.LocalConfiguration.current.fontScale
-            val density = if (vm.largeOn(systemScale)) androidx.compose.ui.unit.Density(base.density, maxOf(base.fontScale, LARGE_FONT_SCALE)) else base
+            val scale = vm.appFontScale(systemScale)
+            val density = if (scale != base.fontScale) androidx.compose.ui.unit.Density(base.density, scale) else base
             androidx.compose.runtime.CompositionLocalProvider(androidx.compose.ui.platform.LocalDensity provides density) {
             LaunchedEffect(vm.screen) { if (vm.screen == Screen.HOME || vm.screen == Screen.SETTINGS) vm.refreshSkins(com.aaideas.krossvord.model.Ranks.unlockedThemes(vm.xp).toSet()) }
             KrossvordTheme(mode, vm.dynamicColor, skin) {
@@ -110,6 +121,7 @@ class MainActivity : ComponentActivity() {
                                 Screen.COLLECTION -> CollectionScreen(vm)
                                 Screen.DAILY -> DailyScreen(vm)
                                 Screen.PACKS -> PacksScreen(vm)
+                                Screen.MAP -> JourneyScreen(vm)
                             }
                         }
                     }

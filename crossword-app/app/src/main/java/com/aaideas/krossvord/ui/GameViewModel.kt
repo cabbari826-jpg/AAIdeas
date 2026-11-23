@@ -34,7 +34,7 @@ import com.aaideas.krossvord.monetization.LocalPremiumManager
 import com.aaideas.krossvord.monetization.PlaceholderAdService
 import com.aaideas.krossvord.monetization.PremiumManager
 
-enum class Screen { HOME, LEVELS, PUZZLE, SETTINGS, WORD_OF_DAY, STATS, COLLECTION, DAILY, PACKS }
+enum class Screen { HOME, LEVELS, PUZZLE, SETTINGS, WORD_OF_DAY, STATS, COLLECTION, DAILY, PACKS, MAP }
 
 /** How letters are entered. COLUMNS is the default; the others stay as options in settings. */
 /** Pack shown alone in kids mode. */
@@ -43,6 +43,10 @@ const val KIDS_PACK = "az-usaq"
 enum class InputMode { COLUMNS, TILES, KEYBOARD }
 
 enum class WordFeedback { RIGHT, WRONG }
+
+/** Text sizes on the settings slider: normal, a bit bigger, large, very large. */
+val TEXT_SCALES = listOf(1f, 1.15f, 1.3f, 1.5f)
+val TEXT_SCALE_NAMES = listOf("Adi", "Bir az iri", "İri", "Çox iri")
 
 /** The phone's font at this size or bigger turns large mode on by itself (until the player decides). */
 const val AUTO_LARGE_FONT_SCALE = 1.15f
@@ -251,6 +255,12 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         val days = dailyStore.playedDays
         if (day !in days) dailyStore.playedDays = days + day
         val now = dailyStore.playedDays
+        if (Streak.hintDue(now, day, dailyStore.lastStreakHint)) {
+            dailyStore.lastStreakHint = day
+            freeHints = freeHints + 1
+            progress.freeHints = freeHints
+            dailyNote = "💡 ${Streak.run(now, day)} gün ardıcıl! Hədiyyə: 1 pulsuz «Hərf aç»"
+        }
         if (Streak.giftDue(now, day, dailyStore.lastStreakGift)) {
             dailyStore.lastStreakGift = day
             setLives(livesState.gift(now(), 2))
@@ -618,6 +628,15 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
+    /** The app came back to the front: a new day may have started while it slept. */
+    fun onResumeDay() {
+        daily.refresh()
+        dailyTick++
+        tickLives()
+        if (progress.welcomeDay != today().toEpochDay() && welcome == null) openWelcome()
+        autoUpdatePacks()
+    }
+
     fun editProfile() { welcome = Welcome.PROFILE }
 
     fun saveProfile(name: String, md: java.time.MonthDay?, year: Int? = null) {
@@ -647,14 +666,35 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     var largeModeChosen by mutableStateOf(progress.largeModeChosen)
         private set
 
-    /** Is large mode on, given the phone's font scale (Configuration.fontScale)? */
-    fun largeOn(systemFontScale: Float): Boolean = if (largeModeChosen) largeMode else systemFontScale >= AUTO_LARGE_FONT_SCALE
+    /** Text size picked on the slider (one of TEXT_SCALES), or 0 when never picked. */
+    var textScale by mutableStateOf(progress.textScale)
+        private set
 
-    fun changeLargeMode(on: Boolean) {
-        largeMode = on
-        largeModeChosen = true
-        progress.largeMode = on
+    /**
+     * Font scale for the whole app, given the phone's own (Configuration.fontScale). Never smaller
+     * than the phone's. Until the player picks a size, a big phone font turns large mode on.
+     */
+    fun appFontScale(systemFontScale: Float): Float = when {
+        textScale > 0f -> maxOf(systemFontScale, textScale)
+        largeModeChosen -> if (largeMode) maxOf(systemFontScale, LARGE_FONT_SCALE) else systemFontScale
+        systemFontScale >= AUTO_LARGE_FONT_SCALE -> maxOf(systemFontScale, LARGE_FONT_SCALE)
+        else -> systemFontScale
     }
+
+    /** Is the app's text bigger than the phone's own? */
+    fun largeOn(systemFontScale: Float): Boolean = appFontScale(systemFontScale) > systemFontScale
+
+    /** The slider's position: the picked size, or the size in use now. */
+    fun shownTextScale(systemFontScale: Float): Float =
+        if (textScale > 0f) textScale else TEXT_SCALES.minBy { kotlin.math.abs(it - appFontScale(systemFontScale)) }
+
+    fun changeTextScale(scale: Float) {
+        textScale = scale
+        progress.textScale = scale
+        largeMode = scale > 1f; largeModeChosen = true; progress.largeMode = largeMode
+    }
+
+    fun changeLargeMode(on: Boolean) = changeTextScale(if (on) LARGE_FONT_SCALE else 1f)
 
     var bigClues by mutableStateOf(progress.bigClues)
         private set
@@ -1106,7 +1146,10 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
             flushTime()
             val stars = LevelResult.stars(mistakes, hintsUsed)
             val rankUp = addXp(com.aaideas.krossvord.model.Ranks.levelXp(stars))
+            val before = com.aaideas.krossvord.model.Journey.opened(completed.size)
+            val after = com.aaideas.krossvord.model.Journey.opened(progress.completedLevels().size)
             result = LevelResult(
+                city = if (after > before && !playingMini) com.aaideas.krossvord.model.Journey.CITIES[after - 1] else null,
                 rankUp = rankUp,
                 xp = com.aaideas.krossvord.model.Ranks.levelXp(stars),
                 stars = stars,
@@ -1130,7 +1173,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
 }
 
 /** The result card of a solved level: 1 to 3 stars, time taken (shown only here), praise, new medals. */
-data class LevelResult(val rankUp: com.aaideas.krossvord.model.Rank? = null, val xp: Int = 0, val stars: Int, val seconds: Long, val praise: String, val keyword: String?, val medals: List<Medal>, val fact: String? = null) {
+data class LevelResult(val city: com.aaideas.krossvord.model.City? = null, val rankUp: com.aaideas.krossvord.model.Rank? = null, val xp: Int = 0, val stars: Int, val seconds: Long, val praise: String, val keyword: String?, val medals: List<Medal>, val fact: String? = null) {
     companion object {
         val PRAISE = listOf("Əla!", "Bravo!", "Afərin!", "Belə davam et!", "Mükəmməl!", "Super!", "Çox gözəl!")
         /** Never zero: 3 without mistakes and letter hints, 2 with a few, 1 otherwise. */

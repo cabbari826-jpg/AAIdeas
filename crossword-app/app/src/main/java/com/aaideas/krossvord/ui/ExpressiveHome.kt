@@ -133,6 +133,7 @@ fun ExpressiveHome(vm: GameViewModel) {
         WordOfDayCard(vm.daily) { vm.open(Screen.WORD_OF_DAY) }
         vm.weeklyPack?.let { WeeklyCard(vm, it) }
         TodayCard(vm)
+        if (!vm.kidsMode) JourneyCard(vm)
 
         // Packs first, then the levels of the chosen pack, all on this screen.
         val p = vm.homePack

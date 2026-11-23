@@ -130,13 +130,7 @@ fun SettingsScreen(vm: GameViewModel, isPremium: Boolean) {
         TextButton(onClick = vm::back) { Text("← Əsas səhifə") }
         // First in the list, so it is easy to find for someone who can't read small text.
         Surface(shape = androidx.compose.foundation.shape.RoundedCornerShape(16.dp), color = MaterialTheme.colorScheme.primaryContainer) {
-            Row(Modifier.fillMaxWidth().padding(12.dp), verticalAlignment = Alignment.CenterVertically) {
-                Column(Modifier.weight(1f)) {
-                    Text("🔍 İri rejim", style = MaterialTheme.typography.titleMedium)
-                    Text("Bütün yazılar böyüyür, seçilmiş ipucu şəbəkənin altında iri görünür. Telefonda iri şrift varsa, özü açılır.", style = MaterialTheme.typography.bodySmall)
-                }
-                Switch(checked = vm.largeOn(androidx.compose.ui.platform.LocalConfiguration.current.fontScale), onCheckedChange = vm::changeLargeMode)
-            }
+            TextSizeCard(vm)
         }
         Surface(shape = androidx.compose.foundation.shape.RoundedCornerShape(16.dp), color = MaterialTheme.colorScheme.secondaryContainer) {
             Row(Modifier.fillMaxWidth().padding(12.dp), verticalAlignment = Alignment.CenterVertically) {
@@ -322,6 +316,11 @@ private fun ReminderSwitch() {
             }
         })
     }
+    // Xiaomi/Redmi: without Autostart, MIUI drops the alarm once the app is swiped away.
+    if (on && remind.isXiaomi) {
+        Text("Xiaomi telefonlarında xatırlatma gəlməsi üçün «Avtomatik başlatma»nı açın.", style = MaterialTheme.typography.bodySmall)
+        OutlinedButton(onClick = { remind.openAutostart(context) }, modifier = Modifier.fillMaxWidth()) { Text("⚙ Avtomatik başlatmanı aç") }
+    }
 }
 
 /**
@@ -377,4 +376,30 @@ private fun restartApp(context: android.content.Context) {
     intent.addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK or android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK)
     context.startActivity(intent)
     Runtime.getRuntime().exit(0)
+}
+
+/**
+ * Text size in four steps instead of an on/off switch. Big buttons at both ends as well as the
+ * slider, so nobody has to drag. Telefonda iri şrift varsa, «İri» özü seçilir.
+ */
+@Composable
+private fun TextSizeCard(vm: GameViewModel) {
+    val sys = androidx.compose.ui.platform.LocalConfiguration.current.fontScale
+    val current = vm.shownTextScale(sys)
+    val i = TEXT_SCALES.indexOf(current).coerceAtLeast(0)
+    Column(Modifier.fillMaxWidth().padding(12.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+        Text("🔍 Yazı ölçüsü: ${TEXT_SCALE_NAMES[i]}", style = MaterialTheme.typography.titleMedium)
+        Text("Bütün yazılar böyüyür. Telefonda iri şrift varsa, özü iri olur.", style = MaterialTheme.typography.bodySmall)
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            OutlinedButton(onClick = { if (i > 0) vm.changeTextScale(TEXT_SCALES[i - 1]) }, enabled = i > 0) { Text("A−") }
+            androidx.compose.material3.Slider(
+                value = i.toFloat(),
+                onValueChange = { v -> TEXT_SCALES.getOrNull(kotlin.math.round(v).toInt())?.let { if (it != current) vm.changeTextScale(it) } },
+                valueRange = 0f..(TEXT_SCALES.size - 1).toFloat(),
+                steps = TEXT_SCALES.size - 2,
+                modifier = Modifier.weight(1f).padding(horizontal = 8.dp),
+            )
+            OutlinedButton(onClick = { if (i < TEXT_SCALES.lastIndex) vm.changeTextScale(TEXT_SCALES[i + 1]) }, enabled = i < TEXT_SCALES.lastIndex) { Text("A+") }
+        }
+    }
 }

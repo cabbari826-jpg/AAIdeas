@@ -79,7 +79,16 @@ fun LevelResultDialog(title: String, result: LevelResult, onNext: () -> Unit, on
                             Text("${m.icon} Yeni medal: ${m.title}", Modifier.padding(horizontal = 12.dp, vertical = 6.dp), style = MaterialTheme.typography.bodyMedium)
                         }
                     }
-                    result.fact?.let { f ->
+                    // A new place on the road map: its fact replaces the usual one.
+                    result.city?.let { c ->
+                        Surface(shape = RoundedCornerShape(12.dp), color = MaterialTheme.colorScheme.secondaryContainer) {
+                            Column(Modifier.padding(horizontal = 12.dp, vertical = 8.dp)) {
+                                Text("🗺 Yeni yer açıldı: ${c.icon} ${c.name}", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
+                                Text(c.fact, style = MaterialTheme.typography.bodyMedium)
+                            }
+                        }
+                    }
+                    if (result.city == null) result.fact?.let { f ->
                         Surface(shape = RoundedCornerShape(12.dp), color = MaterialTheme.colorScheme.surfaceVariant) {
                             Column(Modifier.padding(horizontal = 12.dp, vertical = 8.dp)) {
                                 Text("💡 Bilirsinizmi?", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)

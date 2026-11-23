@@ -102,12 +102,36 @@ class UpdateTwoOneTest {
         assertFalse(p.getBoolean("vibrate_on", true))
     }
 
-    @Test fun largeModeFollowsPhoneFontUntilChosen() {
+    @Test fun textSizeFollowsPhoneFontUntilChosen() {
         val vm = vm()
-        assertTrue(vm.largeOn(1.3f))
+        assertTrue(vm.largeOn(1.2f))
+        assertEquals(1.3f, vm.appFontScale(1.2f), 0.001f)
         assertFalse(vm.largeOn(1.0f))
-        vm.changeLargeMode(false)
-        assertFalse(vm.largeOn(1.3f))
+        vm.changeTextScale(1f)
+        assertFalse(vm.largeOn(1.2f))          // "Adi": the phone's own size, no more
+        vm.changeTextScale(1.5f)
+        assertEquals(1.5f, vm.appFontScale(1.0f), 0.001f)
+        assertEquals(1.5f, vm.shownTextScale(1.0f), 0.001f)
+    }
+
+    @Test fun roadMapOpensAPlaceEveryEightLevels() {
+        val m = com.aaideas.krossvord.model.Journey
+        assertEquals(1, m.opened(0)); assertEquals(8, m.toNext(0))
+        assertEquals(2, m.opened(8)); assertEquals(7, m.toNext(9))
+        assertEquals(m.CITIES.size, m.opened(10_000)); assertEquals(null, m.toNext(10_000))
+        val vm = vm()
+        val done = vm.levels.take(17).map { it.id }.toSet()
+        app.getSharedPreferences("progress", 0).edit().putStringSet("completed", done).commit()
+        val vm2 = vm()
+        shoot("v21-map") { JourneyScreen(vm2) }
+    }
+
+    @Test fun everyThirdDayInARowGivesAFreeHint() {
+        val s = com.aaideas.krossvord.model.Streak
+        assertTrue(s.hintDue(setOf(10L, 11L, 12L), 12L, -1))
+        assertFalse(s.hintDue(setOf(10L, 11L, 12L), 12L, 12L))
+        assertFalse(s.hintDue(setOf(11L, 12L), 12L, -1))
+        assertTrue(s.hintDue((1L..6L).toSet(), 6L, 3L))
     }
 
     @Test(timeout = 60_000) fun settingsShowNewSwitches() {
