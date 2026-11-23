@@ -22,6 +22,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
@@ -325,7 +326,14 @@ val BottomMenuHeight: Dp = 102.dp
  * Android versions, so it is a see-through tinted surface with a light rim and soft shadow.
  */
 @Composable
-fun GlassBottomMenu(screen: Screen, open: (Screen) -> Unit, modifier: Modifier = Modifier) {
+fun GlassBottomMenu(
+    screen: Screen,
+    open: (Screen) -> Unit,
+    modifier: Modifier = Modifier,
+    // Variants shown to the owner: a shorter pill hugging its tabs, and a bolder label font.
+    compact: Boolean = false,
+    font: androidx.compose.ui.text.font.FontFamily? = null,
+) {
     val cs = MaterialTheme.colorScheme
     val screenLayer = LocalGlassScreen.current
     // Real glass lens over the passing screen (Maksimum şüşə, Android 13+) replaces the frost.
@@ -334,7 +342,8 @@ fun GlassBottomMenu(screen: Screen, open: (Screen) -> Unit, modifier: Modifier =
     val dark = cs.background.luminance() < 0.5f
     Surface(
         // Lifted off the bottom edge so it floats clear of the gesture bar.
-        modifier = modifier.padding(start = 24.dp, end = 24.dp, top = 12.dp, bottom = 26.dp).fillMaxWidth()
+        modifier = modifier.padding(start = 24.dp, end = 24.dp, top = 12.dp, bottom = 26.dp)
+            .then(if (compact) Modifier else Modifier.fillMaxWidth())
             // Şüşə: frosted glass over whatever scrolls beneath (real blur on Android 12+, a tint before that).
             .then(if (haze != null) Modifier.clip(CircleShape).hazeEffect(haze, glassStyle(dark)) else Modifier)
             .liquidGlass(screenLayer, CircleShape, dark, frost = 2.dp)
@@ -344,7 +353,7 @@ fun GlassBottomMenu(screen: Screen, open: (Screen) -> Unit, modifier: Modifier =
         color = if (haze != null || screenLayer != null) Color.Transparent else if (glass) Color.White.copy(alpha = if (dark) 0.14f else 0.45f) else cs.surfaceContainerHigh,
         border = if (glass) null else BorderStroke(1.dp, cs.outlineVariant.copy(alpha = 0.7f)),
     ) {
-        Row(Modifier.padding(6.dp), horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+        Row(Modifier.padding(if (compact) 5.dp else 6.dp), horizontalArrangement = Arrangement.spacedBy(if (compact) 0.dp else 4.dp)) {
             listOf(
                 Triple(Screen.HOME, "▦", "Oyun"),
                 Triple(Screen.DAILY, "📅", "Bu gün"),
@@ -354,16 +363,22 @@ fun GlassBottomMenu(screen: Screen, open: (Screen) -> Unit, modifier: Modifier =
                 val on = screen == target
                 val src = remember { MutableInteractionSource() }
                 Column(
-                    Modifier.weight(1f).springPress(src).clip(CircleShape)
+                    (if (compact) Modifier.widthIn(min = 58.dp) else Modifier.weight(1f)).springPress(src).clip(CircleShape)
                         // Şüşə: the chosen tab is a brighter glass pill with dark text (mockup); otherwise the accent.
                         .background(if (on) (if (glass) Color.White.copy(alpha = if (dark) 0.22f else 0.6f) else cs.primary) else Color.Transparent)
                         .clickable(interactionSource = src, indication = null) { open(target) }
-                        .padding(vertical = 8.dp),
+                        .padding(vertical = 7.dp, horizontal = if (compact) 9.dp else 0.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
-                    val tabInk = if (on) (if (glass) cs.onSurface else cs.onPrimary) else cs.onSurfaceVariant
+                    // With a chosen font the labels are bolder and darker, so they don't look faded on glass.
+                    val tabInk = if (on) (if (glass) cs.onSurface else cs.onPrimary) else if (font != null) cs.onSurface.copy(alpha = 0.85f) else cs.onSurfaceVariant
                     Text(icon, fontSize = 16.sp, color = tabInk)
-                    Text(label, style = MaterialTheme.typography.labelMedium, color = tabInk)
+                    Text(
+                        label,
+                        style = if (font != null) MaterialTheme.typography.labelLarge.copy(fontFamily = font, fontWeight = androidx.compose.ui.text.font.FontWeight.Bold, fontSize = 13.sp)
+                        else MaterialTheme.typography.labelMedium,
+                        color = tabInk,
+                    )
                 }
             }
         }

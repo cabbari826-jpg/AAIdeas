@@ -3,6 +3,8 @@ package com.aaideas.krossvord.ui
 import android.app.Application
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.ui.unit.dp
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -101,6 +103,38 @@ class ThemeScreenshotTest {
                     GlassBackdrop(mode == ThemeMode.DARK, androidx.compose.ui.Modifier.matchParentSize())
                     screen()
                     GlassBottomMenu(tab, {}, androidx.compose.ui.Modifier.align(androidx.compose.ui.Alignment.BottomCenter))
+                }
+            }
+        }
+    }
+
+    /** Bottom menu variants for the owner: current, shorter, and shorter with bolder fonts. */
+    @Config(qualifiers = "w393dp-h1000dp-xxhdpi")
+    @Test fun menuVariants() {
+        fun font(name: String): androidx.compose.ui.text.font.FontFamily {
+            val f = java.io.File.createTempFile(name, ".ttf")
+            javaClass.getResourceAsStream("/menufonts/$name.ttf")!!.use { i -> f.outputStream().use { i.copyTo(it) } }
+            return androidx.compose.ui.text.font.FontFamily(androidx.compose.ui.text.font.Font(f, androidx.compose.ui.text.font.FontWeight.Bold))
+        }
+        val variants = listOf<Pair<String, androidx.compose.ui.text.font.FontFamily?>>(
+            "0 · indiki" to null,
+            "A · Roboto qalın" to androidx.compose.ui.text.font.FontFamily.Default,
+            "B · Nunito" to font("nunito_800"),
+            "C · Montserrat" to font("montserrat_700"),
+            "D · Manrope" to font("manrope_800"),
+        )
+        for (mode in listOf(ThemeMode.LIGHT, ThemeMode.DARK)) {
+            shoot("menu-variants-${mode.name.lowercase()}", mode, Skin.SUSE) {
+                androidx.compose.foundation.layout.Box {
+                    GlassBackdrop(mode == ThemeMode.DARK, androidx.compose.ui.Modifier.matchParentSize())
+                    androidx.compose.foundation.layout.Column(androidx.compose.ui.Modifier.padding(top = 12.dp)) {
+                        variants.forEachIndexed { i, (name, f) ->
+                            androidx.compose.material3.Text(name, androidx.compose.ui.Modifier.padding(start = 24.dp), style = androidx.compose.material3.MaterialTheme.typography.titleMedium)
+                            androidx.compose.foundation.layout.Box(androidx.compose.ui.Modifier.fillMaxWidth(), contentAlignment = androidx.compose.ui.Alignment.Center) {
+                                GlassBottomMenu(Screen.HOME, {}, compact = i > 0, font = f)
+                            }
+                        }
+                    }
                 }
             }
         }
