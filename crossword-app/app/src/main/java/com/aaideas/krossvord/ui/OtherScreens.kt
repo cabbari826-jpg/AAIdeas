@@ -120,6 +120,7 @@ val CREDITS = listOf(
         "Metin Amiroff, Kevin Scannell, Orkhan Jafarov). Lisenziya: MPL-2.0, " +
         "github.com/mozillaz/spellchecker",
     "Menyu şrifti: Nunito (The Nunito Project Authors). Lisenziya: SIL Open Font License 1.1, github.com/googlefonts/nunito",
+    "Menyu ikonları: Material Symbols (Google). Lisenziya: Apache 2.0, fonts.google.com/icons",
     "Azərbaycan xəritəsi: Natural Earth (ictimai mülkiyyət), naturalearthdata.com",
 )
 

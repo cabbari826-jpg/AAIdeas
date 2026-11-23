@@ -393,47 +393,21 @@ val MenuFont = androidx.compose.ui.text.font.FontFamily(
 
 enum class MenuIcon { PLAY, TODAY, STATS, SETTINGS }
 
-/**
- * Menu icons drawn as one family: rounded 2 dp strokes on a 24 dp box, the chosen tab's icon
- * gets a soft fill. Drawn, not emoji, so they look the same on every phone.
- */
+/** Menu icons: Material Symbols Rounded (Apache 2.0); the chosen tab shows the filled version. */
 @Composable
 fun MenuGlyph(icon: MenuIcon, ink: Color, filled: Boolean, modifier: Modifier = Modifier) {
-    androidx.compose.foundation.Canvas(modifier.size(24.dp)) {
-        val u = size.width / 24f
-        val stroke = androidx.compose.ui.graphics.drawscope.Stroke(2f * u, cap = androidx.compose.ui.graphics.StrokeCap.Round, join = androidx.compose.ui.graphics.StrokeJoin.Round)
-        val soft = ink.copy(alpha = if (filled) 0.28f else 0f)
-        fun rr(x: Float, y: Float, w: Float, h: Float, r: Float) = androidx.compose.ui.geometry.RoundRect(x * u, y * u, (x + w) * u, (y + h) * u, androidx.compose.ui.geometry.CornerRadius(r * u))
-        fun path(r: androidx.compose.ui.geometry.RoundRect) = androidx.compose.ui.graphics.Path().apply { addRoundRect(r) }
-        when (icon) {
-            // A crossword: 2×2 cells, one filled (the key letter).
-            MenuIcon.PLAY -> {
-                val cells = listOf(rr(3f, 3f, 8f, 8f, 2.5f), rr(13f, 3f, 8f, 8f, 2.5f), rr(3f, 13f, 8f, 8f, 2.5f), rr(13f, 13f, 8f, 8f, 2.5f))
-                drawPath(path(cells[1]), ink)
-                cells.forEachIndexed { i, c -> if (i != 1) { drawPath(path(c), soft); drawPath(path(c), ink, style = stroke) } }
-            }
-            // A calendar page with today's dot.
-            MenuIcon.TODAY -> {
-                val page = rr(3f, 5f, 18f, 16f, 3.5f)
-                drawPath(path(page), soft); drawPath(path(page), ink, style = stroke)
-                drawLine(ink, Offset(3f * u, 10f * u), Offset(21f * u, 10f * u), 2f * u)
-                drawLine(ink, Offset(8f * u, 3f * u), Offset(8f * u, 7f * u), 2f * u, cap = androidx.compose.ui.graphics.StrokeCap.Round)
-                drawLine(ink, Offset(16f * u, 3f * u), Offset(16f * u, 7f * u), 2f * u, cap = androidx.compose.ui.graphics.StrokeCap.Round)
-                drawCircle(ink, 2.2f * u, Offset(12f * u, 15.5f * u))
-            }
-            // Three rising bars.
-            MenuIcon.STATS -> listOf(rr(3.5f, 13f, 4.5f, 8f, 1.8f), rr(9.75f, 8f, 4.5f, 13f, 1.8f), rr(16f, 3f, 4.5f, 18f, 1.8f)).forEach {
-                drawPath(path(it), soft); drawPath(path(it), ink, style = stroke)
-            }
-            // Two sliders with knobs.
-            MenuIcon.SETTINGS -> {
-                drawLine(ink, Offset(3f * u, 8f * u), Offset(21f * u, 8f * u), 2f * u, cap = androidx.compose.ui.graphics.StrokeCap.Round)
-                drawLine(ink, Offset(3f * u, 16f * u), Offset(21f * u, 16f * u), 2f * u, cap = androidx.compose.ui.graphics.StrokeCap.Round)
-                listOf(Offset(15f * u, 8f * u), Offset(9f * u, 16f * u)).forEach {
-                    drawCircle(if (filled) ink else Color.Transparent, 3.2f * u, it)
-                    drawCircle(ink, 3.2f * u, it, style = stroke)
-                }
-            }
-        }
+    val d = when (icon) {
+        MenuIcon.PLAY -> if (filled) MenuIconPaths.PLAY_FILLED else MenuIconPaths.PLAY_OUTLINE
+        MenuIcon.TODAY -> if (filled) MenuIconPaths.TODAY_FILLED else MenuIconPaths.TODAY_OUTLINE
+        MenuIcon.STATS -> if (filled) MenuIconPaths.STATS_FILLED else MenuIconPaths.STATS_OUTLINE
+        MenuIcon.SETTINGS -> if (filled) MenuIconPaths.SETTINGS_FILLED else MenuIconPaths.SETTINGS_OUTLINE
     }
+    val vector = remember(d) {
+        androidx.compose.ui.graphics.vector.ImageVector.Builder(
+            defaultWidth = 24.dp, defaultHeight = 24.dp, viewportWidth = 960f, viewportHeight = 960f,
+        ).addGroup(translationY = 960f)
+            .addPath(androidx.compose.ui.graphics.vector.addPathNodes(d), fill = androidx.compose.ui.graphics.SolidColor(Color.Black))
+            .clearGroup().build()
+    }
+    androidx.compose.material3.Icon(vector, contentDescription = null, tint = ink, modifier = modifier.size(24.dp))
 }

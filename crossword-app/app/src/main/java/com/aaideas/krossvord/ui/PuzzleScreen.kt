@@ -175,7 +175,7 @@ private fun PuzzleContent(vm: GameViewModel, isPremium: Boolean, compact: Boolea
         // Şüşə keeps them in the row: its letter tiles are laid out in rows, not columns.
         val actionsInColumns = compact && columns && !glass
         val solved = game.isComplete && !vm.showCompletion
-        if (!actionsInColumns && !solved) Row(Modifier.fillMaxWidth().padding(vertical = if (compact) 2.dp else 6.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        if (!actionsInColumns && !solved) Row(Modifier.fillMaxWidth().padding(vertical = if (compact) 2.dp else if (glass) PANEL_GAP else 6.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             // A fixed height makes the button's fill take the whole touch area, so it lines up with the glass rim.
             val glassBtn = if (glass) Modifier.height(48.dp).glassy(CircleShape) else Modifier
             val outlined = if (glass) ButtonDefaults.outlinedButtonColors(containerColor = MaterialTheme.colorScheme.surfaceContainer) else ButtonDefaults.outlinedButtonColors()
@@ -285,6 +285,9 @@ private fun PuzzleContent(vm: GameViewModel, isPremium: Boolean, compact: Boolea
     }
 
 }
+
+/** One gap between the stacked panels of the level screen (top bar, key word, grid, buttons, clue, letters). */
+private val PANEL_GAP = 8.dp
 
 /** Cells may get this much wider than tall so the grid lines up with the full-width controls. */
 private const val MAX_CELL_STRETCH = 1.25f
@@ -535,7 +538,7 @@ private fun LongClueLine(entry: Entry, text: String, big: Boolean) {
     Surface(
         color = if (glass) MaterialTheme.colorScheme.surfaceContainer else MaterialTheme.colorScheme.secondaryContainer,
         shape = shape,
-        modifier = Modifier.fillMaxWidth().padding(top = 2.dp, bottom = if (glass) 6.dp else 0.dp).glassy(shape),
+        modifier = Modifier.fillMaxWidth().padding(top = if (glass) 0.dp else 2.dp, bottom = if (glass) PANEL_GAP else 0.dp).glassy(shape),
     ) {
         Text(
             if (glass) (if (text.length > CELL_CLUE_MAX) "♪ " else "") + "$text · ${entry.letters.size} hərf"
@@ -829,7 +832,8 @@ private fun KeywordStrip(letters: List<Char?>, known: Boolean, onGuess: () -> Un
     val glass = LocalGlass.current
     val shape = RoundedCornerShape(18.dp)
     Row(
-        modifier.fillMaxWidth().padding(vertical = 4.dp)
+        // The same 8 dp gap above and below as between every other panel on this screen.
+        modifier.fillMaxWidth().padding(vertical = PANEL_GAP)
             .then(if (glass) Modifier.clip(shape).background(MaterialTheme.colorScheme.surfaceContainer).glassy(shape) else Modifier)
             .clickable(enabled = !known, onClick = onGuess)
             .padding(horizontal = 12.dp, vertical = 6.dp),
@@ -1004,7 +1008,7 @@ private fun GlassTopBar(vm: GameViewModel, isPremium: Boolean, onRestart: () -> 
     val cs = MaterialTheme.colorScheme
     val ink = cs.onSurface
     Row(
-        Modifier.fillMaxWidth().padding(bottom = 6.dp).clip(CircleShape).background(cs.surfaceContainer).glassy(CircleShape)
+        Modifier.fillMaxWidth().clip(CircleShape).background(cs.surfaceContainer).glassy(CircleShape)
             .height(52.dp).padding(horizontal = 4.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
