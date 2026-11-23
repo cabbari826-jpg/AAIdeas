@@ -327,7 +327,9 @@ val BottomMenuHeight: Dp = 102.dp
 @Composable
 fun GlassBottomMenu(screen: Screen, open: (Screen) -> Unit, modifier: Modifier = Modifier) {
     val cs = MaterialTheme.colorScheme
-    val haze = LocalHaze.current
+    val screenLayer = LocalGlassScreen.current
+    // Real glass lens over the passing screen (Maksimum şüşə, Android 13+) replaces the frost.
+    val haze = if (screenLayer != null) null else LocalHaze.current
     val glass = LocalGlass.current
     val dark = cs.background.luminance() < 0.5f
     Surface(
@@ -335,10 +337,11 @@ fun GlassBottomMenu(screen: Screen, open: (Screen) -> Unit, modifier: Modifier =
         modifier = modifier.padding(start = 24.dp, end = 24.dp, top = 12.dp, bottom = 26.dp).fillMaxWidth()
             // Şüşə: frosted glass over whatever scrolls beneath (real blur on Android 12+, a tint before that).
             .then(if (haze != null) Modifier.clip(CircleShape).hazeEffect(haze, glassStyle(dark)) else Modifier)
-            .glassy(CircleShape),
+            .liquidGlass(screenLayer, CircleShape, dark, frost = 2.dp)
+            .glassy(CircleShape, lens = false),
         shape = CircleShape,
         // No shadow: it would show through the see-through fill as a smudge.
-        color = if (haze != null) Color.Transparent else if (glass) Color.White.copy(alpha = if (dark) 0.14f else 0.45f) else cs.surfaceContainerHigh,
+        color = if (haze != null || screenLayer != null) Color.Transparent else if (glass) Color.White.copy(alpha = if (dark) 0.14f else 0.45f) else cs.surfaceContainerHigh,
         border = if (glass) null else BorderStroke(1.dp, cs.outlineVariant.copy(alpha = 0.7f)),
     ) {
         Row(Modifier.padding(6.dp), horizontalArrangement = Arrangement.spacedBy(4.dp)) {

@@ -175,13 +175,19 @@ val LocalGlass = staticCompositionLocalOf { false }
  * fill, and a 1 dp rim that is bright on top and fades downward. Does nothing outside the Şüşə theme.
  */
 @Composable
-fun Modifier.glassy(shape: Shape): Modifier {
+fun Modifier.glassy(shape: Shape, lens: Boolean = true): Modifier {
     if (!LocalGlass.current) return this
     val dark = androidx.compose.material3.MaterialTheme.colorScheme.background.luminance() < 0.5f
     val lite = LocalGlassLite.current
     val cardHaze = LocalCardHaze.current
-    // Maksimum şüşə: the card frosts the moving light behind it (the drop shadow would be clipped, so none).
-    val base = if (cardHaze != null) this.then(Modifier.clip(shape).hazeEffect(cardHaze, cardGlassStyle(dark))) else this
+    val liquid = if (lens) LocalGlassBackdrop.current else null
+    // Maksimum şüşə: the card looks through a glass lens at the moving light behind it (Android 13+),
+    // or frosts it (Android 12). The drop shadow would be clipped, so none.
+    val base = when {
+        liquid != null -> this.liquidGlass(liquid, shape, dark)
+        cardHaze != null -> this.then(Modifier.clip(shape).hazeEffect(cardHaze, cardGlassStyle(dark)))
+        else -> this
+    }
     return base.drawWithCache {
         val path = Path().apply { addOutline(shape.createOutline(size, layoutDirection, this@drawWithCache)) }
         val sheen = Brush.linearGradient(
@@ -197,7 +203,7 @@ fun Modifier.glassy(shape: Shape): Modifier {
         val stroke = androidx.compose.ui.graphics.drawscope.Stroke(1.dp.toPx())
         // The soft shadow under each panel (CSS 0 10px 30px), drawn only outside the panel: under a
         // see-through panel it would show through as a grey box. Blurred shadows need Android 9.
-        val shadow = if (!lite && cardHaze == null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+        val shadow = if (!lite && cardHaze == null && liquid == null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             val dy = minOf(10.dp.toPx(), size.minDimension * 0.12f)
             Path().apply { addPath(path, Offset(0f, dy)) }.asAndroidPath() to android.graphics.Paint(android.graphics.Paint.ANTI_ALIAS_FLAG).apply {
                 color = if (dark) android.graphics.Color.argb(90, 0, 0, 0) else android.graphics.Color.argb(56, 40, 20, 80)
@@ -216,24 +222,33 @@ fun Modifier.glassy(shape: Shape): Modifier {
 }
 
 /**
- * Maksimum şüşə: glass cards get see-through fills so the blur shows (normal Şüşə keeps them nearly
- * solid). Dialogs keep their solid colour: they float over the grid, where see-through would hurt reading.
+ * Maksimum şüşə: glass cards get see-through fills so the glass shows (normal Şüşə keeps them nearly
+ * solid). With the lens (Android 13+) the fills are almost clear: the lens itself tints.
  */
 @Composable
-fun MaxGlassColors(on: Boolean, dark: Boolean, content: @Composable () -> Unit) {
+fun MaxGlassColors(on: Boolean, dark: Boolean, liquid: Boolean, content: @Composable () -> Unit) {
     if (!on) { content(); return }
     val cs = androidx.compose.material3.MaterialTheme.colorScheme
+    // A nested MaterialTheme resets the text style and colour set by the app theme; keep them.
+    val style = androidx.compose.material3.LocalTextStyle.current
+    val ink = androidx.compose.material3.LocalContentColor.current
     fun Color.see(a: Float) = copy(alpha = a)
+    val clear = if (dark) Color(0x14FFFFFF) else Color(0x1FFFFFFF)
     androidx.compose.material3.MaterialTheme(
         colorScheme = cs.copy(
-            surfaceContainerHigh = if (dark) Color(0x66221C38) else Color(0x73FFFFFF),
-            surfaceContainer = if (dark) Color(0x4D221C38) else Color(0x59FFFFFF),
-            primaryContainer = cs.primaryContainer.see(0.6f),
-            secondaryContainer = cs.secondaryContainer.see(0.6f),
-            tertiaryContainer = cs.tertiaryContainer.see(0.6f),
+            surfaceContainerHigh = if (liquid) clear else if (dark) Color(0x66221C38) else Color(0x73FFFFFF),
+            surfaceContainer = if (liquid) clear else if (dark) Color(0x4D221C38) else Color(0x59FFFFFF),
+            primaryContainer = cs.primaryContainer.see(if (liquid) 0.22f else 0.6f),
+            secondaryContainer = cs.secondaryContainer.see(if (liquid) 0.18f else 0.6f),
+            tertiaryContainer = cs.tertiaryContainer.see(if (liquid) 0.18f else 0.6f),
         ),
         typography = androidx.compose.material3.MaterialTheme.typography,
         shapes = androidx.compose.material3.MaterialTheme.shapes,
-        content = content,
-    )
+    ) {
+        androidx.compose.runtime.CompositionLocalProvider(
+            androidx.compose.material3.LocalTextStyle provides style,
+            androidx.compose.material3.LocalContentColor provides ink,
+            content = content,
+        )
+    }
 }

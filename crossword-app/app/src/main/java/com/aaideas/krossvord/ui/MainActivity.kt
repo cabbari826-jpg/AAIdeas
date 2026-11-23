@@ -102,15 +102,19 @@ class MainActivity : ComponentActivity() {
                     val glassLite = skin.glass && GlassLite.isOn(this@MainActivity)
                     val haze = if (skin.glass && !glassLite) androidx.compose.runtime.remember { dev.chrisbanes.haze.HazeState() } else null
                     val glassMax = haze != null && GlassMax.isOn(this@MainActivity)
-                    val cardHaze = if (glassMax) androidx.compose.runtime.remember { dev.chrisbanes.haze.HazeState() } else null
+                    // Android 13+: real glass lens (LiquidGlass.kt); Android 12: frosted cards (Haze).
+                    val liquid = glassMax && LiquidGlass.supported
+                    val cardHaze = if (glassMax && !liquid) androidx.compose.runtime.remember { dev.chrisbanes.haze.HazeState() } else null
+                    val backdropLayer = if (liquid) androidx.compose.ui.graphics.rememberGraphicsLayer() else null
+                    val screenLayer = if (liquid) androidx.compose.ui.graphics.rememberGraphicsLayer() else null
                     val isPremium by vm.premium.isPremium.collectAsState()
                     BackHandler(enabled = vm.screen != Screen.HOME) { vm.back() }
                     val menu = vm.screen != Screen.PUZZLE && vm.screen != Screen.WORD_OF_DAY
-                    androidx.compose.runtime.CompositionLocalProvider(LocalHaze provides haze, LocalGlassLite provides glassLite, LocalCardHaze provides cardHaze) {
-                    MaxGlassColors(glassMax, dark) {
+                    androidx.compose.runtime.CompositionLocalProvider(LocalHaze provides haze, LocalGlassLite provides glassLite, LocalCardHaze provides cardHaze, LocalGlassBackdrop provides backdropLayer, LocalGlassScreen provides screenLayer) {
+                    MaxGlassColors(glassMax, dark, liquid) {
                     // The backdrop and screens are the blur source; the floating menu (outside it) frosts them.
-                    Box(Modifier.fillMaxSize().then(if (haze != null) Modifier.hazeSource(haze) else Modifier)) {
-                        if (skin.glass) GlassBackdrop(dark, Modifier.fillMaxSize().then(if (cardHaze != null) Modifier.hazeSource(cardHaze) else Modifier), moving = glassMax)
+                    Box(Modifier.fillMaxSize().then(if (haze != null && !liquid) Modifier.hazeSource(haze) else Modifier).recordInto(screenLayer)) {
+                        if (skin.glass) GlassBackdrop(dark, Modifier.fillMaxSize().then(if (cardHaze != null) Modifier.hazeSource(cardHaze) else Modifier).recordInto(backdropLayer), moving = glassMax)
                     Box(Modifier.safeDrawingPadding()) {
                         // Leave room under the floating menu so it never hides the last item (home scrolls under it).
                         Box(if (menu && vm.screen != Screen.HOME) Modifier.padding(bottom = BottomMenuHeight) else Modifier) {
