@@ -97,7 +97,8 @@ fun SkinPicker(current: Skin, owned: Set<Skin>, onPick: (Skin) -> Unit, onUnlock
             }
             androidx.compose.material3.Switch(checked = GlassLite.isOn(ctx), onCheckedChange = { GlassLite.set(ctx, it) })
         }
-        if (current.glass && glassBlurSupported && !GlassLite.isOn(ctx)) Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+        // Experiment: only in the Lab build until the owner decides.
+        if (com.aaideas.krossvord.BuildConfig.LAB && current.glass && glassBlurSupported && !GlassLite.isOn(ctx)) Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
             Column(Modifier.weight(1f)) {
                 Text("Maksimum şüşə (sınaq)", style = MaterialTheme.typography.titleMedium)
                 Text("Hər kart arxasındakı rəngli işığı bulandırır, işıq yavaş-yavaş hərəkət edir. Batareyanı bir az çox işlədir.", style = MaterialTheme.typography.bodySmall)
