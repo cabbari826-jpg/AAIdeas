@@ -84,6 +84,7 @@ fun PuzzleScreen(vm: GameViewModel, isPremium: Boolean) {
     androidx.compose.runtime.CompositionLocalProvider(LocalTile provides if (compact) 40.dp else 46.dp, LocalLowEnd provides lowEnd) {
         Box(Modifier.fillMaxSize()) {
             PuzzleContent(vm, isPremium, compact)
+            PraiseBurst(vm, Modifier.align(Alignment.Center))
             TutorialLayer(vm)
         }
     }
@@ -137,6 +138,7 @@ private fun PuzzleContent(vm: GameViewModel, isPremium: Boolean, compact: Boolea
                 tutorialEntry = if (vm.tutorialStep == TUTORIAL_COACH && COACH_STEPS[vm.coachIndex].first == TutorialSpot.CLUE) game.activeEntry else null,
                 onSpot = if (vm.tutorialStep == TUTORIAL_COACH) { spot, r -> vm.tutorialRects[spot] = r } else null,
             )
+            if (!game.isComplete && vm.tutorialStep == TUTORIAL_DONE) StuckHint(vm, Modifier.align(Alignment.BottomCenter))
         }
         val hintText = when {
             isPremium -> "Hərf aç"
@@ -1071,4 +1073,67 @@ private fun GlassLetterRows(
             }
         }
     }
+}
+
+/**
+ * Stuck on one word for a while: a soft pill offers an easier clue. No timer is shown; the pill
+ * pulses three times and then stays still. Any progress, a hint or picking another word hides it.
+ */
+@Composable
+private fun StuckHint(vm: GameViewModel, modifier: Modifier) {
+    val entry = vm.game?.activeEntry ?: return
+    var show by remember { mutableStateOf(false) }
+    LaunchedEffect(vm.progressTick, entry.id) {
+        show = false
+        kotlinx.coroutines.delay(vm.stuckSeconds * 1000)
+        show = true
+    }
+    if (!show) return
+    val pulse = remember { androidx.compose.animation.core.Animatable(1f) }
+    LaunchedEffect(Unit) {
+        repeat(3) {
+            pulse.animateTo(1.08f, androidx.compose.animation.core.tween(450))
+            pulse.animateTo(1f, androidx.compose.animation.core.tween(450))
+        }
+    }
+    val cs = MaterialTheme.colorScheme
+    androidx.compose.material3.Surface(
+        onClick = { show = false; vm.tapClueOf(entry) },
+        shape = CircleShape,
+        color = cs.tertiaryContainer,
+        contentColor = cs.onTertiaryContainer,
+        shadowElevation = if (LocalGlass.current) 0.dp else 4.dp,
+        modifier = modifier.padding(10.dp).graphicsLayer { scaleX = pulse.value; scaleY = pulse.value },
+    ) {
+        Text("💡 Çətindir? İpucunu asanlaşdır", Modifier.padding(horizontal = 18.dp, vertical = 12.dp), style = MaterialTheme.typography.titleMedium)
+    }
+}
+
+/** A found word: "Bravo!" grows in the middle and fades within a second. Touches pass through. */
+@Composable
+private fun PraiseBurst(vm: GameViewModel, modifier: Modifier) {
+    val word = vm.praise ?: return
+    val t = remember { androidx.compose.animation.core.Animatable(1f) }
+    LaunchedEffect(vm.praiseTick) {
+        t.snapTo(0f)
+        t.animateTo(1f, androidx.compose.animation.core.tween(900, easing = androidx.compose.animation.core.LinearEasing))
+    }
+    val v = t.value
+    if (v >= 1f) return
+    val cs = MaterialTheme.colorScheme
+    Text(
+        word,
+        modifier = modifier.graphicsLayer {
+            val grow = (v / 0.2f).coerceAtMost(1f)
+            alpha = if (v < 0.2f) grow else 1f - (v - 0.2f) / 0.8f
+            scaleX = 0.8f + 0.3f * grow
+            scaleY = 0.8f + 0.3f * grow
+        },
+        fontSize = 46.sp,
+        fontWeight = FontWeight.ExtraBold,
+        color = cs.primary,
+        style = MaterialTheme.typography.displayMedium.copy(
+            shadow = androidx.compose.ui.graphics.Shadow(cs.surface, blurRadius = 12f),
+        ),
+    )
 }

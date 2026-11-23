@@ -47,7 +47,7 @@ class ProgressStore(context: Context) {
 
     /** Forget every level's progress and counters; keep the player's settings. */
     fun resetAll() {
-        val keep = setOf(KEY_INPUT, KEY_HIDE_CLUES, KEY_EXTRA, KEY_THEME, KEY_DYNAMIC, KEY_TUTORIAL, KEY_BIG_CLUES, KEY_SOUND, KEY_SKIN, KEY_SKINS_OWNED, "large_mode", "kids_mode", "reminder_asked", "launches", "whats_new_seen", "player_name", "birthday", "birth_year", "profile_asked", "birthday_gift_year")
+        val keep = setOf(KEY_INPUT, KEY_HIDE_CLUES, KEY_EXTRA, KEY_THEME, KEY_DYNAMIC, KEY_TUTORIAL, KEY_BIG_CLUES, KEY_SOUND, KEY_SKIN, KEY_SKINS_OWNED, "large_mode", "kids_mode", "vibrate_on", "praise_voice", "reminder_asked", "launches", "whats_new_seen", "player_name", "birthday", "birth_year", "profile_asked", "birthday_gift_year")
         val e = prefs.edit()
         prefs.all.keys.filter { it !in keep }.forEach { e.remove(it) }
         e.apply()
@@ -193,6 +193,24 @@ class ProgressStore(context: Context) {
     var largeMode: Boolean
         get() = prefs.getBoolean("large_mode", false)
         set(v) = prefs.edit().putBoolean("large_mode", v).apply()
+
+    /** False until the player touches the large-mode switch; till then it follows the phone's font size. */
+    val largeModeChosen: Boolean get() = prefs.contains("large_mode")
+
+    /** Short buzz for a found word (separate from the sound). */
+    var vibrateOn: Boolean
+        get() = prefs.getBoolean("vibrate_on", true)
+        set(v) = prefs.edit().putBoolean("vibrate_on", v).apply()
+
+    /** Say "Bravo!" aloud for a found word, when the phone has an Azerbaijani voice. */
+    var praiseVoice: Boolean
+        get() = prefs.getBoolean("praise_voice", true)
+        set(v) = prefs.edit().putBoolean("praise_voice", v).apply()
+
+    /** Words the player got wrong at least once, for "Mənim sözlərim"; a word leaves when marked learned. */
+    var mistakeWords: Set<String>
+        get() = prefs.getStringSet("mistake_words", emptySet()).orEmpty().toSet()
+        set(v) = prefs.edit().putStringSet("mistake_words", HashSet(v)).apply()
 
     /** The first-run tutorial (tap a clue cell to ease the clue) was finished or skipped. */
     var tutorialDone: Boolean

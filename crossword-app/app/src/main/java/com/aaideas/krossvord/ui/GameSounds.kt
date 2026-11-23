@@ -11,6 +11,9 @@ import com.aaideas.krossvord.R
 
 /** Short chime and buzz for a found word and a solved level. Silent when the player turns them off. */
 class GameSounds(context: Context) {
+    /** Chime on/off and buzz on/off, set from the settings. */
+    var sound = true
+    var vibrate = true
     private val pool: SoundPool? = runCatching {
         SoundPool.Builder().setMaxStreams(2).setAudioAttributes(
             AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_GAME)
@@ -28,8 +31,8 @@ class GameSounds(context: Context) {
     fun levelSolved() = play(level, longArrayOf(0, 60, 80, 60, 80, 120))
 
     private fun play(id: Int, pattern: LongArray) {
-        runCatching { pool?.play(id, 0.8f, 0.8f, 1, 0, 1f) }
-        runCatching {
+        if (sound) runCatching { pool?.play(id, 0.8f, 0.8f, 1, 0, 1f) }
+        if (vibrate) runCatching {
             val v = vibrator ?: return@runCatching
             if (!v.hasVibrator()) return@runCatching
             if (Build.VERSION.SDK_INT >= 26) v.vibrate(VibrationEffect.createWaveform(pattern, -1))

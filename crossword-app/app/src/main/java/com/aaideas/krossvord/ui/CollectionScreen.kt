@@ -32,6 +32,8 @@ private data class Found(val word: String, val group: String, val explanation: S
 @Composable
 fun CollectionScreen(vm: GameViewModel) {
     var query by remember { mutableStateOf("") }
+    // "Mənim sözlərim": the words the player got wrong, to go over again.
+    var mine by remember { mutableStateOf(vm.openMistakes) }
     val all = remember(vm.collection) {
         val fromLevels = vm.allEntries.filter { (_, e) -> e.answer in vm.collection }.map { (p, e) ->
             Found(e.answer, p.title, e.clueLevels.distinct().joinToString(" · "))
@@ -40,27 +42,45 @@ fun CollectionScreen(vm: GameViewModel) {
         (fromDaily + fromLevels).distinctBy { it.word }
     }
     val total = vm.allEntries.size
-    val shown = remember(all, query) {
+    val missed = remember(vm.mistakeWords) {
+        vm.allEntries.filter { (_, e) -> e.answer in vm.mistakeWords }.map { (p, e) ->
+            Found(e.answer, p.title, e.clueLevels.distinct().joinToString(" · "))
+        }.distinctBy { it.word }
+    }
+    val shown = remember(all, missed, mine, query) {
         val q = AzText.normalize(query.trim())
-        if (q.isEmpty()) all else all.filter { it.word.contains(q) }
+        val base = if (mine) missed else all
+        if (q.isEmpty()) base else base.filter { it.word.contains(q) }
     }
     Column(Modifier.fillMaxSize().padding(horizontal = 16.dp)) {
         TextButton(onClick = { vm.open(Screen.STATS) }) { Text("← Statistika") }
         Text("Söz kolleksiyası", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
         Text("Tapılmış sözlər: ${all.size}. Səviyyələrdə cəmi $total söz var.", style = MaterialTheme.typography.bodyMedium)
+        androidx.compose.foundation.layout.Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            androidx.compose.material3.FilterChip(selected = !mine, onClick = { mine = false }, label = { Text("Hamısı") })
+            androidx.compose.material3.FilterChip(selected = mine, onClick = { mine = true }, label = { Text("📖 Mənim sözlərim (${missed.size})") })
+        }
+        if (mine) Text(
+            if (missed.isEmpty()) "Səhv etdiyiniz sözlər burada toplanır ki, təkrar edəsiniz. Hələ heç biri yoxdur. Əla!"
+            else "Səhv etdiyiniz sözlər. Yadda qalanda «Öyrəndim» deyin.",
+            style = MaterialTheme.typography.bodyMedium,
+        )
         OutlinedTextField(
             query, { query = it },
             label = { Text("Söz axtar") },
             singleLine = true,
             modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
         )
-        if (all.isEmpty()) Text("Hələ söz yoxdur. Tapdığın hər söz burada izahı ilə görünəcək.", style = MaterialTheme.typography.bodyLarge)
+        if (all.isEmpty() && !mine) Text("Hələ söz yoxdur. Tapdığın hər söz burada izahı ilə görünəcək.", style = MaterialTheme.typography.bodyLarge)
         LazyColumn(verticalArrangement = Arrangement.spacedBy(2.dp)) {
             items(shown, key = { it.word }) { f ->
                 Column(Modifier.fillMaxWidth().padding(vertical = 8.dp)) {
                     Text(f.word, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
                     Text(f.explanation, style = MaterialTheme.typography.bodyLarge)
-                    Text(f.group, style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary)
+                    androidx.compose.foundation.layout.Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+                        Text(f.group, style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary, modifier = Modifier.weight(1f))
+                        if (mine) androidx.compose.material3.OutlinedButton(onClick = { vm.markLearned(f.word) }) { Text("✓ Öyrəndim") }
+                    }
                 }
                 HorizontalDivider()
             }

@@ -62,9 +62,9 @@ class ClueTierTest {
     }
 
     @Test fun everyThemedPackHasAtLeastTenLevels() {
-        // Holiday packs are short (open for a few weeks only), but not tiny.
+        // Holiday packs are short (open for a few weeks only), but not tiny; a weekly surprise is 3 levels.
         packs.filter { it.packId != "az-starter" }.forEach {
-            val min = if (Holidays.holidayFor(it.packId) != null) 6 else 10
+            val min = if (Weekly.isWeekly(it.packId)) 3 else if (Holidays.holidayFor(it.packId) != null) 6 else 10
             assertTrue(it.packId, it.levels.size >= min)
         }
     }

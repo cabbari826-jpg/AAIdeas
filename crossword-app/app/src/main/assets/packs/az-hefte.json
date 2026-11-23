@@ -1,0 +1,394 @@
+{
+ "formatVersion": 1,
+ "packId": "az-hefte",
+ "language": "az",
+ "normalization": "az-v1",
+ "contentVersion": 1,
+ "title": "Həftənin sürprizi",
+ "levels": [
+  {
+   "id": "az-hefte-001",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "ÜNVAN",
+     "clue": "Poçt yazısı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Küçə və ev",
+      "Məktubda yazılır",
+      "Poçt yazısı"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "ŞƏNBƏ",
+     "clue": "Bazardan əvvəl",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "İstirahət günü",
+      "Həftə sonu",
+      "Bazardan əvvəl"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 5,
+     "answer": "PƏNCƏRƏ",
+     "clue": "Evin gözü",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Şüşəli açırım",
+      "Otağa işıq verir",
+      "Evin gözü"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 2,
+     "answer": "VİNT",
+     "clue": "Şurup",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Burğulu mıx",
+      "Burulan",
+      "Şurup"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "MİSGƏR",
+     "clue": "Qazan döyən",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Mis ustası",
+      "Lahıc ustası",
+      "Qazan döyən"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "GENİŞ",
+     "clue": "Böyük sahəli",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Enli, açıq",
+      "Darın əksi",
+      "Böyük sahəli"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "SƏRNİŞİN",
+    "cells": [
+     [
+      7,
+      3
+     ],
+     [
+      2,
+      5
+     ],
+     [
+      7,
+      6
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      7,
+      2
+     ],
+     [
+      5,
+      1
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      5,
+      3
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-hefte-002",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "ÇƏPƏR",
+     "clue": "Taxta hasar",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Çubuq hasar",
+      "Bağ hasarı",
+      "Taxta hasar"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 1,
+     "answer": "ŞOFER",
+     "clue": "Maşın sürücüsü",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Avtomobilçi",
+      "Taksi sürən",
+      "Maşın sürücüsü"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 2,
+     "answer": "VAŞAQ",
+     "clue": "Vəhşi pişik",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qulağı fırçalı",
+      "Meşə pişiyi",
+      "Vəhşi pişik"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 1,
+     "answer": "QARAJ",
+     "clue": "Dəmir qutu",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Maşın evi",
+      "Avtomobil yeri",
+      "Dəmir qutu"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "TƏRİF",
+     "clue": "Yaxşı söz demək",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Öymə",
+      "Afərin sözü",
+      "Yaxşı söz demək"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "SƏRT",
+     "clue": "Yumşağın ziddi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Bərk",
+      "Kəskin",
+      "Yumşağın ziddi"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "ŞPRİS",
+    "cells": [
+     [
+      5,
+      2
+     ],
+     [
+      3,
+      6
+     ],
+     [
+      5,
+      6
+     ],
+     [
+      4,
+      4
+     ],
+     [
+      1,
+      1
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-hefte-003",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 2,
+     "answer": "BAYIR",
+     "clue": "Həyət, küçə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Çöl tərəf",
+      "İçərinin ziddi",
+      "Həyət, küçə"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 1,
+     "answer": "BURĞU",
+     "clue": "Divar deşən",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Deşən alət",
+      "Dril",
+      "Divar deşən"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "ÖYÜD",
+     "clue": "Tərbiyə sözü",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Nəsihət",
+      "Ata sözü",
+      "Tərbiyə sözü"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 4,
+     "answer": "DİZEL",
+     "clue": "Yük maşını yağı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ağır yanacaq",
+      "Solyarka",
+      "Yük maşını yağı"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 1,
+     "answer": "PALAZ",
+     "clue": "Kilim növü",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Xovsuz xalça",
+      "Yer örtüyü",
+      "Kilim növü"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 6,
+     "answer": "HOVUZ",
+     "clue": "Çimmək yeri",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Üzmə yeri",
+      "Su hövzəsi",
+      "Çimmək yeri"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "BUĞDA",
+    "cells": [
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      6
+     ],
+     [
+      1,
+      5
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      7,
+      5
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  }
+ ]
+}

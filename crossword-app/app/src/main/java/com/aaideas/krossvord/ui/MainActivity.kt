@@ -80,7 +80,9 @@ class MainActivity : ComponentActivity() {
             }
             // Large mode: all text at least 1.3x, whatever the phone's own font setting.
             val base = androidx.compose.ui.platform.LocalDensity.current
-            val density = if (vm.largeMode) androidx.compose.ui.unit.Density(base.density, maxOf(base.fontScale, LARGE_FONT_SCALE)) else base
+            // Follows the phone's own big font until the player sets the switch.
+            val systemScale = androidx.compose.ui.platform.LocalConfiguration.current.fontScale
+            val density = if (vm.largeOn(systemScale)) androidx.compose.ui.unit.Density(base.density, maxOf(base.fontScale, LARGE_FONT_SCALE)) else base
             androidx.compose.runtime.CompositionLocalProvider(androidx.compose.ui.platform.LocalDensity provides density) {
             LaunchedEffect(vm.screen) { if (vm.screen == Screen.HOME || vm.screen == Screen.SETTINGS) vm.refreshSkins(com.aaideas.krossvord.model.Ranks.unlockedThemes(vm.xp).toSet()) }
             KrossvordTheme(mode, vm.dynamicColor, skin) {
@@ -107,6 +109,7 @@ class MainActivity : ComponentActivity() {
                                 Screen.STATS -> StatsScreen(vm)
                                 Screen.COLLECTION -> CollectionScreen(vm)
                                 Screen.DAILY -> DailyScreen(vm)
+                                Screen.PACKS -> PacksScreen(vm)
                             }
                         }
                     }

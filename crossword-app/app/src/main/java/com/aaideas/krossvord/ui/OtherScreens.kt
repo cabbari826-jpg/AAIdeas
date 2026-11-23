@@ -133,9 +133,9 @@ fun SettingsScreen(vm: GameViewModel, isPremium: Boolean) {
             Row(Modifier.fillMaxWidth().padding(12.dp), verticalAlignment = Alignment.CenterVertically) {
                 Column(Modifier.weight(1f)) {
                     Text("🔍 İri rejim", style = MaterialTheme.typography.titleMedium)
-                    Text("Bütün yazılar böyüyür, seçilmiş ipucu şəbəkənin altında iri görünür", style = MaterialTheme.typography.bodySmall)
+                    Text("Bütün yazılar böyüyür, seçilmiş ipucu şəbəkənin altında iri görünür. Telefonda iri şrift varsa, özü açılır.", style = MaterialTheme.typography.bodySmall)
                 }
-                Switch(checked = vm.largeMode, onCheckedChange = vm::changeLargeMode)
+                Switch(checked = vm.largeOn(androidx.compose.ui.platform.LocalConfiguration.current.fontScale), onCheckedChange = vm::changeLargeMode)
             }
         }
         Surface(shape = androidx.compose.foundation.shape.RoundedCornerShape(16.dp), color = MaterialTheme.colorScheme.secondaryContainer) {
@@ -165,6 +165,7 @@ fun SettingsScreen(vm: GameViewModel, isPremium: Boolean) {
         }
         com.aaideas.krossvord.update.UpdateSettingsRow()
         OutlinedButton(onClick = vm::openWhatsNew, modifier = Modifier.fillMaxWidth()) { Text("🆕 Yeniliklər") }
+        if (!vm.kidsMode) OutlinedButton(onClick = { vm.open(Screen.PACKS) }, modifier = Modifier.fillMaxWidth()) { Text("📦 Yeni paketlər") }
         ThemePicker(vm.themeMode, vm::changeTheme, vm.dynamicColor, vm::changeDynamicColor)
         SkinPicker(vm.activeSkin(isPremium), vm.usableSkins(isPremium), vm::changeSkin, vm::unlockAllSkinsForTesting)
         AppIconPicker(isPremium)
@@ -205,16 +206,31 @@ fun SettingsScreen(vm: GameViewModel, isPremium: Boolean) {
         }
         Row(verticalAlignment = Alignment.CenterVertically) {
             Column(Modifier.weight(1f)) {
-                Text("Səs və vibrasiya")
+                Text("Səs")
                 Text("Söz tapılanda və səviyyə həll olunanda", style = MaterialTheme.typography.bodySmall)
             }
             Switch(checked = vm.soundOn, onCheckedChange = vm::changeSound)
+        }
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Column(Modifier.weight(1f)) {
+                Text("Vibrasiya")
+                Text("Düz sözdə telefon yüngülcə titrəyir", style = MaterialTheme.typography.bodySmall)
+            }
+            Switch(checked = vm.vibrateOn, onCheckedChange = vm::changeVibrate)
+        }
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Column(Modifier.weight(1f)) {
+                Text("«Bravo!» səsli tərif")
+                Text("Düz sözdə tərif səslə deyilir (telefonda Azərbaycan səsi varsa)", style = MaterialTheme.typography.bodySmall)
+            }
+            Switch(checked = vm.praiseVoice, onCheckedChange = vm::changePraiseVoice)
         }
         ReminderSwitch()
         Spacer(Modifier.height(8.dp))
         Text("İrəliləyiş", style = MaterialTheme.typography.headlineSmall)
         Text("Həll olunub: ${vm.completed.size} / ${vm.levels.size}. Həll olunmuş səviyyəni siyahıdan yenidən oynamaq olar.")
         var confirmReset by remember { mutableStateOf(false) }
+        BackupButtons()
         OutlinedButton(onClick = { confirmReset = true }) { Text("Bütün irəliləyişi sıfırla") }
         if (confirmReset) ResetAllDialog(onConfirm = { confirmReset = false; vm.resetAllProgress() }, onDismiss = { confirmReset = false })
         Spacer(Modifier.height(8.dp))
@@ -293,4 +309,59 @@ private fun ReminderSwitch() {
             }
         })
     }
+}
+
+/**
+ * Progress to a file and back, for a new phone or after reinstalling. The phone's own file
+ * picker chooses where (Downloads, Google Drive, sent by WhatsApp...). Restoring asks first,
+ * then restarts the game with the saved progress.
+ */
+@Composable
+private fun BackupButtons() {
+    val context = androidx.compose.ui.platform.LocalContext.current
+    var note by remember { mutableStateOf<String?>(null) }
+    var pending by remember { mutableStateOf<String?>(null) }
+    val save = androidx.activity.compose.rememberLauncherForActivityResult(
+        androidx.activity.result.contract.ActivityResultContracts.CreateDocument("application/json")
+    ) { uri ->
+        if (uri == null) return@rememberLauncherForActivityResult
+        note = runCatching {
+            context.contentResolver.openOutputStream(uri)!!.use { it.write(com.aaideas.krossvord.data.ProgressBackup.export(context).toByteArray()) }
+            "✓ Saxlanıldı. Yeni telefonda «Fayldan bərpa et» ilə açın."
+        }.getOrElse { "Saxlamaq alınmadı." }
+    }
+    val open = androidx.activity.compose.rememberLauncherForActivityResult(
+        androidx.activity.result.contract.ActivityResultContracts.OpenDocument()
+    ) { uri ->
+        if (uri == null) return@rememberLauncherForActivityResult
+        val text = runCatching { context.contentResolver.openInputStream(uri)!!.use { it.readBytes().decodeToString() } }.getOrNull()
+        if (text == null || !text.contains(com.aaideas.krossvord.data.ProgressBackup.MARK)) note = "Bu fayl Açar Söz faylı deyil."
+        else pending = text
+    }
+    OutlinedButton(onClick = { save.launch("acar-soz-${java.time.LocalDate.now()}.json") }, modifier = Modifier.fillMaxWidth()) { Text("💾 İrəliləyişi fayla saxla") }
+    OutlinedButton(onClick = { open.launch(arrayOf("application/json", "application/octet-stream", "text/plain", "*/*")) }, modifier = Modifier.fillMaxWidth()) { Text("📂 Fayldan bərpa et") }
+    note?.let { Text(it, style = MaterialTheme.typography.bodyMedium) }
+    pending?.let { text ->
+        AlertDialog(
+            onDismissRequest = { pending = null },
+            title = { Text("İrəliləyiş bərpa olunsun?") },
+            text = { Text("Bu telefondakı irəliləyiş fayldakı ilə əvəz olunacaq. Oyun yenidən açılacaq.") },
+            confirmButton = {
+                Button(onClick = {
+                    pending = null
+                    if (com.aaideas.krossvord.data.ProgressBackup.import(context, text)) restartApp(context)
+                    else note = "Fayl oxunmadı, heç nə dəyişmədi."
+                }) { Text("Bərpa et") }
+            },
+            dismissButton = { TextButton(onClick = { pending = null }) { Text("İmtina") } },
+        )
+    }
+}
+
+/** Starts the game again from scratch, so every screen reads the restored progress. */
+private fun restartApp(context: android.content.Context) {
+    val intent = context.packageManager.getLaunchIntentForPackage(context.packageName) ?: return
+    intent.addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK or android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK)
+    context.startActivity(intent)
+    Runtime.getRuntime().exit(0)
 }
