@@ -3247,7 +3247,6 @@ HSPLcom/aaideas/krossvord/ui/TutorialKt;->CoachOverlay$lambda$12(Lcom/aaideas/kr
 HSPLcom/aaideas/krossvord/ui/TutorialKt;->layoutAt_lG28NQ4$lambda$14$lambda$13(ZLandroidx/compose/ui/layout/MeasureScope;FLandroidx/compose/ui/layout/Placeable;Landroidx/compose/ui/unit/Constraints;Landroidx/compose/ui/layout/Placeable$PlacementScope;)Lkotlin/Unit;
 HSPLcom/aaideas/krossvord/ui/TutorialKt;->layoutAt_lG28NQ4$lambda$14(ZFLandroidx/compose/ui/layout/MeasureScope;Landroidx/compose/ui/layout/Measurable;Landroidx/compose/ui/unit/Constraints;)Landroidx/compose/ui/layout/MeasureResult;
 Lcom/aaideas/krossvord/ui/TutorialSpot;
-HSPLcom/aaideas/krossvord/ui/TutorialSpot;->descriptor:Lcom/aaideas/krossvord/ui/TutorialSpot;
 HSPLcom/aaideas/krossvord/ui/TutorialSpot;-><init>(Ljava/lang/String;I)V
 HSPLcom/aaideas/krossvord/ui/TutorialSpot;->values()[Lcom/aaideas/krossvord/ui/TutorialSpot;
 HSPLcom/aaideas/krossvord/ui/TutorialSpot;->valueOf(Ljava/lang/String;)Lcom/aaideas/krossvord/ui/TutorialSpot;

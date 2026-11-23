@@ -42,7 +42,8 @@ def main():
                 rules.append(f'L{cls};')
                 continue
             s = line.strip()
-            if s.startswith('descriptor:') and cls and name and not re.search(r'[.\-]', name):
+            # Only method descriptors: a field rule ("->name:Type") is a syntax error for the profile compiler.
+            if s.startswith('descriptor:') and s.split(':', 1)[1].strip().startswith('(') and cls and name and not re.search(r'[.\-]', name):
                 rules.append(f'HSPL{cls};->{name}{s.split(":", 1)[1].strip()}')
                 name = None
             elif s.endswith(');') or s.endswith('();') or ('(' in s and s.endswith(';')):

@@ -101,13 +101,16 @@ class MainActivity : ComponentActivity() {
                 Surface(Modifier.fillMaxSize(), color = if (skin.glass) androidx.compose.ui.graphics.Color.Transparent else MaterialTheme.colorScheme.background) {
                     val glassLite = skin.glass && GlassLite.isOn(this@MainActivity)
                     val haze = if (skin.glass && !glassLite) androidx.compose.runtime.remember { dev.chrisbanes.haze.HazeState() } else null
+                    val glassMax = haze != null && GlassMax.isOn(this@MainActivity)
+                    val cardHaze = if (glassMax) androidx.compose.runtime.remember { dev.chrisbanes.haze.HazeState() } else null
                     val isPremium by vm.premium.isPremium.collectAsState()
                     BackHandler(enabled = vm.screen != Screen.HOME) { vm.back() }
                     val menu = vm.screen != Screen.PUZZLE && vm.screen != Screen.WORD_OF_DAY
-                    androidx.compose.runtime.CompositionLocalProvider(LocalHaze provides haze, LocalGlassLite provides glassLite) {
+                    androidx.compose.runtime.CompositionLocalProvider(LocalHaze provides haze, LocalGlassLite provides glassLite, LocalCardHaze provides cardHaze) {
+                    MaxGlassColors(glassMax, dark) {
                     // The backdrop and screens are the blur source; the floating menu (outside it) frosts them.
                     Box(Modifier.fillMaxSize().then(if (haze != null) Modifier.hazeSource(haze) else Modifier)) {
-                        if (skin.glass) GlassBackdrop(dark, Modifier.fillMaxSize())
+                        if (skin.glass) GlassBackdrop(dark, Modifier.fillMaxSize().then(if (cardHaze != null) Modifier.hazeSource(cardHaze) else Modifier), moving = glassMax)
                     Box(Modifier.safeDrawingPadding()) {
                         // Leave room under the floating menu so it never hides the last item (home scrolls under it).
                         Box(if (menu && vm.screen != Screen.HOME) Modifier.padding(bottom = BottomMenuHeight) else Modifier) {
@@ -128,6 +131,7 @@ class MainActivity : ComponentActivity() {
                     }
                     Box(Modifier.fillMaxSize().safeDrawingPadding()) {
                         if (menu) GlassBottomMenu(vm.screen, vm::open, Modifier.align(Alignment.BottomCenter))
+                    }
                     }
                     }
                     WelcomeHost(vm)

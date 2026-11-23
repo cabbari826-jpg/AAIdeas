@@ -11,7 +11,11 @@ android {
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.aaideas.krossvord"
+        // -Plab=true: "Açar Söz Lab", a separate app for trying experiments (Maksimum şüşə) next to the real one.
+        val lab = project.findProperty("lab") == "true"
+        applicationId = "com.aaideas.krossvord" + if (lab) ".lab" else ""
+        buildConfigField("boolean", "LAB", lab.toString())
+        manifestPlaceholders["appLabel"] = if (lab) "Açar Söz Lab" else "@string/app_name"
         minSdk = 24
         targetSdk = 36
         // CI sets GITHUB_RUN_NUMBER, so every published build has a bigger
@@ -43,7 +47,7 @@ android {
     buildTypes {
         debug {
             // Where the in-app updater (src/debug only) looks for new builds.
-            buildConfigField("String", "UPDATE_REPO", "\"cabbari826-jpg/AAIdeas\"")
+            buildConfigField("String", "UPDATE_REPO", if (project.findProperty("lab") == "true") "\"\"" else "\"cabbari826-jpg/AAIdeas\"")
             // This build goes to real phones for testing. A debuggable app runs Compose with
             // ART optimisations off and ignores the libraries' startup profiles, which makes it
             // several times slower to start on low-end phones. Turn that off.

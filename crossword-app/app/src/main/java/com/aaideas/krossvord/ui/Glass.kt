@@ -30,6 +30,10 @@ import dev.chrisbanes.haze.HazeDefaults
 import dev.chrisbanes.haze.HazeState
 import dev.chrisbanes.haze.HazeStyle
 import dev.chrisbanes.haze.HazeTint
+import dev.chrisbanes.haze.hazeEffect
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.ui.draw.clip
+import androidx.compose.runtime.getValue
 
 /** Set while the Şüşə theme is on: floating panels (the bottom menu) blur what scrolls under them. */
 val LocalHaze = staticCompositionLocalOf<HazeState?> { null }
@@ -58,9 +62,19 @@ fun glassStyle(dark: Boolean): HazeStyle = HazeDefaults.style(
  * Static (no animation), so it costs one cheap draw.
  */
 @Composable
-fun GlassBackdrop(dark: Boolean, modifier: Modifier = Modifier) {
-    Canvas(modifier) { if (dark) glowsDark() else glowsLight() }
+fun GlassBackdrop(dark: Boolean, modifier: Modifier = Modifier, moving: Boolean = false) {
+    if (!moving) { Canvas(modifier) { if (dark) glowsDark() else glowsLight() }; return }
+    // Maksimum şüşə: the glows drift slowly in circles (one turn in ~24 s), so the blur under the cards lives.
+    val t by androidx.compose.animation.core.rememberInfiniteTransition(label = "glow").animateFloat(
+        0f, (2 * Math.PI).toFloat(),
+        androidx.compose.animation.core.infiniteRepeatable(androidx.compose.animation.core.tween(24_000, easing = androidx.compose.animation.core.LinearEasing)),
+        label = "t",
+    )
+    Canvas(modifier) { if (dark) glowsDark(t) else glowsLight(t) }
 }
+
+private fun dx(t: Float, k: Float) = 0.18f * kotlin.math.sin(t * k)
+private fun dy(t: Float, k: Float) = 0.12f * kotlin.math.cos(t * k)
 
 /** An oval glow, like CSS radial-gradient(rx ry at cx cy, c 0, transparent 70%): sizes are parts of the screen. */
 private fun DrawScope.glow(cx: Float, cy: Float, rx: Float, ry: Float, c: Color) {
@@ -72,19 +86,21 @@ private fun DrawScope.glow(cx: Float, cy: Float, rx: Float, ry: Float, c: Color)
 }
 
 // Same glows as the mockup.
-private fun DrawScope.glowsLight() {
+private fun DrawScope.glowsLight(t: Float = 0f) {
     drawRect(Color(0xFFE8DEF8))
-    glow(0.15f, 0.10f, 0.60f, 0.40f, Color(0xFFB69DF8))
-    glow(0.90f, 0.25f, 0.50f, 0.35f, Color(0xFFFFC94D))
-    glow(0.30f, 0.80f, 0.60f, 0.45f, Color(0xFF7FD1AE))
-    glow(0.95f, 0.90f, 0.70f, 0.50f, Color(0xFF6750A4))
+    glow(0.15f + dx(t, 1f), 0.10f + dy(t, 1f), 0.60f, 0.40f, Color(0xFFB69DF8))
+    glow(0.90f - dx(t, 1f), 0.25f + dy(t, 2f), 0.50f, 0.35f, Color(0xFFFFC94D))
+    glow(0.30f + dx(t, 2f), 0.80f - dy(t, 1f), 0.60f, 0.45f, Color(0xFF7FD1AE))
+    glow(0.95f - dx(t, 1f), 0.90f - dy(t, 1f), 0.70f, 0.50f, Color(0xFF6750A4))
+    if (t != 0f) glow(0.5f + 2 * dx(t, 1f), 0.5f + 3 * dy(t, 1f), 0.35f, 0.25f, Color(0xFFFF8FB1))
 }
 
-private fun DrawScope.glowsDark() {
+private fun DrawScope.glowsDark(t: Float = 0f) {
     drawRect(Color(0xFF120F1E))
-    glow(0.80f, 0.15f, 0.55f, 0.40f, Color(0xFF4B3A8C))
-    glow(0.10f, 0.60f, 0.50f, 0.40f, Color(0xFF1E5A6B))
-    glow(0.70f, 0.85f, 0.40f, 0.30f, Color(0xFF8A3B6E))
+    glow(0.80f - dx(t, 1f), 0.15f + dy(t, 1f), 0.55f, 0.40f, Color(0xFF4B3A8C))
+    glow(0.10f + dx(t, 1f), 0.60f + dy(t, 2f), 0.50f, 0.40f, Color(0xFF1E5A6B))
+    glow(0.70f + dx(t, 2f), 0.85f - dy(t, 1f), 0.40f, 0.30f, Color(0xFF8A3B6E))
+    if (t != 0f) glow(0.5f + 2 * dx(t, 1f), 0.45f + 3 * dy(t, 1f), 0.35f, 0.25f, Color(0xFF3A7BD5))
 }
 
 /** Asked before switching a weak phone to Şüşə. */
@@ -120,6 +136,34 @@ object GlassLite {
     }
 }
 
+/**
+ * "Maksimum şüşə" (experiment, Android 12+): every glass card really blurs the light behind it, and
+ * that light slowly moves, so colour drifts under the cards like on iPhone's Liquid Glass. Costs
+ * battery and frames on weak phones, so it is off unless switched on (on by default only in the Lab build).
+ */
+object GlassMax {
+    private var state: androidx.compose.runtime.MutableState<Boolean>? = null
+    private fun prefs(ctx: Context) = ctx.getSharedPreferences("glass", Context.MODE_PRIVATE)
+    fun isOn(ctx: Context): Boolean = glassBlurSupported && (state ?: androidx.compose.runtime.mutableStateOf(
+        prefs(ctx).getBoolean("max", com.aaideas.krossvord.BuildConfig.LAB),
+    ).also { state = it }).value
+    fun set(ctx: Context, on: Boolean) {
+        prefs(ctx).edit().putBoolean("max", on).apply()
+        isOn(ctx); state?.value = on
+    }
+}
+
+/** Set in "Maksimum şüşə": the moving backdrop that every glass card blurs. */
+val LocalCardHaze = staticCompositionLocalOf<HazeState?> { null }
+
+/** Card frost: a stronger blur than the menu, a light tint so text stays readable. */
+fun cardGlassStyle(dark: Boolean): HazeStyle = HazeDefaults.style(
+    backgroundColor = if (dark) Color(0xFF15112A) else Color(0xFFE9E0F7),
+    tint = HazeTint(if (dark) Color(0x40221C38) else Color(0x59FFFFFF)),
+    blurRadius = 28.dp,
+    noiseFactor = 0.04f,
+)
+
 /** Set while reduced glass effects are on. */
 val LocalGlassLite = staticCompositionLocalOf { false }
 
@@ -135,7 +179,10 @@ fun Modifier.glassy(shape: Shape): Modifier {
     if (!LocalGlass.current) return this
     val dark = androidx.compose.material3.MaterialTheme.colorScheme.background.luminance() < 0.5f
     val lite = LocalGlassLite.current
-    return this.drawWithCache {
+    val cardHaze = LocalCardHaze.current
+    // Maksimum şüşə: the card frosts the moving light behind it (the drop shadow would be clipped, so none).
+    val base = if (cardHaze != null) this.then(Modifier.clip(shape).hazeEffect(cardHaze, cardGlassStyle(dark))) else this
+    return base.drawWithCache {
         val path = Path().apply { addOutline(shape.createOutline(size, layoutDirection, this@drawWithCache)) }
         val sheen = Brush.linearGradient(
             0f to Color.White.copy(alpha = if (dark) 0.16f else 0.5f),
@@ -150,7 +197,7 @@ fun Modifier.glassy(shape: Shape): Modifier {
         val stroke = androidx.compose.ui.graphics.drawscope.Stroke(1.dp.toPx())
         // The soft shadow under each panel (CSS 0 10px 30px), drawn only outside the panel: under a
         // see-through panel it would show through as a grey box. Blurred shadows need Android 9.
-        val shadow = if (!lite && Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+        val shadow = if (!lite && cardHaze == null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             val dy = minOf(10.dp.toPx(), size.minDimension * 0.12f)
             Path().apply { addPath(path, Offset(0f, dy)) }.asAndroidPath() to android.graphics.Paint(android.graphics.Paint.ANTI_ALIAS_FLAG).apply {
                 color = if (dark) android.graphics.Color.argb(90, 0, 0, 0) else android.graphics.Color.argb(56, 40, 20, 80)
@@ -166,4 +213,27 @@ fun Modifier.glassy(shape: Shape): Modifier {
             drawPath(path, rim, style = stroke)
         }
     }
+}
+
+/**
+ * Maksimum şüşə: glass cards get see-through fills so the blur shows (normal Şüşə keeps them nearly
+ * solid). Dialogs keep their solid colour: they float over the grid, where see-through would hurt reading.
+ */
+@Composable
+fun MaxGlassColors(on: Boolean, dark: Boolean, content: @Composable () -> Unit) {
+    if (!on) { content(); return }
+    val cs = androidx.compose.material3.MaterialTheme.colorScheme
+    fun Color.see(a: Float) = copy(alpha = a)
+    androidx.compose.material3.MaterialTheme(
+        colorScheme = cs.copy(
+            surfaceContainerHigh = if (dark) Color(0x66221C38) else Color(0x73FFFFFF),
+            surfaceContainer = if (dark) Color(0x4D221C38) else Color(0x59FFFFFF),
+            primaryContainer = cs.primaryContainer.see(0.6f),
+            secondaryContainer = cs.secondaryContainer.see(0.6f),
+            tertiaryContainer = cs.tertiaryContainer.see(0.6f),
+        ),
+        typography = androidx.compose.material3.MaterialTheme.typography,
+        shapes = androidx.compose.material3.MaterialTheme.shapes,
+        content = content,
+    )
 }

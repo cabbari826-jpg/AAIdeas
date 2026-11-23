@@ -97,6 +97,13 @@ fun SkinPicker(current: Skin, owned: Set<Skin>, onPick: (Skin) -> Unit, onUnlock
             }
             androidx.compose.material3.Switch(checked = GlassLite.isOn(ctx), onCheckedChange = { GlassLite.set(ctx, it) })
         }
+        if (current.glass && glassBlurSupported && !GlassLite.isOn(ctx)) Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+            Column(Modifier.weight(1f)) {
+                Text("Maksimum şüşə (sınaq)", style = MaterialTheme.typography.titleMedium)
+                Text("Hər kart arxasındakı rəngli işığı bulandırır, işıq yavaş-yavaş hərəkət edir. Batareyanı bir az çox işlədir.", style = MaterialTheme.typography.bodySmall)
+            }
+            androidx.compose.material3.Switch(checked = GlassMax.isOn(ctx), onCheckedChange = { GlassMax.set(ctx, it) })
+        }
         val lockedOnes = Skin.entries.filter { it !in owned }
         if (lockedOnes.isNotEmpty()) {
             Text("🔒 Hədiyyə mövzular oyunda qazanılır.", style = MaterialTheme.typography.bodySmall)
