@@ -9,6 +9,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.unit.dp
 import androidx.test.core.app.ApplicationProvider
@@ -78,6 +81,79 @@ class MonolithShotTest {
         }
         rule.mainClock.advanceTimeBy(1500)
         captureScreenRoboImage("build/outputs/roborazzi/mono-result-dialog.png")
+    }
+
+    /** Step 1 of the frosted preview: the level screen alone (blurred outside the test, see tools). */
+    @Test fun glassBackground() {
+        val vm = glassVm()
+        rule.mainClock.autoAdvance = false
+        rule.setContent {
+            KrossvordTheme(ThemeMode.LIGHT, skin = Skin.SUSE) {
+                MaxGlassColors(on = true, dark = false, liquid = true) {
+                    Box(Modifier.fillMaxSize()) {
+                        GlassBackdrop(false, Modifier.fillMaxSize())
+                        PuzzleScreen(vm, isPremium = false)
+                    }
+                }
+            }
+        }
+        rule.mainClock.advanceTimeBy(1500)
+        captureScreenRoboImage("build/outputs/roborazzi/mono-bg.png")
+    }
+
+    /** Step 2: the dialogs over the blurred screen, as the phone's window blur shows them. */
+    @Test fun frostedDialogs() {
+        val file = java.io.File("build/outputs/roborazzi/mono-bg-blur.png")
+        org.junit.Assume.assumeTrue(file.exists())
+        val bmp = android.graphics.BitmapFactory.decodeFile(file.path).asImageBitmap()
+        GlassPreview.forceFrosted = true
+        try {
+            run {
+                rule.mainClock.autoAdvance = false
+                rule.setContent {
+                    KrossvordTheme(ThemeMode.LIGHT, skin = Skin.SUSE) {
+                        MaxGlassColors(on = true, dark = false, liquid = true) {
+                            Box(Modifier.fillMaxSize()) {
+                                androidx.compose.foundation.Image(bmp, null, Modifier.fillMaxSize(), contentScale = androidx.compose.ui.layout.ContentScale.FillBounds)
+                                SolidAlertDialog(
+                                    onDismissRequest = {},
+                                    title = { androidx.compose.material3.Text("Açar sözü təxmin et") },
+                                    text = { androidx.compose.material3.Text("Düz cavab: +2 pulsuz ipucu.") },
+                                    confirmButton = { androidx.compose.material3.Button(onClick = {}) { androidx.compose.material3.Text("Yoxla") } },
+                                    dismissButton = { androidx.compose.material3.TextButton(onClick = {}) { androidx.compose.material3.Text("Bağla") } },
+                                )
+                            }
+                        }
+                    }
+                }
+                rule.mainClock.advanceTimeBy(1500)
+                captureScreenRoboImage("build/outputs/roborazzi/frost-keyword.png")
+            }
+        } finally { GlassPreview.forceFrosted = false }
+    }
+
+    @Test fun frostedResult() {
+        val file = java.io.File("build/outputs/roborazzi/mono-bg-blur.png")
+        org.junit.Assume.assumeTrue(file.exists())
+        val bmp = android.graphics.BitmapFactory.decodeFile(file.path).asImageBitmap()
+        GlassPreview.forceFrosted = true
+        try {
+            val result = LevelResult(xp = 20, stars = 2, seconds = 119, praise = "Mükəmməl!", keyword = "HAMAM", medals = emptyList(),
+                fact = "Azərbaycanın ən yüksək zirvəsi Bazardüzüdür: 4466 metr.")
+            rule.mainClock.autoAdvance = false
+            rule.setContent {
+                KrossvordTheme(ThemeMode.LIGHT, skin = Skin.SUSE) {
+                    MaxGlassColors(on = true, dark = false, liquid = true) {
+                        Box(Modifier.fillMaxSize()) {
+                            androidx.compose.foundation.Image(bmp, null, Modifier.fillMaxSize(), contentScale = androidx.compose.ui.layout.ContentScale.FillBounds)
+                            LevelResultDialog("Səviyyə 11", result, {}, {})
+                        }
+                    }
+                }
+            }
+            rule.mainClock.advanceTimeBy(1500)
+            captureScreenRoboImage("build/outputs/roborazzi/frost-result.png")
+        } finally { GlassPreview.forceFrosted = false }
     }
 
     @Test fun menuEveryTheme() {

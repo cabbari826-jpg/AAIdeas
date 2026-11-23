@@ -181,7 +181,7 @@ val LocalGlass = staticCompositionLocalOf { false }
  * fill, and a 1 dp rim that is bright on top and fades downward. Does nothing outside the Şüşə theme.
  */
 @Composable
-fun Modifier.glassy(shape: Shape, lens: Boolean = true): Modifier {
+fun Modifier.glassy(shape: Shape, lens: Boolean = true, shadow: Boolean = true): Modifier {
     if (!LocalGlass.current) return this
     val dark = androidx.compose.material3.MaterialTheme.colorScheme.background.luminance() < 0.5f
     val lite = LocalGlassLite.current
@@ -209,7 +209,7 @@ fun Modifier.glassy(shape: Shape, lens: Boolean = true): Modifier {
         val stroke = androidx.compose.ui.graphics.drawscope.Stroke(1.dp.toPx())
         // The soft shadow under each panel (CSS 0 10px 30px), drawn only outside the panel: under a
         // see-through panel it would show through as a grey box. Blurred shadows need Android 9.
-        val shadow = if (!lite && cardHaze == null && liquid == null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+        val shadow = if (shadow && !lite && cardHaze == null && liquid == null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             val dy = minOf(10.dp.toPx(), size.minDimension * 0.12f)
             Path().apply { addPath(path, Offset(0f, dy)) }.asAndroidPath() to android.graphics.Paint(android.graphics.Paint.ANTI_ALIAS_FLAG).apply {
                 color = if (dark) android.graphics.Color.argb(90, 0, 0, 0) else android.graphics.Color.argb(56, 40, 20, 80)
@@ -264,41 +264,65 @@ fun MaxGlassColors(on: Boolean, dark: Boolean, liquid: Boolean, content: @Compos
 val LocalPanelScheme = staticCompositionLocalOf<androidx.compose.material3.ColorScheme?> { null }
 
 /**
- * Dialogs and pop-ups are solid in every glass level: text over a see-through window over the grid
- * could not be read, and a window that was half glass, half not looked odd. Outside glass, a no-op.
+ * Dialogs and pop-ups in Şüşə are frosted glass like the rest of the theme: the screen behind the window is
+ * blurred (Android 12+, when the phone allows window blur) and the window is a see-through white/violet
+ * pane with the glass rim. Without that blur (Sadə level, older phones) the pane is nearly solid, so the
+ * text never sits over a sharp grid. Outside glass, a no-op.
  */
 @Composable
 fun SolidPanel(content: @Composable () -> Unit) {
     if (!LocalGlass.current) { content(); return }
     val base = LocalPanelScheme.current ?: androidx.compose.material3.MaterialTheme.colorScheme
+    val dark = base.background.luminance() < 0.5f
+    val frosted = !LocalGlassLite.current && windowBlurOn()
     val back = base.surface.copy(alpha = 1f)
-    fun Color.solid() = compositeOver(back)
-    val solid = base.copy(
-        surface = back, background = base.background.solid(),
-        surfaceContainerLowest = base.surfaceContainerLowest.solid(), surfaceContainerLow = base.surfaceContainerLow.solid(),
-        surfaceContainer = base.surfaceContainer.solid(), surfaceContainerHigh = base.surfaceContainerHigh.solid(),
-        surfaceContainerHighest = base.surfaceContainerHighest.solid(), surfaceVariant = base.surfaceVariant.solid(),
-        primaryContainer = base.primaryContainer.solid(), secondaryContainer = base.secondaryContainer.solid(),
-        tertiaryContainer = base.tertiaryContainer.solid(),
-    )
+    // The pane; panels inside it keep the theme's own see-through whites, as on every glass screen.
+    val pane = back.copy(alpha = if (!frosted) 0.96f else if (dark) 0.62f else 0.55f)
+    val scheme = base.copy(surface = pane, surfaceContainerHigh = pane, surfaceContainerHighest = pane)
     val style = androidx.compose.material3.LocalTextStyle.current
     androidx.compose.material3.MaterialTheme(
-        colorScheme = solid,
+        colorScheme = scheme,
         typography = androidx.compose.material3.MaterialTheme.typography,
         shapes = androidx.compose.material3.MaterialTheme.shapes,
     ) {
         androidx.compose.runtime.CompositionLocalProvider(
             androidx.compose.material3.LocalTextStyle provides style,
-            androidx.compose.material3.LocalContentColor provides solid.onSurface,
-            LocalGlass provides false,
+            androidx.compose.material3.LocalContentColor provides scheme.onSurface,
             LocalCardHaze provides null,
             LocalGlassBackdrop provides null,
+            LocalFrostedWindow provides frosted,
             content = content,
         )
     }
 }
 
-/** [androidx.compose.material3.AlertDialog], solid in the glass theme. */
+/** True inside a glass dialog whose window blurs what is behind it. */
+val LocalFrostedWindow = staticCompositionLocalOf { false }
+
+/** Screenshot tests: draw dialogs as on a phone with window blur (the blur itself is faked in the test). */
+internal object GlassPreview { var forceFrosted = false }
+
+@Composable
+private fun windowBlurOn(): Boolean {
+    if (GlassPreview.forceFrosted) return true
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) return false
+    val wm = androidx.compose.ui.platform.LocalContext.current.getSystemService(android.view.WindowManager::class.java)
+    return runCatching { wm.isCrossWindowBlurEnabled }.getOrDefault(false)
+}
+
+/** Call inside a dialog's content: blurs the screen behind the dialog window, with a light dim. */
+@Composable
+fun FrostBehind() {
+    if (!LocalFrostedWindow.current || Build.VERSION.SDK_INT < Build.VERSION_CODES.S) return
+    val window = (androidx.compose.ui.platform.LocalView.current.parent as? androidx.compose.ui.window.DialogWindowProvider)?.window ?: return
+    val radius = with(androidx.compose.ui.platform.LocalDensity.current) { 28.dp.roundToPx() }
+    androidx.compose.runtime.SideEffect {
+        window.addFlags(android.view.WindowManager.LayoutParams.FLAG_BLUR_BEHIND)
+        window.attributes = window.attributes.apply { blurBehindRadius = radius; dimAmount = 0.18f }
+    }
+}
+
+/** [androidx.compose.material3.AlertDialog] in glass: a frosted pane with the rim. */
 @Composable
 fun SolidAlertDialog(
     onDismissRequest: () -> Unit,
@@ -309,7 +333,11 @@ fun SolidAlertDialog(
     title: (@Composable () -> Unit)? = null,
     text: (@Composable () -> Unit)? = null,
 ) = SolidPanel {
-    androidx.compose.material3.AlertDialog(onDismissRequest, confirmButton, modifier, dismissButton, icon, title, text)
+    val shape = androidx.compose.material3.AlertDialogDefaults.shape
+    androidx.compose.material3.AlertDialog(
+        onDismissRequest, { FrostBehind(); confirmButton() }, modifier.glassy(shape, lens = false, shadow = false), dismissButton, icon, title, text,
+        shape = shape, tonalElevation = 0.dp,
+    )
 }
 
 /** [androidx.compose.ui.window.Dialog], solid in the glass theme. */
@@ -318,4 +346,4 @@ fun SolidDialog(
     onDismissRequest: () -> Unit,
     properties: androidx.compose.ui.window.DialogProperties = androidx.compose.ui.window.DialogProperties(),
     content: @Composable () -> Unit,
-) = SolidPanel { androidx.compose.ui.window.Dialog(onDismissRequest, properties, content) }
+) = SolidPanel { androidx.compose.ui.window.Dialog(onDismissRequest, properties) { FrostBehind(); content() } }
