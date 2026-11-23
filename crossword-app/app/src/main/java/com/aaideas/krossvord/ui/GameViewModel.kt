@@ -50,8 +50,8 @@ const val AUTO_LARGE_FONT_SCALE = 1.15f
 /** Seconds without progress on a level before the gentle "stuck?" hint shows. No timer is ever shown. */
 const val STUCK_SECONDS = 75L
 
-/** How the "stuck?" help looks: A pill under the grid, B owl helper, C golden glow on the clue cell and the hint button. */
-enum class StuckStyle { PILL, OWL, GLOW }
+/** How the "stuck?" help looks: A pill under the grid, B owl helper, C golden glow, D key helper (Açar = key). */
+enum class StuckStyle { PILL, OWL, GLOW, KEY }
 
 /** Short praise for a found word (shown big for a moment, said aloud if there is a voice). */
 val SHORT_PRAISE = listOf("Bravo!", "Əla!", "Afərin!", "Super!", "Düzdür!")

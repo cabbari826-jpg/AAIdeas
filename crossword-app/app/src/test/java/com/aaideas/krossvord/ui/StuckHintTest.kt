@@ -63,6 +63,7 @@ class StuckHintTest {
 
     @Test fun stuckOwl() = styleShot(StuckStyle.OWL)
     @Test fun stuckGlow() = styleShot(StuckStyle.GLOW)
+    @Test fun stuckKey() = styleShot(StuckStyle.KEY)
 }
 
 /** The whole settings page in one tall picture (new switches and the backup buttons are low down). */

@@ -158,6 +158,7 @@ private fun PuzzleContent(vm: GameViewModel, isPremium: Boolean, compact: Boolea
             if (stuckNow != null) when (vm.stuckStyle) {
                 StuckStyle.PILL -> StuckHint(vm, stuckNow, Modifier.align(Alignment.BottomCenter)) { stuck = false }
                 StuckStyle.OWL -> OwlHelper(vm, stuckNow, Modifier.align(Alignment.BottomEnd)) { stuck = false }
+                StuckStyle.KEY -> OwlHelper(vm, stuckNow, Modifier.align(Alignment.BottomEnd), key = true) { stuck = false }
                 else -> {}
             }
         }
@@ -1130,7 +1131,7 @@ private fun StuckHint(vm: GameViewModel, entry: Entry, modifier: Modifier, onUse
  * blinks twice and stays; a tap opens the clue card. Drawn with shapes, so it costs nothing to load.
  */
 @Composable
-private fun OwlHelper(vm: GameViewModel, entry: Entry, modifier: Modifier, onUsed: () -> Unit) {
+private fun OwlHelper(vm: GameViewModel, entry: Entry, modifier: Modifier, key: Boolean = false, onUsed: () -> Unit) {
     val slide = remember { androidx.compose.animation.core.Animatable(1f) }
     val blink = remember { androidx.compose.animation.core.Animatable(1f) }
     LaunchedEffect(Unit) {
@@ -1164,7 +1165,57 @@ private fun OwlHelper(vm: GameViewModel, entry: Entry, modifier: Modifier, onUse
             Spacer(Modifier.height(18.dp))
         }
         Spacer(Modifier.width(4.dp))
-        Owl(blink.value, Modifier.size(64.dp))
+        if (key) KeyBuddy(blink.value, Modifier.size(width = 58.dp, height = 78.dp).graphicsLayer {
+            // A small happy wiggle while it slides in.
+            rotationZ = -14f * slide.value + 6f
+        }) else Owl(blink.value, Modifier.size(64.dp))
+    }
+}
+
+/**
+ * Style D: the game's own mascot, a golden key (Açar = key). Round bow with a face (eyes that
+ * blink, a smile, pink cheeks), a lavender ribbon, and the shaft with teeth below.
+ */
+@Composable
+private fun KeyBuddy(eyeOpen: Float, modifier: Modifier) {
+    val gold = Color(0xFFFFC94D)
+    val goldDark = Color(0xFFE0A21B)
+    val ink = Color(0xFF3A2A10)
+    androidx.compose.foundation.Canvas(modifier) {
+        val w = size.width; val h = size.height
+        val cx = w / 2
+        val r = w * 0.42f
+        val cy = r + w * 0.04f
+        // shaft and teeth
+        val shaftW = w * 0.2f
+        drawRoundRect(goldDark, topLeft = Offset(cx - shaftW / 2, cy + r * 0.6f), size = Size(shaftW, h - cy - r * 0.6f), cornerRadius = androidx.compose.ui.geometry.CornerRadius(shaftW / 2))
+        drawRoundRect(goldDark, topLeft = Offset(cx + shaftW / 2 - 2f, h * 0.78f), size = Size(w * 0.2f, h * 0.07f), cornerRadius = androidx.compose.ui.geometry.CornerRadius(4f))
+        drawRoundRect(goldDark, topLeft = Offset(cx + shaftW / 2 - 2f, h * 0.9f), size = Size(w * 0.14f, h * 0.07f), cornerRadius = androidx.compose.ui.geometry.CornerRadius(4f))
+        // bow (head)
+        drawCircle(goldDark, radius = r, center = Offset(cx, cy + 2f))
+        drawCircle(gold, radius = r * 0.94f, center = Offset(cx, cy))
+        // shine
+        drawCircle(Color.White.copy(alpha = 0.45f), radius = r * 0.16f, center = Offset(cx - r * 0.5f, cy - r * 0.5f))
+        // ribbon
+        val bow = androidx.compose.ui.graphics.Path().apply {
+            moveTo(cx, cy - r * 0.9f); lineTo(cx - r * 0.55f, cy - r * 1.15f); lineTo(cx - r * 0.5f, cy - r * 0.6f); close()
+            moveTo(cx, cy - r * 0.9f); lineTo(cx + r * 0.55f, cy - r * 1.15f); lineTo(cx + r * 0.5f, cy - r * 0.6f); close()
+        }
+        drawPath(bow, Color(0xFF8E7CC3))
+        drawCircle(Color(0xFF6F5BAE), radius = r * 0.13f, center = Offset(cx, cy - r * 0.9f))
+        // eyes
+        for (ex in listOf(cx - r * 0.35f, cx + r * 0.35f)) {
+            val eh = r * 0.3f * eyeOpen
+            drawOval(ink, topLeft = Offset(ex - r * 0.11f, cy - r * 0.12f - eh / 2), size = Size(r * 0.22f, eh.coerceAtLeast(2f)))
+            if (eyeOpen > 0.5f) drawCircle(Color.White, radius = r * 0.05f, center = Offset(ex + r * 0.04f, cy - r * 0.18f))
+        }
+        // cheeks
+        drawCircle(Color(0xFFFF8A80).copy(alpha = 0.6f), radius = r * 0.12f, center = Offset(cx - r * 0.6f, cy + r * 0.18f))
+        drawCircle(Color(0xFFFF8A80).copy(alpha = 0.6f), radius = r * 0.12f, center = Offset(cx + r * 0.6f, cy + r * 0.18f))
+        // smile
+        drawArc(ink, startAngle = 20f, sweepAngle = 140f, useCenter = false,
+            topLeft = Offset(cx - r * 0.28f, cy - r * 0.05f), size = Size(r * 0.56f, r * 0.45f),
+            style = androidx.compose.ui.graphics.drawscope.Stroke(width = r * 0.08f, cap = androidx.compose.ui.graphics.StrokeCap.Round))
     }
 }
 
