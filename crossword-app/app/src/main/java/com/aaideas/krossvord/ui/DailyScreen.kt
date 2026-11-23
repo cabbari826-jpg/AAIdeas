@@ -41,7 +41,7 @@ fun TodayCard(vm: GameViewModel) {
     Card(
         onClick = { vm.open(Screen.DAILY) },
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer),
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth().glassy(CardDefaults.shape),
     ) {
         Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
             Column(Modifier.weight(1f)) {

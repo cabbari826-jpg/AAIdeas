@@ -115,7 +115,7 @@ fun ExpressiveHome(vm: GameViewModel) {
                 shape = MaterialTheme.shapes.large,
                 color = MaterialTheme.colorScheme.tertiaryContainer,
                 contentColor = MaterialTheme.colorScheme.onTertiaryContainer,
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth().glassy(MaterialTheme.shapes.large),
             ) {
                 Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
                     Text("🎁", fontSize = 28.sp)
@@ -188,19 +188,22 @@ private fun ContinueCard(vm: GameViewModel) {
     val started = vm.levelStarted(i)
     val keyLen = level.keyword?.let { AzText.letters(it.word).size } ?: 0
     val src = remember { MutableInteractionSource() }
+    val glass = LocalGlass.current
+    // Şüşə: white glass with dark text and a lavender button, as in the mockup; otherwise the solid accent card.
+    val ink = if (glass) cs.onSurface else cs.onPrimary
     Surface(
         onClick = { vm.startLevel(i) },
         interactionSource = src,
         shape = MaterialTheme.shapes.extraLarge,
-        color = cs.primary,
-        contentColor = cs.onPrimary,
-        modifier = Modifier.fillMaxWidth().springPress(src),
+        color = if (glass) cs.surfaceContainer else cs.primary,
+        contentColor = ink,
+        modifier = Modifier.fillMaxWidth().springPress(src).glassy(MaterialTheme.shapes.extraLarge),
     ) {
         Box {
             Column(Modifier.padding(22.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 Text(
                     "${vm.levelTitle(i)} · ${vm.completed.size}/${vm.levels.size} həll olunub",
-                    style = MaterialTheme.typography.labelLarge, color = cs.onPrimary.copy(alpha = 0.85f),
+                    style = MaterialTheme.typography.labelLarge, color = ink.copy(alpha = 0.85f),
                 )
                 Text(
                     when {
@@ -213,11 +216,11 @@ private fun ContinueCard(vm: GameViewModel) {
                 )
                 if (keyLen > 0) {
                     Row(horizontalArrangement = Arrangement.spacedBy(5.dp), verticalAlignment = Alignment.CenterVertically) {
-                        Text("Açar söz", style = MaterialTheme.typography.labelMedium, color = cs.onPrimary.copy(alpha = 0.85f))
+                        Text("Açar söz", style = MaterialTheme.typography.labelMedium, color = ink.copy(alpha = 0.85f))
                         Spacer(Modifier.width(2.dp))
                         repeat(keyLen) {
                             Box(
-                                Modifier.size(22.dp).clip(RoundedCornerShape(7.dp)).background(cs.onPrimary.copy(alpha = 0.2f)),
+                                Modifier.size(22.dp).clip(RoundedCornerShape(7.dp)).background(if (glass) Color.White.copy(alpha = 0.55f) else cs.onPrimary.copy(alpha = 0.2f)),
                                 contentAlignment = Alignment.Center,
                             ) { Text("?", fontSize = 12.sp, fontWeight = FontWeight.Bold) }
                         }
@@ -226,7 +229,8 @@ private fun ContinueCard(vm: GameViewModel) {
                 Spacer(Modifier.height(2.dp))
                 Button(
                     onClick = { vm.startLevel(i) },
-                    colors = ButtonDefaults.buttonColors(containerColor = cs.onPrimary, contentColor = cs.primary),
+                    colors = if (glass) ButtonDefaults.buttonColors(containerColor = cs.primary, contentColor = cs.onPrimary)
+                        else ButtonDefaults.buttonColors(containerColor = cs.onPrimary, contentColor = cs.primary),
                 ) { Text(if (started) "Davam et ▶" else "Oyna ▶") }
             }
         }
@@ -239,11 +243,17 @@ private fun LevelBadge(number: Int, shape: Shape, done: Boolean, current: Boolea
     val grid = LocalGridColors.current
     val src = remember { MutableInteractionSource() }
     val dark = cs.background.luminance() < 0.5f
-    val bg = when { current -> if (dark) Color(0xFFE9B949) else Color(0xFFFFC94D); done -> grid.solved; else -> cs.surfaceContainer }
-    val fg = if (current) Color(0xFF2A2000) else cs.onSurface
+    val glass = LocalGlass.current
+    val bg = when {
+        current -> if (dark) Color(0xFFE9B949) else Color(0xFFFFC94D)
+        done -> if (glass) Color(0xBF2E9E5B) else grid.solved
+        glass -> Color.White.copy(alpha = if (dark) 0.14f else 0.38f)
+        else -> cs.surfaceContainer
+    }
+    val fg = if (current) Color(0xFF2A2000) else if (glass && done) Color.White else cs.onSurface
     Box(
-        modifier.aspectRatio(1f).springPress(src).clip(shape).background(bg)
-            .border(BorderStroke(if (current) 3.dp else 1.dp, if (current) cs.primary else if (done) Color.Transparent else cs.outlineVariant), shape)
+        modifier.aspectRatio(1f).springPress(src).clip(shape).glassy(shape).background(bg)
+            .border(BorderStroke(if (current) 3.dp else 1.dp, if (current) cs.primary else if (done || glass) Color.Transparent else cs.outlineVariant), shape)
             .clickable(interactionSource = src, indication = null, onClick = onClick),
         contentAlignment = Alignment.Center,
     ) {
@@ -259,8 +269,8 @@ private fun PackCard(title: String, done: Int, total: Int, selected: Boolean, on
         onClick = onClick,
         interactionSource = src,
         shape = MaterialTheme.shapes.large,
-        color = if (selected) cs.primaryContainer else cs.surfaceContainerHigh,
-        modifier = Modifier.width(140.dp).springPress(src),
+        color = if (selected) cs.primaryContainer else if (LocalGlass.current) cs.surfaceContainer else cs.surfaceContainerHigh,
+        modifier = Modifier.width(140.dp).springPress(src).glassy(MaterialTheme.shapes.large),
     ) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
             Text(title, style = MaterialTheme.typography.titleMedium, maxLines = 2)
@@ -284,15 +294,17 @@ val BottomMenuHeight: Dp = 88.dp
 fun GlassBottomMenu(screen: Screen, open: (Screen) -> Unit, modifier: Modifier = Modifier) {
     val cs = MaterialTheme.colorScheme
     val haze = LocalHaze.current
+    val glass = LocalGlass.current
     val dark = cs.background.luminance() < 0.5f
     Surface(
         modifier = modifier.padding(horizontal = 24.dp, vertical = 12.dp).fillMaxWidth()
             // Şüşə: frosted glass over whatever scrolls beneath (real blur on Android 12+, a tint before that).
-            .then(if (haze != null) Modifier.clip(CircleShape).hazeEffect(haze, glassStyle(dark)) else Modifier),
+            .then(if (haze != null) Modifier.clip(CircleShape).hazeEffect(haze, glassStyle(dark)) else Modifier)
+            .glassy(CircleShape),
         shape = CircleShape,
         // No shadow: it would show through the see-through fill as a smudge.
-        color = if (haze != null) Color.Transparent else cs.surfaceContainerHigh,
-        border = BorderStroke(1.dp, cs.outlineVariant.copy(alpha = 0.7f)),
+        color = if (haze != null) Color.Transparent else if (glass) Color.White.copy(alpha = if (dark) 0.14f else 0.45f) else cs.surfaceContainerHigh,
+        border = if (glass) null else BorderStroke(1.dp, cs.outlineVariant.copy(alpha = 0.7f)),
     ) {
         Row(Modifier.padding(6.dp), horizontalArrangement = Arrangement.spacedBy(4.dp)) {
             listOf(
@@ -305,13 +317,15 @@ fun GlassBottomMenu(screen: Screen, open: (Screen) -> Unit, modifier: Modifier =
                 val src = remember { MutableInteractionSource() }
                 Column(
                     Modifier.weight(1f).springPress(src).clip(CircleShape)
-                        .background(if (on) cs.primary else Color.Transparent)
+                        // Şüşə: the chosen tab is a brighter glass pill with dark text (mockup); otherwise the accent.
+                        .background(if (on) (if (glass) Color.White.copy(alpha = if (dark) 0.22f else 0.6f) else cs.primary) else Color.Transparent)
                         .clickable(interactionSource = src, indication = null) { open(target) }
                         .padding(vertical = 8.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
-                    Text(icon, fontSize = 16.sp, color = if (on) cs.onPrimary else cs.onSurfaceVariant)
-                    Text(label, style = MaterialTheme.typography.labelMedium, color = if (on) cs.onPrimary else cs.onSurfaceVariant)
+                    val tabInk = if (on) (if (glass) cs.onSurface else cs.onPrimary) else cs.onSurfaceVariant
+                    Text(icon, fontSize = 16.sp, color = tabInk)
+                    Text(label, style = MaterialTheme.typography.labelMedium, color = tabInk)
                 }
             }
         }

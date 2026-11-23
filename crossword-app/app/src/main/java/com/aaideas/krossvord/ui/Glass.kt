@@ -14,6 +14,12 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.DrawScope
+import androidx.compose.ui.draw.drawWithCache
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.addOutline
+import androidx.compose.ui.graphics.luminance
+import androidx.compose.ui.unit.dp
 import dev.chrisbanes.haze.HazeDefaults
 import dev.chrisbanes.haze.HazeState
 import dev.chrisbanes.haze.HazeStyle
@@ -86,4 +92,36 @@ fun GlassWarning(onYes: () -> Unit, onNo: () -> Unit) {
         confirmButton = { TextButton(onClick = onYes) { Text("Bəli") } },
         dismissButton = { TextButton(onClick = onNo) { Text("Xeyr") } },
     )
+}
+
+/** True while the Şüşə theme is on; glass-only touches (rims, sheen, gaps) read it. */
+val LocalGlass = staticCompositionLocalOf { false }
+
+/**
+ * The glass rim and sheen from the mockup: a light diagonal sheen under the panel's own see-through
+ * fill, and a 1 dp rim that is bright on top and fades downward. Does nothing outside the Şüşə theme.
+ */
+@Composable
+fun Modifier.glassy(shape: Shape): Modifier {
+    if (!LocalGlass.current) return this
+    val dark = androidx.compose.material3.MaterialTheme.colorScheme.background.luminance() < 0.5f
+    return this.drawWithCache {
+        val path = Path().apply { addOutline(shape.createOutline(size, layoutDirection, this@drawWithCache)) }
+        val sheen = Brush.linearGradient(
+            0f to Color.White.copy(alpha = if (dark) 0.16f else 0.42f),
+            0.4f to Color.White.copy(alpha = 0f),
+            0.7f to Color.White.copy(alpha = 0f),
+            1f to Color.White.copy(alpha = if (dark) 0.06f else 0.16f),
+            start = Offset.Zero, end = Offset(size.width * 0.7f, size.height),
+        )
+        val rim = Brush.verticalGradient(
+            listOf(Color.White.copy(alpha = if (dark) 0.45f else 0.9f), Color.White.copy(alpha = if (dark) 0.12f else 0.35f)),
+        )
+        val stroke = androidx.compose.ui.graphics.drawscope.Stroke(1.dp.toPx())
+        onDrawWithContent {
+            drawPath(path, sheen)
+            drawContent()
+            drawPath(path, rim, style = stroke)
+        }
+    }
 }

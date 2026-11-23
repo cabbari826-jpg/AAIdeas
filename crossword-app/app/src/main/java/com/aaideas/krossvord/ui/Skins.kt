@@ -130,12 +130,25 @@ private fun grid(
 // Surfaces are see-through so the backdrop (GlassBackdrop) shows; the grid stays readable with near-white letter cells.
 private val GlassLight = SkinPalette(
     light(0xFF6750A4, 0xFFFFFFFF, 0x99E8DEF8, 0xFF21005D, 0xFFE9E0F7, 0xFF1D1A22, 0x66FFFFFF, 0xFF3E3A4A, 0x59FFFFFF, 0x80FFFFFF, 0xFF79747E, 0x66FFFFFF, 0x99FFE8A8, 0xFF3B2A00)
-        .copy(surface = Color(0x40FFFFFF), surfaceContainerLowest = Color(0x33FFFFFF), surfaceContainerLow = Color(0x4DFFFFFF), surfaceContainerHighest = Color(0x99FFFFFF)),
+        .copy(
+            // Panels are the mockup's white glass; only the selected pack is a little whiter. Dialogs and pop-ups
+            // (surface, surfaceContainerHigh/Highest) stay nearly solid so their text never sits over the grid.
+            surface = Color(0xF7F6F1FF), surfaceContainerLowest = Color(0x33FFFFFF), surfaceContainerLow = Color(0x47FFFFFF),
+            surfaceContainer = Color(0x47FFFFFF), surfaceContainerHigh = Color(0xF7F6F1FF), surfaceContainerHighest = Color(0xF7F6F1FF),
+            surfaceVariant = Color(0x5CFFFFFF), secondaryContainer = Color(0x47FFFFFF), tertiaryContainer = Color(0x47FFFFFF),
+            primaryContainer = Color(0x85FFFFFF), onSecondaryContainer = Color(0xFF1D1A22), onTertiaryContainer = Color(0xFF1D1A22),
+        ),
     grid(0x8CE8DEF8, 0xFF2E2640, 0x596750A4, 0xD9FFFFFF, 0xFF1D1A22, 0xE6FFF1C2, 0xFFFFC94D, 0xE6DDF3E3, 0xE6FFD9D6, 0xFF6750A4, 0x80FFFFFF, 0xFFD9480F),
 )
 private val GlassDark = SkinPalette(
     dark(0xFFCDB8FF, 0xFF2B1F4A, 0x40CDB8FF, 0xFFF1EAFF, 0xFF15112A, 0xFFF1ECF8, 0x26FFFFFF, 0xFFD6CFE2, 0x1FFFFFFF, 0x2EFFFFFF, 0xFF9A90AA, 0x33FFFFFF, 0x40FFC94D, 0xFFFFF1C2)
-        .copy(surface = Color(0x14FFFFFF), surfaceContainerLowest = Color(0x0FFFFFFF), surfaceContainerLow = Color(0x1AFFFFFF), surfaceContainerHighest = Color(0x3DFFFFFF)),
+        .copy(
+            surface = Color(0xF7221C38), surfaceContainerLowest = Color(0x0FFFFFFF), surfaceContainerLow = Color(0x1FFFFFFF),
+            surfaceContainer = Color(0x1FFFFFFF), surfaceContainerHigh = Color(0xF7221C38), surfaceContainerHighest = Color(0xF7221C38),
+            surfaceVariant = Color(0x29FFFFFF), secondaryContainer = Color(0x1FFFFFFF), tertiaryContainer = Color(0x1FFFFFFF),
+            primaryContainer = Color(0x38FFFFFF), onSecondaryContainer = Color(0xFFF1ECF8), onTertiaryContainer = Color(0xFFF1ECF8),
+            onPrimaryContainer = Color(0xFFF1ECF8),
+        ),
     grid(0x1FFFFFFF, 0xFFD6CFE2, 0x33000000, 0x29FFFFFF, 0xFFFFFFFF, 0x40FFC94D, 0xBFFFC94D, 0x662E9E5B, 0x66E5484D, 0xFFCDB8FF, 0x33FFFFFF, 0xFFF0A05A),
 )
 

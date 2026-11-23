@@ -17,7 +17,7 @@ import com.aaideas.krossvord.model.Holiday
 /** Holiday greeting with a short fact; a button to the holiday pack while it is open. */
 @Composable
 fun HolidayCard(h: Holiday, vm: GameViewModel) {
-    Surface(shape = RoundedCornerShape(20.dp), color = MaterialTheme.colorScheme.secondaryContainer, modifier = Modifier.fillMaxWidth()) {
+    Surface(shape = RoundedCornerShape(20.dp), color = MaterialTheme.colorScheme.secondaryContainer, modifier = Modifier.fillMaxWidth().glassy(RoundedCornerShape(20.dp))) {
         Column(Modifier.padding(16.dp)) {
             Text("${h.icon} ${h.greeting}", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
             Text("Bilirsinizmi? ${h.fact}", style = MaterialTheme.typography.bodyMedium, modifier = Modifier.padding(top = 4.dp))
