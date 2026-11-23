@@ -29,13 +29,16 @@ fun playTimeText(seconds: Long): String {
 @Composable
 fun StatsScreen(vm: GameViewModel) {
     Column(
-        Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp),
+        Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp).padding(bottom = BottomMenuHeight),
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         Text("Statistika", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
         RankCard(vm.xp)
-        androidx.compose.material3.Button(onClick = { vm.open(Screen.COLLECTION) }, modifier = Modifier.fillMaxWidth()) {
-            Text("📖 Söz kolleksiyası (${vm.collection.size})")
+        androidx.compose.material3.Button(onClick = { vm.openMistakes = false; vm.open(Screen.COLLECTION) }, modifier = Modifier.fillMaxWidth()) {
+            Text("📚 Söz kolleksiyası (${vm.collection.size})")
+        }
+        androidx.compose.material3.OutlinedButton(onClick = { vm.openMistakes = true; vm.open(Screen.COLLECTION) }, modifier = Modifier.fillMaxWidth()) {
+            Text("📖 Mənim sözlərim: təkrar et (${vm.mistakeWords.size})")
         }
         Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
             StatTile("Həll olunub", "${vm.completed.size} / ${vm.levels.size}", Modifier.weight(1f))

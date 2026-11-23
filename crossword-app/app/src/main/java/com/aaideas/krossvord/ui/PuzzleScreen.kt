@@ -26,6 +26,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -60,6 +61,9 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -84,6 +88,7 @@ fun PuzzleScreen(vm: GameViewModel, isPremium: Boolean) {
     androidx.compose.runtime.CompositionLocalProvider(LocalTile provides if (compact) 40.dp else 46.dp, LocalLowEnd provides lowEnd) {
         Box(Modifier.fillMaxSize()) {
             PuzzleContent(vm, isPremium, compact)
+            PraiseBurst(vm, Modifier.align(Alignment.Center))
             TutorialLayer(vm)
         }
     }
@@ -102,6 +107,19 @@ private fun PuzzleContent(vm: GameViewModel, isPremium: Boolean, compact: Boolea
         onDispose { owner.lifecycle.removeObserver(obs); vm.puzzleHidden() }
     }
     val game = vm.game ?: return
+    // Stuck on one word for a while: shown in the way picked in vm.stuckStyle.
+    val stuckEntry = game.activeEntry?.takeIf { !game.isComplete && vm.tutorialStep == TUTORIAL_DONE }
+    var stuck by remember { mutableStateOf(false) }
+    LaunchedEffect(vm.progressTick, stuckEntry?.id) {
+        stuck = false
+        if (stuckEntry == null) return@LaunchedEffect
+        kotlinx.coroutines.delay(vm.stuckSeconds * 1000)
+        stuck = true
+    }
+    val stuckNow = if (stuck) stuckEntry else null
+    androidx.compose.runtime.CompositionLocalProvider(
+        LocalStuck provides (if (vm.stuckStyle == StuckStyle.GLOW) stuckNow else null),
+    ) {
     val columns = vm.inputMode == InputMode.COLUMNS
     val letters = if (columns) vm.columnLetters() else emptyList()
     val draft = if (columns) vm.draft() else emptyList()
@@ -119,42 +137,48 @@ private fun PuzzleContent(vm: GameViewModel, isPremium: Boolean, compact: Boolea
             confirmButton = { Button(onClick = { confirmRestart = false; vm.restartLevel() }) { Text("Yenidən başla") } },
             dismissButton = { TextButton(onClick = { confirmRestart = false }) { Text("İmtina") } },
         )
-        if (glass) GlassTopBar(vm, isPremium) { confirmRestart = true }
-        else Row(verticalAlignment = Alignment.CenterVertically) {
-            SquareButton(Glyph.BACK, "Geri", vm::back, Modifier.tutorialAnchor(vm, TutorialSpot.BACK))
-            Spacer(Modifier.width(8.dp))
-            SquareButton(Glyph.RESTART, "Səviyyəni yenidən başla", { confirmRestart = true }, Modifier.tutorialAnchor(vm, TutorialSpot.RESTART))
-            Spacer(Modifier.weight(1f))
-            LivesBadge(vm, isPremium, Modifier.padding(end = 6.dp).tutorialAnchor(vm, TutorialSpot.LIVES))
-        }
+        // Every theme: one full-width bar on top, so the screen is symmetric edge to edge.
+        GlassTopBar(vm, isPremium) { confirmRestart = true }
         if (game.keyword != null) KeywordStrip(game.keywordLetters, game.isKeywordKnown, vm::openKeywordDialog, Modifier.tutorialAnchor(vm, TutorialSpot.KEYWORD))
         BoxWithConstraints(Modifier.fillMaxWidth().weight(1f), contentAlignment = Alignment.Center) {
             // Şüşə: the grid sits in a glass card with a small inner margin.
             val pad = if (glass) GLASS_GRID_PAD * 2 else 0.dp
-            val cell = min((maxWidth - pad) / game.board.cols, (maxHeight - pad) / game.board.rows)
+            // The grid spans the full width, in line with the buttons and letters below (symmetry): cells may
+            // be a little wider than tall when height is short, but never more than [MAX_CELL_STRETCH].
+            // Spare height goes into the cells too (a little taller than wide), so the gaps above and below
+            // the grid stay the same 8 dp as everywhere else instead of a wide empty band.
+            val fit = min((maxWidth - pad) / game.board.cols, (maxHeight - pad) / game.board.rows)
+            val cellW = min((maxWidth - pad) / game.board.cols, fit * MAX_CELL_STRETCH)
+            val cellH = min((maxHeight - pad) / game.board.rows, cellW * MAX_CELL_STRETCH)
             Grid(
-                game, cell, preview, vm.feedback, vm::isClueShown, vm::tapCell, vm::tapClueOf,
+                game, cellW, cellH, preview, vm.feedback, vm::isClueShown, vm::tapCell, vm::tapClueOf,
                 tutorialEntry = if (vm.tutorialStep == TUTORIAL_COACH && COACH_STEPS[vm.coachIndex].first == TutorialSpot.CLUE) game.activeEntry else null,
                 onSpot = if (vm.tutorialStep == TUTORIAL_COACH) { spot, r -> vm.tutorialRects[spot] = r } else null,
             )
+            if (stuckNow != null) when (vm.stuckStyle) {
+                StuckStyle.PILL -> StuckHint(vm, stuckNow, Modifier.align(Alignment.BottomCenter)) { stuck = false }
+                StuckStyle.OWL -> OwlHelper(vm, stuckNow, Modifier.align(Alignment.BottomEnd)) { stuck = false }
+                StuckStyle.KEY -> OwlHelper(vm, stuckNow, Modifier.align(Alignment.BottomEnd), key = true) { stuck = false }
+                StuckStyle.KEY_TALL -> OwlHelper(vm, stuckNow, Modifier.align(Alignment.BottomEnd), tall = true) { stuck = false }
+                else -> {}
+            }
         }
         val hintText = when {
             isPremium -> "Hərf aç"
             vm.freeHints > 0 -> "Hərf aç (${vm.freeHints} pulsuz)"
             else -> "Hərf aç ▶ reklam"
         }
-        // Small phones, letter columns: shuffle and hint move between the columns, so the grid gets that row.
-        // Şüşə keeps them in the row: its letter tiles are laid out in rows, not columns.
-        val actionsInColumns = compact && columns && !glass
+        // Letter tiles are laid out in even rows in every theme, so shuffle and hint always keep their own row.
+        val actionsInColumns = false
         val solved = game.isComplete && !vm.showCompletion
-        if (!actionsInColumns && !solved) Row(Modifier.fillMaxWidth().padding(vertical = if (compact) 2.dp else 6.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        if (!actionsInColumns && !solved) Row(Modifier.fillMaxWidth().padding(vertical = if (compact) 2.dp else PANEL_GAP), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             // A fixed height makes the button's fill take the whole touch area, so it lines up with the glass rim.
-            val glassBtn = if (glass) Modifier.height(48.dp).glassy(CircleShape) else Modifier
+            val glassBtn = Modifier.height(48.dp).glassy(CircleShape)
             val outlined = if (glass) ButtonDefaults.outlinedButtonColors(containerColor = MaterialTheme.colorScheme.surfaceContainer) else ButtonDefaults.outlinedButtonColors()
             val border = if (glass) null else ButtonDefaults.outlinedButtonBorder(true)
             if (columns) OutlinedButton(onClick = vm::shuffleTiles, modifier = Modifier.weight(1f).then(glassBtn), colors = outlined, border = border) { Text("⟳ Qarışdır") }
             else OutlinedButton(onClick = vm::clearWord, modifier = Modifier.weight(1f).then(glassBtn), colors = outlined, border = border) { Text("Sözü sil") }
-            Button(onClick = vm::hint, modifier = Modifier.weight(1f).then(glassBtn).tutorialAnchor(vm, TutorialSpot.HINT)) {
+            Button(onClick = vm::hint, modifier = Modifier.weight(1f).stuckGlow(vm.stuckStyle == StuckStyle.GLOW && stuckNow != null).then(glassBtn).tutorialAnchor(vm, TutorialSpot.HINT)) {
                 Text(
                     when {
                         isPremium -> "Hərf aç"
@@ -209,6 +233,7 @@ private fun PuzzleContent(vm: GameViewModel, isPremium: Boolean, compact: Boolea
         }
         }
     }
+    }
     if (vm.showKeywordDialog) KeywordDialog(vm)
     vm.clueCard?.takeIf { it in game.board.level.entries }?.let { e ->
         androidx.compose.runtime.LaunchedEffect(Unit) { vm.voice.warmUp() }
@@ -257,9 +282,16 @@ private fun PuzzleContent(vm: GameViewModel, isPremium: Boolean, compact: Boolea
 
 }
 
+/** One gap between the stacked panels of the level screen (top bar, key word, grid, buttons, clue, letters). */
+private val PANEL_GAP = 8.dp
+
+/** Cells may get this much wider than tall so the grid lines up with the full-width controls. */
+private const val MAX_CELL_STRETCH = 1.25f
+
 @Composable
 private fun Grid(
     game: GameState,
+    cellWidth: Dp,
     cellSize: Dp,
     preview: Map<Cell, Char>,
     feedback: WordFeedback?,
@@ -289,9 +321,10 @@ private fun Grid(
     val spots = if (onSpot == null || active == null) Modifier else Modifier.onGloballyPositioned { co ->
         val o = co.boundsInRoot().topLeft
         val px = with(density) { cellSize.toPx() }
+        val pw = with(density) { cellWidth.toPx() }
         fun rectOf(cells: List<Cell>) = androidx.compose.ui.geometry.Rect(
-            o.x + cells.minOf { it.col } * px, o.y + cells.minOf { it.row } * px,
-            o.x + (cells.maxOf { it.col } + 1) * px, o.y + (cells.maxOf { it.row } + 1) * px,
+            o.x + cells.minOf { it.col } * pw, o.y + cells.minOf { it.row } * px,
+            o.x + (cells.maxOf { it.col } + 1) * pw, o.y + (cells.maxOf { it.row } + 1) * px,
         )
         onSpot(TutorialSpot.WORD, rectOf(active.cells))
         game.board.cluesAt.entries.firstOrNull { active in it.value }?.let { onSpot(TutorialSpot.CLUE, rectOf(listOf(it.key))) }
@@ -307,8 +340,8 @@ private fun Grid(
             Row {
                 for (c in 0 until game.board.cols) {
                     val cell = Cell(r, c)
-                    val mod = if (glass) Modifier.size(cellSize).padding(1.5.dp).clip(RoundedCornerShape(cellSize * 0.16f))
-                        else Modifier.size(cellSize).border(0.5.dp, colors.line)
+                    val mod = if (glass) Modifier.size(cellWidth, cellSize).padding(1.5.dp).clip(RoundedCornerShape(cellSize * 0.16f))
+                        else Modifier.size(cellWidth, cellSize).border(0.5.dp, colors.line)
                     if (game.board.isLetter(cell)) {
                         LetterCell(
                             game, cell, cell == game.selectedCell, cell in activeCells, cellSize,
@@ -360,7 +393,7 @@ private fun LetterCell(
     ) {
         if (keywordIndex >= 0) {
             // Ring sits inset; the number sits in the corner on the cell colour so it never covers the letter.
-            Box(Modifier.fillMaxSize().padding(size * 0.14f).border(2.dp, colors.keyword, RoundedCornerShape(50)))
+            Box(Modifier.fillMaxHeight().aspectRatio(1f).padding(size * 0.14f).border(2.dp, colors.keyword, RoundedCornerShape(50)))
             Text(
                 "${keywordIndex + 1}",
                 fontSize = (size.value * 0.22f).sp,
@@ -451,9 +484,11 @@ private fun ClueCell(
                 LaunchedEffect(e) { a.animateTo(1f, repeatable(7, tween(600), RepeatMode.Reverse)) }
                 a.value
             } else 0f
+            val stuckHere = LocalStuck.current == e
             Box(
                 Modifier.fillMaxWidth().weight(1f)
                     .background(if (isActive) colors.activeWord else colors.clueCell)
+                    .then(if (stuckHere) Modifier.stuckClue() else Modifier)
                     .then(if (e == tutorialEntry) Modifier.border(3.dp, MaterialTheme.colorScheme.primary.copy(alpha = pulse)) else Modifier)
                     .clickable { onClueTap(e) }
                     .semantics { contentDescription = "İpucu: $text" },
@@ -499,7 +534,7 @@ private fun LongClueLine(entry: Entry, text: String, big: Boolean) {
     Surface(
         color = if (glass) MaterialTheme.colorScheme.surfaceContainer else MaterialTheme.colorScheme.secondaryContainer,
         shape = shape,
-        modifier = Modifier.fillMaxWidth().padding(top = 2.dp, bottom = if (glass) 6.dp else 0.dp).glassy(shape),
+        modifier = Modifier.fillMaxWidth().padding(bottom = PANEL_GAP).glassy(shape),
     ) {
         Text(
             if (glass) (if (text.length > CELL_CLUE_MAX) "♪ " else "") + "$text · ${entry.letters.size} hərf"
@@ -650,7 +685,8 @@ private fun ColumnsInput(
             for (x in listOf(14f, -12f, 9f, -6f, 3f, 0f)) shake.animateTo(x, tween(45))
         }
     }
-    if (LocalGlass.current) {
+    // Every theme: even rows of tiles, edge to edge (the old two-columns-a-side layout left ragged holes).
+    if (true) {
         GlassLetterRows(letters, draft, onPick, onUnpick, onUndo, onClear, Modifier.graphicsLayer { translationX = shake.value })
         return
     }
@@ -782,36 +818,49 @@ private fun SmallAction(label: String, description: String, enabled: Boolean, on
     }
 }
 
-/** The level's key word: slots fill in as its highlighted cells are solved; tap to guess early. */
+/**
+ * The level's key word: one full-width bar, its edges in line with the grid and the letters.
+ * Label on the left, the slots spread evenly (they fill in as the ringed cells are solved), and a
+ * guess button on the right. In Şüşə it is a glass bar like the others.
+ */
 @Composable
 private fun KeywordStrip(letters: List<Char?>, known: Boolean, onGuess: () -> Unit, modifier: Modifier = Modifier) {
     val colors = LocalGridColors.current
-    // Centred as one group: label, circles, guess mark.
-    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
+    val glass = LocalGlass.current
+    val shape = RoundedCornerShape(18.dp)
     Row(
-        modifier.clickable(enabled = !known, onClick = onGuess).padding(vertical = 2.dp, horizontal = 8.dp),
+        // The same 8 dp gap above and below as between every other panel on this screen.
+        modifier.fillMaxWidth().padding(vertical = PANEL_GAP)
+            .clip(shape).background(MaterialTheme.colorScheme.surfaceContainer).glassy(shape)
+            .clickable(enabled = !known, onClick = onGuess)
+            .padding(horizontal = 12.dp, vertical = 6.dp),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(4.dp),
     ) {
-        Text("Açar söz", style = MaterialTheme.typography.labelLarge, color = colors.keyword)
-        Spacer(Modifier.width(6.dp))
-        letters.forEachIndexed { i, ch ->
-            Box(
-                Modifier.size(28.dp).border(2.dp, colors.keyword, RoundedCornerShape(50)),
-                contentAlignment = Alignment.Center,
-            ) {
-                Text(ch?.toString() ?: "${i + 1}", fontSize = if (ch != null) 15.sp else 10.sp,
-                    fontWeight = if (ch != null) FontWeight.Bold else FontWeight.Normal,
-                    color = if (ch != null) MaterialTheme.colorScheme.onSurface else colors.keyword)
+        Column {
+            Text("Açar", style = MaterialTheme.typography.labelLarge, fontWeight = FontWeight.Bold, color = colors.keyword, lineHeight = 14.sp)
+            Text("söz", style = MaterialTheme.typography.labelLarge, fontWeight = FontWeight.Bold, color = colors.keyword, lineHeight = 14.sp)
+        }
+        Row(Modifier.weight(1f).padding(horizontal = 8.dp), horizontalArrangement = Arrangement.SpaceEvenly) {
+            letters.forEachIndexed { i, ch ->
+                Box(
+                    Modifier.size(32.dp).clip(RoundedCornerShape(10.dp))
+                        .background(if (ch != null) colors.keyword.copy(alpha = 0.18f) else Color.Transparent)
+                        .border(2.dp, colors.keyword, RoundedCornerShape(10.dp)),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    Text(ch?.toString() ?: "${i + 1}", fontSize = if (ch != null) 17.sp else 11.sp,
+                        fontWeight = if (ch != null) FontWeight.Bold else FontWeight.Normal,
+                        color = if (ch != null) MaterialTheme.colorScheme.onSurface else colors.keyword)
+                }
             }
         }
-        Spacer(Modifier.width(6.dp))
-        Text(
-            if (known) "✓" else "›",
-            style = MaterialTheme.typography.titleLarge,
-            color = colors.keyword,
-        )
-    }
+        Box(
+            Modifier.size(36.dp).clip(CircleShape).background(colors.keyword.copy(alpha = if (known) 0.25f else 0.9f)),
+            contentAlignment = Alignment.Center,
+        ) {
+            Text(if (known) "✓" else "?", fontWeight = FontWeight.Bold, fontSize = 18.sp,
+                color = if (known) colors.keyword else Color.White)
+        }
     }
 }
 
@@ -956,7 +1005,7 @@ private fun GlassTopBar(vm: GameViewModel, isPremium: Boolean, onRestart: () -> 
     val cs = MaterialTheme.colorScheme
     val ink = cs.onSurface
     Row(
-        Modifier.fillMaxWidth().padding(bottom = 6.dp).clip(CircleShape).background(cs.surfaceContainer).glassy(CircleShape)
+        Modifier.fillMaxWidth().clip(CircleShape).background(cs.surfaceContainer).glassy(CircleShape)
             .height(52.dp).padding(horizontal = 4.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
@@ -1071,4 +1120,282 @@ private fun GlassLetterRows(
             }
         }
     }
+}
+
+/** The word the player is stuck on, for the golden clue cell (glow style); null otherwise. */
+val LocalStuck = androidx.compose.runtime.staticCompositionLocalOf<Entry?> { null }
+
+/** Style A (first one): a soft pill under the grid offers an easier clue; pulses three times, then stays still. */
+@Composable
+private fun StuckHint(vm: GameViewModel, entry: Entry, modifier: Modifier, onUsed: () -> Unit) {
+    val pulse = remember { androidx.compose.animation.core.Animatable(1f) }
+    LaunchedEffect(Unit) {
+        repeat(3) {
+            pulse.animateTo(1.08f, androidx.compose.animation.core.tween(450))
+            pulse.animateTo(1f, androidx.compose.animation.core.tween(450))
+        }
+    }
+    val cs = MaterialTheme.colorScheme
+    androidx.compose.material3.Surface(
+        onClick = { onUsed(); vm.tapClueOf(entry) },
+        shape = CircleShape,
+        color = cs.tertiaryContainer,
+        contentColor = cs.onTertiaryContainer,
+        shadowElevation = if (LocalGlass.current) 0.dp else 4.dp,
+        modifier = modifier.padding(10.dp).graphicsLayer { scaleX = pulse.value; scaleY = pulse.value },
+    ) {
+        Text("💡 Çətindir? İpucunu asanlaşdır", Modifier.padding(horizontal = 18.dp, vertical = 12.dp), style = MaterialTheme.typography.titleMedium)
+    }
+}
+
+/**
+ * Style B: a little owl peeks in at the grid's corner with a speech bubble. It slides in once,
+ * blinks twice and stays; a tap opens the clue card. Drawn with shapes, so it costs nothing to load.
+ */
+@Composable
+private fun OwlHelper(vm: GameViewModel, entry: Entry, modifier: Modifier, key: Boolean = false, tall: Boolean = false, onUsed: () -> Unit) {
+    val slide = remember { androidx.compose.animation.core.Animatable(1f) }
+    val blink = remember { androidx.compose.animation.core.Animatable(1f) }
+    LaunchedEffect(Unit) {
+        slide.animateTo(0f, androidx.compose.animation.core.spring(dampingRatio = 0.6f, stiffness = 300f))
+        repeat(2) {
+            kotlinx.coroutines.delay(700)
+            blink.animateTo(0.1f, androidx.compose.animation.core.tween(90))
+            blink.animateTo(1f, androidx.compose.animation.core.tween(90))
+        }
+    }
+    val cs = MaterialTheme.colorScheme
+    Row(
+        modifier.padding(6.dp).graphicsLayer { translationX = slide.value * 260f; alpha = 1f - slide.value * 0.6f }
+            .clickable(interactionSource = remember { androidx.compose.foundation.interaction.MutableInteractionSource() }, indication = null) { onUsed(); vm.tapClueOf(entry) },
+        verticalAlignment = Alignment.Bottom,
+    ) {
+        // Speech bubble with a small tail pointing at the owl.
+        Column(horizontalAlignment = Alignment.End) {
+            androidx.compose.material3.Surface(
+                shape = RoundedCornerShape(topStart = 18.dp, topEnd = 18.dp, bottomStart = 18.dp, bottomEnd = 4.dp),
+                color = cs.surface,
+                contentColor = cs.onSurface,
+                border = androidx.compose.foundation.BorderStroke(2.dp, cs.primary),
+                shadowElevation = 3.dp,
+            ) {
+                Column(Modifier.padding(horizontal = 14.dp, vertical = 10.dp)) {
+                    Text("Kömək edim?", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                    Text("Asan ipucu göstərim", style = MaterialTheme.typography.bodyMedium, color = cs.primary)
+                }
+            }
+            Spacer(Modifier.height(18.dp))
+        }
+        Spacer(Modifier.width(4.dp))
+        if (tall) TallKey(blink.value, Modifier.size(width = 56.dp, height = 104.dp).graphicsLayer {
+            // Leans in with a wobble, then stays a little tilted, curious.
+            rotationZ = 18f * slide.value - 7f
+            transformOrigin = androidx.compose.ui.graphics.TransformOrigin(0.5f, 1f)
+        }) else if (key) KeyBuddy(blink.value, Modifier.size(width = 58.dp, height = 78.dp).graphicsLayer {
+            // A small happy wiggle while it slides in.
+            rotationZ = -14f * slide.value + 6f
+        }) else Owl(blink.value, Modifier.size(64.dp))
+    }
+}
+
+/**
+ * Style D: the game's own mascot, a golden key (Açar = key). Round bow with a face (eyes that
+ * blink, a smile, pink cheeks), a lavender ribbon, and the shaft with teeth below.
+ */
+@Composable
+private fun KeyBuddy(eyeOpen: Float, modifier: Modifier) {
+    val gold = Color(0xFFFFC94D)
+    val goldDark = Color(0xFFE0A21B)
+    val ink = Color(0xFF3A2A10)
+    androidx.compose.foundation.Canvas(modifier) {
+        val w = size.width; val h = size.height
+        val cx = w / 2
+        val r = w * 0.42f
+        val cy = r + w * 0.04f
+        // shaft and teeth
+        val shaftW = w * 0.2f
+        drawRoundRect(goldDark, topLeft = Offset(cx - shaftW / 2, cy + r * 0.6f), size = Size(shaftW, h - cy - r * 0.6f), cornerRadius = androidx.compose.ui.geometry.CornerRadius(shaftW / 2))
+        drawRoundRect(goldDark, topLeft = Offset(cx + shaftW / 2 - 2f, h * 0.78f), size = Size(w * 0.2f, h * 0.07f), cornerRadius = androidx.compose.ui.geometry.CornerRadius(4f))
+        drawRoundRect(goldDark, topLeft = Offset(cx + shaftW / 2 - 2f, h * 0.9f), size = Size(w * 0.14f, h * 0.07f), cornerRadius = androidx.compose.ui.geometry.CornerRadius(4f))
+        // bow (head)
+        drawCircle(goldDark, radius = r, center = Offset(cx, cy + 2f))
+        drawCircle(gold, radius = r * 0.94f, center = Offset(cx, cy))
+        // shine
+        drawCircle(Color.White.copy(alpha = 0.45f), radius = r * 0.16f, center = Offset(cx - r * 0.5f, cy - r * 0.5f))
+        // ribbon
+        val bow = androidx.compose.ui.graphics.Path().apply {
+            moveTo(cx, cy - r * 0.9f); lineTo(cx - r * 0.55f, cy - r * 1.15f); lineTo(cx - r * 0.5f, cy - r * 0.6f); close()
+            moveTo(cx, cy - r * 0.9f); lineTo(cx + r * 0.55f, cy - r * 1.15f); lineTo(cx + r * 0.5f, cy - r * 0.6f); close()
+        }
+        drawPath(bow, Color(0xFF8E7CC3))
+        drawCircle(Color(0xFF6F5BAE), radius = r * 0.13f, center = Offset(cx, cy - r * 0.9f))
+        // eyes
+        for (ex in listOf(cx - r * 0.35f, cx + r * 0.35f)) {
+            val eh = r * 0.3f * eyeOpen
+            drawOval(ink, topLeft = Offset(ex - r * 0.11f, cy - r * 0.12f - eh / 2), size = Size(r * 0.22f, eh.coerceAtLeast(2f)))
+            if (eyeOpen > 0.5f) drawCircle(Color.White, radius = r * 0.05f, center = Offset(ex + r * 0.04f, cy - r * 0.18f))
+        }
+        // cheeks
+        drawCircle(Color(0xFFFF8A80).copy(alpha = 0.6f), radius = r * 0.12f, center = Offset(cx - r * 0.6f, cy + r * 0.18f))
+        drawCircle(Color(0xFFFF8A80).copy(alpha = 0.6f), radius = r * 0.12f, center = Offset(cx + r * 0.6f, cy + r * 0.18f))
+        // smile
+        drawArc(ink, startAngle = 20f, sweepAngle = 140f, useCenter = false,
+            topLeft = Offset(cx - r * 0.28f, cy - r * 0.05f), size = Size(r * 0.56f, r * 0.45f),
+            style = androidx.compose.ui.graphics.drawscope.Stroke(width = r * 0.08f, cap = androidx.compose.ui.graphics.StrokeCap.Round))
+    }
+}
+
+/**
+ * Style E: a tall, thin golden key standing on its tip, with big round eyes and raised
+ * eyebrows on its bow, no mouth: the eyes and brows do the talking. Our own drawing.
+ */
+@Composable
+private fun TallKey(eyeOpen: Float, modifier: Modifier) {
+    val gold = Color(0xFFFFC94D)
+    val edge = Color(0xFFC98A0E)
+    val ink = Color(0xFF2A2140)
+    androidx.compose.foundation.Canvas(modifier) {
+        val w = size.width; val h = size.height
+        val cx = w / 2
+        val stroke = w * 0.13f
+        val line = androidx.compose.ui.graphics.drawscope.Stroke(width = stroke, cap = androidx.compose.ui.graphics.StrokeCap.Round, join = androidx.compose.ui.graphics.StrokeJoin.Round)
+        val outline = androidx.compose.ui.graphics.drawscope.Stroke(width = stroke + 4f, cap = androidx.compose.ui.graphics.StrokeCap.Round, join = androidx.compose.ui.graphics.StrokeJoin.Round)
+        // Bow: an open oval ring at the top (like a wire bent round), with a little gap where it meets the shaft.
+        val ringTop = h * 0.08f; val ringH = h * 0.36f
+        val ring = androidx.compose.ui.graphics.Path().apply {
+            arcTo(androidx.compose.ui.geometry.Rect(w * 0.12f, ringTop, w * 0.88f, ringTop + ringH), 100f, 340f, true)
+        }
+        // Shaft with a slight S-bend, and two teeth near the tip.
+        val shaft = androidx.compose.ui.graphics.Path().apply {
+            moveTo(cx, ringTop + ringH)
+            cubicTo(cx + w * 0.12f, h * 0.6f, cx - w * 0.1f, h * 0.78f, cx, h * 0.94f)
+            moveTo(cx + w * 0.01f, h * 0.8f); lineTo(cx + w * 0.26f, h * 0.8f)
+            moveTo(cx + w * 0.01f, h * 0.9f); lineTo(cx + w * 0.2f, h * 0.9f)
+        }
+        for (p in listOf(ring, shaft)) drawPath(p, edge, style = outline)
+        for (p in listOf(ring, shaft)) drawPath(p, gold, style = line)
+        // Big eyes inside the bow, looking toward the bubble (left).
+        val eyeY = ringTop + ringH * 0.52f
+        val er = w * 0.15f
+        for (ex in listOf(cx - w * 0.15f, cx + w * 0.15f)) {
+            drawOval(Color.White, topLeft = Offset(ex - er, eyeY - er * 1.15f), size = Size(er * 2, er * 2.3f))
+            drawOval(ink.copy(alpha = 0.25f), topLeft = Offset(ex - er, eyeY - er * 1.15f), size = Size(er * 2, er * 2.3f), style = androidx.compose.ui.graphics.drawscope.Stroke(width = 2f))
+            val ph = er * 1.1f * eyeOpen
+            drawOval(ink, topLeft = Offset(ex - er * 0.85f, eyeY - ph / 2 + er * 0.1f), size = Size(er * 0.95f, ph.coerceAtLeast(2f)))
+            if (eyeOpen > 0.5f) drawCircle(Color.White, radius = er * 0.18f, center = Offset(ex - er * 0.45f, eyeY - er * 0.2f))
+        }
+        // Raised, slightly tilted eyebrows: "Need a hand?"
+        val brow = androidx.compose.ui.graphics.drawscope.Stroke(width = w * 0.06f, cap = androidx.compose.ui.graphics.StrokeCap.Round)
+        drawLine(ink, Offset(cx - w * 0.3f, eyeY - er * 1.55f), Offset(cx - w * 0.04f, eyeY - er * 1.85f), strokeWidth = brow.width, cap = brow.cap)
+        drawLine(ink, Offset(cx + w * 0.04f, eyeY - er * 1.9f), Offset(cx + w * 0.3f, eyeY - er * 1.7f), strokeWidth = brow.width, cap = brow.cap)
+    }
+}
+
+/** A round lavender owl: body, ear tufts, big eyes (that blink), beak, wings. */
+@Composable
+private fun Owl(eyeOpen: Float, modifier: Modifier) {
+    val body = Color(0xFF8E7CC3)
+    val belly = Color(0xFFE9E1FA)
+    val ink = Color(0xFF2A2140)
+    androidx.compose.foundation.Canvas(modifier) {
+        val w = size.width; val h = size.height
+        // ear tufts
+        val ear = androidx.compose.ui.graphics.Path().apply {
+            moveTo(w * 0.18f, h * 0.30f); lineTo(w * 0.22f, h * 0.04f); lineTo(w * 0.42f, h * 0.22f); close()
+            moveTo(w * 0.82f, h * 0.30f); lineTo(w * 0.78f, h * 0.04f); lineTo(w * 0.58f, h * 0.22f); close()
+        }
+        drawPath(ear, body)
+        drawOval(body, topLeft = Offset(w * 0.1f, h * 0.14f), size = Size(w * 0.8f, h * 0.84f))
+        drawOval(belly, topLeft = Offset(w * 0.27f, h * 0.5f), size = Size(w * 0.46f, h * 0.44f))
+        // wings
+        drawOval(Color(0xFF6F5BAE), topLeft = Offset(w * 0.04f, h * 0.48f), size = Size(w * 0.2f, h * 0.36f))
+        drawOval(Color(0xFF6F5BAE), topLeft = Offset(w * 0.76f, h * 0.48f), size = Size(w * 0.2f, h * 0.36f))
+        // eyes
+        for (cx in listOf(w * 0.35f, w * 0.65f)) {
+            drawCircle(Color.White, radius = w * 0.15f, center = Offset(cx, h * 0.38f))
+            drawOval(ink, topLeft = Offset(cx - w * 0.07f, h * 0.38f - w * 0.07f * eyeOpen), size = Size(w * 0.14f, w * 0.14f * eyeOpen))
+            if (eyeOpen > 0.5f) drawCircle(Color.White, radius = w * 0.025f, center = Offset(cx + w * 0.03f, h * 0.36f))
+        }
+        // beak
+        val beak = androidx.compose.ui.graphics.Path().apply {
+            moveTo(w * 0.45f, h * 0.48f); lineTo(w * 0.55f, h * 0.48f); lineTo(w * 0.5f, h * 0.58f); close()
+        }
+        drawPath(beak, Color(0xFFFFB300))
+    }
+}
+
+/** Golden frame and warm light on the stuck clue cell; breathes three times, then stays lit. */
+@Composable
+private fun Modifier.stuckClue(): Modifier {
+    val a = remember { androidx.compose.animation.core.Animatable(0f) }
+    LaunchedEffect(Unit) {
+        repeat(3) {
+            a.animateTo(1f, androidx.compose.animation.core.tween(600))
+            a.animateTo(0.5f, androidx.compose.animation.core.tween(600))
+        }
+        a.animateTo(1f, androidx.compose.animation.core.tween(600))
+    }
+    val v = a.value
+    return this.drawBehind {
+        drawRect(
+            androidx.compose.ui.graphics.Brush.radialGradient(
+                listOf(Color(0xFFFFD54F).copy(alpha = 0.55f * v), Color(0x00FFD54F)),
+                center = Offset(size.width, 0f), radius = size.maxDimension * 1.1f,
+            )
+        )
+    }.border(2.5.dp, Color(0xFFFFB300).copy(alpha = 0.4f + 0.6f * v))
+}
+
+/** Style C (with the golden clue cell): the "Hərf aç" button gets a warm golden halo that breathes three times (no text added). */
+@Composable
+private fun Modifier.stuckGlow(on: Boolean): Modifier {
+    if (!on) return this
+    val a = remember { androidx.compose.animation.core.Animatable(0f) }
+    LaunchedEffect(Unit) {
+        repeat(3) {
+            a.animateTo(1f, androidx.compose.animation.core.tween(700))
+            a.animateTo(0.45f, androidx.compose.animation.core.tween(700))
+        }
+    }
+    val v = a.value
+    return this.drawBehind {
+        val r = size.height / 2
+        for (i in 3 downTo 1) {
+            val g = i * 4.dp.toPx()
+            drawRoundRect(
+                Color(0xFFFFC94D).copy(alpha = 0.22f * v / i),
+                topLeft = Offset(-g, -g), size = Size(size.width + 2 * g, size.height + 2 * g),
+                cornerRadius = androidx.compose.ui.geometry.CornerRadius(r + g),
+            )
+        }
+    }
+}
+
+/** A found word: "Bravo!" grows in the middle and fades within a second. Touches pass through. */
+@Composable
+private fun PraiseBurst(vm: GameViewModel, modifier: Modifier) {
+    val word = vm.praise ?: return
+    val t = remember { androidx.compose.animation.core.Animatable(1f) }
+    LaunchedEffect(vm.praiseTick) {
+        t.snapTo(0f)
+        t.animateTo(1f, androidx.compose.animation.core.tween(900, easing = androidx.compose.animation.core.LinearEasing))
+    }
+    val v = t.value
+    if (v >= 1f) return
+    val cs = MaterialTheme.colorScheme
+    Text(
+        word,
+        modifier = modifier.graphicsLayer {
+            val grow = (v / 0.2f).coerceAtMost(1f)
+            alpha = if (v < 0.2f) grow else 1f - (v - 0.2f) / 0.8f
+            scaleX = 0.8f + 0.3f * grow
+            scaleY = 0.8f + 0.3f * grow
+        },
+        fontSize = 46.sp,
+        fontWeight = FontWeight.ExtraBold,
+        color = cs.primary,
+        style = MaterialTheme.typography.displayMedium.copy(
+            shadow = androidx.compose.ui.graphics.Shadow(cs.surface, blurRadius = 12f),
+        ),
+    )
 }

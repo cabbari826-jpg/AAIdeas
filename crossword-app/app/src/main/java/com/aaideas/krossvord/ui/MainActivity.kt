@@ -35,6 +35,16 @@ class MainActivity : ComponentActivity() {
     private var ready by androidx.compose.runtime.mutableStateOf(com.aaideas.krossvord.data.PackCache.isLoaded)
     private var pendingIntent: android.content.Intent? = null
 
+    /**
+     * Back in front (also after a night in the background, when the process was kept): pick up
+     * the new day's word, tasks and lives, and set the reminder again.
+     */
+    override fun onStart() {
+        super.onStart()
+        if (ready) vm.onResumeDay()
+        if (com.aaideas.krossvord.remind.DailyReminder.isOn(this)) com.aaideas.krossvord.remind.DailyReminder.schedule(this)
+    }
+
     override fun onNewIntent(intent: android.content.Intent) {
         super.onNewIntent(intent)
         if (ready) openFrom(intent) else pendingIntent = intent
@@ -80,24 +90,38 @@ class MainActivity : ComponentActivity() {
             }
             // Large mode: all text at least 1.3x, whatever the phone's own font setting.
             val base = androidx.compose.ui.platform.LocalDensity.current
-            val density = if (vm.largeMode) androidx.compose.ui.unit.Density(base.density, maxOf(base.fontScale, LARGE_FONT_SCALE)) else base
+            // Follows the phone's own big font until the player sets the switch.
+            val systemScale = androidx.compose.ui.platform.LocalConfiguration.current.fontScale
+            val scale = vm.appFontScale(systemScale)
+            val density = if (scale != base.fontScale) androidx.compose.ui.unit.Density(base.density, scale) else base
             androidx.compose.runtime.CompositionLocalProvider(androidx.compose.ui.platform.LocalDensity provides density) {
             LaunchedEffect(vm.screen) { if (vm.screen == Screen.HOME || vm.screen == Screen.SETTINGS) vm.refreshSkins(com.aaideas.krossvord.model.Ranks.unlockedThemes(vm.xp).toSet()) }
             KrossvordTheme(mode, vm.dynamicColor, skin) {
                 // Şüşə: the colourful backdrop shows through, so the window surface is clear.
-                Surface(Modifier.fillMaxSize(), color = if (skin.glass) androidx.compose.ui.graphics.Color.Transparent else MaterialTheme.colorScheme.background) {
+                Surface(Modifier.fillMaxSize(), color = if (skin.glass) androidx.compose.ui.graphics.Color.Transparent else MaterialTheme.colorScheme.background,
+                    // A clear surface would leave text black on the dark glass; say the colour outright.
+                    contentColor = MaterialTheme.colorScheme.onBackground) {
                     val glassLite = skin.glass && GlassLite.isOn(this@MainActivity)
                     val haze = if (skin.glass && !glassLite) androidx.compose.runtime.remember { dev.chrisbanes.haze.HazeState() } else null
+                    val glassMax = haze != null && GlassMax.isOn(this@MainActivity)
+                    // Android 13+: real glass lens (LiquidGlass.kt); Android 12: frosted cards (Haze).
+                    val liquid = glassMax && LiquidGlass.supported
+                    val cardHaze = if (glassMax && !liquid) androidx.compose.runtime.remember { dev.chrisbanes.haze.HazeState() } else null
+                    // The moving light's clock: the backdrop and every glass lens read the same time.
+                    val glassClock = if (liquid) rememberGlassClock() else null
+                    val backdrop = glassClock?.let { LensLight(it, dark) }
+                    val screenLayer = if (liquid) androidx.compose.ui.graphics.rememberGraphicsLayer() else null
                     val isPremium by vm.premium.isPremium.collectAsState()
                     BackHandler(enabled = vm.screen != Screen.HOME) { vm.back() }
                     val menu = vm.screen != Screen.PUZZLE && vm.screen != Screen.WORD_OF_DAY
-                    androidx.compose.runtime.CompositionLocalProvider(LocalHaze provides haze, LocalGlassLite provides glassLite) {
+                    androidx.compose.runtime.CompositionLocalProvider(LocalHaze provides haze, LocalGlassLite provides glassLite, LocalCardHaze provides cardHaze, LocalGlassBackdrop provides backdrop, LocalGlassScreen provides screenLayer) {
+                    MaxGlassColors(glassMax, dark, liquid) {
                     // The backdrop and screens are the blur source; the floating menu (outside it) frosts them.
-                    Box(Modifier.fillMaxSize().then(if (haze != null) Modifier.hazeSource(haze) else Modifier)) {
-                        if (skin.glass) GlassBackdrop(dark, Modifier.fillMaxSize())
+                    Box(Modifier.fillMaxSize().then(if (haze != null && !liquid) Modifier.hazeSource(haze) else Modifier).recordInto(screenLayer)) {
+                        if (skin.glass) GlassBackdrop(dark, Modifier.fillMaxSize().then(if (cardHaze != null) Modifier.hazeSource(cardHaze) else Modifier), moving = glassMax, clock = glassClock)
                     Box(Modifier.safeDrawingPadding()) {
                         // Leave room under the floating menu so it never hides the last item (home scrolls under it).
-                        Box(if (menu && vm.screen != Screen.HOME) Modifier.padding(bottom = BottomMenuHeight) else Modifier) {
+                        Box(if (menu && vm.screen != Screen.HOME && !liquid) Modifier.padding(bottom = BottomMenuHeight) else Modifier) {
                             when (vm.screen) {
                                 Screen.HOME -> ExpressiveHome(vm)
                                 Screen.LEVELS -> LevelsScreen(vm)
@@ -107,6 +131,8 @@ class MainActivity : ComponentActivity() {
                                 Screen.STATS -> StatsScreen(vm)
                                 Screen.COLLECTION -> CollectionScreen(vm)
                                 Screen.DAILY -> DailyScreen(vm)
+                                Screen.PACKS -> PacksScreen(vm)
+                                Screen.MAP -> JourneyScreen(vm)
                             }
                         }
                     }
@@ -115,7 +141,9 @@ class MainActivity : ComponentActivity() {
                         if (menu) GlassBottomMenu(vm.screen, vm::open, Modifier.align(Alignment.BottomCenter))
                     }
                     }
+                    }
                     WelcomeHost(vm)
+                    RestDialog(vm)
                     AdPlaceholderHost(vm.ads)
                     UpdateBanner() // prototype only; empty in the release build
                 }

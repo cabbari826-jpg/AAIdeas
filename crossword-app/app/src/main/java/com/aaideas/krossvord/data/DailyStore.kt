@@ -31,6 +31,11 @@ class DailyStore(context: Context) {
         get() = prefs.getStringSet("played", emptySet()).orEmpty().mapNotNull { it.toLongOrNull() }.toSet()
         set(v) = prefs.edit().putStringSet("played", v.sortedDescending().take(400).map { it.toString() }.toSet()).apply()
 
+    /** Day the last 3-days-in-a-row free hint was given. */
+    var lastStreakHint: Long
+        get() = prefs.getLong("last_streak_hint", -1)
+        set(v) = prefs.edit().putLong("last_streak_hint", v).apply()
+
     var lastStreakGift: Long
         get() = prefs.getLong("streak_gift", Long.MIN_VALUE)
         set(v) = prefs.edit().putLong("streak_gift", v).apply()

@@ -3,6 +3,8 @@ package com.aaideas.krossvord.ui
 import android.app.Application
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.ui.unit.dp
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -78,6 +80,93 @@ class ThemeScreenshotTest {
         "OD".forEach { ch -> vm.pickLetter(letters.indexOf(ch)) }
         vm.tapCell(Cell(0, 1))
         shoot("puzzle-dark", ThemeMode.DARK) { PuzzleScreen(vm, isPremium = false) }
+    }
+
+    /** Klassik level screen with the tutorial closed: the same symmetric layout as Şüşə. */
+    @Test fun classicSymmetric() {
+        val vm = vm()
+        vm.startLevel(0); vm.restartLevel(); vm.finishTutorial()
+        val letters = vm.columnLetters()
+        "OD".forEach { ch -> vm.pickLetter(letters.indexOf(ch)) }
+        for (mode in listOf(ThemeMode.LIGHT, ThemeMode.DARK))
+            shoot("classic-sym-${mode.name.lowercase()}", mode) { PuzzleScreen(vm, isPremium = false) }
+    }
+
+    /** Update 2.1 screens in Şüşə: home, "Bu gün", the map, packs, settings. */
+    @Config(qualifiers = "w393dp-h1300dp-xxhdpi")
+    @Test fun glassUpdate21() {
+        val app = ApplicationProvider.getApplicationContext<Application>()
+        app.getSharedPreferences("progress", 0).edit().putInt("month_key", 202611).putInt("month_levels", 9).commit()
+        val vm = vm()
+        vm.unlockAllSkinsForTesting(); vm.changeSkin(Skin.SUSE)
+        val screens: List<Pair<String, @Composable () -> Unit>> = listOf(
+            "home" to { ExpressiveHome(vm) },
+            "today" to { DailyScreen(vm) },
+            "map" to { JourneyScreen(vm) },
+            "packs" to { PacksScreen(vm) },
+            "settings" to { SettingsScreen(vm, isPremium = false) },
+        )
+        for (mode in listOf(ThemeMode.LIGHT, ThemeMode.DARK)) for ((name, screen) in screens) {
+            val tab = when (name) { "today" -> Screen.DAILY; "settings" -> Screen.SETTINGS; else -> Screen.HOME }
+            shoot("glass21-$name-${mode.name.lowercase()}", mode, Skin.SUSE) {
+                androidx.compose.foundation.layout.Box {
+                    GlassBackdrop(mode == ThemeMode.DARK, androidx.compose.ui.Modifier.matchParentSize())
+                    screen()
+                    GlassBottomMenu(tab, {}, androidx.compose.ui.Modifier.align(androidx.compose.ui.Alignment.BottomCenter))
+                }
+            }
+        }
+    }
+
+    /** The chosen menu: short pill, Nunito labels, drawn icons; each tab selected once. */
+    @Config(qualifiers = "w393dp-h700dp-xxhdpi")
+    @Test fun menuFinal() {
+        for (mode in listOf(ThemeMode.LIGHT, ThemeMode.DARK)) {
+            shoot("menu-final-${mode.name.lowercase()}", mode, Skin.SUSE) {
+                androidx.compose.foundation.layout.Box {
+                    GlassBackdrop(mode == ThemeMode.DARK, androidx.compose.ui.Modifier.matchParentSize())
+                    androidx.compose.foundation.layout.Column(androidx.compose.ui.Modifier.padding(top = 8.dp)) {
+                        listOf(Screen.HOME, Screen.DAILY, Screen.STATS, Screen.SETTINGS).forEach { tab ->
+                            androidx.compose.foundation.layout.Box(androidx.compose.ui.Modifier.fillMaxWidth(), contentAlignment = androidx.compose.ui.Alignment.Center) {
+                                GlassBottomMenu(tab, {})
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /** Bottom menu variants for the owner: current, shorter, and shorter with bolder fonts. */
+    @Config(qualifiers = "w393dp-h1000dp-xxhdpi")
+    @Test fun menuVariants() {
+        fun font(name: String): androidx.compose.ui.text.font.FontFamily {
+            val f = java.io.File.createTempFile(name, ".ttf")
+            javaClass.getResourceAsStream("/menufonts/$name.ttf")!!.use { i -> f.outputStream().use { i.copyTo(it) } }
+            return androidx.compose.ui.text.font.FontFamily(androidx.compose.ui.text.font.Font(f, androidx.compose.ui.text.font.FontWeight.Bold))
+        }
+        val variants = listOf<Pair<String, androidx.compose.ui.text.font.FontFamily?>>(
+            "0 · indiki" to null,
+            "A · Roboto qalın" to androidx.compose.ui.text.font.FontFamily.Default,
+            "B · Nunito" to font("nunito_800"),
+            "C · Montserrat" to font("montserrat_700"),
+            "D · Manrope" to font("manrope_800"),
+        )
+        for (mode in listOf(ThemeMode.LIGHT, ThemeMode.DARK)) {
+            shoot("menu-variants-${mode.name.lowercase()}", mode, Skin.SUSE) {
+                androidx.compose.foundation.layout.Box {
+                    GlassBackdrop(mode == ThemeMode.DARK, androidx.compose.ui.Modifier.matchParentSize())
+                    androidx.compose.foundation.layout.Column(androidx.compose.ui.Modifier.padding(top = 12.dp)) {
+                        variants.forEachIndexed { i, (name, f) ->
+                            androidx.compose.material3.Text(name, androidx.compose.ui.Modifier.padding(start = 24.dp), style = androidx.compose.material3.MaterialTheme.typography.titleMedium)
+                            androidx.compose.foundation.layout.Box(androidx.compose.ui.Modifier.fillMaxWidth(), contentAlignment = androidx.compose.ui.Alignment.Center) {
+                                GlassBottomMenu(Screen.HOME, {}, compact = i > 0, font = f)
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     @Test fun glassTheme() {

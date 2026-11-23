@@ -21,7 +21,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
@@ -131,20 +133,24 @@ fun ExpressiveHome(vm: GameViewModel) {
 
         ContinueCard(vm)
         WordOfDayCard(vm.daily) { vm.open(Screen.WORD_OF_DAY) }
+        // Weekly surprise, month road and the big road live on the "Bu gün" tab; here one card leads there.
         TodayCard(vm)
 
         // Packs first, then the levels of the chosen pack, all on this screen.
         val p = vm.homePack
         val open = vm.packs.indices.filter { vm.packOpen(it) }
-        if (open.size > 1) {
-            Text("Paketlər", style = MaterialTheme.typography.titleLarge)
-            Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                open.forEach { i ->
-                    val pack = vm.packs[i]
-                    val done = pack.levels.count { it.id in vm.completed }
-                    val icon = com.aaideas.krossvord.model.Holidays.holidayFor(pack.packId)?.icon?.let { "$it " }.orEmpty()
-                    PackCard(icon + pack.title, done, pack.levels.size, selected = i == p) { vm.selectedPack = i }
-                }
+        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+            Text("Paketlər", style = MaterialTheme.typography.titleLarge, modifier = Modifier.weight(1f))
+            // Kids mode keeps to the kids pack, so no downloads from there.
+            if (!vm.kidsMode) TextButton(onClick = { vm.open(Screen.PACKS) }) { Text("📦 Yeni paketlər ▶", style = MaterialTheme.typography.titleSmall) }
+        }
+        Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+            if (open.size > 1) open.forEach { i ->
+                val pack = vm.packs[i]
+                val done = pack.levels.count { it.id in vm.completed }
+                val icon = com.aaideas.krossvord.model.Holidays.holidayFor(pack.packId)?.icon?.let { "$it " }
+                    ?: if (com.aaideas.krossvord.model.Weekly.isWeekly(pack.packId)) "🎁 " else ""
+                PackCard(icon + pack.title, done, pack.levels.size, selected = i == p) { vm.selectedPack = i }
             }
         }
         Text(vm.packs[p].title, style = MaterialTheme.typography.titleLarge)
@@ -284,6 +290,36 @@ private fun PackCard(title: String, done: Int, total: Int, selected: Boolean, on
     }
 }
 
+/** "Həftənin sürprizi": the newest weekly pack with levels left. */
+@Composable
+fun WeeklyCard(vm: GameViewModel, p: Int) {
+    val cs = MaterialTheme.colorScheme
+    val pack = vm.packs[p]
+    val done = pack.levels.count { it.id in vm.completed }
+    val src = remember { MutableInteractionSource() }
+    Surface(
+        onClick = vm::startWeekly,
+        interactionSource = src,
+        shape = MaterialTheme.shapes.large,
+        color = cs.tertiaryContainer,
+        contentColor = cs.onTertiaryContainer,
+        modifier = Modifier.fillMaxWidth().springPress(src).glassy(MaterialTheme.shapes.large),
+    ) {
+        Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
+            Text("🎁", fontSize = 30.sp)
+            Spacer(Modifier.width(12.dp))
+            Column(Modifier.weight(1f)) {
+                Text("Həftənin sürprizi", style = MaterialTheme.typography.titleMedium)
+                Text(
+                    if (done == 0) "${pack.levels.size} yeni səviyyə sizi gözləyir" else "$done / ${pack.levels.size} həll olunub",
+                    style = MaterialTheme.typography.bodyMedium,
+                )
+            }
+            Text(if (done == 0) "Aç ▶" else "Davam ▶", style = MaterialTheme.typography.labelLarge)
+        }
+    }
+}
+
 val BottomMenuHeight: Dp = 102.dp
 
 /**
@@ -291,44 +327,87 @@ val BottomMenuHeight: Dp = 102.dp
  * Android versions, so it is a see-through tinted surface with a light rim and soft shadow.
  */
 @Composable
-fun GlassBottomMenu(screen: Screen, open: (Screen) -> Unit, modifier: Modifier = Modifier) {
+fun GlassBottomMenu(
+    screen: Screen,
+    open: (Screen) -> Unit,
+    modifier: Modifier = Modifier,
+    // The owner's pick (2026-11-23): a shorter pill hugging its tabs, labels in Nunito ExtraBold.
+    compact: Boolean = true,
+    font: androidx.compose.ui.text.font.FontFamily? = MenuFont,
+) {
     val cs = MaterialTheme.colorScheme
-    val haze = LocalHaze.current
+    val screenLayer = LocalGlassScreen.current
+    // Real glass lens over the passing screen (Maksimum şüşə, Android 13+) replaces the frost.
+    val haze = if (screenLayer != null) null else LocalHaze.current
     val glass = LocalGlass.current
     val dark = cs.background.luminance() < 0.5f
     Surface(
         // Lifted off the bottom edge so it floats clear of the gesture bar.
-        modifier = modifier.padding(start = 24.dp, end = 24.dp, top = 12.dp, bottom = 26.dp).fillMaxWidth()
+        modifier = modifier.padding(start = 24.dp, end = 24.dp, top = 12.dp, bottom = 26.dp)
+            .then(if (compact) Modifier else Modifier.fillMaxWidth())
             // Şüşə: frosted glass over whatever scrolls beneath (real blur on Android 12+, a tint before that).
             .then(if (haze != null) Modifier.clip(CircleShape).hazeEffect(haze, glassStyle(dark)) else Modifier)
-            .glassy(CircleShape),
+            .liquidGlass(screenLayer, CircleShape, dark, frost = 2.dp)
+            .glassy(CircleShape, lens = false),
         shape = CircleShape,
         // No shadow: it would show through the see-through fill as a smudge.
-        color = if (haze != null) Color.Transparent else if (glass) Color.White.copy(alpha = if (dark) 0.14f else 0.45f) else cs.surfaceContainerHigh,
+        color = if (haze != null || screenLayer != null) Color.Transparent else if (glass) Color.White.copy(alpha = if (dark) 0.14f else 0.45f) else cs.surfaceContainerHigh,
         border = if (glass) null else BorderStroke(1.dp, cs.outlineVariant.copy(alpha = 0.7f)),
     ) {
-        Row(Modifier.padding(6.dp), horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+        Row(Modifier.padding(if (compact) 5.dp else 6.dp), horizontalArrangement = Arrangement.spacedBy(if (compact) 0.dp else 4.dp)) {
             listOf(
-                Triple(Screen.HOME, "▦", "Oyun"),
-                Triple(Screen.DAILY, "📅", "Bu gün"),
-                Triple(Screen.STATS, "★", "Statistika"),
-                Triple(Screen.SETTINGS, "⚙", "Ayarlar"),
+                Triple(Screen.HOME, MenuIcon.PLAY, "Oyun"),
+                Triple(Screen.DAILY, MenuIcon.TODAY, "Bu gün"),
+                Triple(Screen.STATS, MenuIcon.STATS, "Statistika"),
+                Triple(Screen.SETTINGS, MenuIcon.SETTINGS, "Ayarlar"),
             ).forEach { (target, icon, label) ->
                 val on = screen == target
                 val src = remember { MutableInteractionSource() }
                 Column(
-                    Modifier.weight(1f).springPress(src).clip(CircleShape)
+                    (if (compact) Modifier.widthIn(min = 58.dp) else Modifier.weight(1f)).springPress(src).clip(CircleShape)
                         // Şüşə: the chosen tab is a brighter glass pill with dark text (mockup); otherwise the accent.
                         .background(if (on) (if (glass) Color.White.copy(alpha = if (dark) 0.22f else 0.6f) else cs.primary) else Color.Transparent)
                         .clickable(interactionSource = src, indication = null) { open(target) }
-                        .padding(vertical = 8.dp),
+                        .padding(vertical = 7.dp, horizontal = if (compact) 9.dp else 0.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
-                    val tabInk = if (on) (if (glass) cs.onSurface else cs.onPrimary) else cs.onSurfaceVariant
-                    Text(icon, fontSize = 16.sp, color = tabInk)
-                    Text(label, style = MaterialTheme.typography.labelMedium, color = tabInk)
+                    // With a chosen font the labels are bolder and darker, so they don't look faded on glass.
+                    val tabInk = if (on) (if (glass) cs.onSurface else cs.onPrimary) else if (font != null) cs.onSurface.copy(alpha = 0.85f) else cs.onSurfaceVariant
+                    MenuGlyph(icon, tabInk, filled = on)
+                    Text(
+                        label,
+                        style = if (font != null) MaterialTheme.typography.labelLarge.copy(fontFamily = font, fontWeight = androidx.compose.ui.text.font.FontWeight.Bold, fontSize = 13.sp)
+                        else MaterialTheme.typography.labelMedium,
+                        color = tabInk,
+                    )
                 }
             }
         }
     }
+}
+
+/** Nunito ExtraBold (SIL OFL 1.1), subset to Latin + Azerbaijani letters: the menu labels. */
+val MenuFont = androidx.compose.ui.text.font.FontFamily(
+    androidx.compose.ui.text.font.Font(com.aaideas.krossvord.R.font.nunito_extrabold, androidx.compose.ui.text.font.FontWeight.Bold),
+)
+
+enum class MenuIcon { PLAY, TODAY, STATS, SETTINGS }
+
+/** Menu icons: Material Symbols Rounded (Apache 2.0); the chosen tab shows the filled version. */
+@Composable
+fun MenuGlyph(icon: MenuIcon, ink: Color, filled: Boolean, modifier: Modifier = Modifier) {
+    val d = when (icon) {
+        MenuIcon.PLAY -> if (filled) MenuIconPaths.PLAY_FILLED else MenuIconPaths.PLAY_OUTLINE
+        MenuIcon.TODAY -> if (filled) MenuIconPaths.TODAY_FILLED else MenuIconPaths.TODAY_OUTLINE
+        MenuIcon.STATS -> if (filled) MenuIconPaths.STATS_FILLED else MenuIconPaths.STATS_OUTLINE
+        MenuIcon.SETTINGS -> if (filled) MenuIconPaths.SETTINGS_FILLED else MenuIconPaths.SETTINGS_OUTLINE
+    }
+    val vector = remember(d) {
+        androidx.compose.ui.graphics.vector.ImageVector.Builder(
+            defaultWidth = 24.dp, defaultHeight = 24.dp, viewportWidth = 960f, viewportHeight = 960f,
+        ).addGroup(translationY = 960f)
+            .addPath(androidx.compose.ui.graphics.vector.addPathNodes(d), fill = androidx.compose.ui.graphics.SolidColor(Color.Black))
+            .clearGroup().build()
+    }
+    androidx.compose.material3.Icon(vector, contentDescription = null, tint = ink, modifier = modifier.size(24.dp))
 }

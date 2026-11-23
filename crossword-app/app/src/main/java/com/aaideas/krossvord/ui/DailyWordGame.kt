@@ -25,6 +25,8 @@ class DailyWordGame(
     val words: List<DailyWord> =
         context.assets.open("word_of_day.json").bufferedReader(Charsets.UTF_8).use { DailyWords.parse(it.readText()) }
 
+    /** Day the current [guess] belongs to. */
+    private var loadedDay = today()
     var guess by mutableStateOf(load())
         private set
     var wrongFlash by mutableStateOf(false)
@@ -48,6 +50,7 @@ class DailyWordGame(
 
     private fun load(): DailyGuess {
         val day = today()
+        loadedDay = day
         val word = DailyWords.forDay(words, day)
         if (prefs.getLong(KEY_DAY, Long.MIN_VALUE) != day) return DailyGuess(word)
         return DailyGuess(
@@ -59,7 +62,7 @@ class DailyWordGame(
     }
 
     /** Picks up a new day if the date changed while the app was open. */
-    fun refresh() { if (prefs.getLong(KEY_DAY, Long.MIN_VALUE) != today()) guess = load() }
+    fun refresh() { if (loadedDay != today()) guess = load() }
 
     private fun save(g: DailyGuess) {
         val e = prefs.edit().putLong(KEY_DAY, today())

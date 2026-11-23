@@ -29,11 +29,24 @@ object DailyReminder {
     private const val PREFS = "reminder"
     private const val KEY_ON = "on"
 
-    fun isOn(context: Context) = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).getBoolean(KEY_ON, false)
+    /** On unless the player turned it off (the owner wants the reminder to come by itself). */
+    fun isOn(context: Context) = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).getBoolean(KEY_ON, true)
 
     fun set(context: Context, on: Boolean) {
         context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).edit().putBoolean(KEY_ON, on).apply()
         if (on) schedule(context) else cancel(context)
+    }
+
+    /** Xiaomi/Redmi (MIUI) stops alarms of apps without "Autostart"; the settings show a button for it. */
+    val isXiaomi: Boolean get() = Build.MANUFACTURER.equals("Xiaomi", ignoreCase = true) || Build.BRAND.equals("Redmi", ignoreCase = true)
+
+    /** Opens MIUI's Autostart list (or the app's own settings page if that screen is missing). */
+    fun openAutostart(context: Context) {
+        val miui = Intent().setClassName("com.miui.securitycenter", "com.miui.permcenter.autostart.AutoStartManagementActivity")
+            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        val app = Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, android.net.Uri.parse("package:" + context.packageName))
+            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        runCatching { context.startActivity(miui) }.onFailure { runCatching { context.startActivity(app) } }
     }
 
     fun canNotify(context: Context): Boolean =
@@ -51,7 +64,10 @@ object DailyReminder {
             set(Calendar.HOUR_OF_DAY, HOUR); set(Calendar.MINUTE, 0); set(Calendar.SECOND, 0); set(Calendar.MILLISECOND, 0)
             if (timeInMillis <= System.currentTimeMillis()) add(Calendar.DAY_OF_YEAR, 1)
         }
-        am.setInexactRepeating(AlarmManager.RTC_WAKEUP, next.timeInMillis, AlarmManager.INTERVAL_DAY, alarmIntent(context))
+        // One alarm at a time, set again each time it fires. "While idle" so a phone asleep in
+        // Doze still gets it (a repeating inexact alarm could slip by many hours or a whole day).
+        if (Build.VERSION.SDK_INT >= 23) am.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, next.timeInMillis, alarmIntent(context))
+        else am.set(AlarmManager.RTC_WAKEUP, next.timeInMillis, alarmIntent(context))
     }
 
     private fun cancel(context: Context) {
@@ -94,7 +110,7 @@ class ReminderReceiver : BroadcastReceiver() {
         when (intent.action) {
             Intent.ACTION_BOOT_COMPLETED, Intent.ACTION_MY_PACKAGE_REPLACED ->
                 if (DailyReminder.isOn(context)) DailyReminder.schedule(context)
-            else -> DailyReminder.show(context)
+            else -> { DailyReminder.show(context); if (DailyReminder.isOn(context)) DailyReminder.schedule(context) }
         }
     }
 }

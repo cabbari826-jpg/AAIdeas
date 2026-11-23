@@ -34,7 +34,7 @@ import com.aaideas.krossvord.monetization.LocalPremiumManager
 import com.aaideas.krossvord.monetization.PlaceholderAdService
 import com.aaideas.krossvord.monetization.PremiumManager
 
-enum class Screen { HOME, LEVELS, PUZZLE, SETTINGS, WORD_OF_DAY, STATS, COLLECTION, DAILY }
+enum class Screen { HOME, LEVELS, PUZZLE, SETTINGS, WORD_OF_DAY, STATS, COLLECTION, DAILY, PACKS, MAP }
 
 /** How letters are entered. COLUMNS is the default; the others stay as options in settings. */
 /** Pack shown alone in kids mode. */
@@ -43,6 +43,30 @@ const val KIDS_PACK = "az-usaq"
 enum class InputMode { COLUMNS, TILES, KEYBOARD }
 
 enum class WordFeedback { RIGHT, WRONG }
+
+/** "Bir az dincəlin" after this much play in one sitting, and again every time after it. */
+const val REST_EVERY_SECONDS = 60L * 60
+/** Away this long and the next play is a new sitting. */
+const val REST_GAP_MS = 15L * 60 * 1000
+
+/** Text sizes on the settings slider: normal, a bit bigger, large, very large. */
+val TEXT_SCALES = listOf(1f, 1.15f, 1.3f, 1.5f)
+val TEXT_SCALE_NAMES = listOf("Adi", "Bir az iri", "İri", "Çox iri")
+
+/** The phone's font at this size or bigger turns large mode on by itself (until the player decides). */
+const val AUTO_LARGE_FONT_SCALE = 1.15f
+
+/** Seconds without progress on a level before the gentle "stuck?" hint shows. No timer is ever shown. */
+const val STUCK_SECONDS = 75L
+
+/** How the "stuck?" help looks: A pill under the grid, B owl helper, C golden glow, D key helper (Açar = key), E tall key with big eyes and brows (an office-assistant feel, our own drawing). */
+enum class StuckStyle { PILL, OWL, GLOW, KEY, KEY_TALL }
+
+/** Mascots the player can pick in Settings (in this order). */
+val MASCOTS = listOf(StuckStyle.KEY_TALL, StuckStyle.KEY, StuckStyle.OWL)
+
+/** Short praise for a found word (shown big for a moment, said aloud if there is a voice). */
+val SHORT_PRAISE = listOf("Bravo!", "Əla!", "Afərin!", "Super!", "Düzdür!")
 
 /** Free hints for guessing the key word before its letters are all in the grid. */
 const val KEYWORD_BONUS_HINTS = 2
@@ -71,8 +95,11 @@ val COACH_STEPS: List<Pair<TutorialSpot, String>> = listOf(
 )
 
 class GameViewModel(app: Application) : AndroidViewModel(app) {
-    val packs: List<Pack> = com.aaideas.krossvord.data.PackCache.get(app)
-    val levels: List<Level> = packs.flatMap { it.levels }
+    /** Bundled packs plus downloaded ones; replaced after a download (see [reloadPacks]). */
+    var packs: List<Pack> by mutableStateOf(com.aaideas.krossvord.data.PackCache.get(app))
+        private set
+    var levels: List<Level> by mutableStateOf(packs.flatMap { it.levels })
+        private set
     private val progress = ProgressStore(app)
     private val dailyStore = com.aaideas.krossvord.data.DailyStore(app)
 
@@ -83,7 +110,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     val ads = PlaceholderAdService()
     val daily = DailyWordGame(app, ads, premium).also { d ->
         d.onSolved = {
-            if (soundOn) sounds.wordFound()
+            sounds.wordFound()
             d.reward = dailyReward()
             addXp(com.aaideas.krossvord.model.Ranks.DAILY_XP)
             collect(listOf(d.guess.word.word))
@@ -100,14 +127,97 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     fun changeSound(on: Boolean) {
         soundOn = on
         progress.soundOn = on
+        sounds.sound = on
+    }
+
+    var vibrateOn by mutableStateOf(progress.vibrateOn)
+        private set
+
+    fun changeVibrate(on: Boolean) {
+        vibrateOn = on
+        progress.vibrateOn = on
+        sounds.vibrate = on
+    }
+
+    init { sounds.sound = soundOn; sounds.vibrate = vibrateOn }
+
+    /** Say the praise aloud for a found word (only with an Azerbaijani voice on the phone). */
+    var praiseVoice by mutableStateOf(progress.praiseVoice)
+        private set
+
+    fun changePraiseVoice(on: Boolean) {
+        praiseVoice = on
+        progress.praiseVoice = on
+        if (on) voice.warmUp()
+    }
+
+    /** "Bravo!" shown big for a moment after a found word; [praiseTick] restarts the animation. */
+    var praise by mutableStateOf<String?>(null)
+        private set
+    var praiseTick by mutableStateOf(0)
+        private set
+
+    private fun praiseWord() {
+        val w = SHORT_PRAISE.random()
+        praise = w
+        praiseTick++
+        if (praiseVoice) voice.speak(w)
+    }
+
+    // ---- Gentle hint when stuck: bumped on every bit of progress; the screen waits STUCK_SECONDS after it ----
+    var progressTick by mutableStateOf(0)
+        private set
+    private fun progressed() { progressTick++ }
+
+    // ---- "Mənim sözlərim": words got wrong at least once ----
+    var mistakeWords by mutableStateOf(progress.mistakeWords)
+        private set
+
+    private fun addMistake(word: String) {
+        if (word in mistakeWords) return
+        mistakeWords = mistakeWords + word
+        progress.mistakeWords = mistakeWords
+    }
+
+    /** The collection screen opens on "Mənim sözlərim" (set by the button that opens it). */
+    var openMistakes = false
+
+    /** The player marks a word as learned: it leaves the list. */
+    fun markLearned(word: String) {
+        mistakeWords = mistakeWords - word
+        progress.mistakeWords = mistakeWords
     }
 
     /** Time on the puzzle screen: started when it shows, added up when it hides. */
     private var playStart = 0L
-    fun puzzleShown() { playStart = android.os.SystemClock.elapsedRealtime() }
+    fun puzzleShown() {
+        val now = android.os.SystemClock.elapsedRealtime()
+        // A real pause (15 minutes away) starts a new sitting for the rest reminder.
+        if (lastHidden != 0L && now - lastHidden > REST_GAP_MS) { sittingSeconds = 0; nextRestAt = REST_EVERY_SECONDS }
+        playStart = now
+    }
     fun puzzleHidden() {
         flushTime()
         playStart = 0L
+        lastHidden = android.os.SystemClock.elapsedRealtime()
+    }
+
+    // ---- "Bir az dincəlin": after an hour of play in one sitting, a gentle window before the next level, then every hour ----
+    private var lastHidden = 0L
+    /** Seconds played on levels in this sitting. */
+    private var sittingSeconds = 0L
+    private var nextRestAt = REST_EVERY_SECONDS
+    var restDue by mutableStateOf(false)
+        private set
+    fun closeRest(goHome: Boolean) { restDue = false; if (goHome) { flushTime(); screen = Screen.HOME } }
+    /** Tests: pretend this much was played. */
+    fun addSittingForTest(sec: Long) { sittingSeconds += sec }
+    private fun checkRest() {
+        flushTime()
+        if (sittingSeconds >= nextRestAt) {
+            restDue = true
+            nextRestAt = sittingSeconds + REST_EVERY_SECONDS
+        }
     }
 
     /** Adds the time since [playStart] to the totals and to the current level; keeps counting. */
@@ -117,6 +227,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         val sec = (now - playStart) / 1000
         if (sec in 1..6 * 3600) {
             progress.playSeconds = progress.playSeconds + sec
+            sittingSeconds += sec
             game?.let { progress.addLevelSeconds(it.board.level.id, sec) }
             playStart += sec * 1000
         }
@@ -174,6 +285,12 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         val days = dailyStore.playedDays
         if (day !in days) dailyStore.playedDays = days + day
         val now = dailyStore.playedDays
+        if (Streak.hintDue(now, day, dailyStore.lastStreakHint)) {
+            dailyStore.lastStreakHint = day
+            freeHints = freeHints + 1
+            progress.freeHints = freeHints
+            dailyNote = "💡 ${Streak.run(now, day)} gün ardıcıl! Hədiyyə: 1 pulsuz «Hərf aç»"
+        }
         if (Streak.giftDue(now, day, dailyStore.lastStreakGift)) {
             dailyStore.lastStreakGift = day
             setLives(livesState.gift(now(), 2))
@@ -190,7 +307,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     fun pickProverb(w: String) {
         if (proverbPick != null) return
         dailyStore.setProverbPick(dayNum(), w)
-        if (soundOn) { if (w == proverb.answer) sounds.wordFound() }
+        if (w == proverb.answer) sounds.wordFound()
         if (w == proverb.answer) { addXp(5); track(TaskKind.PROVERB) } else markPlayed()
         dailyTick++
     }
@@ -233,9 +350,14 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     /** Every answer in the bundled packs, with its pack, for the collection screen. */
-    val allEntries: List<Pair<Pack, Entry>> by lazy { packs.flatMap { p -> p.levels.flatMap { l -> l.entries.map { p to it } } } }
+    val allEntries: List<Pair<Pack, Entry>> get() = entriesOf(packs)
+    private var entriesCache: Pair<List<Pack>, List<Pair<Pack, Entry>>>? = null
+    private fun entriesOf(ps: List<Pack>): List<Pair<Pack, Entry>> =
+        entriesCache?.takeIf { it.first === ps }?.second
+            ?: ps.flatMap { p -> p.levels.flatMap { l -> l.entries.map { p to it } } }.also { entriesCache = ps to it }
 
-    val medals: List<Medal> = Medals.all(packs)
+    var medals: List<Medal> by mutableStateOf(Medals.all(packs))
+        private set
     fun medalStats(done: Set<String> = completed) = MedalStats(
         packsDone = packs.filter { p -> p.levels.isNotEmpty() && p.levels.all { it.id in done } }.map { it.packId }.toSet(),
         levelsDone = done.size,
@@ -426,6 +548,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         val e = s.activeEntry ?: return
         if (!s.canEaseClue(e)) return
         val needsAd = s.clueTier(e) >= FREE_CLUE_STEPS && !premium.isPremium.value
+        progressed()
         if (needsAd) ads.showRewarded("Asan ipucu") { update { it.easeClue(e) } } else update { it.easeClue(e) }
     }
 
@@ -479,7 +602,8 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     var askReminder by mutableStateOf(false)
         private set
     private var reminderDue = false
-    private fun reminderOn() = com.aaideas.krossvord.remind.DailyReminder.isOn(getApplication())
+    /** On, and Android lets us notify (Android 13+ needs the permission even though the reminder is on by default). */
+    private fun reminderOn() = com.aaideas.krossvord.remind.DailyReminder.let { it.isOn(getApplication()) && it.canNotify(getApplication()) }
 
     private fun maybeAskReminder() {
         if (!reminderDue || progress.reminderAsked || reminderOn() || welcome != null || showWhatsNew || whatsNewDue) return
@@ -514,6 +638,8 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         progress.launches = progress.launches + 1
         if (progress.launches >= 2) reminderDue = true
         openWelcome()
+        rollMonth()
+        autoUpdatePacks()
         maybeShowWhatsNew()
         maybeAskReminder()
     }
@@ -532,6 +658,16 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
             progress.welcomeDay = day.toEpochDay()
             welcome = Welcome.DAILY
         }
+    }
+
+    /** The app came back to the front: a new day may have started while it slept. */
+    fun onResumeDay() {
+        rollMonth()
+        daily.refresh()
+        dailyTick++
+        tickLives()
+        if (progress.welcomeDay != today().toEpochDay() && welcome == null) openWelcome()
+        autoUpdatePacks()
     }
 
     fun editProfile() { welcome = Welcome.PROFILE }
@@ -559,11 +695,39 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
 
     var largeMode by mutableStateOf(progress.largeMode)
         private set
+    /** Until the player sets the switch, large mode follows the phone's own font size. */
+    var largeModeChosen by mutableStateOf(progress.largeModeChosen)
+        private set
 
-    fun changeLargeMode(on: Boolean) {
-        largeMode = on
-        progress.largeMode = on
+    /** Text size picked on the slider (one of TEXT_SCALES), or 0 when never picked. */
+    var textScale by mutableStateOf(progress.textScale)
+        private set
+
+    /**
+     * Font scale for the whole app, given the phone's own (Configuration.fontScale). Never smaller
+     * than the phone's. Until the player picks a size, a big phone font turns large mode on.
+     */
+    fun appFontScale(systemFontScale: Float): Float = when {
+        textScale > 0f -> maxOf(systemFontScale, textScale)
+        largeModeChosen -> if (largeMode) maxOf(systemFontScale, LARGE_FONT_SCALE) else systemFontScale
+        systemFontScale >= AUTO_LARGE_FONT_SCALE -> maxOf(systemFontScale, LARGE_FONT_SCALE)
+        else -> systemFontScale
     }
+
+    /** Is the app's text bigger than the phone's own? */
+    fun largeOn(systemFontScale: Float): Boolean = appFontScale(systemFontScale) > systemFontScale
+
+    /** The slider's position: the picked size, or the size in use now. */
+    fun shownTextScale(systemFontScale: Float): Float =
+        if (textScale > 0f) textScale else TEXT_SCALES.minBy { kotlin.math.abs(it - appFontScale(systemFontScale)) }
+
+    fun changeTextScale(scale: Float) {
+        textScale = scale
+        progress.textScale = scale
+        largeMode = scale > 1f; largeModeChosen = true; progress.largeMode = largeMode
+    }
+
+    fun changeLargeMode(on: Boolean) = changeTextScale(if (on) LARGE_FONT_SCALE else 1f)
 
     var bigClues by mutableStateOf(progress.bigClues)
         private set
@@ -643,6 +807,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         } else {
             mistakes++
             loseLife()
+            addMistake(e.answer)
             feedback = WordFeedback.WRONG
             viewModelScope.launch {
                 delay(700)
@@ -654,7 +819,113 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     fun shuffleTiles() { tileShuffle++ }
 
     /** Pack index and 1-based number inside its pack for a global level index. */
-    private val packStart: List<Int> = packs.runningFold(0) { acc, p -> acc + p.levels.size }
+    private var packStart: List<Int> = packs.runningFold(0) { acc, p -> acc + p.levels.size }
+
+    /** Puts new packs in (after a download) and keeps the current level and chosen pack. */
+    fun reloadPacks(newPacks: List<Pack>) {
+        val levelId = levels.getOrNull(levelIndex)?.id
+        val packId = packs.getOrNull(selectedPack)?.packId
+        packs = newPacks
+        levels = newPacks.flatMap { it.levels }
+        packStart = newPacks.runningFold(0) { acc, p -> acc + p.levels.size }
+        medals = Medals.all(newPacks)
+        levelIndex = levels.indexOfFirst { it.id == levelId }.coerceAtLeast(0)
+        selectedPack = packId?.let { id -> newPacks.indexOfFirst { it.packId == id } } ?: -1
+    }
+
+    // ---- Downloadable packs (screen "Yeni paketlər") ----
+    private val downloads = com.aaideas.krossvord.data.DownloadedPacks(app)
+    /** Packs offered online, as last seen (kept for offline). */
+    var remotePacks by mutableStateOf(downloads.cachedIndex()?.packs.orEmpty())
+        private set
+    enum class Online { IDLE, LOADING, OK, OFFLINE }
+    var online by mutableStateOf(Online.IDLE)
+        private set
+    /** Pack ids being downloaded now. */
+    val downloading = androidx.compose.runtime.mutableStateMapOf<String, Boolean>()
+    var downloadNote by mutableStateOf<String?>(null)
+
+    /** Version of a pack the game has (bundled or downloaded), or null. */
+    fun haveVersion(packId: String): Int? = packs.firstOrNull { it.packId == packId }?.contentVersion
+    fun isBundled(packId: String): Boolean = packs.any { it.packId == packId } && !downloads.installedVersions().containsKey(packId)
+
+    fun refreshRemote() {
+        if (online == Online.LOADING || !networkOn) return
+        online = Online.LOADING
+        viewModelScope.launch {
+            val list = kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) { runCatching { downloads.fetchIndex().packs }.getOrNull() }
+            if (list != null) { remotePacks = list; online = Online.OK } else online = Online.OFFLINE
+        }
+    }
+
+    fun downloadPack(r: com.aaideas.krossvord.data.RemotePack) {
+        if (downloading[r.packId] == true) return
+        downloading[r.packId] = true
+        downloadNote = null
+        viewModelScope.launch {
+            val app = getApplication<Application>()
+            val ok = kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) {
+                runCatching { downloads.download(r); com.aaideas.krossvord.data.PackCache.reload(app) }.getOrNull()
+            }
+            downloading.remove(r.packId)
+            if (ok != null) {
+                reloadPacks(ok)
+                downloadNote = "✓ «${r.title}» yükləndi: ${r.levels} səviyyə"
+            } else downloadNote = "Yükləmək alınmadı. İnterneti yoxlayıb yenidən cəhd edin."
+        }
+    }
+
+    fun removePack(packId: String) {
+        downloads.remove(packId)
+        reloadPacks(com.aaideas.krossvord.data.PackCache.reload(getApplication()))
+    }
+
+    /**
+     * Once a day, quietly: fetch the list, download new weekly surprises and newer versions of
+     * downloaded packs, so they are ready offline. Never blocks; no internet means nothing happens.
+     */
+    private fun autoUpdatePacks() {
+        if (!networkOn || downloads.lastCheckDay == dayNum()) return
+        viewModelScope.launch {
+            val app = getApplication<Application>()
+            val day = dayNum()
+            val fresh = kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) {
+                runCatching {
+                    val index = downloads.fetchIndex()
+                    downloads.lastCheckDay = day
+                    val have = downloads.installedVersions()
+                    val bundled = packs.map { it.packId }.toSet() - have.keys
+                    val want = index.packs.filter { r ->
+                        r.packId !in bundled && (have[r.packId]?.let { it < r.contentVersion } ?: com.aaideas.krossvord.model.Weekly.isWeekly(r.packId))
+                    }
+                    want.forEach { runCatching { downloads.download(it) } }
+                    index.packs to (if (want.isEmpty()) null else com.aaideas.krossvord.data.PackCache.reload(app))
+                }.getOrNull()
+            } ?: return@launch
+            remotePacks = fresh.first
+            fresh.second?.let { reloadPacks(it) }
+        }
+    }
+
+    /** Off in tests (Robolectric): no list check, no downloads. */
+    var networkOn = android.os.Build.FINGERPRINT != "robolectric"
+
+    /** Seconds before the "stuck?" pill; tests shorten it. */
+    var stuckSeconds = STUCK_SECONDS
+
+    /**
+     * How the stuck help shows. Default: the quiet golden glow. A mascot (Settings → Köməkçi)
+     * replaces it with a little helper and a speech bubble. PILL is kept as an option in code.
+     */
+    var stuckStyle by mutableStateOf(runCatching { StuckStyle.valueOf(progress.helper) }.getOrDefault(StuckStyle.GLOW))
+
+    /** Settings: the mascot, or null for none (glow). */
+    val helper: StuckStyle? get() = stuckStyle.takeIf { it in MASCOTS }
+
+    fun changeHelper(h: StuckStyle?) {
+        stuckStyle = h ?: StuckStyle.GLOW
+        progress.helper = h?.name.orEmpty()
+    }
     fun packIndexOf(index: Int): Int = (packs.indices.lastOrNull { packStart[it] <= index } ?: 0)
     fun numberInPack(index: Int): Int = index - packStart[packIndexOf(index)] + 1
     fun levelTitle(index: Int): String {
@@ -701,6 +972,8 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         draftPicks = emptyList()
         mistakes = 0
         hintsUsed = 0
+        progressed()
+        if (praiseVoice) voice.warmUp()
         tickLives()
         screen = Screen.PUZZLE
     }
@@ -726,10 +999,63 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     fun packOpen(p: Int): Boolean {
         val pack = packs[p]
         if (kidsMode && kidsPack >= 0) return p == kidsPack
+        if (com.aaideas.krossvord.model.Weekly.isWeekly(pack.packId)) {
+            val position = packs.subList(0, p).count { com.aaideas.krossvord.model.Weekly.isWeekly(it.packId) }
+            return com.aaideas.krossvord.model.Weekly.isOpen(position, today()) || pack.levels.any { it.id in completed || progress.hasProgress(it.id) }
+        }
         return com.aaideas.krossvord.model.Holidays.packOpen(pack.packId, today()) ||
             pack.levels.any { it.id in completed || progress.hasProgress(it.id) }
     }
     fun levelOpen(index: Int) = packOpen(packIndexOf(index))
+
+    // ---- "Ayın yolu": a monthly road trip, moved by levels solved this month ----
+    private fun monthKeyOf(d: java.time.LocalDate) = d.year * 100 + d.monthValue
+    /** Levels solved for the first time this month (resets when the month changes). */
+    var monthLevels by mutableStateOf(0)
+        private set
+    var monthFinishDay by mutableStateOf(0)
+        private set
+    val bestFinishDay: Int get() { monthLevels; return progress.bestFinishDay }
+    val route: com.aaideas.krossvord.model.Route get() = com.aaideas.krossvord.model.Challenge.routeFor(java.time.YearMonth.from(today()))
+
+    private fun rollMonth() {
+        val key = monthKeyOf(today())
+        if (progress.monthKey != key) {
+            progress.monthKey = key; progress.monthLevels = 0; progress.monthFinishDay = 0
+        }
+        monthLevels = progress.monthLevels
+        monthFinishDay = progress.monthFinishDay
+    }
+
+    /** A level solved for the first time: the car moves; at the end, free hints. Returns a line for the result card. */
+    private fun advanceTrip(): String? {
+        rollMonth()
+        val c = com.aaideas.krossvord.model.Challenge
+        if (monthLevels >= c.GOAL) return null
+        val before = c.position(route, monthLevels).toInt()
+        monthLevels++; progress.monthLevels = monthLevels
+        if (monthLevels >= c.GOAL) {
+            val day = today().dayOfMonth
+            monthFinishDay = day; progress.monthFinishDay = day
+            if (progress.bestFinishDay == 0 || day < progress.bestFinishDay) progress.bestFinishDay = day
+            freeHints += c.REWARD_HINTS; progress.freeHints = freeHints
+            return "🏁 ${route.places.last().name}! Ayın yolu ${day}-də başa çatdı. Hədiyyə: ${c.REWARD_HINTS} pulsuz ipucu"
+        }
+        val after = c.position(route, monthLevels).toInt()
+        return if (after > before) "🚗 Ayın yolu: ${route.places[after].name} çatdınız!" else null
+    }
+
+    init { rollMonth() }
+
+    /** The newest open weekly surprise with levels left, for the home card; null when none. */
+    val weeklyPack: Int? get() = packs.indices.lastOrNull { com.aaideas.krossvord.model.Weekly.isWeekly(packs[it].packId) && packOpen(it) }
+        ?.takeIf { p -> packs[p].levels.any { it.id !in completed } }
+
+    fun startWeekly() {
+        val p = weeklyPack ?: return
+        val i = packLevels(p).firstOrNull { (_, l) -> l.id !in completed }?.first ?: return
+        startLevel(i)
+    }
 
     /** The holiday to greet on the home screen today, if any. */
     val holiday: com.aaideas.krossvord.model.Holiday? get() = com.aaideas.krossvord.model.Holidays.greeting(today())
@@ -753,6 +1079,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     fun startLevel(index: Int) {
+        checkRest()
         playingMini = false
         levelIndex = index
         selectedPack = packIndexOf(index)
@@ -768,6 +1095,8 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         draftPicks = emptyList()
         mistakes = 0
         hintsUsed = 0
+        progressed()
+        if (praiseVoice) voice.warmUp()
         tickLives()
         screen = Screen.PUZZLE
     }
@@ -818,6 +1147,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     /** Hint: free for premium, otherwise after a rewarded (placeholder) ad. */
     fun hint() {
         hintsUsed++
+        progressed()
         if (premium.isPremium.value) update { it.revealLetter() }
         else if (freeHints > 0) {
             freeHints--
@@ -867,7 +1197,11 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
             track(TaskKind.WORDS, found)
             collect(s.board.level.entries.filter { s.isEntrySolved(it) && !old.isEntrySolved(it) }.map { it.answer })
         }
-        if (soundOn && found > 0) { if (s.isComplete && !old.isComplete) sounds.levelSolved() else sounds.wordFound() }
+        if (found > 0) {
+            progressed()
+            if (s.isComplete && !old.isComplete) sounds.levelSolved() else { sounds.wordFound(); praiseWord() }
+        }
+        s.board.level.entries.filter { s.isEntryWrong(it) && !old.isEntryWrong(it) }.forEach { addMistake(it.answer) }
         if (s.isComplete && !old.isComplete) {
             val medalsBefore = earnedMedals()
             if (mistakes == 0) {
@@ -885,7 +1219,12 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
             flushTime()
             val stars = LevelResult.stars(mistakes, hintsUsed)
             val rankUp = addXp(com.aaideas.krossvord.model.Ranks.levelXp(stars))
+            val trip = if (!playingMini && id !in completed) advanceTrip() else null
+            val before = com.aaideas.krossvord.model.Journey.opened(completed.size)
+            val after = com.aaideas.krossvord.model.Journey.opened(progress.completedLevels().size)
             result = LevelResult(
+                trip = trip,
+                city = if (after > before && !playingMini) com.aaideas.krossvord.model.Journey.CITIES[after - 1] else null,
                 rankUp = rankUp,
                 xp = com.aaideas.krossvord.model.Ranks.levelXp(stars),
                 stars = stars,
@@ -909,7 +1248,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
 }
 
 /** The result card of a solved level: 1 to 3 stars, time taken (shown only here), praise, new medals. */
-data class LevelResult(val rankUp: com.aaideas.krossvord.model.Rank? = null, val xp: Int = 0, val stars: Int, val seconds: Long, val praise: String, val keyword: String?, val medals: List<Medal>, val fact: String? = null) {
+data class LevelResult(val trip: String? = null, val city: com.aaideas.krossvord.model.City? = null, val rankUp: com.aaideas.krossvord.model.Rank? = null, val xp: Int = 0, val stars: Int, val seconds: Long, val praise: String, val keyword: String?, val medals: List<Medal>, val fact: String? = null) {
     companion object {
         val PRAISE = listOf("Əla!", "Bravo!", "Afərin!", "Belə davam et!", "Mükəmməl!", "Super!", "Çox gözəl!")
         /** Never zero: 3 without mistakes and letter hints, 2 with a few, 1 otherwise. */
