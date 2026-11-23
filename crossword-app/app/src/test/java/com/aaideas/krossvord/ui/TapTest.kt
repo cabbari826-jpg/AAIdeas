@@ -79,6 +79,23 @@ class TapTest {
         assertEquals(other, vm.game!!.activeEntry)
     }
 
+    @Test fun solvedScreenOffersNextLevelAfterClosingTheWindow() {
+        val vm = GameViewModel(ApplicationProvider.getApplicationContext<Application>())
+        vm.resetAllProgress()
+        vm.setInput(InputMode.TILES)
+        vm.startLevel(0)
+        for (e in vm.game!!.board.level.entries) {
+            vm.selectEntry(e)
+            val g = vm.game!!
+            e.cells.filter { g.typed[it] != g.board.solution[it] }.forEach { vm.type(g.board.solution[it]!!) }
+        }
+        vm.dismissCompletion()
+        rule.setContent { KrossvordTheme { PuzzleScreen(vm, isPremium = true) } }
+        rule.onNodeWithText("Növbəti səviyyə ▶").performClick()
+        rule.waitForIdle()
+        assertEquals(2, vm.currentLevelNumber)
+    }
+
     @Test fun homeResetWipesProgressButKeepsSettings() {
         val vm = GameViewModel(ApplicationProvider.getApplicationContext<Application>())
         vm.resetAllProgress()

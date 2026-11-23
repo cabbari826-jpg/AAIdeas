@@ -87,7 +87,7 @@ fun LevelResultDialog(title: String, result: LevelResult, onNext: () -> Unit, on
                     }
                     Row(Modifier.fillMaxWidth().padding(top = 4.dp), horizontalArrangement = Arrangement.End) {
                         TextButton(onClick = onClose) { Text("Bağla") }
-                        Button(onClick = onNext) { Text("Növbəti") }
+                        Button(onClick = onNext) { Text("Növbəti səviyyə ▶") }
                     }
                 }
             }

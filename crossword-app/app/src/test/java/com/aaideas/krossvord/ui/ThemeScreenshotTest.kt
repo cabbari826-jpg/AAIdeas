@@ -115,6 +115,26 @@ class ThemeScreenshotTest {
         }
     }
 
+    @Test fun solvedLevel() {
+        val vm = vm()
+        vm.startLevel(0); vm.restartLevel(); vm.finishTutorial()
+        for (e in vm.game!!.board.level.entries) {
+            vm.selectEntry(e)
+            val g = vm.game!!
+            e.cells.filter { g.typed[it] != g.board.solution[it] }.forEach { vm.type(g.board.solution[it]!!) }
+        }
+        shoot("solved-dialog", ThemeMode.LIGHT) { PuzzleScreen(vm, isPremium = false) }
+        vm.dismissCompletion()
+        shoot("solved-screen", ThemeMode.LIGHT) { PuzzleScreen(vm, isPremium = false) }
+        vm.unlockAllSkinsForTesting(); vm.changeSkin(Skin.SUSE)
+        shoot("solved-screen-glass", ThemeMode.LIGHT, Skin.SUSE) {
+            androidx.compose.foundation.layout.Box {
+                GlassBackdrop(false, androidx.compose.ui.Modifier.matchParentSize())
+                PuzzleScreen(vm, isPremium = false)
+            }
+        }
+    }
+
     @Test fun holidayHomes() {
         val vm = vm()
         vm.open(Screen.HOME)

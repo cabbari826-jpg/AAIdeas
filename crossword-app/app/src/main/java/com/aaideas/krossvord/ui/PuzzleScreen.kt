@@ -146,7 +146,8 @@ private fun PuzzleContent(vm: GameViewModel, isPremium: Boolean, compact: Boolea
         // Small phones, letter columns: shuffle and hint move between the columns, so the grid gets that row.
         // Şüşə keeps them in the row: its letter tiles are laid out in rows, not columns.
         val actionsInColumns = compact && columns && !glass
-        if (!actionsInColumns) Row(Modifier.fillMaxWidth().padding(vertical = if (compact) 2.dp else 6.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        val solved = game.isComplete && !vm.showCompletion
+        if (!actionsInColumns && !solved) Row(Modifier.fillMaxWidth().padding(vertical = if (compact) 2.dp else 6.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             // A fixed height makes the button's fill take the whole touch area, so it lines up with the glass rim.
             val glassBtn = if (glass) Modifier.height(48.dp).glassy(CircleShape) else Modifier
             val outlined = if (glass) ButtonDefaults.outlinedButtonColors(containerColor = MaterialTheme.colorScheme.surfaceContainer) else ButtonDefaults.outlinedButtonColors()
@@ -168,10 +169,25 @@ private fun PuzzleContent(vm: GameViewModel, isPremium: Boolean, compact: Boolea
         val active = game.activeEntry
         val bigText = vm.bigClues || LocalDensity.current.fontScale >= BIG_FONT_SCALE
         when {
-            active != null && vm.isClueShown(active) && (glass || bigText || game.clueText(active).length > CELL_CLUE_MAX) ->
+            !solved && active != null && vm.isClueShown(active) && (glass || bigText || game.clueText(active).length > CELL_CLUE_MAX) ->
                 LongClueLine(active, game.clueText(active), big = bigText)
         }
         val entry = game.activeEntry
+        // Solved and the congratulations window closed: the letters give way to a big "next level" button,
+        // so the player never has to go back through the menu to continue.
+        if (solved) {
+            Column(
+                Modifier.fillMaxWidth().padding(top = 8.dp, bottom = 16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(10.dp),
+            ) {
+                Text("${vm.currentLevelTitle} həll olundu ✓", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+                Button(
+                    onClick = vm::nextLevel,
+                    modifier = Modifier.fillMaxWidth().height(64.dp).then(if (glass) Modifier.glassy(CircleShape) else Modifier),
+                ) { Text(if (vm.playingMini) "Davam et ▶" else "Növbəti səviyyə ▶", fontSize = 22.sp, fontWeight = FontWeight.Bold) }
+            }
+        } else
         Box(Modifier.tutorialAnchor(vm, TutorialSpot.LETTERS)) {
         when {
             entry == null || vm.inputMode == InputMode.KEYBOARD -> Column {
