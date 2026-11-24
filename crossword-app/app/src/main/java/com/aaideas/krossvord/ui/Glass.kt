@@ -13,6 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.compositeOver
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.clipPath
@@ -27,6 +29,8 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.addOutline
 import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.composed
+import androidx.compose.foundation.layout.padding
 import dev.chrisbanes.haze.HazeDefaults
 import dev.chrisbanes.haze.HazeState
 import dev.chrisbanes.haze.HazeStyle
@@ -347,3 +351,30 @@ fun SolidDialog(
     properties: androidx.compose.ui.window.DialogProperties = androidx.compose.ui.window.DialogProperties(),
     content: @Composable () -> Unit,
 ) = SolidPanel { androidx.compose.ui.window.Dialog(onDismissRequest, properties) { FrostBehind(); content() } }
+
+
+/**
+ * Lists that scroll on menu screens melt away at their top edge instead of being cut by a hard line
+ * under the status bar (owner, 2026-11-24). The fade is as tall as the screens' own top padding, so
+ * nothing is faded while the list rests at the top.
+ */
+/** Height of the status bar that menu screens now run under; their scrolling content starts below it. */
+val LocalTopInset = androidx.compose.runtime.staticCompositionLocalOf { 0.dp }
+
+/** Top padding for a screen's scrolling content: the status bar, which the content can scroll under. */
+fun Modifier.belowStatusBar(): Modifier = composed { Modifier.padding(top = LocalTopInset.current) }
+
+fun Modifier.topFade(height: androidx.compose.ui.unit.Dp = 16.dp): Modifier = this
+    .graphicsLayer { compositingStrategy = androidx.compose.ui.graphics.CompositingStrategy.Offscreen }
+    .drawWithContent {
+        drawContent()
+        val h = height.toPx().coerceAtMost(size.height)
+        drawRect(
+            androidx.compose.ui.graphics.Brush.verticalGradient(
+                0f to Color.Transparent, 0.35f to Color.Black.copy(alpha = 0.25f), 0.7f to Color.Black.copy(alpha = 0.75f), 1f to Color.Black,
+                startY = 0f, endY = h,
+            ),
+            size = androidx.compose.ui.geometry.Size(size.width, h),
+            blendMode = androidx.compose.ui.graphics.BlendMode.DstIn,
+        )
+    }

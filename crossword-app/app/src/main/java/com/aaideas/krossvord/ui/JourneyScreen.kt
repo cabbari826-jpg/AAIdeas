@@ -46,10 +46,10 @@ fun JourneyScreen(vm: GameViewModel) {
     val solved = vm.completed.size
     val open = Journey.opened(solved)
     val state = rememberLazyListState()
-    Column(Modifier.fillMaxSize().padding(horizontal = 16.dp)) {
+    Column(Modifier.fillMaxSize().belowStatusBar().padding(horizontal = 16.dp)) {
         ScreenHeader("Yol xəritəsi", vm::back, Modifier.padding(top = 16.dp))
         Spacer(Modifier.height(12.dp))
-        LazyColumn(state = state, modifier = Modifier.fillMaxSize()) {
+        LazyColumn(state = state, modifier = Modifier.fillMaxSize().topFade()) {
             item { MonthTripCard(vm) }
             item {
                 Text("Böyük yol", style = MaterialTheme.typography.titleLarge, modifier = Modifier.padding(top = 16.dp, bottom = 8.dp))

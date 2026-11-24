@@ -63,7 +63,7 @@ fun TodayCard(vm: GameViewModel) {
 @Composable
 fun DailyScreen(vm: GameViewModel) {
     Column(
-        Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp),
+        Modifier.fillMaxSize().verticalScroll(rememberScrollState()).belowStatusBar().padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(14.dp),
     ) {
         ScreenHeader("Bu gün", vm::back)

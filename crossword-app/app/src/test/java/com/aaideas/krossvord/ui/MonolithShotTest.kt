@@ -13,6 +13,8 @@ import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onFirst
+import androidx.compose.ui.test.performSemanticsAction
 import androidx.compose.ui.unit.dp
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -224,4 +226,32 @@ class MonolithShotTest {
         rule.mainClock.advanceTimeBy(1500)
         captureScreenRoboImage("build/outputs/roborazzi/mono-menus.png")
     }
+
+    // Home scrolled a little: the cards melt away under the status bar instead of being cut by a hard line.
+    private fun scrolledHome(name: String, skin: Skin, mode: ThemeMode) {
+        val vm = GameViewModel(ApplicationProvider.getApplicationContext<Application>())
+        rule.mainClock.autoAdvance = false
+        rule.setContent {
+            KrossvordTheme(mode, skin = skin) {
+                Surface(Modifier.fillMaxSize()) {
+                    Box(Modifier.fillMaxSize()) {
+                        if (skin.glass) GlassBackdrop(mode == ThemeMode.DARK, Modifier.matchParentSize())
+                        androidx.compose.runtime.CompositionLocalProvider(LocalTopInset provides 40.dp) {
+                            Box(Modifier.topFade(56.dp)) { ExpressiveHome(vm) }
+                        }
+                    }
+                }
+            }
+        }
+        rule.mainClock.advanceTimeBy(800)
+        rule.onAllNodes(androidx.compose.ui.test.hasScrollAction()).onFirst()
+            .performSemanticsAction(androidx.compose.ui.semantics.SemanticsActions.ScrollBy) { it(0f, 130f * 3) }
+        rule.mainClock.advanceTimeBy(800)
+        captureScreenRoboImage("build/outputs/roborazzi/$name.png")
+    }
+
+    @Test fun fadeKlassik() = scrolledHome("fade-klassik", Skin.KLASSIK, ThemeMode.LIGHT)
+    @Test fun fadeKlassikDark() = scrolledHome("fade-klassik-dark", Skin.KLASSIK, ThemeMode.DARK)
+    @Test fun fadeGlass() = scrolledHome("fade-glass", Skin.SUSE, ThemeMode.LIGHT)
+    @Test fun fadeGlassDark() = scrolledHome("fade-glass-dark", Skin.SUSE, ThemeMode.DARK)
 }

@@ -81,7 +81,7 @@ fun ResetAllDialog(onConfirm: () -> Unit, onDismiss: () -> Unit) {
 
 @Composable
 fun LevelsScreen(vm: GameViewModel) {
-    Column(Modifier.fillMaxSize().padding(16.dp)) {
+    Column(Modifier.fillMaxSize().belowStatusBar().padding(16.dp)) {
         ScreenHeader("Səviyyələr", vm::back)
         Spacer(Modifier.height(12.dp))
         // One chip per pack: the main pack first, then the themes.
@@ -101,7 +101,7 @@ fun LevelsScreen(vm: GameViewModel) {
             }
         }
         Spacer(Modifier.height(8.dp))
-        LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp), contentPadding = androidx.compose.foundation.layout.PaddingValues(bottom = BottomMenuHeight)) {
+        LazyColumn(Modifier.topFade(), verticalArrangement = Arrangement.spacedBy(8.dp), contentPadding = androidx.compose.foundation.layout.PaddingValues(bottom = BottomMenuHeight)) {
             items(vm.packLevels(vm.homePack)) { (i, level) ->
                 val done = level.id in vm.completed
                 Card(Modifier.fillMaxWidth().clickable { vm.startLevel(i) }) {
@@ -129,7 +129,7 @@ val CREDITS = listOf(
 @Composable
 fun SettingsScreen(vm: GameViewModel, isPremium: Boolean) {
     Column(
-        Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp).padding(bottom = BottomMenuHeight),
+        Modifier.fillMaxSize().verticalScroll(rememberScrollState()).belowStatusBar().padding(16.dp).padding(bottom = BottomMenuHeight),
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         ScreenHeader("Ayarlar", vm::back)

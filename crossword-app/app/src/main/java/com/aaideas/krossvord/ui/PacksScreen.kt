@@ -38,7 +38,7 @@ fun PacksScreen(vm: GameViewModel) {
     LaunchedEffect(Unit) { vm.refreshRemote() }
     val cs = MaterialTheme.colorScheme
     Column(
-        Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp),
+        Modifier.fillMaxSize().verticalScroll(rememberScrollState()).belowStatusBar().padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         ScreenHeader("Yeni paketlər", vm::back)
