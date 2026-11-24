@@ -1,0 +1,397 @@
+{
+ "formatVersion": 1,
+ "packId": "az-hefte-4",
+ "language": "az",
+ "normalization": "az-v1",
+ "contentVersion": 1,
+ "title": "Həftənin sürprizi 4",
+ "levels": [
+  {
+   "id": "az-hefte-4-001",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "SÜZMƏ",
+     "clue": "Qatı qatıq",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qatıq pendiri",
+      "Süzülmüş qatıq",
+      "Qatı qatıq"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 1,
+     "answer": "FƏHLƏ",
+     "clue": "Tikinti işçisi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Zavod işçisi",
+      "Əl əməyi adamı",
+      "Tikinti işçisi"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "XOŞBƏXT",
+     "clue": "Şad insan",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Bəxtəvər",
+      "Səadətli",
+      "Şad insan"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "YAZI",
+     "clue": "Qələmlə çəkilən",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Kağıza düşən",
+      "Əlyazma",
+      "Qələmlə çəkilən"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "PƏYƏ",
+     "clue": "Qış damı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qoyun damı",
+      "Qoyun yeri",
+      "Qış damı"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 4,
+     "clueCol": 4,
+     "answer": "HİN",
+     "clue": "Quş damı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Toyuq evi",
+      "Xoruz yuvası",
+      "Quş damı"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "MƏTN",
+     "clue": "Oxunan yazı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Yazı parçası",
+      "Kitab parçası",
+      "Oxunan yazı"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "POLİS",
+    "cells": [
+     [
+      1,
+      1
+     ],
+     [
+      2,
+      6
+     ],
+     [
+      5,
+      5
+     ],
+     [
+      6,
+      4
+     ],
+     [
+      1,
+      3
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-hefte-4-002",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "KÜLÜNG",
+     "clue": "Uclu alət",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Daş qazan",
+      "Dağ çapacağı",
+      "Uclu alət"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 1,
+     "answer": "DALAN",
+     "clue": "Xırda döngə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Çıxılmaz küçə",
+      "Dar küçə",
+      "Xırda döngə"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 2,
+     "answer": "BULUDLU",
+     "clue": "Boz göy",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Tutqun hava",
+      "Günəşsiz",
+      "Boz göy"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 1,
+     "answer": "BİLƏK",
+     "clue": "Əl buğumu",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qol ilə əl arası",
+      "Saat taxılan",
+      "Əl buğumu"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "BURUQ",
+     "clue": "Neft vurur",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Neft qülləsi",
+      "Dəniz qurğusu",
+      "Neft vurur"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "İLXI",
+     "clue": "Atlar dəstəsi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "At sürüsü",
+      "Yılqı",
+      "Atlar dəstəsi"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "QÜRUB",
+    "cells": [
+     [
+      7,
+      5
+     ],
+     [
+      4,
+      6
+     ],
+     [
+      7,
+      3
+     ],
+     [
+      4,
+      2
+     ],
+     [
+      7,
+      1
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-hefte-4-003",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "PENAL",
+     "clue": "Çanta qutusu",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qələm qabı",
+      "Qələmdan",
+      "Çanta qutusu"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "DƏNİZ",
+     "clue": "Böyük su",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Dalğalı su",
+      "Xəzər, Qara",
+      "Böyük su"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 5,
+     "answer": "MOZAİKA",
+     "clue": "Rəngli naxış",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Daş şəkli",
+      "Xırda parçalar",
+      "Rəngli naxış"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 1,
+     "answer": "ELTİ",
+     "clue": "Bir evin gəlini",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qaynın arvadı",
+      "Gəlin qohumu",
+      "Bir evin gəlini"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "ÇAYLAQ",
+     "clue": "Çay daşlığı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Quru çay yatağı",
+      "Çınqıllı yer",
+      "Çay daşlığı"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "MƏDƏ",
+     "clue": "Yemək kisəsi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Həzm orqanı",
+      "Qarın içi",
+      "Yemək kisəsi"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "OKEAN",
+    "cells": [
+     [
+      2,
+      5
+     ],
+     [
+      6,
+      5
+     ],
+     [
+      5,
+      2
+     ],
+     [
+      7,
+      2
+     ],
+     [
+      3,
+      3
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  }
+ ]
+}

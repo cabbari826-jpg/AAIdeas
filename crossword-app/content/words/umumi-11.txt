@@ -1,0 +1,59 @@
+# Ümumi sözlər (11): şəhər, yol, hisslər. Format: SÖZ | çətin | orta | asan
+ÇƏTƏN | Çubuq hörgü | Hörmə çəpər | Hörmə hasar
+SİPƏR | Qalxan | Müdafiə vasitəsi | Döyüşçü qalxanı
+KOMA | Daxma | Kiçik ev | Kol evi
+DƏYƏ | Yaylaq evi | Çoban çadırı | Keçə ev
+KÖÇ | Yurd dəyişmə | Yer dəyişmə | Elin yolu
+ÇAYXANA | Çay evi | Nərd oynanan yer | Kişilər məclisi
+ZAVOD | Sənaye yeri | İstehsal yeri | Fabrik qardaşı
+FABRİK | Toxuculuq yeri | İstehsal binası | Parça istehsalı
+MƏDƏN | Yeraltı ocaq | Filiz yatağı | Kömür ocağı
+BURUQ | Neft qülləsi | Dəniz qurğusu | Neft vurur
+BORU | İçi boş mil | Qaz xətti | Kəmər
+KRAN | Su açarı | Qaldırıcı | Su axıdan
+NASOS | Su vuran | Pompa | Su çəkən
+ƏYLƏC | Tormoz | Saxlayıcı | Sürəti azaldır
+BƏXŞİŞ | Hədiyyə pul | Ənam | Çay pulu
+SOVQAT | Yol hədiyyəsi | Səfər payı | Gətirilən pay
+TÖHFƏ | Pay, nəzir | Xidmət, pay | Qiymətli pay
+MARKA | Poçt nişanı | Zərfə yapışar | Avtomobil növü
+VİZA | Giriş icazəsi | Pasporta möhür | Səfirlik kağızı
+GÖMRÜK | Sərhəd yoxlaması | Rüsum yeri | Yük yoxlanışı
+HƏBS | Tutulma | Barmaqlıq arxası | Qandal, zindan
+CƏZA | Töhmət | Günah əvəzi | Günah bədəli
+HÖKM | Qərar | Hakim sözü | Məhkəmə qərarı
+HAQQ | Ədalət | Hüquq | Düzlük
+ZÜLM | Sitəm | Haqsızlıq | Əziyyət vermə
+BARIŞIQ | Sülh sözü | Küsülülüyə son | Aranı düzəltmə
+KÜSÜ | İnciklik | Araya soyuqluq | Dinməz olmaq
+İNCİK | Küsülü | Xətirdən dəymiş | Qəlbi sınıq
+QISQANC | Paxıl gözlü | Rəqib görən | Həsəd aparan
+PAXIL | Gözü götürməyən | Həsədçi | Pis gözlü
+HƏSƏD | Qibtə | Paxıllıq | Gözü götürməmək
+KİN | Ədavət | Köhnə nifrət | Qəlb düşmənliyi
+İNTİQAM | Qisas | Əvəz çıxma | Acıq çıxma
+FAL | Gələcək xəbəri | Gələcəyə baxış | Kart açmaq
+KABUS | Qorxulu yuxu | Pis yuxu | Gecə qorxusu
+GÖYƏRTİ | Tərəvəz otu | Göy otlar | Süfrə yaşıllığı
+QƏNNADI | Şirniyyatçı | Tort ustası | Şirni bişirən
+BAQQAL | Ərzaq satan | Kiçik dükançı | Məhəllə satıcısı
+PİNƏÇİ | Ayaqqabı yamayan | Çəkməçi | Yamaq ustası
+SAATSAZ | Saat ustası | Saat təmirçisi | Mexanizm ustası
+ARABAÇI | Faytonçu | At sürən | Araba sahibi
+FAYTON | Atlı araba | Köhnə taksi | Kəhər arabası
+RELS | Dəmiryol xətti | Qatar yolu | Polad zolaq
+VAĞZAL | Stansiya | Qatar binası | Perron yeri
+PERRON | Platforma | Vaqon kənarı | Sərnişin yeri
+MƏRKƏZ | Orta yer | Orta nöqtə | Şəhər ortası
+KƏNAR | Qıraq | Uc | Sərhəd yeri
+TİN | Küçə küncü | Döngə | Bina küncü
+DALAN | Çıxılmaz küçə | Dar küçə | Xırda döngə
+QƏSƏBƏ | Kiçik şəhər | Kənd-şəhər | Kiçik məntəqə
+RAYON | İnzibati vahid | Bölgə, mahal | Ərazi vahidi
+MƏSKƏN | Yurd, məkan | Sığınacaq | Oturaq yer
+DAXMA | Kasıb evi | Komacıq | Kiçik ev, koma
+MİNARƏ | Məscid qülləsi | Azan yeri | Uca qüllə
+HÖRGÜ | Divar işi | Daş düzümü | Kərpic sırası
+SUVAQ | Divar örtüyü | Malalanmış qat | Mala işi
+KAFEL | Divar plitəsi | Hamam örtüyü | Şirli plitə
+MOZAİKA | Daş şəkli | Xırda parçalar | Rəngli naxış

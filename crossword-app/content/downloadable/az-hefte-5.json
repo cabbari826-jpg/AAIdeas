@@ -1,0 +1,409 @@
+{
+ "formatVersion": 1,
+ "packId": "az-hefte-5",
+ "language": "az",
+ "normalization": "az-v1",
+ "contentVersion": 1,
+ "title": "Həftənin sürprizi 5",
+ "levels": [
+  {
+   "id": "az-hefte-5-001",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 2,
+     "answer": "QAMƏT",
+     "clue": "Endam",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Bədən quruluşu",
+      "Boy-bəstə",
+      "Endam"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 2,
+     "clueCol": 0,
+     "answer": "QADAĞA",
+     "clue": "Yasaq şey",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Yasaq",
+      "Olmaz deyimi",
+      "Yasaq şey"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "SARIŞIN",
+     "clue": "Qızılı saç",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Sarı saçlı",
+      "Ağ bənizli",
+      "Qızılı saç"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "ŞABALID",
+     "clue": "Tikanlı qabıq",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qəhvəyi qoz",
+      "Qovrulan meyvə",
+      "Tikanlı qabıq"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 4,
+     "clueCol": 0,
+     "answer": "BƏLA",
+     "clue": "Fəlakət, dərd",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Müsibət",
+      "Fəlakət",
+      "Fəlakət, dərd"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "DƏRD",
+     "clue": "Ürək yükü",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qəm",
+      "Qüssə",
+      "Ürək yükü"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "BALQABAQ",
+    "cells": [
+     [
+      4,
+      1
+     ],
+     [
+      4,
+      4
+     ],
+     [
+      4,
+      3
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      2,
+      6
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      1,
+      2
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-hefte-5-002",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "BOLLUQ",
+     "clue": "Doyumluq",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Firavanlıq",
+      "Çoxluq",
+      "Doyumluq"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "BULANIQ",
+     "clue": "Qatı su",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Lilli",
+      "Duru deyil",
+      "Qatı su"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 1,
+     "clueCol": 4,
+     "answer": "MƏHSUL",
+     "clue": "Bar, barı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Biçin barı",
+      "Hasilat",
+      "Bar, barı"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 1,
+     "answer": "SÜSƏN",
+     "clue": "Bahar gülü",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Bənövşəyi gül",
+      "Qılıncvari gül",
+      "Bahar gülü"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "TƏZƏ",
+     "clue": "Təravətli",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Yeni",
+      "Köhnə deyil",
+      "Təravətli"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "KƏTƏ",
+     "clue": "Dadlı kökə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "İçli kökə",
+      "Qarabağ kökəsi",
+      "Dadlı kökə"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "KÜY",
+     "clue": "Basabas səsi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Səs-səda",
+      "Gurultu",
+      "Basabas səsi"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "BOYLU",
+    "cells": [
+     [
+      1,
+      6
+     ],
+     [
+      7,
+      2
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      7,
+      4
+     ],
+     [
+      2,
+      6
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-hefte-5-003",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "VƏZİFƏ",
+     "clue": "Tapşırıq",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Borc, iş",
+      "Mənsəb",
+      "Tapşırıq"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "GÖZYAŞI",
+     "clue": "Duzlu damla",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ağlayanda axar",
+      "Kirpikdə damla",
+      "Duzlu damla"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 1,
+     "clueCol": 6,
+     "answer": "FƏRYAD",
+     "clue": "Ah-nalə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Nalə, ah",
+      "Ağlaşma",
+      "Ah-nalə"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 1,
+     "answer": "HARAY",
+     "clue": "Fəryad səsi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Kömək çağırışı",
+      "İmdad",
+      "Fəryad səsi"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "BUGÜN",
+     "clue": "Dünəndən sonra",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Elə indi",
+      "Bu sutka",
+      "Dünəndən sonra"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "AYIQ",
+     "clue": "Huşyar",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Oyaq",
+      "Diqqətli",
+      "Huşyar"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "BƏNİZ",
+    "cells": [
+     [
+      1,
+      1
+     ],
+     [
+      3,
+      2
+     ],
+     [
+      1,
+      5
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      3,
+      3
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  }
+ ]
+}

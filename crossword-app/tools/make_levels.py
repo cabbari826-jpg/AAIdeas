@@ -112,6 +112,8 @@ def build_theme(theme, other, rng, tries, min_entries, max_words, min_theme=0.0)
         letters = sum(1 for v in grid.values() if v not in (None, '#'))
         nt = sum(1 for e in ent if e[3] in theme)
         if sum(1 for e in ent if len(e[3]) == 2) > 1: continue   # at most one 2-letter word
+        ws = [e[3] for e in ent]
+        if any(x != y and len(y) >= 3 and x.startswith(y) for x in ws for y in ws): continue   # no OVÇU next to OVÇULUQ
         sc = letters + 6 * nt
         if len(ent) >= min_entries and nt >= min_theme * len(ent) and (best is None or sc > best[0]): best = (sc, grid, ent)
     if not best: return None
@@ -204,8 +206,10 @@ def main():
             grid, ent = got
             answers = [e[3] for e in ent]
             if mini: break
-            kw = (keyword_for(grid, [w for w in theme if usable(w) and w not in answers], rng)
-                  or keyword_for(grid, [w for w in general if usable(w) and w not in answers], rng))
+            # the key word must not be a form of an answer in the same grid (OVÇU / OVÇULUQ)
+            ok = lambda w: usable(w) and not any(w.startswith(a[:4]) or a.startswith(w[:4]) for a in answers)
+            kw = (keyword_for(grid, [w for w in theme if ok(w)], rng)
+                  or keyword_for(grid, [w for w in general if ok(w)], rng))
             if kw: break
         if not got:
             src = 'umumi*.txt' if pack_id == 'az-starter' else f'{pack_id}.txt'
