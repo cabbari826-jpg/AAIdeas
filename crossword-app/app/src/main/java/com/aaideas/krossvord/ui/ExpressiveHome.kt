@@ -88,7 +88,7 @@ object SquircleShape : Shape by GenericShape({ size, _ ->
 
 /** Gentle spring squash on press. */
 @Composable
-private fun Modifier.springPress(source: MutableInteractionSource): Modifier {
+internal fun Modifier.springPress(source: MutableInteractionSource): Modifier {
     val pressed by source.collectIsPressedAsState()
     val s by animateFloatAsState(
         if (pressed) 0.9f else 1f,
@@ -103,9 +103,14 @@ fun ExpressiveHome(vm: GameViewModel) {
     var confirmReset by remember { mutableStateOf(false) }
     val cs = MaterialTheme.colorScheme
     val season = DecorSeason.on(vm.today())
+    // Past the top cards the progress pill comes in at the top of the screen (MainActivity draws it).
+    val scroll = rememberScrollState()
+    val pastTop = with(androidx.compose.ui.platform.LocalDensity.current) { 280.dp.toPx() }
+    androidx.compose.runtime.LaunchedEffect(scroll) { androidx.compose.runtime.snapshotFlow { scroll.value > pastTop }.collect { vm.homeScrolled = it } }
+    androidx.compose.runtime.DisposableEffect(Unit) { onDispose { vm.homeScrolled = false } }
     Box(Modifier.fillMaxSize()) {
     Column(
-        Modifier.fillMaxSize().verticalScroll(rememberScrollState()).belowStatusBar().padding(horizontal = 20.dp, vertical = 16.dp),
+        Modifier.fillMaxSize().verticalScroll(scroll).belowStatusBar().padding(horizontal = 20.dp, vertical = 16.dp),
         verticalArrangement = Arrangement.spacedBy(18.dp),
     ) {
         Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
