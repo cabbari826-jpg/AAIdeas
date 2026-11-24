@@ -12,6 +12,8 @@ import androidx.compose.animation.scaleOut
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.animation.togetherWith
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
@@ -82,76 +84,111 @@ private fun Island(vm: GameViewModel, open: Boolean, toggle: () -> Unit) {
     val haze = if (screenLayer != null) null else LocalHaze.current
     val glass = LocalGlass.current
     val dark = cs.background.luminance() < 0.5f
-    val springy = spring<androidx.compose.ui.unit.Dp>(dampingRatio = 0.8f, stiffness = Spring.StiffnessMediumLow)
-    // A capsule while thin; a card with the bottom menu's round feel when open.
-    val corner by animateDpAsState(if (open) 28.dp else 18.dp, springy, label = "islandCorner")
+    val springy = spring<androidx.compose.ui.unit.Dp>(dampingRatio = 0.85f, stiffness = Spring.StiffnessMediumLow)
+    // A capsule while thin; the same round feel as the bottom menu when open.
+    val corner by animateDpAsState(if (open) 32.dp else 18.dp, springy, label = "islandCorner")
     val shape = RoundedCornerShape(corner)
     val src = remember { MutableInteractionSource() }
-    val p = vm.homePack
-    val packs = vm.packs.indices.filter { vm.packOpen(it) }
+    val wide = androidx.compose.ui.platform.LocalConfiguration.current.screenWidthDp.dp - 32.dp
+    // Exactly the bottom menu's glass in every state and theme (owner, 2026-11-24).
     Surface(
-        modifier = Modifier.padding(top = 8.dp, start = 16.dp, end = 16.dp)
-            .then(if (open) Modifier.fillMaxWidth() else Modifier)
+        modifier = Modifier.padding(top = 8.dp)
             .then(if (haze != null) Modifier.clip(shape).hazeEffect(haze, glassStyle(dark)) else Modifier)
             .liquidGlass(screenLayer, shape, dark, frost = 2.dp)
             .glassy(shape, lens = false)
             .springPress(src)
             .clip(shape)
-            .clickable(src, indication = null, onClick = toggle)
-            .animateContentSize(spring(dampingRatio = 0.8f, stiffness = Spring.StiffnessMediumLow)),
+            .clickable(src, indication = null, onClick = toggle),
         shape = shape,
-        // Open, it holds a list to read, so the glass gets as dense as the frosted dialogs.
-        color = if (glass && open) cs.surface.copy(alpha = if (dark) 0.78f else 0.82f)
-            else if (haze != null || screenLayer != null) Color.Transparent else if (glass) Color.White.copy(alpha = if (dark) 0.14f else 0.45f) else cs.surfaceContainerHigh,
+        color = if (haze != null || screenLayer != null) Color.Transparent else if (glass) Color.White.copy(alpha = if (dark) 0.14f else 0.45f) else cs.surfaceContainerHigh,
         border = if (glass) null else BorderStroke(1.dp, cs.outlineVariant.copy(alpha = 0.7f)),
     ) {
-        val label = MaterialTheme.typography.labelLarge.copy(fontFamily = MenuFont, fontWeight = FontWeight.ExtraBold)
-        if (!open) {
-            // Thin: the chosen pack, a small ring and its count. 36 dp tall.
-            val pack = vm.packs[p]
+        // One shape that grows out of the pill and back, like an island: size springs, contents cross-fade.
+        androidx.compose.animation.AnimatedContent(
+            targetState = open,
+            transitionSpec = {
+                (fadeIn(androidx.compose.animation.core.tween(180, delayMillis = 90)) + scaleIn(initialScale = 0.96f))
+                    .togetherWith(fadeOut(androidx.compose.animation.core.tween(90)))
+                    .using(androidx.compose.animation.SizeTransform(clip = true) { _, _ -> spring(dampingRatio = 0.85f, stiffness = Spring.StiffnessMediumLow) })
+            },
+            contentAlignment = Alignment.TopCenter,
+            label = "island",
+        ) { isOpen ->
+            if (!isOpen) Thin(vm) else Wide(vm, Modifier.width(wide), toggle)
+        }
+    }
+}
+
+private val islandLabel @Composable get() = MaterialTheme.typography.labelLarge.copy(fontFamily = MenuFont, fontWeight = FontWeight.ExtraBold)
+
+@Composable
+private fun Ring(done: Int, total: Int, size: androidx.compose.ui.unit.Dp) {
+    val cs = MaterialTheme.colorScheme
+    CircularProgressIndicator(
+        progress = { if (total == 0) 0f else done.toFloat() / total },
+        modifier = Modifier.size(size),
+        strokeWidth = size / 5,
+        trackColor = cs.onSurface.copy(alpha = 0.15f),
+        gapSize = 0.dp,
+    )
+}
+
+/** Thin: the chosen pack, a small ring and its count. 36 dp tall, 14 dp on each side. */
+@Composable
+private fun Thin(vm: GameViewModel) {
+    val cs = MaterialTheme.colorScheme
+    val pack = vm.packs[vm.homePack]
+    val done = pack.levels.count { it.id in vm.completed }
+    Row(
+        Modifier.height(36.dp).padding(horizontal = 14.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
+        Ring(done, pack.levels.size, 16.dp)
+        Text(pack.title, style = islandLabel, color = cs.onSurface, maxLines = 1)
+        Text("$done/${pack.levels.size}", style = islandLabel, color = cs.onSurface.copy(alpha = 0.7f), maxLines = 1)
+    }
+}
+
+/**
+ * Open: every pack as a row of the same height, a ring on the left, the name, and the count on the
+ * right. The chosen pack sits in the same highlight as the chosen menu tab. 8 dp inset all round,
+ * like the menu, so the highlight follows the card's corners.
+ */
+@Composable
+private fun Wide(vm: GameViewModel, modifier: Modifier, close: () -> Unit) {
+    val cs = MaterialTheme.colorScheme
+    val glass = LocalGlass.current
+    val dark = cs.background.luminance() < 0.5f
+    val p = vm.homePack
+    val packs = vm.packs.indices.filter { vm.packOpen(it) }
+    Column(modifier.heightIn(max = 460.dp).verticalScroll(rememberScrollState()).padding(8.dp)) {
+        packs.forEach { i ->
+            val pack = vm.packs[i]
             val done = pack.levels.count { it.id in vm.completed }
+            val on = i == p
+            val icon = com.aaideas.krossvord.model.Holidays.holidayFor(pack.packId)?.icon?.let { "$it " }
+                ?: if (com.aaideas.krossvord.model.Weekly.isWeekly(pack.packId)) "🎁 " else ""
+            val ink = if (on && !glass) cs.onPrimary else cs.onSurface
             Row(
-                Modifier.height(36.dp).padding(horizontal = 14.dp),
+                Modifier.fillMaxWidth().height(48.dp).clip(CircleShape)
+                    .background(if (on) (if (glass) Color.White.copy(alpha = if (dark) 0.22f else 0.6f) else cs.primary) else Color.Transparent)
+                    .clickable { vm.selectedPack = i; close() }
+                    .padding(horizontal = 14.dp),
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                horizontalArrangement = Arrangement.spacedBy(12.dp),
             ) {
-                CircularProgressIndicator(
-                    progress = { if (pack.levels.isEmpty()) 0f else done.toFloat() / pack.levels.size },
-                    modifier = Modifier.size(16.dp),
-                    strokeWidth = 3.dp,
-                    trackColor = cs.onSurface.copy(alpha = 0.15f),
-                    gapSize = 0.dp,
-                )
-                Text(pack.title, style = label, color = cs.onSurface, maxLines = 1)
-                Text("$done/${pack.levels.size}", style = label, color = cs.onSurface.copy(alpha = 0.7f), maxLines = 1)
-            }
-        } else {
-            Column(Modifier.heightIn(max = 440.dp).verticalScroll(rememberScrollState()).padding(20.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
-                Text("Paketlər", style = label.copy(fontSize = MaterialTheme.typography.titleMedium.fontSize),
-                    color = cs.onSurface, modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center)
-                packs.forEach { i ->
-                    val pack = vm.packs[i]
-                    val done = pack.levels.count { it.id in vm.completed }
-                    val icon = com.aaideas.krossvord.model.Holidays.holidayFor(pack.packId)?.icon?.let { "$it " }
-                        ?: if (com.aaideas.krossvord.model.Weekly.isWeekly(pack.packId)) "🎁 " else ""
-                    Column(
-                        Modifier.fillMaxWidth().clip(RoundedCornerShape(14.dp))
-                            .clickable { vm.selectedPack = i; toggle() },
-                        verticalArrangement = Arrangement.spacedBy(6.dp),
-                    ) {
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Text(icon + pack.title, style = label, color = if (i == p) cs.primary else cs.onSurface, modifier = Modifier.weight(1f), maxLines = 1)
-                            Text("$done / ${pack.levels.size}", style = label, color = cs.onSurface.copy(alpha = 0.7f))
-                        }
-                        LinearProgressIndicator(
+                if (on && !glass) {
+                    androidx.compose.runtime.CompositionLocalProvider(androidx.compose.material3.LocalContentColor provides ink) {
+                        CircularProgressIndicator(
                             progress = { if (pack.levels.isEmpty()) 0f else done.toFloat() / pack.levels.size },
-                            modifier = Modifier.fillMaxWidth().height(6.dp).clip(CircleShape),
-                            trackColor = cs.onSurface.copy(alpha = 0.12f),
-                            drawStopIndicator = {},
-                            gapSize = 0.dp,
+                            modifier = Modifier.size(20.dp), strokeWidth = 4.dp, color = ink,
+                            trackColor = ink.copy(alpha = 0.3f), gapSize = 0.dp,
                         )
                     }
-                }
+                } else Ring(done, pack.levels.size, 20.dp)
+                Text(icon + pack.title, style = islandLabel, color = ink, modifier = Modifier.weight(1f), maxLines = 1)
+                Text("$done / ${pack.levels.size}", style = islandLabel, color = ink.copy(alpha = 0.75f), maxLines = 1)
             }
         }
     }
