@@ -105,7 +105,7 @@ fun ExpressiveHome(vm: GameViewModel) {
     val season = DecorSeason.on(vm.today())
     Box(Modifier.fillMaxSize()) {
     Column(
-        Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(horizontal = 20.dp, vertical = 16.dp),
+        Modifier.fillMaxSize().verticalScroll(rememberScrollState()).belowStatusBar().padding(horizontal = 20.dp, vertical = 16.dp),
         verticalArrangement = Arrangement.spacedBy(18.dp),
     ) {
         Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
@@ -325,7 +325,7 @@ fun WeeklyCard(vm: GameViewModel, p: Int) {
 
 /** Room left at the end of a screen for the floating menu, plus the gesture bar the screen now runs under. */
 val BottomMenuHeight: Dp
-    @Composable get() = 102.dp + androidx.compose.foundation.layout.WindowInsets.navigationBars
+    @Composable get() = 108.dp + androidx.compose.foundation.layout.WindowInsets.navigationBars
         .asPaddingValues().calculateBottomPadding()
 
 /**
@@ -338,7 +338,7 @@ fun GlassBottomMenu(
     open: (Screen) -> Unit,
     modifier: Modifier = Modifier,
     // The owner's pick (2026-11-23): a shorter pill hugging its tabs, labels in Nunito ExtraBold.
-    compact: Boolean = true,
+    compact: Boolean = false,
     font: androidx.compose.ui.text.font.FontFamily? = MenuFont,
 ) {
     val cs = MaterialTheme.colorScheme
@@ -352,19 +352,38 @@ fun GlassBottomMenu(
         modifier = modifier.padding(start = 16.dp, end = 16.dp, top = 12.dp, bottom = 26.dp)
             .then(if (compact) Modifier else Modifier.fillMaxWidth())
             // Şüşə: frosted glass over whatever scrolls beneath (real blur on Android 12+, a tint before that).
-            .then(if (haze != null) Modifier.clip(CircleShape).hazeEffect(haze, glassStyle(dark)) else Modifier)
-            .liquidGlass(screenLayer, CircleShape, dark, frost = 2.dp)
-            .glassy(CircleShape, lens = false),
-        shape = CircleShape,
+            .then(if (haze != null) Modifier.clip(MenuShape).hazeEffect(haze, glassStyle(dark)) else Modifier)
+            .liquidGlass(screenLayer, MenuShape, dark, frost = 2.dp)
+            .glassy(MenuShape, lens = false),
+        shape = MenuShape,
         // No shadow: it would show through the see-through fill as a smudge.
         color = if (haze != null || screenLayer != null) Color.Transparent else if (glass) Color.White.copy(alpha = if (dark) 0.14f else 0.45f) else cs.surfaceContainerHigh,
         border = if (glass) null else BorderStroke(1.dp, cs.outlineVariant.copy(alpha = 0.7f)),
     ) {
-        // Every tab as wide as the widest label, so the chosen tab's highlight is the same size on each
-        // and its icon and label sit exactly in the middle (the owner wants strict symmetry).
-        Row(Modifier.then(if (compact) Modifier.width(androidx.compose.foundation.layout.IntrinsicSize.Max) else Modifier).padding(6.dp),
-            // The gap between tabs equals the inset from the pill's edge, so the chosen tab sits evenly in its slot.
-            horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+        // As on the owner's mockup (2026-11-24): a wide capsule, the four tabs spread evenly, the chosen
+        // one a round-ended highlight around icon and label. Every tab is the same width (the longest label
+        // plus padding), so the highlight is the same size on each, with the icon and label in its centre.
+        val baseStyle = if (font != null) MaterialTheme.typography.labelLarge.copy(fontFamily = font, fontWeight = androidx.compose.ui.text.font.FontWeight.ExtraBold, fontSize = 13.sp)
+            else MaterialTheme.typography.labelMedium
+        val measurer = androidx.compose.ui.text.rememberTextMeasurer()
+        val density = androidx.compose.ui.platform.LocalDensity.current
+        val screenW = androidx.compose.ui.platform.LocalConfiguration.current.screenWidthDp.dp
+        val (labelStyle, tabWidth) = remember(baseStyle, measurer, screenW, density) {
+            with(density) {
+                val longest = MENU_LABELS.maxOf { measurer.measure(it, baseStyle, softWrap = false).size.width }.toDp()
+                // Each tab's share: the bar's inner width (8 dp inset all round, 8 dp between tabs) over four.
+                val most = (screenW - 32.dp - 16.dp - 24.dp) / 4
+                val room = most - 16.dp
+                if (longest <= room) baseStyle to most
+                else baseStyle.copy(fontSize = baseStyle.fontSize * (room / longest)) to most
+            }
+        }
+        Row(
+            Modifier.then(if (compact) Modifier else Modifier.fillMaxWidth()).padding(8.dp),
+            // The same 8 dp everywhere: bar edge to highlight on every side, and between tabs, so the chosen
+            // highlight sits concentric in the capsule's round end and centred top to bottom.
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
             listOf(
                 Triple(Screen.HOME, MenuIcon.PLAY, "Oyun"),
                 Triple(Screen.DAILY, MenuIcon.TODAY, "Bu gün"),
@@ -374,32 +393,17 @@ fun GlassBottomMenu(
                 val on = screen == target
                 val src = remember { MutableInteractionSource() }
                 Column(
-                    Modifier.weight(1f).springPress(src).clip(CircleShape)
+                    (if (compact) Modifier.width(tabWidth) else Modifier.weight(1f)).springPress(src).clip(TabShape)
                         // Şüşə: the chosen tab is a brighter glass pill with dark text (mockup); otherwise the accent.
                         .background(if (on) (if (glass) Color.White.copy(alpha = if (dark) 0.22f else 0.6f) else cs.primary) else Color.Transparent)
                         .clickable(interactionSource = src, indication = null) { open(target) }
-                        .padding(vertical = 7.dp, horizontal = if (compact) 6.dp else 0.dp),
+                        .padding(vertical = 8.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     // With a chosen font the labels are bolder and darker, so they don't look faded on glass.
                     val tabInk = if (on) (if (glass) cs.onSurface else cs.onPrimary) else if (font != null) cs.onSurface.copy(alpha = 0.85f) else cs.onSurfaceVariant
                     MenuGlyph(icon, tabInk, filled = on)
-                    // On a narrow phone or with big text the label shrinks to fit its tab instead of being cut
-                    // on the right, so it always sits exactly under the icon in the middle of the highlight.
-                    val labelStyle = (if (font != null) MaterialTheme.typography.labelLarge.copy(fontFamily = font, fontWeight = androidx.compose.ui.text.font.FontWeight.ExtraBold, fontSize = 13.sp)
-                        else MaterialTheme.typography.labelMedium).copy(color = tabInk, textAlign = androidx.compose.ui.text.style.TextAlign.Center)
-                    // Every tab is the same width, so sizing all labels to fit the longest one keeps them one size.
-                    val measurer = androidx.compose.ui.text.rememberTextMeasurer()
-                    val density = androidx.compose.ui.platform.LocalDensity.current
-                    val screen = androidx.compose.ui.platform.LocalConfiguration.current.screenWidthDp.dp
-                    val style = remember(labelStyle, measurer, screen, density) {
-                        val longest = MENU_LABELS.maxOf { measurer.measure(it, labelStyle, softWrap = false).size.width }
-                        // Room per tab: the screen less the pill's margins, its inset, the gaps and each tab's padding.
-                        val room = with(density) { ((screen - 32.dp - 12.dp - 18.dp) / 4 - 12.dp).toPx() }
-                        if (longest <= room || longest == 0) labelStyle
-                        else labelStyle.copy(fontSize = labelStyle.fontSize * (room / longest * 0.98f))
-                    }
-                    Text(label, style = style, maxLines = 1, softWrap = false)
+                    Text(label, style = labelStyle, color = tabInk, maxLines = 1, softWrap = false)
                 }
             }
         }
@@ -408,6 +412,12 @@ fun GlassBottomMenu(
 
 /** Nunito ExtraBold (SIL OFL 1.1), subset to Latin + Azerbaijani letters: the menu labels. */
 val MenuFont = AppFont
+
+/**
+ * The owner's mockup (2026-11-24): a wide capsule with round ends, the chosen tab round-ended too.
+ */
+private val MenuShape = androidx.compose.foundation.shape.CircleShape
+private val TabShape = androidx.compose.foundation.shape.CircleShape
 
 private val MENU_LABELS = listOf("Oyun", "Bu gün", "Uğurlar", "Ayarlar")
 

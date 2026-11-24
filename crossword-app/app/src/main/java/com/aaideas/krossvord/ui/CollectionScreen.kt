@@ -52,7 +52,7 @@ fun CollectionScreen(vm: GameViewModel) {
         val base = if (mine) missed else all
         if (q.isEmpty()) base else base.filter { it.word.contains(q) }
     }
-    Column(Modifier.fillMaxSize().padding(horizontal = 16.dp)) {
+    Column(Modifier.fillMaxSize().belowStatusBar().padding(horizontal = 16.dp)) {
         ScreenHeader("Söz kolleksiyası", { vm.open(Screen.STATS) }, Modifier.padding(top = 16.dp, bottom = 12.dp))
         Text("Tapılmış sözlər: ${all.size}. Səviyyələrdə cəmi $total söz var.", style = MaterialTheme.typography.bodyMedium)
         androidx.compose.foundation.layout.Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -71,7 +71,7 @@ fun CollectionScreen(vm: GameViewModel) {
             modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
         )
         if (all.isEmpty() && !mine) Text("Hələ söz yoxdur. Tapdığın hər söz burada izahı ilə görünəcək.", style = MaterialTheme.typography.bodyLarge)
-        LazyColumn(verticalArrangement = Arrangement.spacedBy(2.dp), contentPadding = androidx.compose.foundation.layout.PaddingValues(bottom = BottomMenuHeight)) {
+        LazyColumn(Modifier.topFade(), verticalArrangement = Arrangement.spacedBy(2.dp), contentPadding = androidx.compose.foundation.layout.PaddingValues(bottom = BottomMenuHeight)) {
             items(shown, key = { it.word }) { f ->
                 Column(Modifier.fillMaxWidth().padding(vertical = 8.dp)) {
                     Text(f.word, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)

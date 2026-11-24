@@ -15,6 +15,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.Alignment
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.windowInsetsPadding
@@ -124,10 +125,14 @@ class MainActivity : ComponentActivity() {
                         if (skin.glass) GlassBackdrop(dark, Modifier.fillMaxSize().then(if (cardHaze != null) Modifier.hazeSource(cardHaze) else Modifier), moving = glassMax, clock = glassClock)
                     // Screens with the menu run on under it and under the gesture bar: a hard edge behind the pill
                     // looked like a ledge. Their lists end with BottomMenuHeight of space so nothing stays hidden.
+                    // Menu screens also run on under the status bar: their content starts below it (LocalTopInset)
+                    // and melts away as it scrolls up there, instead of being cut by a hard line.
+                    val topInset = with(androidx.compose.ui.platform.LocalDensity.current) { androidx.compose.foundation.layout.WindowInsets.safeDrawing.getTop(this).toDp() }
                     Box(if (menu) Modifier.windowInsetsPadding(androidx.compose.foundation.layout.WindowInsets.safeDrawing.only(
-                        androidx.compose.foundation.layout.WindowInsetsSides.Top + androidx.compose.foundation.layout.WindowInsetsSides.Horizontal))
+                        androidx.compose.foundation.layout.WindowInsetsSides.Horizontal))
                         else Modifier.safeDrawingPadding()) {
-                        Box {
+                        androidx.compose.runtime.CompositionLocalProvider(LocalTopInset provides if (menu) topInset else 0.dp) {
+                        Box(if (menu) Modifier.topFade(topInset + 16.dp) else Modifier) {
                             when (vm.screen) {
                                 Screen.HOME -> ExpressiveHome(vm)
                                 Screen.LEVELS -> LevelsScreen(vm)
@@ -140,6 +145,7 @@ class MainActivity : ComponentActivity() {
                                 Screen.PACKS -> PacksScreen(vm)
                                 Screen.MAP -> JourneyScreen(vm)
                             }
+                        }
                         }
                     }
                     }
