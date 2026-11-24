@@ -1,0 +1,57 @@
+# Ümumi sözlər (12): xasiyyət, görünüş, zaman. Format: SÖZ | çətin | orta | asan
+KAMAL | Yetkinlik | Ağıl, dərrakə | Müdriklik
+İGİDLİK | Döyüşdə rəşadət | Mərd iş | Cəsur iş
+MƏRDLİK | Səxavət, ər işi | Sözündə durmaq | Alicənablıq
+İZZƏT | Hörmət, şərəf | Ali hörmət | Qədir-qiymət
+DÜHA | Böyük istedad | Dahilik | Fövqəladə ağıl
+ƏNƏNƏ | Adət, gələnək | Köhnə adət | Nəsildən qalan
+SORAQ | Xəbər, iz | Axtarış | Xəbər tutma
+GİZLİ | Pünhan | Sirli | Açıq deyil
+AŞKAR | Aydın, açıq | Göz önündə | Gizlinin əksi
+BULANIQ | Lilli | Duru deyil | Qatı su
+DURU | Lilsiz | Bulanıq deyil | Təmiz su kimi
+SARIŞIN | Sarı saçlı | Ağ bənizli | Qızılı saç
+ƏSMƏR | Qarabuğdayı | Tünd bənizli | Qaraşın
+BOYLU | Uca qamətli | Hündür adam | Uzunboy
+QAMƏT | Bədən quruluşu | Boy-bəstə | Endam
+SİFƏT | Üz, sima | Xüsusiyyət | Üz-göz
+SİMA | Üz cizgisi | Üz ifadəsi | Adamın üzü
+BƏNİZ | Üzün rəngi | Rəng-ruh | Al yanaq
+HÖRÜK | Uzun saç | Qız saçı | Örülmüş saç
+KƏKİL | Alın saçı | Alına düşən saç | Atın alın tükü
+ZÜLF | Saç burumu | Qıvrım saç | Telli saç
+ÇAL | Ağ düşmüş | Bozumtul | Ağ saçlı
+SAMAN | Quru küləş | Taxıl sapı | Kərpic qatqısı
+UNLUQ | Un anbarı | Un qabı | Un yeri
+MƏHSUL | Biçin barı | Hasilat | Bar, barı
+BOLLUQ | Firavanlıq | Çoxluq | Doyumluq
+QITLIQ | Azlıq | Kasadlıq | Ərzaq yoxluğu
+YUXUSUZ | Gecəni oyaq | Yatmamış | Oyaq qalan
+AYIQ | Oyaq | Diqqətli | Huşyar
+HAY | Səs, haray | Çağırış səsi | Səslənmə
+KÜY | Səs-səda | Gurultu | Basabas səsi
+HARAY | Kömək çağırışı | İmdad | Fəryad səsi
+ÇIĞIRTI | Bağırtı | Qışqırıq | Uca səs
+FƏRYAD | Nalə, ah | Ağlaşma | Ah-nalə
+NALƏ | İnilti | Ah-zar | Kədər səsi
+ŞİKAYƏT | Narazılıq | Ərizə, gileyli | Dərdini demək
+GİLEY | Küsmək sözü | İncik söz | Narazı söz
+MİNNƏT | Başa qaxma | Əvəz gözləmə | Yaxşılığı demək
+XAHİŞ | Rica | İltimas | Lütfən deyimi
+İCAZƏ | Yol vermə | İzn | Olar deyimi
+QADAĞA | Yasaq | Olmaz deyimi | Yasaq şey
+VƏZİFƏ | Borc, iş | Mənsəb | Tapşırıq
+PEŞƏ | Sənət | İxtisas | İş növü
+ALVER | Alış-veriş | Ticarət | Bazar işi
+ENDİRİM | Ucuzlaşma | Güzəşt | Satış faizi
+FAYDA | Xeyir | Köməyi dəyən | İstifadə
+ŞƏR | Pislik | Bəla, fitnə | Xeyirin əksi
+BƏLA | Müsibət | Fəlakət | Fəlakət, dərd
+DƏRD | Qəm | Qüssə | Ürək yükü
+HƏYƏCAN | Təşviş | Ürək çırpıntısı | Narahatlıq
+ERKƏN | Tezdən | Vaxtından əvvəl | Gec deyil
+SONRA | Arxadan | Arxasınca | Əvvəlin əksi
+ƏVVƏL | Qabaq | Öncə | Sonranın əksi
+BUGÜN | Elə indi | Bu sutka | Dünəndən sonra
+GÜN | Sutka | İşıqlı vaxt | Gecənin əksi
+ZAMAN | Vaxt | Dövr | Saat ölçür

@@ -1,0 +1,60 @@
+# Ümumi sözlər (8): kənd, heyvanlar, insanlar. Format: SÖZ | çətin | orta | asan
+CEYRAN | Şirvan heyvanı | Zərif çöl ceyli | Qaraquyruq
+DƏLƏ | Meşə gəmiricisi | Qoz yığan | Kol quyruqlu
+DURNA | Nazik ayaqlı quş | Köçəri quş | Qatar-qatar uçar
+ŞİMŞƏK | Buludda çaxan | Gurultu öncəsi | İldırım çaxması
+PLANET | Göy cismi | Mars, Venera | Günəş peyki
+DƏNİZ | Dalğalı su | Xəzər, Qara | Böyük su
+TƏPƏ | Kiçik dağ | Alçaq yüksəklik | Kurqan, yal
+BUDAQ | Ağac qolu | Yarpaqlı qol | Ağacın qolu
+MİXƏK | Ətirli qönçə | Qurudulmuş qönçə | Qərənfil
+SÜSƏN | Bənövşəyi gül | Qılıncvari gül | Bahar gülü
+PALID | Möhkəm ağac | Qozalı ağac | Meşə nəhəngi
+SÖYÜD | Salxım ağac | Çay kənarı ağacı | Sallanan ağac
+ŞABALID | Qəhvəyi qoz | Qovrulan meyvə | Tikanlı qabıq
+DƏRZİ | Paltar tikən | Ölçü götürən | Tikişçi
+ÇOBAN | Sürü güdən | Qoyun otaran | Tütək çalan
+BAĞBAN | Bağ becərən | Ağac əkən | Bar yetişdirən
+DƏMİRÇİ | Kürə ustası | Zindan ustası | Nal düzəldən
+RƏSSAM | Fırça ustası | Tablo müəllifi | Rəng ustası
+POLİS | Asayiş keşikçisi | Fitli işçi | Yol nəzarəti
+VƏKİL | Müdafiəçi | Hüquqşünas | Məhkəmə dostu
+TACİR | Alverçi | Karvan sahibi | Satıcı, bazirgan
+QƏZET | Gündəlik nəşr | Xəbər vərəqi | Səhər oxunur
+JURNAL | Rəngli nəşr | Aylıq nəşr | Dərs dəftəri
+LÜĞƏT | Söz kitabı | Sözlük | Tərcümə kitabı
+POZAN | Silgi | Rezin parça | Səhv silən
+SARAY | Şah evi | Xan iqamətgahı | Böyük bina
+BAĞ | Meyvəlik | Ağaclı həyət | Ağaclıq yer
+BOSTAN | Qarpız yeri | Tərəvəz sahəsi | Tağlı sahə
+ŞƏHƏR | Böyük yaşayış | Bakı, Gəncə | Kəndin əksi
+QƏZƏB | Hirs | Acıq | Hiddət
+NİFRƏT | Sevginin əksi | Kin | İkrah
+BEYİN | Düşüncə mərkəzi | Kəllədə orqan | Ağıl yeri
+MƏDƏ | Həzm orqanı | Qarın içi | Yemək kisəsi
+BİLƏK | Qol ilə əl arası | Saat taxılan | Əl buğumu
+TAYFA | Nəsil, qəbilə | Qəbilə üzvləri | El, oba
+GÖZƏTÇİ | Keşikçi | Qarovulçu | Nəzarətçi
+OVÇU | Tüfəngli kişi | Ov edən | Meşə qonağı
+KƏNDLİ | Kənd sakini | Əkinçi kişi | Şəhərli deyil
+BİÇİNÇİ | Oraqçı | Zəmi işçisi | Taxıl biçən
+DƏRYAZ | Uzun oraq | Ot biçən | Çəmən biçən
+KƏTMƏN | Bel növü | Torpaq aləti | Çapa
+YABA | Ot çəngəli | Taxta çəngəl | Saman aləti
+YƏHƏR | At oturacağı | Minik yeri | Atın belində
+ÜZƏNGİ | Ayaq yeri | Yəhər halqası | Atlı ayaq qoyar
+NAL | At ayaqqabısı | Dırnaq dəmiri | Uğur nişanı
+QAMÇI | Şallaq | Çubuq, qırmanc | Atı sürən
+PƏYƏ | Qoyun damı | Qoyun yeri | Qış damı
+HİN | Toyuq evi | Xoruz yuvası | Quş damı
+İLXI | At sürüsü | Yılqı | Atlar dəstəsi
+NAXIR | Mal sürüsü | İnək dəstəsi | Kənd mal-qarası
+QOŞUN | Ordu | Silahlı kütlə | Əsgər kütləsi
+DƏSTƏ | Qrup | Bir neçə nəfər | Gül topası
+BƏY | Xan, ağa | Kübar kişi | Zadəgan
+AĞA | Bəy, xan | Böyük qardaş | Ev başçısı
+KÜRƏKƏN | Qızın əri | Yeznə | Toy oğlanı
+ELTİ | Qaynın arvadı | Gəlin qohumu | Bir evin gəlini
+DOST | Yaxın adam | Rəfiq | Yar-yoldaş
+MOŞ | Xırda yaşıl dən | Maş dəni | Xırda paxla
+KÜTÜM | Çəki balığı növü | Lənkəran balığı | Ləvəngi balıq

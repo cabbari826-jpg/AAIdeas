@@ -1,0 +1,77 @@
+# Ümumi sözlər (9): təbiət, hava, idman, məktəb. Format: SÖZ | çətin | orta | asan
+QÜRUB | Günəşin batışı | Axşam çağı | Şəfəqin əksi
+SAXTA | Yalançı | Qondarma | Əsli olmayan
+TUFAN | Güclü fırtına | Dəniz qasırğası | Dəhşətli külək
+ÇİSKİN | Xırda yağış | Narın yağış | Çiləyən yağış
+LEYSAN | Yaz sağanağı | Qəfil sağanaq | Şiddətli yağış
+DAŞQIN | Çay daşması | Su basması | Selin nəticəsi
+ZƏLZƏLƏ | Yer silkinməsi | Təkan | Bal ilə ölçülür
+OKEAN | Ən böyük su | Sakit, Atlantik | Dənizdən böyük
+ÇAYLAQ | Quru çay yatağı | Çınqıllı yer | Çay daşlığı
+ARX | Su yolu | Bağ kanalı | Kiçik kanal
+FONTAN | Fəvvarə | Hovuzda su | Parkda su
+MUSİQİ | Notlu sənət | Səslər sənəti | Mahnı, melodiya
+ZARAFAT | Şənlik sözü | Hənək | Gülməli söz
+ZİYAFƏT | Böyük qonaqlıq | Şənlik süfrəsi | Bol süfrə
+KART | Oyun vərəqi | Bank plastiki | Tuz, kral
+TOPAQ | Fırlanan oyuncaq | Fırfıra | Qamçılı oyuncaq
+TENNİS | Kort oyunu | Tor üstündən | Top və raketka
+FİT | Hakim siqnalı | Dodaq səsi | Hakimin səsi
+CƏRİMƏ | Pul cəzası | On bir metr | Qayda pozana
+OYUNÇU | Komanda üzvü | Futbolçu | Oyun iştirakçısı
+YARIŞ | Bəhs | Müsabiqə | Qaçış, bəhs
+RƏQİB | Hərif | Qarşı tərəf | Rəqabət edən
+PRİNTER | Kağıza çap edən | Ofis aparatı | Çap aləti
+FOTO | Kamera şəkli | Kamera işi | Şəkil
+ÇƏRÇİVƏ | Rama | Şəkil haşiyəsi | Pəncərə taxtası
+PLAKAT | Divar elanı | Böyük afişa | Şüar vərəqi
+AFİŞA | Teatr elanı | Divar reklamı | Kino elanı
+TOXUMA | Hana işi | Xalça işi | Toxunmuş şey
+HÖRMƏ | Saç örgüsü | Örülmüş | Səbət işi
+QƏHVƏYİ | Şabalıdı | Torpaq rəngi | Qəhvə rəngi
+ALƏT | Cihaz | Avadanlıq | İş vasitəsi
+RƏNDƏ | Taxta yonan | Dülgər aləti | Sürtgəc
+KÜLÜNG | Daş qazan | Dağ çapacağı | Uclu alət
+TƏRƏZİ | Çəki aləti | Bazar cihazı | Kilo göstərən
+HESAB | Riyaziyyat | Say, rəqəm | Kassa çeki
+RƏQƏM | 0-dan 9-a | Say işarəsi | Ədəd yazısı
+SAY | Kəmiyyət | Ədəd | Bir, iki, üç
+TOPLAMA | Cəm əməli | Üstəgəl | Artı işarəsi
+ÇIXMA | Fərq əməli | Minus | Azaltma
+VURMA | Hasil əməli | Çarpma | Çoxaltma
+BÖLMƏ | Qismət əməli | Hissələmə | Hissəyə ayırma
+ROL | Aktyor işi | Obraz | Səhnə surəti
+GRİM | Aktyor boyası | Üz makiyajı | Səhnə üzü
+DEKOR | Səhnə bəzəyi | Tərtibat | Teatr bəzəyi
+AKTRİSA | Səhnə xanımı | Kino ulduzu | Qadın aktyor
+SOLİST | Təkbaşına ifaçı | Xorun öndəri | Baş müğənni
+AKKORD | Səs birliyi | Gitara səsi | Üç notlu səs
+RİTM | Ahəng | Təkrar döyüntü | Musiqi ölçüsü
+TEMP | Sürət | İş ahəngi | Musiqi sürəti
+ŞÜA | İşıq zolağı | Gün telləri | Lazer xətti
+BULUDLU | Tutqun hava | Günəşsiz | Boz göy
+DUMANLI | Çəni olan | Görünməz hava | Sisli
+YAĞIŞLI | Çətirli gün | Islaq gün | Payız günü
+ŞAXTALI | Buz bağlayan | Çox soyuq | Qış gecəsi
+ÇİRKİN | Gözəlin əksi | Kifir | Yaraşıqsız
+İTİ | Kəsən | Küt deyil | Bıçaq kimi
+KÜT | İti deyil | Kəsməyən | Fərasətsiz
+TƏZƏ | Yeni | Köhnə deyil | Təravətli
+GƏNC | Cavan | Qoca deyil | Cavan oğlan
+ÇİRKLİ | Kirli | Murdar | Təmiz deyil
+QURU | Yaş deyil | Susuz | Nəmsiz
+İSLAQ | Sulu | Su dəymiş | Nəm
+AÇIQ | Örtüsüz | Aşkar | Qapısı açılmış
+QAPALI | Bağlı | Örtülü | Gizli, qapanmış
+SƏSLİ | Gurultulu | Səs-küylü | Ucadan
+CƏLD | Çevik | Tez tərpənən | Zirək
+TƏNBƏL | Avara | İşdən qaçan | Ərincək
+QORXAQ | Cəsurun əksi | Ürəksiz | Hürkək
+XƏSİS | Simic | Əli bağlı | Pul sevən
+NAZİK | İncə | Zərif | Qalının əksi
+QALIN | Qatı | Yoğun | Nazik deyil
+DOLĞUN | Dolu, kök | Ətli-canlı | Tam dolu
+ARIQ | Cılız | Kökün əksi | Zəif
+XOŞBƏXT | Bəxtəvər | Səadətli | Şad insan
+BƏDBƏXT | Bəxtsiz | Yazıq | Talesiz
+VARLI | Sərvətli | Pullu | Kasıbın əksi

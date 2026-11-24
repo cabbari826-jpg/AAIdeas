@@ -1,0 +1,66 @@
+# Ümumi sözlər (7): mətbəx, ev əşyaları. Format: SÖZ | çətin | orta | asan
+HEYVA | Tüklü sarı meyvə | Mürəbbəlik meyvə | Sarı payız barı
+TƏRXUN | Limonad otu | Yaşıl içki otu | Ətirli yaşıl ot
+KABAB | Şişdə bişən ət | Manqal yeməyi | Közdə ət
+QUTAB | Nazik yayma | Göyərtili yayma | Sacda bişən
+MÜRƏBBƏ | Şirin konserv | Çay yanında | Meyvə qaynadması
+YAĞ | Kərə, zeytun | Piy, kərə | Tavaya tökülür
+AYRAN | Qatıq içkisi | Duzlu ağ içki | Sərin süd içkisi
+YUXA | Nazik lavaş | Sac çörəyi | Yayma çörək
+SAMOVAR | Çay qaynadan | Mis çay qabı | Çayxana qabı
+BIÇAQ | Tiyəli alət | Çörək kəsən | Mətbəx aləti
+TAVA | Qızartma qabı | Qızardan qab | Yumurta bişən
+DOLÇA | Ağzı dar qab | Su qabı, ibrik | Kiçik su qabı
+KUZƏ | Gil su qabı | Saxsı su qabı | Kiçik küp
+CÜRDƏK | Kiçik dolça | Çiyə su qabı | Su kuzəsi
+DƏHLİZ | Ev keçidi | Uzun koridor | Otaq arası
+TAVAN | Başın üstü | Otağın üstü | Damın altı
+KİLİM | Naxışlı palaz | Toxuma palaz | Döşəmə örtüyü
+ŞAMPUN | Saç yuyucu | Köpüklü maye | Vanna şüşəsi
+SAP | İynəyə keçər | Tikiş ipi | Nazik ip
+ŞLYAPA | Kişi papağı | Lentli papaq | Kənarlı papaq
+BAŞMAQ | Ev ayaqqabısı | Yumşaq ayaqqabı | Qapıda çıxarılır
+ÇƏLLƏK | Taxta qab | Su tutan qab | Turşu qabı
+ÇUVAL | Böyük torba | Un kisəsi | Taxıl kisəsi
+TEŞT | Paltar qabı | Böyük ləyən | Yuyucu ləyən
+HƏVƏNG | Döyəcli qab | Ədviyyat əzən | Dəstəli qab
+FƏNƏR | Əl işığı | Gecə çırağı | Cib işığı
+TÜSTÜ | Od nişanəsi | Bacadan çıxar | Ocaq buxarı
+KÜL | Yanmış qalıq | Ocaqda qalan | Odun qalığı
+ALOV | Od dili | Yanan od | Şölə
+BACA | Tüstü yolu | Damda boru | Soba borusu
+ÇÖMÇƏ | Uzun qaşıq | Plov qaşığı | Qazan qaşığı
+PİYALƏ | Qulpsuz kasa | Kiçik kasa | Çay kasası
+QƏNDDAN | Şəkər qabı | Süfrə qabı | Qənd qabı
+ZƏFƏRAN | Sarı ədviyyat | Plov rəngi | Bahalı ədviyyat
+DARÇIN | Qabıq ədviyyat | Çay ədviyyatı | Ətirli qabıq
+SUMAX | Tünd qırmızı toz | Kababa səpilir | Qırmızı toz
+HƏLİM | Buğda yeməyi | Ətli sıyıq | Qalın şorba
+BOZBAŞ | Noxudlu şorba | Ətli şorba | Kartoflu şorba
+BORANI | Qatıqlı yemək | İspanaqlı yemək | Qatıq yeməyi
+FƏSƏLİ | Qatlı kökə | Yağlı yayma | Laylı çörək
+KƏTƏ | İçli kökə | Qarabağ kökəsi | Dadlı kökə
+GÖZLƏMƏ | Sac piroqu | İçli yayma | Qızarmış yayma
+SÜZMƏ | Qatıq pendiri | Süzülmüş qatıq | Qatı qatıq
+KÖVRƏK | Tez ovulan | Tez qırılan | Ovulan, zərif
+KÜRÜ | Balıq dənəsi | Qara, qırmızı | Nərə dənəsi
+NƏRƏ | Xəzər balığı | Kürülü balıq | Bahalı balıq
+XƏŞİL | Un sıyığı | Qovrulmuş un | Yağlı sıyıq
+QAYMAQ | Süd üzü | Südün qatı | Yağlı süd üzü
+LİMONAD | Qazlı içki | Limon içkisi | Şirin su
+QƏHVƏ | Qara içki | Türk içkisi | Ətirli dən
+SAQQIZ | Çeynənən şey | Ağız rezini | Çeynənən şirni
+DARI | Xırda dən | Sərçə yemi | Sarı dən
+YULAF | Sıyıq dəni | At yemi | Səhər sıyığı
+ZEYTUN | Yağlı meyvə | Yaşıl gilə | Yağ verən gilə
+ANANAS | Tropik meyvə | Tikanlı meyvə | Sarı tropik
+FEYXOA | Yaşıl meyvə | Lənkəran meyvəsi | Ətirli yaşıl
+QARAĞAT | Qara gilə | Kol giləsi | Turş gilə
+İYDƏ | Unlu meyvə | Gümüşü ağac | Payız giləsi
+YEMİŞAN | Ürəyə xeyirli | Tikanlı kol | Ürək dərmanı
+GİLƏNAR | Turş albalı | Albalı növü | Gilas qohumu
+ÇİNİ | Farfor qab | Ağ saxsı | Nazik qab
+GİL | Saxsı xammalı | Dulus palçığı | Kərpic xammalı
+BOLT | Qayka cütü | Burma mil | Dəmir mil
+HALQA | Dairəvi şey | Zəncir bəndi | Üzük, dairə
+TEL | Nazik metal | Məftil | Sim
