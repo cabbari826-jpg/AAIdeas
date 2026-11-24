@@ -1,13 +1,13 @@
 {
  "formatVersion": 1,
- "packId": "az-hefte-3",
+ "packId": "az-hefte3",
  "language": "az",
  "normalization": "az-v1",
  "contentVersion": 1,
  "title": "Həftənin sürprizi 3",
  "levels": [
   {
-   "id": "az-hefte-3-001",
+   "id": "az-hefte3-001",
    "rows": 8,
    "cols": 7,
    "difficulty": 1,
@@ -146,7 +146,7 @@
    }
   },
   {
-   "id": "az-hefte-3-002",
+   "id": "az-hefte3-002",
    "rows": 8,
    "cols": 7,
    "difficulty": 1,
@@ -270,7 +270,7 @@
    }
   },
   {
-   "id": "az-hefte-3-003",
+   "id": "az-hefte3-003",
    "rows": 8,
    "cols": 7,
    "difficulty": 1,
