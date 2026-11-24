@@ -338,7 +338,7 @@ fun GlassBottomMenu(
     open: (Screen) -> Unit,
     modifier: Modifier = Modifier,
     // The owner's pick (2026-11-23): a shorter pill hugging its tabs, labels in Nunito ExtraBold.
-    compact: Boolean = false,
+    compact: Boolean = true,
     font: androidx.compose.ui.text.font.FontFamily? = MenuFont,
 ) {
     val cs = MaterialTheme.colorScheme
@@ -378,7 +378,7 @@ fun GlassBottomMenu(
                         // Şüşə: the chosen tab is a brighter glass pill with dark text (mockup); otherwise the accent.
                         .background(if (on) (if (glass) Color.White.copy(alpha = if (dark) 0.22f else 0.6f) else cs.primary) else Color.Transparent)
                         .clickable(interactionSource = src, indication = null) { open(target) }
-                        .padding(vertical = 9.dp, horizontal = 4.dp),
+                        .padding(vertical = 9.dp, horizontal = 10.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     // With a chosen font the labels are bolder and darker, so they don't look faded on glass.
@@ -395,7 +395,7 @@ fun GlassBottomMenu(
                     val style = remember(labelStyle, measurer, screen, density) {
                         val longest = MENU_LABELS.maxOf { measurer.measure(it, labelStyle, softWrap = false).size.width }
                         // Room per tab: the screen less the pill's margins, its inset, the gaps and each tab's padding.
-                        val room = with(density) { ((screen - 32.dp - 12.dp - 18.dp) / 4 - 8.dp).toPx() }
+                        val room = with(density) { ((screen - 32.dp - 12.dp - 18.dp) / 4 - 20.dp).toPx() }
                         if (longest <= room || longest == 0) labelStyle
                         else labelStyle.copy(fontSize = labelStyle.fontSize * (room / longest * 0.98f))
                     }
@@ -410,11 +410,11 @@ fun GlassBottomMenu(
 val MenuFont = AppFont
 
 /**
- * The owner's pick (2026-11-24, as on the mockup): a full-width bar, a little taller, with softer
- * rounded corners instead of a capsule. The chosen tab's corners follow the bar's (26 − 6 dp inset).
+ * The owner's pick (2026-11-24): the short pill hugging its tabs, a little bigger, with softer
+ * rounded corners instead of a capsule. The chosen tab's corners follow the bar's (24 − 6 dp inset).
  */
-private val MenuShape = androidx.compose.foundation.shape.RoundedCornerShape(26.dp)
-private val TabShape = androidx.compose.foundation.shape.RoundedCornerShape(20.dp)
+private val MenuShape = androidx.compose.foundation.shape.RoundedCornerShape(24.dp)
+private val TabShape = androidx.compose.foundation.shape.RoundedCornerShape(18.dp)
 
 private val MENU_LABELS = listOf("Oyun", "Bu gün", "Uğurlar", "Ayarlar")
 
