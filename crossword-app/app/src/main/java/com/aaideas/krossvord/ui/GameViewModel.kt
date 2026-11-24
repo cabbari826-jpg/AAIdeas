@@ -936,6 +936,8 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
 
     /** Pack shown on the level list; follows the level being played. */
     var selectedPack by mutableStateOf(-1)
+    /** The home list is scrolled past its top cards: the progress pill shows at the top of the screen. */
+    var homeScrolled by mutableStateOf(false)
 
     /** Pack whose levels the home screen shows: the one picked, else the one being played. */
     val homePack: Int get() = selectedPack.takeIf { it in packs.indices && packOpen(it) } ?: packIndexOf(continueIndex())

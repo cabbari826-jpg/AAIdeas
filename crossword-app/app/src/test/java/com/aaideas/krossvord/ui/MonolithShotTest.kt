@@ -254,4 +254,39 @@ class MonolithShotTest {
     @Test fun fadeKlassikDark() = scrolledHome("fade-klassik-dark", Skin.KLASSIK, ThemeMode.DARK)
     @Test fun fadeGlass() = scrolledHome("fade-glass", Skin.SUSE, ThemeMode.LIGHT)
     @Test fun fadeGlassDark() = scrolledHome("fade-glass-dark", Skin.SUSE, ThemeMode.DARK)
+
+    // The progress pill: thin while scrolling, open like an island on a tap.
+    private fun pill(name: String, skin: Skin, mode: ThemeMode, open: Boolean) {
+        val app = ApplicationProvider.getApplicationContext<Application>()
+        val first = GameViewModel(app)
+        val done = first.packs[0].levels.take(12).map { it.id }.toSet() + first.packs.getOrNull(1)?.levels.orEmpty().take(4).map { it.id }
+        app.getSharedPreferences("progress", 0).edit().putStringSet("completed", done).commit()
+        val vm = GameViewModel(app)
+        rule.mainClock.autoAdvance = false
+        rule.setContent {
+            KrossvordTheme(mode, skin = skin) {
+                Surface(Modifier.fillMaxSize()) {
+                    Box(Modifier.fillMaxSize()) {
+                        if (skin.glass) GlassBackdrop(mode == ThemeMode.DARK, Modifier.matchParentSize())
+                        androidx.compose.runtime.CompositionLocalProvider(LocalTopInset provides 40.dp) {
+                            Box(Modifier.topFade(56.dp)) { ExpressiveHome(vm) }
+                        }
+                        Box(Modifier.padding(top = 40.dp)) { HomeProgressPill(vm, forceOpen = open) }
+                    }
+                }
+            }
+        }
+        rule.mainClock.advanceTimeBy(800)
+        rule.onAllNodes(androidx.compose.ui.test.hasScrollAction()).onFirst()
+            .performSemanticsAction(androidx.compose.ui.semantics.SemanticsActions.ScrollBy) { it(0f, 1300f) }
+        rule.mainClock.advanceTimeBy(1500)
+        captureScreenRoboImage("build/outputs/roborazzi/$name.png")
+    }
+
+    @Test fun pillKlassik() = pill("pill-klassik", Skin.KLASSIK, ThemeMode.LIGHT, false)
+    @Test fun pillKlassikDark() = pill("pill-klassik-dark", Skin.KLASSIK, ThemeMode.DARK, false)
+    @Test fun pillGlass() = pill("pill-glass", Skin.SUSE, ThemeMode.LIGHT, false)
+    @Test fun pillOpenKlassik() = pill("pill-open-klassik", Skin.KLASSIK, ThemeMode.LIGHT, true)
+    @Test fun pillOpenKlassikDark() = pill("pill-open-klassik-dark", Skin.KLASSIK, ThemeMode.DARK, true)
+    @Test fun pillOpenGlass() = pill("pill-open-glass", Skin.SUSE, ThemeMode.LIGHT, true)
 }

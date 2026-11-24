@@ -150,6 +150,7 @@ class MainActivity : ComponentActivity() {
                     }
                     }
                     Box(Modifier.fillMaxSize().safeDrawingPadding()) {
+                        if (vm.screen == Screen.HOME) HomeProgressPill(vm)
                         if (menu) GlassBottomMenu(vm.screen, vm::open, Modifier.align(Alignment.BottomCenter))
                     }
                     }
