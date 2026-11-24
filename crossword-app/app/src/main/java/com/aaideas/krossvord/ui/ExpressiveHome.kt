@@ -371,16 +371,18 @@ fun GlassBottomMenu(
         val (labelStyle, tabWidth) = remember(baseStyle, measurer, screenW, density) {
             with(density) {
                 val longest = MENU_LABELS.maxOf { measurer.measure(it, baseStyle, softWrap = false).size.width }.toDp()
-                // Most a tab may take: the bar's inner width shared by four, with some air between tabs.
-                val most = (screenW - 32.dp - 16.dp) / 4 - 4.dp
-                val want = maxOf(longest + 24.dp, 64.dp)
-                if (want <= most) baseStyle to want
-                else baseStyle.copy(fontSize = baseStyle.fontSize * ((most - 24.dp) / longest).coerceAtMost(1f)) to most
+                // Each tab's share: the bar's inner width (8 dp inset all round, 8 dp between tabs) over four.
+                val most = (screenW - 32.dp - 16.dp - 24.dp) / 4
+                val room = most - 16.dp
+                if (longest <= room) baseStyle to most
+                else baseStyle.copy(fontSize = baseStyle.fontSize * (room / longest)) to most
             }
         }
         Row(
             Modifier.then(if (compact) Modifier else Modifier.fillMaxWidth()).padding(8.dp),
-            horizontalArrangement = if (compact) Arrangement.spacedBy(8.dp) else Arrangement.SpaceEvenly,
+            // The same 8 dp everywhere: bar edge to highlight on every side, and between tabs, so the chosen
+            // highlight sits concentric in the capsule's round end and centred top to bottom.
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             listOf(
                 Triple(Screen.HOME, MenuIcon.PLAY, "Oyun"),
@@ -391,7 +393,7 @@ fun GlassBottomMenu(
                 val on = screen == target
                 val src = remember { MutableInteractionSource() }
                 Column(
-                    Modifier.width(tabWidth).springPress(src).clip(TabShape)
+                    (if (compact) Modifier.width(tabWidth) else Modifier.weight(1f)).springPress(src).clip(TabShape)
                         // Şüşə: the chosen tab is a brighter glass pill with dark text (mockup); otherwise the accent.
                         .background(if (on) (if (glass) Color.White.copy(alpha = if (dark) 0.22f else 0.6f) else cs.primary) else Color.Transparent)
                         .clickable(interactionSource = src, indication = null) { open(target) }
