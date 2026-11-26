@@ -265,5 +265,26 @@ class ScreenshotTest {
         rule.onRoot().captureRoboImage("screenshots/icons.png")
     }
 
+    /**
+     * Icons that 0.1 showed as plain pictures on the owner's phone (cut from their screenshot):
+     * top row as they were, bottom row what 0.2 makes of them.
+     */
+    @Test fun realPictureIcons() {
+        val dir = java.io.File(javaClass.classLoader!!.getResource("real-icons")!!.toURI())
+        val files = dir.listFiles()!!.filter { f -> listOf("38-0-0", "abb", "aliexpress", "araz", "birbank", "birmarket").any { f.name.endsWith("-$it.png") } }.sortedBy { it.name }
+        val res = ApplicationProvider.getApplicationContext<android.content.Context>().resources
+        val originals = files.map { android.graphics.BitmapFactory.decodeFile(it.path) }
+        val processed = originals.map { IconProcessor.process(android.graphics.drawable.BitmapDrawable(res, Bitmap.createScaledBitmap(it, 216, 216, true)), 216) }
+        rule.setContent {
+            Frame {
+                Column(Modifier.fillMaxSize().padding(top = 120.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(28.dp)) {
+                    Row(horizontalArrangement = Arrangement.spacedBy(14.dp)) { for (b in originals) Image(b.asImageBitmap(), null, Modifier.size(52.dp)) }
+                    Row(horizontalArrangement = Arrangement.spacedBy(14.dp)) { for (p in processed) GlassAppIcon(p, "", 52.dp, null, Modifier) }
+                }
+            }
+        }
+        rule.onRoot().captureRoboImage("screenshots/real-icons.png")
+    }
+
     @Suppress("unused") private fun block() = runBlocking { }
 }

@@ -40,6 +40,7 @@ class GlassIcon(
 object IconProcessor {
     /** Glyph's longer side as a share of the tile: same for every app (studio rule: equal sizes). */
     private const val GLYPH = 0.54f
+    private const val GLYPH_WIDE = 0.72f
 
     fun process(d: Drawable, size: Int): GlassIcon {
         val full = composite(d, size)
@@ -68,6 +69,11 @@ object IconProcessor {
             val a = averageOutside(full, pick, 0, third) ?: ringColor(full)
             val b = averageOutside(full, pick, full.width - third, full.width) ?: a
             return GlassIcon(normalize(pick, size).asImageBitmap(), a, color2 = b.takeIf { distance(a, b) > 0.12f })
+        }
+        // A "glyph" that is just a solid block (white square instead of a logo) is not a drawing:
+        // then show the original icon rather than an empty white tile.
+        if (mono == null && solidness(mask) > 0.85f) {
+            return GlassIcon(full.asImageBitmap(), average(full, null) ?: 0xFF64748B.toInt(), whiteGlyph = false)
         }
         val color = glassColor(full, mask, bg)
         return GlassIcon(normalize(mask, size).asImageBitmap(), color)
@@ -280,6 +286,18 @@ object IconProcessor {
         return px.count { (it ushr 24) > 128 } / px.size.toFloat()
     }
 
+    /** How much of the glyph's own bounding box it fills (1 = a solid rectangle). */
+    private fun solidness(mask: Bitmap): Float {
+        val w = mask.width; val h = mask.height
+        val px = IntArray(w * h); mask.getPixels(px, 0, w, 0, 0, w, h)
+        var l = w; var t = h; var r = -1; var b = -1; var n = 0
+        for (y in 0 until h) for (x in 0 until w) if ((px[y * w + x] ushr 24) > 128) {
+            l = min(l, x); r = max(r, x); t = min(t, y); b = max(b, y); n++
+        }
+        if (r < 0) return 1f
+        return n / ((r - l + 1f) * (b - t + 1f))
+    }
+
     /** Trims the glyph to its content and centres it at one common size. */
     private fun normalize(mask: Bitmap, size: Int): Bitmap {
         val w = mask.width; val h = mask.height
@@ -291,7 +309,8 @@ object IconProcessor {
         val out = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888)
         if (r < 0) return out
         val bw = (r - l + 1).toFloat(); val bh = (b - t + 1).toFloat()
-        val scale = GLYPH * size / max(bw, bh)
+        // Square-ish glyphs get GLYPH of the tile; wide word-logos may use more width so they stay readable.
+        val scale = min(GLYPH_WIDE * size / bw, GLYPH * size / bh)
         val dw = bw * scale; val dh = bh * scale
         val dst = RectF((size - dw) / 2f, (size - dh) / 2f, (size + dw) / 2f, (size + dh) / 2f)
         Canvas(out).drawBitmap(mask, Rect(l, t, r + 1, b + 1), dst, Paint(Paint.FILTER_BITMAP_FLAG or Paint.ANTI_ALIAS_FLAG))
