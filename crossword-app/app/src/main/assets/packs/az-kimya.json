@@ -1,0 +1,1687 @@
+{
+ "formatVersion": 1,
+ "packId": "az-kimya",
+ "language": "az",
+ "normalization": "az-v1",
+ "contentVersion": 1,
+ "title": "Kimya",
+ "levels": [
+  {
+   "id": "az-kimya-001",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 4,
+     "clueCol": 0,
+     "answer": "SİMVOL",
+     "clue": "Qısa işarə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Fe, Cu, Na",
+      "Element işarəsi",
+      "Qısa işarə"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 5,
+     "answer": "HALOGEN",
+     "clue": "F, Cl, Br, I",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Duz yaradan",
+      "VII qrup",
+      "F, Cl, Br, I"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "PLASTİK",
+     "clue": "Butulka",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Polietilen",
+      "Sintetik kütlə",
+      "Butulka"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "FERMENT",
+     "clue": "Mayalanma",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Bio katalizator",
+      "Enzim",
+      "Mayalanma"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 2,
+     "clueCol": 2,
+     "answer": "ETAN",
+     "clue": "Alkan",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "C2H6",
+      "İki karbonlu",
+      "Alkan"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 2,
+     "answer": "TUNC",
+     "clue": "... dövrü",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Mis + qalay",
+      "Bürünc",
+      "... dövrü"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "ACROSS",
+     "clueRow": 6,
+     "clueCol": 0,
+     "answer": "İON",
+     "clue": "Yüklü zərrə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Yüklü atom",
+      "Kat..., an...",
+      "Yüklü zərrə"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "LİTİUM",
+    "cells": [
+     [
+      3,
+      5
+     ],
+     [
+      6,
+      1
+     ],
+     [
+      5,
+      1
+     ],
+     [
+      4,
+      2
+     ],
+     [
+      7,
+      4
+     ],
+     [
+      4,
+      3
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-kimya-002",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "ŞƏKƏR",
+     "clue": "Şirin maddə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "C12H22O11",
+      "Çuğundur özü",
+      "Şirin maddə"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "KARBON",
+     "clue": "Kömür elementi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "C",
+      "Almazın elementi",
+      "Kömür elementi"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "MOLEKUL",
+     "clue": "Maddə zərrəsi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "H2O",
+      "Atomlar birliyi",
+      "Maddə zərrəsi"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "LAKMUS",
+     "clue": "Göstərici",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qızarır, göyərir",
+      "Rəng kağızı",
+      "Göstərici"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 1,
+     "clueCol": 6,
+     "answer": "KSENON",
+     "clue": "Ağır nəcib qaz",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Xe",
+      "Fara lampası",
+      "Ağır nəcib qaz"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 2,
+     "answer": "URAN",
+     "clue": "Radioaktiv",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "U",
+      "AES yanacağı",
+      "Radioaktiv"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "DOWN",
+     "clueRow": 4,
+     "clueCol": 4,
+     "answer": "BOR",
+     "clue": "Bura elementi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "B",
+      "Beşinci element",
+      "Bura elementi"
+     ]
+    },
+    {
+     "id": 8,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "MƏŞƏL",
+     "clue": "Od mənbəyi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Olimpiya odu",
+      "Yanar çubuq",
+      "Od mənbəyi"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "SABUN",
+    "cells": [
+     [
+      3,
+      6
+     ],
+     [
+      3,
+      2
+     ],
+     [
+      5,
+      4
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      7,
+      6
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-kimya-003",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "QRAFİT",
+     "clue": "Qara karbon",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Karandaş içi",
+      "Yumşaq karbon",
+      "Qara karbon"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "KATALİZ",
+     "clue": "Tezləşdirmə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Sürət artımı",
+      "Reaksiya sürəti",
+      "Tezləşdirmə"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 2,
+     "answer": "AEROZOL",
+     "clue": "Balon sprey",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Sprey",
+      "Qazda damcı",
+      "Balon sprey"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "KAUÇUK",
+     "clue": "Elastik",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Hevea şirəsi",
+      "Rezinin əsası",
+      "Elastik"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 1,
+     "answer": "ZÜLAL",
+     "clue": "Yumurta ağı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Amin turşuları",
+      "Protein",
+      "Yumurta ağı"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 4,
+     "answer": "FİLTR",
+     "clue": "Təmizləyici",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Süzgəc",
+      "Süzmə kağızı",
+      "Təmizləyici"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "XLOR",
+     "clue": "Yaşıl zəhər qaz",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Cl",
+      "Hovuz qoxusu",
+      "Yaşıl zəhər qaz"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "FLÜOR",
+    "cells": [
+     [
+      3,
+      4
+     ],
+     [
+      5,
+      4
+     ],
+     [
+      5,
+      3
+     ],
+     [
+      6,
+      2
+     ],
+     [
+      7,
+      4
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-kimya-004",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "POLAD",
+     "clue": "Möhkəm ərinti",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Dəmir + karbon",
+      "Zəngləməz ...",
+      "Möhkəm ərinti"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "SULFAT",
+     "clue": "Kükürdlü duz",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "SO4",
+      "Mis kuporosu",
+      "Kükürdlü duz"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "VİTAMİN",
+     "clue": "Meyvədə olan",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Askorbin",
+      "C, D, B",
+      "Meyvədə olan"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "RADİUM",
+     "clue": "Şüalanan metal",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ra",
+      "Küri tapdı",
+      "Şüalanan metal"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 1,
+     "answer": "SİRKƏ",
+     "clue": "Marinad",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Asetat turşusu",
+      "Turş ədviyyat",
+      "Marinad"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 2,
+     "answer": "OZON",
+     "clue": "Şimşək qoxusu",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "O3",
+      "Göy qalxanı",
+      "Şimşək qoxusu"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "GİPS",
+     "clue": "Ağ toz",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Sınıq sarğısı",
+      "Kalsium sulfat",
+      "Ağ toz"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "PLATİN",
+    "cells": [
+     [
+      1,
+      3
+     ],
+     [
+      3,
+      3
+     ],
+     [
+      4,
+      6
+     ],
+     [
+      3,
+      6
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      7,
+      6
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-kimya-005",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 2,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "SEMENT",
+     "clue": "Beton əsası",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Klinker",
+      "Tikinti tozu",
+      "Beton əsası"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "ETİLEN",
+     "clue": "Qoşa bağlı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "C2H4",
+      "Meyvə yetişdirən",
+      "Qoşa bağlı"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 2,
+     "answer": "KRİSTAL",
+     "clue": "Billur",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qəfəsli quruluş",
+      "Qar dənəsi",
+      "Billur"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 1,
+     "answer": "KVARS",
+     "clue": "Saat kristalı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "SiO2",
+      "Qum mineralı",
+      "Saat kristalı"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 4,
+     "answer": "KOLBA",
+     "clue": "Kimya qabı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Konik qab",
+      "Laborator qabı",
+      "Kimya qabı"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "ALMAZ",
+     "clue": "Brilyant",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ən bərk",
+      "Karbon kristalı",
+      "Brilyant"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "SİNK",
+     "clue": "Boz metal",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Zn",
+      "Qalvanik örtük",
+      "Boz metal"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "NOBEL",
+    "cells": [
+     [
+      5,
+      6
+     ],
+     [
+      4,
+      4
+     ],
+     [
+      6,
+      4
+     ],
+     [
+      2,
+      6
+     ],
+     [
+      7,
+      2
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-kimya-006",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 2,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "PROTON",
+     "clue": "Nüvədəki müsbət",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Müsbət yük",
+      "p⁺",
+      "Nüvədəki müsbət"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "NATRİUM",
+     "clue": "Qələvi metal",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Na",
+      "Xörək duzunda",
+      "Qələvi metal"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "KALİUM",
+     "clue": "Gübrə metalı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "K",
+      "Bananda bol",
+      "Gübrə metalı"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "KÖPÜK",
+     "clue": "Pivə ...",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qabarcıqlar",
+      "Sabun ...",
+      "Pivə ..."
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "FORMUL",
+     "clue": "H2SO4 kimi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "NaCl yazılışı",
+      "Tərkib yazısı",
+      "H2SO4 kimi"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 4,
+     "clueCol": 6,
+     "answer": "MOL",
+     "clue": "6·10²³",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Avoqadro sayı",
+      "Miqdar vahidi",
+      "6·10²³"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 2,
+     "answer": "ANOD",
+     "clue": "Katodun cütü",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Müsbət elektrod",
+      "+ qütb",
+      "Katodun cütü"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "KATOD",
+    "cells": [
+     [
+      5,
+      1
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      1,
+      6
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-kimya-007",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 2,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "MANQAN",
+     "clue": "Bənövşəyi duz",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Mn",
+      "Polada qatılır",
+      "Bənövşəyi duz"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "KİMYAÇI",
+     "clue": "Kimya alimi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Reaksiya ustası",
+      "Alim",
+      "Kimya alimi"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "BENZOL",
+     "clue": "Aromatik",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "C6H6",
+      "Kekule halqası",
+      "Aromatik"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "KOBALT",
+     "clue": "Mavi rəngli",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Co",
+      "Göy boya metalı",
+      "Mavi rəngli"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "ATOM",
+     "clue": "Kiçik zərrə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Bölünməz sanılan",
+      "Nüvə + elektron",
+      "Kiçik zərrə"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 6,
+     "answer": "NİKEL",
+     "clue": "Parlaq örtük",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ni",
+      "Sikkə metalı",
+      "Parlaq örtük"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 3,
+     "answer": "GÖL",
+     "clue": "Kiçik su hövzəsi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qapalı su",
+      "Durğun su",
+      "Kiçik su hövzəsi"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "AMMONYAK",
+    "cells": [
+     [
+      5,
+      1
+     ],
+     [
+      5,
+      4
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      5,
+      3
+     ],
+     [
+      3,
+      3
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      5,
+      6
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-kimya-008",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 2,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "MADDƏ",
+     "clue": "Materiya",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Kütləsi olan",
+      "Cisimin tərkibi",
+      "Materiya"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "ƏRİNTİ",
+     "clue": "Qatışıq metal",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Metal qarışığı",
+      "Tunc, polad",
+      "Qatışıq metal"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "KALSİUM",
+     "clue": "Süddə bol",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ca",
+      "Sümük elementi",
+      "Süddə bol"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "DALTON",
+     "clue": "İngilis alimi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Rəng korluğu",
+      "Atom nəzəriyyəsi",
+      "İngilis alimi"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "BENZİN",
+     "clue": "Yanacaq növü",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Neftdən",
+      "Maşın yanacağı",
+      "Yanacaq növü"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "GÜMÜŞ",
+     "clue": "Qızıldan ucuz",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ag",
+      "Ağ nəcib metal",
+      "Qızıldan ucuz"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "MƏKTUB",
+     "clue": "Namə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Zərfdə gələr",
+      "Poçtla gələn",
+      "Namə"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "BUTAN",
+    "cells": [
+     [
+      1,
+      6
+     ],
+     [
+      1,
+      5
+     ],
+     [
+      5,
+      5
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      5,
+      4
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-kimya-009",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 3,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "SIXLIQ",
+     "clue": "Nə qədər sıx",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Kütlə/həcm",
+      "ρ",
+      "Nə qədər sıx"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "NİŞASTA",
+     "clue": "Kraxmal",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Kartof unu",
+      "Yodla göyərir",
+      "Kraxmal"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "NEYLON",
+     "clue": "Kapron kimi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Corab lifi",
+      "Sintetik lif",
+      "Kapron kimi"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "ASETON",
+     "clue": "Həlledici",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Lak silən",
+      "Dırnaq yuyucusu",
+      "Həlledici"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 6,
+     "answer": "ARQON",
+     "clue": "Nəcib qaz",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ar",
+      "Qaynaq qazı",
+      "Nəcib qaz"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "ŞÜŞƏ",
+     "clue": "Pəncərə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qum + soda",
+      "Şəffaf",
+      "Pəncərə"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "TİTAN",
+    "cells": [
+     [
+      7,
+      4
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      6,
+      1
+     ],
+     [
+      3,
+      6
+     ],
+     [
+      1,
+      1
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-kimya-010",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 3,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 6,
+     "clueCol": 0,
+     "answer": "İZOTOP",
+     "clue": "Element növü",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Eyni yer",
+      "Neytronu fərqli",
+      "Element növü"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "NEYTRON",
+     "clue": "Nüvədəki neytral",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Yüksüz zərrə",
+      "n⁰",
+      "Nüvədəki neytral"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "TƏBAŞİR",
+     "clue": "Ağ çubuq",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Lövhə yazısı",
+      "CaCO3",
+      "Ağ çubuq"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "BOYL",
+     "clue": "... qanunu",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qaz qanunu",
+      "İrland alimi",
+      "... qanunu"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 2,
+     "answer": "NEON",
+     "clue": "Qırmızı işıq",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ne",
+      "Reklam lampası",
+      "Qırmızı işıq"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "NÜVƏ",
+     "clue": "Mərkəz",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Atomun mərkəzi",
+      "Proton evi",
+      "Mərkəz"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "DOWN",
+     "clueRow": 4,
+     "clueCol": 5,
+     "answer": "YOD",
+     "clue": "Qəhvəyi məhlul",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "I",
+      "Yara dərmanı",
+      "Qəhvəyi məhlul"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "VALENT",
+    "cells": [
+     [
+      3,
+      6
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      6,
+      4
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-kimya-011",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 3,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "KÜTLƏ",
+     "clue": "Ağırlıq",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qramla ölçülür",
+      "Atom ...si",
+      "Ağırlıq"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "NİTRAT",
+     "clue": "Azot gübrəsi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "NO3",
+      "Selitra",
+      "Azot gübrəsi"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "KÜKÜRD",
+     "clue": "Kibrit başında",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "S",
+      "Sarı ametal",
+      "Kibrit başında"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 1,
+     "answer": "DƏMİR",
+     "clue": "Polad metalı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Fe",
+      "Pas bağlayan",
+      "Polad metalı"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 6,
+     "answer": "TURŞU",
+     "clue": "Turş maddə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "pH < 7",
+      "Lakmus qızarır",
+      "Turş maddə"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 4,
+     "clueCol": 2,
+     "answer": "DUZ",
+     "clue": "Xörək ...",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "NaCl",
+      "Turşu + əsas",
+      "Xörək ..."
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "AZOT",
+     "clue": "Havada ən çox",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "N",
+      "Havanın çoxu",
+      "Havada ən çox"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "RADON",
+    "cells": [
+     [
+      3,
+      4
+     ],
+     [
+      7,
+      1
+     ],
+     [
+      5,
+      2
+     ],
+     [
+      7,
+      3
+     ],
+     [
+      3,
+      1
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-kimya-012",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 3,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "KÖMÜR",
+     "clue": "Qara yanacaq",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Daş ...",
+      "Ağac ...",
+      "Qara yanacaq"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "MƏHLUL",
+     "clue": "Su + duz",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Həll olunmuş",
+      "Duzlu su",
+      "Su + duz"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "POLİMER",
+     "clue": "Zəncirvari",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Uzun zəncir",
+      "Plastik əsası",
+      "Zəncirvari"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "VOLFRAM",
+     "clue": "Ən çətin əriyən",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "W",
+      "Lampa teli",
+      "Ən çətin əriyən"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 2,
+     "answer": "BROM",
+     "clue": "Qırmızı maye",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Br",
+      "Maye halogen",
+      "Qırmızı maye"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "XROM",
+     "clue": "Krom",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Cr",
+      "Güzgü kimi örtük",
+      "Krom"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "BUXAR",
+    "cells": [
+     [
+      5,
+      3
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      7,
+      1
+     ],
+     [
+      6,
+      4
+     ],
+     [
+      7,
+      2
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  }
+ ]
+}

@@ -1,0 +1,58 @@
+# Ümumi sözlər: ev, alətlər, materiallar, şəhər. Format: SÖZ | çətin | orta | asan
+EYVAN | Balkon | Ev qabağı | Açıq otaq
+HƏYƏT | Ev qabağı sahə | Darvazalı yer | Ev-eşik yeri
+DARVAZA | Böyük qapı | Həyət qapısı | İkitaylı qapı
+HASAR | Çəpər | Divar-çəpər | Hədd divarı
+ÇƏPƏR | Çubuq hasar | Bağ hasarı | Taxta hasar
+PİLLƏKƏN | Pillə-pillə | Yuxarı qalxan | Nərdivan kimi
+ZİRZƏMİ | Yeraltı otaq | Podval | Evin altı
+ÇARDAQ | Damaltı | Üzüm ... | Talvar
+TALVAR | Kölgəlik | Çardaq kimi | Örtülü eyvan
+DÖŞƏMƏ | Ayaq altı | Otağın altı | Parket
+KÜNC | Bucaq | İki divar arası | Otaq bucağı
+SƏTƏL | Mis vedrə | Sərnic | Su qabı
+SƏRNİC | Böyük vedrə | Süd qabı | Mis qab
+KƏTİL | Arxasız stul | Kiçik stul | Taburet
+MÜTƏKKƏ | Uzun yastıq | Söykənmə yastığı | Döşəkcə
+PALAZ | Xovsuz xalça | Yer örtüyü | Kilim növü
+CECİM | Toxunma örtük | Zolaqlı kilim | Xovsuz toxuma
+ÇİT | Nazik parça | Güllü pambıq | Ucuz parça
+TİRMƏ | Naxışlı parça | Şal növü | Buta naxışlı
+DÜYÜN | Bağ | Ip ilməyi | Bağlanmış ip
+İLMƏ | Toxuma halqası | Düymə yeri | Halqa
+ÜTÜ | Paltar hamarlar | İsti dəmir | Qırışıq açan
+LƏĞƏN | Mis tas | Yuyunma qabı | Geniş tas
+AFTAFA | Lüləli qab | Əl yuyan qab | Su qabı lüləli
+TAS | Hamam qabı | Mis kasa | Kasa kimi
+MƏCMƏYİ | Sini | Böyük dairə qab | Mis sini
+QABLAMA | Bağlama | Paket | Qutu
+QUTU | Yeşik | Karton | Qapaqlı qab
+YEŞİK | Meyvə qutusu | Taxta tara | Böyük qutu
+TORBA | Parça kisə | Bazar kisəsi | Ip ağızlı kisə
+KİSƏ | Pul torbası | Kiçik torba | Çanta kimi
+DƏMİRYOL | Relsli yol | Vaqon yolu | Qatar xətti
+STANSİYA | Dayanacaq | Metro ... | Qatar yeri
+VAQON | Qatar otağı | Kupe | Sərnişin qutusu
+BİLET | Gediş kağızı | Kassada alınır | Giriş kağızı
+KASSA | Pul qəbulu | Bilet satan | Kassir yeri
+TAKSİ | Sarı maşın | Ödənişli maşın | Kirayə maşın
+MİKRORAYON | Yaşayış massivi | Məhəllə qrupu | Rayon hissəsi
+BİNA | Tikili | Ev, qurğu | Çox qatlı ev
+MƏRTƏBƏ | Bina qatı | Etaj | Qat
+LİFT | Qalxan kabin | Elevator | Mərtəbə qaldıran
+DAM | Evin üstü | Örtük | Çardaq üstü
+KİRƏMİT | Dam örtüyü | Qırmızı plitə | Bişmiş gil
+KƏRPİC | Divar daşı | Bişmiş gil blok | Tikinti daşı
+TAXTA | Lövhə | Ağac materialı | Döşəmə lövhəsi
+MİSMAR | Mıx | Çəkiclə vurulan | Dəmir mıx
+VİNT | Burğulu mıx | Burulan | Şurup
+BURĞU | Deşən alət | Dril | Divar deşən
+REZİN | Elastik maddə | Kauçukdan | Uzanan maddə
+ŞÜŞƏBƏND | Şüşəli eyvan | Şəbəkəli pəncərə | Şüşəli divar
+ŞƏBƏKƏ | Taxta naxış | Mıxsız pəncərə | Şəki ...
+BALKON | Eyvan kimi | Asma eyvan | Divardan çıxıntı
+ZƏNGÇƏ | Qapı zəngi | Balaca zəng | Cingilti verən
+ZINQIROV | Qoyun boynunda | Cingildəyən | Zəngçik
+KİLİD | Qıfıl | Açarla açılan | Qapı bağı
+DƏSTƏK | Tutacaq | Qulp | Qapı tutacağı
+QULP | Fincan qulağı | Tutacaq yeri | Qab qulağı

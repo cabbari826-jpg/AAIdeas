@@ -1,0 +1,51 @@
+# Ümumi sözlər (6). Format: SÖZ | çətin | orta | asan
+ALÇAQ | Hündürün ziddi | Kiçik boylu | Aşağı
+HÜNDÜR | Uca boylu | Göyə yaxın | Alçaq deyil
+GENİŞ | Enli, açıq | Darın əksi | Böyük sahəli
+UZAQ | Yaxının ziddi | Çox aralı | Gözdən iraq
+YAXIN | Bir addımlıq | Uzağın ziddi | Qonşu kimi
+SOL | Sağın ziddi | Ürək tərəfi | Sağ deyil
+SAĞ | Diri, salamat | Solun ziddi | Sol deyil
+QABAQ | Ön | Arxanın ziddi | Öndə olan
+ARXA | Kürək tərəfi | Qabağın ziddi | Dal
+ÜST | Yuxarı | Altın ziddi | Səth
+ALT | Aşağı tərəf | Üstün ziddi | Dib
+ORTA | Mərkəz nöqtəsi | Arada olan | Yarı yol
+İÇƏRİ | Daxil | Bayırın ziddi | Ev içi
+BAYIR | Çöl tərəf | İçərinin ziddi | Həyət, küçə
+ŞİMAL | Kompasın N-i | Qütb tərəfi | Cənubun ziddi
+CƏNUB | İsti tərəf | Şimalın ziddi | Xəritədə aşağı
+QƏRB | Gün batan | Şərqin ziddi | Avropa tərəfi
+AYDIN | Buludsuz | Açıq səma | Açıq-aşkar
+TUTQUN | Buludlu | Qaşqabaqlı hava | Sönük
+QARANLIQ | Gecə zülməti | İşıqsız | Zülmət
+PARLAQ | İşıldayan | Ulduz kimi | Sönük deyil
+SÖNÜK | Solğun | Parlaq deyil | Tutqun işıq
+SOLĞUN | Rəngi qaçmış | Ağarmış | Sönük rəng
+QARIŞIQ | Səliqəsiz | Dolaşıq | Qatışıq
+DÜZGÜN | Doğru | Səhvsiz | Düz
+SƏHV | Yanlış | Xəta | Düzün ziddi
+XƏTA | Səhv | Yanılma | Qəza
+DOĞRU | Həqiqət sözü | Düz söz | Yalan deyil
+YALAN | Uydurma | Doğrunun ziddi | Bəzəkli söz
+HƏQİQƏT | Gerçək | Doğru söz | Reallıq
+GERÇƏK | Həqiqi | Real | Uydurma deyil
+MÖCÜZƏ | Fövqəladə hal | Sehr | Ağlasığmaz
+SEHR | Ovsun | Cadu | Möcüzə gücü
+CADU | Ovsunlama | Sehrbazlıq | Qara sehr
+CADUGƏR | Sehrbaz qadın | Süpürgəli | Nağıl qarısı
+QULYABANI | Nağıl qorxusu | Meşə ruhu | Qorxunc varlıq
+ƏNQA | Əfsanəvi quş | Simurq | Görünməz quş
+SİMURQ | Zümrüd quşu | Qaf dağı quşu | Nəhəng quş
+PƏHLƏVAN | Güclü kişi | Güləşçi | Nəhəng igid
+NƏHƏNG | Div boyda | İri, böyük | Cüssəli
+CÜSSƏ | Bədən | Boy-buxun | Gövdə ölçüsü
+BOY | Uzunluq | Qamət | Neçə santimetr
+ÇƏKİ | Kilo | Kiloqram ölçüsü | Tərəzidə görünür
+ÖLÇÜ | Həcm, uzunluq | Paltar ... | Razmer
+SƏBƏB | Niyə? | Bais | Nəticənin əksi
+NƏTİCƏ | Son | Hasil | Səbəbin əksi
+MƏQSƏD | Hədəf, niyyət | Niyyət-istək | Nə üçün?
+PLAN | Layihə | İş qrafiki | Fikir sxemi
+LAYİHƏ | Plan | Proyekt | Çertyoj
+ÇERTYOJ | Memar şəkli | Texniki rəsm | Layihə rəsmi

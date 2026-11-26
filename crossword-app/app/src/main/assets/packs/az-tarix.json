@@ -1,0 +1,1681 @@
+{
+ "formatVersion": 1,
+ "packId": "az-tarix",
+ "language": "az",
+ "normalization": "az-v1",
+ "contentVersion": 1,
+ "title": "Tarix və dünya",
+ "levels": [
+  {
+   "id": "az-tarix-001",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "BABƏK",
+     "clue": "Xürrəmi sərkərdə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Bəzz qalası",
+      "Xürrəmilər başı",
+      "Xürrəmi sərkərdə"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 5,
+     "answer": "ATƏŞKƏS",
+     "clue": "Döyüş fasiləsi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Barışıq",
+      "Silahlar susur",
+      "Döyüş fasiləsi"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "VERSAL",
+     "clue": "Güzgülər salonu",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "1919 sülhü",
+      "Fransa sarayı",
+      "Güzgülər salonu"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "MƏTBƏƏ",
+     "clue": "Çap evi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qutenberq işi",
+      "Kitab çapı",
+      "Çap evi"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 1,
+     "answer": "MƏBƏD",
+     "clue": "Allahlar evi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Atəşgah",
+      "İbadətxana",
+      "Allahlar evi"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 2,
+     "answer": "TUSİ",
+     "clue": "Astronom",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Marağa alimi",
+      "Nəsirəddin",
+      "Astronom"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "DOWN",
+     "clueRow": 4,
+     "clueCol": 3,
+     "answer": "BMT",
+     "clue": "Baş Assambleya",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "1945-də yarandı",
+      "Nyu-York iqaməti",
+      "Baş Assambleya"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "ASSUR",
+    "cells": [
+     [
+      1,
+      5
+     ],
+     [
+      7,
+      5
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      7,
+      4
+     ],
+     [
+      1,
+      3
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-tarix-002",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "ALBAN",
+     "clue": "Udinlərin əcdadı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qəbələ paytaxtı",
+      "Qafqaz xalqı",
+      "Udinlərin əcdadı"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "KOLUMB",
+     "clue": "Dənizçi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Santa Mariya",
+      "Amerikanı tapdı",
+      "Dənizçi"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "QALİLEY",
+     "clue": "İtalyan alimi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Teleskop",
+      "Yer fırlanır!",
+      "İtalyan alimi"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "SULTAN",
+     "clue": "Padşah",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Osmanlı hökmdarı",
+      "Saray sahibi",
+      "Padşah"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 2,
+     "answer": "QALA",
+     "clue": "Qız ...sı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Bürclü istehkam",
+      "Divarlı müdafiə",
+      "Qız ...sı"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "BAYRAQ",
+     "clue": "Sancaq",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Üçrəngli",
+      "Dövlət rəmzi",
+      "Sancaq"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "İNK",
+     "clue": "Qədim hindular",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Maçu-Pikçu",
+      "Peru xalqı",
+      "Qədim hindular"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "TROYA",
+    "cells": [
+     [
+      5,
+      4
+     ],
+     [
+      7,
+      4
+     ],
+     [
+      3,
+      2
+     ],
+     [
+      7,
+      3
+     ],
+     [
+      7,
+      5
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-tarix-003",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "FƏRMAN",
+     "clue": "Göstəriş",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Şah əmri",
+      "Hökm",
+      "Göstəriş"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "POTSDAM",
+     "clue": "Alman şəhəri",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Sansusi sarayı",
+      "1945 görüşü",
+      "Alman şəhəri"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 1,
+     "clueCol": 6,
+     "answer": "DARVİN",
+     "clue": "Təbiətşünas",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Təkamül",
+      "Biqi gəmisi",
+      "Təbiətşünas"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 4,
+     "clueCol": 2,
+     "answer": "ƏSİR",
+     "clue": "Qul",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Hərbi dustaq",
+      "Yesir",
+      "Qul"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 3,
+     "clueCol": 1,
+     "answer": "SKİF",
+     "clue": "Bozqır xalqı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "İskit",
+      "Qızıl maral",
+      "Bozqır xalqı"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 2,
+     "clueCol": 0,
+     "answer": "NATO",
+     "clue": "Brüssel bloku",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Şimali Atlantika",
+      "Hərbi alyans",
+      "Brüssel bloku"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 2,
+     "answer": "ÇAR",
+     "clue": "Rus şahı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Rus hökmdarı",
+      "Romanov",
+      "Rus şahı"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "SƏFƏVİ",
+    "cells": [
+     [
+      4,
+      1
+     ],
+     [
+      4,
+      3
+     ],
+     [
+      7,
+      1
+     ],
+     [
+      7,
+      2
+     ],
+     [
+      5,
+      6
+     ],
+     [
+      6,
+      6
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-tarix-004",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "FATEH",
+     "clue": "Sultan ləqəbi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "İstanbulu aldı",
+      "II Mehmed",
+      "Sultan ləqəbi"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "TEYMUR",
+     "clue": "Əmir ...",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Topal hökmdar",
+      "Səmərqənd hakimi",
+      "Əmir ..."
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "OSMANLI",
+     "clue": "Türk imperiyası",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Altı əsrlik",
+      "Sultanlar evi",
+      "Türk imperiyası"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "FİRON",
+     "clue": "Ehram sahibi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Tutanxamon",
+      "Misir hökmdarı",
+      "Ehram sahibi"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "HİMN",
+     "clue": "Ana mahnı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Dövlət mahnısı",
+      "Marş",
+      "Ana mahnı"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 1,
+     "clueCol": 6,
+     "answer": "BREST",
+     "clue": "Belarus şəhəri",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "1918 sülhü",
+      "Qəhrəman qala",
+      "Belarus şəhəri"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "BARIT",
+     "clue": "Tüfəng tozu",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Çin tozu",
+      "Partlayıcı toz",
+      "Tüfəng tozu"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "NERON",
+    "cells": [
+     [
+      1,
+      5
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      5,
+      4
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-tarix-005",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 2,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "XƏLİFƏ",
+     "clue": "Xilafət başçısı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Canişin",
+      "Bağdad hakimi",
+      "Xilafət başçısı"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "SƏLCUQ",
+     "clue": "Türk dövləti",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Toğrul bəy",
+      "Oğuz sülaləsi",
+      "Türk dövləti"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "İNQİLAB",
+     "clue": "Köklü dəyişiklik",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Oktyabr ...",
+      "Çevriliş",
+      "Köklü dəyişiklik"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "VESTFAL",
+     "clue": "Sülh adı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "1648 sülhü",
+      "Otuzillik sonu",
+      "Sülh adı"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "FİFA",
+     "clue": "Futbol qurumu",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Sürixdə iqamət",
+      "Dünya kuboku",
+      "Futbol qurumu"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 3,
+     "answer": "MDB",
+     "clue": "Birlik",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "1991-də yarandı",
+      "Minsk sazişi",
+      "Birlik"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "VAXT",
+     "clue": "Fürsət",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Zaman",
+      "Saat göstərir",
+      "Fürsət"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "TESLA",
+    "cells": [
+     [
+      1,
+      4
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      7,
+      1
+     ],
+     [
+      6,
+      1
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-tarix-006",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 2,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "ÜSYAN",
+     "clue": "Ayağa qalxma",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qiyam",
+      "Spartak qaldırdı",
+      "Ayağa qalxma"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 5,
+     "answer": "FALANQA",
+     "clue": "Döyüş sırası",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Makedon düzülüşü",
+      "Nizəli sıra",
+      "Döyüş sırası"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "ATATÜRK",
+     "clue": "Qazi paşa",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Mustafa Kamal",
+      "Türkiyə qurucusu",
+      "Qazi paşa"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "KOMPAS",
+     "clue": "Şimalı göstərir",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Çin ixtirası",
+      "Maqnit iynəsi",
+      "Şimalı göstərir"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "ATİLLA",
+     "clue": "Hunlar xanı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Allahın qamçısı",
+      "Hun hökmdarı",
+      "Hunlar xanı"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 2,
+     "answer": "UEFA",
+     "clue": "Avropa futbolu",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Nyonda iqamət",
+      "Avrokubok",
+      "Avropa futbolu"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "SOKRAT",
+    "cells": [
+     [
+      7,
+      6
+     ],
+     [
+      7,
+      2
+     ],
+     [
+      7,
+      1
+     ],
+     [
+      6,
+      1
+     ],
+     [
+      7,
+      5
+     ],
+     [
+      4,
+      1
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-tarix-007",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 2,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "NADİR",
+     "clue": "... şah",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Əfşar şahı",
+      "Hindistanı aldı",
+      "... şah"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 2,
+     "clueCol": 0,
+     "answer": "SÜLALƏ",
+     "clue": "Dinastiya",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Nəsil hökmü",
+      "Hökmdar nəsli",
+      "Dinastiya"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 4,
+     "clueCol": 0,
+     "answer": "MİDİYA",
+     "clue": "Qədim dövlət",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ekbatan",
+      "Kiaksar",
+      "Qədim dövlət"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "XƏTAİ",
+     "clue": "Şah-şair",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Şah İsmayıl adı",
+      "Səfəvi şairi",
+      "Şah-şair"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 2,
+     "answer": "KÜRİ",
+     "clue": "Mariya ...",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Radium",
+      "İki Nobel alan",
+      "Mariya ..."
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 3,
+     "clueCol": 1,
+     "answer": "MİXİ",
+     "clue": "Yazı növü",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Gil lövhə yazısı",
+      "Şumer yazısı",
+      "Yazı növü"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "İSTİLA",
+     "clue": "Fəth",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Zəbt",
+      "İşğal",
+      "Fəth"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "YALTA",
+    "cells": [
+     [
+      4,
+      5
+     ],
+     [
+      7,
+      6
+     ],
+     [
+      2,
+      5
+     ],
+     [
+      7,
+      3
+     ],
+     [
+      4,
+      6
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-tarix-008",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 2,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "EDİSON",
+     "clue": "İxtiraçı Tomas",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Fonoqraf",
+      "Lampa ixtiraçısı",
+      "İxtiraçı Tomas"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 4,
+     "clueCol": 0,
+     "answer": "BİZANS",
+     "clue": "Yunan imperiyası",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Şərqi Roma",
+      "Bizantiya",
+      "Yunan imperiyası"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 2,
+     "answer": "ARXİMED",
+     "clue": "Yunan alimi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Evrika!",
+      "Siraküzalı",
+      "Yunan alimi"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 6,
+     "clueCol": 0,
+     "answer": "LEGİON",
+     "clue": "Roma qoşunu",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Roma alayı",
+      "Yad ...",
+      "Roma qoşunu"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 4,
+     "answer": "SAZİŞ",
+     "clue": "Anlaşma",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Razılaşma",
+      "Pakt",
+      "Anlaşma"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "TAXT",
+     "clue": "Kürsü",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Hakimiyyət yeri",
+      "Tac və ...",
+      "Kürsü"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "SEZAR",
+    "cells": [
+     [
+      4,
+      6
+     ],
+     [
+      1,
+      6
+     ],
+     [
+      4,
+      3
+     ],
+     [
+      4,
+      4
+     ],
+     [
+      2,
+      2
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-tarix-009",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 3,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "YAYLIM",
+     "clue": "Salvo",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Atəş",
+      "Topların səsi",
+      "Salvo"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "YUNESKO",
+     "clue": "BMT təşkilatı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "İrs siyahısı",
+      "Elm təşkilatı",
+      "BMT təşkilatı"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "MÖMİNƏ",
+     "clue": "... xatun",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Əcəmi tikdi",
+      "Naxçıvan türbəsi",
+      "... xatun"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "NİZƏ",
+     "clue": "Süngü",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Uzun silah",
+      "Ucu iti",
+      "Süngü"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 3,
+     "answer": "ZİREH",
+     "clue": "Qoruyucu",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Dəmir paltar",
+      "Döyüş geyimi",
+      "Qoruyucu"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 2,
+     "answer": "HUN",
+     "clue": "Böyük köç",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Atillanın xalqı",
+      "Köçəri xalq",
+      "Böyük köç"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "SARVAN",
+     "clue": "Karvançı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Karvan başçısı",
+      "Dəvə sürən",
+      "Karvançı"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "KANSLER",
+    "cells": [
+     [
+      6,
+      1
+     ],
+     [
+      5,
+      2
+     ],
+     [
+      7,
+      5
+     ],
+     [
+      5,
+      1
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      6,
+      3
+     ],
+     [
+      5,
+      3
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-tarix-010",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 3,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "KURSK",
+     "clue": "Rusiya şəhəri",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Tank döyüşü",
+      "1943 qövsü",
+      "Rusiya şəhəri"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "SPARTAK",
+     "clue": "Trakiyalı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qul üsyanı",
+      "Qladiator",
+      "Trakiyalı"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "PLATON",
+     "clue": "Yunan filosofu",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Akademiya",
+      "Dövlət əsəri",
+      "Yunan filosofu"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "DOWN",
+     "clueRow": 1,
+     "clueCol": 6,
+     "answer": "MANNA",
+     "clue": "Qədim çarlıq",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Urmiya gölü yanı",
+      "Urmiya dövləti",
+      "Qədim çarlıq"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "SİKKƏ",
+     "clue": "Metal pul",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Tarixi pul",
+      "Dəmir pul",
+      "Metal pul"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 3,
+     "clueCol": 2,
+     "answer": "ELÇİ",
+     "clue": "Xəbər gətirən",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Səfir",
+      "Nümayəndə",
+      "Xəbər gətirən"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 2,
+     "answer": "DAVA",
+     "clue": "Savaş",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Sülhün əksi",
+      "Döyüş",
+      "Savaş"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "VATERLO",
+    "cells": [
+     [
+      3,
+      5
+     ],
+     [
+      3,
+      6
+     ],
+     [
+      5,
+      4
+     ],
+     [
+      4,
+      2
+     ],
+     [
+      4,
+      4
+     ],
+     [
+      5,
+      2
+     ],
+     [
+      5,
+      5
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-tarix-011",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 3,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "NYUTON",
+     "clue": "Fizik",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Cazibə qanunu",
+      "Alma düşdü",
+      "Fizik"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "VİKİNQ",
+     "clue": "Şimal dənizçisi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Normand",
+      "Drakkar",
+      "Şimal dənizçisi"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 6,
+     "answer": "PUNİK",
+     "clue": "Karfagen savaşı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "... müharibələri",
+      "Roma Karfagenə",
+      "Karfagen savaşı"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 1,
+     "answer": "ASTEK",
+     "clue": "Qədim meksikalı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Tenoçtitlan",
+      "Meksika xalqı",
+      "Qədim meksikalı"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "KRAL",
+     "clue": "Monarx",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Taxt-tac sahibi",
+      "Avropa hökmdarı",
+      "Monarx"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "QUL",
+     "clue": "Əsir",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Spartakın dostu",
+      "Kölə",
+      "Əsir"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 3,
+     "answer": "QAZ",
+     "clue": "Uzunboyun quş",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ev quşu",
+      "Qaqqıldayan",
+      "Uzunboyun quş"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "İNTERPOL",
+    "cells": [
+     [
+      2,
+      1
+     ],
+     [
+      5,
+      6
+     ],
+     [
+      7,
+      4
+     ],
+     [
+      7,
+      5
+     ],
+     [
+      3,
+      2
+     ],
+     [
+      3,
+      6
+     ],
+     [
+      5,
+      5
+     ],
+     [
+      3,
+      4
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-tarix-012",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 3,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "XANLIQ",
+     "clue": "Xan dövləti",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qarabağ ...ı",
+      "Şəki ...ı",
+      "Xan dövləti"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 3,
+     "answer": "DİNAR",
+     "clue": "Pul vahidi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ərəb pulu",
+      "Xilafət pulu",
+      "Pul vahidi"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "GERB",
+     "clue": "Emblem",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Dövlət nişanı",
+      "Rəmz",
+      "Emblem"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "ORDU",
+     "clue": "Hərbi qüvvə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qoşun",
+      "Əsgərlər",
+      "Hərbi qüvvə"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "BALIQÇI",
+     "clue": "Balıq tutan",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Tilov sahibi",
+      "Tor atan",
+      "Balıq tutan"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 1,
+     "answer": "SƏLİB",
+     "clue": "Orta əsr yürüşü",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "... yürüşləri",
+      "Xaçlılar",
+      "Orta əsr yürüşü"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "ÇALDIRAN",
+    "cells": [
+     [
+      6,
+      6
+     ],
+     [
+      2,
+      6
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      3,
+      3
+     ],
+     [
+      7,
+      6
+     ],
+     [
+      7,
+      3
+     ],
+     [
+      6,
+      3
+     ],
+     [
+      5,
+      3
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  }
+ ]
+}

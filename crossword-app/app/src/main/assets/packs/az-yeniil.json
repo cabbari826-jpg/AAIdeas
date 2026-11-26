@@ -1,0 +1,788 @@
+{
+ "formatVersion": 1,
+ "packId": "az-yeniil",
+ "language": "az",
+ "normalization": "az-v1",
+ "contentVersion": 1,
+ "title": "Yeni il",
+ "levels": [
+  {
+   "id": "az-yeniil-001",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "ŞİRNİ",
+     "clue": "Bayram payı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Şirin şey",
+      "Konfet, halva",
+      "Bayram payı"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "ŞƏKİL",
+     "clue": "Çəkilən",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Foto",
+      "Rəsm",
+      "Çəkilən"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "KOSTYUM",
+     "clue": "Bal paltarı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Geyim dəsti",
+      "Pencək-şalvar",
+      "Bal paltarı"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 6,
+     "clueCol": 1,
+     "answer": "KUKLA",
+     "clue": "Bəbək",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qız oyuncağı",
+      "Gəlincik",
+      "Bəbək"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 1,
+     "clueCol": 6,
+     "answer": "YANVAR",
+     "clue": "Qış ayı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "İlin əvvəli",
+      "1-ci ay",
+      "Qış ayı"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 2,
+     "answer": "SOBA",
+     "clue": "Peç",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ev qızdıran",
+      "Odun yanan",
+      "Peç"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "KİRŞƏ",
+    "cells": [
+     [
+      6,
+      2
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      7,
+      6
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      2
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-yeniil-002",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "QARLI",
+     "clue": "Qış günü kimi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ağ örtüklü",
+      "Qar yağmış",
+      "Qış günü kimi"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "TƏQVİM",
+     "clue": "Divarda asılır",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Gün cədvəli",
+      "Ay-gün kitabı",
+      "Divarda asılır"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "AÇIQCA",
+     "clue": "Şəkilli kart",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Təbrik kartı",
+      "Poçt kartı",
+      "Şəkilli kart"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "MASKA",
+     "clue": "Gizlədici",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Üz örtüyü",
+      "Karnaval üzü",
+      "Gizlədici"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "ŞƏRF",
+     "clue": "Boyun şalı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Boyun örtüyü",
+      "Boyuna sarınır",
+      "Boyun şalı"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 4,
+     "clueCol": 4,
+     "answer": "QUM",
+     "clue": "Sarı dənələr",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Səhra dənəsi",
+      "Çimərlik örtüyü",
+      "Sarı dənələr"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "ÇƏKMƏ",
+     "clue": "Boğazlı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Uzun ayaqqabı",
+      "Qış ayaqqabısı",
+      "Boğazlı"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "ÇAQQAL",
+    "cells": [
+     [
+      7,
+      1
+     ],
+     [
+      5,
+      1
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      5,
+      4
+     ],
+     [
+      5,
+      6
+     ],
+     [
+      4,
+      3
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-yeniil-003",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 2,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "PALTO",
+     "clue": "Plaş",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Uzun üst geyim",
+      "Düyməli geyim",
+      "Plaş"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 1,
+     "clueCol": 4,
+     "answer": "KONFET",
+     "clue": "Uşaq sevər",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Şokoladlı",
+      "Kağızlı şirni",
+      "Uşaq sevər"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 4,
+     "clueCol": 0,
+     "answer": "KÜKNAR",
+     "clue": "Yolka ağacı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "İynəyarpaq",
+      "Qışda da yaşıl",
+      "Yolka ağacı"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "TƏBRİK",
+     "clue": "Gözaydınlığı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Xoş arzu",
+      "Açıqcada yazılan",
+      "Gözaydınlığı"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 2,
+     "answer": "GÜLÜŞ",
+     "clue": "Ağlamağın ziddi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Şən səs",
+      "Təbəssüm",
+      "Ağlamağın ziddi"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 2,
+     "clueCol": 0,
+     "answer": "KÜRK",
+     "clue": "Dəri palto",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Xəz palto",
+      "İsti geyim",
+      "Dəri palto"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "TƏTİL",
+    "cells": [
+     [
+      7,
+      4
+     ],
+     [
+      2,
+      6
+     ],
+     [
+      1,
+      6
+     ],
+     [
+      5,
+      6
+     ],
+     [
+      3,
+      2
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-yeniil-004",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 2,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "ŞAXTA",
+     "clue": "... baba",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Bərk soyuq",
+      "Qış soyuğu",
+      "... baba"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "ŞOKOLAD",
+     "clue": "Tünd şirni",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Kakao şirnisi",
+      "Qəhvəyi şirni",
+      "Tünd şirni"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "DEKABR",
+     "clue": "Qışın əvvəli",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "İlin sonu",
+      "12-ci ay",
+      "Qışın əvvəli"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 3,
+     "answer": "BƏZƏK",
+     "clue": "Süs",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Gözəllik verən",
+      "Zinət",
+      "Süs"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 5,
+     "answer": "AİLƏ",
+     "clue": "Doğmalar",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ata, ana, uşaq",
+      "Ev əhli",
+      "Doğmalar"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 4,
+     "clueCol": 6,
+     "answer": "ŞAR",
+     "clue": "Uçan oyuncaq",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Hava dolu",
+      "Rəngli top",
+      "Uçan oyuncaq"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 2,
+     "answer": "BEL",
+     "clue": "Kürək",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qazıma aləti",
+      "Torpaq qazan",
+      "Kürək"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "XİZƏK",
+    "cells": [
+     [
+      1,
+      3
+     ],
+     [
+      2,
+      5
+     ],
+     [
+      5,
+      3
+     ],
+     [
+      6,
+      3
+     ],
+     [
+      3,
+      1
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-yeniil-005",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 3,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "BAYRAM",
+     "clue": "Novruz, Yeni il",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Şənlik günü",
+      "Təntənə",
+      "Novruz, Yeni il"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "YOLKA",
+     "clue": "Şam ağacı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Bayram ağacı",
+      "Küknar",
+      "Şam ağacı"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 1,
+     "answer": "MAHNI",
+     "clue": "Bayram nəğməsi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Oxunan şey",
+      "Nəğmə",
+      "Bayram nəğməsi"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 5,
+     "answer": "QONAQ",
+     "clue": "Qonşu da olur",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Evə gələn",
+      "Bayram gələni",
+      "Qonşu da olur"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "PAPAQ",
+     "clue": "Börk",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Baş örtüyü",
+      "Qış başlığı",
+      "Börk"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "BUZ",
+     "clue": "Soyuq parça",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Donmuş su",
+      "Sürüşkən",
+      "Soyuq parça"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "QIZAQ",
+    "cells": [
+     [
+      3,
+      5
+     ],
+     [
+      5,
+      6
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      6,
+      5
+     ],
+     [
+      7,
+      5
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-yeniil-006",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 3,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "SÜFRƏ",
+     "clue": "Masa örtüyü",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Yemək masası",
+      "Bəzənmiş masa",
+      "Masa örtüyü"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 4,
+     "clueCol": 0,
+     "answer": "ZƏRF",
+     "clue": "Poçt qabı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Məktub qabı",
+      "Kağız torba",
+      "Poçt qabı"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 3,
+     "clueCol": 1,
+     "answer": "ZƏNG",
+     "clue": "Səsli əşya",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Gecəyarı səsi",
+      "Dəng-dəng",
+      "Səsli əşya"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "YASTIQ",
+     "clue": "Yataqda baş üçün",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Lələkli döşək",
+      "Baş altına",
+      "Yataqda baş üçün"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "QARTOPU",
+     "clue": "Qardan top",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qış oyunu",
+      "Atılan top",
+      "Qardan top"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 2,
+     "answer": "ARZU",
+     "clue": "Ürək istəyi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "İstək",
+      "Diləy",
+      "Ürək istəyi"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "PÜSTƏ",
+    "cells": [
+     [
+      6,
+      6
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      4,
+      6
+     ],
+     [
+      5,
+      3
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  }
+ ]
+}

@@ -1,0 +1,43 @@
+# title: Novruz
+# Novruz bayramı: bahar, çərşənbələr, xonça, bayram şirniləri. Format: SÖZ | çətin | orta | asan
+SƏMƏNİ | Cücərmiş buğda | Xonçanın yaşılı | Bayram yaşıllığı
+PAXLAVA | Romb şəkilli | Qozlu, ballı | Laylı şirni
+QOVURĞA | Qovrulmuş dən | Dən, noxud, ... | Xonçada dən
+TONQAL | Üstündən atılır | Çərşənbə odu | Həyətdə yanan od
+KOSA | Saqqalsız oyunçu | Keçəlin yoldaşı | Meydan təlxəyi
+KEÇƏL | Kosanın tay-tuşu | Saçsız qəhrəman | Tükü yoxdur
+ÇƏRŞƏNBƏ | Dörd bayram günü | Həftənin günü | Su, Od, Yel...
+YUMURTA | Döyüşdə vurulur | Boyanır | Toyuq verir
+XONÇA | Bəzənmiş sini | Bayram payı qabı | Şirnili məcməyi
+NOĞUL | Ağ şəkərli dən | Toyda səpilir | Xırda şirni
+LƏBLƏBİ | Qovrulmuş noxud | Çərəz noxudu | Sarı xırda dən
+KİŞMİŞ | Quru üzüm | Plova qatılır | Çəyirdəksiz quru
+İLAXIR | Son çərşənbə | Axır ... | İlin sonuncu
+YEL | Hava çərşənbəsi | Əsən hava | Yüngül külək
+CÜCƏRTİ | Dəndən çıxan | Torpaqdan qalxır | Yeni zoğ
+BƏRƏKƏT | Bolluq, xeyir | Süfrəyə gələn | Ruzi
+SOĞAN | Qabığı boyaqdır | Gözdən yaş açar | Göz yaşardan
+BOYAQ | Rəng verən | Yumurta üçün | Rəngləyici
+QOĞAL | Duzlu kökə | Zirəli çörəkçik | Laylı xəmir
+NOVRUZGÜLÜ | Erkən sarı çiçək | Bahar müjdəçisi | Bayram çiçəyi
+KƏNDİRBAZ | İp üstündə gəzən | Meydan ustası | İp oyunu ustası
+QULAQASMA | Qapı dalında fal | Niyyətli dinləmə | Gizli dinləmə
+ŞADLIQ | Fərəh, sevinc | Bayram əhvalı | Şənlik
+DÜYÜ | Plovun əsası | Çəltik dəni | Ağ dən
+BULAQ | Su günü yeri | Dağ çeşməsi | Yerdən çıxan su
+NƏRGİZ | Ağ-sarı çiçək | Novruzda dərilir | Ətirli çiçək
+BƏNÖVŞƏ | Utancaq çiçək | Erkən yaz gülü | Kiçik göy çiçək
+QARANQUŞ | Baharı gətirir | Çəngəl quyruq | Yuvası damda
+ÇİLİNGAĞAC | Çubuq oyunu | Ağacla vurulan | Kənd oyunu
+MÜJDƏ | Xoş xəbər | Muştuluq | Sevindirən xəbər
+TƏNDİR | Lavaş bişirilir | Yer sobası | Çörək ocağı
+HALVA | Un-şəkər şirnisi | Səməni ... | Yağlı şirni
+YAZBAŞI | Baharın gəlişi | Yazın əvvəli | Mart sonu
+OCAQBAŞI | Ailə yığıncağı | Od ətrafı | Ev isti yeri
+NƏĞMƏ | Oxunan söz | Şən oxuma | Mahnı sözü
+YAŞILLIQ | Göy-göyərti | Çəmənlik | Yaşıl yer
+ŞƏNLİK | Toy-bayram | Şən məclis | Bayram şənliyi
+GÜLAB | Gül suyu | Qızılgül suyu | Ətirli su
+QOVURMA | Ət qızartması | Qızarmış tikə | Plov üstü ət
+ŞİRNİYYAT | Şirin şeylər | Konditer malı | Halva, nabat
+BAYRAMLIQ | Bayram paltarı | Təzə geyim | Bayram hədiyyəsi

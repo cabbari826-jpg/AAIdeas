@@ -1,0 +1,49 @@
+# title: Qurban bayramı
+# Qurban bayramı: həcc, qurban payı, səxavət. Format: SÖZ | çətin | orta | asan
+HƏCC | Məkkə ziyarəti | İslamın şərti | Ziyarət
+ZƏVVAR | Ziyarətə gedən | Hacı | Ziyarətçi
+KƏBƏ | Məkkədə tikili | Qibləgah | Müqəddəs ev
+ARAFAT | Dağ adı | Həcc dayanacağı | Həcc dağı
+QOÇ | Buynuzlu erkək | Qoyun atası | Qurbanlıq heyvan
+PAY | Qismət | Qonşuya verilən | Bölüş
+İBRAHİM | Peyğəmbər | Xəlilullah | İsmayılın atası
+İSMAYIL | İbrahimin oğlu | Peyğəmbər oğlu | Qurban əhvalatı
+İHRAM | Hacı paltarı | Ağ örtü | Ziyarət geyimi
+TƏVAF | Kəbə ətrafında | Dövrə vurma | Fırlanma
+ZƏMZƏM | Müqəddəs su | Məkkə bulağı | ... suyu
+SƏXAVƏT | Əliaçıqlıq | Comərdlik | Xəsisliyin ziddi
+MÖMİN | İnanclı | Dindar adam | İmanlı
+İMAN | İnam, etiqad | Dini inam | Allaha inam
+ZİYARƏT | Müqəddəs gediş | Baş çəkmə | Pirə getmək
+HACI | Həcc edən | Kəbəyə gedən | ... ana
+COMƏRD | Əliaçıq | Səxavətli | Mərd
+BÖLÜŞMƏK | Paylaşmaq | Yarı vermək | Bölmək
+KASIB | Yoxsul | Varlının ziddi | Ehtiyaclı
+QURBANLIQ | Kəsiləcək qoç | Qurban üçün | Bayram qoçu
+QONŞULUQ | Qonşu olmaq | Yaxın ev | Yaxınlıq
+KÖMƏK | Yardım əli | Əl uzatma | Yardım etmə
+YAXŞILIQ | Xeyir iş | Lütf | Pisliyin ziddi
+SƏADƏT | Xoşbəxtlik | Bəxtiyarlıq | Ən böyük sevinc
+BƏXTİYAR | Bəxtli | Səadətli adam | Xoşbəxt insan
+SƏFA | Zövq | Xoşluq | Gül-çiçək ...
+XEYİRXAH | Xeyirsevər | Mərhəmətli | Xeyir verən
+QİBLƏ | Kəbə istiqaməti | Namaz yönü | Üz tutulan tərəf
+MƏRVƏ | Təpə adı | Səfa ilə ... | Məkkə təpəsi
+MİNA | Həcc vadisi | Şeytan daşlanır | Vadi adı
+ŞEYTAN | İblis | Daşlanan | Pis ruh
+QOYUNÇU | Qoyun saxlayan | Çoban kimi | Sürü sahibi
+KƏSİM | Qurban kəsmə | Bıçaq işi | Mal kəsmək
+ƏLİAÇIQ | Səxavətli adam | Comərd adam | Xəsis deyil
+PAYLAMA | Bölüşdürmə | Pay etmə | Hissələrə bölmə
+ÜMMƏT | Möminlər | İslam əhli | Bütün möminlər
+DİNDAŞ | Eyni dinli | Ümmət üzvü | Dini qardaş
+TƏKBİR | Allahu Əkbər | Bayram nidası | Uca söz
+NAMAZGAH | Açıq namaz yeri | Bayram namazı | Çöldə ibadət
+SƏCCADƏ | Namaz xalçası | Kiçik xalça | Dua xalçası
+TƏSBEH | Dənəli sap | Zikr aləti | Muncuqlu sap
+ZİKR | Allahı anma | Təsbeh çəkmə | Dua təkrarı
+MİHRAB | Məscid taxçası | Qiblə tərəfi | İmamın yeri
+MİNBƏR | Xütbə yeri | Pilləli kürsü | Məscid kürsüsü
+XÜTBƏ | Cümə nitqi | İmamın sözü | Minbər nitqi
+QİYAM | Ayaq üstə namaz | Namazda durma | Qalxış
+SƏCDƏ | Alnı yerə | Namazda əyilmə | Baş qoyma

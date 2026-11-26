@@ -1,0 +1,94 @@
+# "Run workflow" button: make new crossword levels from content/words/ without a computer.
+# Actions → crossword-levels → Run workflow → pack, count → Run.
+# Result: artifact levels-<pack> (the pack JSON + duplicate report + review sheet).
+# With "publish" ticked, the new levels are committed to the prototype branch and the
+# crossword-app workflow is started there, which builds the APK and publishes the update
+# that the phone installs by itself.
+name: crossword-levels
+on:
+  workflow_dispatch:
+    inputs:
+      pack:
+        description: "Pack id: az-starter, az-novruz, az-usaq, az-mini, az-cografiya ..."
+        required: true
+        default: az-starter
+      count:
+        description: "How many new levels"
+        required: true
+        default: "5"
+      seed:
+        description: "Any number for other grids (empty = random)"
+        required: false
+        default: ""
+      publish:
+        description: "Commit the levels and publish an app update"
+        type: boolean
+        default: false
+      branch:
+        description: "Branch with the app"
+        required: false
+        default: claude/project-thread-50gxx8
+concurrency:
+  group: crossword-levels
+  cancel-in-progress: false
+jobs:
+  levels:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # commit the levels
+      actions: write  # start the crossword-app build
+    defaults:
+      run:
+        working-directory: crossword-app/tools
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.branch }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Check word lists
+        run: python check_words.py
+      - name: Make levels
+        env:
+          PACK: ${{ inputs.pack }}
+          COUNT: ${{ inputs.count }}
+          SEED: ${{ inputs.seed }}
+        run: |
+          case "$PACK" in *[!a-z0-9-]*|"") echo "::error::bad pack id: $PACK"; exit 1;; esac
+          case "$COUNT" in *[!0-9]*|"") echo "::error::count must be a number"; exit 1;; esac
+          case "$SEED" in *[!0-9]*) echo "::error::seed must be a number"; exit 1;; esac
+          set +e
+          python make_levels.py "$PACK" "$COUNT" $SEED | tee make.log
+          code=${PIPESTATUS[0]}
+          set -e
+          [ "$code" = 2 ] && echo "::warning::Fewer levels than asked: add words to content/words/$PACK.txt"
+          [ "$code" = 0 ] || [ "$code" = 2 ]
+          mkdir -p ../out
+          f=../app/src/main/assets/packs/$PACK.json
+          [ -f "$f" ] || f=../app/src/main/assets/mini/$PACK.json
+          [ -f "$f" ] || f=../content/downloadable/$PACK.json
+          cp "$f" "../out/$PACK.json"
+      - name: Duplicate report and review sheet
+        run: |
+          python report_dupes.py ../out/duplicates-report.md
+          python review_sheet.py ../out/clues-for-review.md
+      - uses: actions/upload-artifact@v4
+        with:
+          name: levels-${{ inputs.pack }}
+          path: crossword-app/out/
+      - name: Commit and start the app build
+        if: inputs.publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PACK: ${{ inputs.pack }}
+          BRANCH: ${{ inputs.branch }}
+        run: |
+          cd ..
+          git config user.name "crossword-levels"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add app/src/main/assets content/downloadable 2>/dev/null || git add app/src/main/assets
+          git commit -m "New levels for $PACK (crossword-levels run ${{ github.run_number }})"
+          git push origin "HEAD:$BRANCH"
+          # A push made with the workflow token does not start other workflows, so start the build by hand.
+          gh workflow run crossword-app.yml --repo "$GITHUB_REPOSITORY" --ref "$BRANCH"

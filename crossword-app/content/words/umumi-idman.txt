@@ -1,0 +1,65 @@
+# Ümumi sözlər: idman, oyun, məktəb, sənət, alətlər. Format: SÖZ | çətin | orta | asan
+FUTBOL | On bir nəfərlik | Topu qapıya | Ən sevilən oyun
+QAPIÇI | Torun keşikçisi | Əlcəkli oyunçu | Qapını qoruyan
+HAKİM | Fit çalan | Oyunun ədaləti | Qərar verən
+MATÇ | İki komanda | Oyun görüşü | Yarış
+KOMANDA | Oyunçular | Klub heyəti | Birlikdə oynayan
+GÜLƏŞ | Xalçada döyüş | Pəhləvan idmanı | Kürəşmə
+BOKS | Əlcəkli döyüş | Rinqdə idman | Yumruq idmanı
+ÜZGÜÇÜ | Hovuz idmançısı | Suda yarışan | Üzən idmançı
+HOVUZ | Üzmə yeri | Su hövzəsi | Çimmək yeri
+QAÇIŞ | Sürət yarışı | Marafon | Yüyürmə
+MEDALÇI | Mükafatçı | Pyedestalda | Qalib idmançı
+KUBOK | Qalibə verilən | Qızıl qab | Çempion mükafatı
+ÇEMPİON | Birinci yer | Ən güclü | Qalib
+MƏŞQÇİ | İdman müəllimi | Trener | Hazırlayan
+STOLÜSTÜ | Tennis növü | Raketkalı oyun | Masa tennisi
+DAMA | Taxtada daşlar | Şahmata bənzər | Ağ-qara daşlar
+LOTO | Kisədən rəqəm | Kartlı oyun | Bəxt oyunu
+GİZLƏNPAÇ | Uşaq oyunu | Axtarış oyunu | Gizlənmə oyunu
+KƏNDİR | Qalın ip | Yoğun ip | Bağlama ipi
+TƏRƏNNÜM | Mədh | Vəsf etmə | Nəğmə ilə tərif
+RƏSM | Fırça ilə | Şəkil çəkmə | Rəssamın işi
+FIRÇA | Rəssamın aləti | Boya çəkən | Diş ...
+BOYA | Rəng maddəsi | Divara çəkilir | Rəngləyən
+MOLBERT | Rəssam taxtası | Kətan dayağı | Üçayaqlı stend
+HEYKƏLTƏRAŞ | Daş yonan | Büst ustası | Heykəl ustası
+SƏHNƏ | Teatr meydançası | Aktyorların yeri | Pərdə arxası
+TAMAŞA | Pyes göstərişi | Seyr | Teatrda baxılan
+KİNO | Ekran sənəti | Film | Sinema
+EKRAN | Görüntü səthi | Televizor üzü | Monitor
+FİLM | Kino əsəri | Lent | Ekran əsəri
+RADİO | Dalğa ilə səs | Efir qutusu | Səsli qəbuledici
+TELEFON | Zəng edilən | Mobil ... | Nömrə yığılan
+KOMPÜTER | Klaviaturalı | Proqram işlədən | Kompyuter
+AÇIRSÖZ | Parol | Şifrə | Gizli söz
+ŞİFRƏ | Kod | Gizli yazı | Parol sözü
+QEYD | Qısa yazı | Yaddaş yazısı | Dəftərə yazılan
+NAMƏ | Məktub | Yazılı xəbər | Kağız
+MİSAL | Nümunə | Örnək | Məsələn
+MƏSƏLƏ | Riyazi tapşırıq | Problem | Həlli olan
+CƏDVƏL | Sətir-sütun | Vurma ... | Qrafik
+XƏRİTƏ | Ölkələr şəkli | Coğrafi şəkil | Kart
+QLOBUS | Yer modeli | Fırlanan kürə | Kürə xəritə
+XƏTKEŞ | Düz xətt çəkən | Santimetrli | Sinif aləti
+PƏRGAR | Dairə çəkən | İki ayaqlı alət | Sirkul
+SİLGİ | Qələm izi silən | Rezin | Pozan
+KARANDAŞ | Qrafitli | Yonulur | Qələm növü
+QOVLUQ | Sənəd qabı | Kağız qutusu | Papka
+PORTFEL | Məktəbli çantası | Dəri çanta | Kitab çantası
+DƏRSXANA | Sinif otağı | Dərs keçilən | Auditoriya
+KÜRSÜ | Natiqin yeri | Tribuna | Kafedra
+KLAVİŞ | Pianonun dili | Basılan düymə | Klaviatura üzvü
+PEDAL | Ayaqla basılan | Velosipeddə | Ayaq dəstəyi
+SÜKAN | Maşının çarxı | Gəmi çarxı | Döndərən çarx
+MOTOR | Mühərrik | Benzinlə işləyən | Maşının ürəyi
+ŞİN | Rezin təkər | Təkər örtüyü | Hava dolu rezin
+FARA | Maşının gözü | Ön işıq | Avtomobil işığı
+QARAJ | Maşın evi | Avtomobil yeri | Dəmir qutu
+YANACAQ | Benzin, dizel | Odun-kömür | Yandırılan
+DİZEL | Ağır yanacaq | Solyarka | Yük maşını yağı
+QAYIQ | Kiçik gəmi | Avarlı | Balıqçı qayığı
+AVAR | Qayıq kürəyi | Suyu itələyən | Kürəkcik
+YELKƏN | Küləklə dolan | Gəmi parçası | Ağ parça gəmidə
+LÖVBƏR | Gəmi lənqəri | Dibə atılan | Dəmir qarmaq
+GÖYƏRTƏ | Gəminin üstü | Paluba | Gəmi döşəməsi

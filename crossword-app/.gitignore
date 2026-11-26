@@ -1,0 +1,12 @@
+.gradle/
+build/
+local.properties
+.idea/
+*.iml
+.kotlin/
+captures/
+tools/*.txt
+tools/out_*.json
+__pycache__/
+tools/*.log
+prototype.keystore

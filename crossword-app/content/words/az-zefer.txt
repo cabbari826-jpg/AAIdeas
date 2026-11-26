@@ -1,0 +1,58 @@
+# title: Zəfər günü
+# 8 noyabr, Zəfər günü: Qarabağ, qayıdış, qürur. Format: SÖZ | çətin | orta | asan
+QARABAĞ | Xarıbülbül yurdu | Şuşalı bölgə | Muğam vətəni
+CIDIR | Şuşada düz | ... düzü | Atçılıq düzü
+QUBADLI | Bərgüşad çaylı | Həkəri çaylı | Zəngilan qonşusu
+HADRUT | Azıx yaxını | Qəsəbə adı | Xocavənd yeri
+TOPXANA | Şuşa meşəsi | Meşə adı | Şuşanın meşəsi
+VƏTƏN | Ana yurd | Doğma torpaq | Ölkə
+QAYIDIŞ | Geri dönüş | Böyük ... | Dönmək
+İGİD | Qoçaq | Cəsur oğlan | Ər oğlu
+CƏSUR | Qorxmaz | Ürəkli | Cəsarətli
+ŞƏHİD | Vətən fədaisi | Əbədi ölməz | Ölməz qəhrəman
+QAZİ | Döyüşdən dönən | Yaralı qəhrəman | Döyüşmüş igid
+NOYABR | Payızın sonu | On birinci ay | Payız ayı
+ŞƏRƏF | Namus, ləyaqət | Ləyaqət | Şan-şöhrət
+QÜRUR | İftixar | Fəxr hissi | Məğrurluq
+ŞÖHRƏT | Məşhurluq | Ad çıxarma | Şan
+ƏZƏMƏT | Böyüklük | Böyük şan | Ululuq
+DİRÇƏLİŞ | Yenidən canlanma | Bərpa | Oyanış
+BƏRPA | Yenidən tikmə | Təmir | Dirçəltmə
+ALQIŞ | Əl çalma | Təbrik səsi | Afərin
+AFƏRİN | Bəh-bəh | Tərif sözü | Əhsən
+MİNNƏTDAR | Borclu hiss | Təşəkkürlü | Sağ ol deyən
+XANKƏNDİ | Qarabağ mərkəzi | Şəhər adı | Dağlıq şəhər
+XOCAVƏND | Hadrutlu rayon | Qarabağda rayon | Azıxlı rayon
+KƏLBƏCƏR | İstisulu rayon | Dağlıq rayon | Murovlu yer
+CƏBRAYIL | Arazboyu rayon | Xudafərinli | Diridağlı rayon
+XUDAFƏRİN | On beş aşırımlı | Tarixi körpü | Daş körpü
+ARAZBOYU | Çay boyu | Sahil zolağı | Araz kənarı
+ŞAHBULAQ | Ağdam qalası | Qala adı | Pənahəli qalası
+AZIX | Qədim mağara | İbtidai düşərgə | Mağara adı
+GƏNCLİK | Cavanlıq | Gənclər | Gənc yaş
+QARABAĞATI | Məşhur cins at | Qızılı at | Cıdır atı
+BAYRAMLI | Şənlikli | Bayram ovqatlı | Təntənəli gün
+ŞAD | Sevincli | Fərəhli | Şən
+QƏHRƏMAN | Ər igid | Nağıl ... | Cəsur igid
+YENİDƏN | Təkrar | Bir də | Təzədən
+ƏBƏDİYYƏT | Sonsuzluq | Əzəl-əbəd | Daimilik
+ŞUŞALI | Şuşa sakini | Şuşadan olan | Qarabağlı
+MUĞAMÇI | Muğam xanəndəsi | Dəstgah ifaçısı | Ustad oxuyan
+XARIBÜLBÜL | Şuşa çiçəyi | Ofris | Qarabağ gülü
+KÖÇKÜN | Yurdsuz | Qaçqın | Evdən didərgin
+QAÇQIN | Didərgin | Yurdsuz qalan | Evsiz qalan
+ÇİÇƏKLİ | Güllü | Çəmənli | Bahar kimi
+TƏRANƏ | Şən mahnı | Nəğmə sözü | Xoş avaz
+DAĞLIQ | Dağlı yer | Yüksək yer | Dağ-dərə
+ATÇILIQ | At yetişdirmə | Cıdır işi | At saxlama
+YARAŞIQ | Gözəl duruş | Bəzək | Göyçəklik
+DİRƏNİŞ | Müqavimət | Əyilməmək | Təslim olmama
+SƏMƏRƏ | Bəhrə | Faydalı nəticə | Nəticə
+BƏHRƏ | Meyvə, fayda | Səmərə | Əməyin nəticəsi
+QOÇAQ | Cəld və cəsur | Qorxu bilməz | İgid adam
+MƏRD | Kişi kimi | Namərdin ziddi | Ər oğlu ər
+NAMUS | Şərəf, ar | Qeyrət | Ləyaqət hissi
+QEYRƏT | Namus hissi | Kişilik | Qüvvət, cəsarət
+ŞÜKRAN | Təşəkkür hissi | Şükür | Razılıq bildirmə
+DÖNÜŞ | Geri qayıtma | Yuvaya dönmə | Qayıdış yolu
+SEVİNCLİ | Şad-xürrəm | Fərəhli gün | Gülərüz

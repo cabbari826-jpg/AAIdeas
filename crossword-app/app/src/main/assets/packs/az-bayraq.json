@@ -1,0 +1,804 @@
+{
+ "formatVersion": 1,
+ "packId": "az-bayraq",
+ "language": "az",
+ "normalization": "az-v1",
+ "contentVersion": 1,
+ "title": "Bayraq günü",
+ "levels": [
+  {
+   "id": "az-bayraq-001",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "ŞAHİN",
+     "clue": "Qızılquş",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Göy ovçusu",
+      "İti gözlü quş",
+      "Qızılquş"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "ŞƏRƏFLİ",
+     "clue": "Ləyaqətli",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Hörmətli",
+      "Adlı-sanlı",
+      "Ləyaqətli"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "RƏNGLİ",
+     "clue": "Çoxçalarlı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Boyalı",
+      "Rəng-rəng",
+      "Çoxçalarlı"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "DOWN",
+     "clueRow": 1,
+     "clueCol": 6,
+     "answer": "ZİRVƏ",
+     "clue": "Təpə ucu",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Dağın başı",
+      "Ən yüksək nöqtə",
+      "Təpə ucu"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 3,
+     "answer": "NAXIŞ",
+     "clue": "Xalça bəzəyi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Bəzək şəkli",
+      "Ornament",
+      "Xalça bəzəyi"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "FƏXR",
+     "clue": "Başucalıq",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Öyünmə",
+      "Fəxarət",
+      "Başucalıq"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 2,
+     "answer": "ŞƏN",
+     "clue": "Qəmginin ziddi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Şad",
+      "Kefli",
+      "Qəmginin ziddi"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "ƏLVAN",
+    "cells": [
+     [
+      6,
+      6
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      5,
+      6
+     ],
+     [
+      4,
+      3
+     ],
+     [
+      1,
+      5
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-bayraq-002",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "SANCAQ",
+     "clue": "Dirəkdə parça",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Kiçik bayraq",
+      "Bayraqcıq",
+      "Dirəkdə parça"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "QIRMIZI",
+     "clue": "Qan rəngi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Müasirlik rəngi",
+      "Al rəng",
+      "Qan rəngi"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "MÜASİR",
+     "clue": "Qırmızı rəng",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Çağdaş",
+      "Yeni dövrə aid",
+      "Qırmızı rəng"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "SƏMAVİ",
+     "clue": "Mavi-göy",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Göy rəngli",
+      "Göylərə aid",
+      "Mavi-göy"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 1,
+     "answer": "ŞANLI",
+     "clue": "Şərəfli bayraq",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Şöhrətli",
+      "Ad-sanlı",
+      "Şərəfli bayraq"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 4,
+     "clueCol": 3,
+     "answer": "UCA",
+     "clue": "Alçağın ziddi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Hündür, ali",
+      "Yüksək",
+      "Alçağın ziddi"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "NİŞAN",
+    "cells": [
+     [
+      1,
+      3
+     ],
+     [
+      6,
+      1
+     ],
+     [
+      7,
+      2
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      7,
+      4
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-bayraq-003",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "DÖVRƏ",
+     "clue": "Dövran",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Dairə",
+      "Dairəvi hərəkət",
+      "Dövran"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "DEVİZ",
+     "clue": "Gerb üstündə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Moto",
+      "Həyat şüarı",
+      "Gerb üstündə"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "İSLAM",
+     "clue": "Müsəlman dini",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Yaşıl rəng",
+      "Din adı",
+      "Müsəlman dini"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 4,
+     "clueCol": 2,
+     "answer": "MAVİ",
+     "clue": "Səma rəngi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Türkçülük rəngi",
+      "Göy rəngi",
+      "Səma rəngi"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 6,
+     "answer": "DİRƏK",
+     "clue": "Dik çubuq",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Bayraq ağacı",
+      "Sütun",
+      "Dik çubuq"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "YÜKSƏK",
+     "clue": "Aşağının ziddi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Uca",
+      "Hündür",
+      "Aşağının ziddi"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "KÜLƏK",
+    "cells": [
+     [
+      7,
+      6
+     ],
+     [
+      7,
+      2
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      5,
+      1
+     ],
+     [
+      7,
+      3
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-bayraq-004",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "MÖHÜR",
+     "clue": "Ştamp",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Dövlət damğası",
+      "Sənədə vurulur",
+      "Ştamp"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "MƏRASİM",
+     "clue": "Bayram tədbiri",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Təntənəli tədbir",
+      "Rəsmi ayin",
+      "Bayram tədbiri"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "MEYDAN",
+     "clue": "Şəhər sahəsi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Bayraq ...",
+      "Böyük sahə",
+      "Şəhər sahəsi"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "DOWN",
+     "clueRow": 1,
+     "clueCol": 6,
+     "answer": "GƏRDƏN",
+     "clue": "Boyun, boğaz",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Boyun",
+      "Ənsə",
+      "Boyun, boğaz"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "RƏMZ",
+     "clue": "Nişanə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Simvol",
+      "İşarə",
+      "Nişanə"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 2,
+     "answer": "QURD",
+     "clue": "Boz yırtıcı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Canavar",
+      "Torpaqda yaşayan",
+      "Boz yırtıcı"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "MÜQƏDDƏS",
+    "cells": [
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      5,
+      3
+     ],
+     [
+      3,
+      2
+     ],
+     [
+      7,
+      4
+     ],
+     [
+      5,
+      6
+     ],
+     [
+      3,
+      6
+     ],
+     [
+      5,
+      1
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-bayraq-005",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "ÜÇRƏNG",
+     "clue": "Bayraq rəngləri",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Mavi, al, yaşıl",
+      "Üç rəngli",
+      "Bayraq rəngləri"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "GÖYRƏNG",
+     "clue": "Səma rəngli",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Mavi",
+      "Göy",
+      "Səma rəngli"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "TƏNTƏNƏ",
+     "clue": "Şan-şöhrətli an",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Möhtəşəm mərasim",
+      "Bayram şəni",
+      "Şan-şöhrətli an"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "AYİN",
+     "clue": "Ritual",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Dini adət",
+      "Adət-ənənə",
+      "Ritual"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "ŞÜAR",
+     "clue": "Plakat sözü",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Çağırış sözü",
+      "Bayraq sözü",
+      "Plakat sözü"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 1,
+     "answer": "ƏZƏLƏ",
+     "clue": "İdmançıda iri",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Pəzi",
+      "Güc verən",
+      "İdmançıda iri"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "ZƏNGÇƏ",
+    "cells": [
+     [
+      5,
+      3
+     ],
+     [
+      5,
+      2
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      7,
+      6
+     ],
+     [
+      7,
+      2
+     ],
+     [
+      5,
+      6
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-bayraq-006",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "UCALIQ",
+     "clue": "Zirvədə olmaq",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Yüksəklik",
+      "Yuxarıda olmaq",
+      "Zirvədə olmaq"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "AYPARA",
+     "clue": "Ağ ay",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Hilal",
+      "Ayın yarısı",
+      "Ağ ay"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 1,
+     "clueCol": 1,
+     "answer": "ÇAĞDAŞ",
+     "clue": "Yeni dövr",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Müasir",
+      "İndiki",
+      "Yeni dövr"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 3,
+     "answer": "PARÇA",
+     "clue": "Kəsik toxuma",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Bayraq materialı",
+      "Mahud, ipək",
+      "Kəsik toxuma"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "DƏRİ",
+     "clue": "Bədən örtüyü",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Çanta materialı",
+      "Heyvan örtüyü",
+      "Bədən örtüyü"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 1,
+     "answer": "QORXU",
+     "clue": "Qorxmaq hissi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Cəsarətin əksi",
+      "Vahimə",
+      "Qorxmaq hissi"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 2,
+     "answer": "ACI",
+     "clue": "Şirin deyil",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Bibər dadı",
+      "Yandıran dad",
+      "Şirin deyil"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "PARLAQ",
+    "cells": [
+     [
+      3,
+      3
+     ],
+     [
+      7,
+      3
+     ],
+     [
+      5,
+      3
+     ],
+     [
+      4,
+      6
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      1,
+      2
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  }
+ ]
+}

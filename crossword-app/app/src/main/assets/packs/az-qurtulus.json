@@ -1,0 +1,811 @@
+{
+ "formatVersion": 1,
+ "packId": "az-qurtulus",
+ "language": "az",
+ "normalization": "az-v1",
+ "contentVersion": 1,
+ "title": "Qurtuluş günü",
+ "levels": [
+  {
+   "id": "az-qurtulus-001",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 2,
+     "answer": "İRADƏ",
+     "clue": "Əzm",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Möhkəm istək",
+      "Dəmir ...",
+      "Əzm"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "SAĞLAM",
+     "clue": "Möhkəm bədənli",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Xəstə deyil",
+      "Gümrah",
+      "Möhkəm bədənli"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "GƏLƏCƏK",
+     "clue": "Keçmişin ziddi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Hələ gəlməyən",
+      "Sabahkı günlər",
+      "Keçmişin ziddi"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "BİRGƏ",
+     "clue": "Əl-ələ",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Birlikdə",
+      "Bir yerdə",
+      "Əl-ələ"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "MÖHKƏM",
+     "clue": "Güclü",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Bərk, davamlı",
+      "Sınmaz",
+      "Güclü"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 1,
+     "clueCol": 6,
+     "answer": "ƏMİN",
+     "clue": "Rahat",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Arxayın",
+      "Şübhəsiz",
+      "Rahat"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "XƏRC",
+     "clue": "Gəlirin ziddi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Məsrəf",
+      "Pul gedişi",
+      "Gəlirin ziddi"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "BÖCƏK",
+    "cells": [
+     [
+      1,
+      1
+     ],
+     [
+      7,
+      2
+     ],
+     [
+      5,
+      4
+     ],
+     [
+      5,
+      2
+     ],
+     [
+      7,
+      4
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-qurtulus-002",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "GÜVƏN",
+     "clue": "Etimad hissi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Arxayınlıq",
+      "Bel bağlama",
+      "Etimad hissi"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "NİKBİN",
+     "clue": "Bədbinin ziddi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Optimist",
+      "Ümidli adam",
+      "Bədbinin ziddi"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "SÜKUNƏT",
+     "clue": "Dinc sükut",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Sakitlik",
+      "Dinclik halı",
+      "Dinc sükut"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "TƏRTİB",
+     "clue": "Sıra-nizam",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qaydaya salma",
+      "Ardıcıllıq",
+      "Sıra-nizam"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 4,
+     "answer": "SABİT",
+     "clue": "Tərpənməz",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Dəyişməz",
+      "Möhkəm duran",
+      "Tərpənməz"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "SÜBH",
+     "clue": "Dan yeri",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Gecənin sonu",
+      "Alaçıq vaxt",
+      "Dan yeri"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "SƏBAT",
+    "cells": [
+     [
+      1,
+      1
+     ],
+     [
+      7,
+      2
+     ],
+     [
+      7,
+      6
+     ],
+     [
+      4,
+      4
+     ],
+     [
+      7,
+      1
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-qurtulus-003",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "DÜZLÜK",
+     "clue": "Yalanın ziddi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Doğruluq",
+      "Dürüstlük",
+      "Yalanın ziddi"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "YENİLİK",
+     "clue": "Novatorluq",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Təzəlik",
+      "Yeni şey",
+      "Novatorluq"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 1,
+     "answer": "SÜTUN",
+     "clue": "Dik dayaq",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Bina dirəyi",
+      "Mərmər dirək",
+      "Dik dayaq"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 4,
+     "answer": "TƏMƏL",
+     "clue": "Əsas",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Bünövrə",
+      "Binanın altı",
+      "Əsas"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "İNAM",
+     "clue": "İnanmaq",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Etimad",
+      "Güvən",
+      "İnanmaq"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 2,
+     "answer": "YOSUN",
+     "clue": "Mamır",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Daşda yaşıllıq",
+      "Su bitkisi",
+      "Mamır"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "İYUN",
+     "clue": "Yay ayı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Yayın başı",
+      "Altıncı ay",
+      "Yay ayı"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "NİZAM",
+    "cells": [
+     [
+      3,
+      6
+     ],
+     [
+      5,
+      1
+     ],
+     [
+      7,
+      3
+     ],
+     [
+      5,
+      3
+     ],
+     [
+      5,
+      4
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-qurtulus-004",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 2,
+     "answer": "ADDIM",
+     "clue": "Ayaq atma",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qədəm",
+      "Bir ... irəli",
+      "Ayaq atma"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "SAĞLIQ",
+     "clue": "Sağlam olmaq",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Can sağlığı",
+      "Salamatlıq",
+      "Sağlam olmaq"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 1,
+     "answer": "DAYAQ",
+     "clue": "Kömək",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Arxa, söykənəcək",
+      "Dirək",
+      "Kömək"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 6,
+     "answer": "QAYDA",
+     "clue": "Nizam",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qanun, tərtib",
+      "Yol ...",
+      "Nizam"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 2,
+     "answer": "ZİYA",
+     "clue": "Parıltı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "İşıq, nur",
+      "Şəfəq nuru",
+      "Parıltı"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "ƏMƏK",
+     "clue": "Əl işi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Zəhmət",
+      "İş",
+      "Əl işi"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "DOWN",
+     "clueRow": 4,
+     "clueCol": 1,
+     "answer": "ƏHD",
+     "clue": "Müqavilə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "And, vəd",
+      "Söz-peyman",
+      "Müqavilə"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "DƏMLİK",
+    "cells": [
+     [
+      7,
+      1
+     ],
+     [
+      5,
+      1
+     ],
+     [
+      5,
+      2
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      7,
+      4
+     ],
+     [
+      5,
+      4
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-qurtulus-005",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "NİCAT",
+     "clue": "Çıxış yolu",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qurtuluş yolu",
+      "Xilas olma",
+      "Çıxış yolu"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "ABADLIQ",
+     "clue": "Bərəkət",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Gözəlləşmə",
+      "Abad olmaq",
+      "Bərəkət"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 2,
+     "answer": "İNKİŞAF",
+     "clue": "Böyümə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Tərəqqi",
+      "İrəliləyiş",
+      "Böyümə"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 6,
+     "clueCol": 0,
+     "answer": "BARIŞ",
+     "clue": "Əl sıxışma",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Sülh",
+      "Küsülülüyün sonu",
+      "Əl sıxışma"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 3,
+     "answer": "AHU",
+     "clue": "Çöl heyvanı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ceyran, maral",
+      "Gözəl gözlü",
+      "Çöl heyvanı"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 1,
+     "clueCol": 6,
+     "answer": "YURD",
+     "clue": "Vətən",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Doğma diyar",
+      "Ev-eşik",
+      "Vətən"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "YALAN",
+    "cells": [
+     [
+      2,
+      6
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      5,
+      4
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      1,
+      1
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-qurtulus-006",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "ETİBAR",
+     "clue": "Bel bağlamaq",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "İnam, güvən",
+      "Sözə inam",
+      "Bel bağlamaq"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 2,
+     "clueCol": 0,
+     "answer": "ZƏHMƏT",
+     "clue": "Çətin iş",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Əmək, iş",
+      "Tər tökmə",
+      "Çətin iş"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "ÜMİDVAR",
+     "clue": "Gələcəyə inanan",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ümidli",
+      "Nikbin",
+      "Gələcəyə inanan"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 2,
+     "answer": "TƏRƏQQİ",
+     "clue": "İnkişaf yolu",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "İrəliyə gediş",
+      "Geriləmə ziddi",
+      "İnkişaf yolu"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "ŞİFRƏ",
+     "clue": "Parol sözü",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Kod",
+      "Gizli yazı",
+      "Parol sözü"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 4,
+     "clueCol": 0,
+     "answer": "SƏDD",
+     "clue": "Bənd",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Su bəndi",
+      "Su anbarı divarı",
+      "Bənd"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "HƏRARƏT",
+    "cells": [
+     [
+      2,
+      3
+     ],
+     [
+      7,
+      5
+     ],
+     [
+      7,
+      4
+     ],
+     [
+      6,
+      4
+     ],
+     [
+      6,
+      6
+     ],
+     [
+      4,
+      2
+     ],
+     [
+      1,
+      2
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  }
+ ]
+}

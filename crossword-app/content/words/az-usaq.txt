@@ -1,0 +1,122 @@
+# title: Uşaqlar üçün
+# Uşaq paketi: heyvanlar, meyvələr, ailə, rənglər, oyuncaqlar. Hər üç ipucu asan və mehriban. Format: SÖZ | çətin | orta | asan
+PİŞİK | Miyoldayır | Siçan tutur | Mırıldayan dost
+BALIQ | Suda üzür | Akvariumda yaşar | Pulcuqlu dost
+ARMUD | Sarı-yaşıl meyvə | Lampaya oxşar | Şirin meyvə
+KİRPİ | Tikanlı top | Alma daşıyar | Tikanlı heyvan
+CÜCƏ | Civ-civ | Toyuğun balası | Sarı bala
+XORUZ | Səhər banlayar | Quqquluqu! | Pipikli quş
+İNƏK | Mö-mö deyir | Süd verir | Buynuzlu dost
+QURBAĞA | Qur-qur | Gölməçədə yaşar | Yaşıl tullanan
+SİÇAN | Pendir sevər | Pişikdən qaçar | Balaca boz
+BUZOV | İnəyin balası | Mö deyən bala | Balaca dana
+ÇİYƏLƏK | Al giləmeyvə | Xalları var | Yaz giləsi
+GİLAS | Cüt-cüt asılır | Qırmızı gilə | Şirin yay giləsi
+MORUQ | Kolda bitir | Al rəngli gilə | Mürəbbəlik gilə
+XİYAR | Uzun yaşıl | Salata doğranır | Yaşıl tərəvəz
+KİTAB | Nağıl yazılır | Səhifələri var | Oxumaq üçün
+QƏLƏM | Şəkil çəkir | Yazı yazır | Karandaş kimi
+OYUN | Uşaqlar sevər | Əyləncə | Oynanılan iş
+BEŞİK | Körpə yatır | Yellənir | Layla yeri
+LAYLA | Ana oxuyar | Yuxu mahnısı | Beşik nəğməsi
+BALA | Kiçik uşaq | Əzizim | Anasının gülü
+DƏFTƏR | Xətli vərəqlər | Yazı yazılır | Dərs kitabçası
+MƏKTƏB | Zəng çalınır | Dərs yeri | Şagird evi
+SİNİF | Partalar otağı | Dərs otağı | Lövhəli otaq
+GÖZ | İki dənə | Görmək üçün | Kirpikli
+QULAQ | Eşitmək üçün | Başın yanında | Sırğa yeri
+BURUN | Üzün ortasında | İy bilir | Fınxırar
+DODAQ | Gülüşdə görünür | Ağızın kənarı | Öpüş üçün
+BARMAQ | Beş dənə | Əldə olur | Sayırıq onunla
+AYAQ | Qaçmaq üçün | Çəkmə geyər | Yeriyirik
+BOZ | Siçan rəngi | Bulud rəngi | Kül rəngi
+BULUD | Göydə ağ | Yağış gətirir | Göydə pambıq
+YAĞIŞ | Damcı damcı | Çətir lazımdır | Göydən su
+KÖLGƏ | Arxanca gəzir | Günəşdə yaranır | Qara şəkil
+ŞİR | Heyvan padşahı | Yallı | Yalmanlı pişik
+MEYMUN | Banan yeyir | Ağacda oynar | Şıltaq heyvan
+TISBAĞA | Evini daşıyar | Ən yavaş | Qınlı dost
+İLBİZ | Buynuzcuq | Yavaş sürünər | Qabıqlı
+TƏYYARƏ | Göydə uçur | Qanadları var | Pilot sürər
+AVTOBUS | Çox adam aparır | Duracaqda durur | Böyük maşın
+KUBİK | Kvadrat oyuncaq | Qala tikilir | Rəngli kub
+ROBOT | Dəmir adam | Düyməli oyuncaq | Danışan maşın
+ALBOM | Şəkil dəftəri | Rəsm dəftəri | Foto kitabı
+PALTAR | Geyinirik | Don, köynək | Geyim
+PİJAMA | Gecə geyimi | Yuxu paltarı | Yataq geyimi
+YATAQ | Gecə yatırıq | Yorğanlı yer | Çarpayı
+BALACA | Kiçik | Böyüyün ziddi | Xırda
+BÖYÜK | Nəhəng | Kiçiyin ziddi | İri
+SEVİMLİ | Əziz | Hamı sevir | Şirin
+YUMRU | Top kimi | Dairəvi | Girdə
+ÇAMADAN | Səfər çantası | Təkərli çanta | Yol çantası
+GÜNƏBAXAN | Sarı böyük çiçək | Toxumu çərəz | Günəşə baxar
+BALIQÇIL | Uzunayaq quş | Gölməçədə durar | Balıq tutan quş
+QAZ | Qa-qa deyir | Ağ ev quşu | Hasar qoruyar
+PƏNCƏ | Pişiyin ayağı | Caynaqlı | Heyvan əli
+QUYRUQ | Arxada yellənir | İt yelləyir | Heyvanın ucu
+LƏLƏK | Quşun paltarı | Yüngül tük | Quş tükü
+YUVA | Quş evi | Ağacda ev | Balalar evi
+NAĞILÇI | Nağıl söyləyən | Nənə kimi | Hekayəçi
+CIRTDAN | Nağıl qəhrəmanı | Balaca, ağıllı | Div yenən
+SEHRLİ | Möcüzəli | Sehrbazlı | Nağıl kimi
+SEHRBAZ | Fokus göstərər | Sehrli çubuqlu | Möcüzə edən
+KARUSEL | Fırlanan atlar | Parkda var | Dövrə oyunu
+YELLƏNCƏK | İpli oturacaq | Həyətdə var | Uçub-qonan
+BANAN | Meymun sevər | Sarı qabıqlı | Əyri sarı meyvə
+DARAQ | Saç daranır | Dişli əşya | Saç üçün
+DONDURMA | Soyuq şirni | Yayda yeyilir | Buzlu şirniyyat
+DƏSMAL | Əl silinir | Yuyunandan sonra | Hamam əşyası
+GÜZGÜ | Özünü görürsən | Şüşədə əksin | Əksini göstərər
+KİVİ | Tüklü meyvəcik | İçi yaşıl | Qəhvəyi tüklü
+KENQURU | Çantalı heyvan | Tullanan heyvan | Avstraliyalı
+PİNQVİN | Antarktida quşu | Buzda yaşar | Frakli quş
+QAŞIQ | Sıyıq yeyilir | Çəngəlin yanında | Şorba üçün
+ÇÖRƏK | Təndirdə bişər | Süfrədə hər gün | Lavaş, bulka
+ÇƏHRAYI | Açıq qırmızı | Gül rəngi | Qızılgül rəngi
+NARINCI | Portağal rəngi | Sarı-qırmızı | Mandarin rəngi
+OĞLAN | Qızın qardaşı | Kiçik kişi | Balaca bəy
+UŞAQ | Böyük deyil | Bağçaya gedən | Oğlan və ya qız
+ZEBR | Zolaqlı at | Ağ-qara zolaqlı | Afrika atı
+TİMSAH | Dişli sürünən | Çayda yaşar | Uzun ağızlı
+KARTOF | Püresi olur | Yerin altında | Qızardılır
+GECƏ | Ay çıxanda | Yatmaq vaxtı | Qaranlıq vaxt
+SƏHƏR | Gün çıxanda | Oyanmaq vaxtı | Xoruz banlayanda
+SOYUQ | Qış havası | Buz kimi | İstinin ziddi
+KİÇİK | Balaca | Cırtdan boyda | Az böyük
+AĞIZ | Dişlər evi | Yemək yeyilir | Danışmaq üçün
+BAŞ | Papaq qoyulur | Saç bitir | Bədənin üstü
+PEÇENYE | Çaya quru şirni | Xırtıldayan | Qutuda kökə
+KAKAO | Şokolad dəni | Südlü isti içki | Qəhvəyi içki
+QUMBARA | Pul yığılır | Dəmir qutucuq | Pul qutusu
+BANT | Saç bəzəyi | Qız saçında | Ləntdən bağ
+AYICIQ | Balaca ayı | Bal sevən bala | Oyuncaq ayı
+BALON | Hava şarı | Uçan top | Rəngli şar
+BAĞÇA | Kiçiklər gedər | Tərbiyəçili ev | Məktəbdən əvvəl
+BULKA | Yumşaq çörək | Kişmişli kökə | Yumru çörək
+DIRNAQ | Barmağın ucu | Kəsilir | Pişikdə caynaq
+DUMAN | Ağ pərdə | Göz görmür | Bulud yerdə
+DİVAN | Yumşaq oturacaq | Otaqda uzanmaq | Kreslo qardaşı
+GÖDƏKCƏ | Qısa palto | Payız geyimi | İsti gödək
+KAĞIZ | Ağ vərəq | Rəsm çəkilir | Ağ səhifə
+KÖKƏ | Sobada şirni | Yumşaq şirni | Çaya şirni
+KÜÇÜK | İt balası | Hav-hav bala | Balaca it
+LEQO | Kərpic oyuncaq | Tikinti oyunu | Rəngli kərpic
+MULTFİLM | Cizgi filmi | Uşaq kinosu | Ekranda nağıl
+NAHAR | Günorta yeməyi | Şorba vaxtı | Gün yeməyi
+NOXUD | Yumru dən | Yaşıl dənəcik | Bozbaşa salınır
+PARTA | Məktəb masası | Sinifdə oturacaq | İkinəfərlik masa
+PAZL | Parçalı şəkil | Yığılan şəkil | Tapmaca oyun
+PENDİR | Ağ duzlu | Çörəklə yeyilir | Siçan sevər
+QAYÇI | Kağız kəsir | İki ağızlı | Kəsən alət
+SIYIQ | Səhər yeməyi | Südlü yarma | Qaşıqla yeyilir
+SÜRÜŞMƏ | Parkda enmə | Yuxarıdan aşağı | Sürüşkən oyun
+TELEVİZOR | Ekranlı qutu | Cizgi göstərir | Pultla açılır
+TƏRBİYƏÇİ | Bağça müəllimi | Uşaqlara baxan | Bağçada böyük
+YAPIŞQAN | Kağız yapışdırar | Yapışdırır | Kley
+YUBKA | Qız geyimi | Ətək | Belə geyilir
+ÇADIR | Səfər evi | Kampda ev | Brezent ev
+ÇƏNGƏL | Dişli qaşıq | Makaron yeyilir | Bıçağın yanında
+ŞEİR | Qafiyəli söz | Əzbər deyilir | Bayramda deyilən
+ŞORBA | Duru yemək | Qaşıqla içilir | Sup
+ŞORT | Qısa şalvar | Yayda geyilir | Dizə qədər

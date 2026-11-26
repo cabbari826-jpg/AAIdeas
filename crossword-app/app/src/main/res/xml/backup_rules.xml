@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Android 6–11: Google backup keeps the progress, settings and downloaded packs; not the update download cache. -->
+<full-backup-content>
+    <include domain="sharedpref" path="." />
+    <include domain="file" path="packs/" />
+    <exclude domain="sharedpref" path="premium.xml" />
+</full-backup-content>

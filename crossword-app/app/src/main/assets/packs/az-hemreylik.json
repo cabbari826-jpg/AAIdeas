@@ -1,0 +1,812 @@
+{
+ "formatVersion": 1,
+ "packId": "az-hemreylik",
+ "language": "az",
+ "normalization": "az-v1",
+ "contentVersion": 1,
+ "title": "Həmrəylik günü",
+ "levels": [
+  {
+   "id": "az-hemreylik-001",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 2,
+     "answer": "ELLƏR",
+     "clue": "Obalar",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Bütün xalqlar",
+      "Xalqlar",
+      "Obalar"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 2,
+     "clueCol": 0,
+     "answer": "ƏLVİDA",
+     "clue": "Xudahafiz",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ayrılıq sözü",
+      "Sağollaşma",
+      "Xudahafiz"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "YADİGAR",
+     "clue": "Yaddaşda qalan",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Xatirə əşyası",
+      "Hədiyyə, xatirə",
+      "Yaddaşda qalan"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 4,
+     "clueCol": 0,
+     "answer": "SƏMİMİ",
+     "clue": "Riyasız",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ürəkdən",
+      "Mehriban",
+      "Riyasız"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "ÇİYİN",
+     "clue": "Kürək üstü",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Yük daşıyan yer",
+      "Qolun başı",
+      "Kürək üstü"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 1,
+     "answer": "ƏLBİR",
+     "clue": "Birləşmiş",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Əl-ələ verib",
+      "Həmrəy halda",
+      "Birləşmiş"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "SALAM",
+    "cells": [
+     [
+      4,
+      1
+     ],
+     [
+      6,
+      6
+     ],
+     [
+      7,
+      3
+     ],
+     [
+      2,
+      6
+     ],
+     [
+      4,
+      3
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-hemreylik-002",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "SÖHBƏT",
+     "clue": "Gap",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Danışıq",
+      "Müsahibə",
+      "Gap"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "SOYDAŞ",
+     "clue": "Həmyerli",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Eyni soydan",
+      "Qandaş",
+      "Həmyerli"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "DOĞMACA",
+     "clue": "Qan qohumu",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Əmi-dayı övladı",
+      "Yaxın qohum",
+      "Qan qohumu"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "ƏCDAD",
+     "clue": "Keçmiş nəsil",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ulu babalar",
+      "Babalar",
+      "Keçmiş nəsil"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 1,
+     "answer": "ƏLAQƏ",
+     "clue": "Bağlılıq",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Bağ, rabitə",
+      "Rabitə saxlamaq",
+      "Bağlılıq"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 2,
+     "answer": "UĞUR",
+     "clue": "Yolun açıq olsun",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Yaxşı nəticə",
+      "Bəxt gətirmə",
+      "Yolun açıq olsun"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "ŞİRƏ",
+     "clue": "Sıxılmış maye",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Meyvə suyu",
+      "Albalı ...",
+      "Sıxılmış maye"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "ORTAQ",
+    "cells": [
+     [
+      2,
+      4
+     ],
+     [
+      3,
+      6
+     ],
+     [
+      6,
+      1
+     ],
+     [
+      7,
+      4
+     ],
+     [
+      7,
+      5
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-hemreylik-003",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "KÖRPÜ",
+     "clue": "Keçid",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Çay üstü keçid",
+      "İki sahil arası",
+      "Keçid"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "DİASPOR",
+     "clue": "Soydaşlar icması",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Xaricdəki icma",
+      "Qürbətdəki xalq",
+      "Soydaşlar icması"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "HƏMRƏY",
+     "clue": "Yekdil",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Bir fikirdə olan",
+      "Birlikdə olan",
+      "Yekdil"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "VƏHDƏT",
+     "clue": "Birlik ruhu",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Bütövlük",
+      "Yekdillik",
+      "Birlik ruhu"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "DİYAR",
+     "clue": "Torpaq, ölkə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Yurd yeri",
+      "Uzaq ...",
+      "Torpaq, ölkə"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "VƏD",
+     "clue": "Boyun olma",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Söz vermə",
+      "Əhd",
+      "Boyun olma"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "DİRSƏK",
+    "cells": [
+     [
+      1,
+      4
+     ],
+     [
+      3,
+      2
+     ],
+     [
+      5,
+      3
+     ],
+     [
+      4,
+      4
+     ],
+     [
+      7,
+      2
+     ],
+     [
+      5,
+      1
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-hemreylik-004",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "ELLİK",
+     "clue": "Birgəlik",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Eloğlu ruhu",
+      "Ümumi iş",
+      "Birgəlik"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 2,
+     "clueCol": 0,
+     "answer": "QƏLB",
+     "clue": "Ürək",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Can evi",
+      "Sinədə döyünən",
+      "Ürək"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "ƏQRƏBA",
+     "clue": "Qohumlar",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qohum, qardaş",
+      "Nəsil adamları",
+      "Qohumlar"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "BOKS",
+     "clue": "Yumruq idmanı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Əlcəkli döyüş",
+      "Rinqdə idman",
+      "Yumruq idmanı"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 4,
+     "clueCol": 4,
+     "answer": "SOY",
+     "clue": "Kök, əsil",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Nəsil, kök",
+      "Tayfa",
+      "Kök, əsil"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 1,
+     "answer": "CİYƏR",
+     "clue": "Daxili orqan",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qaraciyər",
+      "Ağciyər",
+      "Daxili orqan"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "MÜHACİR",
+     "clue": "Köçkün",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Köçüb gedən",
+      "Qürbətdə yaşayan",
+      "Köçkün"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "HƏMYERLİ",
+    "cells": [
+     [
+      3,
+      6
+     ],
+     [
+      2,
+      2
+     ],
+     [
+      1,
+      6
+     ],
+     [
+      7,
+      4
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      3,
+      3
+     ],
+     [
+      6,
+      6
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-hemreylik-005",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 5,
+     "answer": "KÖNÜL",
+     "clue": "Can",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ürəyin istəyi",
+      "Gönül",
+      "Can"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "ELOĞLU",
+     "clue": "Elin oğlu",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Həmvətən",
+      "Bir eldən",
+      "Elin oğlu"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 2,
+     "answer": "UZAQLIQ",
+     "clue": "Uzaq olmaq",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Aradakı yol",
+      "Ayrılıq",
+      "Uzaq olmaq"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 1,
+     "answer": "QOHUM",
+     "clue": "Doğma adam",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qan bağlı",
+      "Əqrəba",
+      "Doğma adam"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "QAZANC",
+     "clue": "Pul qazanmaq",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Gəlir",
+      "Mənfəət",
+      "Pul qazanmaq"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "KUBOK",
+     "clue": "Çempion mükafatı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qalibə verilən",
+      "Qızıl qab",
+      "Çempion mükafatı"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "QABAQ",
+    "cells": [
+     [
+      3,
+      1
+     ],
+     [
+      3,
+      2
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      4,
+      2
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-hemreylik-006",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 5,
+     "answer": "ÜMUMİ",
+     "clue": "İctimai",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Hamının",
+      "Şəxsi deyil",
+      "İctimai"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "BİRLİK",
+     "clue": "Ayrılığın ziddi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Vəhdət",
+      "Bir olmaq",
+      "Ayrılığın ziddi"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 1,
+     "clueCol": 1,
+     "answer": "QÜRBƏT",
+     "clue": "Uzaq ölkə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Yad diyar",
+      "Vətəndən uzaq",
+      "Uzaq ölkə"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 1,
+     "answer": "GÖRÜŞ",
+     "clue": "Üz-üzə gəlmək",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Rastlaşma",
+      "Qovuşma",
+      "Üz-üzə gəlmək"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 3,
+     "answer": "ŞƏRİK",
+     "clue": "Pay sahibi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ortaq",
+      "Yoldaş",
+      "Pay sahibi"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 2,
+     "answer": "KƏRƏ",
+     "clue": "Sarı yağ",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Yağ növü",
+      "İnək yağı",
+      "Sarı yağ"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "MƏMLƏKƏT",
+    "cells": [
+     [
+      2,
+      5
+     ],
+     [
+      7,
+      6
+     ],
+     [
+      4,
+      5
+     ],
+     [
+      5,
+      4
+     ],
+     [
+      7,
+      4
+     ],
+     [
+      5,
+      6
+     ],
+     [
+      6,
+      1
+     ],
+     [
+      7,
+      1
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  }
+ ]
+}

@@ -1,0 +1,61 @@
+# Ümumi sözlər: təbiət, heyvanlar, bitkilər, hava. Format: SÖZ | çətin | orta | asan
+ÇÖL | Açıq düzənlik | Səhra kimi | Şəhərdən kənar
+DÜZ | Hamar yer | Əyri deyil | Çöl, ova
+QAYALIQ | Daşlı yer | Qaya yığını | Sıldırım
+KÖRFƏZ | Dəniz qucağı | Sahil girintisi | Liman suyu
+BOĞAZ | İki dəniz arası | Dar su yolu | Gərdən
+ŞEH | Səhər damcıları | Otda nəm | Sübh suyu
+ÇİNGƏL | Xırda daş | Çay daşı | Kiçik daşlar
+SAHİLYANI | Dəniz yaxını | Kənar zolaq | Sahil boyu
+MƏNZƏRƏ | Görünüş | Pəncərədən baxış | Peyzaj
+CÜYÜR | Kiçik maral | Ürkək heyvan | Meşə ceyranı
+VAŞAQ | Qulağı fırçalı | Meşə pişiyi | Vəhşi pişik
+PORSUQ | Yeraltı yuvalı | Gecə heyvanı | Zolaqlı üz
+SİNCAB | Qoz gizlədən | Ağac heyvanı | Qırmızı quyruq
+KÖSTƏBƏK | Yeraltı heyvan | Kor qazıcı | Torpaq eşən
+YARASA | Gecə uçan | Qanadlı siçan | Başı aşağı yatar
+QIRQOVUL | Əlvan lələkli | Ov quşcuğu | Uzunquyruq quş
+BİLDİRÇİN | Kiçik çöl quşu | Ovlanan quş | Bıldırcın
+SAĞSAĞAN | Parlaq şey sevər | Ağ-qara quş | Cikkildəyən
+QUMRU | Göyərçinə bənzər | Ququ deyən | Boz quşcuq
+GÖYƏRÇİN | Sülh quşu | Poçt quşu | Meydan quşu
+TUTUQUŞU | Danışan quş | Yaşıl lələkli | Papağan
+QIZILQUŞ | Ovçuların quşu | Şahin kimi | Yırtıcı quşcuq
+CIRCIRAMA | Yay səsi | Cır-cır | Çəmən böcəyi
+BÖCƏK | Cücü | Qanadlı canlı | Altıayaqlı
+QURD | Canavar | Torpaqda yaşayan | Boz yırtıcı
+EŞŞƏK | Ulaq | Yükdaşıyan | İnadkar heyvan
+DANA | Buzovdan böyük | Gənc öküz | Mal balası
+ÖKÜZ | Kotan çəkən | Erkək mal | Arabaya qoşulan
+CAMIŞ | Su sevən mal | Qara iri mal | Südlü mal
+KƏL | Erkək camış | Güclü mal | Camış atası
+QATIR | At-eşşək balası | Dağ yolu heyvanı | Yükçü heyvan
+DƏVƏQUŞU | Uçmayan quş | Ən iri quş | Afrika quşu
+DELFİN | Ağıllı dənizli | Sürətli üzən | Dəniz gülən
+BALİNA | Ən iri canlı | Okean nəhəngi | Kit
+KÖPƏKBALIĞI | Okean yırtıcısı | Akula | Dişli balıq
+AHU | Ceyran, maral | Gözəl gözlü | Çöl heyvanı
+AĞCAQANAD | Gecə vızıldayan | Qan soran | Sancan həşərat
+PALIDLIQ | Palıd meşəsi | Palıd ağacları | Meşəlik
+ÇƏTƏNƏ | Zoğal ağacı | Kol növü | Meşə kolu
+GİLƏMEYVƏ | Kiçik meyvə | Moruq kimi | Gilə-gilə
+YOVŞAN | Acı çöl otu | Çöl qoxusu | Acı ot
+YONCA | Mal yemi | Üçyarpaq ot | Yaşıl yem
+QAMIŞ | Su kənarında | Çoban tütəyi | Uzun ot
+YOSUN | Daşda yaşıllıq | Su bitkisi | Mamır
+KAKTUS | Tikanlı bitki | Səhra bitkisi | Dibçəkdə tikan
+PALMA | İsti ölkə ağacı | Xurma ağacı | Tropik ağac
+QOVAQ | Uca ağac | Tükü uçar | Ağ ağac
+QIZILGÜL | Gülab verən | Tikanlı gül | Qırmızı gül
+TOXUM | Əkilən dən | Bitki başı | Dən
+KÖK | Torpaqdakı hissə | Ağacın dibi | Yer altında
+GÖVDƏ | Ağacın bədəni | Budaq dayağı | Ağacın ortası
+KOL | Kiçik ağac | Böyürtkən növü | Alçaq bitki
+ÇİMƏN | Ot örtüyü | Yaşıl sahə | Qazon
+ŞIDIRĞI | Güclü yağış | Leysan | Sel kimi yağış
+SAZAQ | Soyuq külək | Şaxtalı yel | Qış külək
+GİLAVAR | Cənub küləyi | İsti Bakı küləyi | Xoş yel
+XƏZRİ | Şimal küləyi | Bakının küləyi | Soyuq yel
+İSTİLİK | Hərarət | Isti hava | İsti
+QURAQLIQ | Yağışsızlıq | Su qıtlığı | Susuzluq
+SƏHƏRÇAĞI | Sübhdən | Dan vaxtı | Erkən səhər

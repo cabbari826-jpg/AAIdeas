@@ -1,0 +1,47 @@
+# title: 9 May
+# 9 May, Faşizm üzərində Qələbə günü: xatirə, veteranlar, sülh. Format: SÖZ | çətin | orta | asan
+VETERAN | Cəbhəçi qoca | Ordenli qoca | Cəbhə görmüş
+ORDEN | Ən yüksək nişan | Döşə taxılır | Şərəf nişanı
+MEDAL | Dairəvi nişan | Qızıl, gümüş | Mükafat
+ABİDƏ | Daş xatirə | Meydanda heykəl | Monument
+XATİRƏ | Keçmişin izi | Yada salınan | Anılan şey
+YADDAŞ | Xatırlama gücü | Hafizə | Unutmamaq
+ƏBƏDİ | Sonsuz | Heç sönməyən | Əzəli, daimi
+CƏBHƏ | Döyüş xətti | Ön xətt | Front
+SƏNGƏR | Torpaq sipər | Qazılmış xətt | Əsgər çuxuru
+PARAD | Təntənəli keçid | Meydanda sıra | Hərbi yürüş
+SALYUT | Göydə işıqlar | Bayram atəşi | Rəngli gecə
+XİLAS | Qurtuluş | Nicat | Qurtarma
+DÖYÜŞ | Vuruşma | Vuruş | Cəng
+HƏSRƏT | Ayrılıq dərdi | İntizar | Darıxmaq
+ÜÇBUCAQ | Cəbhə məktubu | Üç bucaqlı | Üçkünc
+NƏSİL | Yaşıdlar | Övladlar zənciri | Soy
+ÇƏLƏNG | Gül halqası | Abidəyə qoyulur | Hörülmüş gül
+SÜKUT | Bir dəqiqəlik | Səssizlik | Dinməmək
+QALİB | Udmuş tərəf | Zəfər çalan | Məğlubun ziddi
+FAŞİZM | 1945-də məğlub | Hitler rejimi | Qara ideologiya
+MAYOR | Kapitandan böyük | Zabit rütbəsi | Ulduzlu paqon
+ÜMİD | Son ölər | İnam | Gözləmə
+ŞÜCAƏT | Qəhrəmanlıq | Cəsarət işi | Rəşadət
+RƏŞADƏT | Mərdlik | Şücaət işi | Qəhrəmanca iş
+PARTİZAN | Meşədə döyüşən | Gizli döyüşçü | Xalq döyüşçüsü
+CƏBHƏÇİ | Front iştirakçı | Ön xətt adamı | Cəbhə oğlu
+TANK | Zirehli maşın | Tırtıllı | Polad qala
+TƏYYARƏÇİ | Pilot | Göy döyüşçüsü | Uçan döyüşçü
+GƏMİÇİ | Matros, kapitan | Gəmi adamı | Dənizdə işləyən
+ƏSİRLİK | Əsir olmaq | Azadlığın itməsi | Dustaqlıq
+DUSTAQ | Məhbus | Zindanda olan | Qandallı
+MÜHARİBƏ | Savaş dövrü | Uzun cəng | Sülhün ziddi
+MƏĞLUB | Uduzan | Qalibin ziddi | Basılmış
+TƏSLİM | Silah yerə | Əl qaldırma | Boyun əymək
+DÖYÜŞKƏN | Vuruşqan | Cəngavər ruhlu | Döyüşə hazır
+FƏDAKAR | Canından keçən | Fədai | Can qoyan
+TƏŞƏKKÜR | Sağ ol | Minnət | Razılıq
+ANIM | Xatırlanma | Yad etmə | Anma günü
+SƏRBAZ | Döyüşçü əsgər | Köhnə əsgər adı | Nizami əsgər
+SÜNGÜ | Tüfəng ucu | İti uclu bıçaq | Lülədə bıçaq
+YARA | Döyüş izi | Sarğı lazım | Qanayan yer
+TİBB | Həkimlik | Səhiyyə | Müalicə elmi
+SANİTAR | Yaralı daşıyan | Tibb köməkçisi | Xərəkçi
+XƏRƏK | Yaralı daşınan | Sanitar aləti | Taxta daşıma
+QARANFİL | Qırmızı mixək | Abidəyə qoyulan | Al çiçək

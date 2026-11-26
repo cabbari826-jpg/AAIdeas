@@ -1,0 +1,85 @@
+# title: Musiqi və muğam
+# Format: SÖZ | çətin | orta | asan
+QÖNÇƏ | Gülü ... dərməzlər | Sarı gəlin sözü | Açılmamış gül
+UZUN | Bu dərə ... dərə | Sarı gəlin | Qısanın əksi
+LAYLAY | ... dedim yatasan | Beşik sözü | Laylanın nidası
+AYRILIQ | Olar yaman ... | Hicran | Vidalaşma
+SELLƏR | Apardı ... Saranı | Daşqınlar | Sel suları
+MƏSUD | Üçrəngli bayrağınla ... yaşa! | Himndən söz | Xoşbəxt
+QURBAN | Minlərlə can ... oldu | Himndə söz | Fəda
+CÜMLƏ | Səndən ötrü can verməyə ... hazırız | Hamı | Hər kəs
+RAST | Muğamların anası | Şən dəstgah | Muğam adı
+ŞUR | Kədərli muğam | Şüştərin qohumu | Muğam
+SEGAH | Zabul ... | Lirik muğam | Muğam növü
+MAHUR | ... hindi | Şən muğam | Muğam pərdəsi
+HÜMAYUN | Qəmli dəstgah | Ağır muğam | Dəstgah adı
+ŞÜŞTƏR | Yeddi dəstgahdan | Qəmli muğam | Dəstgah
+ÇAHARGAH | Qəhrəmanlıq muğamı | Dörd pərdə | Muğam dəstgahı
+TƏSNİF | Muğamda mahnı | Vokal hissə | Mahnı növü
+RƏNG | Rəqsvari hissə | Muğam arası | Boya
+DƏRAMƏD | Muğam girişi | Başlanğıc hissə | Muğam başı
+ŞÖBƏ | Dəstgah hissəsi | Muğam bölməsi | Bölmə
+GUŞƏ | Kiçik şöbə | Muğam hissəsi | Künc
+DƏSTGAH | Tam muğam | Muğam silsiləsi | Silsilə
+XANƏNDƏ | Muğam oxuyan | Qavallı ifaçı | Muğamçı
+SAZƏNDƏ | Çalğıçı | Musiqiçi | Ansambl üzvü
+ZƏRBİ | ... muğam | Ritmik muğam | Zərbli
+MEYXANA | Bədahətən deyişmə | Abşeron sənəti | Rep kimi
+AŞIQ | Saz ustası | Dastançı | Ustad sazçı
+OZAN | Dədə Qorqud tək | Qopuzçu | Aşıq
+TAR | Sədəfli alət | Muğam üçlüyündə | On bir simli
+KAMANÇA | Kamanla çalınır | Dörd simli | Simli alət növü
+QAVAL | Xanəndə aləti | Zərb dairəsi | Dəf
+BALABAN | Qamış ağızlıq | Tut ağacından | Nəfəsli alət
+QOPUZ | Qorqudun aləti | Qədim saz | Ozan aləti
+UD | Ərəb lavtası | Qısa qolu | Lavta
+QANUN | Diz üstə çalınır | Telli qutu | Qədim alət
+TÜTƏK | Çoban aləti | Ney | Fit aləti
+ÇƏNG | Qədim arfa | Üçbucaq alət | Simli alət adı
+NEY | Mövlana aləti | Qamış tütək | Nəfəsli
+SANTUR | Çəkiclə çalınır | Telli lövhə | İran aləti
+DƏF | Zəngli qaval | Tamburin | Zərb aləti
+PİANO | 88 dilli | Royal | Klavişli
+SKRİPKA | Stradivari | Kamanlı | Violin
+ARFA | Mələk aləti | Telli çərçivə | Simli böyük
+FLEYTA | Sehrli ... | Nəfəsli metal | Tütək
+TRUBA | Mis boru | Marş aləti | Nəfəsli mis
+BARABAN | Təbil | Marş zərbi | Döyülür
+QİTARA | Altı simli | İspan aləti | Gitar
+ORQAN | Kilsə aləti | Borulu | Klavişli böyük
+YALLI | Əl-ələ rəqs | Naxçıvan rəqsi | Kollektiv rəqs
+VAĞZALI | Gəlin köçəndə | Toy havası | Toy musiqisi
+ŞALAXO | Kişi rəqsi | Oynaq hava | Sürətli rəqs
+MİRZƏYİ | Toy rəqsi | Oynaq rəqs | Rəqs havası
+TƏRƏKƏMƏ | Köçəri rəqsi | Elat havası | Rəqs adı
+OPERA | Səhnədə oxunur | Musiqili dram | Teatr janrı
+BALET | Qu gölü | Rəqs tamaşası | Barmaq ucunda
+MARŞ | Hərbi musiqi | Addım musiqisi | Yürüş
+VALS | Üçlük rəqs | Ştraus rəqsi | Rəqs
+TANQO | Argentina rəqsi | Cüt rəqs | Ehtiraslı rəqs
+RƏQS | Oyun havası | Hərəkət sənəti | Oynamaq
+HAVA | Oyun ...sı | Çalğı | Mahnı
+NOTA | Do, re, mi | Musiqi işarəsi | Not
+SOLO | Tək ifa | Tək səs | Solist
+DUET | İki səs | Cüt ifa | İkilik
+TRİO | Muğam üçlüyü | Üç ifaçı | Üçlük
+XOR | Kollektiv oxuma | Çoxsəsli | Oxuyan dəstə
+KONSERT | Filarmoniya axşamı | Səhnə çıxışı | Musiqi axşamı
+ORKESTR | Dirijorun dəstəsi | Simfonik ... | Ansambl
+DİRİJOR | Çubuqlu | Orkestr rəhbəri | Maestro
+BƏSTƏ | Mahnı mətni | Melodiya | Quruluş, düzüm
+ZİL | Yüksək səs | Bəmin əksi | İncə səs
+BƏM | Alçaq səs | Zilin əksi | Qalın səs
+ÜZEYİR | Leyli və Məcnun | Hacıbəyli | Himnin bəstəkarı
+QARAYEV | Yeddi gözəl | Qara ... | Balet bəstəkarı
+NİYAZİ | Xosrov və Şirin | Dirijor | Rast simfoniyası
+ƏMİROV | Kürd ovşarı | Fikrət ... | Simfonik muğam
+MÜSLÜM | Şah İsmayıl | Maqomayev | Nərgiz operası
+ŞÖVKƏT | Ələkbərova | Xalq artisti | Qadın xanəndə
+RƏŞİD | Behbudov | Arşın mal alan | Mahnı ustası
+BÜLBÜL | Koroğlu rolu | Müğənni | Oxuyan quş
+CABBAR | Qaryağdı oğlu | Plastinka ustadı | Kişi xanəndə
+SEYİD | Şuşinski | Şuşalı xanəndə | Ustad xanəndə
+ƏLƏSGƏR | Göyçəli aşıq | Aşıqlar ustadı | Aşıq adı
+ARŞIN | ... mal alan | Ölçü vahidi | Operetta
+ŞAHSƏNƏM | Qlier operası | Aşıq Qərib | Qəribin sevgisi

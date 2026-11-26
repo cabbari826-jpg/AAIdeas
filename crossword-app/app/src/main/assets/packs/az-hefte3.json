@@ -1,0 +1,412 @@
+{
+ "formatVersion": 1,
+ "packId": "az-hefte3",
+ "language": "az",
+ "normalization": "az-v1",
+ "contentVersion": 1,
+ "title": "Həftənin sürprizi 3",
+ "levels": [
+  {
+   "id": "az-hefte3-001",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "TÖHFƏ",
+     "clue": "Qiymətli pay",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Pay, nəzir",
+      "Xidmət, pay",
+      "Qiymətli pay"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 1,
+     "answer": "QƏHVƏ",
+     "clue": "Ətirli dən",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qara içki",
+      "Türk içkisi",
+      "Ətirli dən"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 1,
+     "clueCol": 6,
+     "answer": "MƏRCAN",
+     "clue": "Rif yaradan",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Dəniz polipi",
+      "Qırmızı muncuq",
+      "Rif yaradan"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 2,
+     "answer": "GƏNC",
+     "clue": "Cavan oğlan",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Cavan",
+      "Qoca deyil",
+      "Cavan oğlan"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "DOLĞUN",
+     "clue": "Tam dolu",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Dolu, kök",
+      "Ətli-canlı",
+      "Tam dolu"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "DƏSTƏ",
+     "clue": "Gül topası",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qrup",
+      "Bir neçə nəfər",
+      "Gül topası"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "DOWN",
+     "clueRow": 3,
+     "clueCol": 1,
+     "answer": "CƏLD",
+     "clue": "Zirək",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Çevik",
+      "Tez tərpənən",
+      "Zirək"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "HƏVƏS",
+    "cells": [
+     [
+      3,
+      4
+     ],
+     [
+      3,
+      3
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      3
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-hefte3-002",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "XƏSİS",
+     "clue": "Pul sevən",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Simic",
+      "Əli bağlı",
+      "Pul sevən"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "TƏRXUN",
+     "clue": "Ətirli yaşıl ot",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Limonad otu",
+      "Yaşıl içki otu",
+      "Ətirli yaşıl ot"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "TƏCRÜBƏ",
+     "clue": "Yaşanmış bilik",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Həyat dərsi",
+      "Peşəkarlıq",
+      "Yaşanmış bilik"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 4,
+     "clueCol": 2,
+     "answer": "VİZA",
+     "clue": "Səfirlik kağızı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Giriş icazəsi",
+      "Pasporta möhür",
+      "Səfirlik kağızı"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 6,
+     "answer": "QAZMA",
+     "clue": "Xəndək",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Torpaq eşmə",
+      "Qazıntı",
+      "Xəndək"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 2,
+     "answer": "İMLA",
+     "clue": "Dərsdə yazılır",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Diktant",
+      "Yazı qaydası",
+      "Dərsdə yazılır"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "QƏZƏB",
+    "cells": [
+     [
+      3,
+      6
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      4,
+      5
+     ],
+     [
+      7,
+      1
+     ],
+     [
+      6,
+      1
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-hefte3-003",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 2,
+     "answer": "ÇÖMÇƏ",
+     "clue": "Qazan qaşığı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Uzun qaşıq",
+      "Plov qaşığı",
+      "Qazan qaşığı"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "SƏSLİ",
+     "clue": "Ucadan",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Gurultulu",
+      "Səs-küylü",
+      "Ucadan"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "XIŞILTI",
+     "clue": "Xışıldamaq",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Yarpaq səsi",
+      "Pıçıltı kimi",
+      "Xışıldamaq"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 1,
+     "answer": "ÇIXMA",
+     "clue": "Azaltma",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Fərq əməli",
+      "Minus",
+      "Azaltma"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "PALID",
+     "clue": "Meşə nəhəngi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Möhkəm ağac",
+      "Qozalı ağac",
+      "Meşə nəhəngi"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 1,
+     "answer": "MOŞ",
+     "clue": "Xırda paxla",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Xırda yaşıl dən",
+      "Maş dəni",
+      "Xırda paxla"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "ARIQ",
+     "clue": "Zəif",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Cılız",
+      "Kökün əksi",
+      "Zəif"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "XƏŞİL",
+    "cells": [
+     [
+      1,
+      4
+     ],
+     [
+      5,
+      2
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      5,
+      5
+     ],
+     [
+      5,
+      4
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  }
+ ]
+}

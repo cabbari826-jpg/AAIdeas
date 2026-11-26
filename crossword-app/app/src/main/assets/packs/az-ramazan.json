@@ -1,0 +1,800 @@
+{
+ "formatVersion": 1,
+ "packId": "az-ramazan",
+ "language": "az",
+ "normalization": "az-v1",
+ "contentVersion": 1,
+ "title": "Ramazan bayramı",
+ "levels": [
+  {
+   "id": "az-ramazan-001",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "PAKLIQ",
+     "clue": "Ləkəsizlik",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "İsmət",
+      "Təmizlik hissi",
+      "Ləkəsizlik"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "MÜBARƏK",
+     "clue": "Təbrik sözü",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Xeyirli olsun",
+      "Bayram sözü",
+      "Təbrik sözü"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 1,
+     "clueCol": 6,
+     "answer": "SAFLIQ",
+     "clue": "Duruluq",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Paklıq",
+      "Təmiz ürək",
+      "Duruluq"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "NAMAZ",
+     "clue": "Səcdəli dua",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Gündə beş dəfə",
+      "İbadət",
+      "Səcdəli dua"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "NƏCİB",
+     "clue": "Nəcabətli",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Alicənab",
+      "Əsilzadə",
+      "Nəcabətli"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 4,
+     "clueCol": 0,
+     "answer": "İMAM",
+     "clue": "Məscid önü",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Namaz qıldıran",
+      "Din başçısı",
+      "Məscid önü"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "ALİCƏNAB",
+    "cells": [
+     [
+      1,
+      4
+     ],
+     [
+      7,
+      4
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      6,
+      3
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      3,
+      6
+     ],
+     [
+      5,
+      1
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-ramazan-002",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "ŞÜKÜR",
+     "clue": "Təşəkkür",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Minnətdarlıq",
+      "Allaha həmd",
+      "Təşəkkür"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "RƏHM",
+     "clue": "Acıma",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Mərhəmət hissi",
+      "Şəfqət hissi",
+      "Acıma"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 3,
+     "answer": "SƏHUR",
+     "clue": "Gecə yeməyi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Dan yeri yeməyi",
+      "Dan öncəsi süfrə",
+      "Gecə yeməyi"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "QURAN",
+     "clue": "Kitab",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Müqəddəs kitab",
+      "114 surə",
+      "Kitab"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 2,
+     "answer": "SÜRƏ",
+     "clue": "Fatihə kimi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Quran fəsli",
+      "Ayə toplusu",
+      "Fatihə kimi"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "AYƏ",
+     "clue": "Müqəddəs misra",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Quran cümləsi",
+      "Surənin hissəsi",
+      "Müqəddəs misra"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 3,
+     "answer": "DUA",
+     "clue": "Xeyir dilək",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Yalvarış",
+      "Allaha müraciət",
+      "Xeyir dilək"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "SƏDƏQƏ",
+    "cells": [
+     [
+      3,
+      3
+     ],
+     [
+      5,
+      2
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      4,
+      3
+     ],
+     [
+      7,
+      1
+     ],
+     [
+      3,
+      6
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-ramazan-003",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "BAĞIŞ",
+     "clue": "Pay vermək",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Hədiyyə",
+      "Yardım",
+      "Pay vermək"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 1,
+     "answer": "SAVAB",
+     "clue": "Əcr",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Xeyirli əməl",
+      "Günahın ziddi",
+      "Əcr"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "AZAN",
+     "clue": "Müəzzin oxuyar",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Namaza çağırış",
+      "Minarədən səs",
+      "Müəzzin oxuyar"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 4,
+     "clueCol": 0,
+     "answer": "İANƏ",
+     "clue": "Xeyriyyə pulu",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Yardım pulu",
+      "Bağış payı",
+      "Xeyriyyə pulu"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 1,
+     "answer": "FİTRƏ",
+     "clue": "Orucdan sonra",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Bayram sədəqəsi",
+      "Kasıb payı",
+      "Orucdan sonra"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "ƏDALƏT",
+     "clue": "Düz hökm",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "İnsaflılıq",
+      "Haqq-hesab",
+      "Düz hökm"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "İFTAR",
+    "cells": [
+     [
+      4,
+      1
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      5,
+      1
+     ],
+     [
+      1,
+      5
+     ],
+     [
+      6,
+      1
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-ramazan-004",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "İMSAK",
+     "clue": "Səhər sərhədi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Orucun başı",
+      "Dan yeri vaxtı",
+      "Səhər sərhədi"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 4,
+     "clueCol": 0,
+     "answer": "HİLAL",
+     "clue": "Ayın doğuşu",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Təzə ay",
+      "Aypara",
+      "Ayın doğuşu"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 1,
+     "answer": "ƏHSAN",
+     "clue": "Lütfkarlıq",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Yaxşılıq etmə",
+      "Bağış",
+      "Lütfkarlıq"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "NİYYƏT",
+     "clue": "Arzu-kam",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ürəkdəki qərar",
+      "Məqsəd",
+      "Arzu-kam"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "XEYİR",
+     "clue": "Fayda",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Yaxşılıq",
+      "Şərin ziddi",
+      "Fayda"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 4,
+     "clueCol": 6,
+     "answer": "ÇİT",
+     "clue": "Ucuz parça",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Nazik parça",
+      "Güllü pambıq",
+      "Ucuz parça"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "YETİM",
+    "cells": [
+     [
+      7,
+      3
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      7,
+      6
+     ],
+     [
+      4,
+      2
+     ],
+     [
+      2,
+      4
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-ramazan-005",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "XEYRAT",
+     "clue": "Yardım payı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ehsan süfrəsi",
+      "Savab işi",
+      "Yardım payı"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "TƏRAVİH",
+     "clue": "Axşam ibadəti",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Gecə namazı",
+      "Ramazan namazı",
+      "Axşam ibadəti"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "DİNDAR",
+     "clue": "Namaz qılan",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Dinə bağlı",
+      "İbadətkar",
+      "Namaz qılan"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 2,
+     "answer": "İNSAF",
+     "clue": "Haqq gözləmə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ədalət hissi",
+      "Vicdan",
+      "Haqq gözləmə"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 4,
+     "answer": "DALĞA",
+     "clue": "Ləpə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Sörfçünün dostu",
+      "Dənizdə qalxır",
+      "Ləpə"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 1,
+     "answer": "SOL",
+     "clue": "Sağ deyil",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Sağın ziddi",
+      "Ürək tərəfi",
+      "Sağ deyil"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "YUN",
+     "clue": "Toxuma sapı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qoyundan alınır",
+      "Corab xammalı",
+      "Toxuma sapı"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "DOVĞA",
+    "cells": [
+     [
+      3,
+      1
+     ],
+     [
+      5,
+      3
+     ],
+     [
+      5,
+      6
+     ],
+     [
+      6,
+      4
+     ],
+     [
+      4,
+      4
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-ramazan-006",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 4,
+     "clueCol": 0,
+     "answer": "ORUCLU",
+     "clue": "Oruc saxlayan",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Oruc tutan",
+      "Ac qalan mömin",
+      "Oruc saxlayan"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 3,
+     "answer": "XURMA",
+     "clue": "Qəhvəyi şirin",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Səhra meyvəsi",
+      "İftar meyvəsi",
+      "Qəhvəyi şirin"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "İBADƏT",
+     "clue": "Dini əməl",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Allaha qulluq",
+      "Dua, namaz",
+      "Dini əməl"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "DOWN",
+     "clueRow": 1,
+     "clueCol": 6,
+     "answer": "ORUC",
+     "clue": "Ac qalıb ibadət",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ramazan ibadəti",
+      "Gündüz yeməmək",
+      "Ac qalıb ibadət"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "TİLOV",
+     "clue": "Ov çubuğu",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Balıqçı çubuğu",
+      "Qarmaqlı çubuq",
+      "Ov çubuğu"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "TABAQ",
+     "clue": "Dairəvi qab",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Böyük düz qab",
+      "Mis məcməyi",
+      "Dairəvi qab"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "MARAQ",
+    "cells": [
+     [
+      6,
+      3
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      3,
+      6
+     ],
+     [
+      7,
+      3
+     ],
+     [
+      1,
+      5
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  }
+ ]
+}

@@ -1,0 +1,774 @@
+{
+ "formatVersion": 1,
+ "packId": "az-qurban",
+ "language": "az",
+ "normalization": "az-v1",
+ "contentVersion": 1,
+ "title": "Qurban bayramı",
+ "levels": [
+  {
+   "id": "az-qurban-001",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "ARAFAT",
+     "clue": "Həcc dağı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Dağ adı",
+      "Həcc dayanacağı",
+      "Həcc dağı"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "ZİYARƏT",
+     "clue": "Pirə getmək",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Müqəddəs gediş",
+      "Baş çəkmə",
+      "Pirə getmək"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "PAYLAMA",
+     "clue": "Hissələrə bölmə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Bölüşdürmə",
+      "Pay etmə",
+      "Hissələrə bölmə"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 4,
+     "answer": "TƏVAF",
+     "clue": "Fırlanma",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Kəbə ətrafında",
+      "Dövrə vurma",
+      "Fırlanma"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 4,
+     "clueCol": 2,
+     "answer": "SƏFA",
+     "clue": "Gül-çiçək ...",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Zövq",
+      "Xoşluq",
+      "Gül-çiçək ..."
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "PAY",
+     "clue": "Bölüş",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qismət",
+      "Qonşuya verilən",
+      "Bölüş"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "MƏRVƏ",
+    "cells": [
+     [
+      6,
+      1
+     ],
+     [
+      6,
+      6
+     ],
+     [
+      7,
+      2
+     ],
+     [
+      5,
+      4
+     ],
+     [
+      4,
+      4
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-qurban-002",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "MÖMİN",
+     "clue": "İmanlı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "İnanclı",
+      "Dindar adam",
+      "İmanlı"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "COMƏRD",
+     "clue": "Mərd",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Əliaçıq",
+      "Səxavətli",
+      "Mərd"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "DİNDAŞ",
+     "clue": "Dini qardaş",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Eyni dinli",
+      "Ümmət üzvü",
+      "Dini qardaş"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "MİNA",
+     "clue": "Vadi adı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Həcc vadisi",
+      "Şeytan daşlanır",
+      "Vadi adı"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 1,
+     "answer": "KÖMƏK",
+     "clue": "Yardım etmə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Yardım əli",
+      "Əl uzatma",
+      "Yardım etmə"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "KASIB",
+     "clue": "Ehtiyaclı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Yoxsul",
+      "Varlının ziddi",
+      "Ehtiyaclı"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "KƏSİM",
+    "cells": [
+     [
+      3,
+      1
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      7,
+      3
+     ],
+     [
+      5,
+      2
+     ],
+     [
+      3,
+      3
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-qurban-003",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "SƏADƏT",
+     "clue": "Ən böyük sevinc",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Xoşbəxtlik",
+      "Bəxtiyarlıq",
+      "Ən böyük sevinc"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "SƏXAVƏT",
+     "clue": "Xəsisliyin ziddi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Əliaçıqlıq",
+      "Comərdlik",
+      "Xəsisliyin ziddi"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 5,
+     "answer": "ƏLİAÇIQ",
+     "clue": "Xəsis deyil",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Səxavətli adam",
+      "Comərd adam",
+      "Xəsis deyil"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 4,
+     "clueCol": 2,
+     "answer": "İMAN",
+     "clue": "Allaha inam",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "İnam, etiqad",
+      "Dini inam",
+      "Allaha inam"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 3,
+     "answer": "QİBLƏ",
+     "clue": "Üz tutulan tərəf",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Kəbə istiqaməti",
+      "Namaz yönü",
+      "Üz tutulan tərəf"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 2,
+     "answer": "ƏNQA",
+     "clue": "Görünməz quş",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Əfsanəvi quş",
+      "Simurq",
+      "Görünməz quş"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "NALBƏND",
+    "cells": [
+     [
+      7,
+      4
+     ],
+     [
+      4,
+      5
+     ],
+     [
+      6,
+      3
+     ],
+     [
+      5,
+      3
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      4,
+      6
+     ],
+     [
+      1,
+      4
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-qurban-004",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "ZƏMZƏM",
+     "clue": "... suyu",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Müqəddəs su",
+      "Məkkə bulağı",
+      "... suyu"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "İBRAHİM",
+     "clue": "İsmayılın atası",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Peyğəmbər",
+      "Xəlilullah",
+      "İsmayılın atası"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "ZƏVVAR",
+     "clue": "Ziyarətçi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ziyarətə gedən",
+      "Hacı",
+      "Ziyarətçi"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "DOWN",
+     "clueRow": 1,
+     "clueCol": 2,
+     "answer": "KƏBƏ",
+     "clue": "Müqəddəs ev",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Məkkədə tikili",
+      "Qibləgah",
+      "Müqəddəs ev"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "HƏCC",
+     "clue": "Ziyarət",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Məkkə ziyarəti",
+      "İslamın şərti",
+      "Ziyarət"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 1,
+     "clueCol": 4,
+     "answer": "OVUC",
+     "clue": "Açıq əl",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Əlin içi",
+      "Bir ... su",
+      "Açıq əl"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "İHRAM",
+    "cells": [
+     [
+      6,
+      6
+     ],
+     [
+      5,
+      1
+     ],
+     [
+      3,
+      6
+     ],
+     [
+      4,
+      6
+     ],
+     [
+      7,
+      3
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-qurban-005",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "ŞEYTAN",
+     "clue": "Pis ruh",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "İblis",
+      "Daşlanan",
+      "Pis ruh"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "QOYUNÇU",
+     "clue": "Sürü sahibi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qoyun saxlayan",
+      "Çoban kimi",
+      "Sürü sahibi"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 1,
+     "clueCol": 5,
+     "answer": "HACI",
+     "clue": "... ana",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Həcc edən",
+      "Kəbəyə gedən",
+      "... ana"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 6,
+     "clueCol": 0,
+     "answer": "QOÇ",
+     "clue": "Qurbanlıq heyvan",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Buynuzlu erkək",
+      "Qoyun atası",
+      "Qurbanlıq heyvan"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 2,
+     "answer": "USTA",
+     "clue": "Mahir",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Sənətkar",
+      "Bacarıqlı",
+      "Mahir"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "KƏŞF",
+     "clue": "Açılış",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Yenilik tapma",
+      "İxtira",
+      "Açılış"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "QAYIQ",
+    "cells": [
+     [
+      6,
+      1
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      3,
+      3
+     ],
+     [
+      5,
+      5
+     ],
+     [
+      1,
+      3
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-qurban-006",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "XÜTBƏ",
+     "clue": "Minbər nitqi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Cümə nitqi",
+      "İmamın sözü",
+      "Minbər nitqi"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 4,
+     "clueCol": 0,
+     "answer": "MİNBƏR",
+     "clue": "Məscid kürsüsü",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Xütbə yeri",
+      "Pilləli kürsü",
+      "Məscid kürsüsü"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "MİHRAB",
+     "clue": "İmamın yeri",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Məscid taxçası",
+      "Qiblə tərəfi",
+      "İmamın yeri"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 2,
+     "answer": "QİYAM",
+     "clue": "Qalxış",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ayaq üstə namaz",
+      "Namazda durma",
+      "Qalxış"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "ÜMMƏT",
+     "clue": "Bütün möminlər",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Möminlər",
+      "İslam əhli",
+      "Bütün möminlər"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 1,
+     "answer": "TOXUM",
+     "clue": "Dən",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Əkilən dən",
+      "Bitki başı",
+      "Dən"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "BƏXTİYAR",
+    "cells": [
+     [
+      6,
+      6
+     ],
+     [
+      5,
+      4
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      7,
+      5
+     ],
+     [
+      2,
+      6
+     ],
+     [
+      5,
+      2
+     ],
+     [
+      5,
+      6
+     ],
+     [
+      4,
+      6
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  }
+ ]
+}

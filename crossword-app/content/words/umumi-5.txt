@@ -1,0 +1,46 @@
+# Ümumi sözlər (5). Format: SÖZ | çətin | orta | asan
+ANBAR | Mal saxlanan yer | Taxıl yeri | Depo
+DƏYİRMANÇI | Un üyüdən usta | Dəyirman sahibi | Unçu
+ÇÖRƏKÇİ | Təndir ustası | Çörək bişirən | Fırınçı
+QƏSSAB | Ət satan | Ət dükanı sahibi | Bıçaqlı satıcı
+KANAL | Süni çay | Su xətti | Televiziya ...
+SƏDD | Su bəndi | Su anbarı divarı | Bənd
+GÖLMƏÇƏ | Kiçik gölcük | Yağış izi | Palçıqlı su
+ÇİMƏRLİK | Qumlu sahil | Yay çimərliyi | Plyaj
+DALĞIC | Su altına enən | Akvalanqlı | Suya baş vuran
+QAYIQÇI | Avar çəkən | Qayıq sürən | Sahil adamı
+MAYAK | Gəmilərə işıq | Sahil qülləsi | İşıq evi
+QÜLLƏ | Hündür bina | Qız ... | Minarə kimi
+GÜNBƏZ | Yumru dam | Məscid üstü | Dairəvi tavan
+TAĞ | Qapı qövsü | Qövsvari keçid | Yarımdairə
+MİSGƏR | Mis ustası | Lahıc ustası | Qazan döyən
+TOXUCULUQ | Xalça sənəti | Toxuma işi | Dəzgah işi
+DƏZGAH | Toxuma aləti | İş stolu | Usta maşını
+İYNƏCƏ | Su böcəyi | Şüşə qanadlı | Göy uçan cücü
+QIZILBALIQ | Al ətli balıq | Somon | Dəniz balığı
+YELPİK | Əl yelləyən | Sərinlik verən | Yay əşyası
+SOYUDUCU | Ərzaq saxlayan | Ağ dolab | Buz qutusu
+TOZSORAN | Xalça təmizləyən | Elektrik süpürgə | Toz çəkən
+PLİTƏ | Qaz ocağı | Mətbəx sobası | Gözlü ocaq
+YOLÇU | Səfərdə olan | Yola çıxan | Müsafir
+MÜSAFİR | Yolçu | Səfərdəki | Qonaq adam
+SƏRNİŞİN | Avtobusda gedən | Bilet alan | Yolçu adam
+SƏKİ | Piyada yolu | Yol kənarı | Trotuar
+SVETOFOR | Üç gözlü | Qırmızı, yaşıl | Yol işığı
+KƏSİŞMƏ | Yolların görüşü | Dördyol | Yol ayrıcı
+DAYANACAQ | Avtobus gözlənən | Durmaq yeri | Stop
+TUNEL | Dağın içi yol | Yeraltı keçid | Qaranlıq yol
+QAZMA | Torpaq eşmə | Qazıntı | Xəndək
+XƏNDƏK | Qala ətrafı | Uzun çuxur | Qazılmış arx
+BÜRC | Qala qülləsi | Zodiak işarəsi | Ulduz qrupu
+ONİLLİK | On il | Dekada | On illik dövr
+KEÇMİŞ | Ötən zaman | Tarix | Gələcəyin ziddi
+İNDİ | Bu an | Hal-hazırda | Elə bu saat
+HƏMİŞƏ | Daima | Hər zaman | Heç vaxt deyil
+HEÇ | Sıfır | Zərrə qədər | ... vaxt
+SIFIR | Heç nə | Dəyirmi rəqəm | Birdən əvvəl
+CÜT | İki ədəd | Tək deyil | Ər-arvad kimi
+YARIM | Yarı | Bölünmüş iki | Yarısı
+DÖRDDƏBİR | Rüb | Dörddə bir hissə | Çərək
+ÇƏRƏK | Dörddə bir | Kilonun rübü | Bir qırıq
+BÜTÖV | Tam | Hissəsiz | Sınmamış

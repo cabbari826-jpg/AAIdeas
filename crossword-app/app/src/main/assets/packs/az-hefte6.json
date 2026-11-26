@@ -1,0 +1,417 @@
+{
+ "formatVersion": 1,
+ "packId": "az-hefte6",
+ "language": "az",
+ "normalization": "az-v1",
+ "contentVersion": 1,
+ "title": "Həftənin sürprizi 6",
+ "levels": [
+  {
+   "id": "az-hefte6-001",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 4,
+     "clueCol": 0,
+     "answer": "AŞKAR",
+     "clue": "Gizlinin əksi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Aydın, açıq",
+      "Göz önündə",
+      "Gizlinin əksi"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "ŞİKAYƏT",
+     "clue": "Dərdini demək",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Narazılıq",
+      "Ərizə, gileyli",
+      "Dərdini demək"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "KAMAL",
+     "clue": "Müdriklik",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Yetkinlik",
+      "Ağıl, dərrakə",
+      "Müdriklik"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 6,
+     "clueCol": 1,
+     "answer": "ƏNƏNƏ",
+     "clue": "Nəsildən qalan",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Adət, gələnək",
+      "Köhnə adət",
+      "Nəsildən qalan"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 2,
+     "clueCol": 2,
+     "answer": "SİMA",
+     "clue": "Adamın üzü",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Üz cizgisi",
+      "Üz ifadəsi",
+      "Adamın üzü"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "YAĞ",
+     "clue": "Tavaya tökülür",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Kərə, zeytun",
+      "Piy, kərə",
+      "Tavaya tökülür"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "DOWN",
+     "clueRow": 4,
+     "clueCol": 6,
+     "answer": "ŞƏR",
+     "clue": "Xeyirin əksi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Pislik",
+      "Bəla, fitnə",
+      "Xeyirin əksi"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "ƏSMƏR",
+    "cells": [
+     [
+      6,
+      6
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      6,
+      4
+     ],
+     [
+      4,
+      5
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-hefte6-002",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "ZÖKAM",
+     "clue": "Asqırma səbəbi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Burun axması",
+      "Soyuq dəyməsi",
+      "Asqırma səbəbi"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "MİNNƏT",
+     "clue": "Yaxşılığı demək",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Başa qaxma",
+      "Əvəz gözləmə",
+      "Yaxşılığı demək"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 5,
+     "answer": "GÖLMƏÇƏ",
+     "clue": "Palçıqlı su",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Kiçik gölcük",
+      "Yağış izi",
+      "Palçıqlı su"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "KƏKİL",
+     "clue": "Atın alın tükü",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Alın saçı",
+      "Alına düşən saç",
+      "Atın alın tükü"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "ERKƏN",
+     "clue": "Gec deyil",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Tezdən",
+      "Vaxtından əvvəl",
+      "Gec deyil"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 1,
+     "answer": "MİXƏK",
+     "clue": "Qərənfil",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ətirli qönçə",
+      "Qurudulmuş qönçə",
+      "Qərənfil"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "ÇİMƏRLİK",
+    "cells": [
+     [
+      6,
+      5
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      5,
+      1
+     ],
+     [
+      4,
+      3
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      7,
+      3
+     ],
+     [
+      3,
+      1
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-hefte6-003",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "GİLEY",
+     "clue": "Narazı söz",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Küsmək sözü",
+      "İncik söz",
+      "Narazı söz"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "GİZLİ",
+     "clue": "Açıq deyil",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Pünhan",
+      "Sirli",
+      "Açıq deyil"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 5,
+     "answer": "İGİDLİK",
+     "clue": "Cəsur iş",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Döyüşdə rəşadət",
+      "Mərd iş",
+      "Cəsur iş"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "ZAMAN",
+     "clue": "Saat ölçür",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Vaxt",
+      "Dövr",
+      "Saat ölçür"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 2,
+     "answer": "NALƏ",
+     "clue": "Kədər səsi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "İnilti",
+      "Ah-zar",
+      "Kədər səsi"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "HÖRÜK",
+     "clue": "Örülmüş saç",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Uzun saç",
+      "Qız saçı",
+      "Örülmüş saç"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "ENDİRİM",
+    "cells": [
+     [
+      4,
+      1
+     ],
+     [
+      5,
+      3
+     ],
+     [
+      4,
+      5
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      7,
+      3
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      3,
+      3
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  }
+ ]
+}

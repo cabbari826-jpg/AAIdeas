@@ -1,0 +1,1668 @@
+{
+ "formatVersion": 1,
+ "packId": "az-edebiyyat",
+ "language": "az",
+ "normalization": "az-v1",
+ "contentVersion": 1,
+ "title": "Ədəbiyyat",
+ "levels": [
+  {
+   "id": "az-edebiyyat-001",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "RÜBAİ",
+     "clue": "Dörd misralı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Xəyyam janrı",
+      "Dörd misra",
+      "Dörd misralı"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "QORQUD",
+     "clue": "Qopuzlu ozan",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Dədə ...",
+      "Oğuz müdriki",
+      "Qopuzlu ozan"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "DASTAN",
+     "clue": "Epik əsər",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Xalq eposu",
+      "Aşıq danışır",
+      "Epik əsər"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "İLİADA",
+     "clue": "Homer əsəri",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Axillesin qəzəbi",
+      "Troya poeması",
+      "Homer əsəri"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 1,
+     "answer": "İBLİS",
+     "clue": "Mələk düşməni",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Cavid faciəsi",
+      "Şeytan",
+      "Mələk düşməni"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 3,
+     "clueCol": 1,
+     "answer": "CİLD",
+     "clue": "Birinci ...",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Kitabın üzü",
+      "Tom",
+      "Birinci ..."
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "DANTE",
+     "clue": "Florensiyalı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "İlahi komediya",
+      "Beatriçe aşiqi",
+      "Florensiyalı"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "SABİR",
+    "cells": [
+     [
+      3,
+      6
+     ],
+     [
+      2,
+      6
+     ],
+     [
+      3,
+      3
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      1,
+      3
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-edebiyyat-002",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "ƏJDAHA",
+     "clue": "Nağıl canavarı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Yeddibaşlı",
+      "Od püskürən",
+      "Nağıl canavarı"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "TAPMACA",
+     "clue": "Tapılası",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Bil görüm nədir",
+      "Müəmma",
+      "Tapılası"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "ŞİRVANİ",
+     "clue": "Şamaxı şairi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Seyid Əzim",
+      "Məktəb müəllimi",
+      "Şamaxı şairi"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 2,
+     "clueCol": 0,
+     "answer": "NİZAMİ",
+     "clue": "Sirlər xəzinəsi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Xəmsə müəllifi",
+      "Gəncəli şair",
+      "Sirlər xəzinəsi"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "NƏBATİ",
+     "clue": "Gül şairi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Seyid Əbülqasım",
+      "Qaradağlı şair",
+      "Gül şairi"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 3,
+     "clueCol": 1,
+     "answer": "VƏZN",
+     "clue": "Ritm",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Əruz",
+      "Şeir ölçüsü",
+      "Ritm"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 2,
+     "answer": "DİV",
+     "clue": "Nağıl əjdəri",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Nağıl nəhəngi",
+      "Pərinin düşməni",
+      "Nağıl əjdəri"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "NATƏVAN",
+    "cells": [
+     [
+      2,
+      1
+     ],
+     [
+      7,
+      4
+     ],
+     [
+      7,
+      5
+     ],
+     [
+      7,
+      2
+     ],
+     [
+      4,
+      6
+     ],
+     [
+      5,
+      4
+     ],
+     [
+      7,
+      1
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-edebiyyat-003",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "KƏRƏM",
+     "clue": "Aşıq oğlu",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Yanıb kül oldu",
+      "Əslinin aşiqi",
+      "Aşıq oğlu"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "PUŞKİN",
+     "clue": "Rus şairi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Yevgeni Onegin",
+      "Rus poeziyası",
+      "Rus şairi"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "NOVELLA",
+     "clue": "Novel",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Kiçik roman",
+      "Nəsr növü",
+      "Novel"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "XOSROV",
+     "clue": "Pərviz",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Sasani şahı",
+      "Şirinin yarı",
+      "Pərviz"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "SATİRA",
+     "clue": "Həcv",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Gülüş silahı",
+      "Sabir janrı",
+      "Həcv"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "DRAM",
+     "clue": "Pyes növü",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Səhnə janrı",
+      "Ciddi pyes",
+      "Pyes növü"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "DOWN",
+     "clueRow": 4,
+     "clueCol": 2,
+     "answer": "RZA",
+     "clue": "Xalq şairi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Rəsul ...",
+      "Rənglər şeirləri",
+      "Xalq şairi"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "AXUNDOV",
+    "cells": [
+     [
+      5,
+      3
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      6
+     ],
+     [
+      5,
+      1
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      3,
+      6
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-edebiyyat-004",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "HAMLET",
+     "clue": "Faciə qəhrəmanı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Danimarka prinsi",
+      "Olum, ya ölüm",
+      "Faciə qəhrəmanı"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "TOLSTOY",
+     "clue": "Rus klassiki",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Hərb və sülh",
+      "Anna Karenina",
+      "Rus klassiki"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "MÜƏLLİF",
+     "clue": "Yazan",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Yaradıcı",
+      "Əsər sahibi",
+      "Yazan"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 1,
+     "answer": "FƏSİL",
+     "clue": "Bölüm",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Kitab bölməsi",
+      "Hissə",
+      "Bölüm"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "DEFO",
+     "clue": "İngilis yazıçı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Robinzon Kruzo",
+      "Ada romanı",
+      "İngilis yazıçı"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "ƏSLİ",
+     "clue": "Kərəmin sevgisi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Kərəmin yarı",
+      "Keşiş qızı",
+      "Kərəmin sevgisi"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "DOWN",
+     "clueRow": 3,
+     "clueCol": 1,
+     "answer": "BƏND",
+     "clue": "Kuplet",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Şeir hissəsi",
+      "Strofa",
+      "Kuplet"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "İLYAS",
+    "cells": [
+     [
+      3,
+      5
+     ],
+     [
+      3,
+      6
+     ],
+     [
+      7,
+      6
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      4,
+      6
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-edebiyyat-005",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 2,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "ROMAN",
+     "clue": "Nəsr janrı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Böyük əsər",
+      "Epopeya",
+      "Nəsr janrı"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "MÜŞFİQ",
+     "clue": "Mikayıl ...",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Oxu tar",
+      "1938 qurbanı",
+      "Mikayıl ..."
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 5,
+     "answer": "ODİSSEY",
+     "clue": "Uliss",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "İtaka kralı",
+      "On illik yol",
+      "Uliss"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "ROMEO",
+     "clue": "Verona aşiqi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Monteqi",
+      "Cülyettanın yarı",
+      "Verona aşiqi"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "HEKAYƏ",
+     "clue": "Danışılan",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Kiçik nəsr",
+      "Qısa əsər",
+      "Danışılan"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 2,
+     "answer": "NƏSR",
+     "clue": "Düzyazı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Nəzmin əksi",
+      "Roman dili",
+      "Düzyazı"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "MAŞIN",
+     "clue": "Minik",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Avtomobil",
+      "Dörd təkərli",
+      "Minik"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "MİSRA",
+    "cells": [
+     [
+      1,
+      3
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      4,
+      5
+     ],
+     [
+      5,
+      6
+     ],
+     [
+      4,
+      1
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-edebiyyat-006",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 2,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "QAFİYƏ",
+     "clue": "Həmahəng söz",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Səs ahəngi",
+      "Misra sonu",
+      "Həmahəng söz"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "MƏSNƏVİ",
+     "clue": "Poema növü",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Mövlana əsəri",
+      "Cüt qafiyəli",
+      "Poema növü"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 1,
+     "clueCol": 1,
+     "answer": "EPİLOQ",
+     "clue": "Sonluq",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Son söz",
+      "Proloqun əksi",
+      "Sonluq"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "PYES",
+     "clue": "Teatr üçün",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Səhnə əsəri",
+      "Dram əsəri",
+      "Teatr üçün"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 1,
+     "clueCol": 6,
+     "answer": "SƏHİFƏ",
+     "clue": "Vərəq",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Vərəq üzü",
+      "Kitabda nömrəli",
+      "Vərəq"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 2,
+     "answer": "NƏBİ",
+     "clue": "Bozatlı qaçaq",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qaçaq ...",
+      "Həcərin əri",
+      "Bozatlı qaçaq"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 1,
+     "answer": "DÜMA",
+     "clue": "Fransız romançı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Atos müəllifi",
+      "Kristo qrafı",
+      "Fransız romançı"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "QOVSİ",
+    "cells": [
+     [
+      7,
+      1
+     ],
+     [
+      6,
+      1
+     ],
+     [
+      6,
+      4
+     ],
+     [
+      2,
+      6
+     ],
+     [
+      4,
+      1
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-edebiyyat-007",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 2,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "ƏMANİ",
+     "clue": "Qəzəl ustası",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Saray qəzəlxanı",
+      "Lətifə ustası",
+      "Qəzəl ustası"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "VİDADİ",
+     "clue": "Molla Vəli",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Vaqifin dostu",
+      "Durnalar şairi",
+      "Molla Vəli"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "LƏTİFƏ",
+     "clue": "Zarafat",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Molla danışır",
+      "Gülməli hekayə",
+      "Zarafat"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "SEVİL",
+     "clue": "Qadın obrazı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Çadrasını atdı",
+      "Cabbarlı pyesi",
+      "Qadın obrazı"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 2,
+     "answer": "NƏZM",
+     "clue": "Poeziya",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Nəsrin əksi",
+      "Şeir",
+      "Poeziya"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 6,
+     "answer": "İPƏK",
+     "clue": "Parça",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Böyük ... yolu",
+      "Barama verir",
+      "Parça"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "DOWN",
+     "clueRow": 4,
+     "clueCol": 3,
+     "answer": "TAC",
+     "clue": "Qızıl çələng",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Şahın başında",
+      "Kral papağı",
+      "Qızıl çələng"
+     ]
+    },
+    {
+     "id": 8,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "FACİƏ",
+     "clue": "Ölümlə bitən",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Kədərli son",
+      "Tragediya",
+      "Ölümlə bitən"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "NƏSİMİ",
+    "cells": [
+     [
+      4,
+      4
+     ],
+     [
+      5,
+      6
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      3,
+      6
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      3,
+      2
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-edebiyyat-008",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 2,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "OBRAZ",
+     "clue": "Surət",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Personaj",
+      "Bədii surət",
+      "Surət"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "VURĞUN",
+     "clue": "Səməd ...",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Vaqif dramı",
+      "Azərbaycan şeiri",
+      "Səməd ..."
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "PROLOQ",
+     "clue": "Başlanğıc",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ön söz",
+      "Giriş",
+      "Başlanğıc"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 5,
+     "answer": "OXUCU",
+     "clue": "Qiraətçi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Kitabsevər",
+      "Kitab oxuyan",
+      "Qiraətçi"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 1,
+     "answer": "VAQİF",
+     "clue": "Molla Pənah",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qarabağ vəziri",
+      "Qoşma ustası",
+      "Molla Pənah"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "FƏRHAD",
+     "clue": "Şirinin aşiqi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Dağ çapan",
+      "Bisütun aşiqi",
+      "Şirinin aşiqi"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "QIZ",
+     "clue": "Ana-bala: ...",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Oğlanın bacısı",
+      "Gəlin olacaq",
+      "Ana-bala: ..."
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "QƏRİB",
+    "cells": [
+     [
+      5,
+      1
+     ],
+     [
+      7,
+      2
+     ],
+     [
+      7,
+      3
+     ],
+     [
+      6,
+      1
+     ],
+     [
+      2,
+      3
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-edebiyyat-009",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 3,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "QOŞMA",
+     "clue": "Heca şeiri",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Aşıq şeiri",
+      "Vaqif janrı",
+      "Heca şeiri"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "ŞEKSPİR",
+     "clue": "İngilis şairi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Stratford",
+      "Hamlet müəllifi",
+      "İngilis şairi"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "QƏZƏL",
+     "clue": "Şeir növü",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Füzuli janrı",
+      "Aşiqanə şeir",
+      "Şeir növü"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "ZAKİR",
+     "clue": "Şuşalı satirik",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qasım bəy",
+      "Təmsil ustası",
+      "Şuşalı satirik"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "ŞİRİN",
+     "clue": "Xosrovla ...",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Fərhadın yarı",
+      "Bərdə şahzadəsi",
+      "Xosrovla ..."
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 2,
+     "answer": "PƏRİ",
+     "clue": "Sehrli qız",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Nağıl gözəli",
+      "Div düşməni",
+      "Sehrli qız"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "DOWN",
+     "clueRow": 3,
+     "clueCol": 6,
+     "answer": "DİŞ",
+     "clue": "Çeynəyir",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ağızda otuz iki",
+      "Fırçalanır",
+      "Çeynəyir"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "POEMA",
+    "cells": [
+     [
+      5,
+      3
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      3,
+      2
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-edebiyyat-010",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 3,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "OTELLO",
+     "clue": "Qısqanc",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Venesiya mavri",
+      "Dezdemona",
+      "Qısqanc"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "LEYLİ",
+     "clue": "Leyla",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qeysin sevgisi",
+      "Məcnunun yarı",
+      "Leyla"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 4,
+     "clueCol": 0,
+     "answer": "BƏHLUL",
+     "clue": "Müdrik dəli",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Danəndə",
+      "Ağıllı dəli",
+      "Müdrik dəli"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 2,
+     "answer": "XƏMSƏ",
+     "clue": "Nizami beşliyi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Beş poema",
+      "Pənc gənc",
+      "Nizami beşliyi"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "MƏCNUN",
+     "clue": "Leylinin aşiqi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qeys",
+      "Çölə düşən aşiq",
+      "Leylinin aşiqi"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 6,
+     "answer": "ELÇİN",
+     "clue": "Yazıçı Əfəndiyev",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Mahmud və Məryəm",
+      "Ölüm hökmü",
+      "Yazıçı Əfəndiyev"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "SƏBƏT",
+    "cells": [
+     [
+      6,
+      2
+     ],
+     [
+      4,
+      2
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      7,
+      2
+     ],
+     [
+      1,
+      2
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-edebiyyat-011",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 3,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "OQTAY",
+     "clue": "Kişi adı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "... Eloğlu",
+      "Teatr pyesi",
+      "Kişi adı"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "BAYRON",
+     "clue": "Romantik ingilis",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Çayld Harold",
+      "Lord ...",
+      "Romantik ingilis"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "SƏTİR",
+     "clue": "Xətt",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Yazı xətti",
+      "Cərgə",
+      "Xətt"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 1,
+     "answer": "QOQOL",
+     "clue": "Ukraynalı yazıçı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ölü canlar",
+      "Müfəttiş",
+      "Ukraynalı yazıçı"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 3,
+     "clueCol": 6,
+     "answer": "ANAR",
+     "clue": "Yazıçı Rzayev",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Otel otağı",
+      "Ağ liman",
+      "Yazıçı Rzayev"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 1,
+     "answer": "HƏCƏR",
+     "clue": "Qəhrəman qadın",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Nəbinin xanımı",
+      "Qaçaq qadın",
+      "Qəhrəman qadın"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "SƏHRA",
+    "cells": [
+     [
+      3,
+      1
+     ],
+     [
+      7,
+      5
+     ],
+     [
+      7,
+      2
+     ],
+     [
+      7,
+      6
+     ],
+     [
+      4,
+      3
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-edebiyyat-012",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 3,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "ÇEXOV",
+     "clue": "Rus dramaturqu",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Albalı bağı",
+      "Qısa hekayə",
+      "Rus dramaturqu"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 3,
+     "clueCol": 4,
+     "answer": "HÜQO",
+     "clue": "Fransız yazıçı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Səfillər",
+      "Notr-Dam",
+      "Fransız yazıçı"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 4,
+     "clueCol": 1,
+     "answer": "İLHAM",
+     "clue": "Vəhy",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Şairin pərisi",
+      "Yaradıcı coşqu",
+      "Vəhy"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "DOWN",
+     "clueRow": 1,
+     "clueCol": 6,
+     "answer": "HOMER",
+     "clue": "Yunan şairi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Kor ozan",
+      "İliada müəllifi",
+      "Yunan şairi"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 2,
+     "answer": "CAVİD",
+     "clue": "Hüseyn ...",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "İblis dramı",
+      "Romantik dram",
+      "Hüseyn ..."
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 2,
+     "clueCol": 0,
+     "answer": "HADİ",
+     "clue": "Romantik şair",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Məhəmməd ...",
+      "Füyuzat şairi",
+      "Romantik şair"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "DOLMA",
+    "cells": [
+     [
+      5,
+      2
+     ],
+     [
+      7,
+      4
+     ],
+     [
+      4,
+      3
+     ],
+     [
+      4,
+      6
+     ],
+     [
+      4,
+      5
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  }
+ ]
+}

@@ -1,0 +1,47 @@
+# title: 8 Mart
+# 8 Mart, Qadınlar günü: analar, bacılar, çiçəklər, hədiyyələr. Format: SÖZ | çətin | orta | asan
+QADIN | Ərin yoldaşı | Xanım | Ana, bacı, qız
+XANIM | Hörmətli qadın | Ledi | Ağayın yoldaşı
+ÇİÇƏK | Bahar hədiyyəsi | Vazaya qoyulur | Gül
+BUKET | Dəstə gül | Gül dəstəsi | Güldəstə
+MİMOZA | Sarı tüklü çiçək | Mart çiçəyi | Mart gülü sarı
+ZƏRİF | İncə, nazik | Nəfis | Kobudun ziddi
+NƏZAKƏT | Ədəb, mədəniyyət | Kübar davranış | Xoş rəftar
+ŞƏFQƏT | Mərhəmət | Ana ürəyində | Yumşaq ürəklik
+QAYĞI | Diqqət, himayə | Nəvazişli diqqət | Nəvaziş
+İNCƏ | Nazik, zərif | Kökün ziddi | Arıq
+GƏLİN | Təzə ailə üzvü | Ağ donlu | Oğulun arvadı
+ŞAİRƏ | Şeir yazan qadın | Natəvan kimi | Qadın şair
+MƏHSƏTİ | Gəncəli rübaiçi | XII əsr şairəsi | ... Gəncəvi
+TOMRİS | Massaget xanımı | Kiri məğlub edən | Qadın hökmdar
+SEVGİ | Ürək hissi | Məhəbbət | Eşq
+GÜLDAN | Çiçək qabı | Vaza | Gül qoyulan qab
+BAHAR | Martda başlayır | Yaz fəsli adı | Yaşıl fəsil
+MUNCUQ | Boyunbağı dənəsi | Sapa düzülür | Bəzək dənəsi
+SIRĞA | Qulaq bəzəyi | Qulağa taxılır | Sallanan bəzək
+ÜZÜK | Barmaq bəzəyi | Nişan bəzəyi | Barmağa taxılır
+BİLƏRZİK | Qol bəzəyi | Biləyə taxılır | Qolbaq
+ANALIQ | Ana olmaq | Ana qayğısı | Ana borcu
+HƏKİM | Ağ xalatlı | Müalicə edən | Doktor
+NAZ | Qəmzə | Ərköyünlük | Ərkyana hal
+QAYINANA | Ərin anası | Gəlinin anası | Ailə ağsaqqalı
+ANACAN | Əziz ana | Ana sözü əzizlə | Mehriban ana
+QIZCIĞAZ | Balaca qız | Qız balası | Kiçik qız
+XALAQIZI | Xalanın qızı | Xala balası | Ana tərəfdən qız
+BACICAN | Əziz bacı | Bacı nazı | Sevimli bacı
+NƏVAZİŞ | Oxşama | Mehribanlıq | Sığal
+MEHRİBAN | Səmimi | Xoşrəftar | Mülayim insan
+ÇİÇƏKÇİ | Gül satan | Buket bağlayan | Gül ustası
+ƏTİRLİ | Qoxulu | Xoş iyli | Ətir saçan
+BƏNZƏR | Oxşar | Eyni kimi | Tən
+GÖZƏLLİK | Hüsn | Camal | Yaraşıq
+CAMAL | Üz gözəlliyi | Gözəl sima | Gözəl üz
+HÜSN | Gözəllik | Camalı | Gözəl görkəm
+TÜL | Pəncərə pərdəsi | Nazik toxuma | Şəffaf parça
+TİKMƏ | Əl işi naxış | Gülbətin işi | İynə işi
+TOXUCU | Xalça toxuyan | Toxuma ustası | Xalçaçı
+XALÇAÇI | Xalça ustası | Xovlu iş ustası | Toxucu qadın
+QƏŞƏNG | Gözəl | Göyçək | Bəzəkli
+SƏLİQƏ | Təmizlik, nizam | Sahman | Hər şey yerində
+MƏTANƏT | Sarsılmaz ruh | Möhkəm iradə | Dəyanət
+DƏYANƏT | Səbatlılıq | Dözümlülük | Əyilməzlik

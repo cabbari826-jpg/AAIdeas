@@ -1,0 +1,58 @@
+# Ümumi sözlər (10): sənət, peşələr, materiallar. Format: SÖZ | çətin | orta | asan
+ZURNA | Toy nəfəsi | Nağara yoldaşı | Toy aləti
+NAĞARA | Toy təbili | Çubuqla döyülür | Döyülən alət
+MƏTN | Yazı parçası | Kitab parçası | Oxunan yazı
+YAZI | Kağıza düşən | Əlyazma | Qələmlə çəkilən
+İMLA | Diktant | Yazı qaydası | Dərsdə yazılır
+İNŞA | Yazı işi | Sərbəst yazı | Esse
+PENAL | Qələm qabı | Qələmdan | Çanta qutusu
+XAM | Bişməmiş | Təcrübəsiz | Çiy
+MƏXMƏR | Tüklü parça | Barxat | Yumşaq parça
+XƏZ | Heyvan tükü | Kürk | İsti yaxalıq
+TÜK | Kirpik, saç | Saç teli | Xəz teli
+QABIQ | Üst qat | Meyvə örtüyü | Ağac dərisi
+MUM | Arı ifrazı | Şam maddəsi | Ərir, yanır
+PƏTƏK | Bal hücrəsi | Arı yuvası | Mumlu yuva
+CÖVHƏR | Mahiyyət | Daş-qaş | Qiymətli daş
+ZÜMRÜD | Yaşıl daş | Yaşıl cəvahir | Qiymətli yaşıl
+MİRVARİ | Dəniz incisi | İnci | Sədəfdə yetişən
+FİRUZƏ | Mavi daş | Göy-yaşıl daş | Mavi bəzək
+KƏHRƏBA | Sarı qatran | Baltik daşı | Sarı muncuq
+ƏQİQ | Qırmızı daş | Üzük daşı | Yəmən daşı
+MƏRCAN | Dəniz polipi | Qırmızı muncuq | Rif yaradan
+DƏRVİŞ | Səyyah sufi | Dilənçi zahid | Kəşkül gəzdirən
+MƏLİK | Malik, hakim | Məmləkət başı | Nağıl şahı
+LİMAN | Gəmi dayanacağı | Gəmilər evi | Körfəzdə yer
+VİDA | Ayrılıq anı | Son görüş | Əlvida
+KONSUL | Xaricdə vəkil | Xarici nümayəndə | Səfirlik işçisi
+MÜDİR | İdarə başçısı | Məktəb başçısı | Direktor
+SƏDR | İclası aparan | Rəyasət edən | İclas başı
+RƏİS | Şef | Rəhbər işçi | Şöbə müdiri
+İŞÇİ | Fəhlə, əməkçi | İş adamı | Çalışan
+FƏHLƏ | Zavod işçisi | Əl əməyi adamı | Tikinti işçisi
+MƏZUN | Bitirən | Diplom alan | Son kurs sahibi
+DOSENT | Elmi ad | Universitet adı | Müəllim adı
+DOKTOR | Elmlər dərəcəsi | Həkim | Xalat geyən
+FELDŞER | Kənd həkimi | Tibb işçisi | Təcili yardım
+CƏRRAH | Əməliyyatçı | Neştər ustası | Operasiya edən
+DİŞÇİ | Stomatoloq | Diş həkimi | Bormaşın ustası
+ƏCZAÇI | Apteker | Dərman satan | Aptek işçisi
+HƏB | Tablet | Dərman dənəsi | İçilən dərman
+ATƏŞ | Od | Yanğın | Güllə səsi
+ZÖKAM | Burun axması | Soyuq dəyməsi | Asqırma səbəbi
+SANCI | Kəskin ağrı | Qarın ağrısı | Batan ağrı
+İDMAN | Bədən tərbiyəsi | Sport | Məşq, yarış
+YOQA | Hind məşqi | Nəfəs məşqi | Rahatlıq məşqi
+MƏŞQ | Təlim | Təkrar çalışma | İdman dərsi
+QAÇAQ | Xalq igidi | Nəbi, Kərəm | Dağlarda gəzən
+KEÇİD | Aralıq yol | Tunel, yol | Zebra
+AŞIRIM | Dağ keçidi | Aşırma | Dağ yolu
+BUZLAQ | Buz kütləsi | Dağ buzu | Əbədi buz
+AYSBERQ | Üzən buz | Titanikin bəlası | Buz dağı
+BATAQ | Lil, palçıq | Palçıq yeri | Batan yer
+YAYLA | Yüksək düzən | Çobanlar düzü | Dağ düzü
+DÜZƏN | Düz yer | Ova | Hamar torpaq
+VAHƏ | Səhrada yaşıllıq | Səhra bulağı | Xurmalı yer
+QUMSAL | Qumlu yer | Çimərlik | Qumluq
+QAZI | Şəriət hakimi | Qadı | Köhnə hakim
+CİN | Div, şeytan | Nağıl ruhu | Çıraq ruhu

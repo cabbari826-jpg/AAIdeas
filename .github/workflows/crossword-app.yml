@@ -1,0 +1,109 @@
+name: crossword-app
+on:
+  push:
+    paths: ["crossword-app/**", ".github/workflows/crossword-app.yml"]
+  pull_request:
+    paths: ["crossword-app/**"]
+  # Started by the crossword-levels workflow after it commits new levels.
+  workflow_dispatch:
+# One build per branch: a newer push cancels the build still running for an
+# older one, so a burst of commits publishes one release, not one per commit.
+concurrency:
+  group: crossword-app-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # to publish the APK as a GitHub Release
+    defaults:
+      run:
+        working-directory: crossword-app
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+      - uses: gradle/actions/setup-gradle@v4
+      # Robolectric downloads android-all at test time and Maven Central often
+      # answers 429. Pre-fetch it (with retries, from Google's mirror) into ~/.m2,
+      # where Robolectric looks first, and cache it between runs.
+      - uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository/org/robolectric/android-all-instrumented
+          key: robolectric-android-all-15-12650502-i7
+      - name: Pre-fetch Robolectric android-all
+        run: |
+          v=15-robolectric-12650502-i7
+          d=~/.m2/repository/org/robolectric/android-all-instrumented/$v
+          mkdir -p "$d"
+          for ext in jar pom; do
+            f="$d/android-all-instrumented-$v.$ext"
+            [ -s "$f" ] && continue
+            for base in https://maven-central.storage-download.googleapis.com/maven2 https://repo1.maven.org/maven2; do
+              curl -fsSL --retry 5 --retry-all-errors --retry-delay 5 -o "$f" \
+                "$base/org/robolectric/android-all-instrumented/$v/android-all-instrumented-$v.$ext" && break
+            done
+            [ -s "$f" ]
+          done
+      # Fixed prototype signing key from repository secrets (absent on forks/PRs
+      # from forks: then the build is signed with a throwaway debug key).
+      - name: Prototype signing key
+        env:
+          KEYSTORE_B64: ${{ secrets.PROTOTYPE_KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.PROTOTYPE_KEYSTORE_PASSWORD }}
+        run: |
+          if [ -n "$KEYSTORE_B64" ]; then echo "$KEYSTORE_B64" | base64 -d > prototype.keystore; fi
+          if [ -s prototype.keystore ] && [ -z "$KEYSTORE_PASSWORD" ]; then
+            echo "::error::PROTOTYPE_KEYSTORE_PASSWORD secret is missing"; exit 1
+          fi
+          if [ -s prototype.keystore ]; then
+            pw=$(printf '%s' "$KEYSTORE_PASSWORD" | tr -d '[:space:]')
+            keytool -list -keystore prototype.keystore -storepass "$pw" >/dev/null ||
+              { echo "::error::PROTOTYPE_KEYSTORE_PASSWORD does not open PROTOTYPE_KEYSTORE_BASE64 (re-paste both secrets)"; exit 1; }
+          fi
+      # Dependency downloads sometimes fail on rate limits (429); try the build up to 3 times.
+      - run: |
+          for i in 1 2 3; do
+            ./gradlew testDebugUnitTest assembleDebug && exit 0
+            echo "::warning::Gradle attempt $i failed; retrying in $((i * 30))s"
+            sleep $((i * 30))
+          done
+          exit 1
+        env:
+          PROTOTYPE_KEYSTORE_PASSWORD: ${{ secrets.PROTOTYPE_KEYSTORE_PASSWORD }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: app-debug
+          path: crossword-app/app/build/outputs/apk/debug/app-debug.apk
+      # The prototype on the phone checks the latest release on start and offers
+      # to update itself. Only builds of the prototype branch (and main) are
+      # published; feature branches and PRs are not.
+      - name: Publish prototype release
+        if: github.event_name != 'pull_request' && (github.ref == 'refs/heads/claude/project-thread-50gxx8' || github.ref == 'refs/heads/main')
+        env:
+          GH_TOKEN: ${{ github.token }}
+          N: ${{ github.run_number }}
+        run: |
+          if [ ! -s prototype.keystore ]; then
+            echo "::warning::PROTOTYPE_KEYSTORE_* secrets are not set; not publishing (updates would not install)."
+            exit 0
+          fi
+          cp app/build/outputs/apk/debug/app-debug.apk krossvord.apk
+          # Never publish an APK that is not signed with the prototype key: the
+          # phone would refuse to install it over the current version.
+          apksigner=$(ls -d "$ANDROID_HOME"/build-tools/*/apksigner | sort -V | tail -1)
+          "$apksigner" verify --print-certs krossvord.apk | tee certs.txt
+          grep -q "CN=Krossvord prototype" certs.txt
+          gh release delete "krossvord-$N" --repo "$GITHUB_REPOSITORY" --cleanup-tag --yes 2>/dev/null || true
+          git log -1 --format='%s%n%n%b' > notes.txt
+          gh release create "krossvord-$N" krossvord.apk \
+            --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" \
+            --title "Açar Söz 2.1.$N" --notes-file notes.txt --latest
+          # Keep only the 10 newest prototype releases (and their tags).
+          gh release list --repo "$GITHUB_REPOSITORY" --limit 100 --json tagName,createdAt \
+            --jq '[.[] | select(.tagName | startswith("krossvord-"))] | sort_by(.createdAt) | reverse | .[10:] | .[].tagName' |
+          while read -r tag; do
+            gh release delete "$tag" --repo "$GITHUB_REPOSITORY" --cleanup-tag --yes
+          done

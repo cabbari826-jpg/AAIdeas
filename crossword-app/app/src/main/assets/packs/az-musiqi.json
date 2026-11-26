@@ -1,0 +1,1444 @@
+{
+ "formatVersion": 1,
+ "packId": "az-musiqi",
+ "language": "az",
+ "normalization": "az-v1",
+ "contentVersion": 1,
+ "title": "Musiqi və muğam",
+ "levels": [
+  {
+   "id": "az-musiqi-001",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "QİTARA",
+     "clue": "Gitar",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Altı simli",
+      "İspan aləti",
+      "Gitar"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "SELLƏR",
+     "clue": "Sel suları",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Apardı ... Saranı",
+      "Daşqınlar",
+      "Sel suları"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "ORKESTR",
+     "clue": "Ansambl",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Dirijorun dəstəsi",
+      "Simfonik ...",
+      "Ansambl"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "AYRILIQ",
+     "clue": "Vidalaşma",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Olar yaman ...",
+      "Hicran",
+      "Vidalaşma"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 2,
+     "answer": "RAST",
+     "clue": "Muğam adı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Muğamların anası",
+      "Şən dəstgah",
+      "Muğam adı"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "OZAN",
+     "clue": "Aşıq",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Dədə Qorqud tək",
+      "Qopuzçu",
+      "Aşıq"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "RƏQS",
+     "clue": "Oynamaq",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Oyun havası",
+      "Hərəkət sənəti",
+      "Oynamaq"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "KONSERT",
+    "cells": [
+     [
+      3,
+      1
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      5,
+      1
+     ],
+     [
+      5,
+      2
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      3,
+      6
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-musiqi-002",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "LAYLAY",
+     "clue": "Laylanın nidası",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "... dedim yatasan",
+      "Beşik sözü",
+      "Laylanın nidası"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "MÜSLÜM",
+     "clue": "Nərgiz operası",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Şah İsmayıl",
+      "Maqomayev",
+      "Nərgiz operası"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "MİRZƏYİ",
+     "clue": "Rəqs havası",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Toy rəqsi",
+      "Oynaq rəqs",
+      "Rəqs havası"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "ÜZEYİR",
+     "clue": "Himnin bəstəkarı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Leyli və Məcnun",
+      "Hacıbəyli",
+      "Himnin bəstəkarı"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 2,
+     "answer": "ZƏRBİ",
+     "clue": "Zərbli",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "... muğam",
+      "Ritmik muğam",
+      "Zərbli"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "ARFA",
+     "clue": "Simli böyük",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Mələk aləti",
+      "Telli çərçivə",
+      "Simli böyük"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "ZİL",
+     "clue": "İncə səs",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Yüksək səs",
+      "Bəmin əksi",
+      "İncə səs"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "MÜƏLLİM",
+    "cells": [
+     [
+      1,
+      6
+     ],
+     [
+      1,
+      5
+     ],
+     [
+      4,
+      2
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      4,
+      4
+     ],
+     [
+      7,
+      2
+     ],
+     [
+      1,
+      1
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-musiqi-003",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "MAHUR",
+     "clue": "Muğam pərdəsi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "... hindi",
+      "Şən muğam",
+      "Muğam pərdəsi"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 2,
+     "clueCol": 0,
+     "answer": "ŞALAXO",
+     "clue": "Sürətli rəqs",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Kişi rəqsi",
+      "Oynaq hava",
+      "Sürətli rəqs"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 2,
+     "answer": "SAZƏNDƏ",
+     "clue": "Ansambl üzvü",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Çalğıçı",
+      "Musiqiçi",
+      "Ansambl üzvü"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 4,
+     "clueCol": 0,
+     "answer": "MƏSUD",
+     "clue": "Xoşbəxt",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Üçrəngli bayrağınla ... yaşa!",
+      "Himndən söz",
+      "Xoşbəxt"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "TƏSNİF",
+     "clue": "Mahnı növü",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Muğamda mahnı",
+      "Vokal hissə",
+      "Mahnı növü"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 4,
+     "clueCol": 6,
+     "answer": "DƏF",
+     "clue": "Zərb aləti",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Zəngli qaval",
+      "Tamburin",
+      "Zərb aləti"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "XOR",
+     "clue": "Oxuyan dəstə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Kollektiv oxuma",
+      "Çoxsəsli",
+      "Oxuyan dəstə"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "ŞAHSƏNƏM",
+    "cells": [
+     [
+      2,
+      1
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      4,
+      3
+     ],
+     [
+      6,
+      6
+     ],
+     [
+      7,
+      4
+     ],
+     [
+      7,
+      2
+     ],
+     [
+      4,
+      1
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-musiqi-004",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "CABBAR",
+     "clue": "Kişi xanəndə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qaryağdı oğlu",
+      "Plastinka ustadı",
+      "Kişi xanəndə"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "QARAYEV",
+     "clue": "Balet bəstəkarı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Yeddi gözəl",
+      "Qara ...",
+      "Balet bəstəkarı"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "ƏMİROV",
+     "clue": "Simfonik muğam",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Kürd ovşarı",
+      "Fikrət ...",
+      "Simfonik muğam"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 1,
+     "answer": "CÜMLƏ",
+     "clue": "Hər kəs",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Səndən ötrü can verməyə ... hazırız",
+      "Hamı",
+      "Hər kəs"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "ŞÖBƏ",
+     "clue": "Bölmə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Dəstgah hissəsi",
+      "Muğam bölməsi",
+      "Bölmə"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "GUŞƏ",
+     "clue": "Künc",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Kiçik şöbə",
+      "Muğam hissəsi",
+      "Künc"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 3,
+     "answer": "NEY",
+     "clue": "Nəfəsli",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Mövlana aləti",
+      "Qamış tütək",
+      "Nəfəsli"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "QURBAN",
+    "cells": [
+     [
+      1,
+      6
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      3,
+      6
+     ],
+     [
+      3,
+      3
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      5,
+      4
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-musiqi-005",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 2,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "YALLI",
+     "clue": "Kollektiv rəqs",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Əl-ələ rəqs",
+      "Naxçıvan rəqsi",
+      "Kollektiv rəqs"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "FLEYTA",
+     "clue": "Tütək",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Sehrli ...",
+      "Nəfəsli metal",
+      "Tütək"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "ARŞIN",
+     "clue": "Operetta",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "... mal alan",
+      "Ölçü vahidi",
+      "Operetta"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 1,
+     "answer": "BALET",
+     "clue": "Barmaq ucunda",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qu gölü",
+      "Rəqs tamaşası",
+      "Barmaq ucunda"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 3,
+     "clueCol": 1,
+     "answer": "HAVA",
+     "clue": "Mahnı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Oyun ...sı",
+      "Çalğı",
+      "Mahnı"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 4,
+     "clueCol": 3,
+     "answer": "ŞUR",
+     "clue": "Muğam",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Kədərli muğam",
+      "Şüştərin qohumu",
+      "Muğam"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 2,
+     "answer": "RƏNG",
+     "clue": "Boya",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Rəqsvari hissə",
+      "Muğam arası",
+      "Boya"
+     ]
+    },
+    {
+     "id": 8,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "ALTI",
+     "clue": "6",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Beşdən sonra",
+      "Zərin ən çoxu",
+      "6"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "TRUBA",
+    "cells": [
+     [
+      1,
+      5
+     ],
+     [
+      5,
+      2
+     ],
+     [
+      6,
+      3
+     ],
+     [
+      3,
+      2
+     ],
+     [
+      3,
+      3
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-musiqi-006",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 2,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "SEYİD",
+     "clue": "Ustad xanəndə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Şuşinski",
+      "Şuşalı xanəndə",
+      "Ustad xanəndə"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "MEYXANA",
+     "clue": "Rep kimi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Bədahətən deyişmə",
+      "Abşeron sənəti",
+      "Rep kimi"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "DƏSTGAH",
+     "clue": "Silsilə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Tam muğam",
+      "Muğam silsiləsi",
+      "Silsilə"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 5,
+     "answer": "DUET",
+     "clue": "İkilik",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "İki səs",
+      "Cüt ifa",
+      "İkilik"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 6,
+     "clueCol": 2,
+     "answer": "NOTA",
+     "clue": "Not",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Do, re, mi",
+      "Musiqi işarəsi",
+      "Not"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 2,
+     "answer": "MARŞ",
+     "clue": "Yürüş",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Hərbi musiqi",
+      "Addım musiqisi",
+      "Yürüş"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "ACROSS",
+     "clueRow": 4,
+     "clueCol": 4,
+     "answer": "UD",
+     "clue": "Lavta",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ərəb lavtası",
+      "Qısa qolu",
+      "Lavta"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "SANTUR",
+    "cells": [
+     [
+      3,
+      1
+     ],
+     [
+      7,
+      3
+     ],
+     [
+      6,
+      3
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      4,
+      5
+     ],
+     [
+      1,
+      5
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-musiqi-007",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 2,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "RƏŞİD",
+     "clue": "Mahnı ustası",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Behbudov",
+      "Arşın mal alan",
+      "Mahnı ustası"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "BARABAN",
+     "clue": "Döyülür",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Təbil",
+      "Marş zərbi",
+      "Döyülür"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "NİYAZİ",
+     "clue": "Rast simfoniyası",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Xosrov və Şirin",
+      "Dirijor",
+      "Rast simfoniyası"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "BƏSTƏ",
+     "clue": "Kompozisiya",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Mahnı mətni",
+      "Melodiya",
+      "Kompozisiya"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "TRİO",
+     "clue": "Üçlük",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Muğam üçlüyü",
+      "Üç ifaçı",
+      "Üçlük"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "BƏM",
+     "clue": "Qalın səs",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Alçaq səs",
+      "Zilin əksi",
+      "Qalın səs"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "DOWN",
+     "clueRow": 3,
+     "clueCol": 6,
+     "answer": "İSTİ",
+     "clue": "Qızmar",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Soyuğun əksi",
+      "Yay havası",
+      "Qızmar"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "SAZAN",
+    "cells": [
+     [
+      1,
+      3
+     ],
+     [
+      6,
+      1
+     ],
+     [
+      7,
+      5
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      7,
+      1
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-musiqi-008",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 2,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "SEGAH",
+     "clue": "Muğam növü",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Zabul ...",
+      "Lirik muğam",
+      "Muğam növü"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "SOLO",
+     "clue": "Solist",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Tək ifa",
+      "Tək səs",
+      "Solist"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "ORQAN",
+     "clue": "Klavişli böyük",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Kilsə aləti",
+      "Borulu",
+      "Klavişli böyük"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 4,
+     "clueCol": 2,
+     "answer": "VALS",
+     "clue": "Rəqs",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Üçlük rəqs",
+      "Ştraus rəqsi",
+      "Rəqs"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "ƏLƏSGƏR",
+     "clue": "Aşıq adı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Göyçəli aşıq",
+      "Aşıqlar ustadı",
+      "Aşıq adı"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "ŞÜŞTƏR",
+     "clue": "Dəstgah",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Yeddi dəstgahdan",
+      "Qəmli muğam",
+      "Dəstgah"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "QAVAL",
+    "cells": [
+     [
+      3,
+      4
+     ],
+     [
+      4,
+      4
+     ],
+     [
+      4,
+      3
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      4,
+      5
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-musiqi-009",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 3,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "QOPUZ",
+     "clue": "Ozan aləti",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qorqudun aləti",
+      "Qədim saz",
+      "Ozan aləti"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "TANQO",
+     "clue": "Ehtiraslı rəqs",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Argentina rəqsi",
+      "Cüt rəqs",
+      "Ehtiraslı rəqs"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "TÜTƏK",
+     "clue": "Fit aləti",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Çoban aləti",
+      "Ney",
+      "Fit aləti"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 2,
+     "answer": "UZUN",
+     "clue": "Qısanın əksi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Bu dərə ... dərə",
+      "Sarı gəlin",
+      "Qısanın əksi"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 6,
+     "answer": "QANUN",
+     "clue": "Qədim alət",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Diz üstə çalınır",
+      "Telli qutu",
+      "Qədim alət"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "TORPAQ",
+     "clue": "Vətən ...",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Yer",
+      "Əkin örtüyü",
+      "Vətən ..."
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "YORĞAN",
+     "clue": "Yataq örtüyü",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Pambıqlı örtük",
+      "Gecə örtülür",
+      "Yataq örtüyü"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "YARPAQ",
+    "cells": [
+     [
+      7,
+      1
+     ],
+     [
+      7,
+      5
+     ],
+     [
+      3,
+      3
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      3,
+      6
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-musiqi-010",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 3,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "PİANO",
+     "clue": "Klavişli",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "88 dilli",
+      "Royal",
+      "Klavişli"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "XANƏNDƏ",
+     "clue": "Muğamçı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Muğam oxuyan",
+      "Qavallı ifaçı",
+      "Muğamçı"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 1,
+     "answer": "QÖNÇƏ",
+     "clue": "Açılmamış gül",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Gülü ... dərməzlər",
+      "Sarı gəlin sözü",
+      "Açılmamış gül"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "DOWN",
+     "clueRow": 3,
+     "clueCol": 6,
+     "answer": "ÇƏNG",
+     "clue": "Simli alət adı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qədim arfa",
+      "Üçbucaq alət",
+      "Simli alət adı"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "QALXAN",
+     "clue": "Sipər",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Döyüşçü sipəri",
+      "Zirehli lövhə",
+      "Sipər"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "QAPI",
+     "clue": "Darvaza",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Giriş yeri",
+      "Açılır, bağlanır",
+      "Darvaza"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "CÖKƏ",
+     "clue": "Ağ çiçəkli ağac",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ağac",
+      "Çayı dərmandır",
+      "Ağ çiçəkli ağac"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "DƏQİQƏ",
+    "cells": [
+     [
+      6,
+      4
+     ],
+     [
+      7,
+      4
+     ],
+     [
+      5,
+      2
+     ],
+     [
+      3,
+      2
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      4,
+      4
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  }
+ ]
+}

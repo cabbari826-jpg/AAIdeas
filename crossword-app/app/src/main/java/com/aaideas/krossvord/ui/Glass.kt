@@ -1,0 +1,380 @@
+package com.aaideas.krossvord.ui
+
+import android.app.ActivityManager
+import android.content.Context
+import android.os.Build
+import androidx.compose.foundation.Canvas
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.ui.graphics.compositeOver
+import androidx.compose.ui.graphics.drawscope.DrawScope
+import androidx.compose.ui.graphics.drawscope.clipPath
+import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
+import androidx.compose.ui.graphics.drawscope.scale
+import androidx.compose.ui.graphics.ClipOp
+import androidx.compose.ui.graphics.asAndroidPath
+import androidx.compose.ui.graphics.nativeCanvas
+import androidx.compose.ui.draw.drawWithCache
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.addOutline
+import androidx.compose.ui.graphics.luminance
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.composed
+import androidx.compose.foundation.layout.padding
+import dev.chrisbanes.haze.HazeDefaults
+import dev.chrisbanes.haze.HazeState
+import dev.chrisbanes.haze.HazeStyle
+import dev.chrisbanes.haze.HazeTint
+import dev.chrisbanes.haze.hazeEffect
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.ui.draw.clip
+import androidx.compose.runtime.getValue
+
+/** Set while the Şüşə theme is on: floating panels (the bottom menu) blur what scrolls under them. */
+val LocalHaze = staticCompositionLocalOf<HazeState?> { null }
+
+/** Real blur needs Android 12 (RenderEffect). Older phones get see-through panels without blur. */
+val glassBlurSupported: Boolean get() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
+
+/** Phones where the glass look may stutter: no real blur, or little memory. */
+fun isWeakForGlass(ctx: Context): Boolean {
+    if (!glassBlurSupported) return true
+    val am = ctx.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+    val info = ActivityManager.MemoryInfo().also { am.getMemoryInfo(it) }
+    return am.isLowRamDevice || info.totalMem < 3L * 1024 * 1024 * 1024
+}
+
+/** Frosted style: light tint over the blur; without blur (old phones) a denser tint keeps text readable. */
+fun glassStyle(dark: Boolean): HazeStyle = HazeDefaults.style(
+    backgroundColor = if (dark) Color(0xFF15112A) else Color(0xFFE9E0F7),
+    tint = HazeTint(if (dark) Color(0x33FFFFFF) else Color(0x66FFFFFF)),
+    blurRadius = HazeDefaults.blurRadius,
+    noiseFactor = 0f,
+).copy(fallbackTint = HazeTint(if (dark) Color(0xCC241E3D) else Color(0xCCF6F1FF)))
+
+/**
+ * The colourful light behind the glass: a few soft radial glows, drawn once per size change.
+ * Static (no animation), so it costs one cheap draw.
+ */
+@Composable
+fun GlassBackdrop(dark: Boolean, modifier: Modifier = Modifier, moving: Boolean = false, clock: androidx.compose.runtime.State<Float>? = null) {
+    if (!moving) { Canvas(modifier) { if (dark) glowsDark() else glowsLight() }; return }
+    // Maksimum şüşə: the glows drift slowly in circles (one turn in ~24 s), so the colour under the cards lives.
+    val time = clock ?: rememberGlassClock()
+    Canvas(modifier) { val t = time.value; if (dark) glowsDark(t, true) else glowsLight(t, true) }
+}
+
+/** 0..2π over 24 s, forever: the phase of the moving light. */
+@Composable
+fun rememberGlassClock(): androidx.compose.runtime.State<Float> =
+    androidx.compose.animation.core.rememberInfiniteTransition(label = "glow").animateFloat(
+        0f, (2 * Math.PI).toFloat(),
+        androidx.compose.animation.core.infiniteRepeatable(androidx.compose.animation.core.tween(24_000, easing = androidx.compose.animation.core.LinearEasing)),
+        label = "t",
+    )
+
+private fun dx(t: Float, k: Float) = 0.18f * kotlin.math.sin(t * k)
+private fun dy(t: Float, k: Float) = 0.12f * kotlin.math.cos(t * k)
+
+/** An oval glow, like CSS radial-gradient(rx ry at cx cy, c 0, transparent 70%): sizes are parts of the screen. */
+private fun DrawScope.glow(cx: Float, cy: Float, rx: Float, ry: Float, c: Color) {
+    val center = Offset(size.width * cx, size.height * cy)
+    val r = size.width * rx
+    scale(scaleX = 1f, scaleY = size.height * ry / r, pivot = center) {
+        drawCircle(Brush.radialGradient(0f to c, 0.7f to c.copy(alpha = 0f), center = center, radius = r), r, center)
+    }
+}
+
+// Same glows as the mockup.
+private fun DrawScope.glowsLight(t: Float = 0f, moving: Boolean = false) {
+    drawRect(Color(0xFFE8DEF8))
+    glow(0.15f + dx(t, 1f), 0.10f + dy(t, 1f), 0.60f, 0.40f, Color(0xFFB69DF8))
+    glow(0.90f - dx(t, 1f), 0.25f + dy(t, 2f), 0.50f, 0.35f, Color(0xFFFFC94D))
+    glow(0.30f + dx(t, 2f), 0.80f - dy(t, 1f), 0.60f, 0.45f, Color(0xFF7FD1AE))
+    glow(0.95f - dx(t, 1f), 0.90f - dy(t, 1f), 0.70f, 0.50f, Color(0xFF6750A4))
+    if (moving) glow(0.5f + 2 * dx(t, 1f), 0.5f + 3 * dy(t, 1f), 0.35f, 0.25f, Color(0xFFFF8FB1))
+}
+
+private fun DrawScope.glowsDark(t: Float = 0f, moving: Boolean = false) {
+    drawRect(Color(0xFF120F1E))
+    glow(0.80f - dx(t, 1f), 0.15f + dy(t, 1f), 0.55f, 0.40f, Color(0xFF4B3A8C))
+    glow(0.10f + dx(t, 1f), 0.60f + dy(t, 2f), 0.50f, 0.40f, Color(0xFF1E5A6B))
+    glow(0.70f + dx(t, 2f), 0.85f - dy(t, 1f), 0.40f, 0.30f, Color(0xFF8A3B6E))
+    if (moving) glow(0.5f + 2 * dx(t, 1f), 0.45f + 3 * dy(t, 1f), 0.35f, 0.25f, Color(0xFF3A7BD5))
+}
+
+/** Asked before switching a weak phone to Şüşə. */
+@Composable
+fun GlassWarning(onYes: () -> Unit, onNo: () -> Unit) {
+    SolidAlertDialog(
+        onDismissRequest = onNo,
+        title = { Text("Şüşə mövzusu") },
+        text = {
+            Text(
+                if (glassBlurSupported) "Telefonunuzda bu mövzu oyunu bir az ləngidə bilər. Yenə də açılsın?"
+                else "Bu telefonda şüşə bulanıq olmayacaq, sadəcə şəffaf görünəcək. Oyun bir az ləngiyə bilər. Yenə də açılsın?"
+            )
+        },
+        confirmButton = { TextButton(onClick = onYes) { Text("Bəli") } },
+        dismissButton = { TextButton(onClick = onNo) { Text("Xeyr") } },
+    )
+}
+
+/**
+ * "Effektləri azalt": the lighter glass with no shadows and no live blur. On by itself on weak phones
+ * (see [isWeakForGlass]) until the player flips the switch in Settings; their choice is kept.
+ */
+object GlassLite {
+    private var state: androidx.compose.runtime.MutableState<Boolean>? = null
+    private fun prefs(ctx: Context) = ctx.getSharedPreferences("glass", Context.MODE_PRIVATE)
+    fun isOn(ctx: Context): Boolean = (state ?: androidx.compose.runtime.mutableStateOf(
+        prefs(ctx).let { if (it.contains("lite")) it.getBoolean("lite", false) else isWeakForGlass(ctx) },
+    ).also { state = it }).value
+    fun set(ctx: Context, on: Boolean) {
+        prefs(ctx).edit().putBoolean("lite", on).apply()
+        isOn(ctx); state!!.value = on
+    }
+}
+
+/**
+ * "Maksimum şüşə" (experiment, Android 12+): every glass card really blurs the light behind it, and
+ * that light slowly moves, so colour drifts under the cards like on iPhone's Liquid Glass. Costs
+ * battery and frames on weak phones, so it is off unless switched on (on by default only in the Lab build).
+ */
+object GlassMax {
+    private var state: androidx.compose.runtime.MutableState<Boolean>? = null
+    private fun prefs(ctx: Context) = ctx.getSharedPreferences("glass", Context.MODE_PRIVATE)
+    fun isOn(ctx: Context): Boolean = glassBlurSupported && (state ?: androidx.compose.runtime.mutableStateOf(
+        prefs(ctx).getBoolean("max", com.aaideas.krossvord.BuildConfig.LAB),
+    ).also { state = it }).value
+    fun set(ctx: Context, on: Boolean) {
+        prefs(ctx).edit().putBoolean("max", on).apply()
+        isOn(ctx); state?.value = on
+    }
+}
+
+/** Set in "Maksimum şüşə": the moving backdrop that every glass card blurs. */
+val LocalCardHaze = staticCompositionLocalOf<HazeState?> { null }
+
+/** Card frost: a stronger blur than the menu, a light tint so text stays readable. */
+fun cardGlassStyle(dark: Boolean): HazeStyle = HazeDefaults.style(
+    backgroundColor = if (dark) Color(0xFF15112A) else Color(0xFFE9E0F7),
+    tint = HazeTint(if (dark) Color(0x40221C38) else Color(0x59FFFFFF)),
+    blurRadius = 28.dp,
+    noiseFactor = 0.04f,
+)
+
+/** Set while reduced glass effects are on. */
+val LocalGlassLite = staticCompositionLocalOf { false }
+
+/** True while the Şüşə theme is on; glass-only touches (rims, sheen, gaps) read it. */
+val LocalGlass = staticCompositionLocalOf { false }
+
+/**
+ * The glass rim and sheen from the mockup: a light diagonal sheen under the panel's own see-through
+ * fill, and a 1 dp rim that is bright on top and fades downward. Does nothing outside the Şüşə theme.
+ */
+@Composable
+fun Modifier.glassy(shape: Shape, lens: Boolean = true, shadow: Boolean = true): Modifier {
+    if (!LocalGlass.current) return this
+    val dark = androidx.compose.material3.MaterialTheme.colorScheme.background.luminance() < 0.5f
+    val lite = LocalGlassLite.current
+    val cardHaze = LocalCardHaze.current
+    val liquid = if (lens) LocalGlassBackdrop.current else null
+    // Maksimum şüşə: the card looks through a glass lens at the moving light behind it (Android 13+),
+    // or frosts it (Android 12). The drop shadow would be clipped, so none.
+    val base = when {
+        liquid != null -> this.glassLens(liquid, shape)
+        cardHaze != null -> this.then(Modifier.clip(shape).hazeEffect(cardHaze, cardGlassStyle(dark)))
+        else -> this
+    }
+    return base.drawWithCache {
+        val path = Path().apply { addOutline(shape.createOutline(size, layoutDirection, this@drawWithCache)) }
+        val sheen = Brush.linearGradient(
+            0f to Color.White.copy(alpha = if (dark) 0.16f else 0.5f),
+            0.4f to Color.White.copy(alpha = 0f),
+            0.7f to Color.White.copy(alpha = 0f),
+            1f to Color.White.copy(alpha = if (dark) 0.06f else 0.16f),
+            start = Offset.Zero, end = Offset(size.width * 0.7f, size.height),
+        )
+        val rim = Brush.verticalGradient(
+            listOf(Color.White.copy(alpha = if (dark) 0.45f else 0.9f), Color.White.copy(alpha = if (dark) 0.12f else 0.35f)),
+        )
+        val stroke = androidx.compose.ui.graphics.drawscope.Stroke(1.dp.toPx())
+        // The soft shadow under each panel (CSS 0 10px 30px), drawn only outside the panel: under a
+        // see-through panel it would show through as a grey box. Blurred shadows need Android 9.
+        val shadow = if (shadow && !lite && cardHaze == null && liquid == null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            val dy = minOf(10.dp.toPx(), size.minDimension * 0.12f)
+            Path().apply { addPath(path, Offset(0f, dy)) }.asAndroidPath() to android.graphics.Paint(android.graphics.Paint.ANTI_ALIAS_FLAG).apply {
+                color = if (dark) android.graphics.Color.argb(90, 0, 0, 0) else android.graphics.Color.argb(56, 40, 20, 80)
+                maskFilter = android.graphics.BlurMaskFilter(minOf(15.dp.toPx(), size.minDimension * 0.25f), android.graphics.BlurMaskFilter.Blur.NORMAL)
+            }
+        } else null
+        onDrawWithContent {
+            if (shadow != null) clipPath(path, ClipOp.Difference) {
+                drawIntoCanvas { it.nativeCanvas.drawPath(shadow.first, shadow.second) }
+            }
+            drawPath(path, sheen)
+            drawContent()
+            drawPath(path, rim, style = stroke)
+        }
+    }
+}
+
+/**
+ * Maksimum şüşə: glass cards get see-through fills so the glass shows (normal Şüşə keeps them nearly
+ * solid). With the lens (Android 13+) the fills are almost clear: the lens itself tints.
+ */
+@Composable
+fun MaxGlassColors(on: Boolean, dark: Boolean, liquid: Boolean, content: @Composable () -> Unit) {
+    if (!on) { content(); return }
+    val cs = androidx.compose.material3.MaterialTheme.colorScheme
+    // A nested MaterialTheme resets the text style and colour set by the app theme; keep them.
+    val style = androidx.compose.material3.LocalTextStyle.current
+    val ink = androidx.compose.material3.LocalContentColor.current
+    fun Color.see(a: Float) = copy(alpha = a)
+    val clear = if (dark) Color(0x14FFFFFF) else Color(0x1FFFFFFF)
+    androidx.compose.material3.MaterialTheme(
+        colorScheme = cs.copy(
+            surfaceContainerHigh = if (liquid) clear else if (dark) Color(0x66221C38) else Color(0x73FFFFFF),
+            surfaceContainer = if (liquid) clear else if (dark) Color(0x4D221C38) else Color(0x59FFFFFF),
+            primaryContainer = cs.primaryContainer.see(if (liquid) 0.22f else 0.6f),
+            secondaryContainer = cs.secondaryContainer.see(if (liquid) 0.18f else 0.6f),
+            tertiaryContainer = cs.tertiaryContainer.see(if (liquid) 0.18f else 0.6f),
+        ),
+        typography = androidx.compose.material3.MaterialTheme.typography,
+        shapes = androidx.compose.material3.MaterialTheme.shapes,
+    ) {
+        androidx.compose.runtime.CompositionLocalProvider(
+            androidx.compose.material3.LocalTextStyle provides style,
+            androidx.compose.material3.LocalContentColor provides ink,
+            LocalPanelScheme provides cs,
+            content = content,
+        )
+    }
+}
+
+/** The theme's own colours before [MaxGlassColors] made the panels see-through; dialogs start from these. */
+val LocalPanelScheme = staticCompositionLocalOf<androidx.compose.material3.ColorScheme?> { null }
+
+/**
+ * Dialogs and pop-ups in Şüşə are frosted glass like the rest of the theme: the screen behind the window is
+ * blurred (Android 12+, when the phone allows window blur) and the window is a see-through white/violet
+ * pane with the glass rim. Without that blur (Sadə level, older phones) the pane is nearly solid, so the
+ * text never sits over a sharp grid. Outside glass, a no-op.
+ */
+@Composable
+fun SolidPanel(content: @Composable () -> Unit) {
+    if (!LocalGlass.current) { content(); return }
+    val base = LocalPanelScheme.current ?: androidx.compose.material3.MaterialTheme.colorScheme
+    val dark = base.background.luminance() < 0.5f
+    val frosted = !LocalGlassLite.current && windowBlurOn()
+    val back = base.surface.copy(alpha = 1f)
+    // The pane; panels inside it keep the theme's own see-through whites, as on every glass screen.
+    val pane = back.copy(alpha = if (!frosted) 0.96f else if (dark) 0.62f else 0.55f)
+    val scheme = base.copy(surface = pane, surfaceContainerHigh = pane, surfaceContainerHighest = pane)
+    val style = androidx.compose.material3.LocalTextStyle.current
+    androidx.compose.material3.MaterialTheme(
+        colorScheme = scheme,
+        typography = androidx.compose.material3.MaterialTheme.typography,
+        shapes = androidx.compose.material3.MaterialTheme.shapes,
+    ) {
+        androidx.compose.runtime.CompositionLocalProvider(
+            androidx.compose.material3.LocalTextStyle provides style,
+            androidx.compose.material3.LocalContentColor provides scheme.onSurface,
+            LocalCardHaze provides null,
+            LocalGlassBackdrop provides null,
+            LocalFrostedWindow provides frosted,
+            content = content,
+        )
+    }
+}
+
+/** True inside a glass dialog whose window blurs what is behind it. */
+val LocalFrostedWindow = staticCompositionLocalOf { false }
+
+/** Screenshot tests: draw dialogs as on a phone with window blur (the blur itself is faked in the test). */
+internal object GlassPreview { var forceFrosted = false }
+
+@Composable
+private fun windowBlurOn(): Boolean {
+    if (GlassPreview.forceFrosted) return true
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) return false
+    val wm = androidx.compose.ui.platform.LocalContext.current.getSystemService(android.view.WindowManager::class.java)
+    return runCatching { wm.isCrossWindowBlurEnabled }.getOrDefault(false)
+}
+
+/** Call inside a dialog's content: blurs the screen behind the dialog window, with a light dim. */
+@Composable
+fun FrostBehind() {
+    if (!LocalFrostedWindow.current || Build.VERSION.SDK_INT < Build.VERSION_CODES.S) return
+    val window = (androidx.compose.ui.platform.LocalView.current.parent as? androidx.compose.ui.window.DialogWindowProvider)?.window ?: return
+    val radius = with(androidx.compose.ui.platform.LocalDensity.current) { 28.dp.roundToPx() }
+    androidx.compose.runtime.SideEffect {
+        window.addFlags(android.view.WindowManager.LayoutParams.FLAG_BLUR_BEHIND)
+        window.attributes = window.attributes.apply { blurBehindRadius = radius; dimAmount = 0.18f }
+    }
+}
+
+/** [androidx.compose.material3.AlertDialog] in glass: a frosted pane with the rim. */
+@Composable
+fun SolidAlertDialog(
+    onDismissRequest: () -> Unit,
+    confirmButton: @Composable () -> Unit,
+    modifier: Modifier = Modifier,
+    dismissButton: (@Composable () -> Unit)? = null,
+    icon: (@Composable () -> Unit)? = null,
+    title: (@Composable () -> Unit)? = null,
+    text: (@Composable () -> Unit)? = null,
+) = SolidPanel {
+    val shape = androidx.compose.material3.AlertDialogDefaults.shape
+    androidx.compose.material3.AlertDialog(
+        onDismissRequest, { FrostBehind(); confirmButton() }, modifier.glassy(shape, lens = false, shadow = false), dismissButton, icon, title, text,
+        shape = shape, tonalElevation = 0.dp,
+    )
+}
+
+/** [androidx.compose.ui.window.Dialog], solid in the glass theme. */
+@Composable
+fun SolidDialog(
+    onDismissRequest: () -> Unit,
+    properties: androidx.compose.ui.window.DialogProperties = androidx.compose.ui.window.DialogProperties(),
+    content: @Composable () -> Unit,
+) = SolidPanel { androidx.compose.ui.window.Dialog(onDismissRequest, properties) { FrostBehind(); content() } }
+
+
+/**
+ * Lists that scroll on menu screens melt away at their top edge instead of being cut by a hard line
+ * under the status bar (owner, 2026-11-24). The fade is as tall as the screens' own top padding, so
+ * nothing is faded while the list rests at the top.
+ */
+/** Height of the status bar that menu screens now run under; their scrolling content starts below it. */
+val LocalTopInset = androidx.compose.runtime.staticCompositionLocalOf { 0.dp }
+
+/** Top padding for a screen's scrolling content: the status bar, which the content can scroll under. */
+fun Modifier.belowStatusBar(): Modifier = composed { Modifier.padding(top = LocalTopInset.current) }
+
+fun Modifier.topFade(height: androidx.compose.ui.unit.Dp = 16.dp): Modifier = this
+    .graphicsLayer { compositingStrategy = androidx.compose.ui.graphics.CompositingStrategy.Offscreen }
+    .drawWithContent {
+        drawContent()
+        val h = height.toPx().coerceAtMost(size.height)
+        drawRect(
+            androidx.compose.ui.graphics.Brush.verticalGradient(
+                0f to Color.Transparent, 0.35f to Color.Black.copy(alpha = 0.25f), 0.7f to Color.Black.copy(alpha = 0.75f), 1f to Color.Black,
+                startY = 0f, endY = h,
+            ),
+            size = androidx.compose.ui.geometry.Size(size.width, h),
+            blendMode = androidx.compose.ui.graphics.BlendMode.DstIn,
+        )
+    }

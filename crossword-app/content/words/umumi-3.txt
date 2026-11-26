@@ -1,0 +1,71 @@
+# Ümumi sözlər (3): müxtəlif gündəlik sözlər. Format: SÖZ | çətin | orta | asan
+AĞRI | Həkimə aparan | Baş ..., diş ... | Sızıltı
+ƏSNƏK | Yuxu gələndə | Ağzı açmaq | Yorğunluq izi
+ASQIRIQ | Burun partlayışı | Soyuq dəyəndə | Apçı!
+ÖSKÜRƏK | Boğaz qıcığı | Xəstəlik səsi | Öhö-öhö
+HƏRARƏT | Termometr ölçər | Qızdırma | İstilik dərəcəsi
+DƏRMAN | Aptekdən alınır | Həb, məlhəm | Müalicə vasitəsi
+MƏLHƏM | Yaraya sürtülür | Krem dərman | Dərman yağı
+SARĞI | Bint | Yaraya dolanır | Ağ bağlama
+ŞPRİS | İynə vurulan | Tibb aləti | İynəli boru
+NƏBZ | Biləkdə vuran | Ürək döyüntüsü | Dəqiqədə 70
+YUXUSUZLUQ | Gecə yatmamaq | Bezdirici gecə | Ayıq gecə
+YORĞUNLUQ | Taqətsizlik | Əldən düşmə | Halsızlıq
+ACLIQ | Yemək istəyi | Qarın quruldar | Toxluğun ziddi
+SUSUZLUQ | Su istəyi | Dodaq quruyar | Quraqlıq hissi
+DİNCLİK | Sakit həyat | Hüzurlu gün | Səs-küysüz an
+SƏYAHƏT | Uzaq gəzinti | Turizm | Yol macərası
+TURİST | Səyyah | Gəzməyə gələn | Səfər adamı
+SƏYYAH | Dünya gəzən | Marko Polo kimi | Gəzərgi
+BƏLƏDÇİ | Gid | Turları aparan | Yolu tanıyan
+XATİRAT | Memuar | Yaddaş kitabı | Keçmişdən yazı
+GÜNDƏLİK | Gün dəftəri | Şəxsi qeydlər | Məktəb jurnalı
+POÇTXANA | Poçt şöbəsi | Marka satılan | Məktub evi
+BAĞLAMA | Poçt qutusu | Göndərmə | Bükülü pay
+ÜNVAN | Küçə və ev | Məktubda yazılır | Poçt yazısı
+NÖMRƏ | Rəqəm | Telefon ... | Ev ...
+İMZA | Adın yazısı | Sənəd altında | Qol çəkmə
+FOTOAPARAT | Şəkil çəkən | Kamera | Obyektivli cihaz
+KAMERA | Video çəkən | Fotoaparat | Obyektiv
+LUPA | Böyüdücü şüşə | Saatsaz tutar | Kiçik böyüdücü
+EYNƏK | Göz üçün şüşə | Burun üstündə | Gözlük
+DÜRBÜN | Uzağı yaxın edən | İki borulu | Kiçik teleskop
+TELESKOP | Ulduz baxan | Rəsədxana cihazı | Göy borusu
+MİKROSKOP | Hüceyrə görən | Laborant cihazı | Kiçiyi göstərən
+KİLOQRAM | Min qram | Çəki vahidi | Kq
+METR | Yüz santimetr | Uzunluq vahidi | Ruletka ölçüsü
+LİTR | Həcm vahidi | Bir şüşə su | Min millilitr
+DƏRƏCƏ | Termometr vahidi | Pillə | Səviyyə
+SƏVİYYƏ | Hündürlük | Dərəcə | Dəniz ...
+BUCAQ | İki xətt arası | Doxsan dərəcə | Küncün içi
+DAİRƏ | Pərgarla çəkilir | Halqa şəkli | Yumru fiqur
+KVADRAT | Dörd tən tərəf | Dördkünc | Şahmat xanası
+XƏTT | Cızıq | Düz ... | Xətkeşlə çəkilir
+NÖQTƏ | Cümlə sonu | Kiçik ləkə | Vergüldən böyük
+VERGÜL | Durğu işarəsi | Cümlədə fasilə | Nöqtəli quyruq
+HƏRF | Əlifba üzvü | A, B, C | Yazı işarəsi
+SÖZLÜK | Kiçik lüğət | Sözlər kitabı | Terminlər
+ATALARSÖZÜ | Xalq hikməti | Məsəl | Qısa nəsihət
+MƏSƏL | Atalar sözü | İbrətli söz | Xalq deyimi
+HİKMƏT | Müdrik söz | Fəlsəfə | Ağıllı fikir
+NƏSİHƏT | Məsləhət | Öyüd | Yol göstərmə
+ÖYÜD | Nəsihət | Ata sözü | Tərbiyə sözü
+MƏSLƏHƏT | Tövsiyə | Fikir vermə | Kömək sözü
+TƏRBİYƏ | Ədəb öyrətmə | Böyütmə | Yaxşı ...
+ƏDƏB | Nəzakət | Tərbiyəlilik | Yaxşı rəftar
+SAYĞI | Ehtiramlı diqqət | Dəyər vermə | Hörmət etmə
+EHTİRAM | Dərin hörmət | Sayğı | Baş əymə
+VƏD | Söz vermə | Əhd | Boyun olma
+ƏHD | And, vəd | Söz-peyman | Müqavilə
+BORC | Alınan pul | Vəzifə | Kredit
+QƏNAƏT | Az xərcləmə | Kifayət | İsrafın ziddi
+İSRAF | Boş xərc | Qənaətin ziddi | Hədər xərc
+QAZANC | Gəlir | Mənfəət | Pul qazanmaq
+GƏLİR | Qazanc | Mədaxil | Xərcin ziddi
+XƏRC | Məsrəf | Pul gedişi | Gəlirin ziddi
+MAAŞ | Aylıq pul | Əmək haqqı | İşçi pulu
+PUL | Manat, qəpik | Cibdə saxlanılır | Ödəniş vasitəsi
+QƏPİK | Manatın hissəsi | Xırda pul | Sikkə pulu
+MANAT | Azərbaycan pulu | Yüz qəpik | Milli valyuta
+BANK | Pul evi | Əmanət yeri | Kassa idarəsi
+ƏMANƏT | Saxlanılan pul | Etibar edilən | Depozit

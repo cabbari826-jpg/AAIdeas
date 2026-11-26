@@ -1,0 +1,1729 @@
+{
+ "formatVersion": 1,
+ "packId": "az-cografiya",
+ "language": "az",
+ "normalization": "az-v1",
+ "contentVersion": 1,
+ "title": "Coğrafiya",
+ "levels": [
+  {
+   "id": "az-cografiya-001",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "TOKİO",
+     "clue": "Asiya paytaxtı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ən iri meqapolis",
+      "Yapon paytaxtı",
+      "Asiya paytaxtı"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "TÜRKİYƏ",
+     "clue": "Qardaş ölkə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Anadolu",
+      "Ankara ölkəsi",
+      "Qardaş ölkə"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "İTALİYA",
+     "clue": "Pizza vətəni",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Çəkmə forması",
+      "Roma ölkəsi",
+      "Pizza vətəni"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "İSTİSU",
+     "clue": "Bulaq adı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Kəlbəcər suyu",
+      "Mineral su",
+      "Bulaq adı"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "RİQA",
+     "clue": "Daugava şəhəri",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Latviya paytaxtı",
+      "Baltik şəhəri",
+      "Daugava şəhəri"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 1,
+     "clueCol": 6,
+     "answer": "FÜZULİ",
+     "clue": "Qarabağ rayonu",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Şair adlı şəhər",
+      "Hava limanı",
+      "Qarabağ rayonu"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 2,
+     "answer": "MALİ",
+     "clue": "Afrika dövləti",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Timbuktu ölkəsi",
+      "Sahara ölkəsi",
+      "Afrika dövləti"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "RUSİYA",
+    "cells": [
+     [
+      3,
+      1
+     ],
+     [
+      5,
+      6
+     ],
+     [
+      5,
+      2
+     ],
+     [
+      5,
+      4
+     ],
+     [
+      6,
+      1
+     ],
+     [
+      7,
+      4
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-cografiya-002",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "AFRİKA",
+     "clue": "Qara qitə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "İsti qitə",
+      "Nil qitəsi",
+      "Qara qitə"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "MEKSİKA",
+     "clue": "ABŞ-ın cənubu",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Asteklər ölkəsi",
+      "Sombrero ölkəsi",
+      "ABŞ-ın cənubu"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "TBİLİSİ",
+     "clue": "Qonşu paytaxt",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Kür üstündə",
+      "Gürcü paytaxtı",
+      "Qonşu paytaxt"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "KENİYA",
+     "clue": "Afrika ölkəsi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Safari ölkəsi",
+      "Nayrobi ölkəsi",
+      "Afrika ölkəsi"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 1,
+     "clueCol": 6,
+     "answer": "KANADA",
+     "clue": "ABŞ qonşusu",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ağcaqayın ölkəsi",
+      "Ottava ölkəsi",
+      "ABŞ qonşusu"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "MALTA",
+     "clue": "Valletta",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Cəngavər adası",
+      "Kiçik ada ölkə",
+      "Valletta"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 2,
+     "answer": "LİMA",
+     "clue": "And şəhəri",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Peru paytaxtı",
+      "Okean sahili",
+      "And şəhəri"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "NABRAN",
+    "cells": [
+     [
+      4,
+      6
+     ],
+     [
+      1,
+      5
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      7,
+      3
+     ],
+     [
+      7,
+      1
+     ],
+     [
+      3,
+      3
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-cografiya-003",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "VOLQA",
+     "clue": "Xəzərə axır",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "İtil",
+      "Rus çayı",
+      "Xəzərə axır"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "AVROPA",
+     "clue": "Fransa qitəsi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Köhnə qitə",
+      "Qərb qitəsi",
+      "Fransa qitəsi"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "ABŞERON",
+     "clue": "Yarımada",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Neft yarımadası",
+      "Bakı yanı",
+      "Yarımada"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "VYANA",
+     "clue": "Dunay şəhəri",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Valslar şəhəri",
+      "Avstriya mərkəzi",
+      "Dunay şəhəri"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 1,
+     "clueCol": 6,
+     "answer": "SAHARA",
+     "clue": "Qum dənizi adı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ən böyük səhra",
+      "Afrika səhrası",
+      "Qum dənizi adı"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 2,
+     "answer": "ŞUŞA",
+     "clue": "Musiqi beşiyi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qarabağın tacı",
+      "Xarıbülbül yeri",
+      "Musiqi beşiyi"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "SENA",
+     "clue": "Luvr çayı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Paris çayı",
+      "Fransız çayı",
+      "Luvr çayı"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "SALYAN",
+    "cells": [
+     [
+      7,
+      1
+     ],
+     [
+      3,
+      6
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      5
+     ],
+     [
+      1,
+      4
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-cografiya-004",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 1,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "LERİK",
+     "clue": "Dağ rayonu",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Çox yaşayanlar",
+      "Talış dağları",
+      "Dağ rayonu"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "BALTİK",
+     "clue": "Şimal dənizi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Kəhrəba dənizi",
+      "Riqa dənizi",
+      "Şimal dənizi"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "BATABAT",
+     "clue": "Yay yeri",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Üzən ada",
+      "Naxçıvan gölü",
+      "Yay yeri"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "TƏRTƏR",
+     "clue": "Qarabağ çayı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Su anbarı adı",
+      "Çay və rayon",
+      "Qarabağ çayı"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 1,
+     "clueCol": 3,
+     "answer": "URAL",
+     "clue": "Rusiya dağları",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qitələr sərhədi",
+      "Daş qurşaq",
+      "Rusiya dağları"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "TEHRAN",
+     "clue": "İran şəhəri",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Milad qülləsi",
+      "İran paytaxtı",
+      "İran şəhəri"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 3,
+     "answer": "NİL",
+     "clue": "Afrika çayı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ən uzun çay",
+      "Misir çayı",
+      "Afrika çayı"
+     ]
+    },
+    {
+     "id": 8,
+     "direction": "DOWN",
+     "clueRow": 4,
+     "clueCol": 4,
+     "answer": "TAR",
+     "clue": "On bir simli",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Sədəfli alət",
+      "Muğam üçlüyündə",
+      "On bir simli"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "ANKARA",
+    "cells": [
+     [
+      6,
+      1
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      5,
+      6
+     ],
+     [
+      7,
+      5
+     ],
+     [
+      7,
+      4
+     ],
+     [
+      2,
+      1
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-cografiya-005",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 2,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 6,
+     "clueCol": 0,
+     "answer": "DUNAY",
+     "clue": "Avropa çayı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Mavi ... valsı",
+      "Vyana çayı",
+      "Avropa çayı"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 4,
+     "answer": "SAVALAN",
+     "clue": "Cənub zirvəsi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "İranda vulkan",
+      "Ərdəbil dağı",
+      "Cənub zirvəsi"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 2,
+     "answer": "QARAQUM",
+     "clue": "Orta Asiya qumu",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Türkmən səhrası",
+      "Qara qumlar",
+      "Orta Asiya qumu"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 4,
+     "clueCol": 0,
+     "answer": "ŞAMAXI",
+     "clue": "Rəqqasə şəhəri",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Sabirin yurdu",
+      "Şirvan paytaxtı",
+      "Rəqqasə şəhəri"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 2,
+     "clueCol": 0,
+     "answer": "HAVANA",
+     "clue": "Karib şəhəri",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Siqar şəhəri",
+      "Kuba paytaxtı",
+      "Karib şəhəri"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "LAÇIN",
+     "clue": "Qarabağ dağları",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Dəhlizi var",
+      "Quş adlı rayon",
+      "Qarabağ dağları"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "QANIX",
+    "cells": [
+     [
+      1,
+      2
+     ],
+     [
+      2,
+      6
+     ],
+     [
+      2,
+      5
+     ],
+     [
+      4,
+      6
+     ],
+     [
+      4,
+      5
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-cografiya-006",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 2,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "PARİS",
+     "clue": "Eyfel şəhəri",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Luvr şəhəri",
+      "Fransa paytaxtı",
+      "Eyfel şəhəri"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "MOSKVA",
+     "clue": "Qırmızı meydan",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Kreml şəhəri",
+      "Rusiya paytaxtı",
+      "Qırmızı meydan"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "BADAMLI",
+     "clue": "Qazlı su",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Naxçıvan suyu",
+      "Şəfalı bulaq",
+      "Qazlı su"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 2,
+     "clueCol": 0,
+     "answer": "AMAZON",
+     "clue": "Cəngəllik çayı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ən sulu çay",
+      "Braziliya çayı",
+      "Cəngəllik çayı"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 3,
+     "clueCol": 6,
+     "answer": "QANQ",
+     "clue": "Hind çayı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Müqəddəs çay",
+      "Benares çayı",
+      "Hind çayı"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 2,
+     "answer": "İRAQ",
+     "clue": "Ərəb ölkəsi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Bağdad ölkəsi",
+      "İki çay arası",
+      "Ərəb ölkəsi"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "DOWN",
+     "clueRow": 4,
+     "clueCol": 4,
+     "answer": "KÜR",
+     "clue": "Xəzərə tökülür",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ölkənin ən uzunu",
+      "Mingəçevir çayı",
+      "Xəzərə tökülür"
+     ]
+    },
+    {
+     "id": 8,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 5,
+     "answer": "QOZ",
+     "clue": "Qərzəkli meyvə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Beyinə bənzər",
+      "Qabıqlı meyvə",
+      "Qərzəkli meyvə"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "MİNSK",
+    "cells": [
+     [
+      5,
+      1
+     ],
+     [
+      7,
+      3
+     ],
+     [
+      6,
+      6
+     ],
+     [
+      5,
+      3
+     ],
+     [
+      5,
+      4
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-cografiya-007",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 2,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 5,
+     "answer": "MƏKKƏ",
+     "clue": "Müqəddəs şəhər",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Kəbə şəhəri",
+      "Həcc yeri",
+      "Müqəddəs şəhər"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "AĞDAM",
+     "clue": "Azad olunmuş",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qarabağ qapısı",
+      "Çörək muzeyi",
+      "Azad olunmuş"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "DAŞKƏND",
+     "clue": "Türküstan şəhəri",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Özbək paytaxtı",
+      "Pambıq şəhəri",
+      "Türküstan şəhəri"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 1,
+     "answer": "QƏTƏR",
+     "clue": "Qazlı ölkə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Doha ölkəsi",
+      "Körfəz əmirliyi",
+      "Qazlı ölkə"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 2,
+     "answer": "ŞƏKİ",
+     "clue": "Halvası məşhur",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Xan sarayı yeri",
+      "Piti vətəni",
+      "Halvası məşhur"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "MADRİD",
+     "clue": "Real komandası",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Prado şəhəri",
+      "İspan paytaxtı",
+      "Real komandası"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "ARAZ",
+     "clue": "Kürün qolu",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Xudafərin çayı",
+      "Sərhəd çayı",
+      "Kürün qolu"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "ŞƏMKİR",
+    "cells": [
+     [
+      3,
+      3
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      7,
+      1
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      3,
+      6
+     ],
+     [
+      2,
+      1
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-cografiya-008",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 2,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "DEHLİ",
+     "clue": "Hindistan şəhəri",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qırmızı qala",
+      "Hind paytaxtı",
+      "Hindistan şəhəri"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "ORDUBAD",
+     "clue": "Araz sahili",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ərik şəhəri",
+      "Naxçıvan şəhəri",
+      "Araz sahili"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "OTTAVA",
+     "clue": "Şimal paytaxtı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Kanada paytaxtı",
+      "Parlament təpəsi",
+      "Şimal paytaxtı"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 6,
+     "answer": "ASTARA",
+     "clue": "Çay rayonu",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "İranla sərhəd",
+      "Cənub ucu",
+      "Çay rayonu"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "BOSFOR",
+     "clue": "Boğaz",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "İstanbul boğazı",
+      "Dəniz qapısı",
+      "Boğaz"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "TUNİS",
+     "clue": "Məğrib ölkəsi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Karfagen yeri",
+      "Şimali Afrika",
+      "Məğrib ölkəsi"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "DAN",
+     "clue": "Şəfəq",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "... yeri sökülür",
+      "Səhər tezdən",
+      "Şəfəq"
+     ]
+    },
+    {
+     "id": 8,
+     "direction": "DOWN",
+     "clueRow": 4,
+     "clueCol": 4,
+     "answer": "FİL",
+     "clue": "İri heyvan",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Xortumlu",
+      "Hind nəhəngi",
+      "İri heyvan"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "ELBRUS",
+    "cells": [
+     [
+      7,
+      2
+     ],
+     [
+      7,
+      4
+     ],
+     [
+      5,
+      1
+     ],
+     [
+      5,
+      6
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      2,
+      6
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-cografiya-009",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 3,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "İSVEÇ",
+     "clue": "Şimal ölkəsi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Nobel vətəni",
+      "Stokholm ölkəsi",
+      "Şimal ölkəsi"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "İMİŞLİ",
+     "clue": "Mil düzü",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Araz yaxını",
+      "Pambıq rayonu",
+      "Mil düzü"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "YEVLAX",
+     "clue": "Dəmiryol qovşağı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Kür körpüsü",
+      "Mərkəzi qovşaq",
+      "Dəmiryol qovşağı"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "XAÇMAZ",
+     "clue": "Meyvə rayonu",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Nabran yanında",
+      "Şimal sahili",
+      "Meyvə rayonu"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 6,
+     "answer": "XƏZƏR",
+     "clue": "Kaspi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ən böyük göl",
+      "Bakının dənizi",
+      "Kaspi"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 1,
+     "answer": "SİBİR",
+     "clue": "Rusiya şərqi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Tayqa diyarı",
+      "Şaxta diyarı",
+      "Rusiya şərqi"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 1,
+     "answer": "YUXU",
+     "clue": "Yatanda görülür",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Gecə görünən",
+      "Röya",
+      "Yatanda görülür"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "ASİYA",
+    "cells": [
+     [
+      5,
+      5
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      5,
+      2
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-cografiya-010",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 3,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "AFİNA",
+     "clue": "Olimpiya yurdu",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Akropol şəhəri",
+      "Yunan paytaxtı",
+      "Olimpiya yurdu"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "ALYASKA",
+     "clue": "Soyuq ştat",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Satılan torpaq",
+      "ABŞ ştatı",
+      "Soyuq ştat"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "ASTANA",
+     "clue": "Bozqır paytaxtı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Nur-Sultan",
+      "Qazax paytaxtı",
+      "Bozqır paytaxtı"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "DOWN",
+     "clueRow": 1,
+     "clueCol": 6,
+     "answer": "FRANSA",
+     "clue": "Paris ölkəsi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qalliya",
+      "Eyfel ölkəsi",
+      "Paris ölkəsi"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 4,
+     "answer": "TEMZA",
+     "clue": "Britaniya çayı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "London çayı",
+      "İngilis çayı",
+      "Britaniya çayı"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 2,
+     "answer": "OMAN",
+     "clue": "Ərəbistan ucu",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Muskat ölkəsi",
+      "Ərəb sultanlığı",
+      "Ərəbistan ucu"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 2,
+     "answer": "ƏTİR",
+     "clue": "Duxi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Xoş iy",
+      "Flakonda satılır",
+      "Duxi"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "ATLANTİK",
+    "cells": [
+     [
+      4,
+      6
+     ],
+     [
+      7,
+      3
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      7,
+      6
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      6,
+      1
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-cografiya-011",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 3,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "NORVEÇ",
+     "clue": "Şimal krallığı",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Fiordlar ölkəsi",
+      "Oslo ölkəsi",
+      "Şimal krallığı"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 1,
+     "answer": "SİYƏZƏN",
+     "clue": "Xəzər sahili",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Beşbarmaq yanı",
+      "Neftli rayon",
+      "Xəzər sahili"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "ZƏRDAB",
+     "clue": "Mərkəz rayonu",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ziyalının yurdu",
+      "Kür sahili şəhər",
+      "Mərkəz rayonu"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 3,
+     "answer": "ŞƏRUR",
+     "clue": "Sədərək qonşusu",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Türkiyəyə yaxın",
+      "Naxçıvan düzü",
+      "Sədərək qonşusu"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 5,
+     "answer": "POLŞA",
+     "clue": "Avropa ölkəsi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Şopenin vətəni",
+      "Varşava ölkəsi",
+      "Avropa ölkəsi"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 2,
+     "answer": "KİPR",
+     "clue": "Ada ölkə",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Afrodita adası",
+      "Aralıq adası",
+      "Ada ölkə"
+     ]
+    },
+    {
+     "id": 7,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "YAŞIL",
+     "clue": "Yarpaq rəngi",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ot rəngi",
+      "Svetoforda keç",
+      "Yarpaq rəngi"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "PEKİN",
+    "cells": [
+     [
+      1,
+      5
+     ],
+     [
+      7,
+      5
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      7,
+      1
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  },
+  {
+   "id": "az-cografiya-012",
+   "rows": 8,
+   "cols": 7,
+   "difficulty": 3,
+   "entries": [
+    {
+     "id": 1,
+     "direction": "ACROSS",
+     "clueRow": 1,
+     "clueCol": 0,
+     "answer": "ŞAHBUZ",
+     "clue": "Dağ kurortu",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Batabat gölü",
+      "Naxçıvan dağları",
+      "Dağ kurortu"
+     ]
+    },
+    {
+     "id": 2,
+     "direction": "DOWN",
+     "clueRow": 0,
+     "clueCol": 3,
+     "answer": "HİMALAY",
+     "clue": "Tibet dağları",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Qar məskəni",
+      "Ən uca dağlar",
+      "Tibet dağları"
+     ]
+    },
+    {
+     "id": 3,
+     "direction": "ACROSS",
+     "clueRow": 7,
+     "clueCol": 0,
+     "answer": "GÖYÇAY",
+     "clue": "Şirvan rayonu",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Nar festivalı",
+      "Nar diyarı",
+      "Şirvan rayonu"
+     ]
+    },
+    {
+     "id": 4,
+     "direction": "DOWN",
+     "clueRow": 2,
+     "clueCol": 6,
+     "answer": "HAVAY",
+     "clue": "Okean adaları",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ada ştatı",
+      "Aloha",
+      "Okean adaları"
+     ]
+    },
+    {
+     "id": 5,
+     "direction": "ACROSS",
+     "clueRow": 5,
+     "clueCol": 0,
+     "answer": "ÇİLİ",
+     "clue": "Cənubi Amerika",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Ən uzun ölkə",
+      "Santyaqo ölkəsi",
+      "Cənubi Amerika"
+     ]
+    },
+    {
+     "id": 6,
+     "direction": "ACROSS",
+     "clueRow": 3,
+     "clueCol": 0,
+     "answer": "ROMA",
+     "clue": "Kolizey şəhəri",
+     "source": "claude-draft",
+     "status": "candidate",
+     "clues": [
+      "Əbədi şəhər",
+      "İtaliya paytaxtı",
+      "Kolizey şəhəri"
+     ]
+    }
+   ],
+   "keyword": {
+    "word": "HALVA",
+    "cells": [
+     [
+      3,
+      6
+     ],
+     [
+      6,
+      6
+     ],
+     [
+      5,
+      3
+     ],
+     [
+      5,
+      6
+     ],
+     [
+      4,
+      6
+     ]
+    ],
+    "source": "claude-draft"
+   }
+  }
+ ]
+}
