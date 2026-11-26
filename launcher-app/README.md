@@ -25,3 +25,8 @@ newest: https://github.com/cabbari826-jpg/AAIdeas/releases?q=steklo
 - Weather card tap asks for location or refreshes.
 - "Жидкое стекло" switch (Android 13+).
 - Widgets page left of the home screen.
+
+## 0.3
+- Sturdier icon processing (bad monochrome layers ignored, plates peeled, readable glass).
+- Page swipes no longer stolen by the shade swipe.
+- "Отправить значки для проверки" in settings (prototype).
