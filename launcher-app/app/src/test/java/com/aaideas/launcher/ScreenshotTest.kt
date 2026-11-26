@@ -6,6 +6,8 @@ import android.graphics.Canvas
 import android.graphics.Matrix
 import android.graphics.Paint
 import android.graphics.RectF
+import androidx.compose.ui.draw.clip
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -284,6 +286,59 @@ class ScreenshotTest {
             }
         }
         rule.onRoot().captureRoboImage("screenshots/real-icons.png")
+    }
+
+    /**
+     * Icons built like the ones that went wrong in 0.2 on the owner's phone:
+     * a solid block as the "monochrome" layer (Azercell, Azərişıq), a colour picture as the
+     * monochrome layer (Araz), a purple card on white (atb360), a pale background (4PDA, Camera),
+     * a many-coloured logo on white (Sketch). Top row: original, bottom row: 0.3.
+     */
+    @Test fun hardIcons() {
+        val big = 324
+        val res = ApplicationProvider.getApplicationContext<android.content.Context>().resources
+        fun layer(draw: (Canvas, Paint) -> Unit) = android.graphics.drawable.BitmapDrawable(res,
+            Bitmap.createBitmap(big, big, Bitmap.Config.ARGB_8888).apply { draw(Canvas(this), Paint(Paint.ANTI_ALIAS_FLAG)) })
+        fun color(c: Long) = android.graphics.drawable.ColorDrawable(c.toInt())
+        fun text(c: Canvas, p: Paint, t: String, size: Float, col: Long, y: Float = big / 2f + size / 3) {
+            p.color = col.toInt(); p.textSize = size; p.isFakeBoldText = true; p.textAlign = Paint.Align.CENTER; c.drawText(t, big / 2f, y, p)
+        }
+        val m = big / 2f
+        // Azercell-like: purple background, white card with the purple logo, card copied as "monochrome".
+        val card = layer { c, p -> p.color = 0xFFFFFFFF.toInt(); c.drawRect(m - 70, m - 70, m + 70, m + 70, p); p.color = 0xFF5B2C8F.toInt(); c.drawCircle(m, m, 38f, p); p.color = 0xFFFFFFFF.toInt(); c.drawCircle(m, m, 20f, p) }
+        val azercell = android.graphics.drawable.AdaptiveIconDrawable(color(0xFF5B2C8F), card, card)
+        // Araz-like: white background, green/orange word, the same picture as "monochrome".
+        val word = layer { c, p -> text(c, p, "araz", 62f, 0xFF4CAF50); text(c, p, "15", 40f, 0xFFF57C00, m + 60) }
+        val araz = android.graphics.drawable.AdaptiveIconDrawable(color(0xFFFFFFFF), word, word)
+        // atb360-like: white background, purple rounded card with white text.
+        val atb = android.graphics.drawable.AdaptiveIconDrawable(color(0xFFFFFFFF), layer { c, p ->
+            p.color = 0xFF6D28D9.toInt(); c.drawRoundRect(RectF(m - 72, m - 60, m + 72, m + 60), 26f, 26f, p)
+            text(c, p, "atb", 50f, 0xFFFFFFFF, m - 4); text(c, p, "360", 40f, 0xFFFFFFFF, m + 40)
+        }, null)
+        // 4PDA-like: pale blue-grey background, white "4".
+        val pale = android.graphics.drawable.AdaptiveIconDrawable(color(0xFFC9D6E8), layer { c, p -> text(c, p, "4", 130f, 0xFFFFFFFF) }, null)
+        // Sketch-like: white background, many-coloured fan.
+        val fan = android.graphics.drawable.AdaptiveIconDrawable(color(0xFFFFFFFF), layer { c, p ->
+            val cols = longArrayOf(0xFFE53935, 0xFFFB8C00, 0xFFFDD835, 0xFF43A047, 0xFF1E88E5, 0xFF8E24AA)
+            for ((i, col) in cols.withIndex()) {
+                p.color = col.toInt()
+                c.drawArc(RectF(m - 80, m - 70, m + 80, m + 90), 200f + i * 23.3f, 23.3f, true, p)
+            }
+            p.color = 0xFF333333.toInt(); c.drawRect(m - 22, m + 10, m + 22, m + 60, p)
+        }, null)
+        val list = listOf(azercell, araz, atb, pale, fan)
+        val processed = list.map { IconProcessor.process(it, 216) }
+        rule.setContent {
+            Frame {
+                Column(Modifier.fillMaxSize().padding(top = 120.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(28.dp)) {
+                    Row(horizontalArrangement = Arrangement.spacedBy(18.dp)) {
+                        for (d in list) Image(d.toBitmap(216, 216).asImageBitmap(), null, Modifier.size(56.dp).clip(RoundedCornerShape(30)))
+                    }
+                    Row(horizontalArrangement = Arrangement.spacedBy(18.dp)) { for (p in processed) GlassAppIcon(p, "", 56.dp, null, Modifier) }
+                }
+            }
+        }
+        rule.onRoot().captureRoboImage("screenshots/hard-icons.png")
     }
 
     @Suppress("unused") private fun block() = runBlocking { }

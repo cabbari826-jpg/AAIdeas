@@ -2,7 +2,11 @@ package com.aaideas.launcher.ui
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
-import androidx.compose.foundation.gestures.detectVerticalDragGestures
+import androidx.compose.foundation.gestures.awaitEachGesture
+import androidx.compose.foundation.gestures.awaitFirstDown
+import androidx.compose.ui.input.pointer.positionChange
+import androidx.compose.ui.input.pointer.PointerEventPass
+import kotlin.math.abs
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -97,16 +101,7 @@ fun HomeScreen(ui: HomeUi, pager: PagerState, modifier: Modifier = Modifier) {
             Box(
                 Modifier.fillMaxSize()
                     .pointerInput(Unit) { detectTapGestures(onLongPress = { ui.onSettings() }) }
-                    .pointerInput(Unit) {
-                        var total = 0f
-                        val threshold = 48.dp.toPx()
-                        detectVerticalDragGestures(
-                            onDragStart = { total = 0f },
-                            onDragEnd = {
-                                if (total > threshold) ui.onSwipeDown() else if (total < -threshold) ui.onSwipeUp()
-                            },
-                        ) { change, dy -> total += dy; change.consume() }
-                    },
+                    .pointerInput(Unit) { detectVerticalSwipe(ui.onSwipeDown, ui.onSwipeUp) },
             ) {
                 if (page == HOME_PAGE) FirstPage(ui) else AppGrid(pages.getOrNull(page - HOME_PAGE - 1).orEmpty(), ui)
             }
@@ -114,6 +109,36 @@ fun HomeScreen(ui: HomeUi, pager: PagerState, modifier: Modifier = Modifier) {
         PageDots(count = HOME_PAGE + 1 + pages.size, current = pager.currentPage)
         SearchPill(onClick = ui.onSearch, modifier = Modifier.padding(horizontal = SIDE).padding(top = 14.dp, bottom = 16.dp))
         Dock(ui, Modifier.padding(horizontal = SIDE).padding(bottom = 18.dp))
+    }
+}
+
+/**
+ * Swipe down / up on a page. Decides only once the finger has clearly moved, and only for a
+ * mostly vertical move; anything sideways is left alone so the pages always turn.
+ */
+private suspend fun androidx.compose.ui.input.pointer.PointerInputScope.detectVerticalSwipe(onDown: () -> Unit, onUp: () -> Unit) {
+    val decide = viewConfiguration.touchSlop * 2
+    val fire = 48.dp.toPx()
+    awaitEachGesture {
+        val first = awaitFirstDown(requireUnconsumed = false)
+        var dx = 0f; var dy = 0f
+        var vertical = false
+        while (true) {
+            val ev = awaitPointerEvent(PointerEventPass.Main)
+            val ch = ev.changes.firstOrNull { it.id == first.id } ?: break
+            if (!ch.pressed) break
+            val d = ch.positionChange()
+            dx += d.x; dy += d.y
+            if (!vertical) {
+                if (abs(dx) > decide && abs(dx) >= abs(dy)) return@awaitEachGesture // sideways: pages
+                if (abs(dy) > decide && abs(dy) > abs(dx) * 1.7f) vertical = true
+            }
+            if (vertical) { ch.consume(); continue }
+            // Same event after the pager has seen it: if the pager started turning, step aside.
+            val late = awaitPointerEvent(PointerEventPass.Final).changes.firstOrNull { it.id == first.id }
+            if (late == null || late.isConsumed) return@awaitEachGesture
+        }
+        if (vertical) { if (dy > fire) onDown() else if (dy < -fire) onUp() }
     }
 }
 

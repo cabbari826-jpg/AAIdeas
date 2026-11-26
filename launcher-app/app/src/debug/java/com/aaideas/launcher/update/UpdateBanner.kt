@@ -36,6 +36,7 @@ import com.aaideas.launcher.ui.GlassButton
 import com.aaideas.launcher.ui.Glyphs
 import com.aaideas.launcher.ui.LocalInk
 import com.aaideas.launcher.ui.MenuRow
+import com.aaideas.launcher.ui.Sep
 import com.aaideas.launcher.ui.glass
 import kotlinx.coroutines.launch
 
@@ -71,6 +72,12 @@ fun UpdateSettingsRow() {
             }
         }
     }, trailing = status ?: BuildConfig.VERSION_NAME)
+    Sep()
+    val context = androidx.compose.ui.platform.LocalContext.current
+    var exporting by remember { mutableStateOf(false) }
+    MenuRow(Glyphs.Image, "Отправить значки для проверки", ink.text, {
+        if (!exporting) { exporting = true; scope.launch { IconExport.share(context); exporting = false } }
+    }, trailing = if (exporting) "Собираю…" else null)
 }
 
 /** Prototype-only updater: on every return to the launcher, offers a newer build if there is one. */
