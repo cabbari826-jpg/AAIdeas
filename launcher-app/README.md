@@ -18,3 +18,10 @@ crossword; it moves to its own repository later.
 Build: `./gradlew assembleDebug`. Screenshots: `./gradlew testDebugUnitTest -Proborazzi.test.record=true`
 (written to `app/screenshots/`). CI publishes pre-releases `steklo-N` (asset `steklo.apk`);
 newest: https://github.com/cabbari826-jpg/AAIdeas/releases?q=steklo
+
+## 0.2
+- Icons keep the original colour, picture icons get their white drawing pulled out.
+- Apps open by growing from the icon; swipe down opens the notification shade, swipe up opens search.
+- Weather card tap asks for location or refreshes.
+- "Жидкое стекло" switch (Android 13+).
+- Widgets page left of the home screen.
