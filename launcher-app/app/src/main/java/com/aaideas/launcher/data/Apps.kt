@@ -159,8 +159,9 @@ class AppRepository(private val context: Context, private val scope: CoroutineSc
         }
     }
 
-    fun launch(app: AppEntry, bounds: Rect?) {
-        runCatching { launcherApps.startMainActivity(app.component, app.user, bounds, null) }
+    fun launch(app: AppEntry, bounds: Rect?, options: android.os.Bundle? = null) {
+        runCatching { launcherApps.startMainActivity(app.component, app.user, bounds, options) }
+            .onFailure { runCatching { launcherApps.startMainActivity(app.component, app.user, bounds, null) } }
     }
 
     fun openDetails(app: AppEntry) {

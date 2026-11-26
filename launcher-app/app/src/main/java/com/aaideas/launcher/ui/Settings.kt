@@ -73,6 +73,13 @@ fun SettingsOverlay(ui: SettingsUi) {
             LabeledSlider("Белизна", p.whiteness, 0..45, "${p.whiteness}%", p::changeWhiteness)
             LabeledSlider("Оттенок приложения", p.tintStrength, 0..90, "${p.tintStrength}%", p::changeTintStrength)
             LabeledSlider("Размер иконок", p.iconScale, 80..120, "${p.iconScale}%", p::changeIconScale)
+            SwitchRow(
+                "Жидкое стекло",
+                p.liquid && LiquidLens.supported,
+                p::changeLiquid,
+                note = if (LiquidLens.supported) "Края преломляют обои, как линза" else "Нужен Android 13 или новее",
+                enabled = LiquidLens.supported,
+            )
         }
 
         Card("ОБОИ") {
@@ -152,10 +159,17 @@ private fun LabeledSlider(title: String, value: Int, range: IntRange, shown: Str
 }
 
 @Composable
-private fun SwitchRow(title: String, checked: Boolean, onChange: (Boolean) -> Unit) {
+private fun SwitchRow(title: String, checked: Boolean, onChange: (Boolean) -> Unit, note: String? = null, enabled: Boolean = true) {
     val ink = LocalInk.current
-    Row(Modifier.fillMaxWidth().clickable { onChange(!checked) }.padding(horizontal = 18.dp, vertical = 8.dp), verticalAlignment = Alignment.CenterVertically) {
-        Text(title, color = ink.text, fontSize = 16.sp, fontWeight = FontWeight.Medium, modifier = Modifier.weight(1f))
-        Switch(checked, onChange, colors = SwitchDefaults.colors(checkedTrackColor = ink.text, checkedThumbColor = Color.White))
+    val a = if (enabled) 1f else 0.45f
+    Row(
+        Modifier.fillMaxWidth().clickable(enabled = enabled) { onChange(!checked) }.padding(horizontal = 18.dp, vertical = 8.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Column(Modifier.weight(1f)) {
+            Text(title, color = ink.text.copy(alpha = a), fontSize = 16.sp, fontWeight = FontWeight.Medium)
+            if (note != null) Text(note, color = ink.text.copy(alpha = 0.65f * a), fontSize = 13.sp)
+        }
+        Switch(checked, onChange, enabled = enabled, colors = SwitchDefaults.colors(checkedTrackColor = ink.text, checkedThumbColor = Color.White))
     }
 }

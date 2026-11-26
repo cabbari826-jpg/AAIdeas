@@ -26,6 +26,8 @@ class Prefs(context: Context) {
     var hidden by mutableStateOf(sp.getStringSet("hidden", emptySet())!!.toSet()); private set
     /** App key -> ARGB colour the owner picked for its glass ("Цвет стекла"). */
     var colors by mutableStateOf(readColors()); private set
+    /** "Жидкое стекло": edges bend the wallpaper like a glass lens (Android 13+). */
+    var liquid by mutableStateOf(sp.getBoolean("liquid", false)); private set
     var homePrompted by mutableStateOf(sp.getBoolean("homePrompted", false)); private set
 
     fun changeBlur(v: Int) { blur = v; sp.edit().putInt("blur", v).apply() }
@@ -35,6 +37,7 @@ class Prefs(context: Context) {
     fun changeLabels(v: Boolean) { labels = v; sp.edit().putBoolean("labels", v).apply() }
     fun changeDarkInk(v: Boolean) { darkInk = v; sp.edit().putBoolean("darkInk", v).apply() }
     fun changeWallpaper(v: WallpaperKind) { wallpaper = v; sp.edit().putString("wallpaper", v.name).apply() }
+    fun changeLiquid(v: Boolean) { liquid = v; sp.edit().putBoolean("liquid", v).apply() }
     fun changeHomePrompted() { homePrompted = true; sp.edit().putBoolean("homePrompted", true).apply() }
 
     fun hide(key: String) { hidden = hidden + key; sp.edit().putStringSet("hidden", hidden).apply() }

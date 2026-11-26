@@ -48,6 +48,12 @@ object Glyphs {
     val Check = line("M5 12l5 5 9-10")
     val Globe = line("M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18z", "M3 12h18", "M12 3c3 3.5 3 14.5 0 18", "M12 3c-3 3.5-3 14.5 0 18")
     val Home = line("M4 11l8-7 8 7v9h-5v-6h-6v6H4z")
+    val Plus = line("M12 5v14", "M5 12h14")
+    val Up = line("M12 19V5", "M6 11l6-6 6 6")
+    val Down = line("M12 5v14", "M6 13l6 6 6-6")
+    val Grow = line("M12 3v6", "M9 6l3-3 3 3", "M12 21v-6", "M9 18l3 3 3-3", "M5 12h14")
+    val Shrink = line("M12 3v6", "M9 6l3 3 3-3", "M12 21v-6", "M9 18l3-3 3 3", "M5 12h14")
+    val Widgets = line("M5 4h5a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z", "M14 4h5a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1h-5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z", "M5 13h14a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-5a1 1 0 0 1 1-1z")
     val Refresh = line("M20 12a8 8 0 1 1-2.3-5.6", "M20 4v5h-5")
 }
 

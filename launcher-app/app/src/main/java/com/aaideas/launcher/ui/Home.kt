@@ -2,6 +2,7 @@ package com.aaideas.launcher.ui
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.gestures.detectVerticalDragGestures
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -59,6 +60,7 @@ class HomeUi(
     val now: Long,
     val weather: WeatherNow?,
     val weatherNeedsPermission: Boolean,
+    val weatherNote: String?,
     val showMakeDefault: Boolean,
     val onOpen: (AppEntry, Rect) -> Unit,
     val onMenu: (AppEntry, Rect) -> Unit,
@@ -69,7 +71,15 @@ class HomeUi(
     val onWeather: () -> Unit,
     val onMakeDefault: () -> Unit,
     val onDismissMakeDefault: () -> Unit,
+    /** Swipe down anywhere on the home screen: notification shade. Swipe up: search. */
+    val onSwipeDown: () -> Unit = {},
+    val onSwipeUp: () -> Unit = {},
+    /** The page left of the home screen (widgets). */
+    val widgetPage: @Composable () -> Unit = {},
 )
+
+/** Page 0 is the widgets page, page 1 the home screen, then the app pages. */
+const val HOME_PAGE = 1
 
 @Composable
 fun HomeScreen(ui: HomeUi, pager: PagerState, modifier: Modifier = Modifier) {
@@ -80,13 +90,28 @@ fun HomeScreen(ui: HomeUi, pager: PagerState, modifier: Modifier = Modifier) {
             modifier = Modifier.weight(1f).fillMaxWidth(),
             beyondViewportPageCount = 1,
         ) { page ->
+            if (page == 0) {
+                Box(Modifier.fillMaxSize().pointerInput(Unit) { detectTapGestures(onLongPress = { ui.onSettings() }) }) { ui.widgetPage() }
+                return@HorizontalPager
+            }
             Box(
-                Modifier.fillMaxSize().pointerInput(Unit) { detectTapGestures(onLongPress = { ui.onSettings() }) },
+                Modifier.fillMaxSize()
+                    .pointerInput(Unit) { detectTapGestures(onLongPress = { ui.onSettings() }) }
+                    .pointerInput(Unit) {
+                        var total = 0f
+                        val threshold = 48.dp.toPx()
+                        detectVerticalDragGestures(
+                            onDragStart = { total = 0f },
+                            onDragEnd = {
+                                if (total > threshold) ui.onSwipeDown() else if (total < -threshold) ui.onSwipeUp()
+                            },
+                        ) { change, dy -> total += dy; change.consume() }
+                    },
             ) {
-                if (page == 0) FirstPage(ui) else AppGrid(pages.getOrNull(page - 1).orEmpty(), ui)
+                if (page == HOME_PAGE) FirstPage(ui) else AppGrid(pages.getOrNull(page - HOME_PAGE - 1).orEmpty(), ui)
             }
         }
-        PageDots(count = 1 + pages.size, current = pager.currentPage)
+        PageDots(count = HOME_PAGE + 1 + pages.size, current = pager.currentPage)
         SearchPill(onClick = ui.onSearch, modifier = Modifier.padding(horizontal = SIDE).padding(top = 14.dp, bottom = 16.dp))
         Dock(ui, Modifier.padding(horizontal = SIDE).padding(bottom = 18.dp))
     }
@@ -113,7 +138,7 @@ private fun FirstPage(ui: HomeUi) {
                 bottom = when {
                     w != null -> "${w.text} · ${w.max}°/${w.min}°"
                     ui.weatherNeedsPermission -> "Нажмите, чтобы включить"
-                    else -> "Загрузка…"
+                    else -> ui.weatherNote ?: "Загрузка…"
                 },
                 onClick = ui.onWeather,
                 modifier = Modifier.weight(1f),

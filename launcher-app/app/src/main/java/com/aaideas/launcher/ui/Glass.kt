@@ -1,5 +1,6 @@
 package com.aaideas.launcher.ui
 
+import androidx.compose.foundation.shape.CornerBasedShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -30,7 +31,7 @@ import kotlin.math.roundToInt
 class Backdrop(val blurred: ImageBitmap?, val window: IntSize)
 
 /** Glass settings from Настройки → Стекло. All 0..1. */
-data class GlassStyle(val whiteness: Float, val tintStrength: Float, val rim: Float = 0.75f)
+data class GlassStyle(val whiteness: Float, val tintStrength: Float, val rim: Float = 0.75f, val liquid: Boolean = false)
 
 /** Text colour on the wallpaper: dark (owner's choice for "Море") or light. */
 data class Ink(val text: Color, val shadow: Color)
@@ -52,6 +53,7 @@ val IconShape = RoundedCornerShape(30)
 fun Modifier.glass(
     shape: Shape,
     tint: Color? = null,
+    tint2: Color? = null,
     extraWhite: Float = 0f,
     tintScale: Float = 1f,
 ): Modifier = composed {
@@ -69,7 +71,10 @@ fun Modifier.glass(
             )
             val t = (style.tintStrength * tintScale).coerceIn(0f, 1f)
             val tintBrush = tint?.takeIf { t > 0f }?.let {
-                Brush.radialGradient(
+                if (tint2 != null) Brush.linearGradient(
+                    listOf(it.copy(alpha = t), tint2.copy(alpha = t)),
+                    start = Offset.Zero, end = Offset(size.width, size.height),
+                ) else Brush.radialGradient(
                     listOf(it.copy(alpha = t), it.copy(alpha = t * 0.55f)),
                     center = Offset(size.width / 2f, size.height * 0.65f),
                     radius = size.maxDimension * 0.8f,
@@ -84,24 +89,36 @@ fun Modifier.glass(
                 listOf(Color.White.copy(alpha = 0.95f * style.rim), Color.White.copy(alpha = 0.22f * style.rim), Color.White.copy(alpha = 0.55f * style.rim)),
                 start = Offset.Zero, end = Offset(size.width, size.height),
             )
-            val stroke = Stroke(width = 1.dp.toPx())
+                    val stroke = Stroke(width = 1.dp.toPx())
+            val img = backdrop.blurred
+            val corner = (shape as? CornerBasedShape)?.topStart?.toPx(size, this) ?: 0f
+            val lens = if (style.liquid && img != null) LiquidLens.brush(img, backdrop.window, size, corner) else null
             onDrawBehind {
                 clipPath(path) {
-                    backdrop.blurred?.let { img ->
-                        drawImage(
-                            img,
-                            srcOffset = IntOffset.Zero,
-                            srcSize = IntSize(img.width, img.height),
-                            dstOffset = IntOffset(-pos.x.roundToInt(), -pos.y.roundToInt()),
-                            dstSize = backdrop.window,
-                            filterQuality = FilterQuality.Low,
-                        )
+                    if (lens != null) {
+                        // The lens bends the wallpaper itself and draws its own rim and light.
+                        LiquidLens.place(lens, pos, size)
+                        drawRect(lens.brush)
+                        drawRect(Color.White.copy(alpha = white * 0.6f))
+                        tintBrush?.let { drawRect(it) }
+                    } else {
+                        img?.let {
+                            drawImage(
+                                it,
+                                srcOffset = IntOffset.Zero,
+                                srcSize = IntSize(it.width, it.height),
+                                dstOffset = IntOffset(-pos.x.roundToInt(), -pos.y.roundToInt()),
+                                dstSize = backdrop.window,
+                                filterQuality = FilterQuality.Low,
+                            )
+                        }
+                        drawRect(sheen)
+                        tintBrush?.let { drawRect(it) }
+                        drawRect(highlight)
                     }
-                    drawRect(sheen)
-                    tintBrush?.let { drawRect(it) }
-                    drawRect(highlight)
                 }
-                drawPath(path, rim, style = stroke)
+                if (lens == null) drawPath(path, rim, style = stroke)
+                else drawPath(path, Color.White.copy(alpha = 0.35f * style.rim), style = stroke)
             }
         }
 }

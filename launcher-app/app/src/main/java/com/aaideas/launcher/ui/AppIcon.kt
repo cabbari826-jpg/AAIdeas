@@ -16,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
@@ -40,10 +41,14 @@ fun GlassAppIcon(icon: GlassIcon?, label: String, size: Dp, customColor: Int?, m
     Box(
         modifier
             .size(size)
-            .glass(IconShape, tint = Color(color), tintScale = if (icon == null || icon.whiteGlyph || customColor != null) 1f else 0.45f),
+            .glass(IconShape, tint = Color(color), tint2 = icon?.color2?.takeIf { customColor == null }?.let { Color(it) }, tintScale = 1f),
         contentAlignment = Alignment.Center,
     ) {
-        if (icon != null) {
+        if (icon != null && !icon.whiteGlyph) {
+            // An icon with no glyph to pull out (photo-like art): the original, in our shape.
+            Image(icon.glyph, contentDescription = label, contentScale = androidx.compose.ui.layout.ContentScale.Crop,
+                modifier = Modifier.fillMaxSize().clip(IconShape))
+        } else if (icon != null) {
             Image(icon.glyph, contentDescription = label, modifier = Modifier.fillMaxSize())
         } else {
             // Until the icon is processed (first second after start): the first letter.

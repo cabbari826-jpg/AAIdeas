@@ -25,35 +25,66 @@ data class WeatherNow(val city: String, val temp: Int, val max: Int, val min: In
  * is for non-commercial use, so the store version needs a paid plan or another source.
  */
 object Weather {
+    /** Weather, or a short reason in Russian why there is none. */
+    sealed interface Result {
+        data class Ok(val now: WeatherNow) : Result
+        data class Fail(val why: String) : Result
+    }
+
     @SuppressLint("MissingPermission")
-    suspend fun load(context: Context): WeatherNow? = withContext(Dispatchers.IO) {
-        runCatching {
-            val lm = context.getSystemService(LocationManager::class.java)
-            val loc = listOf(LocationManager.NETWORK_PROVIDER, LocationManager.PASSIVE_PROVIDER, LocationManager.GPS_PROVIDER)
-                .mapNotNull { p -> runCatching { lm.getLastKnownLocation(p) }.getOrNull() }
-                .maxByOrNull { it.time } ?: return@runCatching null
-            val lat = "%.2f".format(Locale.US, loc.latitude)
-            val lon = "%.2f".format(Locale.US, loc.longitude)
-            val url = URL("https://api.open-meteo.com/v1/forecast?latitude=$lat&longitude=$lon" +
-                "&current=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min&timezone=auto&forecast_days=1")
-            val conn = url.openConnection() as HttpURLConnection
-            conn.connectTimeout = 10_000; conn.readTimeout = 10_000
-            val body = try { conn.inputStream.bufferedReader().readText() } finally { conn.disconnect() }
-            val root = Json.parseToJsonElement(body).jsonObject
-            val cur = root["current"]!!.jsonObject
-            val daily = root["daily"]!!.jsonObject
-            val city = runCatching {
-                @Suppress("DEPRECATION")
-                Geocoder(context, Locale("ru")).getFromLocation(loc.latitude, loc.longitude, 1)?.firstOrNull()?.locality
-            }.getOrNull() ?: ""
-            WeatherNow(
-                city = city,
-                temp = cur["temperature_2m"]!!.jsonPrimitive.double.roundToInt(),
-                max = daily["temperature_2m_max"]!!.jsonArray[0].jsonPrimitive.double.roundToInt(),
-                min = daily["temperature_2m_min"]!!.jsonArray[0].jsonPrimitive.double.roundToInt(),
-                text = describe(cur["weather_code"]!!.jsonPrimitive.int),
-            )
-        }.getOrNull()
+    private suspend fun location(context: Context): android.location.Location? {
+        val lm = context.getSystemService(LocationManager::class.java)
+        val last = listOf(LocationManager.NETWORK_PROVIDER, LocationManager.PASSIVE_PROVIDER, LocationManager.GPS_PROVIDER)
+            .mapNotNull { p -> runCatching { lm.getLastKnownLocation(p) }.getOrNull() }
+            .maxByOrNull { it.time }
+        if (last != null) return last
+        // Nothing cached (e.g. right after the permission): ask for one fresh position.
+        val provider = listOf(LocationManager.NETWORK_PROVIDER, LocationManager.GPS_PROVIDER)
+            .firstOrNull { runCatching { lm.isProviderEnabled(it) }.getOrDefault(false) } ?: return null
+        return kotlinx.coroutines.withTimeoutOrNull(12_000) {
+            kotlinx.coroutines.suspendCancellableCoroutine<android.location.Location?> { cont ->
+                if (android.os.Build.VERSION.SDK_INT >= 30) {
+                    val cancel = android.os.CancellationSignal()
+                    cont.invokeOnCancellation { cancel.cancel() }
+                    lm.getCurrentLocation(provider, cancel, context.mainExecutor) { cont.resume(it) { } }
+                } else {
+                    @Suppress("DEPRECATION")
+                    lm.requestSingleUpdate(provider, { cont.resume(it) { } }, android.os.Looper.getMainLooper())
+                }
+            }
+        }
+    }
+
+    suspend fun load(context: Context): Result {
+        val lm = context.getSystemService(LocationManager::class.java)
+        val enabled = runCatching { if (android.os.Build.VERSION.SDK_INT >= 28) lm.isLocationEnabled else true }.getOrDefault(true)
+        if (!enabled) return Result.Fail("Включите геолокацию")
+        val loc = location(context) ?: return Result.Fail("Нет местоположения")
+        return withContext(Dispatchers.IO) {
+            runCatching {
+                val lat = "%.2f".format(Locale.US, loc.latitude)
+                val lon = "%.2f".format(Locale.US, loc.longitude)
+                val url = URL("https://api.open-meteo.com/v1/forecast?latitude=$lat&longitude=$lon" +
+                    "&current=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min&timezone=auto&forecast_days=1")
+                val conn = url.openConnection() as HttpURLConnection
+                conn.connectTimeout = 10_000; conn.readTimeout = 10_000
+                val body = try { conn.inputStream.bufferedReader().readText() } finally { conn.disconnect() }
+                val root = Json.parseToJsonElement(body).jsonObject
+                val cur = root["current"]!!.jsonObject
+                val daily = root["daily"]!!.jsonObject
+                val city = runCatching {
+                    @Suppress("DEPRECATION")
+                    Geocoder(context, Locale("ru")).getFromLocation(loc.latitude, loc.longitude, 1)?.firstOrNull()?.locality
+                }.getOrNull() ?: ""
+                Result.Ok(WeatherNow(
+                    city = city,
+                    temp = cur["temperature_2m"]!!.jsonPrimitive.double.roundToInt(),
+                    max = daily["temperature_2m_max"]!!.jsonArray[0].jsonPrimitive.double.roundToInt(),
+                    min = daily["temperature_2m_min"]!!.jsonArray[0].jsonPrimitive.double.roundToInt(),
+                    text = describe(cur["weather_code"]!!.jsonPrimitive.int),
+                )) as Result
+            }.getOrElse { Result.Fail("Нет связи") }
+        }
     }
 
     /** WMO weather codes in Russian. */

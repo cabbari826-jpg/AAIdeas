@@ -5,6 +5,23 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Matrix
 import android.graphics.Paint
+import android.graphics.RectF
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.unit.sp
+import androidx.core.graphics.drawable.toBitmap
+import com.aaideas.launcher.data.IconProcessor
+import com.aaideas.launcher.data.PlacedWidget
+import com.aaideas.launcher.data.WidgetChoice
+import com.aaideas.launcher.ui.GlassAppIcon
+import com.aaideas.launcher.ui.HOME_PAGE
+import com.aaideas.launcher.ui.WidgetPage
+import com.aaideas.launcher.ui.WidgetPickerOverlay
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -122,13 +139,14 @@ class ScreenshotTest {
     }
 
     @Composable
-    private fun HomeContent(page: Int = 0, showDefault: Boolean = false) {
-        val pager = rememberPagerState(initialPage = page) { 1 + (layout.rest.size + 19) / 20 }
+    private fun HomeContent(page: Int = HOME_PAGE, showDefault: Boolean = false, widgetPage: @Composable () -> Unit = {}) {
+        val pager = rememberPagerState(initialPage = page) { HOME_PAGE + 1 + (layout.rest.size + 19) / 20 }
         HomeScreen(
             HomeUi(
                 layout, icons, emptyMap(), 60.dp, true, 1795711200000L,
-                WeatherNow("Баку", 12, 14, 8, "Облачно"), false, showDefault,
+                WeatherNow("Баку", 12, 14, 8, "Облачно"), false, null, showDefault,
                 { _, _ -> }, { _, _ -> }, {}, {}, {}, {}, {}, {}, {},
+                widgetPage = widgetPage,
             ),
             pager,
         )
@@ -140,7 +158,7 @@ class ScreenshotTest {
     }
 
     @Test fun page2() {
-        rule.setContent { Frame { HomeContent(page = 1) } }
+        rule.setContent { Frame { HomeContent(page = HOME_PAGE + 1) } }
         rule.onRoot().captureRoboImage("screenshots/page2.png")
     }
 
@@ -160,6 +178,91 @@ class ScreenshotTest {
         val previews = listOf(WallpaperKind.SEA, WallpaperKind.SAND, WallpaperKind.NIGHT).associateWith { Wallpaper.render(ctx, it, 124, 220).asImageBitmap() }
         rule.setContent { Frame { SettingsOverlay(SettingsUi(prefs, previews, emptyList(), false, {}, {}, {}, {})) } }
         rule.onRoot().captureRoboImage("screenshots/settings.png")
+    }
+
+    /** Fake widgets drawn as plain cards: real widgets need real apps on a phone. */
+    @Test fun widgets() {
+        val placed = listOf(PlacedWidget(1, 170), PlacedWidget(2, 120))
+        rule.setContent {
+            Frame {
+                HomeContent(page = 0) {
+                    WidgetPage(placed, {}) { w, mod ->
+                        Box(mod.background(if (w.id == 1) Color(0xFFF4F1EA) else Color(0xFF1F2937)).padding(20.dp)) {
+                            androidx.compose.material3.Text(
+                                if (w.id == 1) "Заметки\n• Купить хлеб\n• Позвонить маме" else "▶  Музыка — пауза",
+                                color = if (w.id == 1) Color(0xFF1B1F24) else Color.White, fontSize = 17.sp,
+                            )
+                        }
+                    }
+                }
+            }
+        }
+        rule.onRoot().captureRoboImage("screenshots/widgets.png")
+    }
+
+    @Test fun widgetPicker() {
+        fun preview(c: Long, w: Int, h: Int) = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888).apply {
+            val cv = Canvas(this); val p = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = c.toInt() }
+            cv.drawRoundRect(RectF(0f, 0f, w.toFloat(), h.toFloat()), 40f, 40f, p)
+            p.color = 0x88FFFFFF.toInt(); cv.drawRoundRect(RectF(30f, 30f, w * 0.6f, 70f), 20f, 20f, p)
+        }.asImageBitmap()
+        val choices = listOf(
+            WidgetChoice(null, "Заметки", "Список", preview(0xFFF4E7B5, 520, 260), "4×2"),
+            WidgetChoice(null, "Заметки", "Одна заметка", preview(0xFFF4E7B5, 260, 260), "2×2"),
+            WidgetChoice(null, "Музыка", "Плеер", preview(0xFF1F2937, 520, 130), "4×1"),
+        )
+        rule.setContent { Frame { WidgetPickerOverlay(choices, {}, {}) } }
+        rule.onRoot().captureRoboImage("screenshots/widget-picker.png")
+    }
+
+    /**
+     * The real icon processor on icons built like the ones from the owner's phone:
+     * a black adaptive icon, a full-picture legacy icon, a white-background icon and one
+     * with a themed (monochrome) layer. Top row: original, bottom row: on glass.
+     */
+    @Test fun iconProcessing() {
+        val size = 216
+        fun bmp(draw: (Canvas, Paint) -> Unit) = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888).apply {
+            draw(Canvas(this), Paint(Paint.ANTI_ALIAS_FLAG))
+        }
+        val res = ApplicationProvider.getApplicationContext<android.content.Context>().resources
+        fun d(b: Bitmap) = android.graphics.drawable.BitmapDrawable(res, b)
+        val big = size * 3 / 2 // adaptive layers are 108dp for a 72dp icon
+        fun layer(draw: (Canvas, Paint) -> Unit) = Bitmap.createBitmap(big, big, Bitmap.Config.ARGB_8888).apply { draw(Canvas(this), Paint(Paint.ANTI_ALIAS_FLAG)) }
+        val black = android.graphics.drawable.AdaptiveIconDrawable(
+            android.graphics.drawable.ColorDrawable(0xFF000000.toInt()),
+            d(layer { c, p -> p.color = 0xFFFFFFFF.toInt(); c.drawCircle(big / 2f, big / 2f, big * 0.16f, p); p.color = 0xFFE11D48.toInt(); c.drawCircle(big / 2f, big / 2f, big * 0.07f, p) }),
+        )
+        val picture = d(bmp { c, p ->
+            p.shader = android.graphics.LinearGradient(0f, 0f, size.toFloat(), size.toFloat(), 0xFF7C3AED.toInt(), 0xFFF97316.toInt(), android.graphics.Shader.TileMode.CLAMP)
+            c.drawRoundRect(RectF(0f, 0f, size.toFloat(), size.toFloat()), 50f, 50f, p)
+            p.shader = null; p.color = 0xFFFFFFFF.toInt(); p.style = Paint.Style.STROKE; p.strokeWidth = 16f
+            c.drawRoundRect(RectF(size * 0.28f, size * 0.28f, size * 0.72f, size * 0.72f), 34f, 34f, p)
+            p.style = Paint.Style.FILL; c.drawCircle(size * 0.5f, size * 0.5f, size * 0.09f, p)
+        })
+        val white = android.graphics.drawable.AdaptiveIconDrawable(
+            android.graphics.drawable.ColorDrawable(0xFFFFFFFF.toInt()),
+            d(layer { c, p -> p.color = 0xFF1A73E8.toInt(); c.drawRect(big * 0.36f, big * 0.36f, big * 0.64f, big * 0.64f, p) }),
+        )
+        val green = android.graphics.drawable.AdaptiveIconDrawable(
+            android.graphics.drawable.ColorDrawable(0xFF0F9D58.toInt()),
+            d(layer { c, p -> p.color = 0xFFFFFFFF.toInt(); val path = android.graphics.Path().apply { moveTo(big * 0.4f, big * 0.34f); lineTo(big * 0.68f, big * 0.5f); lineTo(big * 0.4f, big * 0.66f); close() }; c.drawPath(path, p) }),
+        )
+        val list = listOf("Чёрный фон" to black, "Картинка" to picture, "Белый фон" to white, "Зелёный" to green)
+        val processed = list.map { (_, dr) -> IconProcessor.process(dr, size) }
+        rule.setContent {
+            Frame {
+                Column(Modifier.fillMaxSize().padding(top = 120.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(28.dp)) {
+                    Row(horizontalArrangement = Arrangement.spacedBy(26.dp)) {
+                        for ((_, dr) in list) Image(dr.toBitmap(size, size).asImageBitmap(), null, Modifier.size(64.dp))
+                    }
+                    Row(horizontalArrangement = Arrangement.spacedBy(26.dp)) {
+                        for ((i, p) in processed.withIndex()) GlassAppIcon(p, list[i].first, 64.dp, null, Modifier)
+                    }
+                }
+            }
+        }
+        rule.onRoot().captureRoboImage("screenshots/icons.png")
     }
 
     @Suppress("unused") private fun block() = runBlocking { }
