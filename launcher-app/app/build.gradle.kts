@@ -1,0 +1,81 @@
+plugins {
+    id("com.android.application")
+    id("org.jetbrains.kotlin.android")
+    id("org.jetbrains.kotlin.plugin.compose")
+    id("org.jetbrains.kotlin.plugin.serialization")
+    id("io.github.takahirom.roborazzi")
+}
+
+android {
+    namespace = "com.aaideas.launcher"
+    compileSdk = 36
+
+    defaultConfig {
+        applicationId = "com.aaideas.launcher"
+        minSdk = 24
+        targetSdk = 36
+        // CI sets GITHUB_RUN_NUMBER, so every published build installs as an update.
+        val build = System.getenv("GITHUB_RUN_NUMBER")?.toIntOrNull() ?: 1
+        versionCode = build
+        versionName = "0.1.$build"
+    }
+
+    // Same fixed prototype key as the crossword prototype (repo secrets), so
+    // each new APK installs over the previous one. Not for Google Play.
+    val protoKeystore = rootProject.file("prototype.keystore")
+    val protoPassword = System.getenv("PROTOTYPE_KEYSTORE_PASSWORD")?.trim()
+    if (protoKeystore.exists() && !protoPassword.isNullOrEmpty()) {
+        signingConfigs {
+            getByName("debug") {
+                storeFile = protoKeystore
+                storePassword = protoPassword
+                keyAlias = "prototype"
+                keyPassword = protoPassword
+            }
+        }
+    }
+
+    buildTypes {
+        debug {
+            buildConfigField("String", "UPDATE_REPO", "\"cabbari826-jpg/AAIdeas\"")
+            // Phone test build: not debuggable and R8-optimised, so it runs at store speed.
+            isDebuggable = false
+            isMinifyEnabled = true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+        }
+        release {
+            isMinifyEnabled = true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+        }
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+    kotlinOptions { jvmTarget = "17" }
+    buildFeatures {
+        compose = true
+        buildConfig = true
+    }
+    testOptions { unitTests.isIncludeAndroidResources = true }
+}
+
+dependencies {
+    val composeBom = platform("androidx.compose:compose-bom:2025.06.00")
+    implementation(composeBom)
+    implementation("androidx.core:core-ktx:1.16.0")
+    implementation("androidx.activity:activity-compose:1.10.1")
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.9.1")
+    implementation("androidx.compose.material3:material3")
+    implementation("androidx.compose.ui:ui")
+    implementation("androidx.profileinstaller:profileinstaller:1.4.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.1")
+
+    testImplementation("junit:junit:4.13.2")
+    testImplementation("org.robolectric:robolectric:4.15.1")
+    testImplementation("io.github.takahirom.roborazzi:roborazzi:1.43.0")
+    testImplementation("io.github.takahirom.roborazzi:roborazzi-compose:1.43.0")
+    testImplementation("androidx.test.ext:junit:1.2.1")
+    testImplementation("androidx.compose.ui:ui-test-junit4")
+    debugImplementation("androidx.compose.ui:ui-test-manifest")
+}

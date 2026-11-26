@@ -1,0 +1,93 @@
+name: launcher-app
+on:
+  push:
+    paths: ["launcher-app/**", ".github/workflows/launcher-app.yml"]
+  workflow_dispatch:
+concurrency:
+  group: launcher-app-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # to publish the APK as a GitHub pre-release
+    defaults:
+      run:
+        working-directory: launcher-app
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+      - uses: gradle/actions/setup-gradle@v4
+      - uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository/org/robolectric/android-all-instrumented
+          key: robolectric-android-all-15-12650502-i7
+      - name: Pre-fetch Robolectric android-all
+        run: |
+          v=15-robolectric-12650502-i7
+          d=~/.m2/repository/org/robolectric/android-all-instrumented/$v
+          mkdir -p "$d"
+          for ext in jar pom; do
+            f="$d/android-all-instrumented-$v.$ext"
+            [ -s "$f" ] && continue
+            for base in https://maven-central.storage-download.googleapis.com/maven2 https://repo1.maven.org/maven2; do
+              curl -fsSL --retry 5 --retry-all-errors --retry-delay 5 -o "$f" \
+                "$base/org/robolectric/android-all-instrumented/$v/android-all-instrumented-$v.$ext" && break
+            done
+            [ -s "$f" ]
+          done
+      # Same fixed prototype key as the crossword, so updates install over each other.
+      - name: Prototype signing key
+        env:
+          KEYSTORE_B64: ${{ secrets.PROTOTYPE_KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.PROTOTYPE_KEYSTORE_PASSWORD }}
+        run: |
+          if [ -n "$KEYSTORE_B64" ]; then echo "$KEYSTORE_B64" | base64 -d > prototype.keystore; fi
+          if [ -s prototype.keystore ]; then
+            pw=$(printf '%s' "$KEYSTORE_PASSWORD" | tr -d '[:space:]')
+            keytool -list -keystore prototype.keystore -storepass "$pw" >/dev/null ||
+              { echo "::error::PROTOTYPE_KEYSTORE_PASSWORD does not open PROTOTYPE_KEYSTORE_BASE64"; exit 1; }
+          fi
+      - run: |
+          for i in 1 2 3; do
+            ./gradlew testDebugUnitTest assembleDebug && exit 0
+            echo "::warning::Gradle attempt $i failed; retrying in $((i * 30))s"
+            sleep $((i * 30))
+          done
+          exit 1
+        env:
+          PROTOTYPE_KEYSTORE_PASSWORD: ${{ secrets.PROTOTYPE_KEYSTORE_PASSWORD }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: launcher-debug
+          path: launcher-app/app/build/outputs/apk/debug/app-debug.apk
+      # Published as a PRE-release and never as "latest": the crossword's updater
+      # reads the repo's latest release. The launcher's updater lists releases
+      # and takes the newest steklo-N.
+      - name: Publish prototype pre-release
+        if: github.ref == 'refs/heads/claude/project-thread-5rxflw' || github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          N: ${{ github.run_number }}
+        run: |
+          if [ ! -s prototype.keystore ]; then
+            echo "::warning::PROTOTYPE_KEYSTORE_* secrets are not set; not publishing."
+            exit 0
+          fi
+          cp app/build/outputs/apk/debug/app-debug.apk steklo.apk
+          apksigner=$(ls -d "$ANDROID_HOME"/build-tools/*/apksigner | sort -V | tail -1)
+          "$apksigner" verify --print-certs steklo.apk | tee certs.txt
+          grep -q "CN=Krossvord prototype" certs.txt
+          gh release delete "steklo-$N" --repo "$GITHUB_REPOSITORY" --cleanup-tag --yes 2>/dev/null || true
+          git log -1 --format='%s%n%n%b' > notes.txt
+          gh release create "steklo-$N" steklo.apk \
+            --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" \
+            --title "Şüşə launcher 0.1.$N" --notes-file notes.txt --prerelease --latest=false
+          gh release list --repo "$GITHUB_REPOSITORY" --limit 100 --json tagName,createdAt \
+            --jq '[.[] | select(.tagName | startswith("steklo-"))] | sort_by(.createdAt) | reverse | .[10:] | .[].tagName' |
+          while read -r tag; do
+            gh release delete "$tag" --repo "$GITHUB_REPOSITORY" --cleanup-tag --yes
+          done
